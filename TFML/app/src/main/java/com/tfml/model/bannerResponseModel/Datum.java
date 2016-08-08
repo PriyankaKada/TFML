@@ -8,6 +8,9 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Datum {
+    @SerializedName("created_at")
+    @Expose
+    private String createdAt;
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -17,15 +20,27 @@ public class Datum {
     @SerializedName("status")
     @Expose
     private Integer status;
-    @SerializedName("created_at")
-    @Expose
-    private String createdAt;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
-    @SerializedName("deleted_at")
-    @Expose
-    private Object deletedAt;
+
+    /**
+     *
+     * @return
+     * The createdAt
+     */
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    /**
+     *
+     * @param createdAt
+     * The created_at
+     */
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
     /**
      *
@@ -84,24 +99,6 @@ public class Datum {
     /**
      *
      * @return
-     * The createdAt
-     */
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    /**
-     *
-     * @param createdAt
-     * The created_at
-     */
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    /**
-     *
-     * @return
      * The updatedAt
      */
     public String getUpdatedAt() {
@@ -115,23 +112,5 @@ public class Datum {
      */
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    /**
-     *
-     * @return
-     * The deletedAt
-     */
-    public Object getDeletedAt() {
-        return deletedAt;
-    }
-
-    /**
-     *
-     * @param deletedAt
-     * The deleted_at
-     */
-    public void setDeletedAt(Object deletedAt) {
-        this.deletedAt = deletedAt;
     }
 }

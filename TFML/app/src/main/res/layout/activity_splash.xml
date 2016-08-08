@@ -6,6 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/color_vlue_zest"
-    tools:context="com.tfml.SplashActivity">
+    tools:context="com.tfml.activity.SplashActivity">
 
 </android.support.constraint.ConstraintLayout>

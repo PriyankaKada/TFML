@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_schemes"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.tfml.activity.SchemesActivity">
+    <include
+        android:id="@+id/upper"
+        layout="@layout/toolbar_schemes_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/llBottom"
+        android:layout_below="@+id/upper"
+        android:orientation="vertical"
+        android:weightSum="3">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".SchemesActivity"
+        android:layout_weight="2"/>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
+        app:tabMode="fixed"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/tab_bg"
+        android:elevation="6dp"
+        app:tabTextColor="@color/tab_selector"
+        app:tabMinWidth="100dp"
+        app:tabSelectedTextColor="@color/tab_selector"
+        app:tabIndicatorColor="#ff00ff"
+        android:layout_alignParentBottom="true"
+        />
+</LinearLayout>
+
+</LinearLayout>

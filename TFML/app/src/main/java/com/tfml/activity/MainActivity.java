@@ -1,12 +1,15 @@
-package com.tfml;
+package com.tfml.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.tfml.R;
+import com.tfml.activity.BaseActivity;
 import com.tfml.auth.TfmlApi;
 import com.tfml.common.ApiService;
+import com.tfml.model.QuickcallResponseModel.QuickCallInputModel;
+import com.tfml.model.QuickcallResponseModel.QuickCallResponse;
 import com.tfml.model.applyLoanResponseModel.ApplyLoanResponse;
 import com.tfml.model.applyLoanResponseModel.InputModel;
 import com.tfml.model.bannerResponseModel.BannerlistResponse;
@@ -15,16 +18,15 @@ import com.tfml.model.referFriendResponseModel.ReferFriendInputModel;
 import com.tfml.model.referFriendResponseModel.ReferFriendResponseModel;
 import com.tfml.model.schemesResponseModel.SchemesResponse;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends BaseActivity {
     TfmlApi tfmlApi;
     InputModel inputModel;
     ReferFriendInputModel friendInputModel;
+    QuickCallInputModel quickCallInputModel;
     String strMsg;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,12 +42,43 @@ public class MainActivity extends AppCompatActivity  {
         //inputModel=new InputModel();
        // initApplyLoan();
        // callApplyLoanResponseModel(inputModel);
+       // quickCallInputModel=new QuickCallInputModel();
+        //initMobileno();
+        //callMobileResponseModel(quickCallInputModel);
         friendInputModel=new ReferFriendInputModel();
         initFriendResponse();
         callFriendResponseModel(friendInputModel);
 
 
     }
+    public void initMobileno()
+    {
+        quickCallInputModel.setMobileNumber("9860909729");
+    }
+     public void callMobileResponseModel(QuickCallInputModel quickCallInputModel)
+     {
+         tfmlApi.getQuickCallResponse(quickCallInputModel).enqueue(new Callback<QuickCallResponse>() {
+             @Override
+             public void onResponse(Call<QuickCallResponse> call, Response<QuickCallResponse> response) {
+                 if ( response != null && response.body().getStatus().contains("success"))
+                 {
+                     Log.e("ApplyLoanResponseModel",response.body().getStatus());
+                 }
+                 else
+                 {
+                     if ( response != null && response.body().getStatus().contains("error"))
+                         strMsg=new Gson().toJson(response.body().getError().getMobileNo().get(0));
+                     Log.e("ErrApplyLoanRespoModel",strMsg);
+                 }
+
+             }
+
+             @Override
+             public void onFailure(Call<QuickCallResponse> call, Throwable t) {
+
+             }
+         });
+     }
 
    public void initApplyLoan()
    {
@@ -95,6 +128,7 @@ public class MainActivity extends AppCompatActivity  {
             public void onResponse(Call<BannerlistResponse> call, Response<BannerlistResponse> response) {
                 Log.e("CallbannerListResponse",new Gson().toJson(response.body()));
 
+
             }
 
             @Override
@@ -140,7 +174,7 @@ public class MainActivity extends AppCompatActivity  {
 
      public void callApplyLoanResponseModel(InputModel inputModel)
      {
-         tfmlApi.getApplyResponse(inputModel).enqueue(new Callback<ApplyLoanResponse>() {
+         tfmlApi.getApplyLoanResponse(inputModel).enqueue(new Callback<ApplyLoanResponse>() {
              @Override
              public void onResponse(Call<ApplyLoanResponse> call, Response<ApplyLoanResponse> response) {
                  if ( response != null && response.body().getStatus().contains("success"))

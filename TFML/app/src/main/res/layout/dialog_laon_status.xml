@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/edt_mobile_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:hint=" * Enter Mobile No." />
+
+    <EditText
+        android:id="@+id/edt_otp_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:hint=" * Enter OTP No." />
+
+    <Button
+        android:id="@+id/btn_loan_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/tab_bg"
+        android:padding="10dp"
+        android:text="Get Loan Application Status"
+        android:textColor="@color/white" />
+</LinearLayout>

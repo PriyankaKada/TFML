@@ -11,45 +11,21 @@ import java.util.List;
  */
 
 public class Banners {
-    @SerializedName("per_page")
-    @Expose
-    private Integer perPage;
     @SerializedName("current_page")
     @Expose
     private Integer currentPage;
-    @SerializedName("next_page_url")
-    @Expose
-    private Object nextPageUrl;
-    @SerializedName("prev_page_url")
-    @Expose
-    private Object prevPageUrl;
-    @SerializedName("from")
-    @Expose
-    private Integer from;
-    @SerializedName("to")
-    @Expose
-    private Integer to;
     @SerializedName("data")
     @Expose
     private List<Datum> data = new ArrayList<Datum>();
-
-    /**
-     *
-     * @return
-     * The perPage
-     */
-    public Integer getPerPage() {
-        return perPage;
-    }
-
-    /**
-     *
-     * @param perPage
-     * The per_page
-     */
-    public void setPerPage(Integer perPage) {
-        this.perPage = perPage;
-    }
+    @SerializedName("from")
+    @Expose
+    private Integer from;
+    @SerializedName("per_page")
+    @Expose
+    private Integer perPage;
+    @SerializedName("to")
+    @Expose
+    private Integer to;
 
     /**
      *
@@ -72,37 +48,19 @@ public class Banners {
     /**
      *
      * @return
-     * The nextPageUrl
+     * The data
      */
-    public Object getNextPageUrl() {
-        return nextPageUrl;
+    public List<Datum> getData() {
+        return data;
     }
 
     /**
      *
-     * @param nextPageUrl
-     * The next_page_url
+     * @param data
+     * The data
      */
-    public void setNextPageUrl(Object nextPageUrl) {
-        this.nextPageUrl = nextPageUrl;
-    }
-
-    /**
-     *
-     * @return
-     * The prevPageUrl
-     */
-    public Object getPrevPageUrl() {
-        return prevPageUrl;
-    }
-
-    /**
-     *
-     * @param prevPageUrl
-     * The prev_page_url
-     */
-    public void setPrevPageUrl(Object prevPageUrl) {
-        this.prevPageUrl = prevPageUrl;
+    public void setData(List<Datum> data) {
+        this.data = data;
     }
 
     /**
@@ -126,6 +84,24 @@ public class Banners {
     /**
      *
      * @return
+     * The perPage
+     */
+    public Integer getPerPage() {
+        return perPage;
+    }
+
+    /**
+     *
+     * @param perPage
+     * The per_page
+     */
+    public void setPerPage(Integer perPage) {
+        this.perPage = perPage;
+    }
+
+    /**
+     *
+     * @return
      * The to
      */
     public Integer getTo() {
@@ -139,23 +115,5 @@ public class Banners {
      */
     public void setTo(Integer to) {
         this.to = to;
-    }
-
-    /**
-     *
-     * @return
-     * The data
-     */
-    public List<Datum> getData() {
-        return data;
-    }
-
-    /**
-     *
-     * @param data
-     * The data
-     */
-    public void setData(List<Datum> data) {
-        this.data = data;
     }
 }
