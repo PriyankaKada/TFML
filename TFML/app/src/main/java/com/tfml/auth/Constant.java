@@ -5,7 +5,7 @@ package com.tfml.auth;
  */
 
 public class Constant {
-    public static final String BASE_URL="http://staging.php-dev.in:8844/tatamotors/public/customer";
+    public static final String BASE_URL="http://staging.php-dev.in:8844/tatamotors/public/customer/";
     public static final String BANNER="banners";
     public static final String SCHEMES="schemes";
     public static final String DOWNLOADS="downloads";

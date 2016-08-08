@@ -12,152 +12,47 @@ import java.util.List;
 
 public class BannerlistResponse
 {
-    @SerializedName("per_page")
+    @SerializedName("status")
     @Expose
-    private Integer perPage;
-    @SerializedName("current_page")
+    private String status;
+    @SerializedName("banners")
     @Expose
-    private Integer currentPage;
-    @SerializedName("next_page_url")
-    @Expose
-    private Object nextPageUrl;
-    @SerializedName("prev_page_url")
-    @Expose
-    private Object prevPageUrl;
-    @SerializedName("from")
-    @Expose
-    private Integer from;
-    @SerializedName("to")
-    @Expose
-    private Integer to;
-    @SerializedName("data")
-    @Expose
-    private List<Datum> data = new ArrayList<Datum>();
+    private Banners banners;
 
     /**
      *
      * @return
-     * The perPage
+     * The status
      */
-    public Integer getPerPage() {
-        return perPage;
+    public String getStatus() {
+        return status;
     }
 
     /**
      *
-     * @param perPage
-     * The per_page
+     * @param status
+     * The status
      */
-    public void setPerPage(Integer perPage) {
-        this.perPage = perPage;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     /**
      *
      * @return
-     * The currentPage
+     * The banners
      */
-    public Integer getCurrentPage() {
-        return currentPage;
+    public Banners getBanners() {
+        return banners;
     }
 
     /**
      *
-     * @param currentPage
-     * The current_page
+     * @param banners
+     * The banners
      */
-    public void setCurrentPage(Integer currentPage) {
-        this.currentPage = currentPage;
-    }
-
-    /**
-     *
-     * @return
-     * The nextPageUrl
-     */
-    public Object getNextPageUrl() {
-        return nextPageUrl;
-    }
-
-    /**
-     *
-     * @param nextPageUrl
-     * The next_page_url
-     */
-    public void setNextPageUrl(Object nextPageUrl) {
-        this.nextPageUrl = nextPageUrl;
-    }
-
-    /**
-     *
-     * @return
-     * The prevPageUrl
-     */
-    public Object getPrevPageUrl() {
-        return prevPageUrl;
-    }
-
-    /**
-     *
-     * @param prevPageUrl
-     * The prev_page_url
-     */
-    public void setPrevPageUrl(Object prevPageUrl) {
-        this.prevPageUrl = prevPageUrl;
-    }
-
-    /**
-     *
-     * @return
-     * The from
-     */
-    public Integer getFrom() {
-        return from;
-    }
-
-    /**
-     *
-     * @param from
-     * The from
-     */
-    public void setFrom(Integer from) {
-        this.from = from;
-    }
-
-    /**
-     *
-     * @return
-     * The to
-     */
-    public Integer getTo() {
-        return to;
-    }
-
-    /**
-     *
-     * @param to
-     * The to
-     */
-    public void setTo(Integer to) {
-        this.to = to;
-    }
-
-    /**
-     *
-     * @return
-     * The data
-     */
-    public List<Datum> getData() {
-        return data;
-    }
-
-    /**
-     *
-     * @param data
-     * The data
-     */
-    public void setData(List<Datum> data) {
-        this.data = data;
+    public void setBanners(Banners banners) {
+        this.banners = banners;
     }
 
 }

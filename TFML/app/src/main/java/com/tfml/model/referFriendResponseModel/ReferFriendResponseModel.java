@@ -1,16 +1,18 @@
-package com.tfml.model.applyLoanResponseModel;
+package com.tfml.model.referFriendResponseModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.tfml.model.applyLoanResponseModel.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by webwerks on 29/7/16.
+ * Created by webwerks on 1/8/16.
  */
 
-public class ApplyLoanResponse {
+public class ReferFriendResponseModel {
+
     @SerializedName("status")
     @Expose
     private String status;

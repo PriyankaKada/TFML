@@ -39,18 +39,6 @@ public class ApiService {
         return apiService;
     }
 
-   /* @Override
-    public void initialize() {
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        services = retrofit.create(IWebServices.class);
-
-
-    }*/
 
     public TfmlApi call() {
         services = retrofit.create(TfmlApi.class);
