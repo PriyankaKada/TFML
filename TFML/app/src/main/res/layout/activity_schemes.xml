@@ -34,10 +34,11 @@
         android:layout_height="120dp"
         android:background="@color/tab_bg"
         android:elevation="6dp"
+        app:tabGravity="fill"
         app:tabTextColor="@color/tab_selector"
         app:tabMinWidth="100dp"
         app:tabSelectedTextColor="@color/tab_selector"
-        app:tabIndicatorColor="#ff00ff"
+        app:tabIndicatorColor="#ffffff"
         android:layout_alignParentBottom="true"
         />
 </LinearLayout>

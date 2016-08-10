@@ -3,7 +3,83 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:isScrollContainer="false"
+    android:padding="5dp"
     tools:context="com.tfml.fragment.ApplyLoanFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:textColor="@color/text_black"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="LEAD TYPE"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/chk_individual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Individual"/>
+        <CheckBox
+            android:id="@+id/chk_organization"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Orgnization"/>
+    </LinearLayout>
+    <EditText
+        android:id="@+id/edt_orgnization_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/whit_rect_bg"
+        android:hint=" * Enter Organization"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/text_black"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="VEHICAL TYPE"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/chk_commercial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Commercial"/>
+        <CheckBox
+            android:id="@+id/chk_passenger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Passenger"/>
+        <CheckBox
+            android:id="@+id/chk_refinance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Refinance"/>
+
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -130,86 +206,37 @@
         android:padding="10dp"
         android:layout_marginTop="10dp">
     </Spinner>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textStyle="bold"
-        android:text="LEAD TYPE"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:padding="10dp"
-        android:orientation="horizontal">
-        <CheckBox
-            android:id="@+id/chk_individual"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Individual"/>
-        <CheckBox
-            android:id="@+id/chk_organization"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Orgnization"/>
-    </LinearLayout>
-    <EditText
-        android:id="@+id/edt_orgnization_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:hint=" * Enter Organization"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textStyle="bold"
-        android:text="VEHICAL TYPE"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:padding="10dp"
-        android:orientation="horizontal">
-        <CheckBox
-            android:id="@+id/chk_commercial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Commercial"/>
-        <CheckBox
-            android:id="@+id/chk_passenger"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Passenger"/>
-        <CheckBox
-            android:id="@+id/chk_refinance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Refinance"/>
 
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:orientation="horizontal">
         <Button
             android:id="@+id/btn_cancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/tab_bg"
             android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/white"
             android:text="Cancel"/>
+
         <Button
             android:id="@+id/btn_apply_laon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/tab_bg"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_marginLeft="20dp"
             android:layout_weight="1"
+            android:textStyle="bold"
             android:text="Apply Loan"/>
+    </LinearLayout>
     </LinearLayout>
     </LinearLayout>
 </ScrollView>

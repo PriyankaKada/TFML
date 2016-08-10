@@ -2,8 +2,12 @@ package com.tfml.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.opengl.EGLDisplay;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -43,6 +47,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.tfml.R.id.imageView1;
+import static com.tfml.R.id.start;
 
 public class BannerActivity extends BaseActivity implements View.OnClickListener,ViewPager.OnPageChangeListener
 {
@@ -108,7 +113,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
          tfmlApi = ApiService.getInstance().call();
          if(CommonUtils.isNetworkAvailable(BannerActivity.this))
          {
-             CommonUtils.showProgressDialog(BannerActivity.this,"Please Wait Load.....");
+             CommonUtils.showProgressDialog(BannerActivity.this,"Loading Data please wait.....");
              callBannerList();
          }
          else
@@ -203,6 +208,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
                 loanStatusDialog();
                 break;
             case R.id.linLogin:
+                startActivity(new Intent(this,LoginActivity.class));
                 break;
 
         }
@@ -306,10 +312,10 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
         socialdialog.getWindow().setAttributes(params);
          socialdialog.getWindow().getAttributes().windowAnimations = R.style.animationdialog;
          socialdialog.setCancelable(true);
-         final ImageView imgmessage = (ImageView) socialdialog.findViewById(R.id.imgmsg);
-         final ImageView imgmap=(ImageView)socialdialog.findViewById(R.id.imgmap);
-         final ImageView imgwhatsapp=(ImageView)socialdialog.findViewById(R.id.imgwhatsapp);
-         final ImageView imgphonecall=(ImageView)socialdialog.findViewById(R.id.imgcall);
+         final ImageView imgMessage = (ImageView) socialdialog.findViewById(R.id.imgmsg);
+         final ImageView imgMap=(ImageView)socialdialog.findViewById(R.id.imgmap);
+         final ImageView imgWhatsApp=(ImageView)socialdialog.findViewById(R.id.imgwhatsapp);
+         final ImageView imgPhoneCall=(ImageView)socialdialog.findViewById(R.id.imgcall);
          final ImageView imgcancel=(ImageView)socialdialog.findViewById(R.id.imgcancel);
          imgcancel.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -318,9 +324,99 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
                  imgSocial.setVisibility(View.VISIBLE);
              }
          });
+         imgMessage.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 sendMail();
+             }
+         });
+         imgPhoneCall.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                dialPhoneCall();
+             }
+         });
+         imgWhatsApp.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 sendWhatsAppMsg();
+             }
+         });
+
+
          socialdialog.show();
 
      }
+
+    public void sendWhatsAppMsg()
+    {
+        boolean isWhatsappInstalled = whatsappInstalledOrNot("com.whatsapp");
+        if (isWhatsappInstalled) {
+            Intent waIntent = new Intent(Intent.ACTION_SEND);
+            waIntent.setType("text/plain");
+            String text = "Welcome to TFML";
+            waIntent.setPackage("com.whatsapp");
+            if (waIntent != null) {
+                waIntent.putExtra(Intent.EXTRA_TEXT, text);//
+                startActivity(Intent.createChooser(waIntent, "Share with"));
+            } else {
+                Toast.makeText(this, "WhatsApp not Installed", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        } else {
+            Toast.makeText(this, "WhatsApp not Installed",
+                    Toast.LENGTH_SHORT).show();
+            Uri uri = Uri.parse("market://details?id=com.whatsapp");
+            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(goToMarket);
+
+        }
+
+    }
+
+    private boolean whatsappInstalledOrNot(String uri) {
+        PackageManager pm = getPackageManager();
+        boolean app_installed = false;
+        try {
+            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+            app_installed = true;
+        } catch (PackageManager.NameNotFoundException e) {
+            app_installed = false;
+        }
+        return app_installed;
+    }
+
+    public void dialPhoneCall()
+    {
+
+        Intent callIntent = new Intent(Intent.ACTION_DIAL);
+        callIntent.setData(Uri.parse("tel:18002090188"));
+        startActivity(callIntent);
+    }
+
+    public void  sendMail()
+    {
+        Log.i("Send email", "");
+        String[] TO = {""};
+        String[] CC = {""};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            finish();
+            Log.i("Finish sending email...", "");
+        }
+        catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(BannerActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
+        }
     public void loanStatusDialog()
     {
      final Dialog loanstatusdialog=new Dialog(BannerActivity.this,android.R.style.Theme_Holo_Dialog_NoActionBar);

@@ -55,7 +55,8 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:orientation="horizontal"
-        android:paddingTop="10dp">
+        android:padding="10dp"
+        >
 
         <LinearLayout
             android:id="@+id/linSchemes"
@@ -71,7 +72,7 @@
                 android:layout_height="30dp"
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_call" />
+                android:src="@drawable/ic_schemes" />
 
             <TextView
                 android:id="@+id/txtSchemes"
@@ -99,13 +100,14 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_call" />
+                android:src="@drawable/ic_apply_loan" />
 
             <TextView
                 android:id="@+id/txtApplyLoan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:text="@string/apply_loan"
                 android:textColor="#000000" />
 
@@ -125,13 +127,14 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_call" />
+                android:src="@drawable/ic_refer_friends" />
 
             <TextView
                 android:id="@+id/txtReferFriend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:text="@string/refer_friend"
                 android:textColor="#000000" />
 
@@ -151,13 +154,14 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_call" />
+                android:src="@drawable/loan_status" />
 
             <TextView
                 android:id="@+id/txtLoanStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:text="@string/laon_status"
                 android:textColor="#000000" />
 
@@ -177,7 +181,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_call" />
+                android:src="@drawable/ic_login" />
 
             <TextView
                 android:id="@+id/txtLogin"

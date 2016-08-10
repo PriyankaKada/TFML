@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="New Schemes"
+            android:textSize="18sp"
             android:textColor="@color/white"
             ></TextView>
         <ImageView

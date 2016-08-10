@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/tab_bg"
+    android:padding="10dp"
+    tools:context="com.tfml.activity.LoginActivity">
+    <TextView
+        android:text="@string/txt_login_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:id="@+id/txt_login_title" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:gravity="center"
+    android:layout_marginTop="30dp"
+    android:orientation="vertical">
+
+     <EditText
+         android:id="@+id/edt_user_name"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="Username"
+         android:layout_marginLeft="10dp"
+         android:layout_marginRight="10dp"
+         android:drawablePadding="10dp"
+         android:textColorHint="@color/white"
+         android:textSize="15dp"
+         android:drawableLeft="@mipmap/ic_user_name"
+
+        />
+    <EditText
+        android:id="@+id/edt_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:textSize="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:drawablePadding="10dp"
+        android:textColorHint="@color/white"
+        android:drawableLeft="@mipmap/ic_password"
+        />
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/chkRemember_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Remember Password"
+            android:textSize="15dp"
+            android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/txt_forgot_password"
+            android:text="Forgot Password?"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textSize="15dp"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_login"
+        android:padding="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:text="Login"
+        android:background="@color/white"
+        android:textColor="@color/tab_bg"
+        android:layout_height="wrap_content" />
+</LinearLayout>
