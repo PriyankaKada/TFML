@@ -5,6 +5,8 @@
     <string name="refer_friend">Refer Friend</string>
     <string name="laon_status">Loan Status</string>
     <string name="login">Login</string>
+    <string name="contact_us">Contact Us</string>
     <string name="title_activity_schemes">SchemesActivity</string>
     <string name="txt_login_title">mCONNECT \n TMFL Customer zone !!!</string>
+    <string name="navigation_view_items">Navigation View Item</string>
 </resources>

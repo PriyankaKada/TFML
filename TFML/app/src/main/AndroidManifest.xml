@@ -43,9 +43,20 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".activity.LoginActivity" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.LoanStatusActivity" />
-        <activity android:name=".activity.ContractActivity"></activity>
+        <activity
+            android:name=".activity.ContractActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.DrawerBaseActivity">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
     </application>
 
 </manifest>

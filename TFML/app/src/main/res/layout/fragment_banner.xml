@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:fillColor="@color/colorAccent"
-        app:pageColor="@android:color/white"
+        app:pageColor="@android:color/holo_red_light"
         app:radius="4dp"
        android:layout_marginTop="10dp"
         app:strokeColor="@android:color/darker_gray"

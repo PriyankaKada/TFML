@@ -64,6 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="start"
+            android:background="?attr/selectableItemBackground"
             android:orientation="vertical">
 
             <ImageView
@@ -91,6 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/linSchemes"
+            android:background="?attr/selectableItemBackground"
             android:layout_weight="1"
             android:layout_marginLeft="2dp"
             android:orientation="vertical">
@@ -119,6 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/linApplyLoan"
+            android:background="?attr/selectableItemBackground"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -145,6 +148,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:background="?attr/selectableItemBackground"
             android:layout_toRightOf="@+id/linReferFriend"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -172,6 +176,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:background="?attr/selectableItemBackground"
             android:layout_toRightOf="@+id/linLoanStaus"
             android:layout_weight="1"
             android:orientation="vertical">

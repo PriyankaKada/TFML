@@ -5,10 +5,26 @@
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/tab_selector"
     android:orientation="vertical"
-    android:background="@color/tab_bg"
-    android:padding="10dp"
     tools:context="com.tfml.activity.LoginActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:background="@color/tab_bg"
+        android:layout_height="?attr/actionBarSize"
+
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            />
+    </android.support.v7.widget.Toolbar>
     <TextView
         android:text="@string/txt_login_title"
         android:layout_width="wrap_content"
@@ -49,6 +65,7 @@
         android:textSize="15dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:inputType="textPassword"
         android:drawablePadding="10dp"
         android:textColorHint="@color/white"
         android:drawableLeft="@mipmap/ic_password"

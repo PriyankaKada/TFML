@@ -39,6 +39,6 @@
         android:layout_height="wrap_content"
        android:layout_gravity="center"
         android:layout_marginLeft="15dp"
-        android:src="@drawable/ic_maps"/>
+        android:src="@drawable/ic_map_locator"/>
     </LinearLayout>
 </RelativeLayout>
