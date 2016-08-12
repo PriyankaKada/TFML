@@ -19,7 +19,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="start"
                 android:layout_marginLeft="5dp"
-                android:src="@drawable/ic_call" />
+                android:src="@drawable/ic_call_non_selected" />
             <TextView
                 android:id="@+id/txtTitle"
                 android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="end"
                 android:layout_marginRight="5dp"
-                android:src="@drawable/ic_action_phone"
+                android:src="@drawable/ic_mobile"
                 ></ImageView>
         </android.support.v7.widget.Toolbar>
 

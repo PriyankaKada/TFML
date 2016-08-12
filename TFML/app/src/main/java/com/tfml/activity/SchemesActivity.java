@@ -55,17 +55,17 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 
         TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabOne.setText("Schemes");
-        tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_schemes, 0, 0);
+        tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_scheme_non_selected, 0, 0);
         tabLayout.getTabAt(0).setCustomView(tabOne);
 
         TextView tabTwo = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabTwo.setText("Apply Loan");
-        tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_apply_loan, 0, 0);
+        tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_apply_loan_non_selected, 0, 0);
         tabLayout.getTabAt(1).setCustomView(tabTwo);
 
         TextView tabThree = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabThree.setText("Refer Friend");
-        tabThree.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_refer_friends, 0, 0);
+        tabThree.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_refer_friends_non_selected, 0, 0);
         tabLayout.getTabAt(2).setCustomView(tabThree);
     }
 

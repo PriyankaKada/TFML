@@ -147,6 +147,7 @@
                 android:textColor="@color/white" />
 
             <TextView
+                android:id="@+id/txt_contract_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
@@ -172,6 +173,7 @@
                 android:textColor="@color/white" />
 
             <TextView
+                android:id="@+id/txt_rc_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
@@ -409,12 +411,14 @@
 
         </LinearLayout>
         <TextView
+            android:id="@+id/txt_terminated_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tata Genx Nano"
             android:textColor="@android:color/black"
             android:textSize="18sp"/>
         <TextView
+            android:id="@+id/txt_terminated_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Terminated on 12/06/2016"
@@ -431,6 +435,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
+        android:background="@color/tab_bg"
         android:orientation="horizontal"
         android:padding="10dp"
         >
@@ -450,7 +455,7 @@
                 android:layout_height="30dp"
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_schemes" />
+                android:src="@drawable/ic_scheme_non_selected" />
 
             <TextView
                 android:id="@+id/txtSchemes"
@@ -458,7 +463,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/schemes"
-                android:textColor="#000000" />
+                android:textColor="#FFFFFF" />
 
 
         </LinearLayout>
@@ -479,7 +484,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_apply_loan" />
+                android:src="@drawable/ic_apply_loan_non_selected" />
 
             <TextView
                 android:id="@+id/txtApplyLoan"
@@ -488,7 +493,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="@string/apply_loan"
-                android:textColor="#000000" />
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
 
@@ -507,7 +512,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_refer_friends" />
+                android:src="@drawable/ic_refer_friends_non_selected" />
 
             <TextView
                 android:id="@+id/txtReferFriend"
@@ -516,7 +521,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="@string/refer_friend"
-                android:textColor="#000000" />
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
 
@@ -535,7 +540,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/loan_status" />
+                android:src="@drawable/ic_loan_status_non_selected" />
 
             <TextView
                 android:id="@+id/txtLoanStatus"
@@ -544,12 +549,12 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="@string/laon_status"
-                android:textColor="#000000" />
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linLogin"
+            android:id="@+id/lin_contact_us"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -563,7 +568,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_action_phone" />
+                android:src="@drawable/ic_mobile" />
 
             <TextView
                 android:id="@+id/txtContactUs"
@@ -571,7 +576,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/contact_us"
-                android:textColor="#000000" />
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
     </LinearLayout>

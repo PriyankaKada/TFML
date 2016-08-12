@@ -3,11 +3,11 @@
           <item
             android:id="@+id/navigation_item_new_scheme"
             android:checked="true"
-            android:icon="@drawable/ic_schemes"
+            android:icon="@drawable/ic_scheme_selected"
             android:title="New Scheme" />
         <item
             android:id="@+id/navigation_item_apply_loan"
-            android:icon="@drawable/ic_apply_loan"
+            android:icon="@drawable/ic_apply_loan_selected"
             android:title="@string/apply_loan" />
 
     <item

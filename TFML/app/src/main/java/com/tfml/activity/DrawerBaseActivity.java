@@ -1,6 +1,7 @@
 package com.tfml.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,8 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.tfml.R;
+import com.tfml.common.SocialUtil;
 
 
 public class DrawerBaseActivity extends BaseActivity {
@@ -46,16 +49,13 @@ public class DrawerBaseActivity extends BaseActivity {
                 int id = menuItem.getItemId();
                 switch (id) {
                     case R.id.navigation_item_new_scheme:
-                        //Do some thing here
-                        // add navigation drawer item onclick method here
+                        startActivity(new Intent(DrawerBaseActivity.this,SchemesActivity.class));
                         break;
                     case R.id.navigation_item_apply_loan:
-                        //Do some thing here
-                        // add navigation drawer item onclick method here
+                        startActivity(new Intent(DrawerBaseActivity.this,SchemesActivity.class));
                         break;
                     case R.id.navigation_item_refer_friend:
-                        //Do some thing here
-                        // add navigation drawer item onclick method here
+                        startActivity(new Intent(DrawerBaseActivity.this,SchemesActivity.class));
                         break;
                     case R.id.navigation_item_download:
                         //Do some thing here
@@ -66,12 +66,26 @@ public class DrawerBaseActivity extends BaseActivity {
                         // add navigation drawer item onclick method here
                         break;
                     case R.id.navigation_item_login:
+                        startActivity(new Intent(DrawerBaseActivity.this,LoginActivity.class));
                         break;
                     case R.id.navigation_item_phone_call:
+                        SocialUtil.dialPhoneCall(DrawerBaseActivity.this);
+                        break;
+                    case R.id.navigation_item_message:
+                        SocialUtil.sendMail(DrawerBaseActivity.this);
                         break;
                     case R.id.navigation_item_whatsapp:
+                        try
+                        {
+                            SocialUtil.sendWhatsAppMsg(DrawerBaseActivity.this);
+                        }catch(Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+
                         break;
                     case R.id.navigation_item_map:
+                        Toast.makeText(DrawerBaseActivity.this,"Map service not avialable",Toast.LENGTH_SHORT).show();
                         break;
 
 
@@ -98,24 +112,11 @@ public class DrawerBaseActivity extends BaseActivity {
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.navigation_view_items, menu);
-        return true;
-    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-      /*  if (drawerToggle.onOptionsItemSelected(item))
-            return true;*/
 
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == android.R.id.home) {
             drawerLayout.openDrawer(GravityCompat.END);
         }

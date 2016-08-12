@@ -5,6 +5,7 @@
     android:id="@+id/activity_banner"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/tab_bg"
     tools:context="com.tfml.activity.BannerActivity">
 
     <include
@@ -73,7 +74,7 @@
                 android:layout_height="30dp"
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_schemes" />
+                android:src="@drawable/ic_scheme_non_selected" />
 
             <TextView
                 android:id="@+id/txtSchemes"
@@ -81,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/schemes"
-                android:textColor="#000000" />
+                android:textColor="#FFFFFF" />
 
 
         </LinearLayout>
@@ -102,7 +103,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_apply_loan" />
+                android:src="@drawable/ic_apply_loan_non_selected" />
 
             <TextView
                 android:id="@+id/txtApplyLoan"
@@ -111,7 +112,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="@string/apply_loan"
-                android:textColor="#000000" />
+                android:textColor="#FFFFFF"  />
 
         </LinearLayout>
 
@@ -130,7 +131,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_refer_friends" />
+                android:src="@drawable/ic_refer_friends_non_selected" />
 
             <TextView
                 android:id="@+id/txtReferFriend"
@@ -139,7 +140,8 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="@string/refer_friend"
-                android:textColor="#000000" />
+                android:textColor="#FFFFFF"
+                />
 
         </LinearLayout>
 
@@ -158,7 +160,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/loan_status" />
+                android:src="@drawable/ic_loan_status_non_selected" />
 
             <TextView
                 android:id="@+id/txtLoanStatus"
@@ -167,7 +169,8 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="@string/laon_status"
-                android:textColor="#000000" />
+                android:textColor="#FFFFFF"
+                 />
 
         </LinearLayout>
 
@@ -186,7 +189,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_login" />
+                android:src="@drawable/ic_login_non_selected" />
 
             <TextView
                 android:id="@+id/txtLogin"
@@ -194,7 +197,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/login"
-                android:textColor="#000000" />
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
     </LinearLayout>

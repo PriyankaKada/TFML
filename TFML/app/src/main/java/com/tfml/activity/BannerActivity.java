@@ -30,6 +30,7 @@ import com.tfml.adapter.BannerAdapter;
 import com.tfml.auth.TfmlApi;
 import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
+import com.tfml.common.SocialUtil;
 import com.tfml.fragment.BannerFragment;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusInputModel;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusResponse;
@@ -191,11 +192,9 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
                 break;
 
             case R.id.imgSocial:
-               // startActivity(new Intent(this, ForgetPasswordActivity.class));
                 socialDialog();
                 break;
             case R.id.linSchemes:
-            //    linSchemesClick();
                 startActivity(new Intent(this, SchemesActivity.class));
                 break;
             case R.id.linApplyLoan:
@@ -205,7 +204,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
                 startActivity(new Intent(this, SchemesActivity.class));
                 break;
             case R.id.linLoanStaus:
-                loanStatusDialog();
+                SocialUtil.loanStatusDialog(BannerActivity.this);
                 break;
             case R.id.linLogin:
                 startActivity(new Intent(this,LoginActivity.class));
@@ -234,7 +233,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
         dialog.getWindow().getAttributes().windowAnimations = R.style.animationdialog;
         dialog.setCancelable(false);
         final EditText edtQuickCall = (EditText) dialog.findViewById(R.id.edt_quick_call);
-       final Button btnCancel = (Button) dialog.findViewById(R.id.btn_cancel);
+        final Button btnCancel = (Button) dialog.findViewById(R.id.btn_cancel);
         Button btnSubmit=(Button)dialog.findViewById(R.id.btn_submit);
         btnCancel.setVisibility(View.VISIBLE);
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -256,7 +255,6 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
                    QuickCallInputModel quickCallInputModel=new QuickCallInputModel();
                    quickCallInputModel.setMobileNumber(strmobileno);
                    callResponseModel(quickCallInputModel);
-                //   Toast.makeText(BannerActivity.this,edtQuickCall.getText().toString(),Toast.LENGTH_SHORT).show();
                    dialog.dismiss();
                    btnCancel.setVisibility(View.GONE);
                }
@@ -278,7 +276,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 
                  if ( response != null && response.body().getStatus().contains("success"))
                  {
-                     loanStatusDialog();
+                     SocialUtil.loanStatusDialog(BannerActivity.this);
 
 
                      Log.e("getQuickCallResponse",response.body().getStatus());
@@ -327,19 +325,19 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
          imgMessage.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 sendMail();
+                 SocialUtil.sendMail(BannerActivity.this);
              }
          });
          imgPhoneCall.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                dialPhoneCall();
+                 SocialUtil.dialPhoneCall(BannerActivity.this);
              }
          });
          imgWhatsApp.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 sendWhatsAppMsg();
+                 SocialUtil.sendWhatsAppMsg(BannerActivity.this);
              }
          });
 
@@ -348,150 +346,8 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 
      }
 
-    public void sendWhatsAppMsg()
-    {
-        boolean isWhatsappInstalled = whatsappInstalledOrNot("com.whatsapp");
-        if (isWhatsappInstalled) {
-            Intent waIntent = new Intent(Intent.ACTION_SEND);
-            waIntent.setType("text/plain");
-            String text = "Welcome to TFML";
-            waIntent.setPackage("com.whatsapp");
-            if (waIntent != null) {
-                waIntent.putExtra(Intent.EXTRA_TEXT, text);//
-                startActivity(Intent.createChooser(waIntent, "Share with"));
-            } else {
-                Toast.makeText(this, "WhatsApp not Installed", Toast.LENGTH_SHORT)
-                        .show();
-            }
-        } else {
-            Toast.makeText(this, "WhatsApp not Installed",
-                    Toast.LENGTH_SHORT).show();
-            Uri uri = Uri.parse("market://details?id=com.whatsapp");
-            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-            startActivity(goToMarket);
 
-        }
 
-    }
-
-    private boolean whatsappInstalledOrNot(String uri) {
-        PackageManager pm = getPackageManager();
-        boolean app_installed = false;
-        try {
-            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
-            app_installed = true;
-        } catch (PackageManager.NameNotFoundException e) {
-            app_installed = false;
-        }
-        return app_installed;
-    }
-
-    public void dialPhoneCall()
-    {
-
-        Intent callIntent = new Intent(Intent.ACTION_DIAL);
-        callIntent.setData(Uri.parse("tel:18002090188"));
-        startActivity(callIntent);
-    }
-
-    public void  sendMail()
-    {
-        Log.i("Send email", "");
-        String[] TO = {""};
-        String[] CC = {""};
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-
-        emailIntent.setData(Uri.parse("mailto:"));
-        emailIntent.setType("text/plain");
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-        emailIntent.putExtra(Intent.EXTRA_CC, CC);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
-
-        try {
-            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-            finish();
-            Log.i("Finish sending email...", "");
-        }
-        catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(BannerActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
-        }
-        }
-    public void loanStatusDialog()
-    {
-     final Dialog loanstatusdialog=new Dialog(BannerActivity.this,android.R.style.Theme_Holo_Dialog_NoActionBar);
-        loanstatusdialog.setContentView(R.layout.dialog_laon_status);
-        WindowManager.LayoutParams params = loanstatusdialog.getWindow().getAttributes();
-        params.y = 15; params.x = 15;
-        params.gravity = Gravity.BOTTOM | Gravity.CENTER;
-        loanstatusdialog.getWindow().setAttributes(params);
-        loanstatusdialog.setCancelable(true);
-       // getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
-      //  WindowManager.LayoutParams params = loanstatusdialog.getWindow().getAttributes();
-      //  params.y = 5; params.x = 5;
-      //  params.gravity = Gravity.BOTTOM | Gravity.END;
-        //loanstatusdialog.getWindow().setAttributes(params);
-        loanstatusdialog.getWindow().getAttributes().windowAnimations = R.style.animationdialog;
-        final EditText edtmobileno=(EditText)loanstatusdialog.findViewById(R.id.edt_mobile_no);
-        final EditText edtotpno=(EditText)loanstatusdialog.findViewById(R.id.edt_otp_no);
-        final Button  btnloanstatus=(Button)loanstatusdialog.findViewById(R.id.btn_loan_status);
-
-        btnloanstatus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-               String monumber=edtmobileno.getText().toString();
-               String otpnumber=edtotpno.getText().toString();
-                if(TextUtils.isEmpty(monumber))
-                {
-                    Toast.makeText(getBaseContext(),"Please Enter Mobile Number",Toast.LENGTH_SHORT).show();
-                }
-                if(TextUtils.isEmpty(otpnumber))
-                {
-                    Toast.makeText(getBaseContext(),"Please Enter OTP Number",Toast.LENGTH_SHORT).show();
-                }
-                if(!TextUtils.isEmpty(monumber) && !TextUtils.isEmpty(otpnumber))
-                {
-                    LoanStatusInputModel loanStatusInputModel=new LoanStatusInputModel();
-                    loanStatusInputModel.setOtpNumber(otpnumber);
-                    loanStatusInputModel.setMobileNumber(monumber);
-                    CallLoanStatusModel(loanStatusInputModel);
-
-                }
-
-            }
-        });
-        loanstatusdialog.show();
-    }
-
-    public void CallLoanStatusModel(LoanStatusInputModel loanStatusInputModel)
-    {
-        tfmlApi.getOtpResponse(loanStatusInputModel).enqueue(new Callback<LoanStatusResponse>() {
-            @Override
-            public void onResponse(Call<LoanStatusResponse> call, Response<LoanStatusResponse> response) {
-                if(response.body().getStatus().contains("success"))
-                {
-                    Log.e("CallLoanStatusModel",response.body().getStatus());
-                    Toast.makeText(getBaseContext(),"Get Application Loan Process ",Toast.LENGTH_SHORT).show();
-                }
-                if(response.body().getStatus().contains("error"))
-                {
-                    Log.e("CallLoanStatusModel",response.body().getError());
-                    Toast.makeText(getBaseContext(),response.body().getError(),Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(getBaseContext(),"Get Application Loan Process ",Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<LoanStatusResponse> call, Throwable t) {
-
-            }
-        });
-    }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

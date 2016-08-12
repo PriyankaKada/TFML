@@ -16,7 +16,7 @@
             android:layout_height="30dp"
             android:layout_gravity="start"
             android:layout_marginLeft="5dp"
-            android:src="@drawable/ic_home_white" />
+            android:src="@drawable/ic_home" />
         <TextView
             android:id="@+id/txt_schemes_title"
             android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
             android:layout_height="30dp"
             android:layout_gravity="end"
             android:layout_marginRight="5dp"
-            android:src="@drawable/ic_action_phone"
+            android:src="@drawable/ic_mobile"
             ></ImageView>
     </android.support.v7.widget.Toolbar>
 </LinearLayout>
