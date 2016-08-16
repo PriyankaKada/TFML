@@ -9,6 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="We pleased to introduce NEW SCHEMES"
         android:textSize="18sp"
         />
@@ -19,6 +20,7 @@
          <ListView
              android:id="@+id/lst_new_schemes"
              android:layout_width="match_parent"
+             android:padding="10dp"
              android:layout_height="wrap_content">
          </ListView>
      </LinearLayout>

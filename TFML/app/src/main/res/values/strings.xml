@@ -9,4 +9,7 @@
     <string name="title_activity_schemes">SchemesActivity</string>
     <string name="txt_login_title">mCONNECT \n TMFL Customer zone !!!</string>
     <string name="navigation_view_items">Navigation View Item</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

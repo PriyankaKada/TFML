@@ -8,30 +8,31 @@
         android:id="@+id/imgmsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_msg"/>
+        android:src="@drawable/ic_email"/>
     <ImageView
         android:id="@+id/imgwhatsapp"
         android:layout_width="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_whatsapp"/>
+        android:src="@drawable/icon_whatsapp"/>
     <ImageView
         android:id="@+id/imgcall"
         android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_phone"/>
+        android:src="@drawable/ic_call_selected"/>
 
     <ImageView
         android:id="@+id/imgmap"
         android:layout_width="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_map_locator"/>
+        android:src="@drawable/ic_locate_us"/>
     <ImageView
         android:id="@+id/imgcancel"
         android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_close"/>
+        android:src="@drawable/ic_cancel"/>
 </LinearLayout>
 

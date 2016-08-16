@@ -26,7 +26,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
     private TextView txtTotalCount,txtTerminatedCount,txtOverDueCount,txtContractNo,txtRcNo,txtNextDueDate,txtCurrentEmi,txtLastPayment,txtPreviousEmi,txtOverdueAmount,txtRepaymentMode,txtTerminitedContracName,txtTerminatedContractDate;
     private Button btnPayEmi,btnMoreDetail;
     private LinearLayout linSchemes,linApplyLoan,linReferFriend,linLoanStaus,linContactUs;
-    ImageView imgDrawer,imgDownload;
+    private ImageView imgDrawer,imgDownload;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +69,8 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
         linContactUs.setOnClickListener(this);
         imgDownload.setOnClickListener(this);
         imgDrawer.setOnClickListener(this);
+        btnPayEmi.setOnClickListener(this);
+        btnMoreDetail.setOnClickListener(this);
     }
 
     @Override
@@ -98,6 +100,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
             case R.id.btn_pay_emi:
                 break;
             case R.id.btn_more_detail:
+                startActivity(new Intent(ContractActivity.this,EmiActivity.class));
                 break;
         }
     }

@@ -5,32 +5,32 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar_emi"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
         <ImageView
-            android:id="@+id/img_contract"
+            android:id="@+id/img_emi_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="start"
             android:layout_marginLeft="5dp"
-            android:src="@drawable/ic_star" />
+            android:src="@drawable/ic_back_arrow" />
         <TextView
-            android:id="@+id/txt_titel_contract"
+            android:id="@+id/txt_titel_emi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginLeft="25dp"
-            android:text="My Contract"
+            android:text="TATA Tiago"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/white"
             ></TextView>
         <ImageView
-            android:id="@+id/img_drawer"
+            android:id="@+id/img_drawer_emi"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="end"

@@ -43,6 +43,7 @@ public class DrawerBaseActivity extends BaseActivity {
         drawerLayout.setDrawerListener(drawerToggle);
 
         navigation = (NavigationView) findViewById(R.id.navigation_view);
+        navigation.setItemIconTintList(null);
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {

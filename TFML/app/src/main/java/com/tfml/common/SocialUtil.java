@@ -43,21 +43,12 @@ public class SocialUtil {
 
     public static void sendMail(Context context)
     {
-        String[] TO = {""};
-        String[] CC = {""};
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-
-        emailIntent.setData(Uri.parse("mailto:"));
-        emailIntent.setType("text/plain");
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-        emailIntent.putExtra(Intent.EXTRA_CC, CC);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
 
         try {
-           context. startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-           //context.finish();
-            Log.i("Finish sending email...", "");
+            Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:satyawan.hajare@wwindia.com"));
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Test App");
+            intent.putExtra(Intent.EXTRA_TEXT, "Email Body");
+            context.startActivity(intent);
         }
         catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(context, "There is no email client installed.", Toast.LENGTH_SHORT).show();

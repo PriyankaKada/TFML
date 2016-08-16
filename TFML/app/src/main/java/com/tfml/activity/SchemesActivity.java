@@ -26,9 +26,9 @@ import com.tfml.fragment.ReferFriendFragment;
 
 public class SchemesActivity extends BaseActivity implements View.OnClickListener{
     Toolbar toolbarschemes;
-    TextView txtschemestitle;
+    private TextView txtschemestitle;
     TabLayout tabLayout;
-    ImageView imgtoolbarhome,imgSocial;
+    private ImageView imgtoolbarhome,imgSocial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

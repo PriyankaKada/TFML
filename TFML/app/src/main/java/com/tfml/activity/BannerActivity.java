@@ -63,8 +63,8 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
     private ImageView[] dots;
     private int dotsCount;
     LinearLayout linSchemes,linApplyLoan,linReferFriend,linLoanStaus,linLogin;
-    TextView txtSchemes ,txtApplyLoan,txtReferFriend,txtLoanStatus,txtLogin;
-     ImageView imgSchemes,imgApplyLoan,imgReferFriend,imgLoanStatus,imgLogin;
+    private TextView txtSchemes ,txtApplyLoan,txtReferFriend,txtLoanStatus,txtLogin;
+    private ImageView imgSchemes,imgApplyLoan,imgReferFriend,imgLoanStatus,imgLogin;
     String errormsg;
     @Override
     protected void onCreate(Bundle savedInstanceState)

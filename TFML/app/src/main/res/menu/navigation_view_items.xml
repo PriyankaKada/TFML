@@ -2,7 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
           <item
             android:id="@+id/navigation_item_new_scheme"
-            android:checked="true"
             android:icon="@drawable/ic_scheme_selected"
             android:title="New Scheme" />
         <item
@@ -12,7 +11,7 @@
 
     <item
         android:id="@+id/navigation_item_refer_friend"
-        android:icon="@drawable/ic_refer_friends"
+        android:icon="@drawable/ic_refer_friends_selected"
         android:title="@string/refer_friend" />
 
     <item
@@ -21,12 +20,12 @@
         android:title="Download" />
     <item
         android:id="@+id/navigation_item_change_password"
-        android:icon="@drawable/ic_password"
+        android:icon="@drawable/ic_change_pass_selected"
         android:title="Change Password"/>
     <item
         android:id="@+id/navigation_item_login"
-        android:icon="@drawable/ic_login"
-        android:title="Login"
+        android:icon="@drawable/ic_logout"
+        android:title="Logout"
         />
 
     <item
@@ -36,19 +35,19 @@
         <menu>
             <item
                 android:id="@+id/navigation_item_phone_call"
-                android:icon="@drawable/ic_phone"
+                android:icon="@drawable/ic_call_selected"
                 android:title="Phone Call" />
             <item
                 android:id="@+id/navigation_item_whatsapp"
-                android:icon="@drawable/ic_whatsapp"
+                android:icon="@drawable/icon_whatsapp"
                 android:title="Whatsapp Call" />
             <item
                 android:id="@+id/navigation_item_message"
-                android:icon="@drawable/ic_msg"
+                android:icon="@drawable/ic_email"
                 android:title="Send Mail" />
             <item
                 android:id="@+id/navigation_item_map"
-                android:icon="@drawable/ic_map_locator"
+                android:icon="@drawable/ic_locate_us"
                 android:title="Locate Map" />
         </menu>
     </item>
