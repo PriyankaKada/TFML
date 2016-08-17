@@ -1,8 +1,11 @@
 package com.tfml.fragment;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.opengl.EGLDisplay;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -61,6 +64,9 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         proList.add("0247");
         proList.add("0250");
         spnProduct.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,proList));
+
+
+
         branchStateList=new ArrayList<String>();
         branchStateList.add("Select Branch State");
         branchStateList.add("MH");

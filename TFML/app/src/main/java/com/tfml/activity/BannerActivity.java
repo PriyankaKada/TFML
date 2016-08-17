@@ -47,7 +47,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.tfml.R.id.imageView1;
+//import static com.tfml.R.id.imageView1;
 import static com.tfml.R.id.start;
 
 public class BannerActivity extends BaseActivity implements View.OnClickListener,ViewPager.OnPageChangeListener
@@ -97,10 +97,11 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
          linLoanStaus=(LinearLayout)findViewById(R.id.linLoanStaus);
          linLogin=(LinearLayout)findViewById(R.id.linLogin);
          circlePageIndicator.setRadius(10.0f);
-         txtTitle.setText("Welcome to TFML");
+         txtTitle.setText("Welcome to TMFL");
          loadBannerData();
          imgQuickCall.setOnClickListener(this);
          imgSocial.setOnClickListener(this);
+         imgSocial.setVisibility(View.VISIBLE);
          linSchemes.setOnClickListener(this);
          linApplyLoan.setOnClickListener(this);
          linReferFriend.setOnClickListener(this);

@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:isScrollContainer="false"
-    android:padding="5dp"
     tools:context="com.tfml.fragment.ApplyLoanFragment">
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,7 +41,7 @@
         android:id="@+id/edt_orgnization_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:padding="15dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/whit_rect_bg"
         android:hint=" * Enter Organization"/>
@@ -50,6 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:padding="15dp"
         android:textColor="@color/text_black"
         android:textStyle="bold"
         android:textSize="18sp"
@@ -89,14 +89,14 @@
         android:id="@+id/edt_first_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:padding="15dp"
         android:background="@drawable/whit_rect_bg"
         android:hint=" * Enter First Name"/>
     <EditText
         android:id="@+id/edt_last_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:padding="15dp"
         android:background="@drawable/whit_rect_bg"
         android:hint=" * Enter Last Name"
         android:layout_marginTop="10dp"
@@ -111,8 +111,9 @@
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="15dp"
             android:maxLength="12"
+            android:inputType="number"
             android:background="@drawable/whit_rect_bg"
             android:hint="* Enter Mobile No."/>
         <EditText
@@ -120,10 +121,12 @@
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:padding="10dp"
+            android:layout_marginLeft="5dp"
+            android:padding="15dp"
+            android:inputType="number"
             android:background="@drawable/whit_rect_bg"
             android:hint="Enter Landline No."/>
-        
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -133,15 +136,18 @@
     <Spinner
         android:id="@+id/sp_select_product"
         android:layout_weight="1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:padding="10dp"
+        android:background="@drawable/spinner_bg"
         android:layout_height="wrap_content">
 
     </Spinner>
         <Spinner
             android:id="@+id/sp_select_branch_state"
             android:layout_weight="1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/spinner_bg"
             android:padding="10dp"
             android:layout_height="wrap_content">
 
@@ -151,20 +157,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:weightSum="2"
         android:orientation="horizontal">
         <Spinner
             android:id="@+id/sp_select_branch_city"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="1"
             android:padding="10dp"
+            android:background="@drawable/spinner_bg"
             android:layout_height="wrap_content">
 
         </Spinner>
         <Spinner
             android:id="@+id/sp_select_branch"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_weight="1"
             android:padding="10dp"
+            android:background="@drawable/spinner_bg"
+            android:layout_marginLeft="5dp"
             android:layout_height="wrap_content">
         </Spinner>
     </LinearLayout>
@@ -173,27 +183,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="* Enter Email Address"
-        android:padding="10dp"
+        android:padding="15dp"
+        android:inputType="textEmailAddress"
         android:background="@drawable/whit_rect_bg"
         android:layout_marginTop="10dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:padding="10dp"
+        android:weightSum="2"
         android:orientation="horizontal">
         <Spinner
             android:id="@+id/sp_select_state"
             android:layout_weight="1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:padding="10dp"
+            android:background="@drawable/spinner_bg"
             android:layout_height="wrap_content">
 
         </Spinner>
         <Spinner
             android:id="@+id/sp_select_city"
             android:layout_weight="1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/spinner_bg"
             android:padding="10dp"
             android:layout_height="wrap_content">
         </Spinner>
@@ -201,8 +215,9 @@
 
     <Spinner
         android:id="@+id/sp_select_pincode"
-        android:layout_width="170dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/spinner_bg"
         android:padding="10dp"
         android:layout_marginTop="10dp">
     </Spinner>

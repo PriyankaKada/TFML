@@ -3,7 +3,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.provider.Contacts;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -18,6 +20,8 @@ import com.tfml.activity.BannerActivity;
 import com.tfml.auth.TfmlApi;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusInputModel;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusResponse;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,17 +45,19 @@ public class SocialUtil {
 
     }
 
-    public static void sendMail(Context context)
-    {
+    public static void sendMail(Context context) {
+        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        intent.setType("text/html");
+        List<ResolveInfo> resInfo = context.getPackageManager().queryIntentActivities(intent, 0);
 
-        try {
-            Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:satyawan.hajare@wwindia.com"));
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Test App");
-            intent.putExtra(Intent.EXTRA_TEXT, "Email Body");
-            context.startActivity(intent);
-        }
-        catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(context, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        if (!resInfo.isEmpty()) {
+            for (ResolveInfo info : resInfo) {
+                if (info.activityInfo.packageName.toLowerCase().contains("email") || info.activityInfo.name.toLowerCase().contains("email")) {
+                    intent.putExtra(android.content.Intent.EXTRA_TEXT, "Welcome to TMFL");
+                    intent.setPackage(info.activityInfo.packageName);
+                   context. startActivity(Intent.createChooser(intent, "Sending mail Through TMFL"));
+                }
+            }
         }
     }
 

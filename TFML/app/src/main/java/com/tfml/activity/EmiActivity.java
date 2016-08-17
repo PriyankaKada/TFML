@@ -36,23 +36,24 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_emi);
+      //  setContentView(R.layout.activity_emi);
+        View view = getLayoutInflater().inflate(R.layout.activity_emi,frameLayout);
         toolbarEmi=(Toolbar)findViewById(R.id.toolbar_emi);
         setSupportActionBar(toolbarEmi);
         getSupportActionBar().setTitle("");
-        init();
+        init(view);
     }
 
-    public void init()
+    public void init(View view)
     {
-         imgEmiBack=(ImageView)findViewById(R.id.img_emi_back);
-        txtEmiName=(TextView)findViewById(R.id.txt_titel_emi);
-        viewPager = (ViewPager) findViewById(R.id.pager);
+         imgEmiBack=(ImageView)view.findViewById(R.id.img_emi_back);
+        txtEmiName=(TextView)view.findViewById(R.id.txt_titel_emi);
+        viewPager = (ViewPager)view. findViewById(R.id.pager);
         setupViewPager(viewPager);
-        emiTabLayout= (TabLayout) findViewById(R.id.tab_layout_emi);
+        emiTabLayout= (TabLayout)view. findViewById(R.id.tab_layout_emi);
         emiTabLayout.setupWithViewPager(viewPager);
-        imgEmiBack=(ImageView)findViewById(R.id.img_emi_back);
-        imgDrawer=(ImageView)findViewById(R.id.img_drawer_emi);
+        imgEmiBack=(ImageView)view.findViewById(R.id.img_emi_back);
+        imgDrawer=(ImageView)view.findViewById(R.id.img_drawer_emi);
         setupTabIcon();
         imgEmiBack.setOnClickListener(this);
         imgDrawer.setOnClickListener(this);
@@ -134,7 +135,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
                 startActivity(new Intent(EmiActivity.this,ContractActivity.class));
                 break;
             case R.id.img_drawer_emi:
-                Toast.makeText(getBaseContext(),"I am in Nav Drawer",Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(getBaseContext(),"I am in Nav Drawer",Toast.LENGTH_SHORT).show();
                 openDrawer();
                 break;
 
