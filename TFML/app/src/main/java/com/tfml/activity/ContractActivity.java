@@ -87,7 +87,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
                 startActivity(new Intent(ContractActivity.this,SchemesActivity.class));
                 break;
             case R.id.linLoanStaus:
-                SocialUtil.loanStatusDialog(ContractActivity.this);
+                SocialUtil.loanStatusDialog(ContractActivity.this,linLoanStaus);
                 break;
             case R.id.lin_contact_us:
                  contactDialog();

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class LoginActivity extends Activity implements View.OnClickListener
     private   String strUserName,strPassword;
     private TextView txtForgotPassword;
     private CheckBox chkRememberMe;
+    private ImageView loginBack;
      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +39,10 @@ public class LoginActivity extends Activity implements View.OnClickListener
         btnLogin=(Button)findViewById(R.id.btn_login);
         txtForgotPassword=(TextView)findViewById(R.id.txt_forgot_password);
         chkRememberMe=(CheckBox)findViewById(R.id.chkRemember_password);
+        loginBack=(ImageView)findViewById(R.id.img_login_back);
         btnLogin.setOnClickListener(this);
         txtForgotPassword.setOnClickListener(this);
+        loginBack.setOnClickListener(this);
     }
 
     @Override
@@ -49,6 +53,9 @@ public class LoginActivity extends Activity implements View.OnClickListener
                 Validation();
                 break;
             case R.id.txt_forgot_password:
+                break;
+            case R.id.img_login_back:
+                startActivity(new Intent(LoginActivity.this,BannerActivity.class));
                 break;
         }
     }

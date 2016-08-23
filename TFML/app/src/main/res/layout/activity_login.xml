@@ -5,26 +5,36 @@
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/tab_selector"
+    android:background="@drawable/login_bg"
     android:orientation="vertical"
     tools:context="com.tfml.activity.LoginActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:background="@color/tab_bg"
         android:layout_height="?attr/actionBarSize"
-
         app:popupTheme="@style/AppTheme.PopupOverlay">
+        <ImageView
+            android:id="@+id/img_login_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/ic_back_arrow"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="@string/txt_login"
             android:padding="10dp"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/white"
             />
+
     </android.support.v7.widget.Toolbar>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0.5dp"
+        android:background="@color/white"/>
     <TextView
         android:text="@string/txt_login_title"
         android:layout_width="wrap_content"
@@ -83,8 +93,11 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:text="Remember Password"
+            android:paddingLeft="10dp"
             android:textSize="15dp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:button="@drawable/checkbox_selector"
+            />
         <TextView
             android:id="@+id/txt_forgot_password"
             android:text="Forgot Password?"

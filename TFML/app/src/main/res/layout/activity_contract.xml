@@ -548,7 +548,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="@string/laon_status"
+                android:text="@string/loan_status"
                 android:textColor="#FFFFFF" />
 
         </LinearLayout>

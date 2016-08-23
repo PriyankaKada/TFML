@@ -1,11 +1,16 @@
 package com.tfml.common;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.provider.Contacts;
+import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -13,6 +18,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.tfml.R;
@@ -26,6 +32,9 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.R.attr.id;
+import static com.tfml.R.id.linLoanStaus;
 
 
 /**
@@ -66,21 +75,17 @@ public class SocialUtil {
 
         boolean isWhatsappInstalled = whatsappInstalledOrNot("com.whatsapp",context);
         if (isWhatsappInstalled) {
-            Intent waIntent = new Intent(Intent.ACTION_SEND);
-            waIntent.setType("text/plain");
-            String text = "Welcome to TFML";
-            waIntent.setPackage("com.whatsapp");
-            if (waIntent != null) {
-                waIntent.putExtra(Intent.EXTRA_TEXT, text);//
-                context.startActivity(Intent.createChooser(waIntent, "Share with"));
-            } else {
-                Toast.makeText(context, "WhatsApp not Installed", Toast.LENGTH_SHORT)
-                        .show();
-            }
+            Uri uri = Uri.parse("smsto:" + "9820399105");
+            Intent sendIntent = new Intent(Intent.ACTION_SENDTO, uri);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "Hai Good Morning");
+           /* sendIntent.setType("text/plain");*/
+            sendIntent.setPackage("com.whatsapp");
+            context.startActivity(sendIntent);
+
         } else {
             Toast.makeText(context, "WhatsApp not Installed",
                     Toast.LENGTH_SHORT).show();
-            Uri uri = Uri.parse("market://details?id=com.whatsapp");
+            Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=com.whatsapp&hl=en");
             Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
            context. startActivity(goToMarket);
 
@@ -100,12 +105,14 @@ public class SocialUtil {
         return app_installed;
     }
 
-  public static void  loanStatusDialog(final Context context)
+  public static void  loanStatusDialog(final Context context,final LinearLayout linloanstatus)
   {
       final Dialog loanstatusdialog=new Dialog(context,android.R.style.Theme_Holo_Dialog_NoActionBar);
+
+      loanstatusdialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
       loanstatusdialog.setContentView(R.layout.dialog_laon_status);
       WindowManager.LayoutParams params = loanstatusdialog.getWindow().getAttributes();
-      params.y = 15; params.x = 15;
+      params.y = 60; params.x = 50;
       params.gravity = Gravity.BOTTOM | Gravity.CENTER;
       loanstatusdialog.getWindow().setAttributes(params);
       loanstatusdialog.setCancelable(true);
@@ -140,6 +147,12 @@ public class SocialUtil {
           }
       });
       loanstatusdialog.show();
+      loanstatusdialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+          @Override
+          public void onCancel(DialogInterface dialog) {
+              linloanstatus.setBackgroundColor(Color.parseColor("#004c92"));
+          }
+      });
   }
 
     public static void CallLoanStatusModel(LoanStatusInputModel loanStatusInputModel, final Context context)

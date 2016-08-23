@@ -3,13 +3,13 @@
     <string name="apply_loan">Apply Loan</string>
     <string name="schemes">Schemes</string>
     <string name="refer_friend">Refer Friend</string>
-    <string name="laon_status">Loan Status</string>
-    <string name="login">Login</string>
+    <string name="loan_status">Loan Status</string>
+    <string name="txt_login">Login</string>
     <string name="contact_us">Contact Us</string>
     <string name="title_activity_schemes">SchemesActivity</string>
     <string name="txt_login_title">mCONNECT \n TMFL Customer zone !!!</string>
     <string name="navigation_view_items">Navigation View Item</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="title_welcome">Welocome to TMFL</string>
+        <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
