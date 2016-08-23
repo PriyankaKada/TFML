@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.tfml.R;
+import com.tfml.common.CommonUtils;
 import com.tfml.common.SocialUtil;
 
 
@@ -50,13 +51,13 @@ public class DrawerBaseActivity extends BaseActivity {
                 int id = menuItem.getItemId();
                 switch (id) {
                     case R.id.navigation_item_new_scheme:
-                        startActivity(new Intent(DrawerBaseActivity.this,SchemesActivity.class));
+                        startActivity(new Intent(DrawerBaseActivity.this, SchemesActivity.class));
                         break;
                     case R.id.navigation_item_apply_loan:
-                        startActivity(new Intent(DrawerBaseActivity.this,SchemesActivity.class));
+                        startActivity(new Intent(DrawerBaseActivity.this, SchemesActivity.class));
                         break;
                     case R.id.navigation_item_refer_friend:
-                        startActivity(new Intent(DrawerBaseActivity.this,SchemesActivity.class));
+                        startActivity(new Intent(DrawerBaseActivity.this, SchemesActivity.class));
                         break;
                     case R.id.navigation_item_download:
                         //Do some thing here
@@ -67,26 +68,42 @@ public class DrawerBaseActivity extends BaseActivity {
                         // add navigation drawer item onclick method here
                         break;
                     case R.id.navigation_item_login:
-                        startActivity(new Intent(DrawerBaseActivity.this,LoginActivity.class));
+                        startActivity(new Intent(DrawerBaseActivity.this, LoginActivity.class));
                         break;
                     case R.id.navigation_item_phone_call:
-                        SocialUtil.dialPhoneCall(DrawerBaseActivity.this);
+                        if (CommonUtils.isNetworkAvailable(DrawerBaseActivity.this)) {
+                            SocialUtil.getContactList();
+                            SocialUtil.dialPhoneCall(DrawerBaseActivity.this, SocialUtil.phoneNo);
+                        } else {
+                            Toast.makeText(getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+                        }
+
                         break;
                     case R.id.navigation_item_message:
-                        SocialUtil.sendMail(DrawerBaseActivity.this);
+                        if (CommonUtils.isNetworkAvailable(DrawerBaseActivity.this)) {
+                            SocialUtil.getContactList();
+                            SocialUtil.sendMail(DrawerBaseActivity.this, SocialUtil.email);
+                        } else {
+                            Toast.makeText(getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+                        }
+
                         break;
                     case R.id.navigation_item_whatsapp:
-                        try
-                        {
-                            SocialUtil.sendWhatsAppMsg(DrawerBaseActivity.this);
-                        }catch(Exception e)
-                        {
-                            e.printStackTrace();
+                        if (CommonUtils.isNetworkAvailable(DrawerBaseActivity.this)) {
+                            SocialUtil.getContactList();
+                            try {
+                                SocialUtil.sendWhatsAppMsg(DrawerBaseActivity.this, SocialUtil.whatsAppNo);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                            Toast.makeText(getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
                         }
 
                         break;
                     case R.id.navigation_item_map:
-                        Toast.makeText(DrawerBaseActivity.this,"Map service not avialable",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DrawerBaseActivity.this, "Map service not avialable", Toast.LENGTH_SHORT).show();
                         break;
 
 

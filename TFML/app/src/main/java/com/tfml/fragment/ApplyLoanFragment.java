@@ -21,14 +21,18 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.tfml.R;
 import com.tfml.activity.SchemesActivity;
+import com.tfml.adapter.ProductAdapter;
 import com.tfml.auth.TfmlApi;
 import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
+import com.tfml.common.SocialUtil;
 import com.tfml.common.Validation;
 import com.tfml.model.applyLoanResponseModel.ApplyLoanResponse;
 import com.tfml.model.applyLoanResponseModel.InputModel;
+import com.tfml.model.productResponseModel.ProductListResponseModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,11 +49,12 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
    private   CheckBox chkLeadTypeIndividual,chkLeadTypeOrganizational,chkVecTypeCommercial,chkVechTypeRefinance,ChkVechPassanger;
    private   Button btnCancel,btnApplyLoan;
    private View view;
-   private List<String >proList,branchStateList,branchCityList,branchList,cityList,stateList,pinCodeList;
+   private List<String >branchStateList,branchCityList,branchList,cityList,stateList,pinCodeList;
     String strLeadTypechk="";
     String strVechicalType="";
     TfmlApi tfmlApi;
     InputModel inputLoanModel;
+    String ProductCode;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,16 +62,6 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         view= inflater.inflate(R.layout.fragment_apply_loan, container, false);
         tfmlApi = ApiService.getInstance().call();
         init();
-        proList=new ArrayList<String>();
-        proList.add("Select Product");
-        proList.add("0245");
-        proList.add("0246");
-        proList.add("0247");
-        proList.add("0250");
-        spnProduct.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,proList));
-
-
-
         branchStateList=new ArrayList<String>();
         branchStateList.add("Select Branch State");
         branchStateList.add("MH");
@@ -91,7 +86,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         spSelectBranch.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,branchList));
         cityList=new ArrayList<String>();
         cityList.add("Select City");
-        cityList.add("Mumabai");
+        cityList.add("Mumbai");
         cityList.add("Delhi");
         cityList.add("Kolkatta");
         cityList.add("Keral");
@@ -128,6 +123,8 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         txtOrgnizationName=(EditText)view.findViewById(R.id.edt_orgnization_name);
         spnProduct=(Spinner)view.findViewById(R.id.sp_select_product);
         spnProduct.setOnItemSelectedListener(this);
+        SocialUtil.getProductListData(getActivity(),spnProduct);
+        //getProductListData();
         spSelectBranchState=(Spinner)view.findViewById(R.id.sp_select_branch_state);
         spSelectBranchCity=(Spinner)view.findViewById(R.id.sp_select_branch_city);
         spSelectBranch=(Spinner)view.findViewById(R.id.sp_select_branch);
@@ -231,7 +228,15 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         inputLoanModel.setMobileNumber(txtMobileNumber.getText().toString());
         inputLoanModel.setLandlineNumber(txtLandlineNumber.getText().toString());
         inputLoanModel.setEmailAddress(txtEmailAddress.getText().toString());
-        inputLoanModel.setProductId(spnProduct.getSelectedItem().toString());
+        if(ProductCode!=null && ProductCode !="-1")
+        {
+            inputLoanModel.setProductId(ProductCode);
+        }
+        else
+        {
+            Toast.makeText(getContext(),"Please Select Product Type",Toast.LENGTH_SHORT).show();
+        }
+
         inputLoanModel.setBranchState(spSelectBranchState.getSelectedItem().toString());
         inputLoanModel.setBranchCity(spSelectBranchCity.getSelectedItem().toString());
         inputLoanModel.setBranch(spSelectBranch.getSelectedItem().toString());
@@ -242,7 +247,6 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         inputLoanModel.setLeadType(strLeadTypechk);
         inputLoanModel.setOrganisationName(txtOrgnizationName.getText().toString());
         inputLoanModel.setVehicalType(strVechicalType);
-
 
     }
 
@@ -290,13 +294,60 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if(position!=0)
+        {
+            ProductCode=((ProductListResponseModel)parent.getItemAtPosition(position)).getProdProductid();
 
+        }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+ /* public void getProductListData()
+  {
+      Log.e("ProductResponse","getProduct");
+
+      if( CommonUtils.isNetworkAvailable(getActivity()))
+      {
+          tfmlApi.getProductList().enqueue(new Callback<List<ProductListResponseModel>>() {
+              @Override
+              public void onResponse(Call<List<ProductListResponseModel>> call, Response<List<ProductListResponseModel>> response) {
+                Log.e("Response",response.body().size()+"");
+
+                  if(response!=null)
+                  {
+                      ProductListResponseModel model =new ProductListResponseModel();
+                      model.setProdName("Select product");
+                      model.setProdProductid("-1");
+                      response.body().add(0,model);
+                      spnProduct.setAdapter(new ProductAdapter(getActivity(),response.body()));
+                      for(int i=0;i<response.body().size();i++)
+                      {
+                          if (response.equals(response.body().get(i).getProdName())) {
+                              spnProduct.setSelection(i);
+
+                          }
+                      }
+
+                  }
+
+              }
+
+              @Override
+              public void onFailure(Call<List<ProductListResponseModel>> call, Throwable t) {
+                  Log.e("Response",t.getMessage()+"");
+              }
+          });
+      }
+      else
+      {
+          CommonUtils.showAlert1(getActivity(),"","No Internet Connection",false);
+      }
+  }*/
+
 
 
 }

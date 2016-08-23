@@ -1,6 +1,7 @@
 package com.tfml.activity;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
@@ -19,48 +20,48 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tfml.R;
+import com.tfml.common.CommonUtils;
 import com.tfml.common.SocialUtil;
 
-public class ContractActivity extends DrawerBaseActivity implements View.OnClickListener
-{
-    private TextView txtTotalCount,txtTerminatedCount,txtOverDueCount,txtContractNo,txtRcNo,txtNextDueDate,txtCurrentEmi,txtLastPayment,txtPreviousEmi,txtOverdueAmount,txtRepaymentMode,txtTerminitedContracName,txtTerminatedContractDate;
-    private Button btnPayEmi,btnMoreDetail;
-    private LinearLayout linSchemes,linApplyLoan,linReferFriend,linLoanStaus,linContactUs;
-    private ImageView imgDrawer,imgDownload;
+public class ContractActivity extends DrawerBaseActivity implements View.OnClickListener {
+    private TextView txtTotalCount, txtTerminatedCount, txtOverDueCount, txtContractNo, txtRcNo, txtNextDueDate, txtCurrentEmi, txtLastPayment, txtPreviousEmi, txtOverdueAmount, txtRepaymentMode, txtTerminitedContracName, txtTerminatedContractDate;
+    private Button btnPayEmi, btnMoreDetail;
+    private LinearLayout linSchemes, linApplyLoan, linReferFriend, linLoanStaus, linContactUs;
+    private ImageView imgDrawer, imgDownload;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        View view = getLayoutInflater().inflate(R.layout.activity_contract,frameLayout);
+        View view = getLayoutInflater().inflate(R.layout.activity_contract, frameLayout);
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         init();
     }
 
-    public void init()
-    {
-        txtTotalCount=(TextView)findViewById(R.id.txt_total_count);
-        txtTerminatedCount=(TextView)findViewById(R.id.txt_terminated_count);
-        txtOverDueCount=(TextView)findViewById(R.id.txt_overdue_count);
-        txtContractNo=(TextView)findViewById(R.id.txt_contract_no);
-        txtRcNo=(TextView)findViewById(R.id.txt_rc_no);
-        txtNextDueDate=(TextView)findViewById(R.id.txt_next_due_date);
-        txtCurrentEmi=(TextView)findViewById(R.id.txt_current_emi_amount);
-        txtLastPayment=(TextView)findViewById(R.id.txt_last_payment_date);
-        txtPreviousEmi=(TextView)findViewById(R.id.txt_previous_emi);
-        txtOverdueAmount=(TextView)findViewById(R.id.txt_overdue_amount);
-        txtRepaymentMode=(TextView)findViewById(R.id.txt_repayment_mode);
-        txtTerminitedContracName=(TextView)findViewById(R.id.txt_terminated_name);
-        txtTerminatedContractDate=(TextView)findViewById(R.id.txt_terminated_date);
-        btnPayEmi=(Button)findViewById(R.id.btn_pay_emi);
-        btnMoreDetail=(Button)findViewById(R.id.btn_more_detail);
-        linSchemes=(LinearLayout)findViewById(R.id.linSchemes);
-        linApplyLoan=(LinearLayout)findViewById(R.id.linApplyLoan);
-        linReferFriend=(LinearLayout)findViewById(R.id.linReferFriend);
-        linLoanStaus=(LinearLayout)findViewById(R.id.linLoanStaus);
-        linContactUs=(LinearLayout)findViewById(R.id.lin_contact_us);
-        imgDownload=(ImageView) findViewById(R.id.img_download);
+    public void init() {
+        txtTotalCount = (TextView) findViewById(R.id.txt_total_count);
+        txtTerminatedCount = (TextView) findViewById(R.id.txt_terminated_count);
+        txtOverDueCount = (TextView) findViewById(R.id.txt_overdue_count);
+        txtContractNo = (TextView) findViewById(R.id.txt_contract_no);
+        txtRcNo = (TextView) findViewById(R.id.txt_rc_no);
+        txtNextDueDate = (TextView) findViewById(R.id.txt_next_due_date);
+        txtCurrentEmi = (TextView) findViewById(R.id.txt_current_emi_amount);
+        txtLastPayment = (TextView) findViewById(R.id.txt_last_payment_date);
+        txtPreviousEmi = (TextView) findViewById(R.id.txt_previous_emi);
+        txtOverdueAmount = (TextView) findViewById(R.id.txt_overdue_amount);
+        txtRepaymentMode = (TextView) findViewById(R.id.txt_repayment_mode);
+        txtTerminitedContracName = (TextView) findViewById(R.id.txt_terminated_name);
+        txtTerminatedContractDate = (TextView) findViewById(R.id.txt_terminated_date);
+        btnPayEmi = (Button) findViewById(R.id.btn_pay_emi);
+        btnMoreDetail = (Button) findViewById(R.id.btn_more_detail);
+        linSchemes = (LinearLayout) findViewById(R.id.linSchemes);
+        linApplyLoan = (LinearLayout) findViewById(R.id.linApplyLoan);
+        linReferFriend = (LinearLayout) findViewById(R.id.linReferFriend);
+        linLoanStaus = (LinearLayout) findViewById(R.id.linLoanStaus);
+        linContactUs = (LinearLayout) findViewById(R.id.lin_contact_us);
+        imgDownload = (ImageView) findViewById(R.id.img_download);
         imgDrawer = (ImageView) findViewById(R.id.img_drawer);
         linSchemes.setOnClickListener(this);
         linApplyLoan.setOnClickListener(this);
@@ -75,22 +76,21 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        switch(v.getId())
-        {
+        switch (v.getId()) {
             case R.id.linSchemes:
-                startActivity(new Intent(ContractActivity.this,SchemesActivity.class));
+                startActivity(new Intent(ContractActivity.this, SchemesActivity.class));
                 break;
             case R.id.linApplyLoan:
-                startActivity(new Intent(ContractActivity.this,SchemesActivity.class));
+                startActivity(new Intent(ContractActivity.this, SchemesActivity.class));
                 break;
             case R.id.linReferFriend:
-                startActivity(new Intent(ContractActivity.this,SchemesActivity.class));
+                startActivity(new Intent(ContractActivity.this, SchemesActivity.class));
                 break;
             case R.id.linLoanStaus:
-                SocialUtil.loanStatusDialog(ContractActivity.this,linLoanStaus);
+                SocialUtil.loanStatusDialog(ContractActivity.this, linLoanStaus);
                 break;
             case R.id.lin_contact_us:
-                 contactDialog();
+                contactDialog();
                 break;
             case R.id.img_drawer:
                 openDrawer();
@@ -100,28 +100,33 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
             case R.id.btn_pay_emi:
                 break;
             case R.id.btn_more_detail:
-                startActivity(new Intent(ContractActivity.this,EmiActivity.class));
+                startActivity(new Intent(ContractActivity.this, EmiActivity.class));
                 break;
         }
     }
 
 
-    public void contactDialog()
-    {
-        final Dialog contactDialog=new Dialog(ContractActivity.this,android.R.style.Theme_Holo_Dialog_NoActionBar);
+    public void contactDialog() {
+        final Dialog contactDialog = new Dialog(ContractActivity.this, android.R.style.Theme_Holo_Dialog_NoActionBar);
         contactDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         contactDialog.setContentView(R.layout.dialog_contact_us);
         WindowManager.LayoutParams params = contactDialog.getWindow().getAttributes();
-        params.y = 25; params.x = 10;
-        params.gravity = Gravity.BOTTOM | Gravity.RIGHT|Gravity.CENTER;
+        params.y = 65;
+        params.x = 40;
+        params.gravity = Gravity.BOTTOM | Gravity.RIGHT | Gravity.CENTER;
         contactDialog.getWindow().setAttributes(params);
         contactDialog.getWindow().getAttributes().windowAnimations = R.style.animationdialog;
         contactDialog.setCancelable(true);
         final ImageView imgMessage = (ImageView) contactDialog.findViewById(R.id.imgmsg);
-        final ImageView imgMap=(ImageView)contactDialog.findViewById(R.id.imgmap);
-        final ImageView imgWhatsApp=(ImageView)contactDialog.findViewById(R.id.imgwhatsapp);
-        final ImageView imgPhoneCall=(ImageView)contactDialog.findViewById(R.id.imgcall);
-        final ImageView imgcancel=(ImageView)contactDialog.findViewById(R.id.imgcancel);
+        final ImageView imgMap = (ImageView) contactDialog.findViewById(R.id.imgmap);
+        final ImageView imgWhatsApp = (ImageView) contactDialog.findViewById(R.id.imgwhatsapp);
+        final ImageView imgPhoneCall = (ImageView) contactDialog.findViewById(R.id.imgcall);
+        final ImageView imgcancel = (ImageView) contactDialog.findViewById(R.id.imgcancel);
+        if (CommonUtils.isNetworkAvailable(ContractActivity.this)) {
+            SocialUtil.getContactList();
+        } else {
+            Toast.makeText(getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+        }
         imgcancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,30 +136,30 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
         imgMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SocialUtil.sendMail(ContractActivity.this);
+                SocialUtil.sendMail(ContractActivity.this, SocialUtil.email);
             }
         });
         imgPhoneCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SocialUtil.dialPhoneCall(ContractActivity.this);
+                SocialUtil.dialPhoneCall(ContractActivity.this, SocialUtil.phoneNo);
             }
         });
         imgWhatsApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SocialUtil.sendWhatsAppMsg(ContractActivity.this);
+                SocialUtil.sendWhatsAppMsg(ContractActivity.this, SocialUtil.whatsAppNo);
             }
         });
         imgMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ContractActivity.this,"Map service not avialable",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ContractActivity.this, "Map service not avialable", Toast.LENGTH_SHORT).show();
             }
         });
         contactDialog.show();
-    }
 
+    }
 
 
 }

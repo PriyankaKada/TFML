@@ -19,13 +19,17 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.tfml.R;
 import com.tfml.activity.BannerActivity;
+import com.tfml.adapter.ProductAdapter;
 import com.tfml.auth.TfmlApi;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusInputModel;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusResponse;
+import com.tfml.model.productResponseModel.ProductListResponseModel;
+import com.tfml.model.socialResponseModel.ContactListResponseModel;
 
 import java.util.List;
 
@@ -44,17 +48,18 @@ import static com.tfml.R.id.linLoanStaus;
 public class SocialUtil {
 
    public static  TfmlApi tfmlApi;
+   public static String email,whatsAppNo,phoneNo;
 
 
-    public static void dialPhoneCall(Context context)
+    public static void dialPhoneCall(Context context,String phoneNo)
     {
         Intent callIntent = new Intent(Intent.ACTION_DIAL);
-        callIntent.setData(Uri.parse("tel:18002090188"));
+        callIntent.setData(Uri.parse("tel:"+phoneNo));
         context.startActivity(callIntent);
 
     }
 
-    public static void sendMail(Context context) {
+    public static void sendMail(Context context,String email) {
         Intent intent = new Intent(android.content.Intent.ACTION_SEND);
         intent.setType("text/html");
         List<ResolveInfo> resInfo = context.getPackageManager().queryIntentActivities(intent, 0);
@@ -63,6 +68,7 @@ public class SocialUtil {
             for (ResolveInfo info : resInfo) {
                 if (info.activityInfo.packageName.toLowerCase().contains("email") || info.activityInfo.name.toLowerCase().contains("email")) {
                     intent.putExtra(android.content.Intent.EXTRA_TEXT, "Welcome to TMFL");
+                    intent.putExtra(Intent.EXTRA_EMAIL,new String[]{email});
                     intent.setPackage(info.activityInfo.packageName);
                    context. startActivity(Intent.createChooser(intent, "Sending mail Through TMFL"));
                 }
@@ -70,12 +76,12 @@ public class SocialUtil {
         }
     }
 
-    public static void sendWhatsAppMsg(Context context)
+    public static void sendWhatsAppMsg(Context context,String whatsAppNo)
     {
 
         boolean isWhatsappInstalled = whatsappInstalledOrNot("com.whatsapp",context);
         if (isWhatsappInstalled) {
-            Uri uri = Uri.parse("smsto:" + "9820399105");
+            Uri uri = Uri.parse("smsto:" + whatsAppNo);
             Intent sendIntent = new Intent(Intent.ACTION_SENDTO, uri);
             sendIntent.putExtra(Intent.EXTRA_TEXT, "Hai Good Morning");
            /* sendIntent.setType("text/plain");*/
@@ -112,7 +118,7 @@ public class SocialUtil {
       loanstatusdialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
       loanstatusdialog.setContentView(R.layout.dialog_laon_status);
       WindowManager.LayoutParams params = loanstatusdialog.getWindow().getAttributes();
-      params.y = 60; params.x = 50;
+      params.y = 120; params.x = 120;
       params.gravity = Gravity.BOTTOM | Gravity.CENTER;
       loanstatusdialog.getWindow().setAttributes(params);
       loanstatusdialog.setCancelable(true);
@@ -185,4 +191,76 @@ public class SocialUtil {
             }
         });
     }
+
+
+    public static void getContactList()
+    {
+
+        tfmlApi = ApiService.getInstance().call();
+        tfmlApi.getContactList().enqueue(new Callback<ContactListResponseModel>() {
+            @Override
+            public void onResponse(Call<ContactListResponseModel> call, Response<ContactListResponseModel> response) {
+                //  Log.e("getContactList",response.body().);
+                if(response!=null)
+                {
+                    email=response.body().getEmail().toString();
+                    whatsAppNo=response.body().getWhatsappNo().toString();
+                    phoneNo=response.body().getPhoneNo().toString();
+                    Log.e("getContactlist",email+""+'\t'+whatsAppNo+""+phoneNo);
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ContactListResponseModel> call, Throwable t) {
+                Log.e("Error","ERROR RESPONSE");
+            }
+        });
+
+    }
+
+    public static void getProductListData(final Context context,final Spinner spnProduct)
+    {
+        Log.e("ProductResponse","getProduct");
+
+        if( CommonUtils.isNetworkAvailable(context))
+        {
+            tfmlApi = ApiService.getInstance().call();
+            tfmlApi.getProductList().enqueue(new Callback<List<ProductListResponseModel>>() {
+                @Override
+                public void onResponse(Call<List<ProductListResponseModel>> call, Response<List<ProductListResponseModel>> response) {
+                    Log.e("Response",response.body().size()+"");
+
+                    if(response!=null)
+                    {
+                        ProductListResponseModel model =new ProductListResponseModel();
+                        model.setProdName("Select product");
+                        model.setProdProductid("-1");
+                        response.body().add(0,model);
+                        spnProduct.setAdapter(new ProductAdapter(context,response.body()));
+                        for(int i=0;i<response.body().size();i++)
+                        {
+                            if (response.equals(response.body().get(i).getProdName())) {
+                                spnProduct.setSelection(i);
+
+                            }
+                        }
+
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<List<ProductListResponseModel>> call, Throwable t) {
+                    Log.e("Response",t.getMessage()+"");
+                }
+            });
+        }
+        else
+        {
+            CommonUtils.showAlert1(context,"","No Internet Connection",false);
+        }
+    }
+
 }

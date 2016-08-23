@@ -15,15 +15,18 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.tfml.R;
 import com.tfml.activity.SchemesActivity;
 import com.tfml.auth.TfmlApi;
 import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
+import com.tfml.common.SocialUtil;
 import com.tfml.common.Validation;
 import com.tfml.model.applyLoanResponseModel.ApplyLoanResponse;
 import com.tfml.model.applyLoanResponseModel.InputModel;
+import com.tfml.model.productResponseModel.ProductListResponseModel;
 import com.tfml.model.referFriendResponseModel.ReferFriendInputModel;
 import com.tfml.model.referFriendResponseModel.ReferFriendResponseModel;
 
@@ -46,6 +49,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
     String strVechicalType="";
     TfmlApi tfmlApi;
     ReferFriendInputModel inputReferFriendModel;
+    String ProductCode;
     View view;
 
     @Override
@@ -55,13 +59,6 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
         view=inflater.inflate(R.layout.fragment_refer_friend, container, false);
         tfmlApi = ApiService.getInstance().call();
         init();
-        proList=new ArrayList<String>();
-        proList.add("Select Product");
-        proList.add("0245");
-        proList.add("0246");
-        proList.add("0247");
-        proList.add("0250");
-        spnProduct.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,proList));
         branchStateList=new ArrayList<String>();
         branchStateList.add("Select Branch State");
         branchStateList.add("MH");
@@ -121,6 +118,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
         txtOrgnizationName=(EditText)view.findViewById(R.id.edt_orgnization_name);
         spnProduct=(Spinner)view.findViewById(R.id.sp_select_product);
         spnProduct.setOnItemSelectedListener(this);
+        SocialUtil.getProductListData(getActivity(),spnProduct);
         spSelectBranchState=(Spinner)view.findViewById(R.id.sp_select_branch_state);
         spSelectBranchCity=(Spinner)view.findViewById(R.id.sp_select_branch_city);
         spSelectBranch=(Spinner)view.findViewById(R.id.sp_select_branch);
@@ -225,7 +223,15 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
         inputReferFriendModel.setMobileNumber(txtMobileNumber.getText().toString());
         inputReferFriendModel.setLandlineNumber(txtLandlineNumber.getText().toString());
         inputReferFriendModel.setEmailAddress(txtEmailAddress.getText().toString());
-        inputReferFriendModel.setProductId(spnProduct.getSelectedItem().toString());
+        if(ProductCode!=null && ProductCode !="-1")
+        {
+            inputReferFriendModel.setProductId(ProductCode);
+        }
+        else
+        {
+            Toast.makeText(getContext(),"Please Select Product Type",Toast.LENGTH_SHORT).show();
+        }
+        //inputReferFriendModel.setProductId(spnProduct.getSelectedItem().toString());
         inputReferFriendModel.setBranchState(spSelectBranchState.getSelectedItem().toString());
         inputReferFriendModel.setBranchCity(spSelectBranchCity.getSelectedItem().toString());
         inputReferFriendModel.setBranch(spSelectBranch.getSelectedItem().toString());
@@ -284,7 +290,11 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if(position!=0)
+        {
+            ProductCode=((ProductListResponseModel)parent.getItemAtPosition(position)).getProdProductid();
 
+        }
     }
 
     @Override

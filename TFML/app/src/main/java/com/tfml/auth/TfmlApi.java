@@ -9,16 +9,18 @@ import com.tfml.model.applyLoanResponseModel.ApplyLoanResponse;
 import com.tfml.model.applyLoanResponseModel.InputModel;
 import com.tfml.model.downloadResponseModel.DownloadResponse;
 import com.tfml.model.bannerResponseModel.BannerlistResponse;
+import com.tfml.model.productResponseModel.ProductListResponseModel;
 import com.tfml.model.referFriendResponseModel.ReferFriendInputModel;
 import com.tfml.model.referFriendResponseModel.ReferFriendResponseModel;
 import com.tfml.model.schemesResponseModel.SchemesResponse;
+import com.tfml.model.socialResponseModel.ContactListResponseModel;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
-
-import static com.tfml.auth.Constant.APPLYLOAN;
 
 /**
  * Created by webwerks on 29/7/16.
@@ -47,4 +49,9 @@ public interface TfmlApi {
     @POST(Constant.VERIFYOTP)
     Call<LoanStatusResponse>getOtpResponse(@Body LoanStatusInputModel loanStatusInputModel);
 
+    @GET(Constant.CONTACTDETAILS)
+    Call<ContactListResponseModel>getContactList();
+
+    @GET(Constant.PRODUCTS)
+    Call<List<ProductListResponseModel>>getProductList();
 }

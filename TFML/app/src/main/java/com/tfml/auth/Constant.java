@@ -13,5 +13,7 @@ public class Constant {
     public static final String REFERFRIEND="referFriend";
     public static final String REQUESTQUICKCALL="requestQuickCall";
     public static final String VERIFYOTP="verifyOtp";
+    public static final String CONTACTDETAILS="contactDetails";
+    public static final String PRODUCTS="products";
 
 }
