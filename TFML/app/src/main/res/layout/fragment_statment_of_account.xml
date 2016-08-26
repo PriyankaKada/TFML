@@ -173,38 +173,37 @@
         android:orientation="vertical"
         android:background="@drawable/selector_layout_rectangle">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:orientation="vertical"
-                android:layout_alignParentLeft="true">
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_weight="10">
 
                     <EditText
                         android:layout_width="150dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:hint="Select Date"
-                        android:layout_weight="1"
-                        android:padding="10dp"
-                        android:drawableRight="@android:drawable/ic_menu_my_calendar"
+                        android:layout_weight="5"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:drawableRight="@drawable/ic_calendar"
                         android:background="@drawable/whit_rect_bg"
                         android:textStyle="bold"
                         android:textSize="12sp"/>
 
                     <Button
                         android:id="@+id/btnReciept"
-                        android:layout_width="120dp"
-                        android:layout_height="35dp"
-                        android:layout_weight="1"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="4"
                         android:layout_alignParentRight="true"
                         android:background="#164d74"
                         android:text="Submit"
@@ -215,19 +214,18 @@
                         android:layout_centerHorizontal="true"/>
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="50dp"
                         android:layout_margin="10dp"
                         android:layout_weight="1"
-                        android:layout_marginRight="10dp"
                         android:src="@drawable/ic_download"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center|end" />
                 </LinearLayout>
 
 
             </LinearLayout>
 
 
-        </RelativeLayout>
+
 
     </LinearLayout>
 

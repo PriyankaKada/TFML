@@ -58,9 +58,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:background="@color/tab_bg"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/linSchemes"
@@ -69,7 +67,10 @@
             android:layout_weight="1"
             android:gravity="start"
             android:background="?attr/selectableItemBackground"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
 
             <ImageView
                 android:id="@+id/imageSchemes"
@@ -87,7 +88,6 @@
                 android:text="@string/schemes"
                 android:textColor="#FFFFFF" />
 
-
         </LinearLayout>
 
         <LinearLayout
@@ -99,6 +99,8 @@
             android:background="?attr/selectableItemBackground"
             android:layout_weight="1"
             android:layout_marginLeft="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:orientation="vertical">
 
             <ImageView
@@ -127,7 +129,10 @@
             android:layout_toRightOf="@+id/linApplyLoan"
             android:background="?attr/selectableItemBackground"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
 
             <ImageView
                 android:id="@+id/imgReferFriend"
@@ -151,26 +156,26 @@
         <LinearLayout
             android:id="@+id/linLoanStaus"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:background="?attr/selectableItemBackground"
             android:layout_toRightOf="@+id/linReferFriend"
             android:layout_weight="1"
-            android:orientation="vertical">
-           <!-- <View
+            android:orientation="vertical"
+            android:layout_marginLeft="2dp">
+
+            <View
                 android:id="@+id/viewId"
-                android:layout_weight="0"
-                android:layout_height="4dp"
+                android:layout_height="3dp"
                 android:layout_width="match_parent"
                 android:background="@color/white"
-               android:visibility="gone"
-
-                />-->
+                android:visibility="invisible" />
             <ImageView
                 android:id="@+id/imgLoanStatus"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="7dp"
                 android:src="@drawable/ic_loan_status_non_selected" />
 
             <TextView
@@ -181,7 +186,7 @@
                 android:gravity="center"
                 android:text="@string/loan_status"
                 android:textColor="#FFFFFF"
-                 />
+                />
 
         </LinearLayout>
 
@@ -193,7 +198,11 @@
             android:background="?attr/selectableItemBackground"
             android:layout_toRightOf="@+id/linLoanStaus"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="5dp">
 
             <ImageView
                 android:id="@+id/imgLogin"
@@ -212,5 +221,4 @@
 
         </LinearLayout>
     </LinearLayout>
-    <!-- </LinearLayout>-->
 </RelativeLayout>

@@ -13,10 +13,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.tfml.R;
+import com.tfml.adapter.DrawerAdapter;
 import com.tfml.common.CommonUtils;
 import com.tfml.common.SocialUtil;
 
@@ -27,13 +31,29 @@ public class DrawerBaseActivity extends BaseActivity {
     ActionBarDrawerToggle drawerToggle;
     Toolbar toolbar;
     NavigationView navigation;
+    ListView lsvNavList;
+    ImageView imgCancel;
     protected FrameLayout frameLayout;
+    String TITLES[] = { "New Schemes", "Apply Loan","Refer Friend","Downloads",
+            "Change Password","Logout","Contact Us","Phone Call","WhatsApp Call","Mail Us","Locate us" };
+    int ICONS[] = { R.drawable.ic_scheme_selected, R.drawable.ic_apply_loan_selected, R.drawable.ic_refer_friends_selected,
+            R.drawable.ic_download, R.drawable.ic_change_pass_selected,R.drawable.ic_logout,
+            R.drawable.ic_checked, R.drawable.ic_call_non_selected,R.drawable.icon_whatsapp,
+            R.drawable.ic_email, R.drawable.ic_locate_us,};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer_base);
         frameLayout = (FrameLayout) findViewById(R.id.framelayout_base_container);
+        lsvNavList=(ListView)findViewById(R.id.lst_navigation_menu);
+        imgCancel=(ImageView)findViewById(R.id.img_cancel);
+        imgCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.closeDrawer(GravityCompat.END);
+            }
+        });
         initInstances();
     }
 
@@ -42,8 +62,68 @@ public class DrawerBaseActivity extends BaseActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         drawerToggle = new ActionBarDrawerToggle(DrawerBaseActivity.this, drawerLayout, R.string.refer_friend, R.string.refer_friend);
         drawerLayout.setDrawerListener(drawerToggle);
+        lsvNavList.setAdapter( new DrawerAdapter( this, TITLES, ICONS ) );
+        lsvNavList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch ( position )
+                {
+                    case 0://New Schemes
+                        startActivity(new Intent(DrawerBaseActivity.this,SchemesActivity.class));
+                        break;
 
-        navigation = (NavigationView) findViewById(R.id.navigation_view);
+                    case 1://Apply Loan
+                        startActivity(new Intent(DrawerBaseActivity.this, SchemesActivity.class));
+                        break;
+                    case 2://Refer Friends
+                        startActivity(new Intent(DrawerBaseActivity.this, SchemesActivity.class));
+                        break;
+                    case 3://Download
+                        break;
+                    case 4://Change Password
+                        break;
+                    case 5://Logout
+                        break;
+                    case 6://Contact
+                        //Nothing do Here
+                        break;
+                    case 7://Phone Call
+                        if (CommonUtils.isNetworkAvailable(DrawerBaseActivity.this)) {
+                            SocialUtil.getContactList();
+                            SocialUtil.dialPhoneCall(DrawerBaseActivity.this, SocialUtil.phoneNo);
+                        } else {
+                            Toast.makeText(getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    case 8://WhatsApp Call
+                        if (CommonUtils.isNetworkAvailable(DrawerBaseActivity.this)) {
+                            SocialUtil.getContactList();
+                            try {
+                                SocialUtil.sendWhatsAppMsg(DrawerBaseActivity.this, SocialUtil.whatsAppNo);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                            Toast.makeText(getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    case 9://Send Mail
+                        if (CommonUtils.isNetworkAvailable(DrawerBaseActivity.this)) {
+                            SocialUtil.getContactList();
+                            SocialUtil.sendMail(DrawerBaseActivity.this, SocialUtil.email);
+                        } else {
+                            Toast.makeText(getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+                    case 10://Locate Map
+                        break;
+                    default:
+                }
+            }
+        });
+
+      /*  navigation = (NavigationView) findViewById(R.id.navigation_view);
         navigation.setItemIconTintList(null);
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -110,7 +190,7 @@ public class DrawerBaseActivity extends BaseActivity {
                 }
                 return false;
             }
-        });
+        });*/
 
     }
 

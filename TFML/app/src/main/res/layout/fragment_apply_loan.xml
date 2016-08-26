@@ -230,19 +230,33 @@
         </Spinner>
     </LinearLayout>
 
-    <Spinner
-        android:id="@+id/sp_select_pincode"
-        android:layout_width="225dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/spinner_bg"
-        android:padding="10dp"
-        android:layout_marginTop="10dp">
-    </Spinner>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/edt_pincode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/whit_rect_bg"
+                android:hint="* Enter Pincode"
+                android:inputType="number"
+                android:maxLength="6"
+                android:padding="15dp">
+            </EditText>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
         <Button
             android:id="@+id/btn_cancel"

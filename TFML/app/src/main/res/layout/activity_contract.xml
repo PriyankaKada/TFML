@@ -193,7 +193,8 @@
         <TextView
             android:id="@+id/txt_contract_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
+            android:layout_toLeftOf="@+id/img_download"
             android:layout_weight="1"
             android:text="TATA Tiago"
             android:textColor="@color/text_black"
@@ -201,11 +202,12 @@
 
         <ImageView
             android:id="@+id/img_download"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="30dp"
             android:layout_alignBottom="@id/txt_contract_name"
             android:layout_alignParentRight="true"
             android:src="@drawable/ic_download" />
+
 
         <TextView
             android:id="@+id/txt_next_due_date_label"
@@ -436,9 +438,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:background="@color/tab_bg"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/linSchemes"
@@ -447,7 +447,10 @@
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:gravity="start"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp">
 
             <ImageView
                 android:id="@+id/imageSchemes"
@@ -476,7 +479,9 @@
             android:layout_toRightOf="@+id/linSchemes"
             android:background="?attr/selectableItemBackground"
             android:layout_weight="1"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="2dp"
+            android:layout_marginBottom="10dp"
             android:orientation="vertical">
 
             <ImageView
@@ -505,7 +510,10 @@
             android:layout_toRightOf="@+id/linApplyLoan"
             android:background="?attr/selectableItemBackground"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginBottom="10dp">
 
             <ImageView
                 android:id="@+id/imgReferFriend"
@@ -528,18 +536,27 @@
         <LinearLayout
             android:id="@+id/linLoanStaus"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/linReferFriend"
             android:background="?attr/selectableItemBackground"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="2dp">
+
+            <View
+                android:id="@+id/viewId"
+                android:layout_height="3dp"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:visibility="invisible" />
 
             <ImageView
                 android:id="@+id/imgLoanStatus"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="7dp"
                 android:src="@drawable/ic_loan_status_non_selected" />
 
             <TextView
@@ -561,7 +578,11 @@
             android:layout_toRightOf="@+id/linLoanStaus"
             android:background="?attr/selectableItemBackground"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp">
 
             <ImageView
                 android:id="@+id/imgContactUs"
@@ -575,6 +596,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:text="@string/contact_us"
                 android:textColor="#FFFFFF" />
 

@@ -82,6 +82,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
     private TextView txtSchemes, txtApplyLoan, txtReferFriend, txtLoanStatus, txtLogin;
     private ImageView imgSchemes, imgApplyLoan, imgReferFriend, imgLoanStatus, imgLogin;
     String errormsg;
+    View selectedView;
     //String email,whatsAppNo,phoneNo;
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
     private static final String TAG = "Contacts";
@@ -115,6 +116,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
         linReferFriend = (LinearLayout) findViewById(R.id.linReferFriend);
         linLoanStaus = (LinearLayout) findViewById(R.id.linLoanStaus);
         linLogin = (LinearLayout) findViewById(R.id.linLogin);
+        selectedView = (View) findViewById( R.id.viewId );
         circlePageIndicator.setRadius(10.0f);
         txtTitle.setText("Welcome to TMFL");
         loadBannerData();
@@ -311,7 +313,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.linLoanStaus:
                 linLoanStausClick();
-                SocialUtil.loanStatusDialog(BannerActivity.this, linLoanStaus);
+                SocialUtil.loanStatusDialog(BannerActivity.this, linLoanStaus,selectedView);
                 break;
             case R.id.linLogin:
                 startActivity(new Intent(this, LoginActivity.class));
@@ -325,11 +327,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
         Log.e("Widthoflin", "" + width);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             linLoanStaus.setBackgroundColor(Color.parseColor("#003668"));
-          /*  linLoanStaus.setBackground(getResources().getDrawable(R.drawable.ic_loan_status_selected_bg));
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams((int)(width),
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-            linLoanStaus.setLayoutParams(lp);*/
-
+            selectedView.setVisibility( View.VISIBLE );
         }
     }
 
@@ -384,7 +382,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
                 Log.e("getQuickCallResponse", new Gson().toJson(response.body()));
 
                 if (response != null && response.body().getStatus().contains("success")) {
-                    SocialUtil.loanStatusDialog(BannerActivity.this, linLoanStaus);
+                    SocialUtil.loanStatusDialog(BannerActivity.this, linLoanStaus,selectedView);
 
 
                     Log.e("getQuickCallResponse", response.body().getStatus());

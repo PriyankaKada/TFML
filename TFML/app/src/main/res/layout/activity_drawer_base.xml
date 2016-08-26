@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <android.support.design.widget.NavigationView
+   <!-- <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -18,5 +18,9 @@
         app:headerLayout="@layout/navigation_header"
          app:itemBackground="@color/white"
         app:itemTextColor="#333"
-        app:menu="@menu/navigation_view_items" />
+        app:menu="@menu/navigation_view_items" />-->
+    <include layout="@layout/layout_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"/>
 </android.support.v4.widget.DrawerLayout>

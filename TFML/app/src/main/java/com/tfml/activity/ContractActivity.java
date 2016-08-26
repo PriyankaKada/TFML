@@ -4,8 +4,10 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -28,6 +30,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
     private Button btnPayEmi, btnMoreDetail;
     private LinearLayout linSchemes, linApplyLoan, linReferFriend, linLoanStaus, linContactUs;
     private ImageView imgDrawer, imgDownload;
+    View selectedView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
         linContactUs = (LinearLayout) findViewById(R.id.lin_contact_us);
         imgDownload = (ImageView) findViewById(R.id.img_download);
         imgDrawer = (ImageView) findViewById(R.id.img_drawer);
+        selectedView = (View) findViewById(R.id.viewId);
         linSchemes.setOnClickListener(this);
         linApplyLoan.setOnClickListener(this);
         linReferFriend.setOnClickListener(this);
@@ -87,7 +91,8 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
                 startActivity(new Intent(ContractActivity.this, SchemesActivity.class));
                 break;
             case R.id.linLoanStaus:
-                SocialUtil.loanStatusDialog(ContractActivity.this, linLoanStaus);
+                linLoanStausClick();
+                SocialUtil.loanStatusDialog(ContractActivity.this, linLoanStaus, selectedView);
                 break;
             case R.id.lin_contact_us:
                 contactDialog();
@@ -105,6 +110,15 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
         }
     }
 
+    public void linLoanStausClick() {
+        int width = linLoanStaus.getWidth();
+        Log.e("Widthoflin", "" + width);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            linLoanStaus.setBackgroundColor(Color.parseColor("#003668"));
+            selectedView.setVisibility(View.VISIBLE);
+
+        }
+    }
 
     public void contactDialog() {
         final Dialog contactDialog = new Dialog(ContractActivity.this, android.R.style.Theme_Holo_Dialog_NoActionBar);

@@ -15,5 +15,10 @@ public class Constant {
     public static final String VERIFYOTP="verifyOtp";
     public static final String CONTACTDETAILS="contactDetails";
     public static final String PRODUCTS="products";
+    public static final String STATES="states";
+    public static final String GETCITIES="getCities";
+    public static final String GETBRANCHES="getBranches";
+    public static final String STATELIST="stateList";
+    public static final String CITYLIST="cityList";
 
 }

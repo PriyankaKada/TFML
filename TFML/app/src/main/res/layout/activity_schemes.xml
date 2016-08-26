@@ -41,6 +41,17 @@
         app:tabIndicatorColor="#ffffff"
         android:layout_alignParentBottom="true"
         />
+       <!-- <com.astuetz.PagerSlidingTabStrip
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            app:pstsDividerColor="@android:color/transparent"
+            app:pstsIndicatorColor="@color/white"
+            app:pstsIndicatorHeight="4px"
+            app:tabGravity="fill"
+            app:tabTextColor="@color/tab_selector"
+            app:tabMinWidth="100dp"
+            app:pstsShouldExpand="true"/>-->
 </LinearLayout>
 
 </LinearLayout>

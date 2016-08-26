@@ -5,12 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.provider.Contacts;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -23,22 +20,30 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.tfml.R;
-import com.tfml.activity.BannerActivity;
+import com.tfml.adapter.BranchCityAdapter;
+import com.tfml.adapter.BranchListAdapter;
+import com.tfml.adapter.CityAdapter;
 import com.tfml.adapter.ProductAdapter;
+import com.tfml.adapter.BranchStateAdapter;
+import com.tfml.adapter.StateAdapter;
 import com.tfml.auth.TfmlApi;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusInputModel;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusResponse;
+import com.tfml.model.branchResponseModel.BranchResponseModel;
+import com.tfml.model.branchResponseModel.InputBranchModel;
+import com.tfml.model.cityResponseModel.BranchCityResponseModel;
+import com.tfml.model.cityResponseModel.CityResponseModel;
+import com.tfml.model.cityResponseModel.InputCityModel;
 import com.tfml.model.productResponseModel.ProductListResponseModel;
 import com.tfml.model.socialResponseModel.ContactListResponseModel;
+import com.tfml.model.stateResponseModel.BranchStateResponseModel;
+import com.tfml.model.stateResponseModel.StateResponseModel;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.R.attr.id;
-import static com.tfml.R.id.linLoanStaus;
 
 
 /**
@@ -111,7 +116,7 @@ public class SocialUtil {
         return app_installed;
     }
 
-  public static void  loanStatusDialog(final Context context,final LinearLayout linloanstatus)
+  public static void  loanStatusDialog(final Context context,final LinearLayout linloanstatus,final View selectedView)
   {
       final Dialog loanstatusdialog=new Dialog(context,android.R.style.Theme_Holo_Dialog_NoActionBar);
 
@@ -157,6 +162,7 @@ public class SocialUtil {
           @Override
           public void onCancel(DialogInterface dialog) {
               linloanstatus.setBackgroundColor(Color.parseColor("#004c92"));
+              selectedView.setVisibility( View.INVISIBLE );
           }
       });
   }
@@ -222,15 +228,13 @@ public class SocialUtil {
 
     public static void getProductListData(final Context context,final Spinner spnProduct)
     {
-        Log.e("ProductResponse","getProduct");
-
         if( CommonUtils.isNetworkAvailable(context))
         {
             tfmlApi = ApiService.getInstance().call();
             tfmlApi.getProductList().enqueue(new Callback<List<ProductListResponseModel>>() {
                 @Override
                 public void onResponse(Call<List<ProductListResponseModel>> call, Response<List<ProductListResponseModel>> response) {
-                    Log.e("Response",response.body().size()+"");
+                    Log.e("ProductResponse",response.body().size()+"");
 
                     if(response!=null)
                     {
@@ -262,5 +266,207 @@ public class SocialUtil {
             CommonUtils.showAlert1(context,"","No Internet Connection",false);
         }
     }
+
+
+    public static void getBranchStateListData(final Context context, final Spinner spnBranchState, final String captionText)
+    {
+        if(CommonUtils.isNetworkAvailable(context))
+        {
+            tfmlApi = ApiService.getInstance().call();
+            tfmlApi.getBranchStateList().enqueue(new Callback<List<BranchStateResponseModel>>() {
+                @Override
+                public void onResponse(Call<List<BranchStateResponseModel>> call, Response<List<BranchStateResponseModel>> response) {
+                    Log.e("BranchStateListDataResp",response.body().size()+"");
+                    if(response!=null)
+                    {
+                        BranchStateResponseModel stateModel=new BranchStateResponseModel();
+                        stateModel.setTerrCaption(captionText);
+                        stateModel.setTerrTerritoryid("-1");
+                        response.body().add(0,stateModel);
+                        spnBranchState.setAdapter(new BranchStateAdapter(context,response.body()));
+                        for(int i=0;i<response.body().size();i++)
+                        {
+                            if(response.equals(response.body().get(i).getTerrCaption()))
+                            {
+                                spnBranchState.setSelection(i);
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<BranchStateResponseModel>> call, Throwable t) {
+                    Log.e("ErrorResponse",t.getMessage()+"");
+                }
+            });
+        }
+        else
+        {
+            CommonUtils.showAlert1(context,"","No Internet Connection",false);
+        }
+
+    }
+
+
+    public static void getStateListData(final Context context,final Spinner spnState,final String caption)
+    {
+        if(CommonUtils.isNetworkAvailable(context))
+        {
+            tfmlApi = ApiService.getInstance().call();
+            tfmlApi.getStateListData().enqueue(new Callback<List<StateResponseModel>>() {
+                @Override
+                public void onResponse(Call<List<StateResponseModel>> call, Response<List<StateResponseModel>> response) {
+                    Log.e("StateListDataResponse",response.body().size()+"");
+                    if(response!=null)
+                    {
+                        StateResponseModel stateModel=new StateResponseModel();
+                        stateModel.setName(caption);
+                        stateModel.setId("-1");
+                        response.body().add(0,stateModel);
+                        spnState.setAdapter(new StateAdapter(context,response.body()));
+                        for(int i=0;i<response.body().size();i++)
+                        {
+                            if(response.equals(response.body().get(i).getName()))
+                            {
+                                spnState.setSelection(i);
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<StateResponseModel>> call, Throwable t) {
+
+                }
+
+                });
+        }
+        else
+        {
+            CommonUtils.showAlert1(context,"","No Internet Connection",false);
+        }
+    }
+
+    public static void getBranchCityListData(final Context context,final Spinner spnCity,final InputCityModel inputCityModel, final String caption)
+    {
+        Log.e("CITYCLAL","CITY");
+        if(CommonUtils.isNetworkAvailable(context))
+        {
+            tfmlApi = ApiService.getInstance().call();
+            tfmlApi.getBranchCityList(inputCityModel).enqueue(new Callback<List<BranchCityResponseModel>>() {
+                @Override
+                public void onResponse(Call<List<BranchCityResponseModel>> call, Response<List<BranchCityResponseModel>> response) {
+                    Log.e("CityListDataResponse",response.body().size()+"");
+                     if(response!=null)
+                     {
+                         BranchCityResponseModel cityResponseModel=new BranchCityResponseModel();
+                         cityResponseModel.setTerrCaption(caption);
+                         cityResponseModel.setTerrTerritoryid("-1");
+                         response.body().add(0,cityResponseModel);
+                         spnCity.setAdapter(new BranchCityAdapter(context,response.body()));
+                         for(int i=0;i<response.body().size();i++)
+                         {
+                             if(response.equals(response.body().get(i).getTerrCaption()))
+                             {
+                                 spnCity.setSelection(i);
+                             }
+                         }
+                     }
+
+                }
+
+                @Override
+                public void onFailure(Call<List<BranchCityResponseModel>> call, Throwable t) {
+                    Log.e("ErrorResponse",t.getMessage()+"");
+                }
+            });
+
+        }
+        else
+        {
+            CommonUtils.showAlert1(context,"","No Internet Connection",false);
+        }
+    }
+
+    public static void getCityListData(final Context context,final Spinner spnCity,final InputCityModel inputCityModel,final String caption)
+    {
+        if(CommonUtils.isNetworkAvailable(context))
+        {
+          tfmlApi=ApiService.getInstance().call();
+            tfmlApi.getCityListData(inputCityModel).enqueue(new Callback<List<CityResponseModel>>() {
+                @Override
+                public void onResponse(Call<List<CityResponseModel>> call, Response<List<CityResponseModel>> response) {
+                    Log.e("CityListDataResponse",response.body().size()+"");
+                    if(response!=null)
+                    {
+                        CityResponseModel cityResponseModel=new CityResponseModel();
+                        cityResponseModel.setName(caption);
+                        cityResponseModel.setId("-1");
+                        response.body().add(0,cityResponseModel);
+                        spnCity.setAdapter(new CityAdapter(context,response.body()));
+                        for(int i=0;i<response.body().size();i++)
+                        {
+                            if(response.equals(response.body().get(i).getName()))
+                            {
+                                spnCity.setSelection(i);
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<CityResponseModel>> call, Throwable t) {
+
+                }
+            });
+        }
+        else
+        {
+            CommonUtils.showAlert1(context,"","No Internet Connection",false);
+        }
+    }
+
+
+
+   public static void getBranchList(final Context context,final Spinner spnBranch,final InputBranchModel inputBranchModel, final String caption)
+   {
+      if(CommonUtils.isNetworkAvailable(context))
+      {
+          tfmlApi=ApiService.getInstance().call();
+          tfmlApi.getBranchList(inputBranchModel).enqueue(new Callback<List<BranchResponseModel>>() {
+              @Override
+              public void onResponse(Call<List<BranchResponseModel>> call, Response<List<BranchResponseModel>> response) {
+
+                  if(response!=null)
+                  {
+                    BranchResponseModel branchResponseModel=new BranchResponseModel();
+                      branchResponseModel.setTerrCaption(caption);
+                      branchResponseModel.setTerrTerritoryid("-1");
+                      response.body().add(0,branchResponseModel);
+                      spnBranch.setAdapter(new BranchListAdapter(context,response.body()));
+                      for(int i=0;i<response.body().size();i++)
+                      {
+                          if(response.equals(response.body().get(i).getTerrCaption()))
+                          {
+                              spnBranch.setSelection(i);
+                          }
+                      }
+                  }
+
+
+              }
+
+              @Override
+              public void onFailure(Call<List<BranchResponseModel>> call, Throwable t) {
+                  Log.e("ErrorResponse",t.getMessage()+"");
+              }
+          });
+      }
+       else
+      {
+          CommonUtils.showAlert1(context,"","No Internet Connection",false);
+      }
+   }
+
 
 }

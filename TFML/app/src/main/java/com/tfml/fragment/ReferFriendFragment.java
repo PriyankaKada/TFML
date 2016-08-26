@@ -1,7 +1,5 @@
 package com.tfml.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,17 +16,21 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.tfml.R;
-import com.tfml.activity.SchemesActivity;
 import com.tfml.auth.TfmlApi;
 import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
 import com.tfml.common.SocialUtil;
 import com.tfml.common.Validation;
-import com.tfml.model.applyLoanResponseModel.ApplyLoanResponse;
-import com.tfml.model.applyLoanResponseModel.InputModel;
+import com.tfml.model.branchResponseModel.BranchResponseModel;
+import com.tfml.model.branchResponseModel.InputBranchModel;
+import com.tfml.model.cityResponseModel.BranchCityResponseModel;
+import com.tfml.model.cityResponseModel.CityResponseModel;
+import com.tfml.model.cityResponseModel.InputCityModel;
 import com.tfml.model.productResponseModel.ProductListResponseModel;
 import com.tfml.model.referFriendResponseModel.ReferFriendInputModel;
 import com.tfml.model.referFriendResponseModel.ReferFriendResponseModel;
+import com.tfml.model.stateResponseModel.BranchStateResponseModel;
+import com.tfml.model.stateResponseModel.StateResponseModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,16 +42,19 @@ import retrofit2.Response;
 
 public class ReferFriendFragment extends Fragment implements View.OnClickListener,AdapterView.OnItemSelectedListener
 {
-    private EditText txtFirstName,txtLastName,txtMobileNumber,txtLandlineNumber,txtEmailAddress,txtOrgnizationName;
-    private Spinner spnProduct,spSelectBranchState,spSelectBranchCity,spSelectBranch,spSelectCity,spSelectState,spSelectPinCode;
+    private EditText txtFirstName,txtLastName,txtMobileNumber,txtLandlineNumber,txtEmailAddress,txtOrgnizationName,txtPincode;
+    private Spinner spnProduct,spSelectBranchState,spSelectBranchCity,spSelectBranch,spSelectCity,spSelectState;
     private CheckBox chkLeadTypeIndividual,chkLeadTypeOrganizational,chkVecTypeCommercial,chkVechTypeRefinance,ChkVechPassanger;
     private Button btnCancel,btnReferFriends;
-    private List<String > proList,branchStateList,branchCityList,branchList,cityList,stateList,pinCodeList;
+    private List<String > branchStateList,branchCityList,branchList,cityList,stateList,pinCodeList;
     String strLeadTypechk="";
     String strVechicalType="";
     TfmlApi tfmlApi;
     ReferFriendInputModel inputReferFriendModel;
-    String ProductCode;
+    InputCityModel inputCityModel;
+    InputBranchModel inputBranchModel;
+    String productCode,branchStateCode, branchCityCode, branchCode,stateCode,cityCode;
+
     View view;
 
     @Override
@@ -61,46 +66,22 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
         init();
         branchStateList=new ArrayList<String>();
         branchStateList.add("Select Branch State");
-        branchStateList.add("MH");
-        branchStateList.add("KA");
-        branchStateList.add("UP");
-        branchStateList.add("Kerla");
-        branchStateList.add("AP");
         spSelectBranchState.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,branchStateList));
-        branchCityList=new ArrayList<String>();
+        branchCityList = new ArrayList<String>();
         branchCityList.add("Select Branch City");
-        branchCityList.add("Mumbai");
-        branchCityList.add("Benglaru");
-        branchCityList.add("Lucknow");
-        branchCityList.add("TiruanantPuram");
-        branchCityList.add("Hydrabad");
-        spSelectBranchCity.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,branchCityList));
-        branchList=new ArrayList<String>();
+        spSelectBranchCity.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, branchCityList));
+
+        branchList = new ArrayList<String>();
         branchList.add("Select Branch");
-        branchList.add("Mumbai");
-        branchList.add("Hydrabad");
-        branchCityList.add("Kerla");
-        spSelectBranch.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,branchList));
-        cityList=new ArrayList<String>();
-        cityList.add("Select City");
-        cityList.add("Mumabai");
-        cityList.add("Delhi");
-        cityList.add("Kolkatta");
-        cityList.add("Keral");
-        spSelectCity.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,cityList));
+        spSelectBranch.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, branchList));
+
         stateList=new ArrayList<String>();
         stateList.add("Select State");
-        stateList.add("MH");
-        stateList.add("KA");
-        stateList.add("MP");
-        stateList.add("AP");
         spSelectState.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,stateList));
-        pinCodeList=new ArrayList<String>();
-        pinCodeList.add("Select Pincode");
-        pinCodeList.add("123456");
-        pinCodeList.add("987654");
-        pinCodeList.add("876567");
-        spSelectPinCode.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,pinCodeList));
+
+        cityList = new ArrayList<String>();
+        cityList.add("Select City");
+        spSelectCity.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, cityList));
         return view;
     }
 
@@ -116,15 +97,22 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
         txtLandlineNumber=(EditText)view.findViewById(R.id.edt_landline_no);
         txtEmailAddress=(EditText)view.findViewById(R.id.edt_email_address);
         txtOrgnizationName=(EditText)view.findViewById(R.id.edt_orgnization_name);
+        txtPincode=(EditText)view.findViewById(R.id.edt_pincode);
         spnProduct=(Spinner)view.findViewById(R.id.sp_select_product);
         spnProduct.setOnItemSelectedListener(this);
         SocialUtil.getProductListData(getActivity(),spnProduct);
         spSelectBranchState=(Spinner)view.findViewById(R.id.sp_select_branch_state);
+        spSelectBranchState.setOnItemSelectedListener(this);
+        SocialUtil.getBranchStateListData(getActivity(), spSelectBranchState, "Select branch state");
         spSelectBranchCity=(Spinner)view.findViewById(R.id.sp_select_branch_city);
+        spSelectBranchCity.setOnItemSelectedListener(this);
         spSelectBranch=(Spinner)view.findViewById(R.id.sp_select_branch);
+        spSelectBranch.setOnItemSelectedListener(this);
         spSelectState=(Spinner)view.findViewById(R.id.sp_select_state);
+        spSelectState.setOnItemSelectedListener(this);
+        SocialUtil.getStateListData(getActivity(), spSelectState, "Select state");
         spSelectCity=(Spinner)view.findViewById(R.id.sp_select_city);
-        spSelectPinCode=(Spinner)view.findViewById(R.id.sp_select_pincode);
+        spSelectCity.setOnItemSelectedListener(this);
         chkLeadTypeIndividual=(CheckBox)view.findViewById(R.id.chk_individual);
         chkLeadTypeOrganizational=(CheckBox)view.findViewById(R.id.chk_organization);
         chkVecTypeCommercial=(CheckBox)view.findViewById(R.id.chk_commercial);
@@ -135,9 +123,10 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
         spnProduct.setSelection(1);
         spSelectCity.setSelection(1);
         spSelectState.setSelection(1);
-        spSelectPinCode.setSelection(1);
         spSelectBranch.setSelection(1);
         inputReferFriendModel=new ReferFriendInputModel();
+        inputCityModel=new InputCityModel();
+        inputBranchModel=new InputBranchModel();
         if(chkLeadTypeIndividual.isChecked())
         {
             strLeadTypechk="Individual";
@@ -223,22 +212,56 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
         inputReferFriendModel.setMobileNumber(txtMobileNumber.getText().toString());
         inputReferFriendModel.setLandlineNumber(txtLandlineNumber.getText().toString());
         inputReferFriendModel.setEmailAddress(txtEmailAddress.getText().toString());
-        if(ProductCode!=null && ProductCode !="-1")
+        if(productCode!=null && productCode !="-1")
         {
-            inputReferFriendModel.setProductId(ProductCode);
+            inputReferFriendModel.setProductId(productCode);
         }
         else
         {
             Toast.makeText(getContext(),"Please Select Product Type",Toast.LENGTH_SHORT).show();
         }
-        //inputReferFriendModel.setProductId(spnProduct.getSelectedItem().toString());
+        if (branchStateCode != null && branchStateCode != "-1") {
+            inputReferFriendModel.setBranchState(branchStateCode);
+
+        } else {
+            Toast.makeText(getContext(), "Please Select Branch State", Toast.LENGTH_SHORT).show();
+        }
+        if (branchCityCode != null && branchCityCode != "-1") {
+            inputReferFriendModel.setBranchCity(branchCityCode);
+        } else {
+            Toast.makeText(getContext(), "Please Select Branch City", Toast.LENGTH_SHORT).show();
+        }
+
+        if (branchCode != null && branchCode != "-1") {
+            inputReferFriendModel.setBranch(branchCode);
+        } else {
+            Toast.makeText(getContext(), "Please Select Branch", Toast.LENGTH_SHORT).show();
+        }
+
+        if (stateCode != null && stateCode != "-1") {
+            inputReferFriendModel.setState(stateCode);
+
+        } else {
+            Toast.makeText(getContext(), "Please Select State", Toast.LENGTH_SHORT).show();
+        }
+
+
+        if (cityCode != null && cityCode != "-1") {
+            inputReferFriendModel.setCity(cityCode);
+        } else {
+            Toast.makeText(getContext(), "Please Select City", Toast.LENGTH_SHORT).show();
+        }
+
+
+       /* inputReferFriendModel.setProductId(spnProduct.getSelectedItem().toString());
         inputReferFriendModel.setBranchState(spSelectBranchState.getSelectedItem().toString());
         inputReferFriendModel.setBranchCity(spSelectBranchCity.getSelectedItem().toString());
         inputReferFriendModel.setBranch(spSelectBranch.getSelectedItem().toString());
-        inputReferFriendModel.setEmailAddress(txtEmailAddress.getText().toString());
         inputReferFriendModel.setState(spSelectState.getSelectedItem().toString());
         inputReferFriendModel.setCity(spSelectCity.getSelectedItem().toString());
-        inputReferFriendModel.setPincode(spSelectPinCode.getSelectedItem().toString());
+    */
+        inputReferFriendModel.setEmailAddress(txtEmailAddress.getText().toString());
+        inputReferFriendModel.setPincode(txtPincode.getText().toString());
         inputReferFriendModel.setLeadType(strLeadTypechk);
         inputReferFriendModel.setOrganisationName(txtOrgnizationName.getText().toString());
         inputReferFriendModel.setVehicalType(strVechicalType);
@@ -290,11 +313,54 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if(position!=0)
-        {
-            ProductCode=((ProductListResponseModel)parent.getItemAtPosition(position)).getProdProductid();
+        switch (parent.getId()) {
+            case R.id.sp_select_product:
+                if (position != 0) {
+                    productCode = ((ProductListResponseModel) parent.getItemAtPosition(position)).getProdProductid();
+                }
+                break;
+            case R.id.sp_select_branch_state:
 
+                if (position != 0) {
+                    branchStateCode = ((BranchStateResponseModel) parent.getItemAtPosition(position)).getTerrTerritoryid();
+                    Log.e("BRANCHSTATECODE", branchStateCode);
+                    inputCityModel.setStateId(branchStateCode);
+                    SocialUtil.getBranchCityListData(getActivity(), spSelectBranchCity, inputCityModel, "Select Branch City");
+                    break;
+                }
+            case R.id.sp_select_branch_city:
+                if (position != 0) {
+                    branchCityCode = ((BranchCityResponseModel) parent.getItemAtPosition(position)).getTerrTerritoryid();
+                    inputBranchModel.setCityId(branchCityCode);
+                    SocialUtil.getBranchList(getActivity(), spSelectBranch, inputBranchModel, "Select Branch");
+                    break;
+                }
+            case R.id.sp_select_branch:
+                if (position != 0) {
+                    branchCode = ((BranchResponseModel) parent.getItemAtPosition(position)).getTerrTerritoryid();
+
+                }
+                break;
+            case R.id.sp_select_state:
+                if(position!=0)
+                {
+                    stateCode = ((StateResponseModel) parent.getItemAtPosition(position)).getId();
+                    Log.e("STATECODE", stateCode);
+                    inputCityModel.setStateId(stateCode);
+                    SocialUtil.getCityListData(getActivity(), spSelectCity, inputCityModel, "Select City");
+                }
+
+                break;
+            case R.id.sp_select_city:
+                if(position!=0)
+                {
+                    cityCode = ((CityResponseModel) parent.getItemAtPosition(position)).getId();
+                    Log.e("BranchCityCode", cityCode);
+                    inputBranchModel.setCityId(cityCode);
+                }
+                break;
         }
+
     }
 
     @Override

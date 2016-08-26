@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.tfml.R;
 import com.tfml.adapter.SchemesPagerAdapter;
 import com.tfml.fragment.ApplyLoanFragment;
@@ -45,6 +46,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
         // Give the TabLayout the ViewPager
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
+       // tabLayout.setViewPager(viewPager);
         setupTabIcons();
         imgtoolbarhome.setOnClickListener(this);
         imgSocial.setOnClickListener(this);
@@ -57,6 +59,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
         tabOne.setText("Schemes");
         tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_scheme_non_selected, 0, 0);
         tabLayout.getTabAt(0).setCustomView(tabOne);
+
 
         TextView tabTwo = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabTwo.setText("Apply Loan");
