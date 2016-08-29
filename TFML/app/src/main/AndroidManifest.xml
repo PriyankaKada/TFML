@@ -66,7 +66,11 @@
         <activity
             android:name=".activity.EmiActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.ChangePasswordActivity"></activity>
+        <activity
+            android:name=".activity.ChangePasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.ForgotPasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

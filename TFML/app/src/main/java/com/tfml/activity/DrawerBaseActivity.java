@@ -81,6 +81,7 @@ public class DrawerBaseActivity extends BaseActivity {
                     case 3://Download
                         break;
                     case 4://Change Password
+                        startActivity(new Intent(DrawerBaseActivity.this,ChangePasswordActivity.class));
                         break;
                     case 5://Logout
                         break;

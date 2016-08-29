@@ -62,8 +62,10 @@
          android:layout_marginLeft="10dp"
          android:layout_marginRight="10dp"
          android:drawablePadding="10dp"
+         android:padding="10dp"
          android:textColorHint="@color/white"
          android:textSize="15dp"
+         android:background="@drawable/bg_edit_text"
          android:drawableLeft="@drawable/ic_user"
 
         />
@@ -73,9 +75,11 @@
         android:layout_height="wrap_content"
         android:hint="Password"
         android:textSize="15dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"
+        android:padding="10dp"
         android:inputType="textPassword"
+        android:background="@drawable/bg_edit_text"
         android:drawablePadding="10dp"
         android:textColorHint="@color/white"
         android:drawableLeft="@drawable/ic_password"
@@ -112,7 +116,8 @@
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:text="Login"
+        android:textAllCaps="false"
         android:background="@color/white"
-        android:textColor="@color/tab_bg"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_height="wrap_content" />
 </LinearLayout>

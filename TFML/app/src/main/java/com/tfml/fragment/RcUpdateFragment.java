@@ -1,24 +1,131 @@
 package com.tfml.fragment;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.tfml.R;
+import com.tfml.util.ImageDecoding;
 
 
-public class RcUpdateFragment extends Fragment {
+public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 
-
+    private EditText txtRcNo;
+    private Button btnRcUpload;
+    private View view;
+    private ImageView img_upload;
+    Uri selectedImage;
+    String imgPhotoUrl,imgExt;
+    static final int REQUEST_TAKE_PHOTO = 1;
+    int mtype;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rc_update, container, false);
+        view= inflater.inflate(R.layout.fragment_rc_update, container, false);
+        init();
+        return view;
+    }
+    public void init()
+    {
+      txtRcNo=(EditText)view.findViewById(R.id.txt_rc_no);
+        btnRcUpload=(Button)view.findViewById(R.id.btn_rc_upload);
+        img_upload=(ImageView)view.findViewById(R.id.img_upload);
+        btnRcUpload.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.btn_rc_upload:
+                mtype = REQUEST_TAKE_PHOTO;
+                upLoadRCdoc();
+                break;
+        }
+    }
+
+    public void upLoadRCdoc()
+    {
+
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+        alertDialog.setTitle("Pictures Option");
+        alertDialog.setIcon(getResources().getDrawable(R.drawable.ic_image));
+        alertDialog.setPositiveButton("GALLARY",new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivityForResult(new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI) , 1);
+            }
+        });
+        alertDialog.setNegativeButton("CAMERA",new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(ImageDecoding.isDeviceSupportCamera(getActivity())){
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    selectedImage = ImageDecoding.getOutputMediaFileUri(1);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, selectedImage);
+                    startActivityForResult(intent, 0);
+                }
+            }
+        });
+        alertDialog.show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        String path="";
+        switch(requestCode) {
+            case 0:
+                if(resultCode == Activity.RESULT_OK) {
+                    path=selectedImage.getPath();
+                }
+                break;
+
+            case 1:
+                if(resultCode == Activity.RESULT_OK){
+                    selectedImage=data.getData();
+                    path=getRealPathFromURI(selectedImage);
+                }
+                break;
+        }
+
+        if(selectedImage!=null) {
+            if (mtype == 1) {
+                imgPhotoUrl = path;
+                if (TextUtils.isEmpty(imgPhotoUrl)) {
+                    img_upload.setImageResource(R.drawable.ic_image);
+                } else {
+                    img_upload.setImageBitmap(ImageDecoding.decodeBitmapFromFile(imgPhotoUrl, 100, 100));
+                    imgExt = imgPhotoUrl.substring(imgPhotoUrl.lastIndexOf(".") + 1, imgPhotoUrl.length());
+
+                }
+            }
+        }
+    }
+    public String getRealPathFromURI(Uri contentUri) {
+        String[] path = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getActivity().getContentResolver().query(contentUri,path, null, null, null);
+        cursor.moveToFirst();
+        String picturePath = cursor.getString(cursor.getColumnIndex(path[0]));
+        cursor.close();
+        return picturePath;
     }
 
 }

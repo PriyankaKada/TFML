@@ -216,17 +216,17 @@
             android:layout_width="0dp"
             android:padding="10dp"
             android:background="@drawable/spinner_bg"
-            android:layout_height="wrap_content">
+            android:layout_height="70dp">
 
         </Spinner>
         <Spinner
             android:id="@+id/sp_select_city"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/spinner_bg"
+            android:layout_weight="1"
             android:padding="10dp"
-            android:layout_height="wrap_content">
+            android:background="@drawable/spinner_bg"
+            android:layout_marginLeft="5dp"
+            android:layout_height="71dp">
         </Spinner>
     </LinearLayout>
 
@@ -249,6 +249,8 @@
             <View
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginLeft="5dp"
                 android:layout_weight="1"/>
 
         </LinearLayout>
@@ -266,6 +268,7 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:gravity="center"
+            android:textAllCaps="false"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:text="Cancel"/>
@@ -280,6 +283,7 @@
             android:textColor="@color/white"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
+            android:textAllCaps="false"
             android:textStyle="bold"
             android:text="Apply Loan"/>
     </LinearLayout>

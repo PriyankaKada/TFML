@@ -243,6 +243,7 @@
                 android:layout_height="35dp"
                 android:layout_alignParentRight="true"
                 android:background="#164d74"
+                android:textAllCaps="false"
                 android:text="Reciepts"
                 android:layout_margin="10dp"
                 android:layout_gravity="center"

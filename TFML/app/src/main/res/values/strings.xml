@@ -5,12 +5,18 @@
     <string name="refer_friend">Refer Friend</string>
     <string name="loan_status">Loan Status</string>
     <string name="txt_login">Login</string>
+    <string name="txt_change_pass">My Password</string>
     <string name="contact_us">Contact Us</string>
+    <string name="btn_change_pass">Change Password</string>
     <string name="title_activity_schemes">SchemesActivity</string>
     <string name="txt_login_title">mCONNECT \n TMFL Customer zone !!!</string>
+    <string name="txt_change_pass_header">To change your password please fill out the fields below.</string>
     <string name="navigation_view_items">Navigation View Item</string>
     <string name="title_welcome">Welocome to TMFL</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="btn_rc_upload_image">Upload RC Image</string>
+    <string name="txt_forgot_pass_header">Forgot Your Password ?</string>
+    <string name="txt_send_link">SEND LINK</string>
+    <string name="txt_forgot_pass_desc">Enter your E-mail address and we Will Send you link to reset your password.</string>
 </resources>

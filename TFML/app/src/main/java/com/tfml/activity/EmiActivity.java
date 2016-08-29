@@ -33,6 +33,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
     TabLayout emiTabLayout;
     ViewPager viewPager;
     DrawerLayout drawerLayout;
+    View view1, view2, view3,view4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,10 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
         txtEmiName=(TextView)view.findViewById(R.id.txt_titel_emi);
         viewPager = (ViewPager)view. findViewById(R.id.pager);
         setupViewPager(viewPager);
+        view1 = findViewById( R.id.view1 );
+        view2 = findViewById( R.id.view2 );
+        view3 = findViewById( R.id.view3 );
+        view4=findViewById(R.id.view4);
         emiTabLayout= (TabLayout)view. findViewById(R.id.tab_layout_emi);
         emiTabLayout.setupWithViewPager(viewPager);
         imgEmiBack=(ImageView)view.findViewById(R.id.img_emi_back);
@@ -78,6 +83,43 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
             @Override
             public void onPageSelected(int position) {
                 setTitle(getPageTitle(position));
+
+                switch(position){
+
+                    case 0:
+                        view1.setBackgroundResource( R.drawable.selector_tab_indicator_white );
+                        view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        view4.setBackgroundResource(R.drawable.selector_tab_indicator_blue);
+                        break;
+
+                    case 1:
+                        view1.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        view2.setBackgroundResource( R.drawable.selector_tab_indicator_white );
+                        view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        view4.setBackgroundResource(R.drawable.selector_tab_indicator_blue);
+                        break;
+
+                    case 2:
+                        view1.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        view3.setBackgroundResource( R.drawable.selector_tab_indicator_white );
+                        view4.setBackgroundResource(R.drawable.selector_tab_indicator_blue);
+                        break;
+
+                    case 3:
+                        view1.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        view4.setBackgroundResource( R.drawable.selector_tab_indicator_white );
+                        break;
+                    default:
+                        view1.setBackgroundResource( R.drawable.selector_tab_indicator_white );
+                        view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        view4.setBackgroundResource(R.drawable.selector_tab_indicator_blue);
+                        break;
+                }
             }
 
             @Override

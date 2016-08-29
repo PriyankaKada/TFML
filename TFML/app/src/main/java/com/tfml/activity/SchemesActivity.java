@@ -30,7 +30,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
     private TextView txtschemestitle;
     TabLayout tabLayout;
     private ImageView imgtoolbarhome,imgSocial;
-
+    View view1, view2, view3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +41,11 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
         imgtoolbarhome=(ImageView)findViewById(R.id.img_toolbar_home);
         imgSocial=(ImageView)findViewById(R.id.img_social);
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        view1 = findViewById( R.id.view1 );
+        view2 = findViewById( R.id.view2 );
+        view3 = findViewById( R.id.view3 );
         setupViewPager(viewPager);
-
+        viewPager.setOffscreenPageLimit( 3 );
         // Give the TabLayout the ViewPager
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
@@ -88,6 +91,33 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onPageSelected(int position) {
                 setTitle(getPageTitle(position));
+
+                switch(position){
+
+                    case 0:
+                        view1.setBackgroundResource( R.drawable.selector_tab_indicator_white );
+                        view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        break;
+
+                    case 1:
+                        view1.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        view2.setBackgroundResource( R.drawable.selector_tab_indicator_white );
+                        view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        break;
+
+                    case 2:
+                        view1.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        view3.setBackgroundResource( R.drawable.selector_tab_indicator_white );
+                        break;
+
+                    default:
+                        view1.setBackgroundResource( R.drawable.selector_tab_indicator_white );
+                        view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        break;
+                }
             }
 
             @Override

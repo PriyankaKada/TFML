@@ -175,20 +175,29 @@
         android:background="@drawable/selector_layout_rectangle">
 
       <EditText
+          android:id="@+id/txt_rc_no"
           android:layout_width="80dp"
           android:layout_height="50dp"
           android:layout_weight="1"
           android:background="@drawable/whit_rect_bg"
           android:hint="*Enter RC Number"/>
         <Button
+            android:id="@+id/btn_rc_upload"
             android:layout_width="80dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#164d74"
+            android:textAllCaps="false"
             android:layout_marginLeft="10dp"
             android:textColor="@color/white"
             android:text="@string/btn_rc_upload_image"/>
 
     </LinearLayout>
+    <ImageView
+        android:id="@+id/img_upload"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_image"/>
 
 </LinearLayout>

@@ -26,6 +26,7 @@ public class LoginActivity extends Activity implements View.OnClickListener
     private TextView txtForgotPassword;
     private CheckBox chkRememberMe;
     private ImageView loginBack;
+
      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,10 +54,12 @@ public class LoginActivity extends Activity implements View.OnClickListener
                 Validation();
                 break;
             case R.id.txt_forgot_password:
+                startActivity(new Intent(LoginActivity.this,ForgotPasswordActivity.class));
                 break;
             case R.id.img_login_back:
                 startActivity(new Intent(LoginActivity.this,BannerActivity.class));
                 break;
+
         }
     }
 
