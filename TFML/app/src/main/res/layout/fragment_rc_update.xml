@@ -186,7 +186,7 @@
             android:layout_width="80dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:background="#164d74"
+            android:background="@color/colorPrimaryDark"
             android:textAllCaps="false"
             android:layout_marginLeft="10dp"
             android:textColor="@color/white"

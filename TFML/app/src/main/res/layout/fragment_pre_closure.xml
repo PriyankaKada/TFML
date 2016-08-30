@@ -205,7 +205,7 @@
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_alignParentRight="true"
-                    android:background="#164d74"
+                    android:background="@color/colorPrimaryDark"
                     android:text="Submit"
                     android:layout_weight="2"
                     android:textAllCaps="false"

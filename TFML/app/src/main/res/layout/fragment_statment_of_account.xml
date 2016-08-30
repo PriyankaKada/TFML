@@ -205,7 +205,7 @@
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_alignParentRight="true"
-                    android:background="#164d74"
+                    android:background="@color/colorPrimaryDark"
                     android:text="Submit"
                     android:layout_weight="2"
                     android:textAllCaps="false"
@@ -230,8 +230,10 @@
 
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/lin_acc_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -243,7 +245,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Basic Detail"
-            android:background="#164d74"
+            android:textAllCaps="false"
+            android:background="@color/tab_bg"
             android:textColor="@color/white"
             android:layout_weight="1"/>
 
@@ -251,7 +254,8 @@
             android:id="@+id/btn_finance_detail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="#164d74"
+            android:background="@color/tab_bg"
+            android:textAllCaps="false"
             android:text="Finance Detail"
             android:layout_marginLeft="5dp"
             android:textColor="@color/white"

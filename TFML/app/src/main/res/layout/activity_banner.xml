@@ -193,7 +193,7 @@
         <LinearLayout
             android:id="@+id/linLogin"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:background="?attr/selectableItemBackground"
             android:layout_toRightOf="@+id/linLoanStaus"
