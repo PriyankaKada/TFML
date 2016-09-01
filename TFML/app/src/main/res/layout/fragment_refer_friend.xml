@@ -24,24 +24,31 @@
             android:layout_marginTop="5dp"
             android:padding="10dp"
             android:orientation="horizontal">
-            <CheckBox
-                android:id="@+id/chk_individual"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/radio_group_lead_type"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:button="@drawable/checkbox_selector"
-                android:paddingLeft="10dp"
-                android:textColor="#6b6b6b"
-                android:layout_weight="1"
-                android:text="Individual"/>
-            <CheckBox
-                android:id="@+id/chk_organization"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/checkbox_selector"
-                android:textColor="#6b6b6b"
-                android:paddingLeft="10dp"
-                android:layout_weight="1"
-                android:text="Orgnization"/>
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rdb_individual"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkbox_selector"
+                    android:paddingLeft="10dp"
+                    android:textColor="#6b6b6b"
+                    android:layout_weight="1"
+                    android:text="Individual"/>
+                <RadioButton
+                    android:id="@+id/rdb_organization"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkbox_selector"
+                    android:textColor="#6b6b6b"
+                    android:paddingLeft="10dp"
+                    android:layout_weight="1"
+                    android:text="Orgnization"/>
+            </RadioGroup>
         </LinearLayout>
         <EditText
             android:id="@+id/edt_orgnization_name"
@@ -68,33 +75,39 @@
             android:layout_marginTop="5dp"
             android:padding="10dp"
             android:orientation="horizontal">
-            <CheckBox
-                android:id="@+id/chk_commercial"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/radio_group_vehicle_type"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:button="@drawable/checkbox_selector"
-                android:paddingLeft="10dp"
-                android:layout_weight="1"
-                android:textColor="#6b6b6b"
-                android:text="Commercial"/>
-            <CheckBox
-                android:id="@+id/chk_passenger"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/checkbox_selector"
-                android:paddingLeft="3dp"
-                android:textColor="#6b6b6b"
-                android:layout_weight="1"
-                android:text="Passenger"/>
-            <CheckBox
-                android:id="@+id/chk_refinance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@drawable/checkbox_selector"
-                android:paddingLeft="3dp"
-                android:textColor="#6b6b6b"
-                android:layout_weight="1"
-                android:text="Refinance"/>
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rdb_commercial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="#6b6b6b"
+                    android:paddingLeft="10dp"
+                    android:button="@drawable/checkbox_selector"
+                    android:text="Commercial"/>
+                <RadioButton
+                    android:id="@+id/rdb_passenger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:textColor="#6b6b6b"
+                    android:button="@drawable/checkbox_selector"
+                    android:layout_weight="1"
+                    android:text="Passenger"/>
+                <RadioButton
+                    android:id="@+id/rdb_refinance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:textColor="#6b6b6b"
+                    android:button="@drawable/checkbox_selector"
+                    android:layout_weight="1"
+                    android:text="Refinance"/>
+            </RadioGroup>
 
         </LinearLayout>
         <LinearLayout

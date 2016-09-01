@@ -58,6 +58,7 @@ public class ReferFriendInputModel {
     @Expose
     private String referedBy;
 
+
     public String getOrganisationName() {
         return organisationName;
     }

@@ -25,12 +25,13 @@
         android:padding="10dp"
         android:orientation="horizontal">
      <RadioGroup
+         android:id="@+id/radio_group_lead_type"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:orientation="horizontal">
 
          <RadioButton
-             android:id="@+id/chk_individual"
+             android:id="@+id/rdb_individual"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:button="@drawable/checkbox_selector"
@@ -38,8 +39,8 @@
              android:textColor="#6b6b6b"
              android:layout_weight="1"
              android:text="Individual"/>
-         <CheckBox
-             android:id="@+id/chk_organization"
+         <RadioButton
+             android:id="@+id/rdb_organization"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:button="@drawable/checkbox_selector"
@@ -75,8 +76,13 @@
         android:layout_marginTop="5dp"
         android:padding="10dp"
         android:orientation="horizontal">
-        <CheckBox
-            android:id="@+id/chk_commercial"
+       <RadioGroup
+           android:id="@+id/radio_group_vehicle_type"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/rdb_commercial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -84,8 +90,8 @@
             android:paddingLeft="10dp"
             android:button="@drawable/checkbox_selector"
             android:text="Commercial"/>
-        <CheckBox
-            android:id="@+id/chk_passenger"
+        <RadioButton
+            android:id="@+id/rdb_passenger"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
@@ -93,8 +99,8 @@
             android:button="@drawable/checkbox_selector"
             android:layout_weight="1"
             android:text="Passenger"/>
-        <CheckBox
-            android:id="@+id/chk_refinance"
+        <RadioButton
+            android:id="@+id/rdb_refinance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
@@ -102,6 +108,7 @@
             android:button="@drawable/checkbox_selector"
             android:layout_weight="1"
             android:text="Refinance"/>
+       </RadioGroup>
 
     </LinearLayout>
     <LinearLayout

@@ -101,6 +101,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
                 openDrawer();
                 break;
             case R.id.img_download:
+               // SocialUtil.downloadData(ContractActivity.this);
                 break;
             case R.id.btn_pay_emi:
                 break;

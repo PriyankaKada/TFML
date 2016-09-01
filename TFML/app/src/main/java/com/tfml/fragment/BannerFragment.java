@@ -1,9 +1,6 @@
 package com.tfml.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.RecoverySystem;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -18,7 +15,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.tfml.R;
 import com.tfml.adapter.BannerAdapter;
-import com.tfml.auth.TfmlApi;
+import com.tfml.auth.TmflApi;
 import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
 import com.tfml.model.bannerResponseModel.BannerlistResponse;
@@ -26,7 +23,6 @@ import com.tfml.model.bannerResponseModel.Datum;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +32,7 @@ import retrofit2.Response;
 public class BannerFragment extends Fragment implements ViewPager.OnPageChangeListener {
     public ViewPager recentViewpager;
     CirclePageIndicator circlePageIndicator;
-    TfmlApi tfmlApi;
+    TmflApi tmflApi;
     BannerAdapter bannerAdapter;
     private ImageView[] dots;
     private int dotsCount;
@@ -54,7 +50,7 @@ public class BannerFragment extends Fragment implements ViewPager.OnPageChangeLi
         recentViewpager = (ViewPager) view.findViewById(R.id.recentViewpager);
         circlePageIndicator = (CirclePageIndicator) view.findViewById(R.id.titles);
         circlePageIndicator.setRadius(10.0f);
-        tfmlApi = ApiService.getInstance().call();
+        tmflApi = ApiService.getInstance().call();
         if(CommonUtils.isNetworkAvailable(getActivity()))
         {
             CommonUtils.showProgressDialog(getActivity(),"Please Wait....");
@@ -68,7 +64,7 @@ public class BannerFragment extends Fragment implements ViewPager.OnPageChangeLi
     }
         public void callBannerList()
         {
-            tfmlApi.getBannerResponse().enqueue(new Callback<BannerlistResponse>() {
+            tmflApi.getBannerResponse().enqueue(new Callback<BannerlistResponse>() {
                 @Override
                 public void onResponse(Call<BannerlistResponse> call, Response<BannerlistResponse> response) {
                     BannerlistResponse bannerlistResponse = response.body();

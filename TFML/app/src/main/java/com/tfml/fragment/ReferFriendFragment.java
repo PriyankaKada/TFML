@@ -10,13 +10,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.tfml.R;
-import com.tfml.auth.TfmlApi;
+import com.tfml.auth.TmflApi;
 import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
 import com.tfml.common.SocialUtil;
@@ -40,16 +41,17 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ReferFriendFragment extends Fragment implements View.OnClickListener,AdapterView.OnItemSelectedListener
+public class ReferFriendFragment extends Fragment implements View.OnClickListener,AdapterView.OnItemSelectedListener,RadioGroup.OnCheckedChangeListener
 {
     private EditText txtFirstName,txtLastName,txtMobileNumber,txtLandlineNumber,txtEmailAddress,txtOrgnizationName,txtPincode;
     private Spinner spnProduct,spSelectBranchState,spSelectBranchCity,spSelectBranch,spSelectCity,spSelectState;
-    private CheckBox chkLeadTypeIndividual,chkLeadTypeOrganizational,chkVecTypeCommercial,chkVechTypeRefinance,ChkVechPassanger;
+    private RadioButton rdbLeadTypeIndividual, rdbLeadTypeOrganizational, rdbVecTypeCommercial, rdbVechTypeRefinance, rdbVechPassanger;
     private Button btnCancel,btnReferFriends;
-    private List<String > branchStateList,branchCityList,branchList,cityList,stateList,pinCodeList;
+    private List<String > branchStateList,branchCityList,branchList,cityList,stateList;
+    private RadioGroup radioGroupLeadType,radioGroupVehicleType;
     String strLeadTypechk="";
     String strVechicalType="";
-    TfmlApi tfmlApi;
+    TmflApi tmflApi;
     ReferFriendInputModel inputReferFriendModel;
     InputCityModel inputCityModel;
     InputBranchModel inputBranchModel;
@@ -62,7 +64,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_refer_friend, container, false);
-        tfmlApi = ApiService.getInstance().call();
+        tmflApi = ApiService.getInstance().call();
         init();
         branchStateList=new ArrayList<String>();
         branchStateList.add("Select Branch State");
@@ -113,11 +115,15 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
         SocialUtil.getStateListData(getActivity(), spSelectState, "Select state");
         spSelectCity=(Spinner)view.findViewById(R.id.sp_select_city);
         spSelectCity.setOnItemSelectedListener(this);
-        chkLeadTypeIndividual=(CheckBox)view.findViewById(R.id.chk_individual);
-        chkLeadTypeOrganizational=(CheckBox)view.findViewById(R.id.chk_organization);
-        chkVecTypeCommercial=(CheckBox)view.findViewById(R.id.chk_commercial);
-        chkVechTypeRefinance=(CheckBox)view.findViewById(R.id.chk_refinance);
-        ChkVechPassanger=(CheckBox)view.findViewById(R.id.chk_passenger);
+        radioGroupLeadType=(RadioGroup)view.findViewById(R.id.radio_group_lead_type);
+        radioGroupVehicleType=(RadioGroup)view.findViewById(R.id.radio_group_vehicle_type) ;
+        radioGroupLeadType.setOnCheckedChangeListener(this);
+        radioGroupVehicleType.setOnCheckedChangeListener(this);
+        rdbLeadTypeIndividual = (RadioButton) view.findViewById(R.id.rdb_individual);
+        rdbLeadTypeOrganizational = (RadioButton) view.findViewById(R.id.rdb_organization);
+        rdbVecTypeCommercial = (RadioButton) view.findViewById(R.id.rdb_commercial);
+        rdbVechTypeRefinance = (RadioButton) view.findViewById(R.id.rdb_refinance);
+        rdbVechPassanger = (RadioButton) view.findViewById(R.id.rdb_passenger);
         btnCancel=(Button)view.findViewById(R.id.btn_cancel);
         btnReferFriends=(Button)view.findViewById(R.id.btn_refer_friends);
         spnProduct.setSelection(1);
@@ -127,33 +133,6 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
         inputReferFriendModel=new ReferFriendInputModel();
         inputCityModel=new InputCityModel();
         inputBranchModel=new InputBranchModel();
-        if(chkLeadTypeIndividual.isChecked())
-        {
-            strLeadTypechk="Individual";
-            inputReferFriendModel.setLeadType(strLeadTypechk);
-        }
-        if(chkLeadTypeOrganizational.isChecked())
-        {
-            strLeadTypechk="Organizational";
-            inputReferFriendModel.setLeadType(strLeadTypechk);
-        }
-        // txtOrgnizationName.setText(strLeadTypechk);
-        if(chkVecTypeCommercial.isChecked())
-        {
-            strVechicalType="Commercial";
-            inputReferFriendModel.setVehicalType(strVechicalType);
-        }
-        if(chkVechTypeRefinance.isChecked())
-        {
-            strVechicalType="Refinance";
-            inputReferFriendModel.setVehicalType(strVechicalType);
-        }
-        if(ChkVechPassanger.isChecked())
-        {
-            strVechicalType="Passanger";
-            inputReferFriendModel.setVehicalType(strVechicalType);
-        }
-
         btnCancel.setOnClickListener(this);
         btnReferFriends.setOnClickListener(this);
     }
@@ -288,7 +267,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
         Log.e("getState",inputReferFriendModel.getState());
         Log.e("getReferFriends",inputReferFriendModel.getReferedBy());
 
-        tfmlApi.getFriendResponse(inputReferFriendModel).enqueue(new Callback<ReferFriendResponseModel>() {
+        tmflApi.getFriendResponse(inputReferFriendModel).enqueue(new Callback<ReferFriendResponseModel>() {
             @Override
             public void onResponse(Call<ReferFriendResponseModel> call, Response<ReferFriendResponseModel> response) {
                 CommonUtils.closeProgressDialog();
@@ -366,5 +345,48 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        switch (group.getId())
+        {
+            case R.id.rdb_organization:
+                if(checkedId==R.id.rdb_organization)
+                {
+                    strLeadTypechk = "Organizational";
+                    inputReferFriendModel.setLeadType(strLeadTypechk);
+
+                }
+                break;
+            case R.id.rdb_individual:
+                if(checkedId==R.id.rdb_individual)
+                {
+                    strLeadTypechk = "Individual";
+                    inputReferFriendModel.setLeadType(strLeadTypechk);
+                }
+                break;
+            case R.id.rdb_commercial:
+                if(checkedId==R.id.rdb_commercial)
+                {
+                    strVechicalType = "Commercial";
+                    inputReferFriendModel.setVehicalType(strVechicalType);
+                }
+                break;
+            case R.id.rdb_refinance:
+                if(checkedId==R.id.rdb_refinance)
+                {
+                    strVechicalType = "Refinance";
+                    inputReferFriendModel.setVehicalType(strVechicalType);
+                }
+                break;
+            case R.id.rdb_passenger:
+                if(checkedId==R.id.rdb_passenger)
+                {
+                    strVechicalType = "Passanger";
+                    inputReferFriendModel.setVehicalType(strVechicalType);
+                }
+                break;
+        }
     }
 }

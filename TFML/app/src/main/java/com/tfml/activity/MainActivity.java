@@ -5,8 +5,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.tfml.R;
-import com.tfml.activity.BaseActivity;
-import com.tfml.auth.TfmlApi;
+import com.tfml.auth.TmflApi;
 import com.tfml.common.ApiService;
 import com.tfml.model.QuickcallResponseModel.QuickCallInputModel;
 import com.tfml.model.QuickcallResponseModel.QuickCallResponse;
@@ -23,7 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends BaseActivity {
-    TfmlApi tfmlApi;
+    TmflApi tmflApi;
     InputModel inputModel;
     ReferFriendInputModel friendInputModel;
     QuickCallInputModel quickCallInputModel;
@@ -35,7 +34,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         //Check Banner Webservice
 
-        tfmlApi=ApiService.getInstance().call();
+        tmflApi =ApiService.getInstance().call();
       //  callBannerListResponse();
        // callDownloadResponseModel();
       //  callSchemesResponseModel();
@@ -57,7 +56,7 @@ public class MainActivity extends BaseActivity {
     }
      public void callMobileResponseModel(QuickCallInputModel quickCallInputModel)
      {
-         tfmlApi.getQuickCallResponse(quickCallInputModel).enqueue(new Callback<QuickCallResponse>() {
+         tmflApi.getQuickCallResponse(quickCallInputModel).enqueue(new Callback<QuickCallResponse>() {
              @Override
              public void onResponse(Call<QuickCallResponse> call, Response<QuickCallResponse> response) {
                  if ( response != null && response.body().getStatus().contains("success"))
@@ -123,7 +122,7 @@ public class MainActivity extends BaseActivity {
 
     public void callBannerListResponse()
     {
-        tfmlApi.getBannerResponse().enqueue(new Callback<BannerlistResponse>() {
+        tmflApi.getBannerResponse().enqueue(new Callback<BannerlistResponse>() {
             @Override
             public void onResponse(Call<BannerlistResponse> call, Response<BannerlistResponse> response) {
                 Log.e("CallbannerListResponse",new Gson().toJson(response.body()));
@@ -142,7 +141,7 @@ public class MainActivity extends BaseActivity {
     public void callDownloadResponseModel()
     {
 
-        tfmlApi.getDownloadResponse().enqueue(new Callback<DownloadResponse>() {
+        tmflApi.getDownloadResponse().enqueue(new Callback<DownloadResponse>() {
             @Override
             public void onResponse(Call<DownloadResponse> call, Response<DownloadResponse> response) {
                 Log.e("DownloadResponse",new Gson().toJson(response.body()));
@@ -158,7 +157,7 @@ public class MainActivity extends BaseActivity {
     public void callSchemesResponseModel()
     {
 
-        tfmlApi.getSchemesResponse().enqueue(new Callback<SchemesResponse>() {
+        tmflApi.getSchemesResponse().enqueue(new Callback<SchemesResponse>() {
             @Override
             public void onResponse(Call<SchemesResponse> call, Response<SchemesResponse> response) {
                 Log.e("SchemesResponse",new Gson().toJson(response.body()));
@@ -174,7 +173,7 @@ public class MainActivity extends BaseActivity {
 
      public void callApplyLoanResponseModel(InputModel inputModel)
      {
-         tfmlApi.getApplyLoanResponse(inputModel).enqueue(new Callback<ApplyLoanResponse>() {
+         tmflApi.getApplyLoanResponse(inputModel).enqueue(new Callback<ApplyLoanResponse>() {
              @Override
              public void onResponse(Call<ApplyLoanResponse> call, Response<ApplyLoanResponse> response) {
                  if ( response != null && response.body().getStatus().contains("success"))
@@ -201,7 +200,7 @@ public class MainActivity extends BaseActivity {
 
   public void callFriendResponseModel(ReferFriendInputModel referFriendInputModel)
   {
-      tfmlApi.getFriendResponse(referFriendInputModel).enqueue(new Callback<ReferFriendResponseModel>() {
+      tmflApi.getFriendResponse(referFriendInputModel).enqueue(new Callback<ReferFriendResponseModel>() {
           @Override
           public void onResponse(Call<ReferFriendResponseModel> call, Response<ReferFriendResponseModel> response) {
               if ( response != null && response.body().getStatus().contains("success"))

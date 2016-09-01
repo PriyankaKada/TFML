@@ -7,13 +7,9 @@ import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.OperationApplicationException;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
-import android.opengl.EGLDisplay;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -22,7 +18,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -34,22 +29,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.channguyen.rsv.RangeSliderView;
 import com.google.gson.Gson;
 import com.tfml.R;
 import com.tfml.adapter.BannerAdapter;
-import com.tfml.auth.TfmlApi;
+import com.tfml.auth.TmflApi;
 import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
 import com.tfml.common.SocialUtil;
 import com.tfml.fragment.BannerFragment;
-import com.tfml.model.LoanStatusResponseModel.LoanStatusInputModel;
-import com.tfml.model.LoanStatusResponseModel.LoanStatusResponse;
 import com.tfml.model.QuickcallResponseModel.QuickCallInputModel;
 import com.tfml.model.QuickcallResponseModel.QuickCallResponse;
 import com.tfml.model.bannerResponseModel.BannerlistResponse;
 import com.tfml.model.bannerResponseModel.Datum;
-import com.tfml.model.socialResponseModel.ContactListResponseModel;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
@@ -62,10 +53,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 //import static com.tfml.R.id.imageView1;
-import static android.R.attr.permission;
-import static android.R.attr.targetSdkVersion;
-import static com.tfml.R.id.linLoanStaus;
-import static com.tfml.R.id.start;
+
 
 public class BannerActivity extends BaseActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
     Toolbar mToolbar;
@@ -74,7 +62,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
     private TextView txtTitle;
     public ViewPager recentViewpager;
     CirclePageIndicator circlePageIndicator;
-    TfmlApi tfmlApi;
+    TmflApi tmflApi;
     BannerAdapter bannerAdapter;
     private ImageView[] dots;
     private int dotsCount;
@@ -225,7 +213,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
     }
 
     public void loadBannerData() {
-        tfmlApi = ApiService.getInstance().call();
+        tmflApi = ApiService.getInstance().call();
         if (CommonUtils.isNetworkAvailable(BannerActivity.this)) {
             CommonUtils.showProgressDialog(BannerActivity.this, "Loading Data please wait.....");
             callBannerList();
@@ -237,7 +225,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 
 
     public void callBannerList() {
-        tfmlApi.getBannerResponse().enqueue(new Callback<BannerlistResponse>() {
+        tmflApi.getBannerResponse().enqueue(new Callback<BannerlistResponse>() {
             @Override
             public void onResponse(Call<BannerlistResponse> call, Response<BannerlistResponse> response) {
                 BannerlistResponse bannerlistResponse = response.body();
@@ -376,7 +364,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 
     public void callResponseModel(QuickCallInputModel quickCallInputModel) {
         Log.e("callResponseModel", "" + quickCallInputModel.getMobileNumber());
-        tfmlApi.getQuickCallResponse(quickCallInputModel).enqueue(new Callback<QuickCallResponse>() {
+        tmflApi.getQuickCallResponse(quickCallInputModel).enqueue(new Callback<QuickCallResponse>() {
             @Override
             public void onResponse(Call<QuickCallResponse> call, Response<QuickCallResponse> response) {
                 Log.e("getQuickCallResponse", new Gson().toJson(response.body()));

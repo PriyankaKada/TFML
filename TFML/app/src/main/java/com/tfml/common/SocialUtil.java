@@ -19,14 +19,16 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.tfml.R;
 import com.tfml.adapter.BranchCityAdapter;
 import com.tfml.adapter.BranchListAdapter;
 import com.tfml.adapter.CityAdapter;
 import com.tfml.adapter.ProductAdapter;
 import com.tfml.adapter.BranchStateAdapter;
+import com.tfml.adapter.SchemesListAdapter;
 import com.tfml.adapter.StateAdapter;
-import com.tfml.auth.TfmlApi;
+import com.tfml.auth.TmflApi;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusInputModel;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusResponse;
 import com.tfml.model.branchResponseModel.BranchResponseModel;
@@ -34,7 +36,9 @@ import com.tfml.model.branchResponseModel.InputBranchModel;
 import com.tfml.model.cityResponseModel.BranchCityResponseModel;
 import com.tfml.model.cityResponseModel.CityResponseModel;
 import com.tfml.model.cityResponseModel.InputCityModel;
+import com.tfml.model.downloadResponseModel.DownloadResponse;
 import com.tfml.model.productResponseModel.ProductListResponseModel;
+import com.tfml.model.schemesResponseModel.Datum;
 import com.tfml.model.socialResponseModel.ContactListResponseModel;
 import com.tfml.model.stateResponseModel.BranchStateResponseModel;
 import com.tfml.model.stateResponseModel.StateResponseModel;
@@ -52,7 +56,7 @@ import retrofit2.Response;
 
 public class SocialUtil {
 
-   public static  TfmlApi tfmlApi;
+   public static TmflApi tmflApi;
    public static String email,whatsAppNo,phoneNo;
 
 
@@ -169,9 +173,9 @@ public class SocialUtil {
 
     public static void CallLoanStatusModel(LoanStatusInputModel loanStatusInputModel, final Context context)
     {
-        tfmlApi = ApiService.getInstance().call();
+        tmflApi = ApiService.getInstance().call();
 
-        tfmlApi.getOtpResponse(loanStatusInputModel).enqueue(new Callback<LoanStatusResponse>() {
+        tmflApi.getOtpResponse(loanStatusInputModel).enqueue(new Callback<LoanStatusResponse>() {
             @Override
             public void onResponse(Call<LoanStatusResponse> call, Response<LoanStatusResponse> response) {
                 if(response.body().getStatus().contains("success"))
@@ -202,8 +206,8 @@ public class SocialUtil {
     public static void getContactList()
     {
 
-        tfmlApi = ApiService.getInstance().call();
-        tfmlApi.getContactList().enqueue(new Callback<ContactListResponseModel>() {
+        tmflApi = ApiService.getInstance().call();
+        tmflApi.getContactList().enqueue(new Callback<ContactListResponseModel>() {
             @Override
             public void onResponse(Call<ContactListResponseModel> call, Response<ContactListResponseModel> response) {
                 //  Log.e("getContactList",response.body().);
@@ -230,8 +234,8 @@ public class SocialUtil {
     {
         if( CommonUtils.isNetworkAvailable(context))
         {
-            tfmlApi = ApiService.getInstance().call();
-            tfmlApi.getProductList().enqueue(new Callback<List<ProductListResponseModel>>() {
+            tmflApi = ApiService.getInstance().call();
+            tmflApi.getProductList().enqueue(new Callback<List<ProductListResponseModel>>() {
                 @Override
                 public void onResponse(Call<List<ProductListResponseModel>> call, Response<List<ProductListResponseModel>> response) {
                     Log.e("ProductResponse",response.body().size()+"");
@@ -272,8 +276,8 @@ public class SocialUtil {
     {
         if(CommonUtils.isNetworkAvailable(context))
         {
-            tfmlApi = ApiService.getInstance().call();
-            tfmlApi.getBranchStateList().enqueue(new Callback<List<BranchStateResponseModel>>() {
+            tmflApi = ApiService.getInstance().call();
+            tmflApi.getBranchStateList().enqueue(new Callback<List<BranchStateResponseModel>>() {
                 @Override
                 public void onResponse(Call<List<BranchStateResponseModel>> call, Response<List<BranchStateResponseModel>> response) {
                     Log.e("BranchStateListDataResp",response.body().size()+"");
@@ -312,8 +316,8 @@ public class SocialUtil {
     {
         if(CommonUtils.isNetworkAvailable(context))
         {
-            tfmlApi = ApiService.getInstance().call();
-            tfmlApi.getStateListData().enqueue(new Callback<List<StateResponseModel>>() {
+            tmflApi = ApiService.getInstance().call();
+            tmflApi.getStateListData().enqueue(new Callback<List<StateResponseModel>>() {
                 @Override
                 public void onResponse(Call<List<StateResponseModel>> call, Response<List<StateResponseModel>> response) {
                     Log.e("StateListDataResponse",response.body().size()+"");
@@ -352,8 +356,8 @@ public class SocialUtil {
         Log.e("CITYCLAL","CITY");
         if(CommonUtils.isNetworkAvailable(context))
         {
-            tfmlApi = ApiService.getInstance().call();
-            tfmlApi.getBranchCityList(inputCityModel).enqueue(new Callback<List<BranchCityResponseModel>>() {
+            tmflApi = ApiService.getInstance().call();
+            tmflApi.getBranchCityList(inputCityModel).enqueue(new Callback<List<BranchCityResponseModel>>() {
                 @Override
                 public void onResponse(Call<List<BranchCityResponseModel>> call, Response<List<BranchCityResponseModel>> response) {
                     Log.e("CityListDataResponse",response.body().size()+"");
@@ -392,8 +396,8 @@ public class SocialUtil {
     {
         if(CommonUtils.isNetworkAvailable(context))
         {
-          tfmlApi=ApiService.getInstance().call();
-            tfmlApi.getCityListData(inputCityModel).enqueue(new Callback<List<CityResponseModel>>() {
+          tmflApi =ApiService.getInstance().call();
+            tmflApi.getCityListData(inputCityModel).enqueue(new Callback<List<CityResponseModel>>() {
                 @Override
                 public void onResponse(Call<List<CityResponseModel>> call, Response<List<CityResponseModel>> response) {
                     Log.e("CityListDataResponse",response.body().size()+"");
@@ -432,8 +436,8 @@ public class SocialUtil {
    {
       if(CommonUtils.isNetworkAvailable(context))
       {
-          tfmlApi=ApiService.getInstance().call();
-          tfmlApi.getBranchList(inputBranchModel).enqueue(new Callback<List<BranchResponseModel>>() {
+          tmflApi =ApiService.getInstance().call();
+          tmflApi.getBranchList(inputBranchModel).enqueue(new Callback<List<BranchResponseModel>>() {
               @Override
               public void onResponse(Call<List<BranchResponseModel>> call, Response<List<BranchResponseModel>> response) {
 
@@ -469,4 +473,48 @@ public class SocialUtil {
    }
 
 
+    /*private static boolean DownloadImage(DownloadResponse body, final Context context) {
+
+        try {
+            Log.d("DownloadImage", "Reading and writing file");
+            InputStream in = null;
+            FileOutputStream out = null;
+
+            try {
+                in = body.byteStream();
+                out = new FileOutputStream(context.getExternalFilesDir(null) + File.separator + "AndroidTutorialPoint.jpg");
+                int c;
+
+                while ((c = in.read()) != -1) {
+                    out.write(c);
+                }
+            }
+            catch (IOException e) {
+                Log.d("DownloadImage",e.toString());
+                return false;
+            }
+            finally {
+                if (in != null) {
+                    in.close();
+                }
+                if (out != null) {
+                    out.close();
+                }
+            }
+
+            int width, height;
+            ImageView image = (ImageView) findViewById(R.id.imageViewId);
+            Bitmap bMap = BitmapFactory.decodeFile(context.getExternalFilesDir(null) + File.separator + "AndroidTutorialPoint.jpg");
+            width = 2*bMap.getWidth();
+            height = 6*bMap.getHeight();
+            Bitmap bMap2 = Bitmap.createScaledBitmap(bMap, width, height, false);
+            image.setImageBitmap(bMap2);
+
+            return true;
+
+        } catch (IOException e) {
+            Log.d("DownloadImage",e.toString());
+            return false;
+        }
+    }*/
 }

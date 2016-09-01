@@ -10,13 +10,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.tfml.R;
-import com.tfml.auth.TfmlApi;
+import com.tfml.auth.TmflApi;
 import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
 import com.tfml.common.SocialUtil;
@@ -40,17 +41,18 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ApplyLoanFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class ApplyLoanFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener ,RadioGroup.OnCheckedChangeListener{
 
     private EditText txtFirstName, txtLastName, txtMobileNumber, txtLandlineNumber, txtEmailAddress, txtOrgnizationName,txtPincode;
     private Spinner spnProduct, spSelectBranchState, spSelectBranchCity, spSelectBranch, spSelectCity, spSelectState, spSelectPinCode;
-    private CheckBox chkLeadTypeIndividual, chkLeadTypeOrganizational, chkVecTypeCommercial, chkVechTypeRefinance, ChkVechPassanger;
+    private RadioButton rdbLeadTypeIndividual, rdbLeadTypeOrganizational, rdbVecTypeCommercial, rdbVechTypeRefinance, rdbVechPassanger;
     private Button btnCancel, btnApplyLoan;
     private View view;
+    private RadioGroup radioGroupLeadType,radioGroupVehicleType;
     private List<String> branchStateList, branchCityList, branchList, cityList, stateList, pinCodeList;
     String strLeadTypechk = "";
     String strVechicalType = "";
-    TfmlApi tfmlApi;
+    TmflApi tmflApi;
     InputModel inputLoanModel;
     InputCityModel inputCityModel;
     InputBranchModel inputBranchModel;
@@ -61,7 +63,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_apply_loan, container, false);
-        tfmlApi = ApiService.getInstance().call();
+        tmflApi = ApiService.getInstance().call();
         init();
         branchStateList=new ArrayList<String>();
         branchStateList.add("Select Branch State");
@@ -114,11 +116,15 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         spSelectCity = (Spinner) view.findViewById(R.id.sp_select_city);
         spSelectCity.setOnItemSelectedListener(this);
         //spSelectPinCode = (Spinner) view.findViewById(R.id.sp_select_pincode);
-        chkLeadTypeIndividual = (CheckBox) view.findViewById(R.id.chk_individual);
-        chkLeadTypeOrganizational = (CheckBox) view.findViewById(R.id.chk_organization);
-        chkVecTypeCommercial = (CheckBox) view.findViewById(R.id.chk_commercial);
-        chkVechTypeRefinance = (CheckBox) view.findViewById(R.id.chk_refinance);
-        ChkVechPassanger = (CheckBox) view.findViewById(R.id.chk_passenger);
+        radioGroupLeadType=(RadioGroup)view.findViewById(R.id.radio_group_lead_type);
+        radioGroupVehicleType=(RadioGroup)view.findViewById(R.id.radio_group_vehicle_type) ;
+        radioGroupLeadType.setOnCheckedChangeListener(this);
+        radioGroupVehicleType.setOnCheckedChangeListener(this);
+        rdbLeadTypeIndividual = (RadioButton) view.findViewById(R.id.rdb_individual);
+        rdbLeadTypeOrganizational = (RadioButton) view.findViewById(R.id.rdb_organization);
+        rdbVecTypeCommercial = (RadioButton) view.findViewById(R.id.rdb_commercial);
+        rdbVechTypeRefinance = (RadioButton) view.findViewById(R.id.rdb_refinance);
+        rdbVechPassanger = (RadioButton) view.findViewById(R.id.rdb_passenger);
         btnCancel = (Button) view.findViewById(R.id.btn_cancel);
         btnApplyLoan = (Button) view.findViewById(R.id.btn_apply_laon);
         inputLoanModel = new InputModel();
@@ -130,29 +136,6 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         spSelectState.setSelection(1);
        // spSelectPinCode.setSelection(1);
         spSelectBranch.setSelection(1);
-
-        if (chkLeadTypeIndividual.isChecked()) {
-            strLeadTypechk = "Individual";
-            inputLoanModel.setLeadType(strLeadTypechk);
-        }
-        if (chkLeadTypeOrganizational.isChecked()) {
-            strLeadTypechk = "Organizational";
-            inputLoanModel.setLeadType(strLeadTypechk);
-        }
-        // txtOrgnizationName.setText(strLeadTypechk);
-        if (chkVecTypeCommercial.isChecked()) {
-            strVechicalType = "Commercial";
-            inputLoanModel.setVehicalType(strVechicalType);
-        }
-        if (chkVechTypeRefinance.isChecked()) {
-            strVechicalType = "Refinance";
-            inputLoanModel.setVehicalType(strVechicalType);
-        }
-        if (ChkVechPassanger.isChecked()) {
-            strVechicalType = "Passanger";
-            inputLoanModel.setVehicalType(strVechicalType);
-        }
-
         btnCancel.setOnClickListener(this);
         btnApplyLoan.setOnClickListener(this);
     }
@@ -267,13 +250,13 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         Log.e("getVehicalType", inputmodel.getVehicalType());
         Log.e("getCity", inputmodel.getCity());
         Log.e("getState", inputmodel.getState());
-        tfmlApi.getApplyLoanResponse(inputmodel).enqueue(new Callback<ApplyLoanResponse>() {
+        tmflApi.getApplyLoanResponse(inputmodel).enqueue(new Callback<ApplyLoanResponse>() {
             @Override
             public void onResponse(Call<ApplyLoanResponse> call, Response<ApplyLoanResponse> response) {
                 CommonUtils.closeProgressDialog();
                 if (response.body().getStatus().contains("success")) {
                     Log.e("getApplyLoanResponse", response.body().getStatus());
-                    CommonUtils.showAlert1(getActivity(), "", "Apply Loan Succesfully", false);
+                    CommonUtils.showAlert1(getActivity(), "", "Apply Loan Successfully", false);
                 } else {
                     Log.e("getApplyloanErr", response.body().getErrors().get(0));
                 }
@@ -346,4 +329,46 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
     }
 
 
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+       switch (group.getId())
+       {
+           case R.id.rdb_organization:
+               if(checkedId==R.id.rdb_organization)
+               {
+                   strLeadTypechk = "Organizational";
+                   inputLoanModel.setLeadType(strLeadTypechk);
+
+               }
+               break;
+           case R.id.rdb_individual:
+               if(checkedId==R.id.rdb_individual)
+               {
+                   strLeadTypechk = "Individual";
+                   inputLoanModel.setLeadType(strLeadTypechk);
+               }
+               break;
+           case R.id.rdb_commercial:
+               if(checkedId==R.id.rdb_commercial)
+               {
+                   strVechicalType = "Commercial";
+                   inputLoanModel.setVehicalType(strVechicalType);
+               }
+               break;
+           case R.id.rdb_refinance:
+               if(checkedId==R.id.rdb_refinance)
+               {
+                   strVechicalType = "Refinance";
+                   inputLoanModel.setVehicalType(strVechicalType);
+               }
+               break;
+           case R.id.rdb_passenger:
+               if(checkedId==R.id.rdb_passenger)
+               {
+                   strVechicalType = "Passanger";
+                   inputLoanModel.setVehicalType(strVechicalType);
+               }
+               break;
+       }
+    }
 }

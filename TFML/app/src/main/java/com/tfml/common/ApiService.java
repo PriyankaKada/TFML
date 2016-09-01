@@ -1,10 +1,8 @@
 package com.tfml.common;
 
-import android.provider.SyncStateContract;
-
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.tfml.auth.Constant;
-import com.tfml.auth.TfmlApi;
+import com.tfml.auth.TmflApi;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -15,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class ApiService {
-    TfmlApi services;
+    TmflApi services;
     static ApiService apiService;
     private static Retrofit retrofit;
 
@@ -40,8 +38,8 @@ public class ApiService {
     }
 
 
-    public TfmlApi call() {
-        services = retrofit.create(TfmlApi.class);
+    public TmflApi call() {
+        services = retrofit.create(TmflApi.class);
         return services;
     }
 

@@ -79,6 +79,7 @@ public class DrawerBaseActivity extends BaseActivity {
                         startActivity(new Intent(DrawerBaseActivity.this, SchemesActivity.class));
                         break;
                     case 3://Download
+                        startActivity(new Intent(DrawerBaseActivity.this,DownloadDataActivity.class));
                         break;
                     case 4://Change Password
                         startActivity(new Intent(DrawerBaseActivity.this,ChangePasswordActivity.class));
@@ -123,75 +124,6 @@ public class DrawerBaseActivity extends BaseActivity {
                 }
             }
         });
-
-      /*  navigation = (NavigationView) findViewById(R.id.navigation_view);
-        navigation.setItemIconTintList(null);
-        navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                int id = menuItem.getItemId();
-                switch (id) {
-                    case R.id.navigation_item_new_scheme:
-                        startActivity(new Intent(DrawerBaseActivity.this, SchemesActivity.class));
-                        break;
-                    case R.id.navigation_item_apply_loan:
-                        startActivity(new Intent(DrawerBaseActivity.this, SchemesActivity.class));
-                        break;
-                    case R.id.navigation_item_refer_friend:
-                        startActivity(new Intent(DrawerBaseActivity.this, SchemesActivity.class));
-                        break;
-                    case R.id.navigation_item_download:
-                        //Do some thing here
-                        // add navigation drawer item onclick method here
-                        break;
-                    case R.id.navigation_item_change_password:
-                        //Do some thing here
-                        // add navigation drawer item onclick method here
-                        break;
-                    case R.id.navigation_item_login:
-                        startActivity(new Intent(DrawerBaseActivity.this, LoginActivity.class));
-                        break;
-                    case R.id.navigation_item_phone_call:
-                        if (CommonUtils.isNetworkAvailable(DrawerBaseActivity.this)) {
-                            SocialUtil.getContactList();
-                            SocialUtil.dialPhoneCall(DrawerBaseActivity.this, SocialUtil.phoneNo);
-                        } else {
-                            Toast.makeText(getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
-                        }
-
-                        break;
-                    case R.id.navigation_item_message:
-                        if (CommonUtils.isNetworkAvailable(DrawerBaseActivity.this)) {
-                            SocialUtil.getContactList();
-                            SocialUtil.sendMail(DrawerBaseActivity.this, SocialUtil.email);
-                        } else {
-                            Toast.makeText(getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
-                        }
-
-                        break;
-                    case R.id.navigation_item_whatsapp:
-                        if (CommonUtils.isNetworkAvailable(DrawerBaseActivity.this)) {
-                            SocialUtil.getContactList();
-                            try {
-                                SocialUtil.sendWhatsAppMsg(DrawerBaseActivity.this, SocialUtil.whatsAppNo);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
-                        } else {
-                            Toast.makeText(getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
-                        }
-
-                        break;
-                    case R.id.navigation_item_map:
-                        Toast.makeText(DrawerBaseActivity.this, "Map service not avialable", Toast.LENGTH_SHORT).show();
-                        break;
-
-
-                }
-                return false;
-            }
-        });*/
 
     }
 

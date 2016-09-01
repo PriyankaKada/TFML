@@ -21,19 +21,24 @@ import com.tfml.model.schemesResponseModel.SchemesResponse;
 import com.tfml.model.socialResponseModel.ContactListResponseModel;
 import com.tfml.model.stateResponseModel.BranchStateResponseModel;
 import com.tfml.model.stateResponseModel.StateResponseModel;
+import com.tfml.model.uploadRcResponseModel.RcUploadDataInputModel;
+import com.tfml.model.uploadRcResponseModel.RcUploadResponseModel;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 
 /**
  * Created by webwerks on 29/7/16.
  */
 
-public interface TfmlApi {
+public interface TmflApi {
 
     @POST(Constant.BANNER)
     Call<BannerlistResponse> getBannerResponse();
@@ -77,4 +82,10 @@ public interface TfmlApi {
     @POST(Constant.CITYLIST)
     Call<List<CityResponseModel>>getCityListData(@Body InputCityModel inputCityModel);
 
+   @POST(Constant.UPDATERC)
+    Call<RcUploadResponseModel>getRcUploadData(@Body RcUploadDataInputModel rcUploadDataInputModel);
+
+    @GET
+    @Streaming
+    Call<ResponseBody> getFile(@Url String url);
 }

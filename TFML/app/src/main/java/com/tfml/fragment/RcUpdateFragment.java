@@ -11,15 +11,28 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.tfml.R;
+import com.tfml.auth.TmflApi;
+import com.tfml.common.ApiService;
+import com.tfml.common.CommonUtils;
+import com.tfml.model.uploadRcResponseModel.RcUploadDataInputModel;
+import com.tfml.model.uploadRcResponseModel.RcUploadResponseModel;
 import com.tfml.util.ImageDecoding;
+
+import java.io.File;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class RcUpdateFragment extends Fragment implements View.OnClickListener {
@@ -29,23 +42,28 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
     private View view;
     private ImageView img_upload;
     Uri selectedImage;
+    TmflApi tmflApi;
     String imgPhotoUrl,imgExt;
     static final int REQUEST_TAKE_PHOTO = 1;
     int mtype;
+    RcUploadDataInputModel rcUploadDataInputModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_rc_update, container, false);
+        tmflApi= ApiService.getInstance().call();
         init();
         return view;
     }
     public void init()
     {
-      txtRcNo=(EditText)view.findViewById(R.id.txt_rc_no);
+
+       txtRcNo=(EditText)view.findViewById(R.id.txt_rc_no);
         btnRcUpload=(Button)view.findViewById(R.id.btn_rc_upload);
         img_upload=(ImageView)view.findViewById(R.id.img_upload);
         btnRcUpload.setOnClickListener(this);
+
     }
 
     @Override
@@ -53,15 +71,22 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
         switch (v.getId())
         {
             case R.id.btn_rc_upload:
-                mtype = REQUEST_TAKE_PHOTO;
-                upLoadRCdoc();
+
+                if(!TextUtils.isEmpty(txtRcNo.getText().toString())) {
+                    mtype = REQUEST_TAKE_PHOTO;
+                    upLoadRCdoc();
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"Please Enter RC Number",Toast.LENGTH_SHORT).show();
+                }
+
                 break;
         }
     }
 
     public void upLoadRCdoc()
     {
-
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         alertDialog.setTitle("Pictures Option");
@@ -114,6 +139,23 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
                 } else {
                     img_upload.setImageBitmap(ImageDecoding.decodeBitmapFromFile(imgPhotoUrl, 100, 100));
                     imgExt = imgPhotoUrl.substring(imgPhotoUrl.lastIndexOf(".") + 1, imgPhotoUrl.length());
+                    Log.e("ImageUrl",imgPhotoUrl);
+                    rcUploadDataInputModel=new RcUploadDataInputModel();
+                    rcUploadDataInputModel.setUserId("11");
+                    rcUploadDataInputModel.setContractNo("C124");
+                    rcUploadDataInputModel.setRcNo(txtRcNo.getText().toString());
+                    File file = new File(imgPhotoUrl);
+                    rcUploadDataInputModel.setImage(file);
+                    if(CommonUtils.isNetworkAvailable(getActivity()))
+                    {
+                        CommonUtils.showProgressDialog(getActivity(),"Please Wait Uploading Data.....");
+
+                            callRcUploadData(rcUploadDataInputModel);
+                    }
+                    else
+                    {
+                        CommonUtils.showAlert1(getActivity(),"","No Internet Connection",false);
+                    }
 
                 }
             }
@@ -127,5 +169,26 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
         cursor.close();
         return picturePath;
     }
+    public void callRcUploadData(RcUploadDataInputModel rcUploadDataInputModel)
+    {
+        tmflApi.getRcUploadData(rcUploadDataInputModel).enqueue(new Callback<RcUploadResponseModel>() {
+            @Override
+            public void onResponse(Call<RcUploadResponseModel> call, Response<RcUploadResponseModel> response) {
+                if (response.body().getStatus().contains("success")) {
+                    CommonUtils.closeProgressDialog();
+                    Log.e("getRcUploadData", response.body().getStatus());
+                    CommonUtils.showAlert1(getActivity(), "", "RC Uploaded Successfully", false);
+                } else {
+                 //   Log.e("getApplyloanErr", response.body().getMessages());
+                    CommonUtils.closeProgressDialog();
+                    CommonUtils.showAlert1(getActivity(), "", response.body().getMessages(), false);
+                }
+            }
 
+            @Override
+            public void onFailure(Call<RcUploadResponseModel> call, Throwable t) {
+                CommonUtils.closeProgressDialog();
+            }
+        });
+    }
 }

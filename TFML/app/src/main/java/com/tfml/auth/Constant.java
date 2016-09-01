@@ -20,5 +20,6 @@ public class Constant {
     public static final String GETBRANCHES="getBranches";
     public static final String STATELIST="stateList";
     public static final String CITYLIST="cityList";
+    public static final String UPDATERC="updateRc";
 
 }
