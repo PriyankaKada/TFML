@@ -27,6 +27,7 @@ import com.tfml.common.CommonUtils;
 import com.tfml.model.uploadRcResponseModel.RcUploadDataInputModel;
 import com.tfml.model.uploadRcResponseModel.RcUploadResponseModel;
 import com.tfml.util.ImageDecoding;
+import com.tfml.util.SetFonts;
 
 import java.io.File;
 
@@ -62,6 +63,7 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
        txtRcNo=(EditText)view.findViewById(R.id.txt_rc_no);
         btnRcUpload=(Button)view.findViewById(R.id.btn_rc_upload);
         img_upload=(ImageView)view.findViewById(R.id.img_upload);
+        SetFonts.setFonts(getActivity(),btnRcUpload,2);
         btnRcUpload.setOnClickListener(this);
 
     }

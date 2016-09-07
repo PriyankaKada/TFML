@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.tfml.R;
 import com.tfml.util.DatePickerDialog;
 import com.tfml.util.DatePickerFragment;
+import com.tfml.util.SetFonts;
 
 import java.util.Calendar;
 
@@ -56,6 +57,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
         btnFinanceDetail=(Button)view.findViewById(R.id.btn_finance_detail);
         frmAccDetail=(FrameLayout)view.findViewById(R.id.frm_acc_detail);
         linAccDetail=(LinearLayout)view.findViewById(R.id.lin_acc_detail);
+        SetFonts.setFonts(getActivity(),btnSubmit,2);
         date=new DatePickerFragment();
         btnSubmit.setOnClickListener(this);
         txtAccDate.setOnClickListener(this);

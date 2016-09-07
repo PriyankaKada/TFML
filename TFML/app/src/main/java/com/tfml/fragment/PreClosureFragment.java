@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.tfml.R;
 import com.tfml.util.DatePickerDialog;
 import com.tfml.util.DatePickerFragment;
+import com.tfml.util.SetFonts;
 
 import java.util.Calendar;
 
@@ -42,6 +43,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
          txtAccDate=(TextView)view.findViewById(R.id.txt_acc_select_date);
          btnSubmit=(Button)view.findViewById(R.id.btn_submit);
          btnDownload=(ImageView)view.findViewById(R.id.img_download);
+         SetFonts.setFonts(getActivity(),btnSubmit,2);
          date=new DatePickerFragment();
          btnSubmit.setOnClickListener(this);
          txtAccDate.setOnClickListener(this);

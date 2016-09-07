@@ -32,6 +32,7 @@ import com.tfml.model.cityResponseModel.InputCityModel;
 import com.tfml.model.productResponseModel.ProductListResponseModel;
 import com.tfml.model.stateResponseModel.BranchStateResponseModel;
 import com.tfml.model.stateResponseModel.StateResponseModel;
+import com.tfml.util.SetFonts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,6 +128,8 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         rdbVechPassanger = (RadioButton) view.findViewById(R.id.rdb_passenger);
         btnCancel = (Button) view.findViewById(R.id.btn_cancel);
         btnApplyLoan = (Button) view.findViewById(R.id.btn_apply_laon);
+        SetFonts.setFonts(getActivity(),btnCancel,2);
+        SetFonts.setFonts(getActivity(),btnApplyLoan,2);
         inputLoanModel = new InputModel();
         inputCityModel = new InputCityModel();
         inputBranchModel = new InputBranchModel();

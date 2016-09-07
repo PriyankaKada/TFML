@@ -24,9 +24,10 @@ import android.widget.Toast;
 import com.tfml.R;
 import com.tfml.common.CommonUtils;
 import com.tfml.common.SocialUtil;
+import com.tfml.util.SetFonts;
 
 public class ContractActivity extends DrawerBaseActivity implements View.OnClickListener {
-    private TextView txtTotalCount, txtTerminatedCount, txtOverDueCount, txtContractNo, txtRcNo, txtNextDueDate, txtCurrentEmi, txtLastPayment, txtPreviousEmi, txtOverdueAmount, txtRepaymentMode, txtTerminitedContracName, txtTerminatedContractDate;
+    private TextView txtTitleContract,txtTotalCount, txtTerminatedCount, txtOverDueCount, txtContractNo, txtRcNo, txtNextDueDate, txtCurrentEmi, txtLastPayment, txtPreviousEmi, txtOverdueAmount, txtRepaymentMode, txtTerminitedContracName, txtTerminatedContractDate,txtSchemes,txtApplyLoan,txtReferFriend,txtLoanStatus,txtContactUs;
     private Button btnPayEmi, btnMoreDetail;
     private LinearLayout linSchemes, linApplyLoan, linReferFriend, linLoanStaus, linContactUs;
     private ImageView imgDrawer, imgDownload;
@@ -44,11 +45,22 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
     }
 
     public void init() {
+        txtTitleContract=(TextView)findViewById(R.id.txt_title_contract) ;
         txtTotalCount = (TextView) findViewById(R.id.txt_total_count);
         txtTerminatedCount = (TextView) findViewById(R.id.txt_terminated_count);
         txtOverDueCount = (TextView) findViewById(R.id.txt_overdue_count);
         txtContractNo = (TextView) findViewById(R.id.txt_contract_no);
         txtRcNo = (TextView) findViewById(R.id.txt_rc_no);
+        txtSchemes = (TextView) findViewById(R.id.txtSchemes);
+        txtApplyLoan = (TextView) findViewById(R.id.txtApplyLoan);
+        txtReferFriend = (TextView) findViewById(R.id.txtReferFriend);
+        txtLoanStatus = (TextView) findViewById(R.id.txtLoanStatus);
+        txtContactUs=(TextView)findViewById(R.id.txtContactUs);
+        SetFonts.setFonts(this,txtSchemes,2);
+        SetFonts.setFonts(this,txtApplyLoan,2);
+        SetFonts.setFonts(this,txtReferFriend,2);
+        SetFonts.setFonts(this,txtLoanStatus,2);
+        SetFonts.setFonts(this,txtContactUs,2);
         txtNextDueDate = (TextView) findViewById(R.id.txt_next_due_date);
         txtCurrentEmi = (TextView) findViewById(R.id.txt_current_emi_amount);
         txtLastPayment = (TextView) findViewById(R.id.txt_last_payment_date);
@@ -67,6 +79,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
         imgDownload = (ImageView) findViewById(R.id.img_download);
         imgDrawer = (ImageView) findViewById(R.id.img_drawer);
         selectedView = (View) findViewById(R.id.viewId);
+        SetFonts.setFonts(this,txtTitleContract,2);
         linSchemes.setOnClickListener(this);
         linApplyLoan.setOnClickListener(this);
         linReferFriend.setOnClickListener(this);
@@ -74,6 +87,8 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
         linContactUs.setOnClickListener(this);
         imgDownload.setOnClickListener(this);
         imgDrawer.setOnClickListener(this);
+        SetFonts.setFonts(this,btnPayEmi,2);
+        SetFonts.setFonts(this,btnMoreDetail,2);
         btnPayEmi.setOnClickListener(this);
         btnMoreDetail.setOnClickListener(this);
     }

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.tfml.R;
@@ -17,6 +18,7 @@ import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
 import com.tfml.model.schemesResponseModel.Datum;
 import com.tfml.model.schemesResponseModel.SchemesResponse;
+import com.tfml.util.SetFonts;
 
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class NewSchemeFragment extends Fragment
 
    private ListView lstnewschemes;
     TmflApi tmflApi;
+    TextView txtNewSchemesHeader;
     SchemesListAdapter schemesListAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,6 +47,8 @@ public class NewSchemeFragment extends Fragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         lstnewschemes=(ListView)view.findViewById(R.id.lst_new_schemes);
+        txtNewSchemesHeader=(TextView)view.findViewById(R.id.new_schemes_header);
+        SetFonts.setFonts(getActivity(),txtNewSchemesHeader,2);
         tmflApi = ApiService.getInstance().call();
         if(CommonUtils.isNetworkAvailable(getActivity()))
         {

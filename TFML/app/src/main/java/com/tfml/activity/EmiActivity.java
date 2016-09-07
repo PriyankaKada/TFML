@@ -23,6 +23,7 @@ import com.tfml.fragment.EmiPatternFragment;
 import com.tfml.fragment.PreClosureFragment;
 import com.tfml.fragment.RcUpdateFragment;
 import com.tfml.fragment.StatementOfAccountFragment;
+import com.tfml.util.SetFonts;
 
 public class EmiActivity extends DrawerBaseActivity implements View.OnClickListener
 {
@@ -150,20 +151,24 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 
         TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabOne.setText("EMI pattern");
+        SetFonts.setFonts(this,tabOne,2);
         //tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_scheme_non_selected, 0, 0);
         emiTabLayout.getTabAt(0).setCustomView(tabOne);
 
         TextView tabTwo = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabTwo.setText("Statment of account");
+        SetFonts.setFonts(this,tabTwo,2);
        // tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_apply_loan_non_selected, 0, 0);
         emiTabLayout.getTabAt(1).setCustomView(tabTwo);
 
         TextView tabThree = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabThree.setText("RC update");
+        SetFonts.setFonts(this,tabThree,2);
        // tabThree.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_refer_friends_non_selected, 0, 0);
         emiTabLayout.getTabAt(2).setCustomView(tabThree);
        TextView tabFour = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabFour.setText("Pre-closure statement");
+        SetFonts.setFonts(this,tabFour,2);
        // tabFour.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_refer_friends_non_selected, 0, 0);
         emiTabLayout.getTabAt(3).setCustomView(tabFour);
     }

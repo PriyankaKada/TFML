@@ -24,6 +24,7 @@ import com.tfml.adapter.SchemesPagerAdapter;
 import com.tfml.fragment.ApplyLoanFragment;
 import com.tfml.fragment.NewSchemeFragment;
 import com.tfml.fragment.ReferFriendFragment;
+import com.tfml.util.SetFonts;
 
 public class SchemesActivity extends BaseActivity implements View.OnClickListener{
     Toolbar toolbarschemes;
@@ -45,6 +46,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
         view2 = findViewById( R.id.view2 );
         view3 = findViewById( R.id.view3 );
         setupViewPager(viewPager);
+        SetFonts.setFonts(this,txtschemestitle,2);
         viewPager.setOffscreenPageLimit( 3 );
         // Give the TabLayout the ViewPager
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -60,17 +62,20 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 
         TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabOne.setText("Schemes");
+        SetFonts.setFonts(this,tabOne,2);
         tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_scheme_non_selected, 0, 0);
         tabLayout.getTabAt(0).setCustomView(tabOne);
 
 
         TextView tabTwo = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabTwo.setText("Apply Loan");
+        SetFonts.setFonts(this,tabTwo,2);
         tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_apply_loan_non_selected, 0, 0);
         tabLayout.getTabAt(1).setCustomView(tabTwo);
 
         TextView tabThree = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabThree.setText("Refer Friend");
+        SetFonts.setFonts(this,tabThree,2);
         tabThree.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_refer_friends_non_selected, 0, 0);
         tabLayout.getTabAt(2).setCustomView(tabThree);
     }

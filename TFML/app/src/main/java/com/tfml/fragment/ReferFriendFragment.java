@@ -32,6 +32,7 @@ import com.tfml.model.referFriendResponseModel.ReferFriendInputModel;
 import com.tfml.model.referFriendResponseModel.ReferFriendResponseModel;
 import com.tfml.model.stateResponseModel.BranchStateResponseModel;
 import com.tfml.model.stateResponseModel.StateResponseModel;
+import com.tfml.util.SetFonts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,6 +127,9 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
         rdbVechPassanger = (RadioButton) view.findViewById(R.id.rdb_passenger);
         btnCancel=(Button)view.findViewById(R.id.btn_cancel);
         btnReferFriends=(Button)view.findViewById(R.id.btn_refer_friends);
+        SetFonts.setFonts(getActivity(),btnCancel,2);
+        SetFonts.setFonts(getActivity(),btnReferFriends,2);
+
         spnProduct.setSelection(1);
         spSelectCity.setSelection(1);
         spSelectState.setSelection(1);

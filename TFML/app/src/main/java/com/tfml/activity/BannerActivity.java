@@ -41,6 +41,7 @@ import com.tfml.model.QuickcallResponseModel.QuickCallInputModel;
 import com.tfml.model.QuickcallResponseModel.QuickCallResponse;
 import com.tfml.model.bannerResponseModel.BannerlistResponse;
 import com.tfml.model.bannerResponseModel.Datum;
+import com.tfml.util.SetFonts;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
@@ -107,6 +108,12 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
         selectedView = (View) findViewById( R.id.viewId );
         circlePageIndicator.setRadius(10.0f);
         txtTitle.setText("Welcome to TMFL");
+        SetFonts.setFonts(this, txtTitle, 2);
+        SetFonts.setFonts(this,txtSchemes,2);
+        SetFonts.setFonts(this,txtApplyLoan,2);
+        SetFonts.setFonts(this,txtReferFriend,2);
+        SetFonts.setFonts(this,txtLoanStatus,2);
+        SetFonts.setFonts(this,txtLogin,2);
         loadBannerData();
         imgQuickCall.setOnClickListener(this);
         imgSocial.setOnClickListener(this);

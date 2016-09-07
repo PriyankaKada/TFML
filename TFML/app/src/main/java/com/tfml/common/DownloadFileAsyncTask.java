@@ -27,7 +27,6 @@ public class DownloadFileAsyncTask  extends AsyncTask<InputStream, Void, Boolean
         OutputStream output = null;
         try {
             output = new FileOutputStream(file);
-
             byte[] buffer = new byte[1024]; // or other buffer size
             int read;
 

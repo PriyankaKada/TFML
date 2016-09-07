@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.tfml.R;
 import com.tfml.common.CommonUtils;
+import com.tfml.util.SetFonts;
 
 import okhttp3.internal.Util;
 
@@ -23,7 +24,7 @@ public class LoginActivity extends Activity implements View.OnClickListener
     private EditText txtUserName,txtPassword;
     private   Button btnLogin;
     private   String strUserName,strPassword;
-    private TextView txtForgotPassword;
+    private TextView txtForgotPassword,txtLoginTitle;
     private CheckBox chkRememberMe;
     private ImageView loginBack;
 
@@ -35,16 +36,19 @@ public class LoginActivity extends Activity implements View.OnClickListener
     }
     public void init()
     {
+        txtLoginTitle=(TextView) findViewById(R.id.txt_login_header);
         txtUserName=(EditText)findViewById(R.id.edt_user_name);
         txtPassword=(EditText)findViewById(R.id.edt_password);
         btnLogin=(Button)findViewById(R.id.btn_login);
         txtForgotPassword=(TextView)findViewById(R.id.txt_forgot_password);
         chkRememberMe=(CheckBox)findViewById(R.id.chkRemember_password);
         loginBack=(ImageView)findViewById(R.id.img_login_back);
+        SetFonts.setFonts(this,txtLoginTitle,2);
         btnLogin.setOnClickListener(this);
         txtForgotPassword.setOnClickListener(this);
         loginBack.setOnClickListener(this);
-    }
+        SetFonts.setFonts(this,btnLogin,2);
+        }
 
     @Override
     public void onClick(View v) {
