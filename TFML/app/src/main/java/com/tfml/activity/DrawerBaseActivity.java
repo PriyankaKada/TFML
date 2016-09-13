@@ -119,6 +119,7 @@ public class DrawerBaseActivity extends BaseActivity {
                         }
                         break;
                     case 10://Locate Map
+                        startActivity(new Intent(DrawerBaseActivity.this,LocateUsActivity.class));
                         break;
                     default:
                 }

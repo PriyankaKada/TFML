@@ -445,6 +445,13 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
                 SocialUtil.sendWhatsAppMsg(BannerActivity.this, SocialUtil.whatsAppNo);
             }
         });
+        imgMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BannerActivity.this,LocateUsActivity.class));
+
+            }
+        });
 
         socialdialog.show();
         socialdialog.setOnCancelListener(new DialogInterface.OnCancelListener() {

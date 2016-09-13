@@ -103,9 +103,11 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
         txtPincode=(EditText)view.findViewById(R.id.edt_pincode);
         spnProduct=(Spinner)view.findViewById(R.id.sp_select_product);
         spnProduct.setOnItemSelectedListener(this);
+        CommonUtils.showProgressDialog(getActivity(),"Please Wait.....");
         SocialUtil.getProductListData(getActivity(),spnProduct);
         spSelectBranchState=(Spinner)view.findViewById(R.id.sp_select_branch_state);
         spSelectBranchState.setOnItemSelectedListener(this);
+        CommonUtils.showProgressDialog(getActivity(),"Please Wait.....");
         SocialUtil.getBranchStateListData(getActivity(), spSelectBranchState, "Select branch state");
         spSelectBranchCity=(Spinner)view.findViewById(R.id.sp_select_branch_city);
         spSelectBranchCity.setOnItemSelectedListener(this);
@@ -113,6 +115,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
         spSelectBranch.setOnItemSelectedListener(this);
         spSelectState=(Spinner)view.findViewById(R.id.sp_select_state);
         spSelectState.setOnItemSelectedListener(this);
+        CommonUtils.showProgressDialog(getActivity(),"Please Wait.....");
         SocialUtil.getStateListData(getActivity(), spSelectState, "Select state");
         spSelectCity=(Spinner)view.findViewById(R.id.sp_select_city);
         spSelectCity.setOnItemSelectedListener(this);
@@ -152,7 +155,6 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
                 if(CommonUtils.isNetworkAvailable(getActivity()))
                 {
                     callSubmit();
-
                 }
                 else
                 {
@@ -308,6 +310,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
                     branchStateCode = ((BranchStateResponseModel) parent.getItemAtPosition(position)).getTerrTerritoryid();
                     Log.e("BRANCHSTATECODE", branchStateCode);
                     inputCityModel.setStateId(branchStateCode);
+                    CommonUtils.showProgressDialog(getActivity(),"Please Wait.....");
                     SocialUtil.getBranchCityListData(getActivity(), spSelectBranchCity, inputCityModel, "Select Branch City");
                     break;
                 }
@@ -315,6 +318,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
                 if (position != 0) {
                     branchCityCode = ((BranchCityResponseModel) parent.getItemAtPosition(position)).getTerrTerritoryid();
                     inputBranchModel.setCityId(branchCityCode);
+                    CommonUtils.showProgressDialog(getActivity(),"Please Wait.....");
                     SocialUtil.getBranchList(getActivity(), spSelectBranch, inputBranchModel, "Select Branch");
                     break;
                 }
@@ -330,6 +334,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
                     stateCode = ((StateResponseModel) parent.getItemAtPosition(position)).getId();
                     Log.e("STATECODE", stateCode);
                     inputCityModel.setStateId(stateCode);
+                    CommonUtils.showProgressDialog(getActivity(),"Please Wait.....");
                     SocialUtil.getCityListData(getActivity(), spSelectCity, inputCityModel, "Select City");
                 }
 

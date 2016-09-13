@@ -9,6 +9,7 @@ import com.tfml.model.applyLoanResponseModel.ApplyLoanResponse;
 import com.tfml.model.applyLoanResponseModel.InputModel;
 import com.tfml.model.branchResponseModel.BranchResponseModel;
 import com.tfml.model.branchResponseModel.InputBranchModel;
+import com.tfml.model.branchResponseModel.InputBranchState;
 import com.tfml.model.cityResponseModel.BranchCityResponseModel;
 import com.tfml.model.cityResponseModel.CityResponseModel;
 import com.tfml.model.cityResponseModel.InputCityModel;
@@ -88,4 +89,7 @@ public interface TmflApi {
     @GET
     @Streaming
     Call<ResponseBody> getFile(@Url String url);
+
+    @POST(Constant.STATEBRNCHES)
+    Call<List<BranchResponseModel>>getStateBranches(@Body InputBranchState inputBranchState) ;
 }

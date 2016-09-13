@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.tfml.R;
 import com.tfml.model.schemesResponseModel.Datum;
+import com.tfml.util.SetFonts;
 
 import java.util.List;
 
@@ -59,6 +60,8 @@ public class SchemesListAdapter extends BaseAdapter {
             holder.txt_title=(TextView) convertView.findViewById(R.id.txt_title);
             holder.txt_description=(TextView)convertView.findViewById(R.id.txt_description);
             holder.img_new_schemes=(ImageView) convertView.findViewById(R.id.img_new_schemes);
+            SetFonts.setFonts(context,holder.txt_title,2);
+            SetFonts.setFonts(context,holder.txt_description,5);
             convertView.setTag(holder);
         }
         else

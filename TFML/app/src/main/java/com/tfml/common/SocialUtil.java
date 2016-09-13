@@ -33,6 +33,7 @@ import com.tfml.model.LoanStatusResponseModel.LoanStatusInputModel;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusResponse;
 import com.tfml.model.branchResponseModel.BranchResponseModel;
 import com.tfml.model.branchResponseModel.InputBranchModel;
+import com.tfml.model.branchResponseModel.InputBranchState;
 import com.tfml.model.cityResponseModel.BranchCityResponseModel;
 import com.tfml.model.cityResponseModel.CityResponseModel;
 import com.tfml.model.cityResponseModel.InputCityModel;
@@ -42,6 +43,7 @@ import com.tfml.model.schemesResponseModel.Datum;
 import com.tfml.model.socialResponseModel.ContactListResponseModel;
 import com.tfml.model.stateResponseModel.BranchStateResponseModel;
 import com.tfml.model.stateResponseModel.StateResponseModel;
+import com.tfml.util.SetFonts;
 
 import java.util.List;
 
@@ -135,7 +137,7 @@ public class SocialUtil {
       final EditText edtmobileno=(EditText)loanstatusdialog.findViewById(R.id.edt_mobile_no);
       final EditText edtotpno=(EditText)loanstatusdialog.findViewById(R.id.edt_otp_no);
       final Button btnloanstatus=(Button)loanstatusdialog.findViewById(R.id.btn_loan_status);
-
+      SetFonts.setFonts(context,btnloanstatus,2);
       btnloanstatus.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
@@ -239,7 +241,7 @@ public class SocialUtil {
                 @Override
                 public void onResponse(Call<List<ProductListResponseModel>> call, Response<List<ProductListResponseModel>> response) {
                     Log.e("ProductResponse",response.body().size()+"");
-
+                   CommonUtils.closeProgressDialog();
                     if(response!=null)
                     {
                         ProductListResponseModel model =new ProductListResponseModel();
@@ -262,12 +264,14 @@ public class SocialUtil {
                 @Override
                 public void onFailure(Call<List<ProductListResponseModel>> call, Throwable t) {
                     Log.e("Response",t.getMessage()+"");
+                    CommonUtils.closeProgressDialog();
                 }
             });
         }
         else
         {
             CommonUtils.showAlert1(context,"","No Internet Connection",false);
+            CommonUtils.closeProgressDialog();
         }
     }
 
@@ -281,6 +285,7 @@ public class SocialUtil {
                 @Override
                 public void onResponse(Call<List<BranchStateResponseModel>> call, Response<List<BranchStateResponseModel>> response) {
                     Log.e("BranchStateListDataResp",response.body().size()+"");
+                    CommonUtils.closeProgressDialog();
                     if(response!=null)
                     {
                         BranchStateResponseModel stateModel=new BranchStateResponseModel();
@@ -301,12 +306,14 @@ public class SocialUtil {
                 @Override
                 public void onFailure(Call<List<BranchStateResponseModel>> call, Throwable t) {
                     Log.e("ErrorResponse",t.getMessage()+"");
+                    CommonUtils.closeProgressDialog();
                 }
             });
         }
         else
         {
             CommonUtils.showAlert1(context,"","No Internet Connection",false);
+            CommonUtils.closeProgressDialog();
         }
 
     }
@@ -321,6 +328,7 @@ public class SocialUtil {
                 @Override
                 public void onResponse(Call<List<StateResponseModel>> call, Response<List<StateResponseModel>> response) {
                     Log.e("StateListDataResponse",response.body().size()+"");
+                    CommonUtils.closeProgressDialog();
                     if(response!=null)
                     {
                         StateResponseModel stateModel=new StateResponseModel();
@@ -340,7 +348,7 @@ public class SocialUtil {
 
                 @Override
                 public void onFailure(Call<List<StateResponseModel>> call, Throwable t) {
-
+                    CommonUtils.closeProgressDialog();
                 }
 
                 });
@@ -348,6 +356,7 @@ public class SocialUtil {
         else
         {
             CommonUtils.showAlert1(context,"","No Internet Connection",false);
+            CommonUtils.closeProgressDialog();
         }
     }
 
@@ -361,6 +370,7 @@ public class SocialUtil {
                 @Override
                 public void onResponse(Call<List<BranchCityResponseModel>> call, Response<List<BranchCityResponseModel>> response) {
                     Log.e("CityListDataResponse",response.body().size()+"");
+                    CommonUtils.closeProgressDialog();
                      if(response!=null)
                      {
                          BranchCityResponseModel cityResponseModel=new BranchCityResponseModel();
@@ -382,6 +392,7 @@ public class SocialUtil {
                 @Override
                 public void onFailure(Call<List<BranchCityResponseModel>> call, Throwable t) {
                     Log.e("ErrorResponse",t.getMessage()+"");
+                    CommonUtils.closeProgressDialog();
                 }
             });
 
@@ -389,6 +400,7 @@ public class SocialUtil {
         else
         {
             CommonUtils.showAlert1(context,"","No Internet Connection",false);
+            CommonUtils.closeProgressDialog();
         }
     }
 
@@ -401,6 +413,7 @@ public class SocialUtil {
                 @Override
                 public void onResponse(Call<List<CityResponseModel>> call, Response<List<CityResponseModel>> response) {
                     Log.e("CityListDataResponse",response.body().size()+"");
+                    CommonUtils.closeProgressDialog();
                     if(response!=null)
                     {
                         CityResponseModel cityResponseModel=new CityResponseModel();
@@ -420,6 +433,7 @@ public class SocialUtil {
 
                 @Override
                 public void onFailure(Call<List<CityResponseModel>> call, Throwable t) {
+                    CommonUtils.closeProgressDialog();
 
                 }
             });
@@ -427,6 +441,7 @@ public class SocialUtil {
         else
         {
             CommonUtils.showAlert1(context,"","No Internet Connection",false);
+            CommonUtils.closeProgressDialog();
         }
     }
 
@@ -440,7 +455,7 @@ public class SocialUtil {
           tmflApi.getBranchList(inputBranchModel).enqueue(new Callback<List<BranchResponseModel>>() {
               @Override
               public void onResponse(Call<List<BranchResponseModel>> call, Response<List<BranchResponseModel>> response) {
-
+                  CommonUtils.closeProgressDialog();
                   if(response!=null)
                   {
                     BranchResponseModel branchResponseModel=new BranchResponseModel();
@@ -463,58 +478,53 @@ public class SocialUtil {
               @Override
               public void onFailure(Call<List<BranchResponseModel>> call, Throwable t) {
                   Log.e("ErrorResponse",t.getMessage()+"");
+                  CommonUtils.closeProgressDialog();
               }
           });
       }
        else
       {
           CommonUtils.showAlert1(context,"","No Internet Connection",false);
+          CommonUtils.closeProgressDialog();
       }
    }
 
+   public static void getStateBranchList(final Context context, final Spinner spnBranch, final InputBranchState inputBranchstate,final String caption)
+   {
 
-    /*private static boolean DownloadImage(DownloadResponse body, final Context context) {
+       if(CommonUtils.isNetworkAvailable(context)) {
+           tmflApi = ApiService.getInstance().call();
+           Log.e("Request",new Gson().toJson(inputBranchstate));
+          tmflApi.getStateBranches(inputBranchstate).enqueue(new Callback<List<BranchResponseModel>>() {
+              @Override
+              public void onResponse(Call<List<BranchResponseModel>> call, Response<List<BranchResponseModel>> response) {
+                  CommonUtils.closeProgressDialog();
+                  Log.e("getStateBranches",response.body().toString());
+                  if(response!=null)
+                  {
+                      BranchResponseModel branchResponseModel=new BranchResponseModel();
+                      branchResponseModel.setTerrCaption(caption);
+                      branchResponseModel.setTerrTerritoryid("-1");
+                      response.body().add(0,branchResponseModel);
+                      spnBranch.setAdapter(new BranchListAdapter(context,response.body()));
+                      for(int i=0;i<response.body().size();i++)
+                      {
+                          if(response.equals(response.body().get(i).getTerrCaption()))
+                          {
+                              spnBranch.setSelection(i);
+                          }
+                      }
+                  }
+              }
 
-        try {
-            Log.d("DownloadImage", "Reading and writing file");
-            InputStream in = null;
-            FileOutputStream out = null;
+              @Override
+              public void onFailure(Call<List<BranchResponseModel>> call, Throwable t) {
+                  Log.e("ErrorResponse",t.getMessage()+"");
+                  CommonUtils.closeProgressDialog();
+              }
+          });
+       }
+   }
 
-            try {
-                in = body.byteStream();
-                out = new FileOutputStream(context.getExternalFilesDir(null) + File.separator + "AndroidTutorialPoint.jpg");
-                int c;
 
-                while ((c = in.read()) != -1) {
-                    out.write(c);
-                }
-            }
-            catch (IOException e) {
-                Log.d("DownloadImage",e.toString());
-                return false;
-            }
-            finally {
-                if (in != null) {
-                    in.close();
-                }
-                if (out != null) {
-                    out.close();
-                }
-            }
-
-            int width, height;
-            ImageView image = (ImageView) findViewById(R.id.imageViewId);
-            Bitmap bMap = BitmapFactory.decodeFile(context.getExternalFilesDir(null) + File.separator + "AndroidTutorialPoint.jpg");
-            width = 2*bMap.getWidth();
-            height = 6*bMap.getHeight();
-            Bitmap bMap2 = Bitmap.createScaledBitmap(bMap, width, height, false);
-            image.setImageBitmap(bMap2);
-
-            return true;
-
-        } catch (IOException e) {
-            Log.d("DownloadImage",e.toString());
-            return false;
-        }
-    }*/
 }

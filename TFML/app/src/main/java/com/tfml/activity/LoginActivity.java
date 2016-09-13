@@ -87,13 +87,13 @@ public class LoginActivity extends Activity implements View.OnClickListener
             else
             {
                 Toast.makeText(getBaseContext(),"Please Check Network Connection", Toast.LENGTH_SHORT).show();
-                //CommonUtils.showAlert1(LoginActivity.this,"","Please Check Network Connection",false);
+
             }
         }
         else
         {
             Toast.makeText(getBaseContext(),"Please Enter User Name and Password", Toast.LENGTH_SHORT).show();
-           // CommonUtils.showAlert1(getBaseContext(),"","Please Enter User Name and Password.",false);
+
         }
     }
 
