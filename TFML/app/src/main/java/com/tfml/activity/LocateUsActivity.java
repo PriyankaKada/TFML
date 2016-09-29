@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tfml.R;
 import com.tfml.common.CommonUtils;
@@ -88,7 +89,15 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
                 {
                     webview.setWebViewClient(new WebViewClient());
                     webview.getSettings().setJavaScriptEnabled(true);
-                    webview.loadUrl("https://www.google.co.in/maps/search/Tata+Motors+in+india/@19.1384285,72.9847334,13z/data=!3m1!4b1");
+                    if(CommonUtils.isNetworkAvailable(LocateUsActivity.this))
+                    {
+                        webview.loadUrl("https://www.google.co.in/maps/search/Tata+Motors+in+india/@19.1384285,72.9847334,13z/data=!3m1!4b1");
+                    }
+                    else
+                    {
+                        Toast.makeText(getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
 
                 break;

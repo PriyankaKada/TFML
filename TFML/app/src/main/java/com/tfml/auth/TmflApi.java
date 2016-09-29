@@ -19,9 +19,11 @@ import com.tfml.model.productResponseModel.ProductListResponseModel;
 import com.tfml.model.referFriendResponseModel.ReferFriendInputModel;
 import com.tfml.model.referFriendResponseModel.ReferFriendResponseModel;
 import com.tfml.model.schemesResponseModel.SchemesResponse;
+import com.tfml.model.soapModel.response.ResponseEnvelope;
 import com.tfml.model.socialResponseModel.ContactListResponseModel;
 import com.tfml.model.stateResponseModel.BranchStateResponseModel;
 import com.tfml.model.stateResponseModel.StateResponseModel;
+import com.tfml.model.soapModel.request.RequestEnvelpe;
 import com.tfml.model.uploadRcResponseModel.RcUploadDataInputModel;
 import com.tfml.model.uploadRcResponseModel.RcUploadResponseModel;
 
@@ -31,6 +33,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
@@ -92,4 +95,11 @@ public interface TmflApi {
 
     @POST(Constant.STATEBRNCHES)
     Call<List<BranchResponseModel>>getStateBranches(@Body InputBranchState inputBranchState) ;
+
+    @Headers({
+            "SOAPAction : http://sap.com/xi/WebService/soap1.1/StmtOfAcc_Out",
+            "Authorization : Basic cHJkX3BpX3dlYjpsb3NAMTIzNA=="
+    })
+    @POST("MessageServlet?senderParty=&senderService=Service_TMFUniverse&receiverParty=&receiverService=&interface=StmtOfAcc_Out&interfaceNamespace=http://tmf.com:TMFUniverse")
+    Call<ResponseEnvelope> callStmtAcRequest(@Body RequestEnvelpe requestEnvelope);
 }

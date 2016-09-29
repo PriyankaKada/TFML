@@ -40,19 +40,19 @@
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/lbl_receipt_date"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:textColor="@color/white"
                 android:gravity="start"
                 android:text="Receipt Date"/>
             <TextView
                 android:id="@+id/lbl_receipt_amount"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:textColor="@color/white"
-                android:gravity="start"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dp"
+                android:gravity="center"
                 android:text="Receipt Amount"/>
         </LinearLayout>
         <ListView

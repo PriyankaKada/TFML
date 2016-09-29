@@ -1,7 +1,7 @@
 package com.tfml.model.soapModel.response;
 
 /**
- * Created by Pravin Borate on 26/9/16.
+ * Created by Satyawan on 26/9/16.
  */
 
 import org.simpleframework.xml.Attribute;
@@ -9,10 +9,12 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
+import java.io.Serializable;
 import java.util.List;
 
-@Root(name = "Envelope")
-public class ResponseEnvelope {
+@Root(name = "SOAP:Envelope")
+public class ResponseEnvelope implements Serializable
+{
 
     @Element(name="Header", required = false)
     String header;
@@ -40,7 +42,7 @@ public class ResponseEnvelope {
 
 
 
-    public static class Body {
+    public static class Body implements Serializable {
 
         @Element(name="ZCIS.Response", required = false)
         ZCISResponse zCISResponse;
@@ -53,7 +55,7 @@ public class ResponseEnvelope {
 
     }
 
-    public static class ZCISResponse {
+    public static class ZCISResponse implements Serializable{
 
         @Element(name="IT_CARDEX1", required = false)
         IT_CARDEX1 iT_CARDEX1;
@@ -103,8 +105,8 @@ public class ResponseEnvelope {
         List<Item> i_REJ;
 
 
-        @Element(name="I_STK", required = false)
-        String i_STK;
+        @ElementList(name = "I_STK", required = false)
+        List<Item> i_STK;
 
 
         @Element(name="I_ZCARDEX_NOTE", required = false)
@@ -112,7 +114,7 @@ public class ResponseEnvelope {
 
 
         @Element(name="RETURN", required = false)
-        String rETURN;
+        RETURN rETURN;
 
 
         @Attribute(name="ns0", required = false)
@@ -168,16 +170,16 @@ public class ResponseEnvelope {
         public void setI_REJ(List<Item> _value) { this.i_REJ = _value; }
 
 
-        public String getI_STK() { return this.i_STK; }
-        public void setI_STK(String _value) { this.i_STK = _value; }
+        public List<Item> getI_STK() { return this.i_STK; }
+        public void setI_STK(List<Item> _value) { this.i_STK = _value; }
 
 
         public I_ZCARDEX_NOTE getI_ZCARDEX_NOTE() { return this.i_ZCARDEX_NOTE; }
         public void setI_ZCARDEX_NOTE(I_ZCARDEX_NOTE _value) { this.i_ZCARDEX_NOTE = _value; }
 
 
-        public String getRETURN() { return this.rETURN; }
-        public void setRETURN(String _value) { this.rETURN = _value; }
+        public RETURN getRETURN() { return this.rETURN; }
+        public void setRETURN(RETURN _value) { this.rETURN = _value; }
 
 
         public String getNs0() { return this.ns0; }
@@ -186,7 +188,7 @@ public class ResponseEnvelope {
 
     }
 
-    public static class IT_CARDEX1 {
+    public static class IT_CARDEX1 implements Serializable {
 
         @Element(name="item", required = false)
         Item item;
@@ -199,7 +201,7 @@ public class ResponseEnvelope {
 
     }
 
-    public static class Item {
+    public static class Item implements Serializable{
 
         @Element(name="CONTRACTNO", required = false)
         String cONTRACTNO;
@@ -1629,6 +1631,54 @@ public class ResponseEnvelope {
         String pROVISON_AMT;
 
 
+        @Element(name="STOCKID", required = false)
+        String sTOCKID;
+
+
+        @Element(name="TRANSID", required = false)
+        String tRANSID;
+
+
+        @Element(name="SEQNR", required = false)
+        String sEQNR;
+
+
+        @Element(name="RWBTR", required = false)
+        String rWBTR;
+
+
+        @Element(name="PDCTYPE", required = false)
+        String pDCTYPE;
+
+
+        @Element(name="PDCTYPE_TXT", required = false)
+        String pDCTYPE_TXT;
+
+
+        @Element(name="PDCBANK", required = false)
+        String pDCBANK;
+
+
+        @Element(name="BRNCH", required = false)
+        String bRNCH;
+
+
+        @Element(name="CHECTDATE", required = false)
+        String cHECTDATE;
+
+
+        @Element(name="BANKDATE", required = false)
+        String bANKDATE;
+
+
+        @Element(name="CHECT", required = false)
+        String cHECT;
+
+
+        @Element(name="STATUS_TXT", required = false)
+        String sTATUS_TXT;
+
+
         @Element(name="NOTE", required = false)
         String nOTE;
 
@@ -1639,6 +1689,58 @@ public class ResponseEnvelope {
 
         @Element(name="NOTE2", required = false)
         String nOTE2;
+
+
+        @Element(name="ID", required = false)
+        String iD;
+
+
+        @Element(name="NUMBER", required = false)
+        String nUMBER;
+
+
+        @Element(name="MESSAGE", required = false)
+        String mESSAGE;
+
+
+        @Element(name="LOG_NO", required = false)
+        String lOG_NO;
+
+
+        @Element(name="LOG_MSG_NO", required = false)
+        String lOG_MSG_NO;
+
+
+        @Element(name="MESSAGE_V1", required = false)
+        String mESSAGE_V1;
+
+
+        @Element(name="MESSAGE_V2", required = false)
+        String mESSAGE_V2;
+
+
+        @Element(name="MESSAGE_V3", required = false)
+        String mESSAGE_V3;
+
+
+        @Element(name="MESSAGE_V4", required = false)
+        String mESSAGE_V4;
+
+
+        @Element(name="PARAMETER", required = false)
+        String pARAMETER;
+
+
+        @Element(name="ROW", required = false)
+        String rOW;
+
+
+        @Element(name="FIELD", required = false)
+        String fIELD;
+
+
+        @Element(name="SYSTEM", required = false)
+        String sYSTEM;
 
 
 
@@ -3070,6 +3172,54 @@ public class ResponseEnvelope {
         public void setPROVISON_AMT(String _value) { this.pROVISON_AMT = _value; }
 
 
+        public String getSTOCKID() { return this.sTOCKID; }
+        public void setSTOCKID(String _value) { this.sTOCKID = _value; }
+
+
+        public String getTRANSID() { return this.tRANSID; }
+        public void setTRANSID(String _value) { this.tRANSID = _value; }
+
+
+        public String getSEQNR() { return this.sEQNR; }
+        public void setSEQNR(String _value) { this.sEQNR = _value; }
+
+
+        public String getRWBTR() { return this.rWBTR; }
+        public void setRWBTR(String _value) { this.rWBTR = _value; }
+
+
+        public String getPDCTYPE() { return this.pDCTYPE; }
+        public void setPDCTYPE(String _value) { this.pDCTYPE = _value; }
+
+
+        public String getPDCTYPE_TXT() { return this.pDCTYPE_TXT; }
+        public void setPDCTYPE_TXT(String _value) { this.pDCTYPE_TXT = _value; }
+
+
+        public String getPDCBANK() { return this.pDCBANK; }
+        public void setPDCBANK(String _value) { this.pDCBANK = _value; }
+
+
+        public String getBRNCH() { return this.bRNCH; }
+        public void setBRNCH(String _value) { this.bRNCH = _value; }
+
+
+        public String getCHECTDATE() { return this.cHECTDATE; }
+        public void setCHECTDATE(String _value) { this.cHECTDATE = _value; }
+
+
+        public String getBANKDATE() { return this.bANKDATE; }
+        public void setBANKDATE(String _value) { this.bANKDATE = _value; }
+
+
+        public String getCHECT() { return this.cHECT; }
+        public void setCHECT(String _value) { this.cHECT = _value; }
+
+
+        public String getSTATUS_TXT() { return this.sTATUS_TXT; }
+        public void setSTATUS_TXT(String _value) { this.sTATUS_TXT = _value; }
+
+
         public String getNOTE() { return this.nOTE; }
         public void setNOTE(String _value) { this.nOTE = _value; }
 
@@ -3082,9 +3232,61 @@ public class ResponseEnvelope {
         public void setNOTE2(String _value) { this.nOTE2 = _value; }
 
 
+        public String getID() { return this.iD; }
+        public void setID(String _value) { this.iD = _value; }
+
+
+        public String getNUMBER() { return this.nUMBER; }
+        public void setNUMBER(String _value) { this.nUMBER = _value; }
+
+
+        public String getMESSAGE() { return this.mESSAGE; }
+        public void setMESSAGE(String _value) { this.mESSAGE = _value; }
+
+
+        public String getLOG_NO() { return this.lOG_NO; }
+        public void setLOG_NO(String _value) { this.lOG_NO = _value; }
+
+
+        public String getLOG_MSG_NO() { return this.lOG_MSG_NO; }
+        public void setLOG_MSG_NO(String _value) { this.lOG_MSG_NO = _value; }
+
+
+        public String getMESSAGE_V1() { return this.mESSAGE_V1; }
+        public void setMESSAGE_V1(String _value) { this.mESSAGE_V1 = _value; }
+
+
+        public String getMESSAGE_V2() { return this.mESSAGE_V2; }
+        public void setMESSAGE_V2(String _value) { this.mESSAGE_V2 = _value; }
+
+
+        public String getMESSAGE_V3() { return this.mESSAGE_V3; }
+        public void setMESSAGE_V3(String _value) { this.mESSAGE_V3 = _value; }
+
+
+        public String getMESSAGE_V4() { return this.mESSAGE_V4; }
+        public void setMESSAGE_V4(String _value) { this.mESSAGE_V4 = _value; }
+
+
+        public String getPARAMETER() { return this.pARAMETER; }
+        public void setPARAMETER(String _value) { this.pARAMETER = _value; }
+
+
+        public String getROW() { return this.rOW; }
+        public void setROW(String _value) { this.rOW = _value; }
+
+
+        public String getFIELD() { return this.fIELD; }
+        public void setFIELD(String _value) { this.fIELD = _value; }
+
+
+        public String getSYSTEM() { return this.sYSTEM; }
+        public void setSYSTEM(String _value) { this.sYSTEM = _value; }
+
+
     }
 
-    public static class IT_CARDEX2 {
+    public static class IT_CARDEX2 implements Serializable{
 
         @Element(name="item", required = false)
         Item item;
@@ -3097,7 +3299,7 @@ public class ResponseEnvelope {
 
     }
 
-    public static class IT_DUES1 {
+    public static class IT_DUES1 implements Serializable {
 
         @Element(name="item", required = false)
         Item item;
@@ -3110,7 +3312,7 @@ public class ResponseEnvelope {
 
     }
 
-    public static class IT_DUES2 {
+    public static class IT_DUES2 implements Serializable {
 
         @Element(name="item", required = false)
         Item item;
@@ -3123,7 +3325,7 @@ public class ResponseEnvelope {
 
     }
 
-    public static class IT_DUES3 {
+    public static class IT_DUES3 implements Serializable {
 
         @Element(name="item", required = false)
         Item item;
@@ -3136,7 +3338,7 @@ public class ResponseEnvelope {
 
     }
 
-    public static class I_ADDTIONAL {
+    public static class I_ADDTIONAL implements Serializable {
 
         @Element(name="item", required = false)
         Item item;
@@ -3149,7 +3351,20 @@ public class ResponseEnvelope {
 
     }
 
-    public static class I_ZCARDEX_NOTE {
+    public static class I_ZCARDEX_NOTE implements Serializable{
+
+        @Element(name="item", required = false)
+        Item item;
+
+
+
+        public Item getItem() { return this.item; }
+        public void setItem(Item _value) { this.item = _value; }
+
+
+    }
+
+    public static class RETURN implements Serializable{
 
         @Element(name="item", required = false)
         Item item;

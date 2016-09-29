@@ -32,6 +32,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
     TabLayout tabLayout;
     private ImageView imgtoolbarhome,imgSocial;
     View view1, view2, view3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +52,24 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
         // Give the TabLayout the ViewPager
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
+
        // tabLayout.setViewPager(viewPager);
+        Bundle bundle = getIntent().getExtras();
+        String myTabselected = bundle.getString("TAB_SELECTED");
         setupTabIcons();
         imgtoolbarhome.setOnClickListener(this);
         imgSocial.setOnClickListener(this);
 
+        if(myTabselected.equals("Schemes")){
+            tabLayout.getTabAt(0).select();
+
+
+        }else if(myTabselected.equals("ApplyLoan")){
+            tabLayout.getTabAt(1).select();
+
+        }else if(myTabselected.equals("ReferFriend")){
+            tabLayout.getTabAt(2).select();
+        }
     }
 
     private void setupTabIcons() {

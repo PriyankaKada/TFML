@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.tfml.R;
 import com.tfml.adapter.DrawerAdapter;
+import com.tfml.auth.Constant;
 import com.tfml.common.CommonUtils;
 import com.tfml.common.SocialUtil;
 
@@ -69,14 +70,20 @@ public class DrawerBaseActivity extends BaseActivity {
                 switch ( position )
                 {
                     case 0://New Schemes
-                        startActivity(new Intent(DrawerBaseActivity.this,SchemesActivity.class));
+                        Intent intentSchema=new Intent(DrawerBaseActivity.this,SchemesActivity.class);
+                        intentSchema.putExtra("TAB_SELECTED", Constant.ISSCHEMASTABSELECT);
+                        startActivity(intentSchema);
                         break;
 
                     case 1://Apply Loan
-                        startActivity(new Intent(DrawerBaseActivity.this, SchemesActivity.class));
+                        Intent intentApplyLoan=new Intent(DrawerBaseActivity.this,SchemesActivity.class);
+                        intentApplyLoan.putExtra("TAB_SELECTED", Constant.ISAPPLYLOANSELECT);
+                        startActivity(intentApplyLoan);
                         break;
                     case 2://Refer Friends
-                        startActivity(new Intent(DrawerBaseActivity.this, SchemesActivity.class));
+                        Intent intentReferFriend=new Intent(DrawerBaseActivity.this,SchemesActivity.class);
+                        intentReferFriend.putExtra("TAB_SELECTED", Constant.ISREFERFREINDSELECT);
+                        startActivity(intentReferFriend);
                         break;
                     case 3://Download
                         startActivity(new Intent(DrawerBaseActivity.this,DownloadDataActivity.class));

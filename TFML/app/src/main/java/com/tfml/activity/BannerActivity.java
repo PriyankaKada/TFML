@@ -32,6 +32,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.tfml.R;
 import com.tfml.adapter.BannerAdapter;
+import com.tfml.auth.Constant;
 import com.tfml.auth.TmflApi;
 import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
@@ -298,13 +299,21 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 
                 break;
             case R.id.linSchemes:
-                startActivity(new Intent(this, SchemesActivity.class));
+                Intent intentSchema=new Intent(this,SchemesActivity.class);
+                intentSchema.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intentSchema.putExtra("TAB_SELECTED", Constant.ISSCHEMASTABSELECT);
+                startActivity(intentSchema);
+          //
                 break;
             case R.id.linApplyLoan:
-                startActivity(new Intent(this, SchemesActivity.class));
+                Intent intentApplyLoan=new Intent(this,SchemesActivity.class);
+                intentApplyLoan.putExtra("TAB_SELECTED", Constant.ISAPPLYLOANSELECT);
+                startActivity(intentApplyLoan);
                 break;
             case R.id.linReferFriend:
-                startActivity(new Intent(this, SchemesActivity.class));
+                Intent intentReferFriend=new Intent(this,SchemesActivity.class);
+                intentReferFriend.putExtra("TAB_SELECTED", Constant.ISREFERFREINDSELECT);
+                startActivity(intentReferFriend);
                 break;
             case R.id.linLoanStaus:
                 linLoanStausClick();

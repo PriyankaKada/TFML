@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
+        android:textColor="@color/text_black"
         android:text="Amount Financed"/>
     <TextView
         android:id="@+id/txt_amount_financed"
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:textColor="@color/text_black"
             android:text="Finance Charges"/>
         <TextView
             android:id="@+id/txt_finance_charges"
@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:textColor="@color/text_black"
             android:text="Insurance Provision"/>
         <TextView
             android:id="@+id/txt_insurance_provision"
@@ -78,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:textColor="@color/text_black"
             android:text="Option Money"/>
         <TextView
             android:id="@+id/txt_option_money"
@@ -98,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:textColor="@color/text_black"
             android:text="Total Receivable"/>
         <TextView
             android:id="@+id/txt_total_receivable"
@@ -123,8 +123,8 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Amount Credited upto 31 March.2016"/>
+            android:textColor="@color/text_black"
+            android:text="Amount Credited upto "/>
         <TextView
             android:id="@+id/txt_amt_credited"
             android:layout_width="match_parent"
@@ -143,8 +143,8 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Amount Credited from 01 Apr.2015 To 31 Mar.2016"/>
+            android:textColor="@color/text_black"
+            android:text="Amount Credited from "/>
         <TextView
             android:id="@+id/txt_amt_credited_economic_year"
             android:layout_width="match_parent"
@@ -168,8 +168,8 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Total Credit upto 31 Mar.2016"/>
+            android:textColor="@color/text_black"
+            android:text="Total Credit upto "/>
         <TextView
             android:id="@+id/txt_total_credit_uptop_31mar"
             android:layout_width="match_parent"
@@ -188,7 +188,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:textColor="@color/text_black"
             android:text="Balance payabal on Contract."/>
         <TextView
             android:id="@+id/txt_balance_payable_on_contract"
@@ -213,8 +213,8 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Principal for the period of 1 Apr.2015 to 31 Mar.2016"/>
+            android:textColor="@color/text_black"
+            android:text="Principal for the period"/>
         <TextView
             android:id="@+id/txt_principal_period"
             android:layout_width="match_parent"
@@ -233,8 +233,8 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="Finance Charges for the period of 1 Apr.2015 to 31 Mar.2016"/>
+            android:textColor="@color/text_black"
+            android:text="Finance Charges for the period"/>
         <TextView
             android:id="@+id/txt_finance_charges_economy_year"
             android:layout_width="match_parent"

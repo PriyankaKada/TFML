@@ -22,6 +22,7 @@
                 android:weightSum="10">
 
                 <TextView
+                    android:id="@+id/txtReceiptDate"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="4"
@@ -30,6 +31,7 @@
                     android:text="Receipt Date"/>
 
                 <TextView
+                    android:id="@+id/txtAmount"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="4"
@@ -41,8 +43,8 @@
 
             <ImageView
                 android:id="@+id/img_expand"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_margin="5dp"
                 android:src="@drawable/ic_spin_bg_small"/>
@@ -55,34 +57,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="2dp"
             android:weightSum="2">
-            <LinearLayout
+              <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.5"
                     android:text="Receipt No:."
                     android:textSize="12sp"
-                    android:textStyle="bold"
+                    android:textColor="@color/text_black"
                     android:gravity="left|center"/>
                 <TextView
+                    android:id="@+id/txtReceiptNo"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:text="RCNo:123564"
                     android:textSize="12sp"
-                    android:textStyle="bold"
+                    android:layout_marginLeft="5dp"
                     android:gravity="left|center"/>
 
             </LinearLayout>
@@ -96,18 +98,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.5"
                     android:text="Mode:"
                     android:textSize="12sp"
-                    android:textStyle="bold"
+                    android:textColor="@color/text_black"
                     android:gravity="left|center"/>
                 <TextView
+                    android:id="@+id/txtMode"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
-                    android:text="C"
+                    android:layout_marginLeft="5dp"
                     android:textSize="12sp"
-                    android:textStyle="bold"
                     android:gravity="left|center"/>
 
             </LinearLayout>
@@ -125,13 +126,13 @@
                 android:layout_height="match_parent"
                 android:text="Type "
                 android:textSize="12sp"
-                android:textStyle="bold"
+                android:textColor="@color/text_black"
                 android:gravity="left|center"/>
 
             <TextView
+                android:id="@+id/txtType"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="ZHP"
                 android:textSize="14sp"
                 android:gravity="left|center"/>
 
@@ -147,13 +148,13 @@
                 android:layout_height="match_parent"
                 android:text="Inst.No: "
                 android:textSize="12sp"
-                android:textStyle="bold"
+                android:textColor="@color/text_black"
                 android:gravity="left|center"/>
 
             <TextView
+                android:id="@+id/txtInstNo"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="INST.2456"
                 android:textSize="14sp"
                 android:gravity="left|center"/>
 
@@ -175,19 +176,20 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Inst.No: "
+                    android:text="Bank: "
                     android:textSize="12sp"
-                    android:textStyle="bold"
+                    android:textColor="@color/text_black"
                     android:gravity="left|center"/>
 
                 <TextView
+                    android:id="@+id/txtBank"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="INST.2456"
                     android:textSize="14sp"
                     android:gravity="left|center"/>
         </LinearLayout>
             <ImageView
+                android:id="@+id/imgPdf"
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="50dp"

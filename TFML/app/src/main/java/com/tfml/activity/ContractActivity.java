@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tfml.R;
+import com.tfml.auth.Constant;
 import com.tfml.common.CommonUtils;
 import com.tfml.common.SocialUtil;
 import com.tfml.util.SetFonts;
@@ -97,13 +98,19 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.linSchemes:
-                startActivity(new Intent(ContractActivity.this, SchemesActivity.class));
+                Intent intentSchema=new Intent(this,SchemesActivity.class);
+                intentSchema.putExtra("TAB_SELECTED", Constant.ISSCHEMASTABSELECT);
+                startActivity(intentSchema);
                 break;
             case R.id.linApplyLoan:
-                startActivity(new Intent(ContractActivity.this, SchemesActivity.class));
+                Intent intentApplyLoan=new Intent(this,SchemesActivity.class);
+                intentApplyLoan.putExtra("TAB_SELECTED", Constant.ISAPPLYLOANSELECT);
+                startActivity(intentApplyLoan);
                 break;
             case R.id.linReferFriend:
-                startActivity(new Intent(ContractActivity.this, SchemesActivity.class));
+                Intent intentReferFriend=new Intent(this,SchemesActivity.class);
+                intentReferFriend.putExtra("TAB_SELECTED", Constant.ISREFERFREINDSELECT);
+                startActivity(intentReferFriend);
                 break;
             case R.id.linLoanStaus:
                 linLoanStausClick();
