@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="30dp"
-            app:fillColor="@color/colorAccent"
+            app:fillColor="@color/color_grey"
             app:pageColor="@android:color/white"
             android:layout_gravity="bottom"
             app:radius="4dp"

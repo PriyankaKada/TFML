@@ -3,11 +3,13 @@ package com.tfml.model.schemesResponseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by webwerks on 29/7/16.
  */
 
-public class Datum {
+public class Datum implements Serializable{
 
     @SerializedName("id")
     @Expose

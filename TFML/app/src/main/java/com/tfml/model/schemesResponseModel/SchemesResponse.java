@@ -3,6 +3,7 @@ package com.tfml.model.schemesResponseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * Created by webwerks on 29/7/16.
  */
 
-public class SchemesResponse {
+public class SchemesResponse implements Serializable {
     @SerializedName("per_page")
     @Expose
     private Integer perPage;
@@ -31,7 +32,7 @@ public class SchemesResponse {
     private Integer to;
     @SerializedName("data")
     @Expose
-    private List<Datum> data = new ArrayList<Datum>();
+    private ArrayList<Datum> data = new ArrayList<Datum>();
 
     /**
      *
@@ -146,7 +147,7 @@ public class SchemesResponse {
      * @return
      * The data
      */
-    public List<Datum> getData() {
+    public ArrayList<Datum> getData() {
         return data;
     }
 
@@ -155,7 +156,7 @@ public class SchemesResponse {
      * @param data
      * The data
      */
-    public void setData(List<Datum> data) {
+    public void setData(ArrayList<Datum> data) {
         this.data = data;
     }
 }

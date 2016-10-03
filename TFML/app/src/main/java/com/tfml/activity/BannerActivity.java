@@ -107,7 +107,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
         linLoanStaus = (LinearLayout) findViewById(R.id.linLoanStaus);
         linLogin = (LinearLayout) findViewById(R.id.linLogin);
         selectedView = (View) findViewById( R.id.viewId );
-        circlePageIndicator.setRadius(10.0f);
+        circlePageIndicator.setRadius(8.0f);
         txtTitle.setText("Welcome to TMFL");
         SetFonts.setFonts(this, txtTitle, 2);
         SetFonts.setFonts(this,txtSchemes,2);
@@ -238,20 +238,28 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
             public void onResponse(Call<BannerlistResponse> call, Response<BannerlistResponse> response) {
                 BannerlistResponse bannerlistResponse = response.body();
                 CommonUtils.closeProgressDialog();
-                if (response.body().getStatus() != null && response.body().getStatus().equals("success")) {
+                if(response.body()!=null)
+                {
+                    if (response.body().getStatus() != null && response.body().getStatus().equals("success")) {
 
-                    Log.e("BannerlistResponse", new Gson().toJson(response.body().getStatus()));
-                    Log.e("CallbannerListResponse", "" + bannerlistResponse.getBanners().getData().get(0).getImage());
-                    bannerAdapter = new BannerAdapter(BannerActivity.this, (ArrayList<Datum>) bannerlistResponse.getBanners().getData());
-                    recentViewpager.setAdapter(bannerAdapter);
-                    setUiPageViewController();
-                    recentViewpager.setCurrentItem(0);
-                    circlePageIndicator.setViewPager(recentViewpager);
+                        Log.e("BannerlistResponse", new Gson().toJson(response.body().getStatus()));
+                        Log.e("CallbannerListResponse", "" + bannerlistResponse.getBanners().getData().get(0).getImage());
+                        bannerAdapter = new BannerAdapter(BannerActivity.this, (ArrayList<Datum>) bannerlistResponse.getBanners().getData());
+                        recentViewpager.setAdapter(bannerAdapter);
+                        setUiPageViewController();
+                        recentViewpager.setCurrentItem(0);
+                        circlePageIndicator.setViewPager(recentViewpager);
 
 
-                } else {
-                    Log.e("ErrorResponse", response.errorBody().toString());
+                    } else {
+                        Log.e("ErrorResponse", response.errorBody().toString());
+                    }
                 }
+                else
+                {
+                    Toast.makeText(getBaseContext(),"Server Error........",Toast.LENGTH_LONG).show();
+                }
+
 
             }
 
@@ -320,7 +328,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
                 SocialUtil.loanStatusDialog(BannerActivity.this, linLoanStaus,selectedView);
                 break;
             case R.id.linLogin:
-                startActivity(new Intent(this, LoginActivity.class));
+                startActivity(new Intent(BannerActivity.this, LoginActivity.class));
                 break;
 
         }

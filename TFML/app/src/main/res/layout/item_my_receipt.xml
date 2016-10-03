@@ -6,7 +6,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="2dp"
+        android:padding="10dp"
         android:orientation="horizontal">
 
         <RelativeLayout
@@ -15,25 +15,25 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:layout_toLeftOf="@+id/img_expand"
                 android:weightSum="10">
 
                 <TextView
                     android:id="@+id/txtReceiptDate"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:textSize="12sp"
                     android:gravity="left|center"
-                    android:text="Receipt Date"/>
+                    android:text="Receipt Date/ReceiptNo"/>
 
                 <TextView
                     android:id="@+id/txtAmount"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="4"
                     android:textSize="12sp"
                     android:gravity="left|center"
@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,6 +68,7 @@
               <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                  android:visibility="gone"
                 android:layout_weight="1">
 
                 <TextView

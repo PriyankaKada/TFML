@@ -14,6 +14,9 @@ public class PreferenceHelper {
     private static SharedPreferences.Editor preferenceEditor;
     private static SharedPreferences pref;
     public static final String SOAPSTATMENTOFACCOUNTRESPONSE="responseModel";
+    public static final String API_TOKEN="api_token";
+    public static final String USER_ID="user_id";
+    public static final String FLAG_LOGGED_OUT = "logout";
 
     public static synchronized final void insertString(String key, String value) {
         getPreferences().edit().putString(key, value).commit();

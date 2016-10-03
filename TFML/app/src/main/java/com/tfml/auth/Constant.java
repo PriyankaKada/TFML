@@ -6,7 +6,8 @@ package com.tfml.auth;
 
 public class Constant {
     public static final String SOAP_BASE="http://203.201.252.137:83/XISOAPAdapter/";
-    public static final String BASE_URL="http://staging.php-dev.in:8844/tatamotors/public/customer/";
+    public static final String BASE_URL="http://staging.php-dev.in:8844/tatamotors/public/";
+    public static final String LOGIN="api/login";
     public static final String BANNER="banners";
     public static final String SCHEMES="schemes";
     public static final String DOWNLOADS="downloads";
@@ -26,7 +27,9 @@ public class Constant {
     public static final String ISSCHEMASTABSELECT="Schemes";
     public static final String ISAPPLYLOANSELECT="ApplyLoan";
     public static final String ISREFERFREINDSELECT="ReferFriend";
+    public static final String MYCONTRACT="customer/myContracts";
     public static final String LOGIN_PREF="loginPrefs";
-
-
+    public static final String ACCOUNT_STATEMENT_DOWNLOAD="customer/accountStatement";
+    public static final String PRECLOSURE_STATEMENT_DOWNLOAD="customer/preClosureStatement";
+    public static final String FORGOT_PASSWORD="forgotPassword";
 }

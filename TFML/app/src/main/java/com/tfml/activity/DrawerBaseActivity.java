@@ -24,6 +24,7 @@ import com.tfml.adapter.DrawerAdapter;
 import com.tfml.auth.Constant;
 import com.tfml.common.CommonUtils;
 import com.tfml.common.SocialUtil;
+import com.tfml.util.PreferenceHelper;
 
 
 public class DrawerBaseActivity extends BaseActivity {
@@ -92,6 +93,14 @@ public class DrawerBaseActivity extends BaseActivity {
                         startActivity(new Intent(DrawerBaseActivity.this,ChangePasswordActivity.class));
                         break;
                     case 5://Logout
+                        if(CommonUtils.isNetworkAvailable(DrawerBaseActivity.this))
+                        {
+                            logout();
+                        }
+                        else
+                        {
+                            Toast.makeText(getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     case 6://Contact
                         //Nothing do Here
@@ -163,5 +172,19 @@ public class DrawerBaseActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    private void logout() {
+        PreferenceHelper.remove(PreferenceHelper.USER_ID);
+        PreferenceHelper.remove(PreferenceHelper.API_TOKEN);
+        PreferenceHelper.insertBoolean(PreferenceHelper.FLAG_LOGGED_OUT, true);
+        Intent intent = new Intent(this,
+                LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+
+    }
 
 }

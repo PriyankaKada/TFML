@@ -1,6 +1,8 @@
 package com.tfml.auth;
 
 
+import com.tfml.model.ContractResponseModel.ContractsInputModel;
+import com.tfml.model.ContractResponseModel.ContractsResponseModel;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusInputModel;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusResponse;
 import com.tfml.model.QuickcallResponseModel.QuickCallInputModel;
@@ -15,10 +17,14 @@ import com.tfml.model.cityResponseModel.CityResponseModel;
 import com.tfml.model.cityResponseModel.InputCityModel;
 import com.tfml.model.downloadResponseModel.DownloadResponse;
 import com.tfml.model.bannerResponseModel.BannerlistResponse;
+import com.tfml.model.loginResponseModel.LoginRequestModel;
+import com.tfml.model.loginResponseModel.LoginResponseModel;
 import com.tfml.model.productResponseModel.ProductListResponseModel;
 import com.tfml.model.referFriendResponseModel.ReferFriendInputModel;
 import com.tfml.model.referFriendResponseModel.ReferFriendResponseModel;
 import com.tfml.model.schemesResponseModel.SchemesResponse;
+import com.tfml.model.soapModel.preClosureRequest.ReqData;
+import com.tfml.model.soapModel.preClosureRequest.RequestEnvelope;
 import com.tfml.model.soapModel.response.ResponseEnvelope;
 import com.tfml.model.socialResponseModel.ContactListResponseModel;
 import com.tfml.model.stateResponseModel.BranchStateResponseModel;
@@ -102,4 +108,17 @@ public interface TmflApi {
     })
     @POST("MessageServlet?senderParty=&senderService=Service_TMFUniverse&receiverParty=&receiverService=&interface=StmtOfAcc_Out&interfaceNamespace=http://tmf.com:TMFUniverse")
     Call<ResponseEnvelope> callStmtAcRequest(@Body RequestEnvelpe requestEnvelope);
+
+    @Headers({
+            "SOAPAction : http://sap.com/xi/WebService/soap1.1/TerminalDues_Out",
+            "Authorization : Basic cHJkX3BpX3dlYjpsb3NAMTIzNA=="
+    })
+    @POST("MessageServlet?senderParty=&senderService=Service_TMFUniverse&receiverParty=&receiverService=&interface=TerminalDues_Out&interfaceNamespace=http://tmf.com:TMFUniverse")
+    Call<com.tfml.model.soapModel.preClousreResponse.ResponseEnvelope> callClosureTableRequest(@Body RequestEnvelope requestEnvelope);
+
+    @POST(Constant.MYCONTRACT)
+    Call<ContractsResponseModel>getContractListData(@Body ContractsInputModel contractsInputModel);
+    @POST(Constant.LOGIN)
+    Call<LoginResponseModel>getLoginResponse(@Body LoginRequestModel loginRequestModel);
+
 }

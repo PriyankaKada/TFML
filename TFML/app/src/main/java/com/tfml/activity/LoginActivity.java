@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,25 +15,36 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tfml.R;
+import com.tfml.auth.TmflApi;
+import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
+import com.tfml.model.loginResponseModel.LoginRequestModel;
+import com.tfml.model.loginResponseModel.LoginResponseModel;
+import com.tfml.util.PreferenceHelper;
 import com.tfml.util.SetFonts;
 
 import okhttp3.internal.Util;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends Activity implements View.OnClickListener
 {
     private EditText txtUserName,txtPassword;
     private   Button btnLogin;
-    private   String strUserName,strPassword;
+    private   String strUserID,strPassword;
     private TextView txtForgotPassword,txtLoginTitle;
     private CheckBox chkRememberMe;
     private ImageView loginBack;
-
+    LoginRequestModel loginRequestModel;
+    LoginResponseModel loginResponseModel;
+    TmflApi tmflApi;
+    String strApiToken,strUsrId;
      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        init();
+         init();
     }
     public void init()
     {
@@ -44,6 +56,7 @@ public class LoginActivity extends Activity implements View.OnClickListener
         chkRememberMe=(CheckBox)findViewById(R.id.chkRemember_password);
         loginBack=(ImageView)findViewById(R.id.img_login_back);
         SetFonts.setFonts(this,txtLoginTitle,2);
+        tmflApi = ApiService.getInstance().call();
         btnLogin.setOnClickListener(this);
         txtForgotPassword.setOnClickListener(this);
         loginBack.setOnClickListener(this);
@@ -69,20 +82,27 @@ public class LoginActivity extends Activity implements View.OnClickListener
 
     public void Validation()
     {
-        strUserName=txtUserName.getText().toString();
+        strUserID=txtUserName.getText().toString();
         strPassword=txtPassword.getText().toString();
-        if(TextUtils.isEmpty(strUserName))
+        if(TextUtils.isEmpty(strUserID))
         {
             Toast.makeText(getBaseContext(),"Please Enter User Name", Toast.LENGTH_SHORT).show();
         }else if(TextUtils.isEmpty(strPassword))
         {
             Toast.makeText(getBaseContext(),"Please Enter Password", Toast.LENGTH_SHORT).show();
         } else
-        if(!TextUtils.isEmpty(strUserName)&&!TextUtils.isEmpty(strPassword))
+        if(!TextUtils.isEmpty(strUserID)&&!TextUtils.isEmpty(strPassword))
         {
            if(CommonUtils.isNetworkAvailable(LoginActivity.this))
             {
-              startActivity(new Intent(LoginActivity.this,ContractActivity.class));
+              loginRequestModel=new LoginRequestModel();
+                loginResponseModel=new LoginResponseModel();
+                loginRequestModel.setUser_id(strUserID);
+                loginRequestModel.setPassword(strPassword);
+
+                CommonUtils.showProgressDialog(LoginActivity.this,"Please Wait");
+                CallLoginService(loginRequestModel);
+
             }
             else
             {
@@ -95,6 +115,36 @@ public class LoginActivity extends Activity implements View.OnClickListener
             Toast.makeText(getBaseContext(),"Please Enter User Name and Password", Toast.LENGTH_SHORT).show();
 
         }
+    }
+
+    public void CallLoginService(LoginRequestModel loginRequestModel)
+    {
+        tmflApi.getLoginResponse(loginRequestModel).enqueue(new Callback<LoginResponseModel>() {
+            @Override
+            public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {
+                CommonUtils.closeProgressDialog();
+                if(response.body()!=null && response.body().getStatus().equals("success"))
+                {
+                    strApiToken=response.body().getData().getApiToken();
+                    strUsrId=response.body().getData().getUserId();
+                    PreferenceHelper.insertString(PreferenceHelper.USER_ID,strUsrId);
+                    PreferenceHelper.insertString(PreferenceHelper.API_TOKEN,strApiToken);
+                    startActivity(new Intent(LoginActivity.this,ContractActivity.class));
+                    Log.e("ResponseData",response.body().getData().getApiToken());
+                    PreferenceHelper.insertBoolean(PreferenceHelper.FLAG_LOGGED_OUT, false);
+                }
+                else
+                {
+                    Toast.makeText(LoginActivity.this,"Invalid UserName And Password",Toast.LENGTH_LONG);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponseModel> call, Throwable t) {
+                CommonUtils.closeProgressDialog();
+            }
+        });
+
     }
 
 }

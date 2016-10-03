@@ -1,20 +1,20 @@
-package com.tfml.model.loginResponseModel;
+package com.tfml.model.accountStmtPdfResponseModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by webwerks on 2/10/16.
+ * Created by webwerks on 3/10/16.
  */
 
-public class LoginResponseModel {
+public class AccountStmtResponse {
 
     @SerializedName("status")
     @Expose
     private String status;
-    @SerializedName("data")
+    @SerializedName("filepath")
     @Expose
-    private Data data;
+    private String filepath;
 
     /**
      *
@@ -37,18 +37,18 @@ public class LoginResponseModel {
     /**
      *
      * @return
-     * The data
+     * The filepath
      */
-    public Data getData() {
-        return data;
+    public String getFilepath() {
+        return filepath;
     }
 
     /**
      *
-     * @param data
-     * The data
+     * @param filepath
+     * The filepath
      */
-    public void setData(Data data) {
-        this.data = data;
+    public void setFilepath(String filepath) {
+        this.filepath = filepath;
     }
 }

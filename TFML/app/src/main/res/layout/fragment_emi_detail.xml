@@ -84,7 +84,7 @@
                 android:background="@color/colorPrimaryDark"
                 android:textAllCaps="false"
                 android:text="Reciepts"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_gravity="center"
                 android:textColor="#ffffff"
                 android:layout_centerHorizontal="true"/>

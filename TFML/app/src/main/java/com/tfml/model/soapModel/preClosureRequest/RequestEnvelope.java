@@ -17,14 +17,17 @@ import org.simpleframework.xml.Root;
 })
 public class RequestEnvelope {
     @Element(name = "soapenv:Body", required = false)
-    com.tfml.model.soapModel.request.ReqBody reqBody;
+    ReqBody reqBody;
 
-
-    public com.tfml.model.soapModel.request.ReqBody getReqBody() {
+    public ReqBody getReqBody() {
         return reqBody;
     }
 
-    public void setReqBody(com.tfml.model.soapModel.request.ReqBody reqBody) {
+    public void setReqBody(ReqBody reqBody) {
         this.reqBody = reqBody;
     }
+
+
+
+
 }

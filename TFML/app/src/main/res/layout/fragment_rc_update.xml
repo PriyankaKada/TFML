@@ -12,6 +12,7 @@
         android:weightSum="10">
 
         <Spinner
+            android:id="@+id/spnContractNo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
@@ -22,7 +23,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:layout_weight="5"
-            android:background="#f58026"
+            android:background="#F39C11"
             android:orientation="horizontal"
             android:padding="5dp">
 

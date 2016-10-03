@@ -18,21 +18,41 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tfml.R;
+import com.tfml.adapter.ContractsListAdapter;
 import com.tfml.auth.Constant;
+import com.tfml.auth.TmflApi;
+import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
 import com.tfml.common.SocialUtil;
+import com.tfml.model.ContractResponseModel.ContractModel;
+import com.tfml.model.ContractResponseModel.ContractsInputModel;
+import com.tfml.model.ContractResponseModel.ContractsResponseModel;
+import com.tfml.util.PreferenceHelper;
 import com.tfml.util.SetFonts;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ContractActivity extends DrawerBaseActivity implements View.OnClickListener {
     private TextView txtTitleContract,txtTotalCount, txtTerminatedCount, txtOverDueCount, txtContractNo, txtRcNo, txtNextDueDate, txtCurrentEmi, txtLastPayment, txtPreviousEmi, txtOverdueAmount, txtRepaymentMode, txtTerminitedContracName, txtTerminatedContractDate,txtSchemes,txtApplyLoan,txtReferFriend,txtLoanStatus,txtContactUs;
-    private Button btnPayEmi, btnMoreDetail;
     private LinearLayout linSchemes, linApplyLoan, linReferFriend, linLoanStaus, linContactUs;
-    private ImageView imgDrawer, imgDownload;
+    private ImageView imgDrawer;
+    private ListView lstCotractList;
     View selectedView;
+    TmflApi tmflApi;
+    ContractsInputModel contractsInputModel;
+    ContractsResponseModel contractsResponseModel;
+    String strApiToken,strUserId,strTerCount,strOverdue,strTotal;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +62,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
+        tmflApi = ApiService.getInstance().call();
         init();
     }
 
@@ -50,34 +71,22 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
         txtTotalCount = (TextView) findViewById(R.id.txt_total_count);
         txtTerminatedCount = (TextView) findViewById(R.id.txt_terminated_count);
         txtOverDueCount = (TextView) findViewById(R.id.txt_overdue_count);
-        txtContractNo = (TextView) findViewById(R.id.txt_contract_no);
-        txtRcNo = (TextView) findViewById(R.id.txt_rc_no);
         txtSchemes = (TextView) findViewById(R.id.txtSchemes);
         txtApplyLoan = (TextView) findViewById(R.id.txtApplyLoan);
         txtReferFriend = (TextView) findViewById(R.id.txtReferFriend);
         txtLoanStatus = (TextView) findViewById(R.id.txtLoanStatus);
         txtContactUs=(TextView)findViewById(R.id.txtContactUs);
+        lstCotractList=(ListView) findViewById(R.id.lstContact);
         SetFonts.setFonts(this,txtSchemes,2);
         SetFonts.setFonts(this,txtApplyLoan,2);
         SetFonts.setFonts(this,txtReferFriend,2);
         SetFonts.setFonts(this,txtLoanStatus,2);
         SetFonts.setFonts(this,txtContactUs,2);
-        txtNextDueDate = (TextView) findViewById(R.id.txt_next_due_date);
-        txtCurrentEmi = (TextView) findViewById(R.id.txt_current_emi_amount);
-        txtLastPayment = (TextView) findViewById(R.id.txt_last_payment_date);
-        txtPreviousEmi = (TextView) findViewById(R.id.txt_previous_emi);
-        txtOverdueAmount = (TextView) findViewById(R.id.txt_overdue_amount);
-        txtRepaymentMode = (TextView) findViewById(R.id.txt_repayment_mode);
-        txtTerminitedContracName = (TextView) findViewById(R.id.txt_terminated_name);
-        txtTerminatedContractDate = (TextView) findViewById(R.id.txt_terminated_date);
-        btnPayEmi = (Button) findViewById(R.id.btn_pay_emi);
-        btnMoreDetail = (Button) findViewById(R.id.btn_more_detail);
         linSchemes = (LinearLayout) findViewById(R.id.linSchemes);
         linApplyLoan = (LinearLayout) findViewById(R.id.linApplyLoan);
         linReferFriend = (LinearLayout) findViewById(R.id.linReferFriend);
         linLoanStaus = (LinearLayout) findViewById(R.id.linLoanStaus);
         linContactUs = (LinearLayout) findViewById(R.id.lin_contact_us);
-        imgDownload = (ImageView) findViewById(R.id.img_download);
         imgDrawer = (ImageView) findViewById(R.id.img_drawer);
         selectedView = (View) findViewById(R.id.viewId);
         SetFonts.setFonts(this,txtTitleContract,2);
@@ -86,12 +95,19 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
         linReferFriend.setOnClickListener(this);
         linLoanStaus.setOnClickListener(this);
         linContactUs.setOnClickListener(this);
-        imgDownload.setOnClickListener(this);
         imgDrawer.setOnClickListener(this);
-        SetFonts.setFonts(this,btnPayEmi,2);
-        SetFonts.setFonts(this,btnMoreDetail,2);
-        btnPayEmi.setOnClickListener(this);
-        btnMoreDetail.setOnClickListener(this);
+        contractsInputModel=new ContractsInputModel();
+        contractsResponseModel=new ContractsResponseModel();
+        strApiToken= PreferenceHelper.getString(PreferenceHelper.API_TOKEN);
+        strUserId=PreferenceHelper.getString(PreferenceHelper.USER_ID);
+        contractsInputModel.setUser_id(strUserId);
+        contractsInputModel.setApi_token(strApiToken);
+        callContractWebservice();
+        CommonUtils.showProgressDialog(ContractActivity.this, "Pleas Wait.....");
+        {
+            loadContractDetailService(contractsInputModel);
+        }
+
     }
 
     @Override
@@ -122,17 +138,55 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
             case R.id.img_drawer:
                 openDrawer();
                 break;
-            case R.id.img_download:
-               // SocialUtil.downloadData(ContractActivity.this);
-                break;
-            case R.id.btn_pay_emi:
-                break;
-            case R.id.btn_more_detail:
-                startActivity(new Intent(ContractActivity.this, EmiActivity.class));
-                break;
         }
     }
+    public void callContractWebservice()
+    {
+        contractsInputModel.setUser_id(strUserId);
+        contractsInputModel.setApi_token(strApiToken);
 
+    }
+
+    public void loadContractDetailService(ContractsInputModel contractsInputModel)
+    {
+
+        tmflApi.getContractListData(contractsInputModel).enqueue(new Callback<ContractsResponseModel>() {
+            @Override
+            public void onResponse(Call<ContractsResponseModel> call, Response<ContractsResponseModel> response) {
+                CommonUtils.closeProgressDialog();
+               // List<ContractModel>model= (List<ContractModel>) response.body().getData();
+                ArrayList<ContractModel>models=new ArrayList<ContractModel>();
+                models.addAll(response.body().getData().getActive().getContracts());
+                models.add(null);
+                models.addAll(response.body().getData().getTerminated().getContracts());
+                lstCotractList.setAdapter(new ContractsListAdapter(ContractActivity.this,models));
+                strTotal=response.body().getData().getTotal().toString();
+                strTerCount=response.body().getData().getTerminated().getCount().toString();
+                strOverdue=response.body().getData().getActive().getCount().toString();
+                if(strTotal!=null)
+                {
+                    txtTotalCount.setText(strTotal);
+                }
+                 if(strTerCount!=null)
+                {
+                    txtTerminatedCount.setText(strTerCount);
+                }
+                if(strOverdue!=null)
+                {
+                    txtOverDueCount.setText(strOverdue);
+                }
+
+
+            Log.e("REsponseModel",response.body().getData().getTotal().toString());
+            }
+
+            @Override
+            public void onFailure(Call<ContractsResponseModel> call, Throwable t) {
+                CommonUtils.closeProgressDialog();
+                Log.e("Response Error","Error Data");
+            }
+        });
+    }
     public void linLoanStausClick() {
         int width = linLoanStaus.getWidth();
         Log.e("Widthoflin", "" + width);

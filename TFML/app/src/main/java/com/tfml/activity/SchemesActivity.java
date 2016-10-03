@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,86 +20,127 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.google.gson.Gson;
 import com.tfml.R;
+import com.tfml.adapter.SchemesListAdapter;
 import com.tfml.adapter.SchemesPagerAdapter;
+import com.tfml.auth.TmflApi;
+import com.tfml.common.ApiService;
+import com.tfml.common.CommonUtils;
 import com.tfml.fragment.ApplyLoanFragment;
 import com.tfml.fragment.NewSchemeFragment;
 import com.tfml.fragment.ReferFriendFragment;
+import com.tfml.model.schemesResponseModel.Datum;
+import com.tfml.model.schemesResponseModel.SchemesResponse;
+import com.tfml.util.PreferenceHelper;
 import com.tfml.util.SetFonts;
 
-public class SchemesActivity extends BaseActivity implements View.OnClickListener{
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class SchemesActivity extends BaseActivity implements View.OnClickListener {
     Toolbar toolbarschemes;
     private TextView txtschemestitle;
     TabLayout tabLayout;
-    private ImageView imgtoolbarhome,imgSocial;
+    private ImageView imgtoolbarhome, imgSocial;
     View view1, view2, view3;
+    TmflApi tmflApi;
+    SchemesListAdapter schemesListAdapter;
+    ReferFriendFragment referFriendFragment;
+    ApplyLoanFragment applyLoanFragment;
+    ViewPager viewPager;
+    private ArrayList<Datum> datumArrayList;
+    Bundle bundle1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schemes);
 
+        datumArrayList = new ArrayList<>();
         toolbarschemes = (Toolbar) findViewById(R.id.toolbar_schemes);
         txtschemestitle = (TextView) findViewById(R.id.txt_schemes_title);
-        imgtoolbarhome=(ImageView)findViewById(R.id.img_toolbar_home);
-        imgSocial=(ImageView)findViewById(R.id.img_social);
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        view1 = findViewById( R.id.view1 );
-        view2 = findViewById( R.id.view2 );
-        view3 = findViewById( R.id.view3 );
-        setupViewPager(viewPager);
-        SetFonts.setFonts(this,txtschemestitle,2);
-        viewPager.setOffscreenPageLimit( 3 );
-        // Give the TabLayout the ViewPager
-        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.setupWithViewPager(viewPager);
-
-       // tabLayout.setViewPager(viewPager);
-        Bundle bundle = getIntent().getExtras();
-        String myTabselected = bundle.getString("TAB_SELECTED");
-        setupTabIcons();
-        imgtoolbarhome.setOnClickListener(this);
-        imgSocial.setOnClickListener(this);
-
-        if(myTabselected.equals("Schemes")){
-            tabLayout.getTabAt(0).select();
-
-
-        }else if(myTabselected.equals("ApplyLoan")){
-            tabLayout.getTabAt(1).select();
-
-        }else if(myTabselected.equals("ReferFriend")){
-            tabLayout.getTabAt(2).select();
+        imgtoolbarhome = (ImageView) findViewById(R.id.img_toolbar_home);
+        imgSocial = (ImageView) findViewById(R.id.img_social);
+        tmflApi = ApiService.getInstance().call();
+        if(CommonUtils.isNetworkAvailable(SchemesActivity.this))
+        {
+            callSchemesResponseModel();
         }
+        else
+        {
+
+        }
+
+        viewPager = (ViewPager) findViewById(R.id.pager);
+
+        view1 = findViewById(R.id.view1);
+        view2 = findViewById(R.id.view2);
+        view3 = findViewById(R.id.view3);
+
+//      setupViewPager(viewPager);
+        SetFonts.setFonts(this, txtschemestitle, 2);
+//        viewPager.setOffscreenPageLimit( 3 );
+//        // Give the TabLayout the ViewPager
+//        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+//        tabLayout.setupWithViewPager(viewPager);
+//       // tabLayout.setViewPager(viewPager);
+        bundle1 = getIntent().getExtras();
+//        String myTabselected = bundle.getString("TAB_SELECTED");
+//        setupTabIcons();
+//        imgtoolbarhome.setOnClickListener(this);
+//        imgSocial.setOnClickListener(this);
+//
+//        if(myTabselected.equals("Offers")){
+//            tabLayout.getTabAt(0).select();
+//
+//
+//        }else if(myTabselected.equals("ApplyLoan")){
+//            tabLayout.getTabAt(1).select();
+//
+//        }else if(myTabselected.equals("ReferFriend")){
+//            tabLayout.getTabAt(2).select();
+//        }
     }
 
     private void setupTabIcons() {
 
         TextView tabOne = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
-        tabOne.setText("Schemes");
-        SetFonts.setFonts(this,tabOne,2);
+        tabOne.setText("Offers");
+        SetFonts.setFonts(this, tabOne, 2);
         tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_scheme_non_selected, 0, 0);
         tabLayout.getTabAt(0).setCustomView(tabOne);
 
 
         TextView tabTwo = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabTwo.setText("Apply Loan");
-        SetFonts.setFonts(this,tabTwo,2);
+        SetFonts.setFonts(this, tabTwo, 2);
         tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_apply_loan_non_selected, 0, 0);
         tabLayout.getTabAt(1).setCustomView(tabTwo);
 
         TextView tabThree = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
         tabThree.setText("Refer Friend");
-        SetFonts.setFonts(this,tabThree,2);
+        SetFonts.setFonts(this, tabThree, 2);
         tabThree.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_refer_friends_non_selected, 0, 0);
         tabLayout.getTabAt(2).setCustomView(tabThree);
     }
 
+
     private void setupViewPager(ViewPager viewPager) {
         SchemesPagerAdapter adapter = new SchemesPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new NewSchemeFragment(), "Schemes");
-        adapter.addFrag(new ApplyLoanFragment(), "Apply Loan");
-        adapter.addFrag(new ReferFriendFragment(), "Refer Friends");
+        System.out.println("------------dgdsgdf----------->" + datumArrayList);
+
+        Fragment newSchemeFragment = new NewSchemeFragment();
+        Fragment applyLoanFragment = new ApplyLoanFragment();
+        Fragment referFriendFragment = new ReferFriendFragment();
+        adapter.addFrag(newSchemeFragment, "Offers");
+        adapter.addFrag(applyLoanFragment, "Apply Loan");
+        adapter.addFrag(referFriendFragment, "Refer Friends");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -111,30 +153,30 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
             public void onPageSelected(int position) {
                 setTitle(getPageTitle(position));
 
-                switch(position){
+                switch (position) {
 
                     case 0:
-                        view1.setBackgroundResource( R.drawable.selector_tab_indicator_white );
-                        view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
-                        view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        view1.setBackgroundResource(R.drawable.selector_tab_indicator_white);
+                        view2.setBackgroundResource(R.drawable.selector_tab_indicator_blue);
+                        view3.setBackgroundResource(R.drawable.selector_tab_indicator_blue);
                         break;
 
                     case 1:
-                        view1.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
-                        view2.setBackgroundResource( R.drawable.selector_tab_indicator_white );
-                        view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        view1.setBackgroundResource(R.drawable.selector_tab_indicator_blue);
+                        view2.setBackgroundResource(R.drawable.selector_tab_indicator_white);
+                        view3.setBackgroundResource(R.drawable.selector_tab_indicator_blue);
                         break;
 
                     case 2:
-                        view1.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
-                        view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
-                        view3.setBackgroundResource( R.drawable.selector_tab_indicator_white );
+                        view1.setBackgroundResource(R.drawable.selector_tab_indicator_blue);
+                        view2.setBackgroundResource(R.drawable.selector_tab_indicator_blue);
+                        view3.setBackgroundResource(R.drawable.selector_tab_indicator_white);
                         break;
 
                     default:
-                        view1.setBackgroundResource( R.drawable.selector_tab_indicator_white );
-                        view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
-                        view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+                        view1.setBackgroundResource(R.drawable.selector_tab_indicator_white);
+                        view2.setBackgroundResource(R.drawable.selector_tab_indicator_blue);
+                        view3.setBackgroundResource(R.drawable.selector_tab_indicator_blue);
                         break;
                 }
             }
@@ -144,6 +186,28 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 
             }
         });
+
+        viewPager.setOffscreenPageLimit(3);
+        // Give the TabLayout the ViewPager
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
+        // tabLayout.setViewPager(viewPager);
+//        Bundle bundle = getIntent().getExtras();
+        String myTabselected = bundle1.getString("TAB_SELECTED");
+        setupTabIcons();
+        imgtoolbarhome.setOnClickListener(this);
+        imgSocial.setOnClickListener(this);
+
+        if (myTabselected.equals("Offers")) {
+            tabLayout.getTabAt(0).select();
+
+
+        } else if (myTabselected.equals("ApplyLoan")) {
+            tabLayout.getTabAt(1).select();
+
+        } else if (myTabselected.equals("ReferFriend")) {
+            tabLayout.getTabAt(2).select();
+        }
     }
 
     public void setTitle(String name) {
@@ -153,7 +217,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
     public String getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "New Schema";
+                return "New Offers";
             case 1:
                 return "Apply Loans";
             case 2:
@@ -165,10 +229,9 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.img_toolbar_home:
-                startActivity(new Intent(SchemesActivity.this,BannerActivity.class));
+                startActivity(new Intent(SchemesActivity.this, BannerActivity.class));
                 finish();
                 break;
             case R.id.img_social:
@@ -178,23 +241,23 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 
     }
 
-    public void socialDialog()
-    {
+    public void socialDialog() {
         imgSocial.setVisibility(View.INVISIBLE);
-        final Dialog socialdialog = new Dialog(SchemesActivity.this,android.R.style.Theme_Holo_Dialog_NoActionBar);
+        final Dialog socialdialog = new Dialog(SchemesActivity.this, android.R.style.Theme_Holo_Dialog_NoActionBar);
         socialdialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         socialdialog.setContentView(R.layout.dialog_social);
         WindowManager.LayoutParams params = socialdialog.getWindow().getAttributes();
-        params.y = 5; params.x = 5;
+        params.y = 5;
+        params.x = 5;
         params.gravity = Gravity.TOP | Gravity.RIGHT;
         socialdialog.getWindow().setAttributes(params);
         socialdialog.getWindow().getAttributes().windowAnimations = R.style.animationdialog;
         socialdialog.setCancelable(true);
         final ImageView imgMessage = (ImageView) socialdialog.findViewById(R.id.imgmsg);
-        final ImageView imgMap=(ImageView)socialdialog.findViewById(R.id.imgmap);
-        final ImageView imgWhatsApp=(ImageView)socialdialog.findViewById(R.id.imgwhatsapp);
-        final ImageView imgPhoneCall=(ImageView)socialdialog.findViewById(R.id.imgcall);
-        final ImageView imgcancel=(ImageView)socialdialog.findViewById(R.id.imgcancel);
+        final ImageView imgMap = (ImageView) socialdialog.findViewById(R.id.imgmap);
+        final ImageView imgWhatsApp = (ImageView) socialdialog.findViewById(R.id.imgwhatsapp);
+        final ImageView imgPhoneCall = (ImageView) socialdialog.findViewById(R.id.imgcall);
+        final ImageView imgcancel = (ImageView) socialdialog.findViewById(R.id.imgcancel);
         imgcancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -226,8 +289,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 
     }
 
-    public void sendWhatsAppMsg()
-    {
+    public void sendWhatsAppMsg() {
         boolean isWhatsappInstalled = whatsappInstalledOrNot("com.whatsapp");
         if (isWhatsappInstalled) {
             Intent waIntent = new Intent(Intent.ACTION_SEND);
@@ -264,16 +326,14 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
         return app_installed;
     }
 
-    public void dialPhoneCall()
-    {
+    public void dialPhoneCall() {
 
         Intent callIntent = new Intent(Intent.ACTION_DIAL);
         callIntent.setData(Uri.parse("tel:18002090188"));
         startActivity(callIntent);
     }
 
-    public void  sendMail()
-    {
+    public void sendMail() {
         Log.i("Send email", "");
         String[] TO = {""};
         String[] CC = {""};
@@ -290,11 +350,49 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
             startActivity(Intent.createChooser(emailIntent, "Send mail..."));
             finish();
             Log.i("Finish sending email...", "");
-        }
-        catch (android.content.ActivityNotFoundException ex) {
+        } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(SchemesActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
         }
     }
 
+
+    public void callSchemesResponseModel() {
+
+        tmflApi.getSchemesResponse().enqueue(new Callback<SchemesResponse>() {
+            @Override
+            public void onResponse(Call<SchemesResponse> call, Response<SchemesResponse> response) {
+
+                Log.e("Respobnse", new Gson().toJson(response.body()));
+                 CommonUtils.closeProgressDialog();
+                Log.e("SchemesResponse", new Gson().toJson(response.body()));
+                System.out.println("----------Response------------->" + datumArrayList);
+
+                datumArrayList = response.body().getData();
+
+                SchemesResponse model = response.body();
+
+                PreferenceHelper.insertObject("Scheme response", model);
+
+                setupViewPager(viewPager);
+                /*applyLoanFragment=new ApplyLoanFragment();
+                referFriendFragment=new ReferFriendFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("datamodel",response.body());
+                applyLoanFragment.setArguments(bundle);
+                referFriendFragment.setArguments(bundle);*/
+                // SchemesResponse mResponse1=response.body();
+                // PreferenceHelper.insertObject("SCHEMASDATA",mResponse1);
+                // lstnewschemes.setAdapter(new SchemesListAdapter(getActivity(), body));
+            }
+
+
+            @Override
+            public void onFailure(Call<SchemesResponse> call, Throwable t) {
+                Log.e("Resp", "Error");
+                 CommonUtils.closeProgressDialog();
+            }
+        });
+
+    }
 
 }

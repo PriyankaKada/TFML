@@ -1,5 +1,7 @@
 package com.tfml.fragment;
 
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.tfml.R;
+import com.tfml.auth.Constant;
 import com.tfml.auth.TmflApi;
 import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
@@ -30,8 +33,11 @@ import com.tfml.model.cityResponseModel.BranchCityResponseModel;
 import com.tfml.model.cityResponseModel.CityResponseModel;
 import com.tfml.model.cityResponseModel.InputCityModel;
 import com.tfml.model.productResponseModel.ProductListResponseModel;
+import com.tfml.model.schemesResponseModel.Datum;
+import com.tfml.model.schemesResponseModel.SchemesResponse;
 import com.tfml.model.stateResponseModel.BranchStateResponseModel;
 import com.tfml.model.stateResponseModel.StateResponseModel;
+import com.tfml.util.PreferenceHelper;
 import com.tfml.util.SetFonts;
 
 import java.util.ArrayList;
@@ -42,22 +48,25 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ApplyLoanFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener ,RadioGroup.OnCheckedChangeListener{
+public class ApplyLoanFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, RadioGroup.OnCheckedChangeListener {
 
-    private EditText txtFirstName, txtLastName, txtMobileNumber, txtLandlineNumber, txtEmailAddress, txtOrgnizationName,txtPincode;
-    private Spinner spnProduct, spSelectBranchState, spSelectBranchCity, spSelectBranch, spSelectCity, spSelectState, spSelectPinCode;
+    private EditText txtFirstName, txtLastName, txtMobileNumber, txtLandlineNumber, txtEmailAddress, txtOrgnizationName, txtPincode;
+    private Spinner spnProduct, spSelectBranchState, spSelectBranchCity, spSelectBranch, spSelectCity, spSelectState, spOffers;
     private RadioButton rdbLeadTypeIndividual, rdbLeadTypeOrganizational, rdbVecTypeCommercial, rdbVechTypeRefinance, rdbVechPassanger;
     private Button btnCancel, btnApplyLoan;
     private View view;
-    private RadioGroup radioGroupLeadType,radioGroupVehicleType;
-    private List<String> branchStateList, branchCityList, branchList, cityList, stateList, pinCodeList;
+    private RadioGroup radioGroupLeadType, radioGroupVehicleType;
+    private List<String> branchStateList, branchCityList, branchList, cityList, stateList, spOfferList;
     String strLeadTypechk = "";
     String strVechicalType = "";
     TmflApi tmflApi;
     InputModel inputLoanModel;
     InputCityModel inputCityModel;
     InputBranchModel inputBranchModel;
-    String productCode, branchStateCode, branchCityCode, branchCode,stateCode,cityCode;
+    String productCode, branchStateCode, branchCityCode, branchCode, stateCode, cityCode,strOfferId,strUserid;
+    List<Datum> arDatumList;
+    SchemesResponse response;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,10 +74,23 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_apply_loan, container, false);
         tmflApi = ApiService.getInstance().call();
+        Intent intent = getActivity().getIntent();
+        Bundle bundle = intent.getExtras();
+
+        response = (SchemesResponse) PreferenceHelper.getObject("Scheme response", SchemesResponse.class);
+
+        arDatumList = response.getData();
+
         init();
-        branchStateList=new ArrayList<String>();
+        spOfferList = new ArrayList<>();
+
+        for (int i = 0; i < arDatumList.size(); i++) {
+            spOfferList.add(response.getData().get(i).getTitle());
+        }
+        spOffers.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, spOfferList));
+        branchStateList = new ArrayList<String>();
         branchStateList.add("Select Branch State");
-        spSelectBranchState.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,branchStateList));
+        spSelectBranchState.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, branchStateList));
         branchCityList = new ArrayList<String>();
         branchCityList.add("Select Branch City");
         spSelectBranchCity.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, branchCityList));
@@ -77,13 +99,15 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         branchList.add("Select Branch");
         spSelectBranch.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, branchList));
 
-        stateList=new ArrayList<String>();
+        stateList = new ArrayList<String>();
         stateList.add("Select State");
-        spSelectState.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,stateList));
+        spSelectState.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, stateList));
 
         cityList = new ArrayList<String>();
         cityList.add("Select City");
         spSelectCity.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, cityList));
+
+
         return view;
     }
 
@@ -100,14 +124,14 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         txtLandlineNumber = (EditText) view.findViewById(R.id.edt_landline_no);
         txtEmailAddress = (EditText) view.findViewById(R.id.edt_email_address);
         txtOrgnizationName = (EditText) view.findViewById(R.id.edt_orgnization_name);
-        txtPincode=(EditText)view.findViewById(R.id.edt_pincode);
+        txtPincode = (EditText) view.findViewById(R.id.edt_pincode);
         spnProduct = (Spinner) view.findViewById(R.id.sp_select_product);
         spnProduct.setOnItemSelectedListener(this);
-        CommonUtils.showProgressDialog(getActivity(),"Please Wait.....");
+        CommonUtils.showProgressDialog(getActivity(), "Please Wait.....");
         SocialUtil.getProductListData(getActivity(), spnProduct);
         spSelectBranchState = (Spinner) view.findViewById(R.id.sp_select_branch_state);
         spSelectBranchState.setOnItemSelectedListener(this);
-        CommonUtils.showProgressDialog(getActivity(),"Please Wait.....");
+        CommonUtils.showProgressDialog(getActivity(), "Please Wait.....");
         SocialUtil.getBranchStateListData(getActivity(), spSelectBranchState, "Select branch state");
         spSelectBranchCity = (Spinner) view.findViewById(R.id.sp_select_branch_city);
         spSelectBranchCity.setOnItemSelectedListener(this);
@@ -115,13 +139,14 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         spSelectBranch.setOnItemSelectedListener(this);
         spSelectState = (Spinner) view.findViewById(R.id.sp_select_state);
         spSelectState.setOnItemSelectedListener(this);
-        CommonUtils.showProgressDialog(getActivity(),"Please Wait.....");
+        CommonUtils.showProgressDialog(getActivity(), "Please Wait.....");
         SocialUtil.getStateListData(getActivity(), spSelectState, "Select state");
         spSelectCity = (Spinner) view.findViewById(R.id.sp_select_city);
         spSelectCity.setOnItemSelectedListener(this);
+        spOffers = (Spinner) view.findViewById(R.id.sp_offers);
         //spSelectPinCode = (Spinner) view.findViewById(R.id.sp_select_pincode);
-        radioGroupLeadType=(RadioGroup)view.findViewById(R.id.radio_group_lead_type);
-        radioGroupVehicleType=(RadioGroup)view.findViewById(R.id.radio_group_vehicle_type) ;
+        radioGroupLeadType = (RadioGroup) view.findViewById(R.id.radio_group_lead_type);
+        radioGroupVehicleType = (RadioGroup) view.findViewById(R.id.radio_group_vehicle_type);
         radioGroupLeadType.setOnCheckedChangeListener(this);
         radioGroupVehicleType.setOnCheckedChangeListener(this);
         rdbLeadTypeIndividual = (RadioButton) view.findViewById(R.id.rdb_individual);
@@ -131,8 +156,8 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         rdbVechPassanger = (RadioButton) view.findViewById(R.id.rdb_passenger);
         btnCancel = (Button) view.findViewById(R.id.btn_cancel);
         btnApplyLoan = (Button) view.findViewById(R.id.btn_apply_laon);
-        SetFonts.setFonts(getActivity(),btnCancel,2);
-        SetFonts.setFonts(getActivity(),btnApplyLoan,2);
+        SetFonts.setFonts(getActivity(), btnCancel, 2);
+        SetFonts.setFonts(getActivity(), btnApplyLoan, 2);
         inputLoanModel = new InputModel();
         inputCityModel = new InputCityModel();
         inputBranchModel = new InputBranchModel();
@@ -140,7 +165,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         spSelectBranchState.setSelection(1);
         spSelectCity.setSelection(1);
         spSelectState.setSelection(1);
-       // spSelectPinCode.setSelection(1);
+        // spSelectPinCode.setSelection(1);
         spSelectBranch.setSelection(1);
         btnCancel.setOnClickListener(this);
         btnApplyLoan.setOnClickListener(this);
@@ -171,7 +196,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         if (!Validation.hasText(txtMobileNumber, "Please enter mobile number")) ret = false;
         if (!Validation.hasText(txtLandlineNumber, "Please enter landline number")) ret = false;
         if (!Validation.isValidEmail(txtEmailAddress.getText().toString())) ret = false;
-        if(!Validation.hasText(txtPincode,"Please enter Pincode number"))ret=false;
+        if (!Validation.hasText(txtPincode, "Please enter Pincode number")) ret = false;
         return ret;
     }
 
@@ -187,7 +212,9 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
     }
 
     public void callApplyLoanService() {
-
+        strUserid=PreferenceHelper.getString(PreferenceHelper.USER_ID);
+        inputLoanModel.setUserId(strUserid);
+      //  inputLoanModel.setOfferId(strOfferId);
         inputLoanModel.setFirstName(txtFirstName.getText().toString());
         inputLoanModel.setLastName(txtLastName.getText().toString());
         inputLoanModel.setMobileNumber(txtMobileNumber.getText().toString());
@@ -256,6 +283,8 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         Log.e("getVehicalType", inputmodel.getVehicalType());
         Log.e("getCity", inputmodel.getCity());
         Log.e("getState", inputmodel.getState());
+        Log.e("getUserID", inputmodel.getUserId());
+        Log.e("getOfferId",inputmodel.getOfferId());
         tmflApi.getApplyLoanResponse(inputmodel).enqueue(new Callback<ApplyLoanResponse>() {
             @Override
             public void onResponse(Call<ApplyLoanResponse> call, Response<ApplyLoanResponse> response) {
@@ -291,7 +320,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
                     branchStateCode = ((BranchStateResponseModel) parent.getItemAtPosition(position)).getTerrTerritoryid();
                     Log.e("BRANCHSTATECODE", branchStateCode);
                     inputCityModel.setStateId(branchStateCode);
-                    CommonUtils.showProgressDialog(getActivity(),"Please Wait.....");
+                    CommonUtils.showProgressDialog(getActivity(), "Please Wait.....");
                     SocialUtil.getBranchCityListData(getActivity(), spSelectBranchCity, inputCityModel, "Select Branch City");
                     break;
                 }
@@ -299,7 +328,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
                 if (position != 0) {
                     branchCityCode = ((BranchCityResponseModel) parent.getItemAtPosition(position)).getTerrTerritoryid();
                     inputBranchModel.setCityId(branchCityCode);
-                    CommonUtils.showProgressDialog(getActivity(),"Please Wait.....");
+                    CommonUtils.showProgressDialog(getActivity(), "Please Wait.....");
                     SocialUtil.getBranchList(getActivity(), spSelectBranch, inputBranchModel, "Select Branch");
                     break;
                 }
@@ -310,23 +339,24 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
                 }
                 break;
             case R.id.sp_select_state:
-                if(position!=0)
-                {
+                if (position != 0) {
                     stateCode = ((StateResponseModel) parent.getItemAtPosition(position)).getId();
                     Log.e("STATECODE", stateCode);
                     inputCityModel.setStateId(stateCode);
-                    CommonUtils.showProgressDialog(getActivity(),"Please Wait.....");
+                    CommonUtils.showProgressDialog(getActivity(), "Please Wait.....");
                     SocialUtil.getCityListData(getActivity(), spSelectCity, inputCityModel, "Select City");
                 }
 
                 break;
             case R.id.sp_select_city:
-                if(position!=0)
-                {
+                if (position != 0) {
                     cityCode = ((CityResponseModel) parent.getItemAtPosition(position)).getId();
                     Log.e("BranchCityCode", cityCode);
 
                 }
+                break;
+            case R.id.sp_offers:
+                strOfferId= String.valueOf(((SchemesResponse)parent.getItemAtPosition(position)).getData().get(position).getId());
                 break;
         }
 
@@ -340,44 +370,38 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-       switch (group.getId())
-       {
-           case R.id.rdb_organization:
-               if(checkedId==R.id.rdb_organization)
-               {
-                   strLeadTypechk = "Organizational";
-                   inputLoanModel.setLeadType(strLeadTypechk);
+        switch (group.getId()) {
+            case R.id.rdb_organization:
+                if (checkedId == R.id.rdb_organization) {
+                    strLeadTypechk = "Organizational";
+                    inputLoanModel.setLeadType(strLeadTypechk);
 
-               }
-               break;
-           case R.id.rdb_individual:
-               if(checkedId==R.id.rdb_individual)
-               {
-                   strLeadTypechk = "Individual";
-                   inputLoanModel.setLeadType(strLeadTypechk);
-               }
-               break;
-           case R.id.rdb_commercial:
-               if(checkedId==R.id.rdb_commercial)
-               {
-                   strVechicalType = "Commercial";
-                   inputLoanModel.setVehicalType(strVechicalType);
-               }
-               break;
-           case R.id.rdb_refinance:
-               if(checkedId==R.id.rdb_refinance)
-               {
-                   strVechicalType = "Refinance";
-                   inputLoanModel.setVehicalType(strVechicalType);
-               }
-               break;
-           case R.id.rdb_passenger:
-               if(checkedId==R.id.rdb_passenger)
-               {
-                   strVechicalType = "Passanger";
-                   inputLoanModel.setVehicalType(strVechicalType);
-               }
-               break;
-       }
+                }
+                break;
+            case R.id.rdb_individual:
+                if (checkedId == R.id.rdb_individual) {
+                    strLeadTypechk = "Individual";
+                    inputLoanModel.setLeadType(strLeadTypechk);
+                }
+                break;
+            case R.id.rdb_commercial:
+                if (checkedId == R.id.rdb_commercial) {
+                    strVechicalType = "Commercial";
+                    inputLoanModel.setVehicalType(strVechicalType);
+                }
+                break;
+            case R.id.rdb_refinance:
+                if (checkedId == R.id.rdb_refinance) {
+                    strVechicalType = "Refinance";
+                    inputLoanModel.setVehicalType(strVechicalType);
+                }
+                break;
+            case R.id.rdb_passenger:
+                if (checkedId == R.id.rdb_passenger) {
+                    strVechicalType = "Passanger";
+                    inputLoanModel.setVehicalType(strVechicalType);
+                }
+                break;
+        }
     }
 }

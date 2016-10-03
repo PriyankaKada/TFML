@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">TMFL</string>
     <string name="apply_loan">Apply Loan</string>
-    <string name="schemes">Schemes</string>
+    <string name="schemes">Offers</string>
     <string name="refer_friend">Refer Friend</string>
     <string name="loan_status">Loan Status</string>
     <string name="txt_login">Login</string>

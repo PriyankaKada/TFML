@@ -47,8 +47,8 @@ import static com.tfml.common.SocialUtil.tmflApi;
 
 
 public class StatementOfAccountFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateChangeListener {
-    private TextView txtAccDate;
-    private Button btnSubmit, btnBasicDetail, btnFinanceDetail;
+    private TextView txtAccDate,btnSubmit;
+    private Button btnBasicDetail, btnFinanceDetail;
     private ImageView btnDownload;
     private View view;
     private Spinner spnContractNo;
@@ -75,7 +75,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
     public void init() {
         spnContractNo = (Spinner) view.findViewById(R.id.spnContractNo);
         txtAccDate = (TextView) view.findViewById(R.id.txt_acc_select_date);
-        btnSubmit = (Button) view.findViewById(R.id.btn_submit);
+        btnSubmit = (TextView) view.findViewById(R.id.btn_submit);
         btnDownload = (ImageView) view.findViewById(R.id.img_download);
         btnBasicDetail = (Button) view.findViewById(R.id.btn_basic_detail);
         btnFinanceDetail = (Button) view.findViewById(R.id.btn_finance_detail);

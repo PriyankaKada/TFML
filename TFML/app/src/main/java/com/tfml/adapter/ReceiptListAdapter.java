@@ -75,15 +75,15 @@ public class ReceiptListAdapter extends BaseAdapter {
         else
 
         holder=(Holder)convertView.getTag();
-        for(int i=0;i<responseEnvelope.getZCISResponse().getI_REC().size();i++)
-        {
-            holder.txtReceiptDate.setText(responseEnvelope.getZCISResponse().getI_REC().get(i).getZFBDT());
-            holder.txtReceiptAmount.setText(responseEnvelope.getZCISResponse().getI_REC().get(i).getDMBTR());
-            holder.txtReceiptNo.setText(responseEnvelope.getZCISResponse().getI_REC().get(i).getBELNR());
-            holder.txtInstNo.setText(responseEnvelope.getZCISResponse().getI_REC().get(i).getCHECT());
-            holder.txtMode.setText(responseEnvelope.getZCISResponse().getI_REC().get(i).getSHKZG());
-            holder.txtType.setText(responseEnvelope.getZCISResponse().getI_REC().get(i).getANBWA());
-        }
+//        for(int i=0;i<responseEnvelope.getZCISResponse().getI_REC().size();i++)
+//        {
+            holder.txtReceiptDate.setText(responseEnvelope.getZCISResponse().getI_REC().get(position).getZFBDT()+" / "+responseEnvelope.getZCISResponse().getI_REC().get(position).getBELNR());
+            holder.txtReceiptAmount.setText(responseEnvelope.getZCISResponse().getI_REC().get(position).getDMBTR());
+         //   holder.txtReceiptNo.setText(responseEnvelope.getZCISResponse().getI_REC().get(i).getBELNR());
+            holder.txtInstNo.setText(responseEnvelope.getZCISResponse().getI_REC().get(position).getCHECT());
+            holder.txtMode.setText(responseEnvelope.getZCISResponse().getI_REC().get(position).getSHKZG());
+            holder.txtType.setText(responseEnvelope.getZCISResponse().getI_REC().get(position).getANBWA());
+//        }
         final Holder finalHolder = holder;
         holder.img_expand.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,6 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="10dp"
     android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/whit_rect_bg"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="2dp"
+            android:background="#F26711"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:padding="10dp"
+                android:text="Contract No : "
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:id="@+id/textView" />
+
+            <TextView
+                android:id="@+id/txt_contract_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:textSize="12dp"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="1"
+            android:background="#F39C11"
+            android:padding="2dp"
+            android:orientation="horizontal"
+           >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="RC No. : "
+                android:textSize="12dp"
+                android:padding="10dp"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/txt_rc_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:textSize="12dp"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@drawable/whit_rect_bg">
+
+        <TextView
+            android:id="@+id/txt_product_name"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_toLeftOf="@+id/img_download"
+            android:layout_weight="1"
+            android:textColor="@color/text_black"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/img_download"
+            android:layout_width="25dp"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@id/txt_product_name"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_download" />
+
+
+        <TextView
+            android:id="@+id/txt_next_due_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_product_name"
+            android:text="Next Due Date : "
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/txt_next_due_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/txt_next_due_date_label"
+            android:layout_toRightOf="@id/txt_next_due_date_label"
+             />
+
+        <TextView
+            android:id="@+id/txt_current_emi_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/img_download"
+            />
+
+        <TextView
+            android:id="@+id/txt_current_emi_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/txt_current_emi_amount"
+            android:layout_toLeftOf="@id/txt_current_emi_amount"
+            android:text="Current EMI : "
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/txt_last_payment_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/txt_next_due_date_label"
+            android:textColor="@android:color/black"
+            android:text="Last Payment :"/>
+        <TextView
+            android:id="@+id/txt_last_payment_date"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/txt_last_payment_label"
+            android:layout_below="@id/txt_next_due_date"
+           />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/txt_previous_emi"
+            android:layout_below="@id/txt_current_emi_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            />
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/txt_previous_emi_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/text_black"
+            android:text="Previous EMI :"
+            android:layout_toLeftOf="@+id/txt_previous_emi"
+            android:layout_alignBottom="@+id/txt_previous_emi" />
+        <View
+            android:id="@+id/view_seprator"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_height="1dp"
+            android:layout_below="@+id/txt_last_payment_date"
+            android:background="@android:color/darker_gray"/>
+        <TextView
+            android:id="@+id/txt_overdue_label"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/view_seprator"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="Overdue : "/>
+        <TextView
+            android:id="@+id/txt_overdue_amount"
+            android:layout_below="@id/view_seprator"
+            android:layout_toRightOf="@id/txt_overdue_label"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/txt_repayment_mode"
+            android:layout_below="@+id/view_seprator"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/txt_repayment_mode_label"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_alignBottom="@+id/txt_repayment_mode"
+            android:layout_toLeftOf="@+id/txt_repayment_mode"
+            android:text="Repayment Mode :"
+            android:textColor="@android:color/black"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id/lin_emi_button"
+            android:layout_below="@id/txt_repayment_mode_label"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btn_pay_emi"
+                android:layout_width="wrap_content"
+                android:textAllCaps="false"
+                android:background="@drawable/btn_bg"
+                android:layout_height="wrap_content"
+                android:text="Pay EMI"/>
+            <Button
+                android:id="@+id/btn_more_detail"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textAllCaps="false"
+                android:background="@drawable/btn_bg"
+                android:layout_height="wrap_content"
+                android:text="More Details"/>
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

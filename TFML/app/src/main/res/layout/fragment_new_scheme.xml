@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="We pleased to introduce NEW SCHEMES"
+        android:text="We pleased to introduce NEW OFFERS"
         android:textSize="18sp"
         />
      <LinearLayout

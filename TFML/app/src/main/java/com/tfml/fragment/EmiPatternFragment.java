@@ -42,7 +42,7 @@ public class EmiPatternFragment extends Fragment
          contractLst.add("Select Contract No");
          contractLst.add("0000005000197989");
          spnContractNo.setSelection(1);
-         spnContractNo.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_dropdown_item,contractLst));
+         spnContractNo.setAdapter(new ArrayAdapter<String>(getActivity(),R.layout.support_simple_spinner_dropdown_item,contractLst));
 
          frmEmiPattern=(FrameLayout)view.findViewById(R.id.frm_emi_detail);
           loadEmiDetail();

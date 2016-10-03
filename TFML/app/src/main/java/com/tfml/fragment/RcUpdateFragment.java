@@ -15,9 +15,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.tfml.R;
@@ -27,9 +30,12 @@ import com.tfml.common.CommonUtils;
 import com.tfml.model.uploadRcResponseModel.RcUploadDataInputModel;
 import com.tfml.model.uploadRcResponseModel.RcUploadResponseModel;
 import com.tfml.util.ImageDecoding;
+import com.tfml.util.PreferenceHelper;
 import com.tfml.util.SetFonts;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,12 +48,16 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
     private Button btnRcUpload;
     private View view;
     private ImageView img_upload;
+    private Spinner spnContractNo;
     Uri selectedImage;
     TmflApi tmflApi;
     String imgPhotoUrl,imgExt;
+    private List<String> contractLst;
     static final int REQUEST_TAKE_PHOTO = 1;
     int mtype;
     RcUploadDataInputModel rcUploadDataInputModel;
+    String strContractNo,strUserId ;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -63,9 +73,26 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
        txtRcNo=(EditText)view.findViewById(R.id.txt_rc_no);
         btnRcUpload=(Button)view.findViewById(R.id.btn_rc_upload);
         img_upload=(ImageView)view.findViewById(R.id.img_upload);
+        spnContractNo=(Spinner)view.findViewById(R.id.spnContractNo) ;
+        contractLst=new ArrayList<String>();
+        contractLst.add("Select Contract No");
+        contractLst.add("0000005000197989");
+        spnContractNo.setAdapter(new ArrayAdapter<String>(getActivity(),R.layout.support_simple_spinner_dropdown_item,contractLst));
+        spnContractNo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                strContractNo = spnContractNo.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         SetFonts.setFonts(getActivity(),btnRcUpload,2);
         btnRcUpload.setOnClickListener(this);
-
+        strUserId=PreferenceHelper.getString(PreferenceHelper.USER_ID);
     }
 
     @Override
@@ -143,8 +170,8 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
                     imgExt = imgPhotoUrl.substring(imgPhotoUrl.lastIndexOf(".") + 1, imgPhotoUrl.length());
                     Log.e("ImageUrl",imgPhotoUrl);
                     rcUploadDataInputModel=new RcUploadDataInputModel();
-                    rcUploadDataInputModel.setUserId("11");
-                    rcUploadDataInputModel.setContractNo("C124");
+                    rcUploadDataInputModel.setUserId(strUserId);
+                    rcUploadDataInputModel.setContractNo(strContractNo);
                     rcUploadDataInputModel.setRcNo(txtRcNo.getText().toString());
                     File file = new File(imgPhotoUrl);
                     rcUploadDataInputModel.setImage(file);

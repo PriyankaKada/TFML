@@ -57,7 +57,27 @@ public class ReferFriendInputModel {
     @SerializedName("refered_by")
     @Expose
     private String referedBy;
+    @SerializedName("user_id")
+    @Expose
+    private String userId;
+    @SerializedName("offer_id")
+    private String offerId;
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getOfferId() {
+        return offerId;
+    }
+
+    public void setOfferId(String offerId) {
+        this.offerId = offerId;
+    }
 
     public String getOrganisationName() {
         return organisationName;

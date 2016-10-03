@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textStyle="bold"
-            android:text="New Schemes"
+            android:text="New Offers"
             android:textSize="18sp"
             android:textColor="@color/white"
             ></TextView>
