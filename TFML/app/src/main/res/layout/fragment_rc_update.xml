@@ -1,9 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.tfml.fragment.RcUpdateFragment">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.tfml.fragment.RcUpdateFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,8 +50,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:elevation="5dp">
+        android:elevation="5dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -171,34 +171,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/selector_layout_rectangle"
         android:orientation="horizontal"
-        android:padding="10dp"
-        android:background="@drawable/selector_layout_rectangle">
+        android:padding="10dp">
 
-      <EditText
-          android:id="@+id/txt_rc_no"
-          android:layout_width="80dp"
-          android:layout_height="50dp"
-          android:layout_weight="1"
-          android:background="@drawable/whit_rect_bg"
-          android:hint="*Enter RC Number"/>
+        <EditText
+            android:id="@+id/txt_rc_no"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/whit_rect_bg"
+            android:hint="*Enter RC Number"
+            android:textSize="14sp"/>
+
         <Button
             android:id="@+id/btn_rc_upload"
-            android:layout_width="80dp"
-            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDark"
+            android:text="@string/btn_rc_upload_image"
             android:textAllCaps="false"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/white"
-            android:text="@string/btn_rc_upload_image"/>
+            android:textColor="@color/white"/>
 
     </LinearLayout>
+
     <ImageView
         android:id="@+id/img_upload"
-        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="10dp"
         android:src="@drawable/ic_image"/>
 
 </LinearLayout>
