@@ -62,7 +62,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
     List<Datum> arDatumList;
     SchemesResponse response;
     ArrayList<String> spOfferList;
-    String strUserid;
+    String strUserid,strOfferId;
     View view;
 
     @Override
@@ -137,6 +137,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
         spSelectCity = (Spinner) view.findViewById(R.id.sp_select_city);
         spSelectCity.setOnItemSelectedListener(this);
         spOffers = (Spinner) view.findViewById(R.id.sp_offers);
+        spOffers.setOnItemSelectedListener(this);
         radioGroupLeadType = (RadioGroup) view.findViewById(R.id.radio_group_lead_type);
         radioGroupVehicleType = (RadioGroup) view.findViewById(R.id.radio_group_vehicle_type);
         radioGroupLeadType.setOnCheckedChangeListener(this);
@@ -196,7 +197,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
             loadReferFriendsResponse(inputReferFriendModel);
 
         } else {
-            CommonUtils.showAlert1(getActivity(), "", "Please Fill the Required Detail", false);
+            Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -341,7 +342,10 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
                     Log.e("BranchCityCode", cityCode);
                     inputBranchModel.setCityId(cityCode);
                 }
+            case R.id.sp_offers:
+                strOfferId= String.valueOf(((SchemesResponse)parent.getItemAtPosition(position)).getData().get(position).getId());
                 break;
+
         }
 
     }

@@ -144,6 +144,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         spSelectCity = (Spinner) view.findViewById(R.id.sp_select_city);
         spSelectCity.setOnItemSelectedListener(this);
         spOffers = (Spinner) view.findViewById(R.id.sp_offers);
+        spOffers.setOnItemSelectedListener(this);
         //spSelectPinCode = (Spinner) view.findViewById(R.id.sp_select_pincode);
         radioGroupLeadType = (RadioGroup) view.findViewById(R.id.radio_group_lead_type);
         radioGroupVehicleType = (RadioGroup) view.findViewById(R.id.radio_group_vehicle_type);
@@ -182,7 +183,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
                     callSubmit();
 
                 } else {
-                    CommonUtils.showAlert1(getActivity(), "", "No Internet Connection", false);
+                    Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
                 }
                 break;
 
@@ -207,7 +208,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
             loadApplyLoanResponse(inputLoanModel);
 
         } else {
-            CommonUtils.showAlert1(getActivity(), "", "Please Fill the Required Detail", false);
+            Toast.makeText(getActivity(), "Please Fill the Required Detail", Toast.LENGTH_SHORT).show();
         }
     }
 

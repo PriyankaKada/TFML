@@ -7,6 +7,8 @@ import com.tfml.model.LoanStatusResponseModel.LoanStatusInputModel;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusResponse;
 import com.tfml.model.QuickcallResponseModel.QuickCallInputModel;
 import com.tfml.model.QuickcallResponseModel.QuickCallResponse;
+import com.tfml.model.accountStmtPdfResponseModel.AccountStatementInputModel;
+import com.tfml.model.accountStmtPdfResponseModel.AccountStmtResponse;
 import com.tfml.model.applyLoanResponseModel.ApplyLoanResponse;
 import com.tfml.model.applyLoanResponseModel.InputModel;
 import com.tfml.model.branchResponseModel.BranchResponseModel;
@@ -19,6 +21,8 @@ import com.tfml.model.downloadResponseModel.DownloadResponse;
 import com.tfml.model.bannerResponseModel.BannerlistResponse;
 import com.tfml.model.loginResponseModel.LoginRequestModel;
 import com.tfml.model.loginResponseModel.LoginResponseModel;
+import com.tfml.model.preClosurePdfResponseModel.PreClosureInputModel;
+import com.tfml.model.preClosurePdfResponseModel.PreClosureStmtPdfResponse;
 import com.tfml.model.productResponseModel.ProductListResponseModel;
 import com.tfml.model.referFriendResponseModel.ReferFriendInputModel;
 import com.tfml.model.referFriendResponseModel.ReferFriendResponseModel;
@@ -120,5 +124,8 @@ public interface TmflApi {
     Call<ContractsResponseModel>getContractListData(@Body ContractsInputModel contractsInputModel);
     @POST(Constant.LOGIN)
     Call<LoginResponseModel>getLoginResponse(@Body LoginRequestModel loginRequestModel);
-
+    @POST(Constant.ACCOUNT_STATEMENT_DOWNLOAD)
+    Call<AccountStmtResponse>getAccStmtDownload(@Body AccountStatementInputModel accountStatementInputModel);
+     @POST(Constant.PRECLOSURE_STATEMENT_DOWNLOAD)
+    Call<PreClosureStmtPdfResponse>getPreClosureDownload(@Body PreClosureInputModel preClosureInputModel);
 }

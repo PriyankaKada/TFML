@@ -1,5 +1,10 @@
 package com.tfml.fragment;
 
+import android.app.DownloadManager;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,8 +27,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tfml.R;
+import com.tfml.auth.TmflApi;
+import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
 import com.tfml.common.SoapApiService;
+import com.tfml.model.accountStmtPdfResponseModel.AccountStatementInputModel;
+import com.tfml.model.accountStmtPdfResponseModel.AccountStmtResponse;
 import com.tfml.model.schemesResponseModel.Datum;
 import com.tfml.model.soapModel.request.ReqBody;
 import com.tfml.model.soapModel.request.ReqData;
@@ -34,7 +43,13 @@ import com.tfml.util.DatePickerFragment;
 import com.tfml.util.PreferenceHelper;
 import com.tfml.util.SetFonts;
 
+import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -42,6 +57,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Url;
 
 import static com.tfml.common.SocialUtil.tmflApi;
 
@@ -62,12 +78,20 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
     String contractNo;
     private List<String> contractLst;
     ResponseEnvelope.Body responseEnvelope;
-
+    String strPathUrl;
+    TmflApi tmflSoapApi,tmfl;
+    AccountStatementInputModel accountStatementInputModel;
+    AccountStmtResponse accountStmtResponse;
+    ProgressDialog progressdialog;
+    String servicestring = Context.DOWNLOAD_SERVICE;
+    DownloadManager downloadmanager;
+    public static final int Progress_Dialog_Progress = 0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_statment_of_account, container, false);
+        tmfl= ApiService.getInstance().call();
         init();
         return view;
     }
@@ -105,6 +129,8 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
         btnDownload.setOnClickListener(this);
         btnBasicDetail.setOnClickListener(this);
         btnFinanceDetail.setOnClickListener(this);
+        accountStatementInputModel=new AccountStatementInputModel();
+        accountStmtResponse=new AccountStmtResponse();
 
 
     }
@@ -131,6 +157,15 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 
                 break;
             case R.id.img_download:
+                if(CommonUtils.isNetworkAvailable(getActivity()))
+                {
+                    callDownloadService();
+                    getDownloadData(accountStatementInputModel);
+                }
+                else
+                {
+                    Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.btn_basic_detail:
                 callBasicDetail();
@@ -158,8 +193,8 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
         reqData.setREQDATE(txtAccDate.getText().toString());
         reqBody.setReqData(reqData);
         requestEnvelpe.setReqBody(reqBody);
-        tmflApi = SoapApiService.getInstance().call();
-        tmflApi.callStmtAcRequest(requestEnvelpe).enqueue(new Callback<ResponseEnvelope>() {
+        tmflSoapApi = SoapApiService.getInstance().call();
+        tmflSoapApi.callStmtAcRequest(requestEnvelpe).enqueue(new Callback<ResponseEnvelope>() {
             @Override
             public void onResponse(Call<ResponseEnvelope> call, Response<ResponseEnvelope> response) {
                 CommonUtils.closeProgressDialog();
@@ -193,6 +228,57 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
         });
 
     }
+
+    public void callDownloadService()
+    {
+
+      if(PreferenceHelper.API_TOKEN!=null)
+      {
+          accountStatementInputModel.setApiToken(PreferenceHelper.getString(PreferenceHelper.API_TOKEN));
+      }
+        if(contractNo!=null)
+      {
+          accountStatementInputModel.setContractNo(contractNo);
+      }
+      if(txtAccDate.getText().toString()!=null)
+      {
+          accountStatementInputModel.setRequestDate(txtAccDate.getText().toString());
+      }
+
+
+    }
+
+
+    public void getDownloadData(AccountStatementInputModel accountStatementInputModel)
+    {
+
+        tmfl.getAccStmtDownload(accountStatementInputModel).enqueue(new Callback<AccountStmtResponse>() {
+          @Override
+          public void onResponse(Call<AccountStmtResponse> call, Response<AccountStmtResponse> response) {
+
+                  Log.e("File Path",response.body().getFilepath());
+
+              strPathUrl=response.body().getFilepath().toString();
+
+              downloadmanager = (DownloadManager)getActivity(). getSystemService(servicestring);
+            //  startDownload(strPathUrl);
+              Uri uri = Uri.parse(strPathUrl);
+              DownloadManager.Request request = new DownloadManager.Request(uri);
+              Long reference = downloadmanager.enqueue(request);
+
+          }
+
+          @Override
+          public void onFailure(Call<AccountStmtResponse> call, Throwable t) {
+
+          }
+      });
+    }
+    public void startDownload(String strPathUrl)
+    {
+        new DownloadFileAsync().execute(strPathUrl);
+    }
+
 
     public void callBasicDetail() {
         setColorButtonBasic();
@@ -257,5 +343,61 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 
         }
     };
+
+
+    class DownloadFileAsync extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+           // showDialog(DIALOG_DOWNLOAD_PROGRESS);
+           // showDialog(Progress_Dialog_Progress);
+            CommonUtils.showProgressDialog(getActivity(),"Download PDF Please Wait.......");
+        }
+
+        @Override
+        protected String doInBackground(String... aurl) {
+            int count;
+
+            try {
+
+                URL url = new URL(aurl[0]);
+                URLConnection conexion = url.openConnection();
+                conexion.connect();
+
+                int lenghtOfFile = conexion.getContentLength();
+                Log.d("ANDRO_ASYNC", "Lenght of file: " + lenghtOfFile);
+
+                InputStream input = new BufferedInputStream(url.openStream());
+                OutputStream output = new FileOutputStream("/sdcard/tmfl.pdf");
+
+                byte data[] = new byte[1024];
+
+                long total = 0;
+
+                while ((count = input.read(data)) != -1) {
+                    total += count;
+                    publishProgress(""+(int)((total*100)/lenghtOfFile));
+                    output.write(data, 0, count);
+                }
+
+                output.flush();
+                output.close();
+                input.close();
+            } catch (Exception e) {}
+            return null;
+
+        }
+        protected void onProgressUpdate(String... progress) {
+            Log.d("ANDRO_ASYNC",progress[0]);
+          //  mProgressDialog.setProgress(Integer.parseInt(progress[0]));
+
+        }
+
+        @Override
+        protected void onPostExecute(String unused) {
+           CommonUtils.closeProgressDialog();
+        }
+    }
 
 }

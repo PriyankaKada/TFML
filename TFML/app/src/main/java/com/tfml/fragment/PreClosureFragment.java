@@ -1,5 +1,6 @@
 package com.tfml.fragment;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,8 +24,14 @@ import android.widget.Toast;
 import com.tfml.R;
 import com.tfml.adapter.PreClosureAdapter;
 import com.tfml.adapter.ReceiptListAdapter;
+import com.tfml.auth.TmflApi;
+import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
 import com.tfml.common.SoapApiService;
+import com.tfml.model.accountStmtPdfResponseModel.AccountStatementInputModel;
+import com.tfml.model.accountStmtPdfResponseModel.AccountStmtResponse;
+import com.tfml.model.preClosurePdfResponseModel.PreClosureInputModel;
+import com.tfml.model.preClosurePdfResponseModel.PreClosureStmtPdfResponse;
 import com.tfml.model.soapModel.preClosureRequest.RequestEnvelope;
 import com.tfml.model.soapModel.request.ReqBody;
 import com.tfml.model.soapModel.request.ReqData;
@@ -32,6 +39,7 @@ import com.tfml.model.soapModel.request.RequestEnvelpe;
 import com.tfml.model.soapModel.response.ResponseEnvelope;
 import com.tfml.util.DatePickerDialog;
 import com.tfml.util.DatePickerFragment;
+import com.tfml.util.PreferenceHelper;
 import com.tfml.util.SetFonts;
 
 
@@ -64,12 +72,20 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
     TextView txtGenDate,txtBal;
     String strContractNo,strAccdate,strDate;
     LinearLayout linTable,llHeader;
+    TmflApi tmflSoapApi,tmflApi;
+    PreClosureInputModel preClosureInputModel;
+    PreClosureStmtPdfResponse preClosureStmtPdfResponse;
     com.tfml.model.soapModel.preClousreResponse.ResponseEnvelope.Body responseEnvelope;
+    String servicestring = Context.DOWNLOAD_SERVICE;
+    DownloadManager downloadmanager;
+    String strPathUrl;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_pre_closure, container, false);
+        tmflApi= ApiService.getInstance().call();
         init();
         return view;
 
@@ -108,6 +124,9 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
          btnSubmit.setOnClickListener(this);
          txtAccDate.setOnClickListener(this);
          btnDownload.setOnClickListener(this);
+         preClosureInputModel=new PreClosureInputModel();
+         preClosureStmtPdfResponse=new PreClosureStmtPdfResponse();
+
      }
 
 
@@ -141,6 +160,15 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
                 }
                 break;
             case R.id.img_download:
+                if(CommonUtils.isNetworkAvailable(getActivity()))
+                {
+                    callDownloadService();
+                    getDownloadData(preClosureInputModel);
+                }
+                else
+                {
+                    Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
         }
@@ -189,8 +217,8 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
         reqData.setReqDate(txtAccDate.getText().toString());
         reqBody.setReqData(reqData);
         requestEnvelope.setReqBody(reqBody);
-        tmflApi = SoapApiService.getInstance().call();
-        tmflApi.callClosureTableRequest(requestEnvelope).enqueue(new Callback<com.tfml.model.soapModel.preClousreResponse.ResponseEnvelope>() {
+        tmflSoapApi = SoapApiService.getInstance().call();
+        tmflSoapApi.callClosureTableRequest(requestEnvelope).enqueue(new Callback<com.tfml.model.soapModel.preClousreResponse.ResponseEnvelope>() {
             @Override
             public void onResponse(Call<com.tfml.model.soapModel.preClousreResponse.ResponseEnvelope> call, Response<com.tfml.model.soapModel.preClousreResponse.ResponseEnvelope> response) {
                // Log.e("ResponseModel",response.body().getBody().getZ_TERMINALDUESResponse().getI_DTL().get(0).getCONTRACTNO());
@@ -217,5 +245,50 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
             }
         });
     }
+
+    public void callDownloadService()
+    {
+
+        if(PreferenceHelper.API_TOKEN!=null)
+        {
+            preClosureInputModel.setApiToken(PreferenceHelper.getString(PreferenceHelper.API_TOKEN));
+        }
+        if(strContractNo!=null)
+        {
+            preClosureInputModel.setContractNo(strContractNo);
+        }
+        if(txtAccDate.getText().toString()!=null)
+        {
+            preClosureInputModel.setRequestDate(txtAccDate.getText().toString());
+        }
+
+
+    }
+
+
+    public void getDownloadData(PreClosureInputModel preClosureInputModel) {
+        tmflApi.getPreClosureDownload(preClosureInputModel).enqueue(new Callback<PreClosureStmtPdfResponse>() {
+            @Override
+            public void onResponse(Call<PreClosureStmtPdfResponse> call, Response<PreClosureStmtPdfResponse> response) {
+                Log.e("File Path",response.body().getFilepath());
+
+                strPathUrl=response.body().getFilepath().toString();
+
+
+                downloadmanager = (DownloadManager)getActivity(). getSystemService(servicestring);
+                //startDownload(strPathUrl);
+                Uri uri = Uri.parse(strPathUrl);
+                DownloadManager.Request request = new DownloadManager.Request(uri);
+                Long reference = downloadmanager.enqueue(request);
+            }
+
+            @Override
+            public void onFailure(Call<PreClosureStmtPdfResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+
 
 }
