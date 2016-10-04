@@ -13,8 +13,8 @@ import com.tfml.R;
 import com.tfml.util.SetFonts;
 
 public class ForgotPasswordActivity extends BaseActivity implements View.OnClickListener {
-    private EditText edtEmail;
-    private Button btnSendLink;
+    private EditText txtUserId;
+    private Button btnSubmit;
     private ImageView imgBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +24,11 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
     }
     public void init()
     {
-        edtEmail=(EditText)findViewById(R.id.txt_email_address);
-        btnSendLink=(Button)findViewById(R.id.btn_send_link);
+        txtUserId=(EditText)findViewById(R.id.txt_user_id);
+        btnSubmit=(Button)findViewById(R.id.btn_submit);
         imgBack=(ImageView)findViewById(R.id.img_forgot_pass_back);
         SetFonts.setFonts(this,imgBack,2);
-        btnSendLink.setOnClickListener(this);
+        btnSubmit.setOnClickListener(this);
         imgBack.setOnClickListener(this);
     }
 
@@ -36,7 +36,7 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.btn_send_link:
+            case R.id.btn_submit:
                 break;
             case R.id.img_forgot_pass_back:
                 startActivity(new Intent(ForgotPasswordActivity.this,LoginActivity.class));
