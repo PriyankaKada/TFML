@@ -17,9 +17,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="btn_rc_upload_image">Upload RC Image</string>
     <string name="txt_forgot_pass_header">Forgot Your Password ?</string>
-    <string name="txt_send_link">SEND LINK</string>
-    <string name="txt_forgot_pass_desc">Enter your E-mail address and we Will Send you link to reset your password.</string>
+    <string name="btn_submit">Submit</string>
+    <string name="txt_forgot_pass_desc">Enter your User Id and we Will Send you link to reset your password.</string>
     <string name="txt_branch_locator">Branch Locator</string>
     <string name="txt_remember_pass">Remember Password</string>
     <string name="txt_forgot_pass">Forgot Password?</string>
+    <string name="txt_user_id">User Id</string>
 </resources>

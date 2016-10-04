@@ -194,6 +194,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
         date.setCallBack(ondate);
         date.show(getFragmentManager(), "Date Picker");
     }
+
     /**
      * The Ondate.
      */
@@ -288,7 +289,6 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
             }
         });
     }
-
 
 
 }
