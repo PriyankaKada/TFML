@@ -66,6 +66,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
         init();
     }
 
+
     public void init() {
         txtTitleContract=(TextView)findViewById(R.id.txt_title_contract) ;
         txtTotalCount = (TextView) findViewById(R.id.txt_total_count);
@@ -98,6 +99,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
         imgDrawer.setOnClickListener(this);
         contractsInputModel=new ContractsInputModel();
         contractsResponseModel=new ContractsResponseModel();
+
         strApiToken= PreferenceHelper.getString(PreferenceHelper.API_TOKEN);
         strUserId=PreferenceHelper.getString(PreferenceHelper.USER_ID);
         contractsInputModel.setUser_id(strUserId);

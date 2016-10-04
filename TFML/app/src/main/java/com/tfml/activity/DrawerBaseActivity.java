@@ -36,11 +36,11 @@ public class DrawerBaseActivity extends BaseActivity {
     ListView lsvNavList;
     ImageView imgCancel;
     protected FrameLayout frameLayout;
-    String TITLES[] = { "New Schemes", "Apply Loan","Refer Friend","Downloads",
-            "Change Password","Logout","Contact Us","Phone Call","WhatsApp Call","Mail Us","Locate us" };
-    int ICONS[] = { R.drawable.ic_scheme_selected, R.drawable.ic_apply_loan_selected, R.drawable.ic_refer_friends_selected,
-            R.drawable.ic_download, R.drawable.ic_change_pass_selected,R.drawable.ic_logout,
-            R.drawable.ic_checked, R.drawable.ic_call_non_selected,R.drawable.icon_whatsapp,
+    String TITLES[] = {"New Schemes", "Apply Loan", "Refer Friend", "Downloads",
+            "Change Password", "Logout", "Contact Us", "Phone Call", "WhatsApp Call", "Mail Us", "Locate us"};
+    int ICONS[] = {R.drawable.ic_scheme_selected, R.drawable.ic_apply_loan_selected, R.drawable.ic_refer_friends_selected,
+            R.drawable.ic_download, R.drawable.ic_change_pass_selected, R.drawable.ic_logout,
+            R.drawable.ic_checked, R.drawable.ic_call_non_selected, R.drawable.icon_whatsapp,
             R.drawable.ic_email, R.drawable.ic_locate_us,};
 
     @Override
@@ -48,8 +48,8 @@ public class DrawerBaseActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer_base);
         frameLayout = (FrameLayout) findViewById(R.id.framelayout_base_container);
-        lsvNavList=(ListView)findViewById(R.id.lst_navigation_menu);
-        imgCancel=(ImageView)findViewById(R.id.img_cancel);
+        lsvNavList = (ListView) findViewById(R.id.lst_navigation_menu);
+        imgCancel = (ImageView) findViewById(R.id.img_cancel);
         imgCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,41 +64,37 @@ public class DrawerBaseActivity extends BaseActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         drawerToggle = new ActionBarDrawerToggle(DrawerBaseActivity.this, drawerLayout, R.string.refer_friend, R.string.refer_friend);
         drawerLayout.setDrawerListener(drawerToggle);
-        lsvNavList.setAdapter( new DrawerAdapter( this, TITLES, ICONS ) );
+        lsvNavList.setAdapter(new DrawerAdapter(this, TITLES, ICONS));
         lsvNavList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch ( position )
-                {
+                switch (position) {
                     case 0://New Schemes
-                        Intent intentSchema=new Intent(DrawerBaseActivity.this,SchemesActivity.class);
+                        Intent intentSchema = new Intent(DrawerBaseActivity.this, SchemesActivity.class);
                         intentSchema.putExtra("TAB_SELECTED", Constant.ISSCHEMASTABSELECT);
                         startActivity(intentSchema);
                         break;
 
                     case 1://Apply Loan
-                        Intent intentApplyLoan=new Intent(DrawerBaseActivity.this,SchemesActivity.class);
+                        Intent intentApplyLoan = new Intent(DrawerBaseActivity.this, SchemesActivity.class);
                         intentApplyLoan.putExtra("TAB_SELECTED", Constant.ISAPPLYLOANSELECT);
                         startActivity(intentApplyLoan);
                         break;
                     case 2://Refer Friends
-                        Intent intentReferFriend=new Intent(DrawerBaseActivity.this,SchemesActivity.class);
+                        Intent intentReferFriend = new Intent(DrawerBaseActivity.this, SchemesActivity.class);
                         intentReferFriend.putExtra("TAB_SELECTED", Constant.ISREFERFREINDSELECT);
                         startActivity(intentReferFriend);
                         break;
                     case 3://Download
-                        startActivity(new Intent(DrawerBaseActivity.this,DownloadDataActivity.class));
+                        startActivity(new Intent(DrawerBaseActivity.this, DownloadDataActivity.class));
                         break;
                     case 4://Change Password
-                        startActivity(new Intent(DrawerBaseActivity.this,ChangePasswordActivity.class));
+                        startActivity(new Intent(DrawerBaseActivity.this, ChangePasswordActivity.class));
                         break;
                     case 5://Logout
-                        if(CommonUtils.isNetworkAvailable(DrawerBaseActivity.this))
-                        {
+                        if (CommonUtils.isNetworkAvailable(DrawerBaseActivity.this)) {
                             logout();
-                        }
-                        else
-                        {
+                        } else {
                             Toast.makeText(getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -135,7 +131,7 @@ public class DrawerBaseActivity extends BaseActivity {
                         }
                         break;
                     case 10://Locate Map
-                        startActivity(new Intent(DrawerBaseActivity.this,LocateUsActivity.class));
+                        startActivity(new Intent(DrawerBaseActivity.this, LocateUsActivity.class));
                         break;
                     default:
                 }
@@ -176,9 +172,11 @@ public class DrawerBaseActivity extends BaseActivity {
     private void logout() {
         PreferenceHelper.remove(PreferenceHelper.USER_ID);
         PreferenceHelper.remove(PreferenceHelper.API_TOKEN);
+        PreferenceHelper.insertBoolean("SaveLogin", false);
+        PreferenceHelper.insertBoolean(PreferenceHelper.ISLOGIN, false);
         PreferenceHelper.insertBoolean(PreferenceHelper.FLAG_LOGGED_OUT, true);
         Intent intent = new Intent(this,
-                LoginActivity.class);
+                BannerActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

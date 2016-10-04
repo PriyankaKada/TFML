@@ -50,4 +50,8 @@ public class CityResponseModel {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

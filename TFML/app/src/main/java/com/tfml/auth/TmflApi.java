@@ -1,6 +1,7 @@
 package com.tfml.auth;
 
 
+import com.tfml.model.ContractResponseModel.ContractModel;
 import com.tfml.model.ContractResponseModel.ContractsInputModel;
 import com.tfml.model.ContractResponseModel.ContractsResponseModel;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusInputModel;
@@ -19,6 +20,8 @@ import com.tfml.model.cityResponseModel.CityResponseModel;
 import com.tfml.model.cityResponseModel.InputCityModel;
 import com.tfml.model.downloadResponseModel.DownloadResponse;
 import com.tfml.model.bannerResponseModel.BannerlistResponse;
+import com.tfml.model.forgotPasswordResponseModel.ForgotInputModel;
+import com.tfml.model.forgotPasswordResponseModel.ForgotResponse;
 import com.tfml.model.loginResponseModel.LoginRequestModel;
 import com.tfml.model.loginResponseModel.LoginResponseModel;
 import com.tfml.model.preClosurePdfResponseModel.PreClosureInputModel;
@@ -128,4 +131,6 @@ public interface TmflApi {
     Call<AccountStmtResponse>getAccStmtDownload(@Body AccountStatementInputModel accountStatementInputModel);
      @POST(Constant.PRECLOSURE_STATEMENT_DOWNLOAD)
     Call<PreClosureStmtPdfResponse>getPreClosureDownload(@Body PreClosureInputModel preClosureInputModel);
+    @POST(Constant.FORGOT_PASSWORD)
+    Call<ForgotResponse>getForgotResponse(@Body ForgotInputModel forgotInputModel);
 }

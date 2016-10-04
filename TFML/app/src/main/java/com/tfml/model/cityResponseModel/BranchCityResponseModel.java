@@ -42,4 +42,9 @@ public class BranchCityResponseModel {
     public void setTerrCaption(String terrCaption) {
         this.terrCaption = terrCaption;
     }
+
+    @Override
+    public String toString() {
+        return this.terrCaption;
+    }
 }

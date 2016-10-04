@@ -63,7 +63,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
     InputModel inputLoanModel;
     InputCityModel inputCityModel;
     InputBranchModel inputBranchModel;
-    String productCode, branchStateCode, branchCityCode, branchCode, stateCode, cityCode,strOfferId,strUserid;
+    String productCode, branchStateCode, branchCityCode, branchCode, stateCode, cityCode, strOfferId, strUserid;
     List<Datum> arDatumList;
     SchemesResponse response;
 
@@ -144,7 +144,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         spSelectCity = (Spinner) view.findViewById(R.id.sp_select_city);
         spSelectCity.setOnItemSelectedListener(this);
         spOffers = (Spinner) view.findViewById(R.id.sp_offers);
-        spOffers.setOnItemSelectedListener(this);
+       // spOffers.setOnItemSelectedListener(this);
         //spSelectPinCode = (Spinner) view.findViewById(R.id.sp_select_pincode);
         radioGroupLeadType = (RadioGroup) view.findViewById(R.id.radio_group_lead_type);
         radioGroupVehicleType = (RadioGroup) view.findViewById(R.id.radio_group_vehicle_type);
@@ -213,9 +213,9 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
     }
 
     public void callApplyLoanService() {
-        strUserid=PreferenceHelper.getString(PreferenceHelper.USER_ID);
+        strUserid = PreferenceHelper.getString(PreferenceHelper.USER_ID);
         inputLoanModel.setUserId(strUserid);
-      //  inputLoanModel.setOfferId(strOfferId);
+        // inputLoanModel.setOfferId(strOfferId);
         inputLoanModel.setFirstName(txtFirstName.getText().toString());
         inputLoanModel.setLastName(txtLastName.getText().toString());
         inputLoanModel.setMobileNumber(txtMobileNumber.getText().toString());
@@ -285,7 +285,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         Log.e("getCity", inputmodel.getCity());
         Log.e("getState", inputmodel.getState());
         Log.e("getUserID", inputmodel.getUserId());
-        Log.e("getOfferId",inputmodel.getOfferId());
+        Log.e("getOfferId", inputmodel.getOfferId());
         tmflApi.getApplyLoanResponse(inputmodel).enqueue(new Callback<ApplyLoanResponse>() {
             @Override
             public void onResponse(Call<ApplyLoanResponse> call, Response<ApplyLoanResponse> response) {
@@ -357,7 +357,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
                 }
                 break;
             case R.id.sp_offers:
-                strOfferId= String.valueOf(((SchemesResponse)parent.getItemAtPosition(position)).getData().get(position).getId());
+              //  strOfferId = String.valueOf(((SchemesResponse) parent.getItemAtPosition(position)).getData().get(position).getId());
                 break;
         }
 

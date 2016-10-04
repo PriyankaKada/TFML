@@ -137,7 +137,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
         spSelectCity = (Spinner) view.findViewById(R.id.sp_select_city);
         spSelectCity.setOnItemSelectedListener(this);
         spOffers = (Spinner) view.findViewById(R.id.sp_offers);
-        spOffers.setOnItemSelectedListener(this);
+       // spOffers.setOnItemSelectedListener(this);
         radioGroupLeadType = (RadioGroup) view.findViewById(R.id.radio_group_lead_type);
         radioGroupVehicleType = (RadioGroup) view.findViewById(R.id.radio_group_vehicle_type);
         radioGroupLeadType.setOnCheckedChangeListener(this);
@@ -305,8 +305,9 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
             case R.id.sp_select_branch_state:
 
                 if (position != 0) {
+                    Log.e("BRANCHSTATECODE",(parent.getItemAtPosition(position) instanceof BranchStateResponseModel)+"" );
                     branchStateCode = ((BranchStateResponseModel) parent.getItemAtPosition(position)).getTerrTerritoryid();
-                    Log.e("BRANCHSTATECODE", branchStateCode);
+                    Log.e("BRAN", branchStateCode);
                     inputCityModel.setStateId(branchStateCode);
                     CommonUtils.showProgressDialog(getActivity(), "Please Wait.....");
                     SocialUtil.getBranchCityListData(getActivity(), spSelectBranchCity, inputCityModel, "Select Branch City");
@@ -343,7 +344,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
                     inputBranchModel.setCityId(cityCode);
                 }
             case R.id.sp_offers:
-                strOfferId= String.valueOf(((SchemesResponse)parent.getItemAtPosition(position)).getData().get(position).getId());
+//                strOfferId= String.valueOf(((SchemesResponse)parent.getItemAtPosition(position)).getData().get(position).getId());
                 break;
 
         }
