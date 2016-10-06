@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 
 import com.tfml.R;
 import com.tfml.util.SetFonts;
@@ -18,6 +20,7 @@ public class EmiDetailFragment extends Fragment implements View.OnClickListener 
 
     Button btnReciept;
     View view;
+    ExpandableListView expandableListViewEmi;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class EmiDetailFragment extends Fragment implements View.OnClickListener 
 
      public void init()
      {
+         expandableListViewEmi=(ExpandableListView)view.findViewById(R.id.expandableListViewEmi);
          btnReciept=(Button)view.findViewById(R.id.btnReciept);
          btnReciept.setOnClickListener(this);
          SetFonts.setFonts(getActivity(),btnReciept,2);
