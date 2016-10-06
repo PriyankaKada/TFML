@@ -20,6 +20,8 @@ import com.tfml.model.cityResponseModel.CityResponseModel;
 import com.tfml.model.cityResponseModel.InputCityModel;
 import com.tfml.model.downloadResponseModel.DownloadResponse;
 import com.tfml.model.bannerResponseModel.BannerlistResponse;
+import com.tfml.model.emiListReponseModel.EmiListInputModel;
+import com.tfml.model.emiListReponseModel.EmiListResponseModel;
 import com.tfml.model.forgotPasswordResponseModel.ForgotInputModel;
 import com.tfml.model.forgotPasswordResponseModel.ForgotResponse;
 import com.tfml.model.logResponseModel.LogInputModel;
@@ -78,38 +80,38 @@ public interface TmflApi {
     Call<QuickCallResponse> getQuickCallResponse(@Body QuickCallInputModel quickCallInputModel);
 
     @POST(Constant.VERIFYOTP)
-    Call<LoanStatusResponse>getOtpResponse(@Body LoanStatusInputModel loanStatusInputModel);
+    Call<LoanStatusResponse> getOtpResponse(@Body LoanStatusInputModel loanStatusInputModel);
 
     @GET(Constant.CONTACTDETAILS)
-    Call<ContactListResponseModel>getContactList();
+    Call<ContactListResponseModel> getContactList();
 
     @GET(Constant.PRODUCTS)
-    Call<List<ProductListResponseModel>>getProductList();
+    Call<List<ProductListResponseModel>> getProductList();
 
     @GET(Constant.STATES)
-    Call<List<BranchStateResponseModel>>getBranchStateList();
+    Call<List<BranchStateResponseModel>> getBranchStateList();
 
     @POST(Constant.GETCITIES)
-    Call<List<BranchCityResponseModel>>getBranchCityList(@Body InputCityModel inputCityModel);
+    Call<List<BranchCityResponseModel>> getBranchCityList(@Body InputCityModel inputCityModel);
 
     @POST(Constant.GETBRANCHES)
-    Call<List<BranchResponseModel>>getBranchList(@Body InputBranchModel inputBranchModel);
+    Call<List<BranchResponseModel>> getBranchList(@Body InputBranchModel inputBranchModel);
 
     @GET(Constant.STATELIST)
-    Call<List<StateResponseModel>>getStateListData();
+    Call<List<StateResponseModel>> getStateListData();
 
     @POST(Constant.CITYLIST)
-    Call<List<CityResponseModel>>getCityListData(@Body InputCityModel inputCityModel);
+    Call<List<CityResponseModel>> getCityListData(@Body InputCityModel inputCityModel);
 
-   @POST(Constant.UPDATERC)
-    Call<RcUploadResponseModel>getRcUploadData(@Body RcUploadDataInputModel rcUploadDataInputModel);
+    @POST(Constant.UPDATERC)
+    Call<RcUploadResponseModel> getRcUploadData(@Body RcUploadDataInputModel rcUploadDataInputModel);
 
     @GET
     @Streaming
     Call<ResponseBody> getFile(@Url String url);
 
     @POST(Constant.STATEBRNCHES)
-    Call<List<BranchResponseModel>>getStateBranches(@Body InputBranchState inputBranchState) ;
+    Call<List<BranchResponseModel>> getStateBranches(@Body InputBranchState inputBranchState);
 
     @Headers({
             "SOAPAction : http://sap.com/xi/WebService/soap1.1/StmtOfAcc_Out",
@@ -126,17 +128,23 @@ public interface TmflApi {
     Call<com.tfml.model.soapModel.preClousreResponse.ResponseEnvelope> callClosureTableRequest(@Body RequestEnvelope requestEnvelope);
 
     @POST(Constant.MYCONTRACT)
-    Call<ContractsResponseModel>getContractListData(@Body ContractsInputModel contractsInputModel);
+    Call<ContractsResponseModel> getContractListData(@Body ContractsInputModel contractsInputModel);
+
     @POST(Constant.LOGIN)
-    Call<LoginResponseModel>getLoginResponse(@Body LoginRequestModel loginRequestModel);
+    Call<LoginResponseModel> getLoginResponse(@Body LoginRequestModel loginRequestModel);
+
     @POST(Constant.ACCOUNT_STATEMENT_DOWNLOAD)
-    Call<AccountStmtResponse>getAccStmtDownload(@Body AccountStatementInputModel accountStatementInputModel);
-     @POST(Constant.PRECLOSURE_STATEMENT_DOWNLOAD)
-    Call<PreClosureStmtPdfResponse>getPreClosureDownload(@Body PreClosureInputModel preClosureInputModel);
+    Call<AccountStmtResponse> getAccStmtDownload(@Body AccountStatementInputModel accountStatementInputModel);
+
+    @POST(Constant.PRECLOSURE_STATEMENT_DOWNLOAD)
+    Call<PreClosureStmtPdfResponse> getPreClosureDownload(@Body PreClosureInputModel preClosureInputModel);
+
     @POST(Constant.FORGOT_PASSWORD)
-    Call<ForgotResponse>getForgotResponse(@Body ForgotInputModel forgotInputModel);
+    Call<ForgotResponse> getForgotResponse(@Body ForgotInputModel forgotInputModel);
+
     @POST(Constant.LOGGEDIN)
-    Call<LogResponseModel>getLogResponse(@Body LogInputModel logInputModel);
- /*   @POST(Constant.RECEIPTPDF)
-    Call<>*/
+    Call<LogResponseModel> getLogResponse(@Body LogInputModel logInputModel);
+    @POST(Constant.EMILIST)
+    Call<EmiListResponseModel>getEmiListResponse(@Body EmiListInputModel emiListInputModel);
+
 }

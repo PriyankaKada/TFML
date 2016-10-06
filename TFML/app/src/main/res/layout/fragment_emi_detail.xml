@@ -84,7 +84,7 @@
                 android:layout_alignParentRight="true"
                 android:background="@color/colorPrimaryDark"
                 android:textAllCaps="false"
-                android:text="Reciepts"
+                android:text="Receipts"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
                 android:textColor="#ffffff"
@@ -92,14 +92,16 @@
 
         </RelativeLayout>
 
+
         <ExpandableListView
             android:id="@+id/expandableListViewEmi"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:padding="5dp"
-            android:divider="@android:color/darker_gray"
+            android:layout_margin="10dp"
+            android:divider="@null"
             android:dividerHeight="0.5dp"
-            android:background="@android:color/transparent"/>
+            android:background="@color/white"/>
 
     </LinearLayout>
 

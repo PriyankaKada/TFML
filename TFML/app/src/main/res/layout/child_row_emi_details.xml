@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/list_row">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,6 +26,7 @@
                 />
 
             <TextView
+                android:id="@+id/txtEmiInterest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7,117.00"/>
@@ -46,6 +48,7 @@
                 />
 
             <TextView
+                android:id="@+id/txtEmiPrinciple"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="7,083.00"/>
@@ -66,6 +69,7 @@
                 />
 
             <TextView
+                android:id="@+id/txtEmiInsurance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0.00"/>
@@ -87,6 +91,7 @@
             />
 
         <TextView
+            android:id="@+id/txtEmiOsPrinciple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#11d911"
