@@ -32,19 +32,20 @@ public class FinanceDetailFragment extends Fragment {
         if(bundle!=null)
         {
             ResponseEnvelope.Body body= (ResponseEnvelope.Body) bundle.getSerializable("ResponseModel");
-            strFinAmt=body.getZCISResponse().getIT_CARDEX1().getItem().getFIN_AMT();
-            strFinCharge=body.getZCISResponse().getIT_CARDEX1().getItem().getFIN_CHRG();
-            strInsPro=body.getZCISResponse().getIT_CARDEX1().getItem().getINS_PROV();
-            strOptionMoney=body.getZCISResponse().getIT_CARDEX1().getItem().getOPTION_MONEY();
-            strDueTillDate=body.getZCISResponse().getIT_CARDEX1().getItem().getDUE_TILL_DATE();
-            strSoaPrvAmt=body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_PRV_AMT();
-            strSoaPrdAmt=body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_PRD_AMT();
-            strSoaDateTo=body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_DATE_TO();
-            strSoaDateFrom=body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_DATE_FROM();
-            strCRec=body.getZCISResponse().getIT_ODC().get((body.getZCISResponse().getIT_ODC().size()-1)).getC_REC();
-            strOverdue=body.getZCISResponse().getIT_CARDEX1().getItem().getOVERDUE();
-            strSoaPrincipal=body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_PRINCIPAL();
-            strSoaFinCharge=body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_FIN_CHRG();
+
+            strFinAmt=body.getZCISResponse().getIT_CARDEX1().getItem().getFIN_AMT()==null?"":body.getZCISResponse().getIT_CARDEX1().getItem().getFIN_AMT();
+            strFinCharge=body.getZCISResponse().getIT_CARDEX1().getItem().getFIN_CHRG()==null?"":body.getZCISResponse().getIT_CARDEX1().getItem().getFIN_CHRG();
+            strInsPro=body.getZCISResponse().getIT_CARDEX1().getItem().getINS_PROV()==null?"":body.getZCISResponse().getIT_CARDEX1().getItem().getINS_PROV();
+            strOptionMoney=body.getZCISResponse().getIT_CARDEX1().getItem().getOPTION_MONEY()==null?"":body.getZCISResponse().getIT_CARDEX1().getItem().getOPTION_MONEY();
+            strDueTillDate=body.getZCISResponse().getIT_CARDEX1().getItem().getDUE_TILL_DATE()==null?"":body.getZCISResponse().getIT_CARDEX1().getItem().getDUE_TILL_DATE();
+            strSoaPrvAmt=body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_PRV_AMT()==null?"":body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_PRV_AMT();
+            strSoaPrdAmt=body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_PRD_AMT()==null?"":body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_PRD_AMT();
+            strSoaDateTo=body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_DATE_TO()==null?"":body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_DATE_TO();
+            strSoaDateFrom=body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_DATE_FROM()==null?"":body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_DATE_FROM();
+            strCRec=body.getZCISResponse().getIT_ODC().get((body.getZCISResponse().getIT_ODC().size()-1)).getC_REC()==null?"":body.getZCISResponse().getIT_ODC().get((body.getZCISResponse().getIT_ODC().size()-1)).getC_REC();
+            strOverdue=body.getZCISResponse().getIT_CARDEX1().getItem().getOVERDUE()==null?"":body.getZCISResponse().getIT_CARDEX1().getItem().getOVERDUE();
+            strSoaPrincipal=body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_PRINCIPAL()==null?"":body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_PRINCIPAL();
+            strSoaFinCharge=body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_FIN_CHRG()==null?"":body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_FIN_CHRG();
             DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
             DateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
 

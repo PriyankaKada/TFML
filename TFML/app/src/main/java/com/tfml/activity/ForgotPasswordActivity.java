@@ -1,8 +1,6 @@
 package com.tfml.activity;
 
 import android.content.Intent;
-import android.provider.ContactsContract;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.tfml.R;
 import com.tfml.auth.TmflApi;
 import com.tfml.common.ApiService;
@@ -37,6 +36,8 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
         tmflApi= ApiService.getInstance().call();
+        forgotInputModel=new ForgotInputModel();
+        forgotResponse=new ForgotResponse();
         init();
     }
     public void init()
@@ -59,24 +60,19 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
                 strUserID=txtUserId.getText().toString();
             if(CommonUtils.isNetworkAvailable(this))
             {
-                Log.e("network","");
 
                 if(TextUtils.isEmpty(strUserID))
                 {
-                    Toast.makeText(getBaseContext(),"Please Enter User ID", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ForgotPasswordActivity.this,"Please Enter User ID", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    Log.e("strUserID else","empty  "+strUserID);
-                    forgotInputModel=new ForgotInputModel();
-                    forgotResponse=new ForgotResponse();
                     forgotInputModel.setUserID(strUserID);
                     callForgotService(forgotInputModel);
                 }
             }
                 else
             {
-                Log.e("netweok false","empty");
                 Toast.makeText(getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
             }
 
@@ -89,18 +85,25 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
 
     public void callForgotService(ForgotInputModel forgotInputModel)
     {
+        Log.e("REq ",new Gson().toJson(forgotInputModel));
         tmflApi.getForgotResponse(forgotInputModel).enqueue(new Callback<ForgotResponse>() {
             @Override
             public void onResponse(Call<ForgotResponse> call, Response<ForgotResponse> response) {
+
+                Log.e("response ",new Gson().toJson(response.body()));
                 if(response.body()!=null)
                 {
-                    if(response.body().getStatus().equals("true"))
+                    if(response.body().getStatus().toString().contains("Success"))
                     {
-                        Toast.makeText(getBaseContext(), "Please Wait I will send UserId", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), "You will get password soon", Toast.LENGTH_SHORT).show();
+                        txtUserId.setText("");
                     }
                     else {
-                        Toast.makeText(getBaseContext(), "System Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), "Invalid UserId", Toast.LENGTH_SHORT).show();
                     }
+                }else {
+
+                    Log.e("null","");
                 }
             }
 
@@ -110,4 +113,5 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
             }
         });
     }
+
 }

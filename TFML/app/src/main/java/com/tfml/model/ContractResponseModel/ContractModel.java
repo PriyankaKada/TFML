@@ -3,11 +3,13 @@ package com.tfml.model.ContractResponseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by webwerks on 1/10/16.
  */
 
-public class ContractModel {
+public class ContractModel implements Serializable{
 
     @SerializedName("id")
     @Expose

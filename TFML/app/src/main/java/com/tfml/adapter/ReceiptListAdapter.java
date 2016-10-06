@@ -56,7 +56,7 @@ public class ReceiptListAdapter extends BaseAdapter {
             holder.txtReceiptDate=(TextView) convertView.findViewById(R.id.txtReceiptDate);
             holder.txtReceiptAmount=(TextView)convertView.findViewById(R.id.txtAmount);
             holder.img_expand=(ImageView) convertView.findViewById(R.id.img_expand);
-            holder.txtReceiptNo=(TextView) convertView.findViewById(R.id.txtReceiptNo);
+         //   holder.txtReceiptNo=(TextView) convertView.findViewById(R.id.txtReceiptNo);
             holder.txtInstNo=(TextView)convertView.findViewById(R.id.txtInstNo);
             holder.txtType=(TextView)convertView.findViewById(R.id.txtType);
             holder.txtMode=(TextView)convertView.findViewById(R.id.txtMode);

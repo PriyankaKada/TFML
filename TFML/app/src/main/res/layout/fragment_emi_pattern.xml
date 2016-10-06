@@ -6,25 +6,34 @@
     tools:context="com.tfml.fragment.EmiPatternFragment">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="10">
+        android:weightSum="1">
 
         <Spinner
             android:id="@+id/spnContractNo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:background="@drawable/selector_spinner"/>
+            android:layout_weight="0.5"
+            android:background="@drawable/selector_spinner"
+            android:layout_gravity="center"
+            android:drawSelectorOnTop="false"
+            android:gravity="left"
+            android:popupBackground="@color/white"
+            android:scrollbars="none"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:spinnerMode="dropdown"/>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
-            android:layout_weight="5"
+            android:layout_weight="0.5"
             android:background="#F39C11"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -32,17 +41,17 @@
                 android:gravity="center"
                 android:text="RC No. :"
                 android:textColor="#ffffff"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/txt_rc_no"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="left|center"
                 android:paddingLeft="10dp"
-                android:text="RCNO1256"
                 android:textColor="#ffffff"
-                android:textSize="12sp"/>
+                android:textSize="14sp"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -63,23 +72,24 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
+                android:paddingLeft="5dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="Next Due Date :"
-                    android:textSize="12sp"
+                    android:text="Due Date :"
+                    android:textSize="13sp"
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/txt_duedate"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
-                    android:paddingLeft="10dp"
-                    android:text="25 July 2016"
-                    android:textSize="12sp"/>
+                    android:paddingLeft="5dp"
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -94,16 +104,16 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="EMI Amount :"
-                    android:textSize="12sp"
+                    android:textSize="13sp"
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/txt_emiamount"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
                     android:paddingLeft="10dp"
-                    android:text="Rs. 25,000"
-                    android:textSize="12sp"/>
+                    android:textSize="13sp"/>
 
             </LinearLayout>
 
@@ -122,6 +132,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
+                android:paddingLeft="5dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -129,16 +140,16 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="Overdue :"
-                    android:textSize="12sp"
+                    android:textSize="13sp"
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/txt_dueamount"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
                     android:paddingLeft="10dp"
-                    android:text="Rs. 82,500"
-                    android:textSize="12sp"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -153,16 +164,16 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="Repayment Mode :"
-                    android:textSize="12sp"
+                    android:textSize="13sp"
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/txt_repaymentmode"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
                     android:paddingLeft="10dp"
-                    android:text="NACH"
-                    android:textSize="12sp"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

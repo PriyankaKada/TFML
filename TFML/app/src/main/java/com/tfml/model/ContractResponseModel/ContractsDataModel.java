@@ -13,6 +13,7 @@ public class ContractsDataModel {
         @SerializedName("total")
         @Expose
         private Integer total;
+
         @SerializedName("active")
         @Expose
         private ActiveContractsModel active;

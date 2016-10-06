@@ -69,9 +69,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             case R.id.btn_login:
 
                 if (chkRememberMe.isChecked()) {
+                    Log.e("RememberMe",chkRememberMe.isChecked()+"");
                     PreferenceHelper.insertBoolean("SaveLogin", true);
-                } else {
-                    PreferenceHelper.insertBoolean("SaveLogin", false);
                 }
                 Validation();
                 break;
@@ -119,7 +118,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             @Override
             public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {
                 CommonUtils.closeProgressDialog();
-                if (response.body() != null && response.body().getStatus().equals("success")) {
+                if (response.body() != null && response.body().getStatus().toString().contains("success")) {
                     strApiToken = response.body().getData().getApiToken();
                     strUsrId = response.body().getData().getUserId();
 
@@ -127,11 +126,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     PreferenceHelper.insertString(PreferenceHelper.API_TOKEN, strApiToken);
                     startActivity(new Intent(LoginActivity.this, ContractActivity.class));
                     finish();
-                    Log.e("ResponseData", response.body().getData().getApiToken());
+                    Log.e("ResponseData", response.body().getData().getApiToken()+" "+response.body().getData().getUserId());
                     //  PreferenceHelper.insertBoolean(PreferenceHelper.ISLOGIN,true);
                     // PreferenceHelper.insertBoolean(PreferenceHelper.FLAG_LOGGED_OUT, false);
                 } else {
-                    Toast.makeText(LoginActivity.this, "Invalid UserName And Password", Toast.LENGTH_LONG);
+                    Toast.makeText(LoginActivity.this, "Invalid UserName And Password", Toast.LENGTH_LONG).show();
                 }
             }
 

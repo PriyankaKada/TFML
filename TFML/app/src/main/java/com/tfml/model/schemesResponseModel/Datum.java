@@ -9,174 +9,147 @@ import java.io.Serializable;
  * Created by webwerks on 29/7/16.
  */
 
-public class Datum implements Serializable{
+public class Datum implements Serializable {
 
-    @SerializedName("id")
-    @Expose
-    private Integer id;
-    @SerializedName("title")
-    @Expose
-    private String title;
-    @SerializedName("image")
-    @Expose
-    private String image;
-    @SerializedName("short_description")
-    @Expose
-    private String shortDescription;
-    @SerializedName("status")
-    @Expose
-    private Integer status;
-    @SerializedName("created_at")
-    @Expose
-    private String createdAt;
-    @SerializedName("updated_at")
-    @Expose
-    private String updatedAt;
-    @SerializedName("deleted_at")
-    @Expose
-    private Object deletedAt;
+	@SerializedName( "id" )
+	@Expose
+	private Integer id;
+	@SerializedName( "title" )
+	@Expose
+	private String  title;
+	@SerializedName( "image" )
+	@Expose
+	private String  image;
+	@SerializedName( "short_description" )
+	@Expose
+	private String  shortDescription;
+	@SerializedName( "status" )
+	@Expose
+	private Integer status;
+	@SerializedName( "created_at" )
+	@Expose
+	private String  createdAt;
+	@SerializedName( "updated_at" )
+	@Expose
+	private String  updatedAt;
+	@SerializedName( "deleted_at" )
+	@Expose
+	private Object  deletedAt;
 
-    /**
-     *
-     * @return
-     * The id
-     */
-    public Integer getId() {
-        return id;
-    }
+	@Override
+	public String toString() {
+		return title;
+	}
 
-    /**
-     *
-     * @param id
-     * The id
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	/**
+	 * @return The id
+	 */
+	public Integer getId() {
+		return id;
+	}
 
-    /**
-     *
-     * @return
-     * The title
-     */
-    public String getTitle() {
-        return title;
-    }
+	/**
+	 * @param id The id
+	 */
+	public void setId( Integer id ) {
+		this.id = id;
+	}
 
-    /**
-     *
-     * @param title
-     * The title
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	/**
+	 * @return The title
+	 */
+	public String getTitle() {
+		return title;
+	}
 
-    /**
-     *
-     * @return
-     * The image
-     */
-    public String getImage() {
-        return image;
-    }
+	/**
+	 * @param title The title
+	 */
+	public void setTitle( String title ) {
+		this.title = title;
+	}
 
-    /**
-     *
-     * @param image
-     * The image
-     */
-    public void setImage(String image) {
-        this.image = image;
-    }
+	/**
+	 * @return The image
+	 */
+	public String getImage() {
+		return image;
+	}
 
-    /**
-     *
-     * @return
-     * The shortDescription
-     */
-    public String getShortDescription() {
-        return shortDescription;
-    }
+	/**
+	 * @param image The image
+	 */
+	public void setImage( String image ) {
+		this.image = image;
+	}
 
-    /**
-     *
-     * @param shortDescription
-     * The short_description
-     */
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-    }
+	/**
+	 * @return The shortDescription
+	 */
+	public String getShortDescription() {
+		return shortDescription;
+	}
 
-    /**
-     *
-     * @return
-     * The status
-     */
-    public Integer getStatus() {
-        return status;
-    }
+	/**
+	 * @param shortDescription The short_description
+	 */
+	public void setShortDescription( String shortDescription ) {
+		this.shortDescription = shortDescription;
+	}
 
-    /**
-     *
-     * @param status
-     * The status
-     */
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+	/**
+	 * @return The status
+	 */
+	public Integer getStatus() {
+		return status;
+	}
 
-    /**
-     *
-     * @return
-     * The createdAt
-     */
-    public String getCreatedAt() {
-        return createdAt;
-    }
+	/**
+	 * @param status The status
+	 */
+	public void setStatus( Integer status ) {
+		this.status = status;
+	}
 
-    /**
-     *
-     * @param createdAt
-     * The created_at
-     */
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
+	/**
+	 * @return The createdAt
+	 */
+	public String getCreatedAt() {
+		return createdAt;
+	}
 
-    /**
-     *
-     * @return
-     * The updatedAt
-     */
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
+	/**
+	 * @param createdAt The created_at
+	 */
+	public void setCreatedAt( String createdAt ) {
+		this.createdAt = createdAt;
+	}
 
-    /**
-     *
-     * @param updatedAt
-     * The updated_at
-     */
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+	/**
+	 * @return The updatedAt
+	 */
+	public String getUpdatedAt() {
+		return updatedAt;
+	}
 
-    /**
-     *
-     * @return
-     * The deletedAt
-     */
-    public Object getDeletedAt() {
-        return deletedAt;
-    }
+	/**
+	 * @param updatedAt The updated_at
+	 */
+	public void setUpdatedAt( String updatedAt ) {
+		this.updatedAt = updatedAt;
+	}
 
-    /**
-     *
-     * @param deletedAt
-     * The deleted_at
-     */
-    public void setDeletedAt(Object deletedAt) {
-        this.deletedAt = deletedAt;
-    }
+	/**
+	 * @return The deletedAt
+	 */
+	public Object getDeletedAt() {
+		return deletedAt;
+	}
+
+	/**
+	 * @param deletedAt The deleted_at
+	 */
+	public void setDeletedAt( Object deletedAt ) {
+		this.deletedAt = deletedAt;
+	}
 }

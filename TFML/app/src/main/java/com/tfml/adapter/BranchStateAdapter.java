@@ -18,9 +18,10 @@ import java.util.List;
 
 public class BranchStateAdapter extends ArrayAdapter<BranchStateResponseModel> {
     Context context;
+
     public BranchStateAdapter(Context context, List<BranchStateResponseModel> data) {
-        super(context, 0,data);
-        this.context=context;
+        super(context, 0, data);
+        this.context = context;
 
     }
 
@@ -28,15 +29,19 @@ public class BranchStateAdapter extends ArrayAdapter<BranchStateResponseModel> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
         if (row == null) {
-            row = LayoutInflater.from(context).inflate(R.layout.simple_branch_state_spinner, parent, false);
+            row = LayoutInflater.from(context).inflate(R.layout.layout_spinner_textview, parent, false);
         }
-        TextView stateName = (TextView) row.findViewById(R.id.txtBranchstate);
-        stateName.setText(getItem(position).getTerrCaption());
+        try {
+            TextView stateName = (TextView) row.findViewById(R.id.txtValue);
+            stateName.setText(getItem(position).getTerrCaption());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return row;
     }
 
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        return getView(position,convertView,parent);
+        return getView(position, convertView, parent);
     }
 }

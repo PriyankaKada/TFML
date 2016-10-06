@@ -10,14 +10,14 @@ import com.google.gson.annotations.SerializedName;
 public class ForgotResponse {
     @SerializedName("status")
     @Expose
-    private Boolean status;
+    private String status;
 
     /**
      *
      * @return
      * The status
      */
-    public Boolean getStatus() {
+    public String getStatus() {
         return status;
     }
 
@@ -26,7 +26,7 @@ public class ForgotResponse {
      * @param status
      * The status
      */
-    public void setStatus(Boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }

@@ -3,13 +3,17 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="4">
-
+    android:weightSum="4"
+    android:layout_marginBottom="2dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@null"
         android:orientation="vertical"
+        android:padding="2dp"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -151,7 +155,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:textColor="#F47F39"
+            android:text="Generated on 11-02-2016 | 01:03 PM"
+            android:textColor="@color/text_black"
             android:layout_gravity="right"
             android:gravity="center"
             />

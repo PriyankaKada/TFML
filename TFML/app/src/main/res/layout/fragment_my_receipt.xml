@@ -13,20 +13,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:padding="10dp"
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/lbl_my_receipt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_margin="10dp"
                 android:textColor="#164d74"
                 android:gravity="start"
-                android:text="My Receipt"/>
+                android:textStyle="bold"
+                android:text="My Receipts"/>
             <Button
                 android:id="@+id/btn_back"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
                 android:background="@color/colorPrimaryDark"
                 android:textColor="@color/white"
                 android:text="Back"/>
@@ -35,6 +37,7 @@
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:padding="10dp"
+            android:layout_margin="10dp"
             android:background="@color/colorPrimary"
             android:layout_height="wrap_content">
             <TextView
@@ -57,7 +60,19 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/lst_my_receipt"></ListView>
+            android:id="@+id/lst_my_receipt"
+            android:divider="@android:color/transparent"
+            android:visibility="gone"
+            >
+        </ListView>
+        <ExpandableListView
+            android:id="@+id/expandableListView"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:padding="5dp"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="0.5dp"
+            android:background="@android:color/transparent"/>
 
     </LinearLayout>
 

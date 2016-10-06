@@ -86,38 +86,6 @@ public class DownloadResultActivity extends BaseActivity {
             }
         });
 
-       /* tmflApi= ApiService.getInstance().call();
-        tmflApi.getFile(URL).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.d("onResponse", response.message());
-            *//*    if(!response.isSuccessful()){
-                    Log.e("onResponse", "Something's gone wrong");
-                    // TODO: show error message
-                    return;
-                }
-                DownloadFileAsyncTask downloadFileAsyncTask = new DownloadFileAsyncTask();
-                downloadFileAsyncTask.execute(response.body().byteStream());*//*
-
-                try {
-
-                    Log.d("onResponse", "Response came from server");
-
-                    boolean FileDownloaded = DownloadImage(response.body());
-
-                    Log.d("onResponse", "Image is downloaded and saved ? " + FileDownloaded);
-
-                } catch (Exception e) {
-                    Log.d("onResponse", "There is an error");
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("onFailure",t.getMessage());
-            }
-        });*/
     }
 
 

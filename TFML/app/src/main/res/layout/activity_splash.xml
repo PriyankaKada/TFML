@@ -8,5 +8,4 @@
     android:background="@drawable/ic_splash"
     android:orientation="horizontal"
     tools:context="com.tfml.activity.SplashActivity">
-
 </LinearLayout>

@@ -28,9 +28,9 @@ public class StateAdapter extends ArrayAdapter<StateResponseModel>{
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
         if (row == null) {
-            row = LayoutInflater.from(context).inflate(R.layout.simple_state_spinner, parent, false);
+            row = LayoutInflater.from(context).inflate(R.layout.layout_spinner_textview, parent, false);
         }
-        TextView stateName = (TextView) row.findViewById(R.id.txtState);
+        TextView stateName = (TextView) row.findViewById(R.id.txtValue);
         stateName.setText(getItem(position).getName());
         return row;
     }

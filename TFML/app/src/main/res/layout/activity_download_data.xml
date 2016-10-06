@@ -6,9 +6,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:background="@color/white"
+    android:background="@drawable/login_bg1"
     android:orientation="vertical"
     tools:context="com.tfml.activity.DownloadDataActivity">
+  <android.support.v7.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize"
+      app:popupTheme="@style/AppTheme.PopupOverlay">
+
+    <ImageView
+        android:id="@+id/img_login_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:src="@drawable/ic_back_arrow"/>
+
+    <TextView
+        android:id="@+id/txt_login_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Download"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+  </android.support.v7.widget.Toolbar>
+
+  <View
+      android:layout_width="wrap_content"
+      android:layout_height="0.5dp"
+      android:background="@color/white"/>
   <ListView
       android:id="@+id/lst_download_data"
       android:layout_width="match_parent"

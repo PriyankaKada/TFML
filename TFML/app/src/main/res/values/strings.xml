@@ -22,5 +22,6 @@
     <string name="txt_branch_locator">Branch Locator</string>
     <string name="txt_remember_pass">Remember Password</string>
     <string name="txt_forgot_pass">Forgot Password?</string>
+    <string name="txt_forgot">Forgot Password</string>
     <string name="txt_user_id">User Id</string>
 </resources>

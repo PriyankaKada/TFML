@@ -29,9 +29,9 @@ public class ProductAdapter extends ArrayAdapter<ProductListResponseModel> {
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
         if (row == null) {
-            row = LayoutInflater.from(context).inflate(R.layout.simple_spinner_item, parent, false);
+            row = LayoutInflater.from(context).inflate(R.layout.layout_spinner_textview, parent, false);
         }
-        TextView ProductName = (TextView) row.findViewById(R.id.text1);
+        TextView ProductName = (TextView) row.findViewById(R.id.txtValue);
         ProductName.setText(getItem(position).getProdName());
         return row;
     }

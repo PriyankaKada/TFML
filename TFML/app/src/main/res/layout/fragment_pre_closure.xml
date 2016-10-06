@@ -7,25 +7,33 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="10">
+        android:weightSum="1">
 
         <Spinner
             android:id="@+id/spnContractNo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:background="@drawable/selector_spinner" />
+            android:layout_weight="0.5"
+            android:background="@drawable/selector_spinner"
+            android:layout_gravity="center"
+            android:drawSelectorOnTop="false"
+            android:gravity="center"
+            android:popupBackground="@color/white"
+            android:scrollbars="none"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:spinnerMode="dropdown"/>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
-            android:layout_weight="5"
+            android:layout_weight="0.5"
             android:background="#F39C11"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -33,25 +41,25 @@
                 android:gravity="center"
                 android:text="RC No. :"
                 android:textColor="#ffffff"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textSize="14sp"
+                android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/txt_rc_no"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="left|center"
                 android:paddingLeft="10dp"
-                android:text="RCNO1256"
                 android:textColor="#ffffff"
-                android:textSize="12sp" />
+                android:textSize="14sp"/>
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="5dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,17 +78,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="Next Due Date :"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:text="Due Date :"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/txt_duedate"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
-                    android:paddingLeft="10dp"
-                    android:text="25 July 2016"
-                    android:textSize="12sp" />
+                    android:paddingLeft="5dp"
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -95,16 +104,17 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="EMI Amount :"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:layout_marginLeft="5dp"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/txt_emiamount"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
                     android:paddingLeft="10dp"
-                    android:text="Rs. 25,000"
-                    android:textSize="12sp" />
+                    android:textSize="13sp"/>
 
             </LinearLayout>
 
@@ -129,17 +139,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:layout_marginLeft="5dp"
                     android:text="Overdue :"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/txt_dueamount"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
                     android:paddingLeft="10dp"
-                    android:text="Rs. 82,500"
-                    android:textSize="12sp" />
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -154,101 +165,93 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="Repayment Mode :"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:layout_marginLeft="5dp"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/txt_repaymentmode"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
                     android:paddingLeft="10dp"
-                    android:text="NACH"
-                    android:textSize="12sp" />
+                    android:textSize="13sp"/>
             </LinearLayout>
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_grey"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/selector_layout_rectangle"
-        android:orientation="vertical">
-
-
-       <!-- <LinearLayout
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp">-->
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:padding="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="3"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="10dp"
-                    android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/txt_acc_select_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/whit_rect_bg"
-                    android:gravity="center"
+                    android:gravity="left|center"
                     android:padding="10dp"
                     android:hint="Select Date"
                     android:textSize="12sp"
                     android:textStyle="bold" />
-                    <ImageView
-                        android:id="@+id/imgCalender"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_margin="5dp"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/ic_calendar"/>
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/btn_submit"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:background="@color/colorPrimaryDark"
-                    android:text="Submit"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:textAllCaps="false"
-                    android:textColor="#ffffff" />
-
                 <ImageView
-                    android:id="@+id/img_download"
+                    android:id="@+id/imgCalender"
                     android:layout_width="20dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center|end"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_download" />
-            </LinearLayout>
+                    android:layout_height="20dp"
+                    android:layout_margin="5dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_calendar"/>
+            </RelativeLayout>
 
-
-       <!-- </LinearLayout>-->
-
-
-
+            <TextView
+                android:id="@+id/btn_submit"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="10dp"
+                android:background="@color/colorPrimaryDark"
+                android:text="Submit"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textAllCaps="false"
+                android:textColor="#ffffff" />
+            <ImageView
+                android:id="@+id/img_download"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center|end"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_download" />
+        </LinearLayout>
             <LinearLayout
                 android:id="@+id/linTabledesc"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:padding="10dp"
+                android:layout_margin="10dp"
+                android:visibility="visible"
+                android:background="@drawable/whit_rect_bg"
                 android:weightSum="4">
 
               <LinearLayout
@@ -316,27 +319,39 @@
                 <ListView
                     android:id="@+id/lst_pre_closure"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></ListView>
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/whit_rect_bg">
+                </ListView>
 
             </LinearLayout>
-
-           <TextView
-               android:id="@+id/txtGeneratedOn"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-              android:layout_gravity="right"
-               android:textColor="#F47F39"
-               android:text="Generated On"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/dashed"/>
-
-        <TextView
-            android:layout_margin="10dp"
-            android:id="@+id/txtFooter"
+        <LinearLayout
+            android:id="@+id/ll_footerclouser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""/>
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/txtGeneratedOn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="Generated On"
+                android:padding="5dp"
+                android:textSize="14sp"
+                android:textColor="@color/overdues_count_bg"
+                android:background="@drawable/list_row"
+                />
+
+            <TextView
+                android:layout_margin="10dp"
+                android:id="@+id/txtFooter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Balance"/>
+        </LinearLayout>
+
+
     </LinearLayout>
 </LinearLayout>

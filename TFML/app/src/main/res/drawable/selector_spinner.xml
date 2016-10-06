@@ -5,12 +5,25 @@
         <layer-list>
             <item>
                 <color android:color="#F26711"/>
+                <shape android:shape="rectangle">
+                    <padding android:top="5dp"
+                        android:bottom="5dp"
+                        android:left="5dp"
+                        android:right="5dp">
+
+                    </padding>
+                </shape>
             </item>
 
             <item>
                 <bitmap
                     android:gravity="center_vertical|right"
-                    android:src="@drawable/ic_down_white"/>
+                    android:src="@drawable/ic_down_white"
+                    />
+                <scale android:scaleWidth="2dp"
+                    android:scaleHeight="2dp">
+
+                </scale>
             </item>
         </layer-list>
     </item>

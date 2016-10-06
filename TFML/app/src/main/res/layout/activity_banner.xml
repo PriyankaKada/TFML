@@ -209,7 +209,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_login_non_selected" />
+                android:src="@drawable/logictab_icon" />
 
             <TextView
                 android:id="@+id/txtLogin"

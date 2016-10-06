@@ -31,5 +31,8 @@ public class Constant {
     public static final String LOGIN_PREF="loginPrefs";
     public static final String ACCOUNT_STATEMENT_DOWNLOAD="customer/accountStatement";
     public static final String PRECLOSURE_STATEMENT_DOWNLOAD="customer/preClosureStatement";
-    public static final String FORGOT_PASSWORD="forgotPassword";
+    public static final String FORGOT_PASSWORD="api/forgotPassword";
+    public static final String LOGGEDIN="api/isLoggedIn";
+    public static final String RECEIPTPDF="customer/myReceipts";
+    public static final String CHANGPASSWORD="customer/changePassword";
 }

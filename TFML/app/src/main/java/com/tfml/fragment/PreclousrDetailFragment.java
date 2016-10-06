@@ -36,6 +36,8 @@ public class PreclousrDetailFragment extends Fragment {
    public void init()
    {
        lstPreclousre=(ListView)view.findViewById(R.id.lst_pre_closure);
+
+
        if (CommonUtils.isNetworkAvailable(getActivity())) {
            CommonUtils.showProgressDialog(getActivity(), "Loaded....");
           // callSoapRequest();

@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.tfml.R;
 import com.tfml.adapter.ContractsListAdapter;
 import com.tfml.auth.Constant;
@@ -102,8 +103,18 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 
         strApiToken= PreferenceHelper.getString(PreferenceHelper.API_TOKEN);
         strUserId=PreferenceHelper.getString(PreferenceHelper.USER_ID);
-        contractsInputModel.setUser_id(strUserId);
-        contractsInputModel.setApi_token(strApiToken);
+        Log.e("strApiToken",strApiToken);
+        Log.e("strUserId",strUserId);
+      /*  if(strApiToken!=null)
+        {
+            contractsInputModel.setUser_id(strUserId);
+        }
+        if(strUserId!=null)
+        {
+            contractsInputModel.setApi_token(strApiToken);
+        }
+       */
+
         callContractWebservice();
         CommonUtils.showProgressDialog(ContractActivity.this, "Pleas Wait.....");
         {
@@ -156,6 +167,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
             @Override
             public void onResponse(Call<ContractsResponseModel> call, Response<ContractsResponseModel> response) {
                 CommonUtils.closeProgressDialog();
+                Log.e("ResponseBody",new Gson().toJson(response.body()));
                // List<ContractModel>model= (List<ContractModel>) response.body().getData();
                 ArrayList<ContractModel>models=new ArrayList<ContractModel>();
                 models.addAll(response.body().getData().getActive().getContracts());
@@ -165,21 +177,19 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
                 strTotal=response.body().getData().getTotal().toString();
                 strTerCount=response.body().getData().getTerminated().getCount().toString();
                 strOverdue=response.body().getData().getActive().getCount().toString();
-                if(strTotal!=null)
-                {
+                if (strTotal != null) {
+                    txtTotalCount.setVisibility(View.VISIBLE);
                     txtTotalCount.setText(strTotal);
                 }
-                 if(strTerCount!=null)
-                {
+                if (strTerCount != null) {
+                    txtTerminatedCount.setVisibility(View.VISIBLE);
                     txtTerminatedCount.setText(strTerCount);
                 }
-                if(strOverdue!=null)
-                {
+                if (strOverdue != null) {
+                    txtOverDueCount.setVisibility(View.VISIBLE);
                     txtOverDueCount.setText(strOverdue);
                 }
-
-
-            Log.e("REsponseModel",response.body().getData().getTotal().toString());
+                Log.e("REsponseModel",response.body().getData().getTotal().toString());
             }
 
             @Override

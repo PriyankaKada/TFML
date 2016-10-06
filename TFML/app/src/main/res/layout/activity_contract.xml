@@ -49,16 +49,24 @@
 
             <TextView
                 android:id="@+id/txt_total_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
                 android:background="@color/total_count_bg"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:text=""
+                android:textStyle="bold"
+                android:gravity="center"
+                android:padding="2dp"
+                android:textSize="24sp"
+                android:visibility="invisible"
+                />
 
             <TextView
                 android:id="@+id/txt_total_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Total"
+                android:textSize="16sp"
                 android:textColor="@color/white" />
 
         </LinearLayout>
@@ -76,17 +84,25 @@
 
             <TextView
                 android:id="@+id/txt_terminated_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
                 android:background="@color/terminated_count_bg"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:text=""
+                android:textStyle="bold"
+                android:gravity="center"
+                android:padding="2dp"
+                android:textSize="24sp"
+                android:visibility="invisible"/>
 
             <TextView
                 android:id="@+id/txt_terminated_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Terminated"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                />
 
         </LinearLayout>
 
@@ -103,31 +119,40 @@
 
             <TextView
                 android:id="@+id/txt_overdue_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
                 android:background="@color/overdues_count_bg"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:text=""
+                android:textStyle="bold"
+                android:gravity="center"
+                android:padding="2dp"
+                android:textSize="24sp"
+                android:visibility="invisible"/>
 
             <TextView
                 android:id="@+id/txt_overdue_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Overdue"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                />
 
         </LinearLayout>
     </LinearLayout>
-
-
-
     </LinearLayout>
-
-
             <ListView
                 android:id="@+id/lstContact"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"></ListView>
+                android:layout_weight="1"
+                android:divider="@android:color/transparent"
+               android:dividerHeight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                ></ListView>
        </LinearLayout>
 
     <LinearLayout

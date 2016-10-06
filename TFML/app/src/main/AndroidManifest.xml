@@ -73,8 +73,10 @@
         <activity
             android:name=".activity.ForgotPasswordActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.DownloadDataActivity" />
-        <activity android:name=".activity.DownloadResultActivity" />
+        <activity android:name=".activity.DownloadDataActivity"
+            android:theme="@style/AppTheme.NoActionBar"   />
+        <activity android:name=".activity.DownloadResultActivity"
+           />
         <activity android:name=".activity.LocateUsActivity"
         android:theme="@style/AppTheme.NoActionBar" />
     </application>

@@ -1,11 +1,13 @@
 package com.tfml.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,11 +32,19 @@ public class DownloadDataActivity extends BaseActivity
 {
     ListView lstDownloadList;
      TmflApi tmflApi;
+    ImageView img_download_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_download_data);
         lstDownloadList=(ListView)findViewById(R.id.lst_download_data);
+        img_download_back=(ImageView)findViewById(R.id.img_login_back);
+        img_download_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DownloadDataActivity.this, ContractActivity.class));
+            }
+        });
         init();
 
     }

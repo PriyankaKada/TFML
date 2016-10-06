@@ -22,6 +22,8 @@ import com.tfml.model.downloadResponseModel.DownloadResponse;
 import com.tfml.model.bannerResponseModel.BannerlistResponse;
 import com.tfml.model.forgotPasswordResponseModel.ForgotInputModel;
 import com.tfml.model.forgotPasswordResponseModel.ForgotResponse;
+import com.tfml.model.logResponseModel.LogInputModel;
+import com.tfml.model.logResponseModel.LogResponseModel;
 import com.tfml.model.loginResponseModel.LoginRequestModel;
 import com.tfml.model.loginResponseModel.LoginResponseModel;
 import com.tfml.model.preClosurePdfResponseModel.PreClosureInputModel;
@@ -133,4 +135,8 @@ public interface TmflApi {
     Call<PreClosureStmtPdfResponse>getPreClosureDownload(@Body PreClosureInputModel preClosureInputModel);
     @POST(Constant.FORGOT_PASSWORD)
     Call<ForgotResponse>getForgotResponse(@Body ForgotInputModel forgotInputModel);
+    @POST(Constant.LOGGEDIN)
+    Call<LogResponseModel>getLogResponse(@Body LogInputModel logInputModel);
+ /*   @POST(Constant.RECEIPTPDF)
+    Call<>*/
 }

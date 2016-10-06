@@ -1,6 +1,5 @@
 package com.tfml.fragment;
 
-import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,7 +18,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.tfml.R;
-import com.tfml.auth.Constant;
+import com.tfml.adapter.BranchCityAdapter;
+import com.tfml.adapter.BranchListAdapter;
+import com.tfml.adapter.BranchStateAdapter;
+import com.tfml.adapter.CityAdapter;
+import com.tfml.adapter.StateAdapter;
 import com.tfml.auth.TmflApi;
 import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
@@ -50,7 +53,8 @@ import retrofit2.Response;
 
 public class ApplyLoanFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, RadioGroup.OnCheckedChangeListener {
 
-    private EditText txtFirstName, txtLastName, txtMobileNumber, txtLandlineNumber, txtEmailAddress, txtOrgnizationName, txtPincode;
+
+    private EditText edtFirstName, edtLastName, edtMobileNumber, edtLandlineNumber, edtEmailAddress, edtOrgnizationName, edtCode;
     private Spinner spnProduct, spSelectBranchState, spSelectBranchCity, spSelectBranch, spSelectCity, spSelectState, spOffers;
     private RadioButton rdbLeadTypeIndividual, rdbLeadTypeOrganizational, rdbVecTypeCommercial, rdbVechTypeRefinance, rdbVechPassanger;
     private Button btnCancel, btnApplyLoan;
@@ -87,25 +91,43 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         for (int i = 0; i < arDatumList.size(); i++) {
             spOfferList.add(response.getData().get(i).getTitle());
         }
-        spOffers.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, spOfferList));
+        spOffers.setAdapter(new ArrayAdapter<Datum>(getActivity(), R.layout.layout_spinner_textview, arDatumList));
         branchStateList = new ArrayList<String>();
-        branchStateList.add("Select Branch State");
-        spSelectBranchState.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, branchStateList));
-        branchCityList = new ArrayList<String>();
-        branchCityList.add("Select Branch City");
-        spSelectBranchCity.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, branchCityList));
 
-        branchList = new ArrayList<String>();
-        branchList.add("Select Branch");
-        spSelectBranch.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, branchList));
+        BranchResponseModel branchResponseModel=new BranchResponseModel();
+        branchResponseModel.setTerrCaption("Select Branch");
+        branchResponseModel.setTerrTerritoryid("-1");
+        List<BranchResponseModel>dummyBranchList=new ArrayList<>();
+        dummyBranchList.add(0,branchResponseModel);
+        spSelectBranch.setAdapter(new BranchListAdapter(getActivity(),dummyBranchList));
 
-        stateList = new ArrayList<String>();
-        stateList.add("Select State");
-        spSelectState.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, stateList));
+        BranchCityResponseModel branchCityResponseModel=new BranchCityResponseModel();
+        branchCityResponseModel.setTerrCaption("Select Branch City");
+        branchCityResponseModel.setTerrTerritoryid("-1");
+        List<BranchCityResponseModel>dummyBranchCityList=new ArrayList<>();
+        dummyBranchCityList.add(0,branchCityResponseModel);
+        spSelectBranchCity.setAdapter(new BranchCityAdapter(getActivity(),dummyBranchCityList));
+        BranchStateResponseModel branchStateResponseModel=new BranchStateResponseModel();
+        branchStateResponseModel.setTerrCaption("Select Branch State");
+        branchStateResponseModel.setTerrTerritoryid("-1");
+        List<BranchStateResponseModel>dummyBranchStateList=new ArrayList<>();
+        dummyBranchStateList.add(0,branchStateResponseModel);
+        spSelectBranchState.setAdapter(new BranchStateAdapter(getActivity(),dummyBranchStateList));
 
-        cityList = new ArrayList<String>();
-        cityList.add("Select City");
-        spSelectCity.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, cityList));
+        StateResponseModel stateResponseModel=new StateResponseModel();
+        stateResponseModel.setName("Select State");
+        stateResponseModel.setId("-1");
+        List<StateResponseModel>dummyStatList=new ArrayList<>();
+        dummyStatList.add(0,stateResponseModel);
+        spSelectState.setAdapter(new StateAdapter(getActivity(),dummyStatList));
+
+        CityResponseModel cityModel=new CityResponseModel();
+        cityModel.setName("Select City");
+        cityModel.setId("-1");
+
+        List<CityResponseModel> dummyCityList=new ArrayList();
+        dummyCityList.add(0,cityModel);
+        spSelectCity.setAdapter(new CityAdapter(getActivity(),dummyCityList));
 
 
         return view;
@@ -118,13 +140,13 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
     }
 
     public void init() {
-        txtFirstName = (EditText) view.findViewById(R.id.edt_first_name);
-        txtLastName = (EditText) view.findViewById(R.id.edt_last_name);
-        txtMobileNumber = (EditText) view.findViewById(R.id.edt_mobile_no);
-        txtLandlineNumber = (EditText) view.findViewById(R.id.edt_landline_no);
-        txtEmailAddress = (EditText) view.findViewById(R.id.edt_email_address);
-        txtOrgnizationName = (EditText) view.findViewById(R.id.edt_orgnization_name);
-        txtPincode = (EditText) view.findViewById(R.id.edt_pincode);
+        edtFirstName = (EditText) view.findViewById(R.id.edt_first_name);
+        edtLastName = (EditText) view.findViewById(R.id.edt_last_name);
+        edtMobileNumber = (EditText) view.findViewById(R.id.edt_mobile_no);
+        edtLandlineNumber = (EditText) view.findViewById(R.id.edt_landline_no);
+        edtEmailAddress = (EditText) view.findViewById(R.id.edt_email_address);
+        edtOrgnizationName = (EditText) view.findViewById(R.id.edt_orgnization_name);
+        edtCode = (EditText) view.findViewById(R.id.edt_pincode);
         spnProduct = (Spinner) view.findViewById(R.id.sp_select_product);
         spnProduct.setOnItemSelectedListener(this);
         CommonUtils.showProgressDialog(getActivity(), "Please Wait.....");
@@ -144,8 +166,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         spSelectCity = (Spinner) view.findViewById(R.id.sp_select_city);
         spSelectCity.setOnItemSelectedListener(this);
         spOffers = (Spinner) view.findViewById(R.id.sp_offers);
-       // spOffers.setOnItemSelectedListener(this);
-        //spSelectPinCode = (Spinner) view.findViewById(R.id.sp_select_pincode);
+        spOffers.setOnItemSelectedListener(this);
         radioGroupLeadType = (RadioGroup) view.findViewById(R.id.radio_group_lead_type);
         radioGroupVehicleType = (RadioGroup) view.findViewById(R.id.radio_group_vehicle_type);
         radioGroupLeadType.setOnCheckedChangeListener(this);
@@ -192,12 +213,24 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 
     private boolean checkValidation() {
         boolean ret = true;
-        if (!Validation.hasText(txtFirstName, "Please enter your First name")) ret = false;
-        if (!Validation.hasText(txtLastName, "Please enter your Last name")) ret = false;
-        if (!Validation.hasText(txtMobileNumber, "Please enter mobile number")) ret = false;
-        if (!Validation.hasText(txtLandlineNumber, "Please enter landline number")) ret = false;
-        if (!Validation.isValidEmail(txtEmailAddress.getText().toString())) ret = false;
-        if (!Validation.hasText(txtPincode, "Please enter Pincode number")) ret = false;
+        if (!Validation.hasText(edtFirstName, "Please enter your First name")) {
+            ret = false;
+        }
+        if (!Validation.hasText(edtLastName, "Please enter your Last name")) {
+            ret = false;
+        }
+        if (!Validation.hasText(edtMobileNumber, "Please enter mobile number")) {
+            ret = false;
+        }
+        if (!Validation.hasText(edtLandlineNumber, "Please enter landline number")) {
+            ret = false;
+        }
+        if (!Validation.isValidEmail(edtEmailAddress.getText().toString())) {
+            ret = false;
+        }
+        if (!Validation.hasText(edtCode, "Please enter Pincode number")) {
+            ret = false;
+        }
         return ret;
     }
 
@@ -214,13 +247,21 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 
     public void callApplyLoanService() {
         strUserid = PreferenceHelper.getString(PreferenceHelper.USER_ID);
-        inputLoanModel.setUserId(strUserid);
-        // inputLoanModel.setOfferId(strOfferId);
-        inputLoanModel.setFirstName(txtFirstName.getText().toString());
-        inputLoanModel.setLastName(txtLastName.getText().toString());
-        inputLoanModel.setMobileNumber(txtMobileNumber.getText().toString());
-        inputLoanModel.setLandlineNumber(txtLandlineNumber.getText().toString());
-        inputLoanModel.setEmailAddress(txtEmailAddress.getText().toString());
+        if(strUserid!=null)
+        {
+            inputLoanModel.setUserId(strUserid);
+        }
+        else
+        {
+            inputLoanModel.setUserId("0");
+        }
+
+        inputLoanModel.setOfferId(strOfferId);
+        inputLoanModel.setFirstName(edtFirstName.getText().toString());
+        inputLoanModel.setLastName(edtLastName.getText().toString());
+        inputLoanModel.setMobileNumber(edtMobileNumber.getText().toString());
+        inputLoanModel.setLandlineNumber(edtLandlineNumber.getText().toString());
+        inputLoanModel.setEmailAddress(edtEmailAddress.getText().toString());
         if (productCode != null && productCode != "-1") {
             inputLoanModel.setProductId(productCode);
         } else {
@@ -259,10 +300,10 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
             Toast.makeText(getContext(), "Please Select City", Toast.LENGTH_SHORT).show();
         }
 
-        inputLoanModel.setEmailAddress(txtEmailAddress.getText().toString());
-        inputLoanModel.setPincode(txtPincode.getText().toString());
+        inputLoanModel.setEmailAddress(edtEmailAddress.getText().toString());
+        inputLoanModel.setPincode(edtCode.getText().toString());
         inputLoanModel.setLeadType(strLeadTypechk);
-        inputLoanModel.setOrganisationName(txtOrgnizationName.getText().toString());
+        inputLoanModel.setOrganisationName(edtOrgnizationName.getText().toString());
         inputLoanModel.setVehicalType(strVechicalType);
 
     }
@@ -293,7 +334,9 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
                 if (response.body().getStatus().contains("success")) {
                     Log.e("getApplyLoanResponse", response.body().getStatus());
                     CommonUtils.showAlert1(getActivity(), "", "Apply Loan Successfully", false);
+                    ClearData();
                 } else {
+                    Toast.makeText(getActivity(), response.body().getErrors().get(0), Toast.LENGTH_LONG).show();
                     Log.e("getApplyloanErr", response.body().getErrors().get(0));
                 }
 
@@ -357,7 +400,10 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
                 }
                 break;
             case R.id.sp_offers:
-              //  strOfferId = String.valueOf(((SchemesResponse) parent.getItemAtPosition(position)).getData().get(position).getId());
+
+                strOfferId = String.valueOf(arDatumList.get(position).getId());
+                Log.d("offer id", strOfferId);
+
                 break;
         }
 
@@ -371,17 +417,18 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        switch (group.getId()) {
+        switch (group.getCheckedRadioButtonId()) {
             case R.id.rdb_organization:
                 if (checkedId == R.id.rdb_organization) {
                     strLeadTypechk = "Organizational";
                     inputLoanModel.setLeadType(strLeadTypechk);
-
+                    edtOrgnizationName.setVisibility(View.VISIBLE);
                 }
                 break;
             case R.id.rdb_individual:
                 if (checkedId == R.id.rdb_individual) {
-                    strLeadTypechk = "Individual";
+                    edtOrgnizationName.setVisibility(View.GONE);
+                    strLeadTypechk = "0";
                     inputLoanModel.setLeadType(strLeadTypechk);
                 }
                 break;
@@ -405,4 +452,22 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
                 break;
         }
     }
+    public void ClearData()
+    {
+        edtFirstName.setText("");
+        edtLastName.setText("");
+        edtMobileNumber.setText("");
+        edtLandlineNumber.setText("");
+        edtEmailAddress.setText("");
+        edtOrgnizationName.setText("");
+        edtCode.setText("");
+        spnProduct.setSelection(0);
+        spSelectBranchState.setSelection(0);
+        spSelectBranchCity.setSelection(0);
+        spSelectBranch.setSelection(0);
+        spSelectCity.setSelection(0);
+        spSelectState.setSelection(0);
+        spOffers.setSelection(0);
+    }
+
 }

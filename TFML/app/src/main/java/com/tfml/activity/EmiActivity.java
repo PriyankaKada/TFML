@@ -3,27 +3,26 @@ package com.tfml.activity;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.GravityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.tfml.R;
 import com.tfml.adapter.EmiPagerAdapter;
-import com.tfml.adapter.SchemesPagerAdapter;
 import com.tfml.fragment.EmiPatternFragment;
 import com.tfml.fragment.PreClosureFragment;
 import com.tfml.fragment.RcUpdateFragment;
 import com.tfml.fragment.StatementOfAccountFragment;
+import com.tfml.model.ContractResponseModel.ContractModel;
 import com.tfml.util.SetFonts;
+
+import java.util.ArrayList;
 
 public class EmiActivity extends DrawerBaseActivity implements View.OnClickListener
 {
@@ -35,6 +34,8 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
     ViewPager viewPager;
     DrawerLayout drawerLayout;
     View view1, view2, view3,view4;
+    ArrayList<ContractModel> modelArrayList;
+    String datavalue = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +44,13 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
         toolbarEmi=(Toolbar)findViewById(R.id.toolbar_emi);
         setSupportActionBar(toolbarEmi);
         getSupportActionBar().setTitle("");
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+        modelArrayList =
+                (ArrayList<ContractModel>)bundle.getSerializable("datamodel");
+        datavalue = (String)bundle.getString("datamodelvalue");
         init(view);
+
     }
 
     public void init(View view)
@@ -69,10 +76,19 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 
     private void setupViewPager(ViewPager viewPager) {
         EmiPagerAdapter adapter = new EmiPagerAdapter(getSupportFragmentManager());
-        adapter.addFrag(new EmiPatternFragment(), "EMI pattern");
-        adapter.addFrag(new StatementOfAccountFragment(), "Statment of account");
-        adapter.addFrag(new RcUpdateFragment(), "RC update");
-      adapter.addFrag(new PreClosureFragment(),"Pre-closure statement");
+        Fragment emiPatternFrag = new EmiPatternFragment();
+        Fragment statementOfAccountFragment = new StatementOfAccountFragment();
+        Fragment rcUpdateFragment = new RcUpdateFragment();
+        Fragment closureFragment = new PreClosureFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("datamodel", modelArrayList);
+        bundle.putString("datamodelvalue", datavalue );
+
+        adapter.addFrag(emiPatternFrag, "EMI pattern");
+        adapter.addFrag(statementOfAccountFragment, "Statment of account");
+        adapter.addFrag(rcUpdateFragment, "RC update");
+        adapter.addFrag(closureFragment,"Pre-closure statement");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
