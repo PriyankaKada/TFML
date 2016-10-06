@@ -35,4 +35,5 @@ public class Constant {
     public static final String LOGGEDIN="api/isLoggedIn";
     public static final String RECEIPTPDF="customer/myReceipts";
     public static final String CHANGPASSWORD="customer/changePassword";
+    public static final String  EMILIST="customer/emiList";
 }
