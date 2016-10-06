@@ -68,10 +68,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.btn_login:
 
-                if (chkRememberMe.isChecked()) {
-                    Log.e("RememberMe",chkRememberMe.isChecked()+"");
-                    PreferenceHelper.insertBoolean("SaveLogin", true);
-                }
                 Validation();
                 break;
             case R.id.txt_forgot_password:
@@ -121,7 +117,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 if (response.body() != null && response.body().getStatus().toString().contains("success")) {
                     strApiToken = response.body().getData().getApiToken();
                     strUsrId = response.body().getData().getUserId();
-
+                    if (chkRememberMe.isChecked()) {
+                        Log.e("RememberMe",chkRememberMe.isChecked()+"");
+                        PreferenceHelper.insertBoolean("SaveLogin", true);
+                    }
                     PreferenceHelper.insertString(PreferenceHelper.USER_ID, strUsrId);
                     PreferenceHelper.insertString(PreferenceHelper.API_TOKEN, strApiToken);
                     startActivity(new Intent(LoginActivity.this, ContractActivity.class));

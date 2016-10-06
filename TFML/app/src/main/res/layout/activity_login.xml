@@ -70,9 +70,10 @@
             android:background="@drawable/bg_edit_text"
             android:drawableLeft="@drawable/ic_user_name"
             android:drawablePadding="10dp"
+            android:textColor="@color/white"
             android:hint="Username"
             android:padding="10dp"
-            android:textColor="@color/white"
+            android:textCursorDrawable="@drawable/cursor_color"
             android:textColorHint="@color/white"
             android:textSize="15dp"
 
@@ -91,6 +92,7 @@
             android:inputType="textPassword"
             android:padding="10dp"
             android:textColor="@color/white"
+            android:textCursorDrawable="@drawable/cursor_color"
             android:textColorHint="@color/white"
             android:textSize="15dp"
             />

@@ -75,7 +75,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
     private String dueDate = "";
     private String repaymentMode = "";
     private String currentEmi = "";
-
+    private String overdue="";
     TmflApi tmflSoapApi, tmflApi;
     PreClosureInputModel preClosureInputModel;
     PreClosureStmtPdfResponse preClosureStmtPdfResponse;
@@ -100,7 +100,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
         dueDate = (String) bundle.getString("DUEDATE");
         repaymentMode = (String) bundle.getString("OVERDUEAMT");
         currentEmi = (String) bundle.getString("CURRENTEMI");
-
+        overdue=(String)bundle.get("OVERDUEAMT");
         init();
         return view;
 
@@ -130,7 +130,11 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
          if (dueDate != null)
              txt_duedate.setText(dueDate);
          if (currentEmi != null)
-             txt_emiamount.setText(currentEmi);
+             txt_emiamount.setText("Rs."+currentEmi);
+         if(overdue!=null)
+         {
+             txt_dueamount.setText("Rs."+overdue);
+         }
          SetFonts.setFonts(getActivity(),btnSubmit,2);
          spnContractNo=(Spinner)view.findViewById(R.id.spnContractNo) ;
          contractLst=new ArrayList<String>();
@@ -211,8 +215,25 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
         txt_rc_no.setText(model.getRcNumber()==null?"":model.getRcNumber().toString());
         txt_duedate.setText(model.getDueDate()==null?"":model.getDueDate().toString());
         txt_dueamount.setText(model.getDueAmount()==null?"":model.getDueAmount().toString());
-        txt_emiamount.setText(model.getDueDate()==null?"":model.getDueAmount().toString());
+        if(txt_emiamount.getText().toString().contains("Rs."))
+        {
+            txt_emiamount.setText(model.getDueDate()==null?"":model.getDueAmount().toString());
+        }
+        else
+        {
+            txt_emiamount.setText(model.getDueDate()==null?"":"Rs."+model.getDueAmount().toString());
+        }
+
         txt_repaymentmode.setText(model.getPdcFlag()==null?"":model.getPdcFlag().toString());
+        if(txt_dueamount.getText().toString().contains("Rs."))
+        {
+            txt_dueamount.setText(model.getTotalCurrentDue()==null?"":model.getTotalCurrentDue().toString());
+        }
+        else
+        {
+            txt_dueamount.setText(model.getTotalCurrentDue()==null?"":"Rs."+model.getTotalCurrentDue().toString());
+        }
+
     }
 
     @Override

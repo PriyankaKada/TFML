@@ -62,11 +62,11 @@ public class ContractsListAdapter extends ArrayAdapter<ContractModel> {
             txt_product_name.setText(model.getProduct()==null?"":model.getProduct().toString());
             txt_contract_no.setText(model.getUsrConNo()==null?"":model.getUsrConNo());
             txt_rc_no.setText(model.getRcNumber()==null?"":model.getRcNumber());
-            txt_overdue_amount.setText(model.getTotalCurrentDue()==null?"":model.getTotalCurrentDue());
-            txt_repayment_mode.setText(model.getPdcFlag()==null?"":model.getPdcFlag());
+            txt_overdue_amount.setText(model.getTotalCurrentDue()==null?"":"Rs."+model.getTotalCurrentDue());
+            txt_repayment_mode.setText(model.getPdcFlag()==null?"":"Rs."+model.getPdcFlag());
             txt_next_due_date.setText(model.getDueDate()==null?"":model.getDueDate().toString());
             txt_last_payment_date.setText(model.getLastReceiptDate()==null?"":model.getLastReceiptDate().toString());
-            txt_current_emi_amount.setText(model.getDueAmount()==null?"":model.getDueAmount().toString());
+            txt_current_emi_amount.setText(model.getDueAmount()==null?"":"Rs."+model.getDueAmount().toString());
 
 
               btn_more_detail.setOnClickListener(new View.OnClickListener() {

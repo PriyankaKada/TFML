@@ -69,6 +69,7 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
     private String dueDate = "";
     private String repaymentMode = "";
     private String currentEmi = "";
+    private String overdue="";
 
 
     @Override
@@ -87,7 +88,7 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
         dueDate = (String) bundle.getString("DUEDATE");
         repaymentMode = (String) bundle.getString("OVERDUEAMT");
         currentEmi = (String) bundle.getString("CURRENTEMI");
-
+        overdue=(String)bundle.get("OVERDUEAMT");
         init();
         return view;
     }
@@ -147,7 +148,8 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
             txt_duedate.setText(dueDate);
         if (currentEmi != null)
             txt_emiamount.setText(currentEmi);
-
+        if(overdue!=null)
+            txt_dueamount.setText(overdue);
         SetFonts.setFonts(getActivity(),btnRcUpload,2);
 
         spnContractNo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -188,6 +190,8 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
         txt_dueamount.setText(model.getDueAmount()==null?"":model.getDueAmount().toString());
         txt_emiamount.setText(model.getDueDate()==null?"":model.getDueAmount().toString());
         txt_repaymentmode.setText(model.getPdcFlag()==null?"":model.getPdcFlag().toString());
+       // txt_dueamount.setText(model.getTotalCurrentDue()==null?"":model.getTotalCurrentDue().toString());
+
     }
 
     @Override

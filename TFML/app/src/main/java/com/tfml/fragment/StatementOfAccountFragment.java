@@ -89,6 +89,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
     ProgressDialog progressdialog;
     String servicestring = Context.DOWNLOAD_SERVICE;
     DownloadManager downloadmanager;
+    private String overdue="";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -104,6 +105,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
         dueDate = (String) bundle.getString("DUEDATE");
         repaymentMode = (String) bundle.getString("OVERDUEAMT");
         currentEmi = (String) bundle.getString("CURRENTEMI");
+        overdue=(String)bundle.get("OVERDUEAMT");
         tmfl = ApiService.getInstance().call();
         init();
         accountStatementInputModel = new AccountStatementInputModel();
@@ -132,7 +134,11 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
         if (dueDate != null)
             txt_duedate.setText(dueDate);
         if (currentEmi != null)
-            txt_dueamount.setText(currentEmi);
+            txt_emiamount.setText("Rs."+currentEmi);
+        if(overdue!=null)
+        {
+            txt_dueamount.setText("Rs."+overdue);
+        }
         SetFonts.setFonts(getActivity(), btnSubmit, 2);
         date = new DatePickerFragment();
         contractLst = new ArrayList<String>();
@@ -224,11 +230,11 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
     }
 
     private void setData(ContractModel model) {
-        txt_rc_no.setText(model.getRcNumber() == null ? "" : model.getRcNumber().toString());
-        txt_duedate.setText(model.getDueDate() == null ? "" : model.getDueDate().toString());
-        txt_dueamount.setText(model.getDueAmount() == null ? "" : model.getDueAmount().toString());
-        txt_emiamount.setText(model.getDueDate() == null ? "" : model.getDueAmount().toString());
-        txt_repaymentmode.setText(model.getPdcFlag() == null ? "" : model.getPdcFlag().toString());
+        txt_rc_no.setText(model.getRcNumber() == null?"":model.getRcNumber().toString());
+        txt_duedate.setText(model.getDueDate() == null ?"":model.getDueDate().toString());
+        txt_emiamount.setText(model.getDueDate()==null?"":model.getDueAmount().toString());
+        txt_repaymentmode.setText(model.getPdcFlag()==null?"":model.getPdcFlag().toString());
+        txt_dueamount.setText(model.getTotalCurrentDue()==null?"":model.getTotalCurrentDue().toString());
     }
 
     @Override
