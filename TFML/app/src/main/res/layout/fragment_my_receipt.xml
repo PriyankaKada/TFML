@@ -38,7 +38,9 @@
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:padding="10dp"
-            android:layout_margin="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:background="@color/colorPrimary"
             android:layout_height="wrap_content">
             <TextView
@@ -70,10 +72,12 @@
             android:id="@+id/expandableListView"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:padding="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:groupIndicator="@null"
             android:divider="@android:color/darker_gray"
             android:dividerHeight="0.5dp"
-            android:background="@android:color/transparent"/>
+            android:background="@color/white"/>
 
     </LinearLayout>
 

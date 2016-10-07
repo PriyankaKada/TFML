@@ -4,12 +4,13 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.File;
+import java.io.Serializable;
 
 /**
  * Created by webwerks on 1/9/16.
  */
 
-public class RcUploadDataInputModel {
+public class RcUploadDataInputModel implements Serializable{
     @SerializedName("user_id")
     @Expose
     private String userId;
@@ -54,4 +55,14 @@ public class RcUploadDataInputModel {
     public void setImage(File image) {
         this.image = image;
     }
+
+    /*@Override
+    public String toString() {
+        return "RcUploadDataInputModel{" +
+                "userId='" + userId + '\'' +
+                ", contractNo='" + contractNo + '\'' +
+                ", rcNo='" + rcNo + '\'' +
+                ", image=" + image +
+                '}';
+    }*/
 }

@@ -94,40 +94,40 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         spOffers.setAdapter(new ArrayAdapter<Datum>(getActivity(), R.layout.layout_spinner_textview, arDatumList));
         branchStateList = new ArrayList<String>();
 
-        BranchResponseModel branchResponseModel=new BranchResponseModel();
+        BranchResponseModel branchResponseModel = new BranchResponseModel();
         branchResponseModel.setTerrCaption("Select Branch");
         branchResponseModel.setTerrTerritoryid("-1");
-        List<BranchResponseModel>dummyBranchList=new ArrayList<>();
-        dummyBranchList.add(0,branchResponseModel);
-        spSelectBranch.setAdapter(new BranchListAdapter(getActivity(),dummyBranchList));
+        List<BranchResponseModel> dummyBranchList = new ArrayList<>();
+        dummyBranchList.add(0, branchResponseModel);
+        spSelectBranch.setAdapter(new BranchListAdapter(getActivity(), dummyBranchList));
 
-        BranchCityResponseModel branchCityResponseModel=new BranchCityResponseModel();
+        BranchCityResponseModel branchCityResponseModel = new BranchCityResponseModel();
         branchCityResponseModel.setTerrCaption("Select Branch City");
         branchCityResponseModel.setTerrTerritoryid("-1");
-        List<BranchCityResponseModel>dummyBranchCityList=new ArrayList<>();
-        dummyBranchCityList.add(0,branchCityResponseModel);
-        spSelectBranchCity.setAdapter(new BranchCityAdapter(getActivity(),dummyBranchCityList));
-        BranchStateResponseModel branchStateResponseModel=new BranchStateResponseModel();
+        List<BranchCityResponseModel> dummyBranchCityList = new ArrayList<>();
+        dummyBranchCityList.add(0, branchCityResponseModel);
+        spSelectBranchCity.setAdapter(new BranchCityAdapter(getActivity(), dummyBranchCityList));
+        BranchStateResponseModel branchStateResponseModel = new BranchStateResponseModel();
         branchStateResponseModel.setTerrCaption("Select Branch State");
         branchStateResponseModel.setTerrTerritoryid("-1");
-        List<BranchStateResponseModel>dummyBranchStateList=new ArrayList<>();
-        dummyBranchStateList.add(0,branchStateResponseModel);
-        spSelectBranchState.setAdapter(new BranchStateAdapter(getActivity(),dummyBranchStateList));
+        List<BranchStateResponseModel> dummyBranchStateList = new ArrayList<>();
+        dummyBranchStateList.add(0, branchStateResponseModel);
+        spSelectBranchState.setAdapter(new BranchStateAdapter(getActivity(), dummyBranchStateList));
 
-        StateResponseModel stateResponseModel=new StateResponseModel();
+        StateResponseModel stateResponseModel = new StateResponseModel();
         stateResponseModel.setName("Select State");
         stateResponseModel.setId("-1");
-        List<StateResponseModel>dummyStatList=new ArrayList<>();
-        dummyStatList.add(0,stateResponseModel);
-        spSelectState.setAdapter(new StateAdapter(getActivity(),dummyStatList));
+        List<StateResponseModel> dummyStatList = new ArrayList<>();
+        dummyStatList.add(0, stateResponseModel);
+        spSelectState.setAdapter(new StateAdapter(getActivity(), dummyStatList));
 
-        CityResponseModel cityModel=new CityResponseModel();
+        CityResponseModel cityModel = new CityResponseModel();
         cityModel.setName("Select City");
         cityModel.setId("-1");
 
-        List<CityResponseModel> dummyCityList=new ArrayList();
-        dummyCityList.add(0,cityModel);
-        spSelectCity.setAdapter(new CityAdapter(getActivity(),dummyCityList));
+        List<CityResponseModel> dummyCityList = new ArrayList();
+        dummyCityList.add(0, cityModel);
+        spSelectCity.setAdapter(new CityAdapter(getActivity(), dummyCityList));
 
 
         return view;
@@ -149,11 +149,11 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         edtCode = (EditText) view.findViewById(R.id.edt_pincode);
         spnProduct = (Spinner) view.findViewById(R.id.sp_select_product);
         spnProduct.setOnItemSelectedListener(this);
-        CommonUtils.showProgressDialog(getActivity(), "Please Wait.....");
+        CommonUtils.showProgressDialog(getActivity(), "Getting Your Information");
         SocialUtil.getProductListData(getActivity(), spnProduct);
         spSelectBranchState = (Spinner) view.findViewById(R.id.sp_select_branch_state);
         spSelectBranchState.setOnItemSelectedListener(this);
-        CommonUtils.showProgressDialog(getActivity(), "Please Wait.....");
+        CommonUtils.showProgressDialog(getActivity(), "Getting Your Information");
         SocialUtil.getBranchStateListData(getActivity(), spSelectBranchState, "Select branch state");
         spSelectBranchCity = (Spinner) view.findViewById(R.id.sp_select_branch_city);
         spSelectBranchCity.setOnItemSelectedListener(this);
@@ -161,7 +161,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         spSelectBranch.setOnItemSelectedListener(this);
         spSelectState = (Spinner) view.findViewById(R.id.sp_select_state);
         spSelectState.setOnItemSelectedListener(this);
-        CommonUtils.showProgressDialog(getActivity(), "Please Wait.....");
+        CommonUtils.showProgressDialog(getActivity(), "Getting Your Information");
         SocialUtil.getStateListData(getActivity(), spSelectState, "Select state");
         spSelectCity = (Spinner) view.findViewById(R.id.sp_select_city);
         spSelectCity.setOnItemSelectedListener(this);
@@ -247,12 +247,9 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 
     public void callApplyLoanService() {
         strUserid = PreferenceHelper.getString(PreferenceHelper.USER_ID);
-        if(strUserid!=null)
-        {
+        if (strUserid != null) {
             inputLoanModel.setUserId(strUserid);
-        }
-        else
-        {
+        } else {
             inputLoanModel.setUserId("0");
         }
 
@@ -452,8 +449,8 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
                 break;
         }
     }
-    public void ClearData()
-    {
+
+    public void ClearData() {
         edtFirstName.setText("");
         edtLastName.setText("");
         edtMobileNumber.setText("");

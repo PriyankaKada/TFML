@@ -193,7 +193,7 @@
         android:weightSum="1">
 
         <EditText
-            android:id="@+id/txt_rc_no"
+            android:id="@+id/edt_rc_no"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"

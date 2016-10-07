@@ -1,11 +1,14 @@
 package com.tfml.fragment;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
@@ -29,7 +32,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.tfml.R;
+import com.tfml.activity.BannerActivity;
+import com.tfml.activity.ContractActivity;
+import com.tfml.activity.SplashActivity;
 import com.tfml.auth.TmflApi;
 import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
@@ -37,6 +44,8 @@ import com.tfml.common.SoapApiService;
 import com.tfml.model.ContractResponseModel.ContractModel;
 import com.tfml.model.accountStmtPdfResponseModel.AccountStatementInputModel;
 import com.tfml.model.accountStmtPdfResponseModel.AccountStmtResponse;
+import com.tfml.model.logResponseModel.LogInputModel;
+import com.tfml.model.logResponseModel.LogResponseModel;
 import com.tfml.model.soapModel.request.ReqBody;
 import com.tfml.model.soapModel.request.ReqData;
 import com.tfml.model.soapModel.request.RequestEnvelpe;
@@ -83,12 +92,14 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
     private String repaymentMode = "";
     private String currentEmi = "";
     String strPathUrl;
-    TmflApi tmflSoapApi, tmfl;
+    TmflApi tmflSoapApi, tmflDownload,tmflLogin;
     AccountStatementInputModel accountStatementInputModel;
     AccountStmtResponse accountStmtResponse;
     ProgressDialog progressdialog;
     String servicestring = Context.DOWNLOAD_SERVICE;
     DownloadManager downloadmanager;
+    LogInputModel logInputModel;
+    LogResponseModel logResponseModel;
     private String overdue="";
 
     @Override
@@ -106,10 +117,13 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
         repaymentMode = (String) bundle.getString("OVERDUEAMT");
         currentEmi = (String) bundle.getString("CURRENTEMI");
         overdue=(String)bundle.get("OVERDUEAMT");
-        tmfl = ApiService.getInstance().call();
-        init();
+        tmflLogin=ApiService.getInstance().call();
+        tmflDownload = ApiService.getInstance().call();
+        logInputModel=new LogInputModel();
+        logResponseModel=new LogResponseModel();
         accountStatementInputModel = new AccountStatementInputModel();
         accountStmtResponse = new AccountStmtResponse();
+        init();
         return view;
     }
 
@@ -127,6 +141,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
         txt_emiamount = (TextView) view.findViewById(R.id.txt_emiamount);
         txt_dueamount = (TextView) view.findViewById(R.id.txt_dueamount);
         txt_duedate = (TextView) view.findViewById(R.id.txt_duedate);
+        setColorButtonBasic();
         if (rcNo != null)
             txt_rc_no.setText(rcNo);
         if (repaymentMode != null)
@@ -134,10 +149,10 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
         if (dueDate != null)
             txt_duedate.setText(dueDate);
         if (currentEmi != null)
-            txt_emiamount.setText("Rs."+currentEmi);
+            txt_emiamount.setText(currentEmi);
         if(overdue!=null)
         {
-            txt_dueamount.setText("Rs."+overdue);
+            txt_dueamount.setText(overdue);
         }
         SetFonts.setFonts(getActivity(), btnSubmit, 2);
         date = new DatePickerFragment();
@@ -192,25 +207,9 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
                 contractNo = spnContractNo.getSelectedItem().toString();
                 itemindex = position;
 
-
-//                if (itemindex > 0) {
                 ContractModel model = modelArrayList.get(itemindex);
                 setData(model);
-                if (CommonUtils.isNetworkAvailable(getActivity())) {
-                    if (!TextUtils.isEmpty(txtAccDate.toString())) {
-                        CommonUtils.showProgressDialog(getActivity(), "Please Wait Data Loaded....");
-                        callSoapRequest();
-                        linAccDetail.setVisibility(View.VISIBLE);
-                    } else {
-                        Toast.makeText(getActivity(), "Please Select Date", Toast.LENGTH_SHORT).show();
-                    }
-
-                } else {
-                    Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
-                }
-
-
-//                }
+                callCheckLogin();
 
             }
 
@@ -230,11 +229,13 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
     }
 
     private void setData(ContractModel model) {
-        txt_rc_no.setText(model.getRcNumber() == null?"":model.getRcNumber().toString());
-        txt_duedate.setText(model.getDueDate() == null ?"":model.getDueDate().toString());
-        txt_emiamount.setText(model.getDueDate()==null?"":model.getDueAmount().toString());
+        txt_rc_no.setText(model.getRcNumber()==null?"":model.getRcNumber().toString());
+        txt_duedate.setText(model.getDueDate()==null?"":model.getDueDate().toString());
+        // txt_dueamount.setText(model.getDueAmount()==null?"":"Rs. "+model.getDueAmount().toString());
+        txt_emiamount.setText(model.getDueAmount()==null?"":"Rs. "+model.getDueAmount().toString());
         txt_repaymentmode.setText(model.getPdcFlag()==null?"":model.getPdcFlag().toString());
-        txt_dueamount.setText(model.getTotalCurrentDue()==null?"":model.getTotalCurrentDue().toString());
+        txt_dueamount.setText(model.getTotalCurrentDue()==null?"":"Rs."+model.getTotalCurrentDue().toString());
+
     }
 
     @Override
@@ -244,24 +245,13 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
                 selectDate();
                 break;
             case R.id.btn_submit:
-                if (CommonUtils.isNetworkAvailable(getActivity())) {
-                    if (!TextUtils.isEmpty(txtAccDate.toString())) {
-                        CommonUtils.showProgressDialog(getActivity(), "Please Wait Data Loaded....");
-                        callSoapRequest();
-                        linAccDetail.setVisibility(View.VISIBLE);
-                    } else {
-                        Toast.makeText(getActivity(), "Please Select Date", Toast.LENGTH_SHORT).show();
-                    }
-
-                } else {
-                    Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+                if(!TextUtils.isEmpty(txtAccDate.getText().toString()))
+                {
+                    callCheckLogin();
                 }
-
-//                if (!TextUtils.isEmpty(txtAccDate.toString())) {
-//                    linAccDetail.setVisibility(View.VISIBLE);
-//                } else {
-//                    Toast.makeText(getActivity(), "Please Select Date", Toast.LENGTH_SHORT).show();
-//                }
+                else {
+                Toast.makeText(getActivity(), "Please Select Date", Toast.LENGTH_SHORT).show();
+            }
 
                 break;
             case R.id.img_download:
@@ -273,18 +263,29 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
                 }
                 break;
             case R.id.btn_basic_detail:
-                callBasicDetail();
+                if (!TextUtils.isEmpty(txtAccDate.getText().toString()))
+                {
+                    callBasicDetail();
+                }
+
                 break;
             case R.id.btn_finance_detail:
                 setColorButtonFinance();
-                fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                frmFinanceDetail = new FinanceDetailFragment();
-                Bundle bundle1 = new Bundle();
-                bundle1.putSerializable("ResponseModel", responseEnvelope);
-                frmFinanceDetail.setArguments(bundle1);
-                fragmentTransaction.add(R.id.frm_acc_detail, frmFinanceDetail);
-                fragmentTransaction.commit();
+                if(!TextUtils.isEmpty(txtAccDate.getText().toString()))
+                {
+                    fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    frmFinanceDetail = new FinanceDetailFragment();
+                    if(responseEnvelope!=null)
+                    {
+                        Bundle bundle1 = new Bundle();
+                        bundle1.putSerializable("ResponseModel", responseEnvelope);
+                        frmFinanceDetail.setArguments(bundle1);
+                    }
+                    fragmentTransaction.add(R.id.frm_acc_detail, frmFinanceDetail);
+                    fragmentTransaction.commit();
+                }
+
                 break;
 
         }
@@ -298,8 +299,8 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
         reqData.setREQDATE(txtAccDate.getText().toString());
         reqBody.setReqData(reqData);
         requestEnvelpe.setReqBody(reqBody);
-        tmflApi = SoapApiService.getInstance().call();
-        tmflApi.callStmtAcRequest(requestEnvelpe).enqueue(new Callback<ResponseEnvelope>() {
+        tmflSoapApi = SoapApiService.getInstance().call();
+        tmflSoapApi.callStmtAcRequest(requestEnvelpe).enqueue(new Callback<ResponseEnvelope>() {
             @Override
             public void onResponse(Call<ResponseEnvelope> call, Response<ResponseEnvelope> response) {
                 CommonUtils.closeProgressDialog();
@@ -339,9 +340,13 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
         fragmentManager = getActivity().getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         frmBasicAccDetail = new BasicDetailFragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("ResponseModel", responseEnvelope);
-        frmBasicAccDetail.setArguments(bundle);
+        if(responseEnvelope!=null)
+        {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("ResponseModel", responseEnvelope);
+            frmBasicAccDetail.setArguments(bundle);
+        }
+
         fragmentTransaction.add(R.id.frm_acc_detail, frmBasicAccDetail);
         fragmentTransaction.commit();
 
@@ -349,9 +354,12 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
     }
 
 
+    @SuppressLint("NewApi")
     public void setColorButtonBasic() {
         /*ON SELECTED*/
-        btnBasicDetail.setBackground(getActivity().getDrawable(R.drawable.tab_btnleft_selector));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            btnBasicDetail.setBackground(getActivity().getDrawable(R.drawable.tab_btnleft_selector));
+        }
         btnBasicDetail.setTextColor(ContextCompat.getColor(getActivity(), R.color.tab_bg));
 
         /*NOT SELECTED*/
@@ -359,6 +367,8 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
         btnFinanceDetail.setTextColor(ContextCompat.getColor(getActivity(), R.color.white));
     }
 
+    @SuppressLint("NewApi")
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void setColorButtonFinance() {
          /*ON SELECTED*/
         btnFinanceDetail.setBackground(getActivity().getDrawable(R.drawable.tab_btnright_selector));
@@ -371,7 +381,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 
     public void callDownloadService() {
 
-        if (PreferenceHelper.API_TOKEN != null) {
+        if (PreferenceHelper.getString(PreferenceHelper.API_TOKEN )!= null) {
             accountStatementInputModel.setApiToken(PreferenceHelper.getString(PreferenceHelper.API_TOKEN));
         }
         if (contractNo != null) {
@@ -380,24 +390,32 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
         if (txtAccDate.getText().toString() != null) {
             accountStatementInputModel.setRequestDate(txtAccDate.getText().toString());
         }
+
     }
 
     public void getDownloadData(AccountStatementInputModel accountStatementInputModel) {
 
-        tmfl.getAccStmtDownload(accountStatementInputModel).enqueue(new Callback<AccountStmtResponse>() {
+        tmflDownload.getAccStmtDownload(accountStatementInputModel).enqueue(new Callback<AccountStmtResponse>() {
             @Override
             public void onResponse(Call<AccountStmtResponse> call, Response<AccountStmtResponse> response) {
+
                 if (response.body().getFilepath() != null) {
                     Log.e("File Path", "" + response.body().getFilepath());
                     strPathUrl = response.body().getFilepath().toString();
+                    Uri uri = Uri.parse(strPathUrl);
+                    DownloadManager.Request request = new DownloadManager.Request(uri);
+                    request.allowScanningByMediaScanner();
+                    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                    request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "StatementOFAccount" + SystemClock.currentThreadTimeMillis());
+                    DownloadManager manager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
+                    manager.enqueue(request);
                 }
-                Uri uri = Uri.parse(strPathUrl);
-                DownloadManager.Request request = new DownloadManager.Request(uri);
-                request.allowScanningByMediaScanner();
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "StatementOFAccount" + SystemClock.currentThreadTimeMillis());
-                DownloadManager manager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
-                manager.enqueue(request);
+                else
+                {
+                   Log.e("RESONSE ERR","REPONSE ERROR"+response.message().toString());
+                }
+
+
             }
 
             @Override
@@ -406,6 +424,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
             }
         });
     }
+
 
     @Override
     public void onDateChange(String date, String picker) {
@@ -441,5 +460,57 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 
         }
     };
+
+    public void callCheckLogin()
+    {
+        if(CommonUtils.isNetworkAvailable(getActivity()))
+        {
+
+            logInputModel.setApi_token(PreferenceHelper.getString(PreferenceHelper.API_TOKEN));
+            logInputModel.setUser_id(PreferenceHelper.getString(PreferenceHelper.USER_ID));
+            callLogService(logInputModel );
+        }
+        else
+        {
+            Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void callLogService(LogInputModel logInputModel)
+    {
+        tmflLogin.getLogResponse(logInputModel).enqueue(new Callback<LogResponseModel>() {
+            @Override
+            public void onResponse(Call<LogResponseModel> call, Response<LogResponseModel> response) {
+                Log.e("isLogin",new Gson().toJson(response.body()));
+
+                if(response.body().getStatus().toString().contains("Success"))
+                {
+                    if (CommonUtils.isNetworkAvailable(getActivity())) {
+
+                            CommonUtils.showProgressDialog(getActivity(), "Getting Your Information");
+                            callSoapRequest();
+                            linAccDetail.setVisibility(View.VISIBLE);
+
+                    } else {
+                        Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+                else
+                {
+                   Toast.makeText(getActivity(),"Unauthorized User access",Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LogResponseModel> call, Throwable t) {
+                Log.e("ERROR",t.getMessage());
+            }
+        });
+
+
+    }
+
 
 }

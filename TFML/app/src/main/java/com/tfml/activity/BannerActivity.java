@@ -223,7 +223,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
     public void loadBannerData() {
         tmflApi = ApiService.getInstance().call();
         if (CommonUtils.isNetworkAvailable(BannerActivity.this)) {
-            CommonUtils.showProgressDialog(BannerActivity.this, "Loading Data please wait.....");
+            CommonUtils.showProgressDialog(BannerActivity.this, "Getting Your Information");
             callBannerList();
         } else {
             Toast.makeText(getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();

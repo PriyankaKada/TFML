@@ -12,7 +12,11 @@ import android.widget.TextView;
 import com.tfml.R;
 import com.tfml.model.emiListReponseModel.Datum;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Pravin Borate on 6/10/16.
@@ -23,8 +27,9 @@ public class EmiExpandableListView extends BaseExpandableListAdapter {
     ArrayList<Datum> childData;
     LayoutInflater layoutInflater;
     EmiViewHolder emiViewHolder;
-
-
+    DateFormat inputFormat,outputFormat;
+    Date date;
+    String outputDateStr;
     public EmiExpandableListView(Context context, ArrayList<Datum> parent,ArrayList<Datum> child){
 
         mContext=context;
@@ -87,8 +92,19 @@ public class EmiExpandableListView extends BaseExpandableListAdapter {
         }
 
         //Format date here
+         inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+         outputFormat = new SimpleDateFormat("dd MMM yyyy");
+
         if(parentData.get(groupPosition).getADATE()!=null)
-            emiViewHolder.txtEmiDate.setText(parentData.get(groupPosition).getADATE().toString());
+            try {
+                 date = inputFormat.parse(parentData.get(groupPosition).getADATE().toString());
+                 outputDateStr = outputFormat.format(date);
+                 emiViewHolder.txtEmiDate.setText(outputDateStr);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
 
         if(parentData.get(groupPosition).getAMOUNT()!=null)
             emiViewHolder.txtEmiAmount.setText(parentData.get(groupPosition).getAMOUNT().toString());

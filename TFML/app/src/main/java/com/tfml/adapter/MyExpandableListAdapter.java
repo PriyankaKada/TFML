@@ -1,5 +1,6 @@
 package com.tfml.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v4.app.FragmentActivity;
@@ -73,6 +74,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         return childPosition;
     }
 
+    @SuppressLint("NewApi")
     @Override
     public View getChildView(int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
@@ -111,7 +113,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         holder.txtReceiptDate.setText(item.getZFBDT() + " / " + item.getBELNR());
         holder.ll_header_row.setVisibility(View.VISIBLE);
         String amountstr = item.getDMBTR();
-        holder.txtReceiptAmount.setText(amountstr);
+        holder.txtReceiptAmount.setText("Rs."+amountstr);
         holder.lexpandList.setBackground(context.getDrawable(R.drawable.list_row));
         holder.txtInstNo.setText(item.getCHECT());
         holder.txtMode.setText(item.getSHKZG());
@@ -159,7 +161,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
         if (titlear.size() == amountar.size()) {
             grpholder.txtReceiptDate.setText(titlear.get(groupPosition));
-            grpholder.txtReceiptAmount.setText(String.valueOf(amountar.get(groupPosition)));
+            grpholder.txtReceiptAmount.setText("Rs."+String.valueOf(amountar.get(groupPosition)));
         }
         return convertView;
     }

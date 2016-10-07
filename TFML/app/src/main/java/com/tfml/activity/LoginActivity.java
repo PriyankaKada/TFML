@@ -96,7 +96,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 loginRequestModel.setUser_id(strUserID);
                 loginRequestModel.setPassword(strPassword);
 
-                CommonUtils.showProgressDialog(LoginActivity.this, "Please Wait");
+                CommonUtils.showProgressDialog(LoginActivity.this, "Getting Your Information");
                 CallLoginService(loginRequestModel);
 
             } else {
@@ -115,11 +115,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {
                 CommonUtils.closeProgressDialog();
                 if (response.body() != null && response.body().getStatus().toString().contains("success")) {
+                    PreferenceHelper.insertBoolean("SaveLogin", true);
                     strApiToken = response.body().getData().getApiToken();
                     strUsrId = response.body().getData().getUserId();
                     if (chkRememberMe.isChecked()) {
-                        Log.e("RememberMe",chkRememberMe.isChecked()+"");
-                        PreferenceHelper.insertBoolean("SaveLogin", true);
+
                     }
                     PreferenceHelper.insertString(PreferenceHelper.USER_ID, strUsrId);
                     PreferenceHelper.insertString(PreferenceHelper.API_TOKEN, strApiToken);

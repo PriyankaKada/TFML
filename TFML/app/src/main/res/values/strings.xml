@@ -5,7 +5,7 @@
     <string name="refer_friend">Refer Friend</string>
     <string name="loan_status">Loan Status</string>
     <string name="txt_login">Login</string>
-    <string name="txt_change_pass">My Password</string>
+    <string name="txt_change_pass">Change Password</string>
     <string name="contact_us">Contact Us</string>
     <string name="btn_change_pass">Change Password</string>
     <string name="title_activity_schemes">SchemesActivity</string>
@@ -24,4 +24,5 @@
     <string name="txt_forgot_pass">Forgot Password?</string>
     <string name="txt_forgot">Forgot Password</string>
     <string name="txt_user_id">User Id</string>
+    <string name="txt_total_bal">"Total balance" amount shown above is \"subject to providing clearance proof of all prior receipts.* The "Total balance\" will change if not paid on </string>
 </resources>

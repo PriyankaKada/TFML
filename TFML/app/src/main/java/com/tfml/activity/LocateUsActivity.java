@@ -79,7 +79,7 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
                     Log.e("STATECODE", stateCode);
                     inputBranchState=new InputBranchState();
                     inputBranchState.setStateId(stateCode);
-                    CommonUtils.showProgressDialog(this,"Please Wait.....");
+                    CommonUtils.showProgressDialog(this,"Getting Your Information");
                     SocialUtil.getStateBranchList(this, spnBranch, inputBranchState, "Select Branch");
                 }
 

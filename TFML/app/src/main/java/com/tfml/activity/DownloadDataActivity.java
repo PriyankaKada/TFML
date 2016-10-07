@@ -53,7 +53,7 @@ public class DownloadDataActivity extends BaseActivity
 
         if(CommonUtils.isNetworkAvailable(this))
         {
-            CommonUtils.showProgressDialog(this,"Loading wait....");
+            CommonUtils.showProgressDialog(this,"Getting Your Information");
 
             downloadData();
         }

@@ -173,8 +173,8 @@ public class DrawerBaseActivity extends BaseActivity {
         PreferenceHelper.remove(PreferenceHelper.USER_ID);
         PreferenceHelper.remove(PreferenceHelper.API_TOKEN);
         PreferenceHelper.insertBoolean("SaveLogin", false);
-        PreferenceHelper.insertBoolean(PreferenceHelper.ISLOGIN, false);
-        PreferenceHelper.insertBoolean(PreferenceHelper.FLAG_LOGGED_OUT, true);
+        //PreferenceHelper.insertBoolean(PreferenceHelper.ISLOGIN, false);
+      //  PreferenceHelper.insertBoolean(PreferenceHelper.FLAG_LOGGED_OUT, true);
         Intent intent = new Intent(this,
                 BannerActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

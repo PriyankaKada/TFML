@@ -53,7 +53,7 @@ public class BannerFragment extends Fragment implements ViewPager.OnPageChangeLi
         tmflApi = ApiService.getInstance().call();
         if(CommonUtils.isNetworkAvailable(getActivity()))
         {
-            CommonUtils.showProgressDialog(getActivity(),"Please Wait....");
+            CommonUtils.showProgressDialog(getActivity(),"Getting Your Information");
             callBannerList();
         }
         else

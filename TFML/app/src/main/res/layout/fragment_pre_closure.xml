@@ -243,93 +243,96 @@
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/ic_download" />
         </LinearLayout>
-            <LinearLayout
-                android:id="@+id/linTabledesc"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_margin="10dp"
-                android:visibility="visible"
-                android:background="@drawable/whit_rect_bg"
-                android:weightSum="4">
 
-              <LinearLayout
+
+
+        <LinearLayout
+            android:id="@+id/linTabledesc"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="visible"
+            android:background="@drawable/whit_rect_bg"
+            android:weightSum="4">
+
+            <LinearLayout
                 android:id="@+id/lstHeader"
                 android:visibility="gone"
-                     android:layout_width="match_parent"
-                     android:orientation="horizontal"
-                     android:background="@color/colorPrimary"
-                     android:layout_height="wrap_content">
-                     <TextView
-                         android:id="@+id/lbl_receipt_date"
-                         android:layout_width="0dp"
-                         android:layout_height="wrap_content"
-                         android:layout_weight="1"
-                         android:textColor="@color/white"
-                         android:gravity="center"
-                         android:layout_gravity="center"
-                         android:textSize="12sp"
-                         android:text="DESCRIPTION"/>
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/xy"
-                    />
-                     <TextView
-                         android:id="@+id/lbl_due_amount"
-                         android:layout_width="0dp"
-                         android:layout_height="wrap_content"
-                         android:textColor="@color/white"
-                         android:layout_weight="1"
-                         android:gravity="center"
-                         android:layout_gravity="center"
-                         android:textSize="12sp"
-                         android:text="DUE AMOUNT"/>
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/xy"
-                    />
-                     <TextView
-                         android:layout_height="wrap_content"
-                         android:text="RECEIVED AMOUNT"
-                         android:layout_width="0dp"
-                         android:gravity="center"
-                         android:layout_weight="1"
-                         android:layout_gravity="center"
-                         android:textColor="@color/white"
-                         android:textSize="12sp"
-                         />
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/xy"
-                    />
-                     <TextView
-                         android:text="NET BALANCE"
-                         android:layout_width="0dp"
-                         android:layout_weight="1"
-                         android:gravity="center"
-                         android:textSize="12sp"
-                         android:layout_gravity="center"
-                         android:textColor="@color/white"
-                         android:layout_height="wrap_content" />
-                 </LinearLayout>
-                <ListView
-                    android:id="@+id/lst_pre_closure"
-                    android:layout_width="match_parent"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/lbl_receipt_date"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/whit_rect_bg">
-                </ListView>
-
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textSize="12sp"
+                    android:text="DESCRIPTION"/>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/xy"
+                    />
+                <TextView
+                    android:id="@+id/lbl_due_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textSize="12sp"
+                    android:text="DUE AMOUNT"/>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/xy"
+                    />
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:text="RECEIVED AMOUNT"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    />
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/xy"
+                    />
+                <TextView
+                    android:text="NET BALANCE"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
+            <ListView
+                android:id="@+id/lst_pre_closure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/whit_rect_bg">
+            </ListView>
+
+        </LinearLayout>
         <LinearLayout
             android:id="@+id/ll_footerclouser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="5dp"
             android:visibility="gone">
 
             <TextView
@@ -338,17 +341,18 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text="Generated On"
+                android:textSize="12sp"
                 android:padding="5dp"
-                android:textSize="14sp"
                 android:textColor="@color/overdues_count_bg"
                 android:background="@drawable/list_row"
                 />
 
             <TextView
-                android:layout_margin="10dp"
                 android:id="@+id/txtFooter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:padding="5dp"
                 android:text="Total Balance"/>
         </LinearLayout>
 

@@ -88,6 +88,7 @@
             android:layout_height="30dp"
             android:layout_alignBottom="@id/txt_product_name"
             android:layout_alignParentRight="true"
+            android:visibility="gone"
             android:src="@drawable/ic_download" />
 
 
@@ -218,6 +219,7 @@
                 android:text="Pay EMI"
                 android:gravity="center"
                 android:textStyle="bold"
+                android:visibility="gone"
                 android:padding="7dp"
                 android:textSize="14sp"
                 android:textColor="@color/text_black"/>

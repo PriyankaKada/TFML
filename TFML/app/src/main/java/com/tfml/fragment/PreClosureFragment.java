@@ -41,6 +41,8 @@ import com.tfml.util.SetFonts;
 
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -53,7 +55,7 @@ import retrofit2.Response;
 import static com.tfml.common.SocialUtil.tmflApi;
 
 
-public class PreClosureFragment extends Fragment implements View.OnClickListener,DatePickerDialog.OnDateChangeListener {
+public class PreClosureFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateChangeListener {
 
     private TextView btnSubmit;
     private ImageView btnDownload;
@@ -64,221 +66,164 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
     PreClosureAdapter preClosureAdapter;
     private List<String> contractLst;
     private Spinner spnContractNo;
-    TextView txtGenDate,txtBal;
-    LinearLayout linTable,llHeader;
+    TextView txtGenDate, txtBal;
+    LinearLayout linTable, llHeader;
     ArrayList<ContractModel> modelArrayList;
     String strContractNo, strAccdate, strDate;
-    TextView txt_repaymentmode,txt_emiamount,txt_dueamount,txt_duedate,txt_rc_no;
-    private int itemindex =0;
+    TextView txt_repaymentmode, txt_emiamount, txt_dueamount, txt_duedate, txt_rc_no;
+    private int itemindex = 0;
     private String datavalue = "";
     private String rcNo = "";
     private String dueDate = "";
     private String repaymentMode = "";
     private String currentEmi = "";
-    private String overdue="";
+    private String overdue = "";
     TmflApi tmflSoapApi, tmflApi;
     PreClosureInputModel preClosureInputModel;
     PreClosureStmtPdfResponse preClosureStmtPdfResponse;
     com.tfml.model.soapModel.preClousreResponse.ResponseEnvelope.Body responseEnvelope;
     String servicestring = Context.DOWNLOAD_SERVICE;
     DownloadManager downloadmanager;
-    String          strPathUrl;
+    String strPathUrl;
     private TextView txtAccDate;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view= inflater.inflate(R.layout.fragment_pre_closure, container, false);
+        view = inflater.inflate(R.layout.fragment_pre_closure, container, false);
         tmflApi = ApiService.getInstance().call();
         Intent intent = getActivity().getIntent();
         Bundle bundle = intent.getExtras();
         modelArrayList =
-                (ArrayList<ContractModel>)bundle.getSerializable("datamodel");
-        datavalue = (String)bundle.getString("datamodelvalue");
+                (ArrayList<ContractModel>) bundle.getSerializable("datamodel");
+        datavalue = (String) bundle.getString("datamodelvalue");
         rcNo = (String) bundle.getString("RCNO");
         dueDate = (String) bundle.getString("DUEDATE");
-        repaymentMode = (String) bundle.getString("OVERDUEAMT");
+        repaymentMode = (String) bundle.getString("REPAYMENT");
         currentEmi = (String) bundle.getString("CURRENTEMI");
-        overdue=(String)bundle.get("OVERDUEAMT");
+        overdue = (String) bundle.get("OVERDUEAMT");
         init();
         return view;
 
     }
 
-     public void init()
-     {
-         spnContractNo=(Spinner)view.findViewById(R.id.spnContractNo) ;
-         txtAccDate=(TextView)view.findViewById(R.id.txt_acc_select_date);
-         btnSubmit=(TextView)view.findViewById(R.id.btn_submit);
-         btnDownload=(ImageView)view.findViewById(R.id.img_download);
-         lstPreClosure=(ListView)view.findViewById(R.id.lst_pre_closure);
-         llHeader=(LinearLayout)view.findViewById(R.id.lstHeader);
-         linTable=(LinearLayout)view.findViewById(R.id.linTabledesc) ;
-         txtGenDate=(TextView)view.findViewById(R.id.txtGeneratedOn) ;
-         txtBal=(TextView)view.findViewById(R.id.txtFooter) ;
-         txt_rc_no=(TextView)view.findViewById(R.id.txt_rc_no);
-         txt_repaymentmode = (TextView)view.findViewById(R.id.txt_repaymentmode);
-         txt_emiamount = (TextView)view.findViewById(R.id.txt_emiamount);
-         txt_dueamount = (TextView)view.findViewById(R.id.txt_dueamount);
-         txt_duedate = (TextView)view.findViewById(R.id.txt_duedate);
-         ll_footerclouser = (LinearLayout)view.findViewById(R.id.ll_footerclouser);
-         if (rcNo != null)
-             txt_rc_no.setText(rcNo);
-         if (repaymentMode != null)
-             txt_repaymentmode.setText(repaymentMode);
-         if (dueDate != null)
-             txt_duedate.setText(dueDate);
-         if (currentEmi != null)
-             txt_emiamount.setText("Rs."+currentEmi);
-         if(overdue!=null)
-         {
-             txt_dueamount.setText("Rs."+overdue);
-         }
-         SetFonts.setFonts(getActivity(),btnSubmit,2);
-         spnContractNo=(Spinner)view.findViewById(R.id.spnContractNo) ;
-         contractLst=new ArrayList<String>();
-         if (modelArrayList.size() > 0) {
-             contractLst.add(datavalue);
-             for (int i = 0; i< modelArrayList.size(); i++){
-                 ContractModel model=modelArrayList.get(i);
-                 if (model != null)
-                     contractLst.add(model.getUsrConNo());
-             }
-         }
+    public void init() {
+        spnContractNo = (Spinner) view.findViewById(R.id.spnContractNo);
+        txtAccDate = (TextView) view.findViewById(R.id.txt_acc_select_date);
+        btnSubmit = (TextView) view.findViewById(R.id.btn_submit);
+        btnDownload = (ImageView) view.findViewById(R.id.img_download);
+        lstPreClosure = (ListView) view.findViewById(R.id.lst_pre_closure);
+        llHeader = (LinearLayout) view.findViewById(R.id.lstHeader);
+        linTable = (LinearLayout) view.findViewById(R.id.linTabledesc);
+        txtGenDate = (TextView) view.findViewById(R.id.txtGeneratedOn);
+        txtBal = (TextView) view.findViewById(R.id.txtFooter);
+        txt_rc_no = (TextView) view.findViewById(R.id.txt_rc_no);
+        txt_repaymentmode = (TextView) view.findViewById(R.id.txt_repaymentmode);
+        txt_emiamount = (TextView) view.findViewById(R.id.txt_emiamount);
+        txt_dueamount = (TextView) view.findViewById(R.id.txt_dueamount);
+        txt_duedate = (TextView) view.findViewById(R.id.txt_duedate);
+        ll_footerclouser = (LinearLayout) view.findViewById(R.id.ll_footerclouser);
+        if (rcNo != null)
+            txt_rc_no.setText(rcNo);
+        if (repaymentMode != null)
+            txt_repaymentmode.setText(repaymentMode);
+        if (dueDate != null)
+            txt_duedate.setText(dueDate);
+        if (currentEmi != null)
+            txt_emiamount.setText(currentEmi);
+        if (overdue != null) {
+            txt_dueamount.setText(overdue);
+        }
+        SetFonts.setFonts(getActivity(), btnSubmit, 2);
+        spnContractNo = (Spinner) view.findViewById(R.id.spnContractNo);
+        contractLst = new ArrayList<String>();
+        if (modelArrayList.size() > 0) {
+            contractLst.add(datavalue);
+            for (int i = 0; i < modelArrayList.size(); i++) {
+                ContractModel model = modelArrayList.get(i);
+                if (model != null)
+                    contractLst.add(model.getUsrConNo());
+            }
+        }
 
-         spnContractNo.setSelection(1);
-         ArrayAdapter<String> madapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_row,contractLst){
+        spnContractNo.setSelection(1);
+        ArrayAdapter<String> madapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_row, contractLst) {
 
-             @Override
-             public boolean isEnabled(int position){
-                 return true;
-             }
-             @Override
-             public View getDropDownView(int position, View convertView,
-                                         ViewGroup parent) {
-                 View view = super.getDropDownView(position, convertView, parent);
-                 TextView tv = (TextView) view;
-                 tv.setTextColor(Color.BLACK);
-                 return view;
-             }
-         };
-         madapter.setDropDownViewResource(R.layout.spinner_item);
-         spnContractNo.setAdapter(madapter);
-         madapter.notifyDataSetChanged();
+            @Override
+            public boolean isEnabled(int position) {
+                return true;
+            }
 
-         spnContractNo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-             @Override
-             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                 strContractNo = spnContractNo.getSelectedItem().toString();
-                 itemindex = position;
-                 if (itemindex > 0){
-                     ContractModel model=modelArrayList.get(itemindex);
-                     setData(model);
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                tv.setTextColor(Color.BLACK);
+                return view;
+            }
+        };
+        madapter.setDropDownViewResource(R.layout.spinner_item);
+        spnContractNo.setAdapter(madapter);
+        madapter.notifyDataSetChanged();
 
-                     if(CommonUtils.isNetworkAvailable(getActivity()))
-                     {
-                         if (!TextUtils.isEmpty(txtAccDate.toString())) {
+        spnContractNo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                strContractNo = spnContractNo.getSelectedItem().toString();
+                itemindex = position;
+                if (itemindex > 0) {
+                    ContractModel model = modelArrayList.get(itemindex);
+                    setData(model);
+                    SoapServiceResult();
+                }
+            }
 
-                             CommonUtils.showProgressDialog(getActivity(),"Loading........");
-                             String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-                             ll_footerclouser.setVisibility(View.VISIBLE);
-                             txtGenDate.setText("Generated On "+txtAccDate.getText().toString()+"|"+currentDateTimeString);
-                             txtBal.setText("Total Balance show above is on "+""+txtAccDate.getText().toString());
-                             callSoapDataRequest();
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-                         } else {
-                             Toast.makeText(getActivity(), "Please Select Date", Toast.LENGTH_SHORT).show();
-                         }
-                     }
-                     else
-                     {
-                         Toast.makeText(getActivity(),"Please Check Network Connection",Toast.LENGTH_LONG).show();
-                     }
-                 }
-             }
+            }
+        });
 
-             @Override
-             public void onNothingSelected(AdapterView<?> parent) {
+        date = new DatePickerFragment();
+        btnSubmit.setOnClickListener(this);
+        txtAccDate.setOnClickListener(this);
+        btnDownload.setOnClickListener(this);
+        preClosureInputModel = new PreClosureInputModel();
+        preClosureStmtPdfResponse = new PreClosureStmtPdfResponse();
+    }
 
-             }
-         });
-
-         date=new DatePickerFragment();
-         btnSubmit.setOnClickListener(this);
-         txtAccDate.setOnClickListener(this);
-         btnDownload.setOnClickListener(this);
-         preClosureInputModel = new PreClosureInputModel();
-         preClosureStmtPdfResponse = new PreClosureStmtPdfResponse();
-     }
     private void setData(ContractModel model) {
-        txt_rc_no.setText(model.getRcNumber()==null?"":model.getRcNumber().toString());
-        txt_duedate.setText(model.getDueDate()==null?"":model.getDueDate().toString());
-        txt_dueamount.setText(model.getDueAmount()==null?"":model.getDueAmount().toString());
-        if(txt_emiamount.getText().toString().contains("Rs."))
-        {
-            txt_emiamount.setText(model.getDueDate()==null?"":model.getDueAmount().toString());
-        }
-        else
-        {
-            txt_emiamount.setText(model.getDueDate()==null?"":"Rs."+model.getDueAmount().toString());
-        }
-
-        txt_repaymentmode.setText(model.getPdcFlag()==null?"":model.getPdcFlag().toString());
-        if(txt_dueamount.getText().toString().contains("Rs."))
-        {
-            txt_dueamount.setText(model.getTotalCurrentDue()==null?"":model.getTotalCurrentDue().toString());
-        }
-        else
-        {
-            txt_dueamount.setText(model.getTotalCurrentDue()==null?"":"Rs."+model.getTotalCurrentDue().toString());
-        }
+        txt_rc_no.setText(model.getRcNumber() == null ? "" : model.getRcNumber().toString());
+        txt_duedate.setText(model.getDueDate() == null ? "" : model.getDueDate().toString());
+        // txt_dueamount.setText(model.getDueAmount()==null?"":"Rs. "+model.getDueAmount().toString());
+        txt_emiamount.setText(model.getDueAmount() == null ? "" : "Rs. " + model.getDueAmount().toString());
+        txt_repaymentmode.setText(model.getPdcFlag() == null ? "" : model.getPdcFlag().toString());
+        txt_dueamount.setText(model.getTotalCurrentDue() == null ? "" : "Rs." + model.getTotalCurrentDue().toString());
 
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.txt_acc_select_date:
                 selectDate();
                 break;
             case R.id.btn_submit:
-                if(CommonUtils.isNetworkAvailable(getActivity()))
-                    {
-                        if (!TextUtils.isEmpty(txtAccDate.toString())) {
-
-                            CommonUtils.showProgressDialog(getActivity(),"Loading........");
-                            String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-                            ll_footerclouser.setVisibility(View.VISIBLE);
-                            txtGenDate.setText("Generated On "+txtAccDate.getText().toString()+"|"+currentDateTimeString);
-                            txtBal.setText("Total Balance show above is on "+""+txtAccDate.getText().toString());
-                            callSoapDataRequest();
-
-                        } else {
-                            Toast.makeText(getActivity(), "Please Select Date", Toast.LENGTH_SHORT).show();
-                        }
-                      }
-                      else
-                {
-                    Toast.makeText(getActivity(),"Please Check Network Connection",Toast.LENGTH_LONG).show();
-                }
-
+                SoapServiceResult();
                 break;
             case R.id.img_download:
-               try{
-                   if ( CommonUtils.isNetworkAvailable( getActivity() ) ) {
-                       callDownloadService();
-                       getDownloadData( preClosureInputModel );
-                   }
-                   else {
-                       Toast.makeText( getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT ).show();
-                   }
-               }
-               catch (Exception e)
-               {
-                   e.printStackTrace();
-               }
+                try {
+                    if (CommonUtils.isNetworkAvailable(getActivity())) {
+                        callDownloadService();
+                        getDownloadData(preClosureInputModel);
+                    } else {
+                        Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 break;
 
@@ -287,7 +232,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onDateChange(String date, String picker) {
-        if(picker.equalsIgnoreCase(" ")){
+        if (picker.equalsIgnoreCase(" ")) {
             txtAccDate.setText(txtAccDate.getText().toString() + " " + date);
         }
     }
@@ -305,6 +250,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
         date.setCallBack(ondate);
         date.show(getFragmentManager(), "Date Picker");
     }
+
     /**
      * The Ondate.
      */
@@ -319,11 +265,10 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
         }
     };
 
-    public void callSoapDataRequest()
-    {
-        RequestEnvelope requestEnvelope=new RequestEnvelope();
-        com.tfml.model.soapModel.preClosureRequest.ReqBody reqBody=new com.tfml.model.soapModel.preClosureRequest.ReqBody();
-        com.tfml.model.soapModel.preClosureRequest.ReqData reqData=new com.tfml.model.soapModel.preClosureRequest.ReqData();
+    public void callSoapDataRequest() {
+        RequestEnvelope requestEnvelope = new RequestEnvelope();
+        com.tfml.model.soapModel.preClosureRequest.ReqBody reqBody = new com.tfml.model.soapModel.preClosureRequest.ReqBody();
+        com.tfml.model.soapModel.preClosureRequest.ReqData reqData = new com.tfml.model.soapModel.preClosureRequest.ReqData();
         reqData.setContactId(strContractNo);
         reqData.setAdustSd("R");
         reqData.setReqDate(txtAccDate.getText().toString());
@@ -333,73 +278,101 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
         tmflSoapApi.callClosureTableRequest(requestEnvelope).enqueue(new Callback<com.tfml.model.soapModel.preClousreResponse.ResponseEnvelope>() {
             @Override
             public void onResponse(Call<com.tfml.model.soapModel.preClousreResponse.ResponseEnvelope> call, Response<com.tfml.model.soapModel.preClousreResponse.ResponseEnvelope> response) {
-               // Log.e("ResponseModel",response.body().getBody().getZ_TERMINALDUESResponse().getI_DTL().get(0).getCONTRACTNO());
+                // Log.e("ResponseModel",response.body().getBody().getZ_TERMINALDUESResponse().getI_DTL().get(0).getCONTRACTNO());
                 CommonUtils.closeProgressDialog();
-               if (response.body() != null) {
+                if (response.body() != null) {
+                    ll_footerclouser.setVisibility(View.VISIBLE);
+                    responseEnvelope = response.body().getBody();
+                    if (responseEnvelope != null) {
+                        for (int i = 0; i < responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().size(); i++) {
+                            lstPreClosure.setAdapter(new PreClosureAdapter(getActivity(), responseEnvelope));
+                        }
 
-                   responseEnvelope = response.body().getBody();
-                   if (responseEnvelope != null) {
-                       for (int i = 0; i < responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().size(); i++) {
-                           lstPreClosure.setAdapter(new PreClosureAdapter(getActivity(), responseEnvelope));
-                       }
-
-                   }
-                   linTable.setVisibility(View.VISIBLE);
-                   llHeader.setVisibility(View.VISIBLE);
-               }
+                    }
+                    linTable.setVisibility(View.VISIBLE);
+                    llHeader.setVisibility(View.VISIBLE);
+                }
 
             }
 
             @Override
             public void onFailure(Call<com.tfml.model.soapModel.preClousreResponse.ResponseEnvelope> call, Throwable t) {
-                Log.e("ERROR",t.getMessage());
+                Log.e("ERROR", t.getMessage());
                 CommonUtils.closeProgressDialog();
             }
         });
     }
 
 
-
     public void callDownloadService() {
 
-        if ( PreferenceHelper.API_TOKEN != null ) {
-            preClosureInputModel.setApiToken( PreferenceHelper.getString( PreferenceHelper.API_TOKEN ) );
+        if (PreferenceHelper.API_TOKEN != null) {
+            preClosureInputModel.setApiToken(PreferenceHelper.getString(PreferenceHelper.API_TOKEN));
         }
-        if ( strContractNo != null ) {
-            preClosureInputModel.setContractNo( strContractNo );
+        if (strContractNo != null) {
+            preClosureInputModel.setContractNo(strContractNo);
         }
-        if ( txtAccDate.getText().toString() != null ) {
-            preClosureInputModel.setRequestDate( txtAccDate.getText().toString() );
+        if (txtAccDate.getText().toString() != null) {
+            preClosureInputModel.setRequestDate(txtAccDate.getText().toString());
         }
 
 
     }
 
+    public void SoapServiceResult() {
+        if (CommonUtils.isNetworkAvailable(getActivity())) {
+            if (!TextUtils.isEmpty(txtAccDate.getText().toString())) {
+                CommonUtils.showProgressDialog(getActivity(), "Loading...");
 
-    public void getDownloadData( PreClosureInputModel preClosureInputModel ) {
-        tmflApi.getPreClosureDownload( preClosureInputModel ).enqueue( new Callback< PreClosureStmtPdfResponse >() {
+                String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+                strAccdate = txtAccDate.getText().toString();
+                DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                DateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy");
+
+                try {
+                    Date date = inputFormat.parse(strAccdate);
+                    strDate = outputFormat.format(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                txtGenDate.setText("Generated On" + txtAccDate.getText().toString() + "|" + currentDateTimeString);
+                txtBal.setText(getActivity().getResources().getString(R.string.txt_total_bal) + "Total Balance show above is on " + "" + txtAccDate.getText().toString());
+                callSoapDataRequest();
+
+
+            } else {
+                Toast.makeText(getActivity(), "Please Select Date", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void getDownloadData(PreClosureInputModel preClosureInputModel) {
+        tmflApi.getPreClosureDownload(preClosureInputModel).enqueue(new Callback<PreClosureStmtPdfResponse>() {
             @Override
-            public void onResponse( Call< PreClosureStmtPdfResponse > call, Response< PreClosureStmtPdfResponse > response ) {
+            public void onResponse(Call<PreClosureStmtPdfResponse> call, Response<PreClosureStmtPdfResponse> response) {
                 //Log.e( "File Path", response.body().getFilepath() );
-               if(response.body().getFilepath()!=null)
-               {
-                   strPathUrl = response.body().getFilepath().toString();
-                   Uri uri     = Uri.parse( strPathUrl );
-                   DownloadManager.Request request = new DownloadManager.Request( uri );
-                   request.allowScanningByMediaScanner();
-                   request.setNotificationVisibility( DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED );
-                   request.setDestinationInExternalPublicDir( Environment.DIRECTORY_DOWNLOADS, "Pre-closure" + SystemClock.currentThreadTimeMillis() );
-                   DownloadManager manager = ( DownloadManager ) getActivity().getSystemService( Context.DOWNLOAD_SERVICE );
-                   manager.enqueue( request );
-               }
-
+                if (response.body().getFilepath() != null) {
+                    strPathUrl = response.body().getFilepath().toString();
+                    Uri uri = Uri.parse(strPathUrl);
+                    DownloadManager.Request request = new DownloadManager.Request(uri);
+                    request.allowScanningByMediaScanner();
+                    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                    request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Pre-closure" + SystemClock.currentThreadTimeMillis());
+                    DownloadManager manager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
+                    manager.enqueue(request);
+                }
 
             }
 
             @Override
-            public void onFailure( Call< PreClosureStmtPdfResponse > call, Throwable t ) {
+            public void onFailure(Call<PreClosureStmtPdfResponse> call, Throwable t) {
 
             }
-        } );
+        });
     }
+
+
 }

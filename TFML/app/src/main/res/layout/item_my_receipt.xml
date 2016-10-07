@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp"
+        android:layout_margin="5dp"
         android:visibility="visible">
 
         <RelativeLayout
@@ -22,7 +22,6 @@
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/img_expand"
                 android:orientation="horizontal"
-                android:padding="5dp"
                 android:weightSum="10">
 
                 <TextView
@@ -116,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:padding="2dp">
+               >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -131,8 +130,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
+                    android:layout_marginLeft="2dp"
                     android:text="TextType"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -155,7 +155,7 @@
                     android:id="@+id/txtMode"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="2dp"
                     android:layout_gravity="right"
                     android:gravity="left|center"
                     android:textSize="12sp" />
@@ -185,6 +185,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="left|center"
+                android:layout_marginLeft="2dp"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -215,6 +216,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
+                    android:layout_marginLeft="2dp"
                     android:textSize="14sp" />
             </LinearLayout>
 

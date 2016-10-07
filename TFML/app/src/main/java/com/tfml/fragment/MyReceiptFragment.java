@@ -75,7 +75,7 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
         modifiedDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
         Log.e("ModifiedDate", modifiedDate);
         if (CommonUtils.isNetworkAvailable(getActivity())) {
-            CommonUtils.showProgressDialog(getActivity(), "Please Wait Data Loaded....");
+            CommonUtils.showProgressDialog(getActivity(), "Getting Your Information");
             callSoapRequest();
         } else {
             Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();

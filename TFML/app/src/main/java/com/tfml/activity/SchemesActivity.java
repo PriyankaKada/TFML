@@ -231,15 +231,20 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_toolbar_home:
-                if(PreferenceHelper.getBoolean(PreferenceHelper.ISLOGIN))
+              //  Log.e("I am Login",""+PreferenceHelper.getBoolean("SaveLogin"));
+             //  Toast.makeText(getBaseContext(),""+PreferenceHelper.getBoolean("SaveLogin"),Toast.LENGTH_LONG).show();
+
+                if(PreferenceHelper.getBoolean("SaveLogin"))
                 {
-                    startActivity(new Intent(SchemesActivity.this, ContractActivity.class));
+
+                   startActivity(new Intent(SchemesActivity.this, ContractActivity.class));
                     finish();
                 }
                 else
                 {
+
                     startActivity(new Intent(SchemesActivity.this, BannerActivity.class));
-                    finish();
+                   finish();
                 }
 
                 break;

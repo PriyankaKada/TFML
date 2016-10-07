@@ -105,18 +105,9 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
         strUserId=PreferenceHelper.getString(PreferenceHelper.USER_ID);
         Log.e("strApiToken",strApiToken);
         Log.e("strUserId",strUserId);
-      /*  if(strApiToken!=null)
-        {
-            contractsInputModel.setUser_id(strUserId);
-        }
-        if(strUserId!=null)
-        {
-            contractsInputModel.setApi_token(strApiToken);
-        }
-       */
 
         callContractWebservice();
-        CommonUtils.showProgressDialog(ContractActivity.this, "Pleas Wait.....");
+        CommonUtils.showProgressDialog(ContractActivity.this, "Getting Your Information");
         {
             loadContractDetailService(contractsInputModel);
         }

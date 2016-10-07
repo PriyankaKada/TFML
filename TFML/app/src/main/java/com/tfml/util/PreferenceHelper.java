@@ -17,7 +17,7 @@ public class PreferenceHelper {
     public static final String API_TOKEN="api_token";
     public static final String USER_ID="user_id";
     public static final String FLAG_LOGGED_OUT = "logout";
-    public static final String ISLOGIN="login";
+    public static final String ISLOGIN="Login";
     public static final String CONTRACT_NO="contractNo";
 
     public static synchronized final void insertString(String key, String value) {

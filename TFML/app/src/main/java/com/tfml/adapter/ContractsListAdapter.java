@@ -63,7 +63,7 @@ public class ContractsListAdapter extends ArrayAdapter<ContractModel> {
             txt_contract_no.setText(model.getUsrConNo()==null?"":model.getUsrConNo());
             txt_rc_no.setText(model.getRcNumber()==null?"":model.getRcNumber());
             txt_overdue_amount.setText(model.getTotalCurrentDue()==null?"":"Rs."+model.getTotalCurrentDue());
-            txt_repayment_mode.setText(model.getPdcFlag()==null?"":"Rs."+model.getPdcFlag());
+            txt_repayment_mode.setText(model.getPdcFlag()==null?"":model.getPdcFlag());
             txt_next_due_date.setText(model.getDueDate()==null?"":model.getDueDate().toString());
             txt_last_payment_date.setText(model.getLastReceiptDate()==null?"":model.getLastReceiptDate().toString());
             txt_current_emi_amount.setText(model.getDueAmount()==null?"":"Rs."+model.getDueAmount().toString());
@@ -112,9 +112,9 @@ public class ContractsListAdapter extends ArrayAdapter<ContractModel> {
                     if(  model.getContractStatusDate()!=null)
                     {
                          varDate=dateFormat.parse(model.getContractStatusDate().toString());
-                        dateFormat=new SimpleDateFormat("dd-MM-yyyy");
+                        dateFormat=new SimpleDateFormat("dd/MM/yyyy");
                     }
-                    txt_terminated_date.setText(model.getContractStatusDate()==null?"":"Terminated On"+dateFormat.format(varDate));
+                    txt_terminated_date.setText(model.getContractStatusDate()==null?"":"Terminated On "+dateFormat.format(varDate));
 
                 }catch (Exception e) {
                     // TODO: handle exception

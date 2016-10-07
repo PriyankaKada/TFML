@@ -147,10 +147,9 @@ public class EmiPatternFragment extends Fragment {
 
         txt_rc_no.setText(model.getRcNumber()==null?"":model.getRcNumber().toString());
         txt_duedate.setText(model.getDueDate()==null?"":model.getDueDate().toString());
-        txt_dueamount.setText(model.getDueAmount()==null?"":"Rs. "+model.getDueAmount().toString());
-        txt_emiamount.setText(model.getDueDate()==null?"":"Rs. "+model.getDueAmount().toString());
+        txt_emiamount.setText(model.getDueAmount()==null?"":"Rs. "+model.getDueAmount().toString());
         txt_repaymentmode.setText(model.getPdcFlag()==null?"":model.getPdcFlag().toString());
-        txt_dueamount.setText(model.getTotalCurrentDue()==null?"":model.getTotalCurrentDue().toString());
+        txt_dueamount.setText(model.getTotalCurrentDue()==null?"":"Rs."+model.getTotalCurrentDue().toString());
 
     }
 

@@ -39,7 +39,7 @@ public class PreclousrDetailFragment extends Fragment {
 
 
        if (CommonUtils.isNetworkAvailable(getActivity())) {
-           CommonUtils.showProgressDialog(getActivity(), "Loaded....");
+           CommonUtils.showProgressDialog(getActivity(), "Getting Your Information");
           // callSoapRequest();
        } else {
            Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
