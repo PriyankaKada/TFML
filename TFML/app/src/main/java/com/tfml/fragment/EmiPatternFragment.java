@@ -71,7 +71,6 @@ public class EmiPatternFragment extends Fragment {
                 ContractModel model = modelArrayList.get(i);
                 if (model != null)
                     contractLst.add(model.getUsrConNo());
-//                 System.out.println("::::: "+model.getDueDate() +" :::: "+model.getDueAmount());
 
             }
         }

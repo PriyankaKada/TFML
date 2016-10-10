@@ -34,6 +34,8 @@ import com.tfml.model.ContractResponseModel.ContractModel;
 import com.tfml.model.preClosurePdfResponseModel.PreClosureInputModel;
 import com.tfml.model.preClosurePdfResponseModel.PreClosureStmtPdfResponse;
 import com.tfml.model.soapModel.preClosureRequest.RequestEnvelope;
+import com.tfml.model.soapModel.preClousreResponse.ResponseEnvelope;
+import com.tfml.model.soapModel.preClousreResponse.ResponseEnvelope.Body;
 import com.tfml.util.DatePickerDialog;
 import com.tfml.util.DatePickerFragment;
 import com.tfml.util.PreferenceHelper;
@@ -81,7 +83,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
     TmflApi tmflSoapApi, tmflApi;
     PreClosureInputModel preClosureInputModel;
     PreClosureStmtPdfResponse preClosureStmtPdfResponse;
-    com.tfml.model.soapModel.preClousreResponse.ResponseEnvelope.Body responseEnvelope;
+    Body responseEnvelope;
     String servicestring = Context.DOWNLOAD_SERVICE;
     DownloadManager downloadmanager;
     String strPathUrl;
@@ -266,7 +268,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
     };
 
     public void callSoapDataRequest() {
-        RequestEnvelope requestEnvelope = new RequestEnvelope();
+        final RequestEnvelope requestEnvelope = new RequestEnvelope();
         com.tfml.model.soapModel.preClosureRequest.ReqBody reqBody = new com.tfml.model.soapModel.preClosureRequest.ReqBody();
         com.tfml.model.soapModel.preClosureRequest.ReqData reqData = new com.tfml.model.soapModel.preClosureRequest.ReqData();
         reqData.setContactId(strContractNo);
@@ -283,14 +285,55 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
                 if (response.body() != null) {
                     ll_footerclouser.setVisibility(View.VISIBLE);
                     responseEnvelope = response.body().getBody();
+
+                    Body dummy = new Body();
+                    ResponseEnvelope.Z_TERMINALDUESResponse z_terminalduesResponse=new ResponseEnvelope.Z_TERMINALDUESResponse();
+                    List<ResponseEnvelope.Item> items=new ArrayList<ResponseEnvelope.Item>();
+
+
+                    List<String> stringList=new ArrayList<String>();
                     if (responseEnvelope != null) {
                         for (int i = 0; i < responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().size(); i++) {
-                            lstPreClosure.setAdapter(new PreClosureAdapter(getActivity(), responseEnvelope));
+
+                            Log.e("element  ",responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(i).getDESCP());
+                            items.add(responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(i));
+                            if(responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(i).getDESCP().equals("TOTAL")){
+                                Log.e("inside elememt  ",responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(i).getDESCP());
+                                break;
+                            }else {
+                                stringList.add(responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(i).getDESCP());
+                            }
+
                         }
 
+                        z_terminalduesResponse.setI_DTL(items);
+                        dummy.setZ_TERMINALDUESResponse(z_terminalduesResponse);
+                        for(String s:stringList){
+                            Log.e("STriong" ,""+s);
+                        }
+                        lstPreClosure.setAdapter(new PreClosureAdapter(getActivity(), dummy));
+
+
                     }
+
+
+
+//                    if (responseEnvelope != null) {
+//                        int i = 0;
+//                        while (responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(i).getDESCP().equalsIgnoreCase("total")) {
+//                            Body dummy = new Body();
+//                            dummy.setZ_TERMINALDUESResponse(responseEnvelope.getZ_TERMINALDUESResponse());
+//                            i++;
+//                        }
+//                        lstPreClosure.setAdapter(new PreClosureAdapter(getActivity(), responseEnvelope));
+//                    }
+
                     linTable.setVisibility(View.VISIBLE);
                     llHeader.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"Server Under Maintenance,Please try after Sometime",Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -327,8 +370,9 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
                 String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
                 strAccdate = txtAccDate.getText().toString();
                 DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
-                DateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy");
-
+                DateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
+                String strTime = sdf.format(new Date());
                 try {
                     Date date = inputFormat.parse(strAccdate);
                     strDate = outputFormat.format(date);
@@ -336,7 +380,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
                     e.printStackTrace();
                 }
 
-                txtGenDate.setText("Generated On" + txtAccDate.getText().toString() + "|" + currentDateTimeString);
+                txtGenDate.setText("Generated On" + strDate + "|" + strTime);
                 txtBal.setText(getActivity().getResources().getString(R.string.txt_total_bal) + "Total Balance show above is on " + "" + txtAccDate.getText().toString());
                 callSoapDataRequest();
 

@@ -324,7 +324,12 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
                     Log.e("RC NO", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getREG_NO());
                     callBasicDetail();
                 }
+                else
+                {
+                    Toast.makeText(getActivity(),"Server Under Maintenance,Please try after Sometime",Toast.LENGTH_LONG).show();
+                }
             }
+
 
             @Override
             public void onFailure(Call<ResponseEnvelope> call, Throwable t) {
@@ -356,6 +361,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 
     @SuppressLint("NewApi")
     public void setColorButtonBasic() {
+
         /*ON SELECTED*/
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             btnBasicDetail.setBackground(getActivity().getDrawable(R.drawable.tab_btnleft_selector));
@@ -496,11 +502,11 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
                     }
 
                 }
-                else
+                /*else
                 {
                    Toast.makeText(getActivity(),"Unauthorized User access",Toast.LENGTH_SHORT).show();
 
-                }
+                }*/
             }
 
             @Override

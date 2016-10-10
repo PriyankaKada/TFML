@@ -23,17 +23,18 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SplashActivity extends BaseActivity {
-     TmflApi tmflApi;
-     LogInputModel logInputModel;
-     LogResponseModel logResponseModel;
-    private  String TAG="SplashLog";
+    TmflApi tmflApi;
+    LogInputModel logInputModel;
+    LogResponseModel logResponseModel;
+    private String TAG = "SplashLog";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        tmflApi= ApiService.getInstance().call();
-        logInputModel=new LogInputModel();
-        logResponseModel=new LogResponseModel();
+        tmflApi = ApiService.getInstance().call();
+        logInputModel = new LogInputModel();
+        logResponseModel = new LogResponseModel();
         showBasicSplash();
     }
 
@@ -58,44 +59,38 @@ public class SplashActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (PreferenceHelper.getBoolean("SaveLogin")) {
-                Log.e(TAG,"savelogin"+""+PreferenceHelper.getString(PreferenceHelper.USER_ID));
-              if(CommonUtils.isNetworkAvailable(SplashActivity.this))
-              {
-                  Log.e(TAG,PreferenceHelper.getString(PreferenceHelper.API_TOKEN)+" "+PreferenceHelper.getString(PreferenceHelper.USER_ID));
-                  logInputModel.setApi_token(PreferenceHelper.getString(PreferenceHelper.API_TOKEN));
-                  logInputModel.setUser_id(PreferenceHelper.getString(PreferenceHelper.USER_ID));
-                  CallLogService(logInputModel);
-              }
-                else
-              {
-                  Toast.makeText(getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
-              }
+                Log.e(TAG, "savelogin" + "" + PreferenceHelper.getString(PreferenceHelper.USER_ID));
+                if (CommonUtils.isNetworkAvailable(SplashActivity.this)) {
+                    Log.e(TAG, PreferenceHelper.getString(PreferenceHelper.API_TOKEN) + " " + PreferenceHelper.getString(PreferenceHelper.USER_ID));
+                    logInputModel.setApi_token(PreferenceHelper.getString(PreferenceHelper.API_TOKEN));
+                    logInputModel.setUser_id(PreferenceHelper.getString(PreferenceHelper.USER_ID));
+                    CallLogService(logInputModel);
+                } else {
+                    Toast.makeText(getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+                }
 
             } else {
-                Log.e(TAG,"SAVELOGINELSE");
+                Log.e(TAG, "SAVELOGINELSE");
                 startActivity(new Intent(SplashActivity.this, BannerActivity.class));
                 finish();
             }
         }
     };
 
-    public void CallLogService(LogInputModel logInputModel)
-    {
+    public void CallLogService(LogInputModel logInputModel) {
         tmflApi.getLogResponse(logInputModel).enqueue(new Callback<LogResponseModel>() {
             @Override
             public void onResponse(Call<LogResponseModel> call, Response<LogResponseModel> response) {
-                Log.e("isLogin",new Gson().toJson(response.body()));
+                Log.e("isLogin", new Gson().toJson(response.body()));
 
-                if(response.body().getStatus().toString().contains("Success"))
-                {
-                    Log.e(TAG,"SUCCESS");
-                    PreferenceHelper.insertBoolean(PreferenceHelper.ISLOGIN,true);
+                if (response.body().getStatus().toString().contains("Success")) {
+                    Log.e(TAG, "SUCCESS");
+                    PreferenceHelper.insertBoolean(PreferenceHelper.ISLOGIN, true);
                     startActivity(new Intent(SplashActivity.this, ContractActivity.class));
                     finish();
-                }
-                else
-                {
-                    Log.e(TAG,"Failure");
+                } else {
+                    Log.e(TAG, "Failure");
+                    PreferenceHelper.insertBoolean(PreferenceHelper.ISLOGIN, false);
                     startActivity(new Intent(SplashActivity.this, BannerActivity.class));
                     finish();
                 }
@@ -103,7 +98,7 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<LogResponseModel> call, Throwable t) {
-              Log.e("ERROR",t.getMessage());
+                Log.e("ERROR", t.getMessage());
             }
         });
 

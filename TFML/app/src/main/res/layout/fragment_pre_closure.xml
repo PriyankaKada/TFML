@@ -140,7 +140,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:layout_marginLeft="5dp"
-                    android:text="Overdue :"
+                    android:text="@string/txt_overdue"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 

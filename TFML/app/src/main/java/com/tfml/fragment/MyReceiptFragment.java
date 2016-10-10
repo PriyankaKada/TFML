@@ -103,7 +103,7 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
             reqData.setContactId(PreferenceHelper.getString(PreferenceHelper.CONTRACT_NO));
         } else {
             Log.e("SelectedContractNoDef", "0000005000197989");
-            reqData.setContactId("0000005000197989");
+            reqData.setContactId(PreferenceHelper.getString(PreferenceHelper.CONTRACT_NO));
         }
         reqData.setREQDATE(modifiedDate);
         reqBody.setReqData(reqData);
@@ -160,7 +160,10 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
                         expandableListView.setAdapter(new MyExpandableListAdapter(getActivity(), hashMap, groupar, amountar));
 
                     }
-
+                }
+                else
+                {
+                    Toast.makeText(getActivity(),"Server Under Maintenance,Please try after Sometime",Toast.LENGTH_LONG).show();
                 }
             }
 

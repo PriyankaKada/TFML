@@ -75,7 +75,7 @@
         <TextView
             android:id="@+id/txt_product_name"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/img_download"
             android:layout_weight="1"
             android:text="TATA Tiago"
@@ -106,6 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/txt_next_due_date_label"
             android:layout_toRightOf="@id/txt_next_due_date_label"
+            android:layout_above="@+id/txt_last_payment_label"
              />
 
         <TextView
@@ -113,17 +114,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/img_download"
-            />
+            android:layout_below="@+id/txt_product_name"
+            android:layout_toRightOf="@+id/txt_current_emi_label"
 
-        <TextView
-            android:id="@+id/txt_current_emi_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/txt_current_emi_amount"
-            android:layout_toLeftOf="@id/txt_current_emi_amount"
-            android:text="Due Amount : "
-            android:textColor="@android:color/black" />
+
+            />
 
         <TextView
             android:id="@+id/txt_last_payment_label"
@@ -176,7 +171,7 @@
             android:layout_marginTop="5dp"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
-            android:text="Overdue : "/>
+            android:text="@string/txt_overdue"/>
         <TextView
             android:id="@+id/txt_overdue_amount"
             android:layout_below="@id/view_seprator"
@@ -238,6 +233,16 @@
                 android:padding="7dp"
                 android:textColor="@color/text_black"/>
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_current_emi_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Due Amount : "
+            android:layout_alignParentRight="true"
+            android:textColor="@android:color/black"
+            android:layout_below="@+id/txt_product_name"
+             />
 
     </RelativeLayout>
 

@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 
 import com.tfml.R;
+import com.tfml.activity.DownloadDataActivity;
 import com.tfml.activity.DownloadResultActivity;
 import com.tfml.auth.TmflApi;
 import com.tfml.common.ApiService;
@@ -84,12 +85,10 @@ public class DownloadAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                String fileUrl=downloadList.get(position).getFile();
-                Intent downloadIntent=new Intent(context, DownloadResultActivity.class);
+                Intent downloadIntent=new Intent(context, DownloadDataActivity.class);
                 downloadIntent.putExtra("URL",fileUrl);
                 context.startActivity(downloadIntent);
 
-                Toast.makeText(context,fileUrl,Toast.LENGTH_LONG).show();
-               // callDownloadImageFromUri(fileUrl);
             }
         });
             return convertView;

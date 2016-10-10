@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.tfml.R;
@@ -81,6 +82,10 @@ public class EmiDetailFragment extends Fragment implements View.OnClickListener 
                      expandableListViewEmi.setAdapter(new EmiExpandableListView(getActivity(),parent,child));
 
 
+                 }
+                 else
+                 {
+                     Toast.makeText(getActivity(),"Server Under Maintenance,Please try after Sometime",Toast.LENGTH_LONG).show();
                  }
              }
 

@@ -118,9 +118,14 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     PreferenceHelper.insertBoolean("SaveLogin", true);
                     strApiToken = response.body().getData().getApiToken();
                     strUsrId = response.body().getData().getUserId();
-                    if (chkRememberMe.isChecked()) {
-
+                    PreferenceHelper.insertBoolean("SaveLogin", true);
+                  /*  if (chkRememberMe.isChecked()) {
+                        PreferenceHelper.insertBoolean("SaveLogin", true);
                     }
+                    else
+                    {
+                        PreferenceHelper.insertBoolean("SaveLogin", false);
+                    }*/
                     PreferenceHelper.insertString(PreferenceHelper.USER_ID, strUsrId);
                     PreferenceHelper.insertString(PreferenceHelper.API_TOKEN, strApiToken);
                     startActivity(new Intent(LoginActivity.this, ContractActivity.class));

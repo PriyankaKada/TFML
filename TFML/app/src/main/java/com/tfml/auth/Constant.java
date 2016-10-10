@@ -36,4 +36,5 @@ public class Constant {
     public static final String RECEIPTPDF="customer/myReceipts";
     public static final String CHANGPASSWORD="customer/changePassword";
     public static final String  EMILIST="customer/emiList";
+    public static final String LOGOUT="customer/logoutCustomer";
 }

@@ -15,6 +15,8 @@ import com.tfml.model.applyLoanResponseModel.InputModel;
 import com.tfml.model.branchResponseModel.BranchResponseModel;
 import com.tfml.model.branchResponseModel.InputBranchModel;
 import com.tfml.model.branchResponseModel.InputBranchState;
+import com.tfml.model.changePasswordModel.ChangePasswordInputModel;
+import com.tfml.model.changePasswordModel.ChangePasswordResponse;
 import com.tfml.model.cityResponseModel.BranchCityResponseModel;
 import com.tfml.model.cityResponseModel.CityResponseModel;
 import com.tfml.model.cityResponseModel.InputCityModel;
@@ -28,6 +30,10 @@ import com.tfml.model.logResponseModel.LogInputModel;
 import com.tfml.model.logResponseModel.LogResponseModel;
 import com.tfml.model.loginResponseModel.LoginRequestModel;
 import com.tfml.model.loginResponseModel.LoginResponseModel;
+import com.tfml.model.logoutResponseModel.LogoutInputModel;
+import com.tfml.model.logoutResponseModel.LogoutResponseModel;
+import com.tfml.model.myReciptPdfResponseModel.MyReceiptInputModel;
+import com.tfml.model.myReciptPdfResponseModel.MyReceiptResponseModel;
 import com.tfml.model.preClosurePdfResponseModel.PreClosureInputModel;
 import com.tfml.model.preClosurePdfResponseModel.PreClosureStmtPdfResponse;
 import com.tfml.model.productResponseModel.ProductListResponseModel;
@@ -153,6 +159,10 @@ public interface TmflApi {
     Call<LogResponseModel> getLogResponse(@Body LogInputModel logInputModel);
     @POST(Constant.EMILIST)
     Call<EmiListResponseModel>getEmiListResponse(@Body EmiListInputModel emiListInputModel);
-
-
+    @POST(Constant.CHANGPASSWORD)
+    Call<ChangePasswordResponse>getChangePassResponse(@Body ChangePasswordInputModel changePasswordInputModel);
+    @POST(Constant.RECEIPTPDF)
+    Call<MyReceiptResponseModel>getMyReceiptResponse(@Body MyReceiptInputModel myReceiptInputModel);
+    @POST(Constant.LOGOUT)
+    Call<LogoutResponseModel>getLogoutResponse(@Body LogoutInputModel logoutInputModel);
 }

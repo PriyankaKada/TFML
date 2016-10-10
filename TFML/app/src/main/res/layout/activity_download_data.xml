@@ -5,44 +5,71 @@
     android:id="@+id/activity_download_data"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    android:background="@drawable/login_bg1"
     android:orientation="vertical"
     tools:context="com.tfml.activity.DownloadDataActivity">
+
   <android.support.v7.widget.Toolbar
       android:id="@+id/toolbar"
       android:layout_width="match_parent"
       android:layout_height="?attr/actionBarSize"
+      android:background="?attr/colorPrimary"
       app:popupTheme="@style/AppTheme.PopupOverlay">
 
     <ImageView
-        android:id="@+id/img_login_back"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:src="@drawable/ic_back_arrow"/>
-
+        android:id="@+id/img_download_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="start"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/ic_back_arrow" />
     <TextView
-        android:id="@+id/txt_login_header"
-        android:layout_width="match_parent"
+        android:id="@+id/txt_download_header"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_gravity="left"
+        android:layout_marginLeft="25dp"
         android:text="Download"
-        android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        />
-
+        android:textColor="@color/white"
+        ></TextView>
+    <ImageView
+        android:id="@+id/img_drawer_download"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="end"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/ic_drawer"
+        ></ImageView>
   </android.support.v7.widget.Toolbar>
-
   <View
       android:layout_width="wrap_content"
       android:layout_height="0.5dp"
       android:background="@color/white"/>
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="10dp"
+      android:background="@drawable/list_row"
+      android:text="Frequently asked questions(FAQ)"/>
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:paddingTop="5dp"
+      android:paddingLeft="10dp"
+     android:textStyle="bold"
+      android:text="Bank PDFs"/>
   <ListView
       android:id="@+id/lst_download_data"
       android:layout_width="match_parent"
+      android:layout_weight="3"
       android:layout_height="wrap_content">
   </ListView>
+  <ImageView
+      android:id="@+id/img_result"
+      android:layout_width="match_parent"
+      android:layout_weight="2"
+      android:padding="10dp"
+      android:background="@color/color_grey"
+      android:layout_height="400dp" />
 </LinearLayout>

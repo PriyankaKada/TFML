@@ -24,5 +24,6 @@
     <string name="txt_forgot_pass">Forgot Password?</string>
     <string name="txt_forgot">Forgot Password</string>
     <string name="txt_user_id">User Id</string>
+    <string name="txt_overdue">Live :</string>
     <string name="txt_total_bal">"Total balance" amount shown above is \"subject to providing clearance proof of all prior receipts.* The "Total balance\" will change if not paid on </string>
 </resources>

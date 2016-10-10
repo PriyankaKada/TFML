@@ -22,9 +22,17 @@ import android.widget.Toast;
 import com.tfml.R;
 import com.tfml.adapter.DrawerAdapter;
 import com.tfml.auth.Constant;
+import com.tfml.auth.TmflApi;
+import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
 import com.tfml.common.SocialUtil;
+import com.tfml.model.logoutResponseModel.LogoutInputModel;
+import com.tfml.model.logoutResponseModel.LogoutResponseModel;
 import com.tfml.util.PreferenceHelper;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class DrawerBaseActivity extends BaseActivity {
@@ -36,6 +44,9 @@ public class DrawerBaseActivity extends BaseActivity {
     ListView lsvNavList;
     ImageView imgCancel;
     protected FrameLayout frameLayout;
+    LogoutInputModel logoutInputModel;
+    LogoutResponseModel logoutResponseModel;
+    TmflApi tmflApi;
     String TITLES[] = {"New Schemes", "Apply Loan", "Refer Friend", "Downloads",
             "Change Password", "Logout", "Contact Us", "Phone Call", "WhatsApp Call", "Mail Us", "Locate us"};
     int ICONS[] = {R.drawable.ic_scheme_selected, R.drawable.ic_apply_loan_selected, R.drawable.ic_refer_friends_selected,
@@ -56,6 +67,7 @@ public class DrawerBaseActivity extends BaseActivity {
                 drawerLayout.closeDrawer(GravityCompat.END);
             }
         });
+        tmflApi= ApiService.getInstance().call();
         initInstances();
     }
 
@@ -93,7 +105,11 @@ public class DrawerBaseActivity extends BaseActivity {
                         break;
                     case 5://Logout
                         if (CommonUtils.isNetworkAvailable(DrawerBaseActivity.this)) {
-                            logout();
+                            logoutInputModel=new LogoutInputModel();
+                            logoutResponseModel=new LogoutResponseModel();
+                            logoutInputModel.setUser_id(PreferenceHelper.getString(PreferenceHelper.USER_ID));
+                            logoutInputModel.setApi_token(PreferenceHelper.getString(PreferenceHelper.API_TOKEN));
+                            logout(logoutInputModel);
                         } else {
                             Toast.makeText(getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
                         }
@@ -169,19 +185,35 @@ public class DrawerBaseActivity extends BaseActivity {
     }
 
 
-    private void logout() {
-        PreferenceHelper.remove(PreferenceHelper.USER_ID);
-        PreferenceHelper.remove(PreferenceHelper.API_TOKEN);
-        PreferenceHelper.insertBoolean("SaveLogin", false);
-        //PreferenceHelper.insertBoolean(PreferenceHelper.ISLOGIN, false);
-      //  PreferenceHelper.insertBoolean(PreferenceHelper.FLAG_LOGGED_OUT, true);
-        Intent intent = new Intent(this,
-                BannerActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
+    private void logout(LogoutInputModel logoutInputModel) {
+
+       tmflApi.getLogoutResponse(logoutInputModel).enqueue(new Callback<LogoutResponseModel>() {
+           @Override
+           public void onResponse(Call<LogoutResponseModel> call, Response<LogoutResponseModel> response) {
+               if(response.body().getStatus().equals("Success"))
+               {
+                   PreferenceHelper.remove(PreferenceHelper.USER_ID);
+                   PreferenceHelper.remove(PreferenceHelper.API_TOKEN);
+                   PreferenceHelper.insertBoolean("SaveLogin", false);
+                   Intent intent = new Intent(DrawerBaseActivity.this, BannerActivity.class);
+                   intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                   intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                   startActivity(intent);
+                   finish();
+               }
+               else
+               {
+                   Toast.makeText(getBaseContext(),"Unauthorized Access Token",Toast.LENGTH_SHORT).show();
+               }
+           }
+
+           @Override
+           public void onFailure(Call<LogoutResponseModel> call, Throwable t) {
+            Log.e("onFailure",t.getMessage().toString());
+           }
+       });
+
 
     }
 
