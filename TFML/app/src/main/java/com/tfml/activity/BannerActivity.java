@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.OperationApplicationException;
@@ -15,11 +16,16 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -30,6 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.michael.easydialog.EasyDialog;
 import com.tfml.R;
 import com.tfml.adapter.BannerAdapter;
 import com.tfml.auth.Constant;
@@ -38,6 +45,8 @@ import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
 import com.tfml.common.SocialUtil;
 import com.tfml.fragment.BannerFragment;
+import com.tfml.model.LoanStatusResponseModel.LoanStatusInputModel;
+import com.tfml.model.LoanStatusResponseModel.LoanStatusResponse;
 import com.tfml.model.QuickcallResponseModel.QuickCallInputModel;
 import com.tfml.model.QuickcallResponseModel.QuickCallResponse;
 import com.tfml.model.bannerResponseModel.BannerlistResponse;
@@ -49,6 +58,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Handler;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -73,10 +83,11 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
     private ImageView imgSchemes, imgApplyLoan, imgReferFriend, imgLoanStatus, imgLogin;
     String errormsg;
     View selectedView;
+    String strQuickCall, strOtpNo;
     //String email,whatsAppNo,phoneNo;
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
     private static final String TAG = "Contacts";
-
+    TmflApi tmflApiOtpSubmit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,15 +117,15 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
         linReferFriend = (LinearLayout) findViewById(R.id.linReferFriend);
         linLoanStaus = (LinearLayout) findViewById(R.id.linLoanStaus);
         linLogin = (LinearLayout) findViewById(R.id.linLogin);
-        selectedView = (View) findViewById( R.id.viewId );
+        selectedView = (View) findViewById(R.id.viewId);
         circlePageIndicator.setRadius(8.0f);
         txtTitle.setText("Welcome to TMFL");
         SetFonts.setFonts(this, txtTitle, 2);
-        SetFonts.setFonts(this,txtSchemes,2);
-        SetFonts.setFonts(this,txtApplyLoan,2);
-        SetFonts.setFonts(this,txtReferFriend,2);
-        SetFonts.setFonts(this,txtLoanStatus,2);
-        SetFonts.setFonts(this,txtLogin,2);
+        SetFonts.setFonts(this, txtSchemes, 2);
+        SetFonts.setFonts(this, txtApplyLoan, 2);
+        SetFonts.setFonts(this, txtReferFriend, 2);
+        SetFonts.setFonts(this, txtLoanStatus, 2);
+        SetFonts.setFonts(this, txtLogin, 2);
         loadBannerData();
         imgQuickCall.setOnClickListener(this);
         imgSocial.setOnClickListener(this);
@@ -180,36 +191,6 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
         return true;
     }
 
-    private void insertDummyContact() {
-        // Two operations are needed to insert a new contact.
-        ArrayList<ContentProviderOperation> operations = new ArrayList<ContentProviderOperation>(2);
-
-        // First, set up a new raw contact.
-        ContentProviderOperation.Builder op =
-                ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
-                        .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, null)
-                        .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, null);
-        operations.add(op.build());
-
-        // Next, set the name for the contact.
-        op = ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                .withValue(ContactsContract.Data.MIMETYPE,
-                        ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME,
-                        "__DUMMY CONTACT from runtime permissions sample");
-        operations.add(op.build());
-
-        // Apply the operations.
-        ContentResolver resolver = getContentResolver();
-        try {
-            resolver.applyBatch(ContactsContract.AUTHORITY, operations);
-        } catch (RemoteException e) {
-            Log.d(TAG, "Could not add a new contact: " + e.getMessage());
-        } catch (OperationApplicationException e) {
-            Log.d(TAG, "Could not add a new contact: " + e.getMessage());
-        }
-    }
 
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
         new AlertDialog.Builder(BannerActivity.this)
@@ -238,8 +219,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
             public void onResponse(Call<BannerlistResponse> call, Response<BannerlistResponse> response) {
                 BannerlistResponse bannerlistResponse = response.body();
                 CommonUtils.closeProgressDialog();
-                if(response.body()!=null)
-                {
+                if (response.body() != null) {
                     if (response.body().getStatus() != null && response.body().getStatus().equals("success")) {
 
                         Log.e("BannerlistResponse", new Gson().toJson(response.body().getStatus()));
@@ -254,10 +234,8 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
                     } else {
                         Log.e("ErrorResponse", response.errorBody().toString());
                     }
-                }
-                else
-                {
-                    Toast.makeText(getBaseContext(),"Server Error........",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getBaseContext(), "Server Error........", Toast.LENGTH_LONG).show();
                 }
 
 
@@ -307,25 +285,25 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 
                 break;
             case R.id.linSchemes:
-                Intent intentSchema=new Intent(this,SchemesActivity.class);
+                Intent intentSchema = new Intent(this, SchemesActivity.class);
                 intentSchema.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 intentSchema.putExtra("TAB_SELECTED", Constant.ISSCHEMASTABSELECT);
                 startActivity(intentSchema);
-          //
+                //
                 break;
             case R.id.linApplyLoan:
-                Intent intentApplyLoan=new Intent(this,SchemesActivity.class);
+                Intent intentApplyLoan = new Intent(this, SchemesActivity.class);
                 intentApplyLoan.putExtra("TAB_SELECTED", Constant.ISAPPLYLOANSELECT);
                 startActivity(intentApplyLoan);
                 break;
             case R.id.linReferFriend:
-                Intent intentReferFriend=new Intent(this,SchemesActivity.class);
+                Intent intentReferFriend = new Intent(this, SchemesActivity.class);
                 intentReferFriend.putExtra("TAB_SELECTED", Constant.ISREFERFREINDSELECT);
                 startActivity(intentReferFriend);
                 break;
             case R.id.linLoanStaus:
                 linLoanStausClick();
-                SocialUtil.loanStatusDialog(BannerActivity.this, linLoanStaus,selectedView);
+                SocialUtil.loanStatusDialog(BannerActivity.this, linLoanStaus, selectedView);
                 break;
             case R.id.linLogin:
                 startActivity(new Intent(BannerActivity.this, LoginActivity.class));
@@ -339,51 +317,93 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
         Log.e("Widthoflin", "" + width);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             linLoanStaus.setBackgroundColor(Color.parseColor("#003668"));
-            selectedView.setVisibility( View.VISIBLE );
+            selectedView.setVisibility(View.VISIBLE);
         }
     }
 
+
     public void quickCallDialog() {
-        final Dialog dialog = new Dialog(BannerActivity.this, android.R.style.Theme_Holo_Dialog_NoActionBar);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.setContentView(R.layout.dialog_quick_call);
-        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-        params.y = 5;
-        params.x = 5;
-        params.gravity = Gravity.TOP | Gravity.LEFT;
-        dialog.getWindow().setAttributes(params);
-        dialog.getWindow().getAttributes().windowAnimations = R.style.animationdialog;
-        dialog.setCancelable(false);
-        final EditText edtQuickCall = (EditText) dialog.findViewById(R.id.edt_quick_call);
-        final Button btnCancel = (Button) dialog.findViewById(R.id.btn_cancel);
-        Button btnSubmit = (Button) dialog.findViewById(R.id.btn_submit);
-        btnCancel.setVisibility(View.VISIBLE);
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_quick_calling, null);
+        final EasyDialog dialog = new EasyDialog(this)
+                .setLayout(view)
+                .setBackgroundColor(Color.parseColor("#FFFFFF"))
+                .setLocationByAttachedView(imgQuickCall)
+                .setGravity(EasyDialog.GRAVITY_BOTTOM)
+                .setAnimationTranslationShow(EasyDialog.DIRECTION_Y, 500, 800, 0)
+                .setAnimationAlphaShow(500, 0, 0.5f, 1)
+                .setAnimationTranslationDismiss(EasyDialog.DIRECTION_Y, 500, -50, 800)
+                .setAnimationAlphaDismiss(500, 1, 0)
+                .setTouchOutsideDismiss(true)
+                .setMatchParent(true)
+                .setMarginLeftAndRight(25, 25)
+                .setOutsideColor(ContextCompat.getColor(this, R.color.background_color_black))
+                .show();
+
+        final EditText edtQuickCall = (EditText) view.findViewById(R.id.edt_mobile_no);
+        final EditText edtOtpNo = (EditText) view.findViewById(R.id.edt_otp_no);
+        final ImageView imgRefreshOtp = (ImageView) view.findViewById(R.id.img_Refresh_token);
+        TextView txtSubmit = (TextView) view.findViewById(R.id.txt_submit);
+        edtQuickCall.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                dialog.dismiss();
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
-        });
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v) {
-                String strQuickCall = edtQuickCall.getText().toString();
-                if (strQuickCall.length() != 0) {
-                    String strmobileno = edtQuickCall.getText().toString();
-                    Log.e("Number", strmobileno);
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                strQuickCall = edtQuickCall.getText().toString();
+
+                if (s.length() != 0) {
                     QuickCallInputModel quickCallInputModel = new QuickCallInputModel();
-                    quickCallInputModel.setMobileNumber(strmobileno);
+                    quickCallInputModel.setMobileNumber(strQuickCall);
                     callResponseModel(quickCallInputModel);
-                    dialog.dismiss();
-                    btnCancel.setVisibility(View.GONE);
+
                 } else {
                     Toast.makeText(BannerActivity.this, "Please Enter Mobile Number", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        dialog.show();
+        txtSubmit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+
+                if (TextUtils.isEmpty(strQuickCall)) {
+                    Toast.makeText(BannerActivity.this, "Please Enter Mobile Number", Toast.LENGTH_SHORT).show();
+                }
+                if (TextUtils.isEmpty(strOtpNo)) {
+                    Toast.makeText(BannerActivity.this, "Please Enter OTP Number", Toast.LENGTH_SHORT).show();
+                }
+                if (!TextUtils.isEmpty(strQuickCall) && !TextUtils.isEmpty(strOtpNo)) {
+                    LoanStatusInputModel loanStatusInputModel = new LoanStatusInputModel();
+                    loanStatusInputModel.setOtpNumber(strOtpNo);
+                    loanStatusInputModel.setMobileNumber(strQuickCall);
+                    CallLoanStatusModel(loanStatusInputModel);
+
+                }
+
+
+                strQuickCall = edtQuickCall.getText().toString();
+
+                if (strQuickCall.length() != 0) {
+                    QuickCallInputModel quickCallInputModel = new QuickCallInputModel();
+                    quickCallInputModel.setMobileNumber(strQuickCall);
+                    callResponseModel(quickCallInputModel);
+                    // dialog.dismiss();
+                } else {
+                    Toast.makeText(BannerActivity.this, "Please Enter Mobile Number", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
     }
 
     public void callResponseModel(QuickCallInputModel quickCallInputModel) {
@@ -394,10 +414,9 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
                 Log.e("getQuickCallResponse", new Gson().toJson(response.body()));
 
                 if (response != null && response.body().getStatus().contains("success")) {
-                    SocialUtil.loanStatusDialog(BannerActivity.this, linLoanStaus,selectedView);
 
-
-                    Log.e("getQuickCallResponse", response.body().getStatus());
+                    // SocialUtil.loanStatusDialog(BannerActivity.this, linLoanStaus, selectedView);
+                    strOtpNo = response.body().getData().getOtp().toString();
 
                 } else {
                     if (response != null && response.body().getStatus().contains("error"))
@@ -412,6 +431,30 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
             }
         });
 
+    }
+
+    public void CallLoanStatusModel(LoanStatusInputModel loanStatusInputModel) {
+        tmflApiOtpSubmit = ApiService.getInstance().call();
+        tmflApiOtpSubmit.getOtpResponse(loanStatusInputModel).enqueue(new Callback<LoanStatusResponse>() {
+            @Override
+            public void onResponse(Call<LoanStatusResponse> call, Response<LoanStatusResponse> response) {
+                if (response.body().getStatus().contains("success")) {
+                  //  Log.e("CallLoanStatusModel", response.body().getStatus());
+                    Toast.makeText(BannerActivity.this, "Thanks for Quick calling ", Toast.LENGTH_SHORT).show();
+
+                }
+                if (response.body().getStatus().contains("error")) {
+                  //  Log.e("CallLoanStatusModel", response.body().getError());
+                    Toast.makeText(BannerActivity.this, response.body().getError(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<LoanStatusResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     public void socialDialog() {
@@ -465,7 +508,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
         imgMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BannerActivity.this,LocateUsActivity.class));
+                startActivity(new Intent(BannerActivity.this, LocateUsActivity.class));
 
             }
         });
@@ -490,8 +533,8 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
                 perms.put(Manifest.permission.ACCESS_FINE_LOCATION, PackageManager.PERMISSION_GRANTED);
                 perms.put(Manifest.permission.READ_CONTACTS, PackageManager.PERMISSION_GRANTED);
                 perms.put(Manifest.permission.WRITE_CONTACTS, PackageManager.PERMISSION_GRANTED);
-                perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE,PackageManager.PERMISSION_GRANTED );
-                perms.put(Manifest.permission.READ_EXTERNAL_STORAGE,PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.READ_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
                 // Fill with results
                 for (int i = 0; i < permissions.length; i++)
                     perms.put(permissions[i], grantResults[i]);

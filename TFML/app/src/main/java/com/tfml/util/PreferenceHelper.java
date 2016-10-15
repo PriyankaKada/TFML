@@ -19,6 +19,7 @@ public class PreferenceHelper {
     public static final String FLAG_LOGGED_OUT = "logout";
     public static final String ISLOGIN="Login";
     public static final String CONTRACT_NO="contractNo";
+    public static final String EMAIL="email";
 
     public static synchronized final void insertString(String key, String value) {
         getPreferences().edit().putString(key, value).commit();

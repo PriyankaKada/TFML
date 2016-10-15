@@ -3,6 +3,7 @@ package com.tfml.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,9 +68,11 @@ public class ContractsListAdapter extends ArrayAdapter<ContractModel> {
             txt_next_due_date.setText(model.getDueDate()==null?"":model.getDueDate().toString());
             txt_last_payment_date.setText(model.getLastReceiptDate()==null?"":model.getLastReceiptDate().toString());
             txt_current_emi_amount.setText(model.getDueAmount()==null?"":"Rs."+model.getDueAmount().toString());
+            Log.e("DueAmount",model.getDueAmount().toString());
+            Log.e("TDueAmount",txt_current_emi_amount.getText().toString());
 
 
-              btn_more_detail.setOnClickListener(new View.OnClickListener() {
+            btn_more_detail.setOnClickListener(new View.OnClickListener() {
                   @Override
                   public void onClick(View v) {
                    System.out.println("arrayList---------->"+arrayList.size());

@@ -10,10 +10,8 @@ import java.util.List;
  * Created by webwerks on 6/10/16.
  */
 
-public class EmiListResponseModel {
-    @SerializedName("status")
-    @Expose
-    private String status;
+public class EmiListResponseModel extends GenericResponse{
+
     @SerializedName("data")
     @Expose
     private List<Datum> data = new ArrayList<Datum>();
@@ -23,18 +21,6 @@ public class EmiListResponseModel {
      * @return
      * The status
      */
-    public String getStatus() {
-        return status;
-    }
-
-    /**
-     *
-     * @param status
-     * The status
-     */
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     /**
      *

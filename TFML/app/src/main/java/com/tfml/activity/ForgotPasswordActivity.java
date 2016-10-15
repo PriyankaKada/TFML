@@ -90,7 +90,6 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
             @Override
             public void onResponse(Call<ForgotResponse> call, Response<ForgotResponse> response) {
 
-                Log.e("response ",new Gson().toJson(response.body()));
                 if(response.body()!=null)
                 {
                     if(response.body().getStatus().toString().contains("Success"))

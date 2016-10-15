@@ -131,8 +131,6 @@ public class DownloadDataActivity extends DrawerBaseActivity implements  View.On
                 imgResult.setImageBitmap(bitmap);
                 String path =   Environment.getExternalStorageDirectory().toString()
                         + "/TMFL/Download/"+"Tmfl.jpg";
-                //  String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + File.separator + "Tmfl.jpg";
-                //  Log.d("abcc","apth "+path);
 
                 FileOutputStream outputStream = null;
                 try {

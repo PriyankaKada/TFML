@@ -98,7 +98,8 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call<LogResponseModel> call, Throwable t) {
-                Log.e("ERROR", t.getMessage());
+              //  Log.e("ERROR", t.getMessage());
+               // Toast.makeText(SplashActivity.this,"Network Error...",Toast.LENGTH_SHORT).show();
             }
         });
 

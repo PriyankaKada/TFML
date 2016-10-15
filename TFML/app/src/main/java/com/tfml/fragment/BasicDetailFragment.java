@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.tfml.R;
 import com.tfml.model.soapModel.response.ResponseEnvelope;
+import com.tfml.util.PreferenceHelper;
 import com.tfml.util.SetFonts;
 
 import org.w3c.dom.Text;
@@ -23,8 +24,8 @@ import java.util.Date;
 
 public class BasicDetailFragment extends Fragment {
      private View view;
-     private TextView txtStmtofAc,txtContractNo,txtContractDate,txtMaturityDate,txtTenure,txtChasisNo,txtEngineNo,txtEmailId;
-    String aggrementNo,aggrementDate,maturityDate,tenure,tenure_unit,chasisNo,engineNo,strSoaDateTo,strSoaDateFrom;
+     private TextView txtStmtofAc,txtContractNo,txtContractDate,txtMaturityDate,txtTenure,txtChasisNo,txtEngineNo,txtEmailId,txtClientName;
+    String aggrementNo,aggrementDate,maturityDate,tenure,tenure_unit,chasisNo,engineNo,strSoaDateTo,strSoaDateFrom,strClientName,strEmail;
     String strFromDate,strToDate,strAggrementDate,strMaturityDate;
 
     @Override
@@ -38,6 +39,7 @@ public class BasicDetailFragment extends Fragment {
         {
             ResponseEnvelope.Body body= (ResponseEnvelope.Body) bundle.getSerializable("ResponseModel");
           //  strFinAmt=body.getZCISResponse().getIT_CARDEX1().getItem().getFIN_AMT()==null?"":body.getZCISResponse().getIT_CARDEX1().getItem().getFIN_AMT();
+            strClientName=body.getZCISResponse().getIT_CARDEX1().getItem().getCLIENT_NAME()==null?"":body.getZCISResponse().getIT_CARDEX1().getItem().getCLIENT_NAME().toString();
             strSoaDateTo=body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_DATE_TO()==null?"":body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_DATE_TO();
             strSoaDateFrom=body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_DATE_FROM()==null?"":body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_DATE_FROM();
             aggrementNo=body.getZCISResponse().getIT_CARDEX1().getItem().getCONTRACTNO().toString()==null?"":body.getZCISResponse().getIT_CARDEX1().getItem().getCONTRACTNO().toString();
@@ -47,6 +49,7 @@ public class BasicDetailFragment extends Fragment {
             tenure_unit=body.getZCISResponse().getIT_CARDEX1().getItem().getTENURE_UNIT()==null?"":body.getZCISResponse().getIT_CARDEX1().getItem().getTENURE_UNIT();
             chasisNo=body.getZCISResponse().getIT_CARDEX1().getItem().getCHASIS_NO()==null?"":body.getZCISResponse().getIT_CARDEX1().getItem().getCHASIS_NO();
             engineNo=body.getZCISResponse().getIT_CARDEX1().getItem().getENGINE_NO()==null?"":body.getZCISResponse().getIT_CARDEX1().getItem().getENGINE_NO();
+            strEmail= PreferenceHelper.getString(PreferenceHelper.EMAIL);
             DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
             DateFormat outputFormat = new SimpleDateFormat("dd-MMM-yyyy");
 
@@ -71,6 +74,7 @@ public class BasicDetailFragment extends Fragment {
     }
     public void init()
     {
+        txtClientName=(TextView)view.findViewById(R.id.txt_client_name);
         txtStmtofAc=(TextView)view.findViewById(R.id.txt_statement_of_account_detail);
         txtContractNo=(TextView)view.findViewById(R.id.txt_agreement_no);
         txtContractDate=(TextView)view.findViewById(R.id.txt_agreement_date);
@@ -79,7 +83,7 @@ public class BasicDetailFragment extends Fragment {
         txtChasisNo=(TextView)view.findViewById(R.id.txt_chasis_no);
         txtEngineNo=(TextView)view.findViewById(R.id.txt_engine_no);
         txtEmailId=(TextView)view.findViewById(R.id.txt_email_id);
-
+        SetFonts.setFonts(getActivity(),txtClientName,2);
         SetFonts.setFonts(getActivity(),txtStmtofAc,2);
         SetFonts.setFonts(getActivity(),txtContractNo,2);
         SetFonts.setFonts(getActivity(),txtContractDate,2);
@@ -94,7 +98,8 @@ public class BasicDetailFragment extends Fragment {
         txtTenure.setText(tenure+" "+tenure_unit);
         txtChasisNo.setText(chasisNo);
         txtEngineNo.setText(engineNo);
-
+        txtClientName.setText(strClientName);
+        txtEmailId.setText(strEmail);
 
     }
 

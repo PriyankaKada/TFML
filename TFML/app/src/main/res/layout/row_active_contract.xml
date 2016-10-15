@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:text="RC No. : "
                 android:textSize="14sp"
-                android:padding="10dp"
+                android:layout_marginLeft="20dp"
                 android:textColor="@color/white"
                 android:layout_gravity="center"/>
 
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:text=""
+                android:text="xyz"
                 android:textColor="@color/white"
                 android:layout_gravity="center"/>
 
@@ -110,17 +110,6 @@
              />
 
         <TextView
-            android:id="@+id/txt_current_emi_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/txt_product_name"
-            android:layout_toRightOf="@+id/txt_current_emi_label"
-
-
-            />
-
-        <TextView
             android:id="@+id/txt_last_payment_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -131,9 +120,9 @@
         <TextView
             android:id="@+id/txt_last_payment_date"
             android:layout_width="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
             android:layout_toRightOf="@id/txt_last_payment_label"
             android:layout_below="@id/txt_next_due_date"
            />
@@ -141,7 +130,6 @@
         <TextView
             android:visibility="gone"
             android:id="@+id/txt_previous_emi"
-            android:layout_below="@id/txt_current_emi_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -178,11 +166,13 @@
             android:layout_toRightOf="@id/txt_overdue_label"
             android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/txt_repayment_mode"
             android:layout_below="@+id/view_seprator"
             android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -218,13 +208,12 @@
                 android:padding="7dp"
                 android:textSize="14sp"
                 android:textColor="@color/text_black"/>
-            <TextView
+            <Button
                 android:id="@+id/btn_more_detail"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
                 android:layout_marginLeft="10dp"
                 android:textAllCaps="false"
-                android:background="@drawable/btn_bg"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:text="More Details"
@@ -235,14 +224,22 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/txt_current_emi_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/txt_current_emi_label"
+            android:layout_alignParentRight="true"
+           />
+
+        <TextView
             android:id="@+id/txt_current_emi_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Due Amount : "
-            android:layout_alignParentRight="true"
             android:textColor="@android:color/black"
             android:layout_below="@+id/txt_product_name"
-             />
+            android:layout_toLeftOf="@+id/txt_current_emi_amount"
+            android:layout_toStartOf="@+id/txt_current_emi_amount" />
 
     </RelativeLayout>
 

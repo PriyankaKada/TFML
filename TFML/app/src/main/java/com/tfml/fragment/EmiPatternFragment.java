@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ public class EmiPatternFragment extends Fragment {
         modelArrayList =
                 (ArrayList<ContractModel>) bundle.getSerializable("datamodel");
         datavalue = (String) bundle.getString("datamodelvalue");
+        PreferenceHelper.insertString(PreferenceHelper.CONTRACT_NO,datavalue);
         rcNo = (String) bundle.getString("RCNO");
         dueDate = (String) bundle.getString("DUEDATE");
         repaymentMode = (String) bundle.getString("REPAYMENT");
@@ -69,8 +71,10 @@ public class EmiPatternFragment extends Fragment {
             contractLst.add(datavalue);
             for (int i = 0; i < modelArrayList.size(); i++) {
                 ContractModel model = modelArrayList.get(i);
-                if (model != null)
+/*
+                if (model != null){}
                     contractLst.add(model.getUsrConNo());
+*/
 
             }
         }
@@ -124,9 +128,8 @@ public class EmiPatternFragment extends Fragment {
                 if (itemindex > 0) {
                     ContractModel model = modelArrayList.get(itemindex);
                     setData(model);
-
+                    Log.e("ID"," "+modelArrayList.get(position).getUsrConNo());
                     PreferenceHelper.insertString(PreferenceHelper.CONTRACT_NO,modelArrayList.get(position).getUsrConNo());
-
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frm_emi_detail, new MyReceiptFragment()).commit();
 
                 }
@@ -143,12 +146,15 @@ public class EmiPatternFragment extends Fragment {
 
 
     private void setData(ContractModel model) {
+        if(model!=null)
+        {
+            txt_rc_no.setText(model.getRcNumber()==null?"":model.getRcNumber().toString());
+            txt_duedate.setText(model.getDueDate()==null?"":model.getDueDate().toString());
+            txt_emiamount.setText(model.getDueAmount()==null?"":"Rs. "+model.getDueAmount().toString());
+            txt_repaymentmode.setText(model.getPdcFlag()==null?"":model.getPdcFlag().toString());
+            txt_dueamount.setText(model.getTotalCurrentDue()==null?"":"Rs."+model.getTotalCurrentDue().toString());
+        }
 
-        txt_rc_no.setText(model.getRcNumber()==null?"":model.getRcNumber().toString());
-        txt_duedate.setText(model.getDueDate()==null?"":model.getDueDate().toString());
-        txt_emiamount.setText(model.getDueAmount()==null?"":"Rs. "+model.getDueAmount().toString());
-        txt_repaymentmode.setText(model.getPdcFlag()==null?"":model.getPdcFlag().toString());
-        txt_dueamount.setText(model.getTotalCurrentDue()==null?"":"Rs."+model.getTotalCurrentDue().toString());
 
     }
 
@@ -156,6 +162,8 @@ public class EmiPatternFragment extends Fragment {
         fragmentManager = getActivity().getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         emiDetailFragment = new EmiDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("datamodelvalue", datavalue );
         fragmentTransaction.add(R.id.frm_emi_detail, emiDetailFragment);
         fragmentTransaction.commit();
 

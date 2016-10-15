@@ -38,7 +38,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     LoginRequestModel loginRequestModel;
     LoginResponseModel loginResponseModel;
     TmflApi tmflApi;
-    String strApiToken, strUsrId;
+    String strApiToken, strUsrId,strEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +85,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     public void Validation() {
         strUserID = txtUserName.getText().toString();
         strPassword = txtPassword.getText().toString();
+
         if (TextUtils.isEmpty(strUserID)) {
             Toast.makeText(getBaseContext(), "Please Enter User Name", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(strPassword)) {
@@ -118,7 +119,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     PreferenceHelper.insertBoolean("SaveLogin", true);
                     strApiToken = response.body().getData().getApiToken();
                     strUsrId = response.body().getData().getUserId();
+                    strEmail=response.body().getData().getEmail()==null?"":response.body().getData().getEmail().toString();
                     PreferenceHelper.insertBoolean("SaveLogin", true);
+                    Log.e("API TOKEN",strApiToken);
                   /*  if (chkRememberMe.isChecked()) {
                         PreferenceHelper.insertBoolean("SaveLogin", true);
                     }
@@ -128,6 +131,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     }*/
                     PreferenceHelper.insertString(PreferenceHelper.USER_ID, strUsrId);
                     PreferenceHelper.insertString(PreferenceHelper.API_TOKEN, strApiToken);
+                    PreferenceHelper.insertString(PreferenceHelper.EMAIL,strEmail);
                     startActivity(new Intent(LoginActivity.this, ContractActivity.class));
                     finish();
                     Log.e("ResponseData", response.body().getData().getApiToken()+" "+response.body().getData().getUserId());

@@ -7,48 +7,19 @@ import com.google.gson.annotations.SerializedName;
  * Created by webwerks on 3/10/16.
  */
 
-public class AccountStmtResponse {
-
-    @SerializedName("status")
-    @Expose
-    private String status;
+public class AccountStmtResponse  extends GenericResponse{
     @SerializedName("filepath")
     @Expose
     private String filepath;
-
-    /**
-     *
-     * @return
-     * The status
-     */
-    public String getStatus() {
-        return status;
-    }
-
-    /**
-     *
-     * @param status
-     * The status
-     */
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    /**
-     *
-     * @return
-     * The filepath
-     */
     public String getFilepath() {
         return filepath;
     }
 
-    /**
-     *
-     * @param filepath
-     * The filepath
-     */
     public void setFilepath(String filepath) {
         this.filepath = filepath;
     }
+
+
+
+
 }

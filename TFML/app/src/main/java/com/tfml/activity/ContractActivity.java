@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -162,6 +163,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
                // List<ContractModel>model= (List<ContractModel>) response.body().getData();
                 ArrayList<ContractModel>models=new ArrayList<ContractModel>();
                 models.addAll(response.body().getData().getActive().getContracts());
+               if(response.body().getData().getTerminated().getCount()!=0)
                 models.add(null);
                 models.addAll(response.body().getData().getTerminated().getContracts());
                 lstCotractList.setAdapter(new ContractsListAdapter(ContractActivity.this,models));
@@ -193,6 +195,8 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
     public void linLoanStausClick() {
         int width = linLoanStaus.getWidth();
         Log.e("Widthoflin", "" + width);
+          /*ON SELECTED*/
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             linLoanStaus.setBackgroundColor(Color.parseColor("#003668"));
             selectedView.setVisibility(View.VISIBLE);

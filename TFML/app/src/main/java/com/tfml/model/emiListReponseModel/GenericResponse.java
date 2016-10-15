@@ -1,13 +1,13 @@
-package com.tfml.model.logResponseModel;
+package com.tfml.model.emiListReponseModel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by webwerks on 5/10/16.
+ * Created by webwerks on 13/10/16.
  */
 
-public class LogResponseModel {
+public class GenericResponse {
     @SerializedName("status")
     @Expose
     private String status;
@@ -29,4 +29,8 @@ public class LogResponseModel {
     public void setError(String error) {
         this.error = error;
     }
+
+
+
+
 }

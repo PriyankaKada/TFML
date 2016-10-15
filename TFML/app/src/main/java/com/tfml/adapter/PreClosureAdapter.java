@@ -58,14 +58,7 @@ public class PreClosureAdapter extends BaseAdapter {
             holder=(Holder) convertView.getTag();
 
         }
-       /* if(responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(position).getDESCP().equals("TOTAL"))
-        {
 
-        }
-        else
-        {
-
-        }*/
         holder.txtDesc.setText(responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(position).getDESCP());
         holder.txtDueAmt.setText(responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(position).getDUE());
         holder.txtNetBal.setText(responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(position).getNET());

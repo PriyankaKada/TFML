@@ -7,47 +7,17 @@ import com.google.gson.annotations.SerializedName;
  * Created by webwerks on 5/8/16.
  */
 
-public class QuickCallResponse {
-    @SerializedName("status")
+public class QuickCallResponse extends GenericResponse{
+    @SerializedName("data")
     @Expose
-    private String status;
-    @SerializedName("error")
-    @Expose
-    private Error error;
+    private Data data;
 
-    /**
-     *
-     * @return
-     * The status
-     */
-    public String getStatus() {
-        return status;
+    public Data getData() {
+        return data;
     }
 
-    /**
-     *
-     * @param status
-     * The status
-     */
-    public void setStatus(String status) {
-        this.status = status;
+    public void setData(Data data) {
+        this.data = data;
     }
 
-    /**
-     *
-     * @return
-     * The error
-     */
-    public Error getError() {
-        return error;
-    }
-
-    /**
-     *
-     * @param error
-     * The error
-     */
-    public void setError(Error error) {
-        this.error = error;
-    }
 }

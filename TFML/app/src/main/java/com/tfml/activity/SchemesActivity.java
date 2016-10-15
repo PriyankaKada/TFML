@@ -50,9 +50,6 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
     private ImageView imgtoolbarhome, imgSocial;
     View view1, view2, view3;
     TmflApi tmflApi;
-    SchemesListAdapter schemesListAdapter;
-    ReferFriendFragment referFriendFragment;
-    ApplyLoanFragment applyLoanFragment;
     ViewPager viewPager;
     private ArrayList<Datum> datumArrayList;
     Bundle bundle1;
@@ -68,13 +65,10 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
         imgtoolbarhome = (ImageView) findViewById(R.id.img_toolbar_home);
         imgSocial = (ImageView) findViewById(R.id.img_social);
         tmflApi = ApiService.getInstance().call();
-        if(CommonUtils.isNetworkAvailable(SchemesActivity.this))
-        {
+        if (CommonUtils.isNetworkAvailable(SchemesActivity.this)) {
             callSchemesResponseModel();
-        }
-        else
-        {
-
+        } else {
+            Toast.makeText(getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
         }
 
         viewPager = (ViewPager) findViewById(R.id.pager);
@@ -83,29 +77,9 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
         view2 = findViewById(R.id.view2);
         view3 = findViewById(R.id.view3);
 
-//      setupViewPager(viewPager);
         SetFonts.setFonts(this, txtschemestitle, 2);
-//        viewPager.setOffscreenPageLimit( 3 );
-//        // Give the TabLayout the ViewPager
-//        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-//        tabLayout.setupWithViewPager(viewPager);
-//       // tabLayout.setViewPager(viewPager);
         bundle1 = getIntent().getExtras();
-//        String myTabselected = bundle.getString("TAB_SELECTED");
-//        setupTabIcons();
-//        imgtoolbarhome.setOnClickListener(this);
-//        imgSocial.setOnClickListener(this);
-//
-//        if(myTabselected.equals("Offers")){
-//            tabLayout.getTabAt(0).select();
-//
-//
-//        }else if(myTabselected.equals("ApplyLoan")){
-//            tabLayout.getTabAt(1).select();
-//
-//        }else if(myTabselected.equals("ReferFriend")){
-//            tabLayout.getTabAt(2).select();
-//        }
+
     }
 
     private void setupTabIcons() {
@@ -191,8 +165,6 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
         // Give the TabLayout the ViewPager
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
-        // tabLayout.setViewPager(viewPager);
-//        Bundle bundle = getIntent().getExtras();
         String myTabselected = bundle1.getString("TAB_SELECTED");
         setupTabIcons();
         imgtoolbarhome.setOnClickListener(this);
@@ -231,20 +203,15 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_toolbar_home:
-              //  Log.e("I am Login",""+PreferenceHelper.getBoolean("SaveLogin"));
-             //  Toast.makeText(getBaseContext(),""+PreferenceHelper.getBoolean("SaveLogin"),Toast.LENGTH_LONG).show();
 
-                if(PreferenceHelper.getBoolean("SaveLogin"))
-                {
+                if (PreferenceHelper.getBoolean("SaveLogin")) {
 
-                   startActivity(new Intent(SchemesActivity.this, ContractActivity.class));
+                    startActivity(new Intent(SchemesActivity.this, ContractActivity.class));
                     finish();
-                }
-                else
-                {
+                } else {
 
                     startActivity(new Intent(SchemesActivity.this, BannerActivity.class));
-                   finish();
+                    finish();
                 }
 
                 break;
@@ -377,33 +344,25 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
             public void onResponse(Call<SchemesResponse> call, Response<SchemesResponse> response) {
 
                 Log.e("Respobnse", new Gson().toJson(response.body()));
-                 CommonUtils.closeProgressDialog();
+                CommonUtils.closeProgressDialog();
                 Log.e("SchemesResponse", new Gson().toJson(response.body()));
                 System.out.println("----------Response------------->" + datumArrayList);
 
                 datumArrayList = response.body().getData();
 
                 SchemesResponse model = response.body();
-
-                PreferenceHelper.insertObject("Scheme response", model);
+                if (model != null)
+                    PreferenceHelper.insertObject("Scheme response", model);
 
                 setupViewPager(viewPager);
-                /*applyLoanFragment=new ApplyLoanFragment();
-                referFriendFragment=new ReferFriendFragment();
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("datamodel",response.body());
-                applyLoanFragment.setArguments(bundle);
-                referFriendFragment.setArguments(bundle);*/
-                // SchemesResponse mResponse1=response.body();
-                // PreferenceHelper.insertObject("SCHEMASDATA",mResponse1);
-                // lstnewschemes.setAdapter(new SchemesListAdapter(getActivity(), body));
+
             }
 
 
             @Override
             public void onFailure(Call<SchemesResponse> call, Throwable t) {
-                Log.e("Resp", "Error");
-                 CommonUtils.closeProgressDialog();
+                //  Log.e("Resp", "Error");
+                CommonUtils.closeProgressDialog();
             }
         });
 

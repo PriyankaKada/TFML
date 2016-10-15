@@ -75,9 +75,9 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:groupIndicator="@null"
-            android:divider="@android:color/darker_gray"
+            android:divider="@null"
             android:dividerHeight="0.5dp"
-            android:background="@color/white"/>
+            android:background="@drawable/whit_rect_bg"/>
 
     </LinearLayout>
 

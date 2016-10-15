@@ -16,7 +16,7 @@ public class InputModel {
         this.mobileNumber = mobileNumber;
     }
 
-    @SerializedName("mobile_number")
+    @SerializedName("mobile_no")
     @Expose()
     private String mobileNumber;
 }

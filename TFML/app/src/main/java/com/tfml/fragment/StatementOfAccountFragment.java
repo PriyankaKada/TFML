@@ -15,6 +15,7 @@ import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompatSideChannelService;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
@@ -36,6 +37,7 @@ import com.google.gson.Gson;
 import com.tfml.R;
 import com.tfml.activity.BannerActivity;
 import com.tfml.activity.ContractActivity;
+import com.tfml.activity.LoginActivity;
 import com.tfml.activity.SplashActivity;
 import com.tfml.auth.TmflApi;
 import com.tfml.common.ApiService;
@@ -142,6 +144,9 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
         txt_dueamount = (TextView) view.findViewById(R.id.txt_dueamount);
         txt_duedate = (TextView) view.findViewById(R.id.txt_duedate);
         setColorButtonBasic();
+
+
+        //setColorButtonFinance();
         if (rcNo != null)
             txt_rc_no.setText(rcNo);
         if (repaymentMode != null)
@@ -172,8 +177,8 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
             contractLst.add(datavalue);
             for (int i = 0; i < modelArrayList.size(); i++) {
                 ContractModel model = modelArrayList.get(i);
-                if (model != null)
-                    contractLst.add(model.getUsrConNo());
+               /* if (model != null)
+                    contractLst.add(model.getUsrConNo());*/
 //                 System.out.println("::::: "+model.getDueDate() +" :::: "+model.getDueAmount());
             }
         }
@@ -247,6 +252,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
             case R.id.btn_submit:
                 if(!TextUtils.isEmpty(txtAccDate.getText().toString()))
                 {
+                    CommonUtils.showProgressDialog(getActivity(), "Getting Your Information");
                     callCheckLogin();
                 }
                 else {
@@ -257,12 +263,14 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
             case R.id.img_download:
                 if (CommonUtils.isNetworkAvailable(getActivity())) {
                     callDownloadService();
+                    CommonUtils.showProgressDialog(getActivity(),"File downloading...");
                     getDownloadData(accountStatementInputModel);
                 } else {
                     Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.btn_basic_detail:
+                setColorButtonBasic();
                 if (!TextUtils.isEmpty(txtAccDate.getText().toString()))
                 {
                     callBasicDetail();
@@ -303,7 +311,6 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
         tmflSoapApi.callStmtAcRequest(requestEnvelpe).enqueue(new Callback<ResponseEnvelope>() {
             @Override
             public void onResponse(Call<ResponseEnvelope> call, Response<ResponseEnvelope> response) {
-                CommonUtils.closeProgressDialog();
                 if (response.body() != null) {
                     responseEnvelope = response.body().getBody();
                     PreferenceHelper.insertObject(PreferenceHelper.SOAPSTATMENTOFACCOUNTRESPONSE, responseEnvelope);
@@ -324,7 +331,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
                     Log.e("RC NO", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getREG_NO());
                     callBasicDetail();
                 }
-                else
+               else
                 {
                     Toast.makeText(getActivity(),"Server Under Maintenance,Please try after Sometime",Toast.LENGTH_LONG).show();
                 }
@@ -334,14 +341,12 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
             @Override
             public void onFailure(Call<ResponseEnvelope> call, Throwable t) {
                 Log.e("Response ", "" + t.getLocalizedMessage());
-                CommonUtils.closeProgressDialog();
             }
         });
 
     }
 
     public void callBasicDetail() {
-        setColorButtonBasic();
         fragmentManager = getActivity().getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         frmBasicAccDetail = new BasicDetailFragment();
@@ -359,11 +364,17 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
     }
 
 
+
     @SuppressLint("NewApi")
     public void setColorButtonBasic() {
 
         /*ON SELECTED*/
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+         //   btnBasicDetail.setBackgroundDrawable(getActivity().getDrawable(R.drawable.tab_btnleft_selector));
+            btnBasicDetail.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.tab_btnleft_selector));
+        }
+        else
+        {
             btnBasicDetail.setBackground(getActivity().getDrawable(R.drawable.tab_btnleft_selector));
         }
         btnBasicDetail.setTextColor(ContextCompat.getColor(getActivity(), R.color.tab_bg));
@@ -377,7 +388,14 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void setColorButtonFinance() {
          /*ON SELECTED*/
-        btnFinanceDetail.setBackground(getActivity().getDrawable(R.drawable.tab_btnright_selector));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            btnFinanceDetail.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.tab_btnright_selector));
+        }
+        else
+        {
+            btnFinanceDetail.setBackground(getActivity().getDrawable(R.drawable.tab_btnright_selector));
+        }
+
         btnFinanceDetail.setTextColor(ContextCompat.getColor(getActivity(), R.color.tab_bg));
         /*NOT SELECTED*/
         btnBasicDetail.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.tab_bg));
@@ -404,8 +422,8 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
         tmflDownload.getAccStmtDownload(accountStatementInputModel).enqueue(new Callback<AccountStmtResponse>() {
             @Override
             public void onResponse(Call<AccountStmtResponse> call, Response<AccountStmtResponse> response) {
-
-                if (response.body().getFilepath() != null) {
+                CommonUtils.closeProgressDialog();
+                if (response.body().getStatus().contains("Success")&&response.body().getFilepath() != null) {
                     Log.e("File Path", "" + response.body().getFilepath());
                     strPathUrl = response.body().getFilepath().toString();
                     Uri uri = Uri.parse(strPathUrl);
@@ -418,7 +436,13 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
                 }
                 else
                 {
-                   Log.e("RESONSE ERR","REPONSE ERROR"+response.message().toString());
+                    if(response.body().getStatus().contains("failed"))
+                    {
+                        Intent loginIntent=new Intent(getActivity(), LoginActivity.class);
+                        startActivity(loginIntent);
+                        getActivity().finish();
+                    }
+
                 }
 
 
@@ -426,7 +450,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 
             @Override
             public void onFailure(Call<AccountStmtResponse> call, Throwable t) {
-
+                CommonUtils.closeProgressDialog();
             }
         });
     }
@@ -491,9 +515,9 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 
                 if(response.body().getStatus().toString().contains("Success"))
                 {
+                    CommonUtils.closeProgressDialog();
                     if (CommonUtils.isNetworkAvailable(getActivity())) {
 
-                            CommonUtils.showProgressDialog(getActivity(), "Getting Your Information");
                             callSoapRequest();
                             linAccDetail.setVisibility(View.VISIBLE);
 
@@ -502,16 +526,19 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
                     }
 
                 }
-                /*else
-                {
-                   Toast.makeText(getActivity(),"Unauthorized User access",Toast.LENGTH_SHORT).show();
 
-                }*/
+                else
+                {
+                    CommonUtils.closeProgressDialog();
+                    Intent loginIntent=new Intent(getActivity(), LoginActivity.class);
+                    getActivity().startActivity(loginIntent);
+                }
             }
 
             @Override
             public void onFailure(Call<LogResponseModel> call, Throwable t) {
-                Log.e("ERROR",t.getMessage());
+            //    Log.e("ERROR",t.getMessage());
+                CommonUtils.closeProgressDialog();
             }
         });
 

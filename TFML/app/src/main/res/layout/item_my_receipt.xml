@@ -71,7 +71,6 @@
         android:id="@+id/ll_expanded_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:background="@drawable/listrow2"
         android:orientation="vertical"
         android:visibility="visible">
@@ -83,37 +82,12 @@
             android:padding="2dp"
             android:weightSum="2">
 
-            <!-- <LinearLayout
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_weight="1"
-                 android:visibility="gone">
-
-                 <TextView
-                     android:layout_width="wrap_content"
-                     android:layout_height="match_parent"
-                     android:gravity="left|center"
-                     android:text="Receipt No:."
-                     android:textColor="@color/text_black"
-                     android:textSize="12sp" />
-
-                 <TextView
-                     android:id="@+id/txtReceiptNo"
-                     android:layout_width="wrap_content"
-                     android:layout_height="match_parent"
-                     android:layout_marginLeft="5dp"
-                     android:layout_weight="0.5"
-                     android:gravity="left|center"
-                     android:text="RCNo:123564"
-                     android:textSize="12sp" />
-
-             </LinearLayout>-->
-
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginLeft="5dp"
                 android:orientation="horizontal"
                >
 
@@ -166,66 +140,75 @@
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="2dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="left|center"
-                android:text="Inst.No: "
-                android:textColor="@color/text_black"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/txtInstNo"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="left|center"
-                android:layout_marginLeft="2dp"
-                android:textSize="14sp" />
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="2dp"
-            android:weightSum="2">
+            >
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="5dp"
+                    >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="left|center"
-                    android:text="Bank: "
-                    android:textColor="@color/text_black"
-                    android:textSize="12sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="Inst.No: "
+                        android:textColor="@color/text_black"
+                        android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/txtBank"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="left|center"
-                    android:layout_marginLeft="2dp"
-                    android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/txtInstNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:layout_marginLeft="2dp"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="Bank: "
+                        android:textColor="@color/text_black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txtBank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:layout_marginLeft="2dp"
+                        android:textSize="14sp" />
+                </LinearLayout>
             </LinearLayout>
+
 
             <ImageView
                 android:id="@+id/imgPdf"
-                android:layout_width="75dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="50dp"
                 android:src="@drawable/ic_pdf" />
         </LinearLayout>
     </LinearLayout>

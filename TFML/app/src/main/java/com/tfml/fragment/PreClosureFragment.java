@@ -24,13 +24,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.tfml.R;
+import com.tfml.activity.LoginActivity;
 import com.tfml.adapter.PreClosureAdapter;
 import com.tfml.auth.TmflApi;
 import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
 import com.tfml.common.SoapApiService;
 import com.tfml.model.ContractResponseModel.ContractModel;
+import com.tfml.model.logResponseModel.LogInputModel;
+import com.tfml.model.logResponseModel.LogResponseModel;
 import com.tfml.model.preClosurePdfResponseModel.PreClosureInputModel;
 import com.tfml.model.preClosurePdfResponseModel.PreClosureStmtPdfResponse;
 import com.tfml.model.soapModel.preClosureRequest.RequestEnvelope;
@@ -80,7 +84,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
     private String repaymentMode = "";
     private String currentEmi = "";
     private String overdue = "";
-    TmflApi tmflSoapApi, tmflApi;
+    TmflApi tmflSoapApi,tmflApi,tmflLogin;
     PreClosureInputModel preClosureInputModel;
     PreClosureStmtPdfResponse preClosureStmtPdfResponse;
     Body responseEnvelope;
@@ -88,6 +92,8 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
     DownloadManager downloadmanager;
     String strPathUrl;
     private TextView txtAccDate;
+    LogInputModel logInputModel;
+    LogResponseModel logResponseModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -105,6 +111,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
         repaymentMode = (String) bundle.getString("REPAYMENT");
         currentEmi = (String) bundle.getString("CURRENTEMI");
         overdue = (String) bundle.get("OVERDUEAMT");
+        tmflLogin=ApiService.getInstance().call();
         init();
         return view;
 
@@ -144,8 +151,8 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
             contractLst.add(datavalue);
             for (int i = 0; i < modelArrayList.size(); i++) {
                 ContractModel model = modelArrayList.get(i);
-                if (model != null)
-                    contractLst.add(model.getUsrConNo());
+               /* if (model != null)
+                    contractLst.add(model.getUsrConNo());*/
             }
         }
 
@@ -178,7 +185,9 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
                 if (itemindex > 0) {
                     ContractModel model = modelArrayList.get(itemindex);
                     setData(model);
-                    SoapServiceResult();
+                    callCheckLogin();
+
+
                 }
             }
 
@@ -206,6 +215,22 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 
     }
 
+    public void callCheckLogin()
+    {
+        logInputModel=new LogInputModel();
+        logResponseModel=new LogResponseModel();
+        if(CommonUtils.isNetworkAvailable(getActivity()))
+        {
+
+            logInputModel.setApi_token(PreferenceHelper.getString(PreferenceHelper.API_TOKEN));
+            logInputModel.setUser_id(PreferenceHelper.getString(PreferenceHelper.USER_ID));
+            callLogService(logInputModel );
+        }
+        else
+        {
+            Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+        }
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -213,12 +238,13 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
                 selectDate();
                 break;
             case R.id.btn_submit:
-                SoapServiceResult();
+                callCheckLogin();
                 break;
             case R.id.img_download:
                 try {
                     if (CommonUtils.isNetworkAvailable(getActivity())) {
                         callDownloadService();
+                        CommonUtils.showProgressDialog(getActivity(),"File downloading...");
                         getDownloadData(preClosureInputModel);
                     } else {
                         Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
@@ -316,31 +342,16 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 
                     }
 
-
-
-//                    if (responseEnvelope != null) {
-//                        int i = 0;
-//                        while (responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(i).getDESCP().equalsIgnoreCase("total")) {
-//                            Body dummy = new Body();
-//                            dummy.setZ_TERMINALDUESResponse(responseEnvelope.getZ_TERMINALDUESResponse());
-//                            i++;
-//                        }
-//                        lstPreClosure.setAdapter(new PreClosureAdapter(getActivity(), responseEnvelope));
-//                    }
-
                     linTable.setVisibility(View.VISIBLE);
                     llHeader.setVisibility(View.VISIBLE);
                 }
-                else
-                {
-                    Toast.makeText(getActivity(),"Server Under Maintenance,Please try after Sometime",Toast.LENGTH_LONG).show();
-                }
+
 
             }
 
             @Override
             public void onFailure(Call<com.tfml.model.soapModel.preClousreResponse.ResponseEnvelope> call, Throwable t) {
-                Log.e("ERROR", t.getMessage());
+              //  Log.e("ERROR", t.getMessage());
                 CommonUtils.closeProgressDialog();
             }
         });
@@ -365,8 +376,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
     public void SoapServiceResult() {
         if (CommonUtils.isNetworkAvailable(getActivity())) {
             if (!TextUtils.isEmpty(txtAccDate.getText().toString())) {
-                CommonUtils.showProgressDialog(getActivity(), "Loading...");
-
+               // CommonUtils.showProgressDialog(getActivity(), "Getting Your Information");
                 String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
                 strAccdate = txtAccDate.getText().toString();
                 DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -381,7 +391,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
                 }
 
                 txtGenDate.setText("Generated On" + strDate + "|" + strTime);
-                txtBal.setText(getActivity().getResources().getString(R.string.txt_total_bal) + "Total Balance show above is on " + "" + txtAccDate.getText().toString());
+                txtBal.setText(getActivity().getResources().getString(R.string.txt_total_bal) + " " + strDate);
                 callSoapDataRequest();
 
 
@@ -398,7 +408,8 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
             @Override
             public void onResponse(Call<PreClosureStmtPdfResponse> call, Response<PreClosureStmtPdfResponse> response) {
                 //Log.e( "File Path", response.body().getFilepath() );
-                if (response.body().getFilepath() != null) {
+                CommonUtils.closeProgressDialog();
+                if (response.body().getFilepath() != null && response.body().getStatus().contains("Success")) {
                     strPathUrl = response.body().getFilepath().toString();
                     Uri uri = Uri.parse(strPathUrl);
                     DownloadManager.Request request = new DownloadManager.Request(uri);
@@ -408,15 +419,58 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
                     DownloadManager manager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
                     manager.enqueue(request);
                 }
+                else
+                {
+                    if(response.body().getStatus().contains("failed"))
+                    {
+                        Intent loginIntent=new Intent(getActivity(), LoginActivity.class);
+                        startActivity(loginIntent);
+                        getActivity().finish();
+                    }
+                }
 
             }
 
             @Override
             public void onFailure(Call<PreClosureStmtPdfResponse> call, Throwable t) {
-
+                CommonUtils.closeProgressDialog();
             }
         });
     }
 
+    public void callLogService(LogInputModel logInputModel)
+    {
+        tmflLogin.getLogResponse(logInputModel).enqueue(new Callback<LogResponseModel>() {
+            @Override
+            public void onResponse(Call<LogResponseModel> call, Response<LogResponseModel> response) {
+                Log.e("isLogin",new Gson().toJson(response.body()));
 
+                if(response.body().getStatus().toString().contains("Success"))
+                {
+                    if (CommonUtils.isNetworkAvailable(getActivity())) {
+
+                        CommonUtils.showProgressDialog(getActivity(), "Getting Your Information");
+                        SoapServiceResult();
+
+                    } else {
+                        Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
+                else
+                {
+                    Intent loginIntent=new Intent(getActivity(), LoginActivity.class);
+                    getActivity().startActivity(loginIntent);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LogResponseModel> call, Throwable t) {
+                Log.e("ERROR",t.getMessage());
+            }
+        });
+
+
+    }
 }

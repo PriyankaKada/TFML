@@ -107,8 +107,8 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
             contractLst.add(datavalue);
             for (int i = 0; i < modelArrayList.size(); i++) {
                 ContractModel model = modelArrayList.get(i);
-                if (model != null)
-                    contractLst.add(model.getUsrConNo());
+               /* if (model != null)
+                    contractLst.add(model.getUsrConNo());*/
 //                 System.out.println("::::: "+model.getDueDate() +" :::: "+model.getDueAmount());
             }
         }
