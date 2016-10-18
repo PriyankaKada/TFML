@@ -71,7 +71,7 @@
             android:drawableLeft="@drawable/ic_user_name"
             android:drawablePadding="10dp"
             android:textColor="@color/white"
-            android:hint="Username"
+            android:hint="@string/txt_hint_username"
             android:maxLines="1"
             android:padding="10dp"
             android:textCursorDrawable="@drawable/cursor_color"
@@ -89,7 +89,7 @@
             android:background="@drawable/bg_edit_text"
             android:drawableLeft="@drawable/ic_pass"
             android:drawablePadding="10dp"
-            android:hint="Password"
+            android:hint="@string/txt_hint_password"
             android:inputType="textPassword"
             android:padding="10dp"
             android:maxLines="1"
@@ -113,7 +113,7 @@
             android:layout_marginLeft="10dp"
             android:button="@drawable/checkbox_selector"
             android:paddingLeft="10dp"
-            android:text="Remember Password"
+            android:text="@string/txt_remember_pass"
             android:textColor="@color/white"
             />
 
@@ -122,7 +122,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="Forgot Password?"
+            android:text="@string/txt_forgot_pass"
             android:textColor="@color/white"/>
     </LinearLayout>
 

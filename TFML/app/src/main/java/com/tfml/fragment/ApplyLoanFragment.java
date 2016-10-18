@@ -1,13 +1,16 @@
 package com.tfml.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -191,13 +194,14 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         spSelectBranch.setSelection(1);
         btnCancel.setOnClickListener(this);
         btnApplyLoan.setOnClickListener(this);
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_cancel:
-                getActivity().finish();
+                getActivity().onBackPressed();
                 break;
             case R.id.btn_apply_laon:
                 if (CommonUtils.isNetworkAvailable(getActivity())) {
@@ -238,10 +242,20 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         if (checkValidation()) {
             CommonUtils.showProgressDialog(getActivity(), "Pleas Wait.....");
             callApplyLoanService();
-            loadApplyLoanResponse(inputLoanModel);
+            try
+            {
+                loadApplyLoanResponse(inputLoanModel);
+            }
+            catch (Exception e)
+            {
+                CommonUtils.closeProgressDialog();
+                e.printStackTrace();
+            }
+
 
         } else {
             Toast.makeText(getActivity(), "Please Fill the Required Detail", Toast.LENGTH_SHORT).show();
+          CommonUtils.closeProgressDialog();
         }
     }
 
@@ -335,6 +349,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
                 } else {
                     Toast.makeText(getActivity(), response.body().getErrors().get(0), Toast.LENGTH_LONG).show();
                     Log.e("getApplyloanErr", response.body().getErrors().get(0));
+                    CommonUtils.closeProgressDialog();
                 }
 
             }
@@ -349,6 +364,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        hideKeyboard();
         switch (parent.getId()) {
             case R.id.sp_select_product:
                 if (position != 0) {
@@ -465,6 +481,14 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         spSelectCity.setSelection(0);
         spSelectState.setSelection(0);
         spOffers.setSelection(0);
+    }
+    private void hideKeyboard() {
+        // Check if no view has focus:
+        View view = getActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
     }
 
 }

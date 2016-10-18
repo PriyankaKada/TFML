@@ -202,6 +202,12 @@ public class DrawerBaseActivity extends BaseActivity {
                    startActivity(intent);
                    finish();
                }
+               else
+               {
+                   Intent intent = new Intent(DrawerBaseActivity.this, BannerActivity.class);
+                   startActivity(intent);
+                   finish();
+               }
 
            }
 

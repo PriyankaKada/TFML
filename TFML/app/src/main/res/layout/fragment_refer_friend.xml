@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:text="OFFERS"
+            android:text="@string/txt_offers"
             android:textColor="@color/text_black"
             android:textSize="18sp"
             android:textStyle="bold"/>
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:text="LEAD TYPE"
+            android:text="@string/txt_lead_type"
             android:textColor="@color/text_black"
             android:textSize="18sp"
             android:textStyle="bold"/>
@@ -61,7 +61,7 @@
                     android:layout_weight="1"
                     android:button="@drawable/checkbox_selector"
                     android:paddingLeft="10dp"
-                    android:text="Individual"
+                    android:text="@string/txt_individual"
                     android:textColor="#6b6b6b"
                     android:textSize="14sp"/>
 
@@ -72,7 +72,7 @@
                     android:layout_weight="1"
                     android:button="@drawable/checkbox_selector"
                     android:paddingLeft="10dp"
-                    android:text="Orgnization"
+                    android:text="@string/txt_organizational"
                     android:textColor="#6b6b6b"
                     android:textSize="14sp"/>
             </RadioGroup>
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="10dp"
-            android:text="VEHICAL TYPE"
+            android:text="@string/txt_vehicle_type"
             android:textColor="@color/text_black"
             android:textSize="18sp"
             android:textStyle="bold"/>
@@ -122,7 +122,7 @@
                     android:layout_weight="1"
                     android:button="@drawable/checkbox_selector"
                     android:paddingLeft="10dp"
-                    android:text="Commercial"
+                    android:text="@string/txt_commercial"
                     android:textColor="#6b6b6b"
                     android:textSize="14sp"/>
 
@@ -133,7 +133,7 @@
                     android:layout_weight="1"
                     android:button="@drawable/checkbox_selector"
                     android:paddingLeft="10dp"
-                    android:text="Passenger"
+                    android:text="@string/txt_passenger"
                     android:textColor="#6b6b6b"
                     android:textSize="14sp"/>
 
@@ -144,7 +144,7 @@
                     android:layout_weight="1"
                     android:button="@drawable/checkbox_selector"
                     android:paddingLeft="10dp"
-                    android:text="Refinance"
+                    android:text="@string/txt_Refinance"
                     android:textColor="#6b6b6b"
                     android:textSize="14sp"/>
             </RadioGroup>

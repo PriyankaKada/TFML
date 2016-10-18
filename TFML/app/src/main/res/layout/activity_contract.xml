@@ -65,7 +65,7 @@
                 android:id="@+id/txt_total_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total"
+                android:text="@string/txt_total"
                 android:textSize="16sp"
                 android:textColor="@color/white" />
 
@@ -99,7 +99,7 @@
                 android:id="@+id/txt_terminated_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Terminated"
+                android:text="@string/txt_terminated"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 />
@@ -134,7 +134,7 @@
                 android:id="@+id/txt_overdue_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Live"
+                android:text="@string/txt_live"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 />

@@ -22,6 +22,7 @@ import com.tfml.util.PreferenceHelper;
 import com.tfml.util.SetFonts;
 
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,7 +45,6 @@ public class ChangePasswordActivity extends DrawerBaseActivity implements View.O
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         tmflApi= ApiService.getInstance().call();
-
         init();
     }
     public void init()
@@ -75,7 +75,7 @@ public class ChangePasswordActivity extends DrawerBaseActivity implements View.O
                 break;
             case R.id.btn_change_password:
                 if(CommonUtils.isNetworkAvailable(ChangePasswordActivity.this))
-                {
+                   {
                    if(TextUtils.isEmpty(txtOldpass.getText().toString()))
                    {
                        Toast.makeText(getBaseContext(),"Please Enter Old Password",Toast.LENGTH_SHORT).show();
@@ -97,6 +97,7 @@ public class ChangePasswordActivity extends DrawerBaseActivity implements View.O
                         changePasswordInputModel.setNew_password(txtNewPass.getText().toString());
                         changePasswordInputModel.setOld_password(txtOldpass.getText().toString());
                         changePasswordInputModel.setApi_token(PreferenceHelper.getString(PreferenceHelper.API_TOKEN));
+                        CommonUtils.showProgressDialog(ChangePasswordActivity.this,"Getting Your Information");
                         callChangePassword(changePasswordInputModel);
                     }
                     else
@@ -121,12 +122,22 @@ public class ChangePasswordActivity extends DrawerBaseActivity implements View.O
      tmflApi.getChangePassResponse(changePasswordInputModel).enqueue(new Callback<ChangePasswordResponse>() {
          @Override
          public void onResponse(Call<ChangePasswordResponse> call, Response<ChangePasswordResponse> response) {
-
+             CommonUtils.closeProgressDialog();
+           if(response.body()!=null && response.body().getStatus().contains("Success"))
+             {
+                 Toast.makeText(getBaseContext(),"Password changed Successfully",Toast.LENGTH_SHORT).show();
+             }
+             else
+            {
+                Intent intent = new Intent(ChangePasswordActivity.this, BannerActivity.class);
+                startActivity(intent);
+                finish();
+            }
          }
 
          @Override
          public void onFailure(Call<ChangePasswordResponse> call, Throwable t) {
-
+             CommonUtils.closeProgressDialog();
          }
      });
     }

@@ -89,7 +89,11 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
         date = new Date();
         modifiedDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
         Log.e("ModifiedDate", modifiedDate);
-        callCheckLogin();
+        if(modifiedDate!=null)
+        {
+            callCheckLogin();
+        }
+
 
     }
 
@@ -139,6 +143,7 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 
                 else
                 {
+                    Toast.makeText(getActivity(),"User Logged in from another Device",Toast.LENGTH_LONG).show();
                     Intent loginIntent=new Intent(getActivity(), LoginActivity.class);
                     getActivity().startActivity(loginIntent);
                 }
@@ -164,7 +169,7 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
             Log.e("SelectedContractNo", PreferenceHelper.getString(PreferenceHelper.CONTRACT_NO));
             reqData.setContactId(PreferenceHelper.getString(PreferenceHelper.CONTRACT_NO));
         } else {
-            Log.e("SelectedContractNoDef", "0000005000197989");
+
             reqData.setContactId(PreferenceHelper.getString(PreferenceHelper.CONTRACT_NO));
         }
         reqData.setREQDATE(modifiedDate);
@@ -270,7 +275,7 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
                 }
                 else
                 {
-                    Toast.makeText(getActivity(),"Server Under Maintenance,Please try after Sometime",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(),"Server Under Maintenance,Please try after Sometime ",Toast.LENGTH_LONG).show();
                 }
 
             }

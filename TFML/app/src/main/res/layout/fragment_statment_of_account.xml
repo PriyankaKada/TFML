@@ -79,7 +79,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:layout_marginLeft="5dp"
-                    android:text="Due Date :"
+                    android:text="@string/txt_due_date"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -89,7 +89,7 @@
                     android:layout_height="match_parent"
                     android:gravity="left|center"
                     android:paddingLeft="5dp"
-                    android:textSize="13sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -103,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="EMI Amount :"
+                    android:text="@string/txt_emi_amount"
                     android:layout_marginLeft="5dp"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
@@ -114,7 +114,7 @@
                     android:layout_height="match_parent"
                     android:gravity="left|center"
                     android:paddingLeft="5dp"
-                    android:textSize="13sp"/>
+                    android:textSize="14sp"/>
 
             </LinearLayout>
 
@@ -150,7 +150,7 @@
                     android:layout_height="match_parent"
                     android:gravity="left|center"
                     android:paddingLeft="5dp"
-                    android:textSize="13sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -164,7 +164,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="Repayment Mode :"
+                    android:text="@string/txt_repayment_mode"
                     android:layout_marginLeft="5dp"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
@@ -175,7 +175,7 @@
                     android:layout_height="match_parent"
                     android:gravity="left|center"
                     android:paddingLeft="5dp"
-                    android:textSize="13sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
         </LinearLayout>
         <View
@@ -209,7 +209,7 @@
                     android:background="@drawable/whit_rect_bg"
                     android:gravity="left|center"
                     android:padding="10dp"
-                    android:hint="Select Date"
+                    android:hint="@string/txt_select_date"
                     android:textSize="12sp"
                     android:textStyle="bold" />
                 <ImageView
@@ -230,7 +230,7 @@
                 android:gravity="center"
                 android:padding="10dp"
                 android:background="@color/colorPrimaryDark"
-                android:text="Submit"
+                android:text="@string/txt_submit"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:textAllCaps="false"
@@ -261,7 +261,7 @@
                     android:id="@+id/btn_basic_detail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Basic Details"
+                    android:text="@string/txt_basic_details"
                     android:textAllCaps="false"
                     android:background="@color/tab_bg"
                     android:textColor="@color/white"
@@ -273,7 +273,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/tab_bg"
                     android:textAllCaps="false"
-                    android:text="Finance Details"
+                    android:text="@string/txt_finance_details"
                     android:layout_marginLeft="5dp"
                     android:textColor="@color/white"
                     android:layout_weight="0.5"/>

@@ -78,8 +78,6 @@ public class MyExpandableListAdapter  extends BaseExpandableListAdapter implemen
             Map.Entry pair = (Map.Entry)it.next();
             groupar.add((String) pair.getKey());
             Childar = (ArrayList<ResponseEnvelope.Item>) pair.getValue();
-//            Log.e("child Size adapter-----------> ",""+Childar.size());
-//            Log.e("groupar size adapter----------->",""+groupar.size());
 
             for (int i =0; i< Childar.size(); i++){
                 ResponseEnvelope.Item item = Childar.get(i);
@@ -145,7 +143,6 @@ public class MyExpandableListAdapter  extends BaseExpandableListAdapter implemen
         holder.txtReceiptAmount.setText("Rs."+amountstr);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            //   btnBasicDetail.setBackgroundDrawable(getActivity().getDrawable(R.drawable.tab_btnleft_selector));
 
             holder.lexpandList.setBackground(ContextCompat.getDrawable(context,R.drawable.list_row));
         }
@@ -196,14 +193,18 @@ public class MyExpandableListAdapter  extends BaseExpandableListAdapter implemen
 
     @Override
     public int getGroupCount() {
-        if(groupar.size()>=5)
+      /*  if(groupar.size()>=5)
         {
             return 5;
         }
         else
         {
             return groupar.size();
-        }
+        }*/
+
+            return groupar.size();
+
+
 
     }
 
@@ -283,6 +284,7 @@ public class MyExpandableListAdapter  extends BaseExpandableListAdapter implemen
                 {
                    if(response.body().getError().toString().contains("Unauthorized Access Token"))
                     {
+                        Toast.makeText(context,"User Logged in from another Device",Toast.LENGTH_LONG).show();
                         CommonUtils.closeProgressDialog();
                         Intent loginIntent=new Intent(context, LoginActivity.class);
                         context.startActivity(loginIntent);
@@ -291,7 +293,7 @@ public class MyExpandableListAdapter  extends BaseExpandableListAdapter implemen
                     else
                    {
                        CommonUtils.closeProgressDialog();
-                       Toast.makeText(context,"Server Under Maintenance,Please try after Sometime",Toast.LENGTH_LONG).show();
+                       Toast.makeText(context,"Server Under Maintenance,Please try after Sometime ",Toast.LENGTH_LONG).show();
                    }
 
                 }

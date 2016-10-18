@@ -1,5 +1,6 @@
 package com.tfml.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -191,7 +193,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 	public void onClick( View v ) {
 		switch ( v.getId() ) {
 			case R.id.btn_cancel:
-				getActivity().finish();
+				getActivity().onBackPressed();
 				break;
 			case R.id.btn_refer_friends:
 				if ( CommonUtils.isNetworkAvailable( getActivity() ) ) {
@@ -229,11 +231,19 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		if ( checkValidation() ) {
 			CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
 			callReferFriendService();
-			loadReferFriendsResponse( inputReferFriendModel );
+			try
+			{
+				loadReferFriendsResponse( inputReferFriendModel );
+			}catch (Exception e)
+			{
+				CommonUtils.closeProgressDialog();
+				e.printStackTrace();
+			}
 
 		}
 		else {
 			Toast.makeText( getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT ).show();
+			CommonUtils.closeProgressDialog();
 		}
 	}
 
@@ -358,6 +368,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 
 	@Override
 	public void onItemSelected( AdapterView< ? > parent, View view, int position, long id ) {
+		hideKeyboard();
 		switch ( parent.getId() ) {
 			case R.id.sp_select_product:
 				if ( position != 0 ) {
@@ -475,4 +486,12 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		spOffers.setSelection(0);
 	}
 
+	private void hideKeyboard() {
+		// Check if no view has focus:
+		View view = getActivity().getCurrentFocus();
+		if (view != null) {
+			InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+			inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+		}
+	}
 }

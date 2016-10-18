@@ -115,7 +115,7 @@ public class EmiDetailFragment extends Fragment implements View.OnClickListener 
                 }
                 else
                 {
-
+                    Toast.makeText(getActivity(),"User Logged in from another Device",Toast.LENGTH_LONG).show();
                         Intent loginIntent=new Intent(getActivity(), LoginActivity.class);
                         getActivity().startActivity(loginIntent);
 
@@ -152,15 +152,15 @@ public class EmiDetailFragment extends Fragment implements View.OnClickListener 
                             child.add(response.body().getData().get(i));
                         }
 
-                        Collections.reverse(parent);
-                        Collections.reverse(child);
+                        /*Collections.reverse(parent);
+                        Collections.reverse(child);*/
 
                         expandableListViewEmi.setAdapter(new EmiExpandableListView(getActivity(),parent,child));
 
                     }else if( response.body().getStatus().toString().contains("Failed"))
                     {
                         CommonUtils.closeProgressDialog();
-                        Toast.makeText(getActivity(),"Server Under Maintenance,Please try after Sometime",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(),"Server Under Maintenance,Please try after Sometime ",Toast.LENGTH_LONG).show();
 
                     }
                     else

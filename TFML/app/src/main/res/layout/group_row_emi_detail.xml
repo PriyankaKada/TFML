@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/linRootHeader"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     >
 
     <LinearLayout
@@ -17,9 +18,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:background="@drawable/list_row"
             android:layout_height="wrap_content"
-
+            android:background="@drawable/list_row"
             >
 
             <LinearLayout
@@ -58,7 +58,6 @@
                     android:textSize="12sp"
                     android:gravity="left|center"
                     style="@style/Base.TextAppearance.AppCompat.Subhead"
-
                     android:text="Receipt Amount"/>
                 <ImageView
                     android:id="@+id/img_expand"

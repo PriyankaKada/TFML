@@ -27,7 +27,7 @@
                 android:id="@+id/txt_contract_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 android:text=""
                 android:padding="10dp"
                 android:layout_gravity="center"
@@ -57,7 +57,7 @@
                 android:id="@+id/txt_rc_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
+                android:textSize="15sp"
                 android:text="xyz"
                 android:textColor="@color/white"
                 android:layout_gravity="center"/>
@@ -105,6 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/txt_next_due_date_label"
+            android:textSize="15sp"
             android:layout_toRightOf="@id/txt_next_due_date_label"
             android:layout_above="@+id/txt_last_payment_label"
              />
@@ -121,6 +122,7 @@
             android:id="@+id/txt_last_payment_date"
             android:layout_width="wrap_content"
             android:layout_marginLeft="5dp"
+            android:textSize="15sp"
             android:layout_marginTop="5dp"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/txt_last_payment_label"
@@ -166,6 +168,7 @@
             android:layout_toRightOf="@id/txt_overdue_label"
             android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
+            android:textSize="15sp"
             android:layout_marginLeft="5dp"
             android:layout_height="wrap_content" />
         <TextView
@@ -173,6 +176,7 @@
             android:layout_below="@+id/view_seprator"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
+            android:textSize="15sp"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -227,6 +231,7 @@
             android:id="@+id/txt_current_emi_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="15sp"
             android:layout_alignBaseline="@+id/txt_current_emi_label"
             android:layout_alignParentRight="true"
            />

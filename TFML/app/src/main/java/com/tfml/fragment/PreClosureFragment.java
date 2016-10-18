@@ -335,7 +335,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
                         z_terminalduesResponse.setI_DTL(items);
                         dummy.setZ_TERMINALDUESResponse(z_terminalduesResponse);
                         for(String s:stringList){
-                            Log.e("STriong" ,""+s);
+                            Log.e("String" ,""+s);
                         }
                         lstPreClosure.setAdapter(new PreClosureAdapter(getActivity(), dummy));
 
@@ -391,12 +391,13 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
                 }
 
                 txtGenDate.setText("Generated On" + strDate + "|" + strTime);
-                txtBal.setText(getActivity().getResources().getString(R.string.txt_total_bal) + " " + strDate);
+                txtBal.setText(getActivity().getResources().getString(R.string.txt_total_bal) + " " + txtAccDate.getText().toString());
                 callSoapDataRequest();
 
 
             } else {
                 Toast.makeText(getActivity(), "Please Select Date", Toast.LENGTH_SHORT).show();
+                CommonUtils.closeProgressDialog();
             }
         } else {
             Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_LONG).show();
@@ -460,6 +461,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 
                 else
                 {
+                    Toast.makeText(getActivity(),"User Logged in from another Device",Toast.LENGTH_LONG).show();
                     Intent loginIntent=new Intent(getActivity(), LoginActivity.class);
                     getActivity().startActivity(loginIntent);
                 }

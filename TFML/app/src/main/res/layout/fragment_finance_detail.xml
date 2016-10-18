@@ -27,14 +27,15 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_black"
-                android:text="Amount Financed"/>
+                android:text="@string/txt_amount_financed"/>
+
             <TextView
                 android:id="@+id/txt_amount_financed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
-                android:text="3,50,000.00"/>
+                />
         </LinearLayout>
 
     <LinearLayout
@@ -48,14 +49,14 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textColor="@color/text_black"
-            android:text="Finance Charges"/>
+            android:text="@string/txt_finance_charges"/>
         <TextView
             android:id="@+id/txt_finance_charges"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="1,43,850.00"/>
+           />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -68,7 +69,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textColor="@color/text_black"
-            android:text="Insurance Provision"/>
+            android:text="@string/txt_insurance_provision"/>
         <TextView
             android:id="@+id/txt_insurance_provision"
             android:layout_width="match_parent"
@@ -88,7 +89,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textColor="@color/text_black"
-            android:text="Option Money"/>
+            android:text="@string/txt_option_money"/>
         <TextView
             android:id="@+id/txt_option_money"
             android:layout_width="match_parent"
@@ -108,14 +109,14 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textColor="@color/text_black"
-            android:text="Total Receivable"/>
+            android:text="@string/txt_total_receivable"/>
         <TextView
             android:id="@+id/txt_total_receivable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="4,93,851.00"/>
+            />
     </LinearLayout>
         </LinearLayout>
        <!-- <View
@@ -141,14 +142,14 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textColor="@color/text_black"
-            android:text="Amount Credited upto "/>
+            android:text="@string/txt_amount_credit_upto"/>
         <TextView
             android:id="@+id/txt_amt_credited"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="4,93,851.00"/>
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -161,7 +162,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textColor="@color/text_black"
-            android:text="Amount Credited from "/>
+            android:text="@string/txt_amount_credited_from"/>
         <TextView
             android:id="@+id/txt_amt_credited_economic_year"
             android:layout_width="match_parent"
@@ -189,14 +190,14 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textColor="@color/text_black"
-            android:text="Total Credit upto "/>
+            android:text="@string/txt_total_credit_upto"/>
         <TextView
             android:id="@+id/txt_total_credit_uptop_31mar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
-            android:text="4,93,851.00"/>
+           />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -209,7 +210,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textColor="@color/text_black"
-            android:text="Balance payable+amount on Contract."/>
+            android:text="@string/txt_balance_payable_amount_contract"/>
         <TextView
             android:id="@+id/txt_balance_payable_on_contract"
             android:layout_width="match_parent"
@@ -231,7 +232,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textColor="@color/text_black"
-            android:text="Principal for the period"/>
+            android:text="@string/txt_principal_for_the_period"/>
         <TextView
             android:id="@+id/txt_principal_period"
             android:layout_width="match_parent"
@@ -251,7 +252,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:textColor="@color/text_black"
-            android:text="Finance Charges for the period"/>
+            android:text="@string/txt_finance_charges_for_the_period"/>
         <TextView
             android:id="@+id/txt_finance_charges_economy_year"
             android:layout_width="match_parent"

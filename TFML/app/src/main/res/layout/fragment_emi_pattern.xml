@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="Due Date :"
+                    android:text="@string/txt_due_date"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -89,7 +89,7 @@
                     android:layout_height="match_parent"
                     android:gravity="left|center"
                     android:paddingLeft="5dp"
-                    android:textSize="13sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -103,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="EMI Amount :"
+                    android:text="@string/txt_emi_amount"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -113,7 +113,7 @@
                     android:layout_height="match_parent"
                     android:gravity="left|center"
                     android:paddingLeft="5dp"
-                    android:textSize="13sp"/>
+                    android:textSize="14sp"/>
 
             </LinearLayout>
 
@@ -149,7 +149,7 @@
                     android:layout_height="match_parent"
                     android:gravity="left|center"
                     android:paddingLeft="5dp"
-                    android:textSize="13sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -163,7 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="Repayment Mode :"
+                    android:text="@string/txt_repayment_mode"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -173,7 +173,7 @@
                     android:layout_height="match_parent"
                     android:gravity="left|center"
                     android:paddingLeft="5dp"
-                    android:textSize="13sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

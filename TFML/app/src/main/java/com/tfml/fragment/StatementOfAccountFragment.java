@@ -214,7 +214,11 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 
                 ContractModel model = modelArrayList.get(itemindex);
                 setData(model);
-                callCheckLogin();
+               if(txtAccDate.getText().toString()!=null)
+               {
+                   callCheckLogin();
+               }
+
 
             }
 
@@ -333,7 +337,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
                 }
                else
                 {
-                    Toast.makeText(getActivity(),"Server Under Maintenance,Please try after Sometime",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(),"Server Under Maintenance,Please try after Sometime ",Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -517,9 +521,13 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
                 {
                     CommonUtils.closeProgressDialog();
                     if (CommonUtils.isNetworkAvailable(getActivity())) {
+                            if(!TextUtils.isEmpty(txtAccDate.getText().toString()))
+                            {
+                                callSoapRequest();
+                                linAccDetail.setVisibility(View.VISIBLE);
+                            }
 
-                            callSoapRequest();
-                            linAccDetail.setVisibility(View.VISIBLE);
+
 
                     } else {
                         Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
@@ -530,6 +538,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
                 else
                 {
                     CommonUtils.closeProgressDialog();
+                    Toast.makeText(getActivity(),"User Logged in from another Device",Toast.LENGTH_LONG).show();
                     Intent loginIntent=new Intent(getActivity(), LoginActivity.class);
                     getActivity().startActivity(loginIntent);
                 }
