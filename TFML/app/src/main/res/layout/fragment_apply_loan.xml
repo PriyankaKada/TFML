@@ -89,6 +89,7 @@
             android:visibility="gone"
             android:hint="* Enter Organization"
             android:maxLines="1"
+            android:maxLength="120"
             android:padding="10dp"
             android:textSize="14sp"/>
 
@@ -161,6 +162,7 @@
                 android:background="@drawable/whit_rect_bg"
                 android:hint=" * Enter First Name"
                 android:maxLines="1"
+                android:maxLength="120"
                 android:padding="10dp"
                 android:textSize="14sp"/>
 
@@ -171,6 +173,8 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/whit_rect_bg"
                 android:hint=" * Enter Last Name"
+                android:maxLines="1"
+                android:maxLength="120"
                 android:padding="10dp"
                 android:textSize="14sp"
                 />
@@ -188,6 +192,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/whit_rect_bg"
                     android:hint="* Enter Mobile No."
+                    android:imeOptions="actionGo"
                     android:inputType="number"
                     android:maxLength="12"
                     android:maxLines="1"
@@ -202,6 +207,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/whit_rect_bg"
                     android:hint="Enter Landline No."
+                    android:imeOptions="actionGo"
                     android:inputType="number"
                     android:maxLines="1"
                     android:maxLength="12"

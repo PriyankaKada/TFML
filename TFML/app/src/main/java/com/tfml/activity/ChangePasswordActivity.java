@@ -126,6 +126,7 @@ public class ChangePasswordActivity extends DrawerBaseActivity implements View.O
            if(response.body()!=null && response.body().getStatus().contains("Success"))
              {
                  Toast.makeText(getBaseContext(),"Password changed Successfully",Toast.LENGTH_SHORT).show();
+                 clearData();
              }
              else
             {
@@ -140,5 +141,12 @@ public class ChangePasswordActivity extends DrawerBaseActivity implements View.O
              CommonUtils.closeProgressDialog();
          }
      });
+    }
+
+    public void clearData()
+    {
+        txtOldpass.setText("");
+        txtNewPass.setText("");
+        txtConfirmPass.setText("");
     }
 }

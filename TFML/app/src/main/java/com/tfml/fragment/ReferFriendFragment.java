@@ -1,13 +1,17 @@
 package com.tfml.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,6 +20,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tfml.R;
@@ -52,7 +57,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ReferFriendFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, RadioGroup.OnCheckedChangeListener {
+public class ReferFriendFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, RadioGroup.OnCheckedChangeListener,EditText.OnEditorActionListener {
 
     private EditText  edtFirstName, edtLastName, edtMobileNumber, edtLandlineNumber, edtEmailAddress, edtOrgnizationName, edtCode;
     private Spinner spnProduct, spSelectBranchState, spSelectBranchCity, spSelectBranch, spSelectCity, spSelectState, spOffers;
@@ -187,6 +192,8 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		inputBranchModel = new InputBranchModel();
 		btnCancel.setOnClickListener( this );
 		btnReferFriends.setOnClickListener( this );
+		edtMobileNumber.setOnEditorActionListener(this);
+		edtLandlineNumber.setOnEditorActionListener(this);
 	}
 
 	@Override
@@ -231,18 +238,10 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		if ( checkValidation() ) {
 			CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
 			callReferFriendService();
-			try
-			{
-				loadReferFriendsResponse( inputReferFriendModel );
-			}catch (Exception e)
-			{
-				CommonUtils.closeProgressDialog();
-				e.printStackTrace();
-			}
-
+			loadReferFriendsResponse( inputReferFriendModel );
 		}
 		else {
-			Toast.makeText( getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT ).show();
+			Toast.makeText(getActivity(), "Please Fill the Required Detail", Toast.LENGTH_SHORT).show();
 			CommonUtils.closeProgressDialog();
 		}
 	}
@@ -294,17 +293,17 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 			inputReferFriendModel.setState( stateCode );
 
 		}
-		else {
+		/*else {
 			Toast.makeText( getContext(), "Please Select State", Toast.LENGTH_SHORT ).show();
-		}
+		}*/
 
 
 		if ( cityCode != null && cityCode != "-1" ) {
 			inputReferFriendModel.setCity( cityCode );
 		}
-		else {
+		/*else {
 			Toast.makeText( getContext(), "Please Select City", Toast.LENGTH_SHORT ).show();
-		}
+		}*/
 
 
 		inputReferFriendModel.setEmailAddress( edtEmailAddress.getText().toString() );
@@ -325,7 +324,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 	}
 
 	public void loadReferFriendsResponse( ReferFriendInputModel inputReferFriendModel ) {
-		Log.e( "getFirstName", inputReferFriendModel.getFirstName() );
+		/*Log.e( "getFirstName", inputReferFriendModel.getFirstName() );
 		Log.e( "getLastName", inputReferFriendModel.getLastName() );
 		Log.e( "getMobileNumber", inputReferFriendModel.getMobileNumber() );
 		Log.e( "getLandlineNumber", inputReferFriendModel.getLandlineNumber() );
@@ -341,20 +340,18 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		Log.e( "getCity", inputReferFriendModel.getCity() );
 		Log.e( "getState", inputReferFriendModel.getState() );
 		Log.e( "getReferFriends", inputReferFriendModel.getReferedBy() );
-
+*/
 		tmflApi.getFriendResponse( inputReferFriendModel ).enqueue( new Callback< ReferFriendResponseModel >() {
 			@Override
 			public void onResponse( Call< ReferFriendResponseModel > call, Response< ReferFriendResponseModel > response ) {
 				CommonUtils.closeProgressDialog();
 				if ( response.body().getStatus().contains( "success" ) ) {
 					Log.e( "getFriendResponse", response.body().getStatus() );
-					CommonUtils.showAlert1( getActivity(), "Refer Friends", "Thanks for this approach", false );
-					ClearData();
+				showAlert( getActivity(), "Refer Friends", "Thanks for this approach", true );
 
 				}
 				else {
 					Toast.makeText( getActivity(), response.body().getErrors().get( 0 ), Toast.LENGTH_LONG ).show();
-					Log.e( "getErr", response.body().getErrors().get( 0 ) );
 				}
 
 			}
@@ -368,7 +365,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 
 	@Override
 	public void onItemSelected( AdapterView< ? > parent, View view, int position, long id ) {
-		hideKeyboard();
+
 		switch ( parent.getId() ) {
 			case R.id.sp_select_product:
 				if ( position != 0 ) {
@@ -462,13 +459,13 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 				break;
 			case R.id.rdb_passenger:
 				if ( checkedId == R.id.rdb_passenger ) {
-					strVechicalType = "Passanger";
+					strVechicalType = "Passenger";
 					inputReferFriendModel.setVehicalType( strVechicalType );
 				}
 				break;
 		}
 	}
-	public void ClearData()
+	public void clearData()
 	{
 		edtFirstName.setText("");
 		edtLastName.setText("");
@@ -477,6 +474,8 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		edtEmailAddress.setText("");
 		edtOrgnizationName.setText("");
 		edtCode.setText("");
+		radioGroupLeadType.clearCheck();
+		radioGroupVehicleType.clearCheck();
 		spnProduct.setSelection(0);
 		spSelectBranchState.setSelection(0);
 		spSelectBranchCity.setSelection(0);
@@ -493,5 +492,30 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 			InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 			inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 		}
+	}
+	public void showAlert( Context ctx, String title, String message, boolean cancelable )
+	{
+		new AlertDialog.Builder( ctx )
+				.setTitle( title )
+				.setCancelable( cancelable )
+				.setMessage( message )
+				.setPositiveButton( android.R.string.yes, new DialogInterface.OnClickListener()
+				{
+					public void onClick( DialogInterface dialog, int which )
+					{
+						clearData();
+					}
+				} ).show();
+	}
+
+
+	@Override
+	public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+		if (actionId == EditorInfo.IME_ACTION_GO) {
+			//Handle go key click
+			hideKeyboard();
+			return true;
+		}
+		return false;
 	}
 }

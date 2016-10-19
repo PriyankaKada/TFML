@@ -51,6 +51,7 @@ import com.tfml.model.QuickcallResponseModel.QuickCallInputModel;
 import com.tfml.model.QuickcallResponseModel.QuickCallResponse;
 import com.tfml.model.bannerResponseModel.BannerlistResponse;
 import com.tfml.model.bannerResponseModel.Datum;
+import com.tfml.util.Logger;
 import com.tfml.util.SetFonts;
 import com.viewpagerindicator.CirclePageIndicator;
 
@@ -86,7 +87,6 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
     String strQuickCall, strOtpNo;
     //String email,whatsAppNo,phoneNo;
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
-    private static final String TAG = "Contacts";
     TmflApi tmflApiOtpSubmit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -221,7 +221,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
                 CommonUtils.closeProgressDialog();
                 if (response.body() != null) {
                     if (response.body().getStatus() != null && response.body().getStatus().equals("success")) {
-
+                       // Logger.e(BannerActivity.class,new Gson().toJson(response.body().getStatus()));
                         Log.e("BannerlistResponse", new Gson().toJson(response.body().getStatus()));
                         Log.e("CallbannerListResponse", "" + bannerlistResponse.getBanners().getData().get(0).getImage());
                         bannerAdapter = new BannerAdapter(BannerActivity.this, (ArrayList<Datum>) bannerlistResponse.getBanners().getData());

@@ -1,15 +1,19 @@
 package com.tfml.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,8 +22,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.tfml.R;
 import com.tfml.adapter.BranchCityAdapter;
 import com.tfml.adapter.BranchListAdapter;
@@ -54,7 +60,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ApplyLoanFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, RadioGroup.OnCheckedChangeListener {
+public class ApplyLoanFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, RadioGroup.OnCheckedChangeListener,TextView.OnEditorActionListener {
 
 
     private EditText edtFirstName, edtLastName, edtMobileNumber, edtLandlineNumber, edtEmailAddress, edtOrgnizationName, edtCode;
@@ -194,6 +200,8 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         spSelectBranch.setSelection(1);
         btnCancel.setOnClickListener(this);
         btnApplyLoan.setOnClickListener(this);
+        edtMobileNumber.setOnEditorActionListener(this);
+        edtLandlineNumber.setOnEditorActionListener(this);
 
     }
 
@@ -240,18 +248,9 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 
     public void callSubmit() {
         if (checkValidation()) {
-            CommonUtils.showProgressDialog(getActivity(), "Pleas Wait.....");
+            CommonUtils.showProgressDialog(getActivity(), "Getting Your Information");
             callApplyLoanService();
-            try
-            {
-                loadApplyLoanResponse(inputLoanModel);
-            }
-            catch (Exception e)
-            {
-                CommonUtils.closeProgressDialog();
-                e.printStackTrace();
-            }
-
+            loadApplyLoanResponse(inputLoanModel);
 
         } else {
             Toast.makeText(getActivity(), "Please Fill the Required Detail", Toast.LENGTH_SHORT).show();
@@ -300,16 +299,17 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         if (stateCode != null && stateCode != "-1") {
             inputLoanModel.setState(stateCode);
 
-        } else {
+        } /*else {
             Toast.makeText(getContext(), "Please Select State", Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
 
         if (cityCode != null && cityCode != "-1") {
             inputLoanModel.setCity(cityCode);
-        } else {
-            Toast.makeText(getContext(), "Please Select City", Toast.LENGTH_SHORT).show();
         }
+       /* else {
+            Toast.makeText(getContext(), "Please Select City", Toast.LENGTH_SHORT).show();
+        }*/
 
         inputLoanModel.setEmailAddress(edtEmailAddress.getText().toString());
         inputLoanModel.setPincode(edtCode.getText().toString());
@@ -320,7 +320,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
     }
 
     public void loadApplyLoanResponse(InputModel inputmodel) {
-        Log.e("getFirstName", inputmodel.getFirstName());
+       /* Log.e("getFirstName", inputmodel.getFirstName());
         Log.e("getLastName", inputmodel.getLastName());
         Log.e("getMobileNumber", inputmodel.getMobileNumber());
         Log.e("getLandlineNumber", inputmodel.getLandlineNumber());
@@ -337,18 +337,19 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         Log.e("getCity", inputmodel.getCity());
         Log.e("getState", inputmodel.getState());
         Log.e("getUserID", inputmodel.getUserId());
-        Log.e("getOfferId", inputmodel.getOfferId());
+        Log.e("getOfferId", inputmodel.getOfferId());*/
         tmflApi.getApplyLoanResponse(inputmodel).enqueue(new Callback<ApplyLoanResponse>() {
             @Override
             public void onResponse(Call<ApplyLoanResponse> call, Response<ApplyLoanResponse> response) {
                 CommonUtils.closeProgressDialog();
+                Log.e("ApplyLoanResponse",new Gson().toJson(response.body()));
                 if (response.body().getStatus().contains("success")) {
                     Log.e("getApplyLoanResponse", response.body().getStatus());
-                    CommonUtils.showAlert1(getActivity(), "", "Apply Loan Successfully", false);
-                    ClearData();
+                    showAlert(getActivity(), "", "Apply Loan Successfully", true);
+
                 } else {
                     Toast.makeText(getActivity(), response.body().getErrors().get(0), Toast.LENGTH_LONG).show();
-                    Log.e("getApplyloanErr", response.body().getErrors().get(0));
+                  //  Log.e("getApplyloanErr", response.body().getErrors().get(0));
                     CommonUtils.closeProgressDialog();
                 }
 
@@ -364,7 +365,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        hideKeyboard();
+
         switch (parent.getId()) {
             case R.id.sp_select_product:
                 if (position != 0) {
@@ -377,7 +378,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
                     branchStateCode = ((BranchStateResponseModel) parent.getItemAtPosition(position)).getTerrTerritoryid();
                     Log.e("BRANCHSTATECODE", branchStateCode);
                     inputCityModel.setStateId(branchStateCode);
-                    CommonUtils.showProgressDialog(getActivity(), "Please Wait.....");
+                    CommonUtils.showProgressDialog(getActivity(), "Getting Your Information");
                     SocialUtil.getBranchCityListData(getActivity(), spSelectBranchCity, inputCityModel, "Select Branch City");
                     break;
                 }
@@ -385,7 +386,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
                 if (position != 0) {
                     branchCityCode = ((BranchCityResponseModel) parent.getItemAtPosition(position)).getTerrTerritoryid();
                     inputBranchModel.setCityId(branchCityCode);
-                    CommonUtils.showProgressDialog(getActivity(), "Please Wait.....");
+                    CommonUtils.showProgressDialog(getActivity(), "Getting Your Information");
                     SocialUtil.getBranchList(getActivity(), spSelectBranch, inputBranchModel, "Select Branch");
                     break;
                 }
@@ -400,7 +401,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
                     stateCode = ((StateResponseModel) parent.getItemAtPosition(position)).getId();
                     Log.e("STATECODE", stateCode);
                     inputCityModel.setStateId(stateCode);
-                    CommonUtils.showProgressDialog(getActivity(), "Please Wait.....");
+                    CommonUtils.showProgressDialog(getActivity(), "Getting Your Information");
                     SocialUtil.getCityListData(getActivity(), spSelectCity, inputCityModel, "Select City");
                 }
 
@@ -459,14 +460,14 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
                 break;
             case R.id.rdb_passenger:
                 if (checkedId == R.id.rdb_passenger) {
-                    strVechicalType = "Passanger";
+                    strVechicalType = "Passenger";
                     inputLoanModel.setVehicalType(strVechicalType);
                 }
                 break;
         }
     }
 
-    public void ClearData() {
+    public void clearData() {
         edtFirstName.setText("");
         edtLastName.setText("");
         edtMobileNumber.setText("");
@@ -474,6 +475,8 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         edtEmailAddress.setText("");
         edtOrgnizationName.setText("");
         edtCode.setText("");
+        radioGroupLeadType.clearCheck();
+        radioGroupVehicleType.clearCheck();
         spnProduct.setSelection(0);
         spSelectBranchState.setSelection(0);
         spSelectBranchCity.setSelection(0);
@@ -482,6 +485,8 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         spSelectState.setSelection(0);
         spOffers.setSelection(0);
     }
+
+
     private void hideKeyboard() {
         // Check if no view has focus:
         View view = getActivity().getCurrentFocus();
@@ -491,4 +496,31 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         }
     }
 
+
+    public void showAlert( Context ctx, String title, String message, boolean cancelable )
+    {
+        new AlertDialog.Builder( ctx )
+                .setTitle( title )
+                .setCancelable( cancelable )
+                .setMessage( message )
+                .setPositiveButton( android.R.string.yes, new DialogInterface.OnClickListener()
+                {
+                    public void onClick( DialogInterface dialog, int which )
+                    {
+                        clearData();
+                    }
+                } ).show();
+    }
+
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_GO) {
+            //Handle go key click
+            hideKeyboard();
+            return true;
+        }
+
+        return false;
+    }
 }
