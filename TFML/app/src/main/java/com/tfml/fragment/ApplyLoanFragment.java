@@ -274,28 +274,28 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
         inputLoanModel.setEmailAddress(edtEmailAddress.getText().toString());
         if (productCode != null && productCode != "-1") {
             inputLoanModel.setProductId(productCode);
-        } else {
+        } /*else {
             Toast.makeText(getContext(), "Please Select Product Type", Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
         if (branchStateCode != null && branchStateCode != "-1") {
             inputLoanModel.setBranchState(branchStateCode);
 
-        } else {
+        } /*else {
             Toast.makeText(getContext(), "Please Select Branch State", Toast.LENGTH_SHORT).show();
-        }
+        }*/
         if (branchCityCode != null && branchCityCode != "-1") {
             inputLoanModel.setBranchCity(branchCityCode);
-        } else {
+        } /*else {
             Toast.makeText(getContext(), "Please Select Branch City", Toast.LENGTH_SHORT).show();
         }
-
+*/
         if (branchCode != null && branchCode != "-1") {
             inputLoanModel.setBranch(branchCode);
-        } else {
+        } /*else {
             Toast.makeText(getContext(), "Please Select Branch", Toast.LENGTH_SHORT).show();
         }
-
+*/
         if (stateCode != null && stateCode != "-1") {
             inputLoanModel.setState(stateCode);
 
@@ -343,15 +343,20 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
             public void onResponse(Call<ApplyLoanResponse> call, Response<ApplyLoanResponse> response) {
                 CommonUtils.closeProgressDialog();
                 Log.e("ApplyLoanResponse",new Gson().toJson(response.body()));
-                if (response.body().getStatus().contains("success")) {
-                    Log.e("getApplyLoanResponse", response.body().getStatus());
-                    showAlert(getActivity(), "", "Apply Loan Successfully", true);
+                if(response.body()!=null)
+                {
+                    if (response.body().getStatus().contains("success")) {
+                        Log.e("getApplyLoanResponse", response.body().getStatus());
+                        showAlert(getActivity(), "", "Apply Loan Successfully", true);
 
-                } else {
-                    Toast.makeText(getActivity(), response.body().getErrors().get(0), Toast.LENGTH_LONG).show();
-                  //  Log.e("getApplyloanErr", response.body().getErrors().get(0));
-                    CommonUtils.closeProgressDialog();
+                    } else {
+                        Toast.makeText(getActivity(), response.body().getErrors().get(0), Toast.LENGTH_LONG).show();
+                        //  Log.e("getApplyloanErr", response.body().getErrors().get(0));
+                        CommonUtils.closeProgressDialog();
+                    }
+
                 }
+
 
             }
 

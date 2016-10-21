@@ -5,7 +5,7 @@ import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by webwerks on 2/8/16.
+ * Created by satyawan on 2/8/16.
  */
 
 public class BaseActivity extends AppCompatActivity {

@@ -25,9 +25,11 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -59,7 +61,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -84,11 +89,15 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
     private ImageView imgSchemes, imgApplyLoan, imgReferFriend, imgLoanStatus, imgLogin;
     String errormsg;
     View selectedView;
-    String strQuickCall, strOtpNo;
+    String strQuickCall, strOtpNo, strMobileNo;
     //String email,whatsAppNo,phoneNo;
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
     TmflApi tmflApiOtpSubmit;
-    @Override
+    ImageView imgRefreshOtp;
+    EasyDialog dialog;
+    EditText edtQuickCall, edtOtpNo;
+    QuickCallInputModel quickCallInputModel;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_banner);
@@ -221,9 +230,9 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
                 CommonUtils.closeProgressDialog();
                 if (response.body() != null) {
                     if (response.body().getStatus() != null && response.body().getStatus().equals("success")) {
-                       // Logger.e(BannerActivity.class,new Gson().toJson(response.body().getStatus()));
+                        // Logger.e(BannerActivity.class,new Gson().toJson(response.body().getStatus()));
                         Log.e("BannerlistResponse", new Gson().toJson(response.body().getStatus()));
-                        Log.e("CallbannerListResponse", "" + bannerlistResponse.getBanners().getData().get(0).getImage());
+                        // Log.e("CallbannerListResponse", "" + bannerlistResponse.getBanners().getData().get(0).getImage());
                         bannerAdapter = new BannerAdapter(BannerActivity.this, (ArrayList<Datum>) bannerlistResponse.getBanners().getData());
                         recentViewpager.setAdapter(bannerAdapter);
                         setUiPageViewController();
@@ -325,7 +334,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
     public void quickCallDialog() {
 
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_quick_calling, null);
-        final EasyDialog dialog = new EasyDialog(this)
+        dialog = new EasyDialog(this)
                 .setLayout(view)
                 .setBackgroundColor(Color.parseColor("#FFFFFF"))
                 .setLocationByAttachedView(imgQuickCall)
@@ -340,10 +349,12 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
                 .setOutsideColor(ContextCompat.getColor(this, R.color.background_color_black))
                 .show();
 
-        final EditText edtQuickCall = (EditText) view.findViewById(R.id.edt_mobile_no);
-        final EditText edtOtpNo = (EditText) view.findViewById(R.id.edt_otp_no);
-        final ImageView imgRefreshOtp = (ImageView) view.findViewById(R.id.img_Refresh_token);
+
+        edtQuickCall = (EditText) view.findViewById(R.id.edt_mobile_no);
+        edtOtpNo = (EditText) view.findViewById(R.id.edt_otp_no);
+        imgRefreshOtp = (ImageView) view.findViewById(R.id.img_Refresh_token);
         TextView txtSubmit = (TextView) view.findViewById(R.id.txt_submit);
+
         edtQuickCall.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -357,51 +368,53 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 
             @Override
             public void afterTextChanged(Editable s) {
-                strQuickCall = edtQuickCall.getText().toString();
 
-                if (s.length() != 0) {
-                    QuickCallInputModel quickCallInputModel = new QuickCallInputModel();
-                    quickCallInputModel.setMobileNumber(strQuickCall);
+                if (s.length() == 10 || s.length() == 12) {
+                    quickCallInputModel = new QuickCallInputModel();
+                    quickCallInputModel.setMobileNumber(edtQuickCall.getText().toString());
                     callResponseModel(quickCallInputModel);
-
-                } else {
-                    Toast.makeText(BannerActivity.this, "Please Enter Mobile Number", Toast.LENGTH_SHORT).show();
+                    imgRefreshOtp.postDelayed(new Runnable() {
+                        public void run() {
+                            imgRefreshOtp.setVisibility(View.VISIBLE);
+                        }
+                    }, 10000);
                 }
             }
         });
-        txtSubmit.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
 
 
-                if (TextUtils.isEmpty(strQuickCall)) {
-                    Toast.makeText(BannerActivity.this, "Please Enter Mobile Number", Toast.LENGTH_SHORT).show();
-                }
-                if (TextUtils.isEmpty(strOtpNo)) {
-                    Toast.makeText(BannerActivity.this, "Please Enter OTP Number", Toast.LENGTH_SHORT).show();
-                }
-                if (!TextUtils.isEmpty(strQuickCall) && !TextUtils.isEmpty(strOtpNo)) {
-                    LoanStatusInputModel loanStatusInputModel = new LoanStatusInputModel();
-                    loanStatusInputModel.setOtpNumber(strOtpNo);
-                    loanStatusInputModel.setMobileNumber(strQuickCall);
-                    CallLoanStatusModel(loanStatusInputModel);
+        txtSubmit.setOnClickListener(new View.OnClickListener()
 
-                }
+                                     {
 
+                                         @Override
+                                         public void onClick(View v) {
 
-                strQuickCall = edtQuickCall.getText().toString();
+                                             if (TextUtils.isEmpty(edtQuickCall.getText().toString())) {
+                                                 Toast.makeText(BannerActivity.this, "Please Enter Mobile Number", Toast.LENGTH_SHORT).show();
+                                             }
 
-                if (strQuickCall.length() != 0) {
-                    QuickCallInputModel quickCallInputModel = new QuickCallInputModel();
-                    quickCallInputModel.setMobileNumber(strQuickCall);
-                    callResponseModel(quickCallInputModel);
-                    // dialog.dismiss();
-                } else {
-                    Toast.makeText(BannerActivity.this, "Please Enter Mobile Number", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+                                             if (TextUtils.isEmpty(edtOtpNo.getText().toString())) {
+                                                 Toast.makeText(BannerActivity.this, "Please Enter OTP Number", Toast.LENGTH_SHORT).show();
+                                             }
+                                             if (!TextUtils.isEmpty(edtQuickCall.getText().toString()) && !TextUtils.isEmpty(edtOtpNo.getText().toString())) {
+                                                 LoanStatusInputModel loanStatusInputModel = new LoanStatusInputModel();
+                                                 loanStatusInputModel.setOtpNumber(edtOtpNo.getText().toString());
+                                                 loanStatusInputModel.setMobileNumber(edtQuickCall.getText().toString());
+                                                 if (edtQuickCall.getText().toString().length() == 10 || edtQuickCall.getText().toString().length() == 12) {
+                                                     CallLoanStatusModel(loanStatusInputModel);
+                                                 }
+                                                 else
+                                                 {
+                                                     Toast.makeText(BannerActivity.this, "Mobile Number must between 10 or 15 digit", Toast.LENGTH_SHORT).show();
+                                                 }
+
+                                             }
+
+                                         }
+                                     }
+
+        );
 
 
     }
@@ -416,11 +429,12 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
                 if (response != null && response.body().getStatus().contains("success")) {
 
                     // SocialUtil.loanStatusDialog(BannerActivity.this, linLoanStaus, selectedView);
-                    strOtpNo = response.body().getData().getOtp().toString();
+                    // strOtpNo = response.body().getData().getOtp().toString();
 
                 } else {
                     if (response != null && response.body().getStatus().contains("error"))
                         errormsg = response.body().getError().getMobileNo().get(0);
+                    // Toast.makeText(getBaseContext(),errormsg,Toast.LENGTH_SHORT).show();
                     Log.e("getcallErrorResponse", errormsg);
                 }
             }
@@ -439,13 +453,17 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
             @Override
             public void onResponse(Call<LoanStatusResponse> call, Response<LoanStatusResponse> response) {
                 if (response.body().getStatus().contains("success")) {
-                  //  Log.e("CallLoanStatusModel", response.body().getStatus());
+                    //  Log.e("CallLoanStatusModel", response.body().getStatus());
                     Toast.makeText(BannerActivity.this, "Thanks for Quick calling ", Toast.LENGTH_SHORT).show();
+                    edtQuickCall.setText("");
+                    edtOtpNo.setText("");
+                    dialog.dismiss();
 
                 }
                 if (response.body().getStatus().contains("error")) {
-                  //  Log.e("CallLoanStatusModel", response.body().getError());
+                    //  Log.e("CallLoanStatusModel", response.body().getError());
                     Toast.makeText(BannerActivity.this, response.body().getError(), Toast.LENGTH_SHORT).show();
+
                 }
 
             }
@@ -558,6 +576,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
+
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

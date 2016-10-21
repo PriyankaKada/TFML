@@ -70,7 +70,6 @@ public class SplashActivity extends BaseActivity {
                 }
 
             } else {
-                Log.e(TAG, "SAVELOGINELSE");
                 startActivity(new Intent(SplashActivity.this, BannerActivity.class));
                 finish();
             }
@@ -84,12 +83,10 @@ public class SplashActivity extends BaseActivity {
                 Log.e("isLogin", new Gson().toJson(response.body()));
 
                 if (response.body().getStatus().toString().contains("Success")) {
-                    Log.e(TAG, "SUCCESS");
                     PreferenceHelper.insertBoolean(PreferenceHelper.ISLOGIN, true);
                     startActivity(new Intent(SplashActivity.this, ContractActivity.class));
                     finish();
                 } else {
-                    Log.e(TAG, "Failure");
                     PreferenceHelper.insertBoolean(PreferenceHelper.ISLOGIN, false);
                     startActivity(new Intent(SplashActivity.this, BannerActivity.class));
                     finish();

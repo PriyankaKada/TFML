@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tfml.R;
@@ -43,6 +44,7 @@ public class DrawerBaseActivity extends BaseActivity {
     NavigationView navigation;
     ListView lsvNavList;
     ImageView imgCancel;
+    TextView txtUserName;
     protected FrameLayout frameLayout;
     LogoutInputModel logoutInputModel;
     LogoutResponseModel logoutResponseModel;
@@ -60,6 +62,7 @@ public class DrawerBaseActivity extends BaseActivity {
         setContentView(R.layout.activity_drawer_base);
         frameLayout = (FrameLayout) findViewById(R.id.framelayout_base_container);
         lsvNavList = (ListView) findViewById(R.id.lst_navigation_menu);
+        txtUserName=(TextView)findViewById(R.id.txt_user_name);
         imgCancel = (ImageView) findViewById(R.id.img_cancel);
         imgCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +70,12 @@ public class DrawerBaseActivity extends BaseActivity {
                 drawerLayout.closeDrawer(GravityCompat.END);
             }
         });
+       if(PreferenceHelper.getString(PreferenceHelper.USER_ID)!=null)
+       {
+           txtUserName.setText(PreferenceHelper.getString(PreferenceHelper.USER_ID));
+       }
+
+
         tmflApi= ApiService.getInstance().call();
         initInstances();
     }

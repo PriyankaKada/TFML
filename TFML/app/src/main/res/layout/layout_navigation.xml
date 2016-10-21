@@ -51,14 +51,14 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txt_name"
+                android:id="@+id/txt_user_name"
                 android:layout_marginTop="3dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/tab_bg"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:text="Satyawan.hajare"/>
+                android:text="Tata Motors User"/>
 
         </LinearLayout>
 

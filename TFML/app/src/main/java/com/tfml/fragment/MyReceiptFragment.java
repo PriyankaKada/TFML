@@ -130,6 +130,7 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 
                 if(response.body().getStatus().toString().contains("Success"))
                 {
+                    if(getActivity()!=null)
                     if (CommonUtils.isNetworkAvailable(getActivity())) {
 
                         CommonUtils.showProgressDialog(getActivity(), "Getting Your Information");
@@ -187,88 +188,93 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
                     if (responseEnvelope != null) {
 
                         Log.e("SIZE ", response.body().getBody().getZCISResponse().getI_REC().size() + "");
-                        TreeMap<String, ArrayList<ResponseEnvelope.Item>> hashMap = new TreeMap<String, ArrayList<ResponseEnvelope.Item>>();
 
-                        Collections.sort(response.body().getBody().getZCISResponse().getI_REC(),new Comparator<ResponseEnvelope.Item>() {
-                            @Override
-                            public int compare(ResponseEnvelope.Item lhs, ResponseEnvelope.Item rhs) {
-                                SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd");
-                                Date date1 = null;
-                                Date date2 = null;
-                                try {
-                                    date1 = form.parse(lhs.getZFBDT());
-                                    date2 = form.parse(rhs.getZFBDT());
-
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-
-                                return date1.compareTo(date2);
-
-                            }
-                        });
-
-                        for (int i = 0; i < response.body().getBody().getZCISResponse().getI_REC().size(); i++) {
-                            Log.d("after sorting", response.body().getBody().getZCISResponse().getI_REC().get(i).getZFBDT());
-                        }
-                        List<String> itemsCategory = new ArrayList<String>();
-                        for (ResponseEnvelope.Item item : response.body().getBody().getZCISResponse().getI_REC()) {
-                            itemsCategory.add(item.getZFBDT());
-                        }
-                        TreeSet<String> categories = new TreeSet<>();
-                        categories.addAll(itemsCategory);
-
-
-                        for(String s:categories){
-                            Log.e("HASH SET",s);
-                        }
-
-                        for (String s : categories) {
-                            ArrayList<ResponseEnvelope.Item> items = new ArrayList<ResponseEnvelope.Item>();
-                            for (ResponseEnvelope.Item item :response.body().getBody().getZCISResponse().getI_REC()) {
-                                if (s.equals(item.getZFBDT())) {
-                                    Log.e("loop",item.getZFBDT());
-                                    items.add(item);
-                                }
-                            }
-                            Log.e("KEY "+s," Value "+items.get(0).getZFBDT());
-                            hashMap.put(s, items);
-                        }
-
-                        for(String s:hashMap.keySet()){
-
-                            Log.e(s+"  ===>  ",hashMap.get(s).get(0).getZFBDT());
-                        }
-
-                        Map<String, ArrayList<ResponseEnvelope.Item>> sortedMap=hashMap.descendingMap();
-
-                        for(String s:sortedMap.keySet())
+                        if(response.body().getBody().getZCISResponse().getI_REC().size()!=0)
                         {
-                            Log.e(s+" SORTED  ===>  ",sortedMap.get(s).get(0).getZFBDT());
-                        }
+                            TreeMap<String, ArrayList<ResponseEnvelope.Item>> hashMap = new TreeMap<String, ArrayList<ResponseEnvelope.Item>>();
 
-                        ArrayList<String> groupar = new ArrayList<>();
-                        ArrayList<Double> amountar = new ArrayList<Double>();
-                        Log.e("HashMap ", new Gson().toJson(hashMap) + "");
+                            Collections.sort(response.body().getBody().getZCISResponse().getI_REC(),new Comparator<ResponseEnvelope.Item>() {
+                                @Override
+                                public int compare(ResponseEnvelope.Item lhs, ResponseEnvelope.Item rhs) {
+                                    SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd");
+                                    Date date1 = null;
+                                    Date date2 = null;
+                                    try {
+                                        date1 = form.parse(lhs.getZFBDT());
+                                        date2 = form.parse(rhs.getZFBDT());
 
-                        Iterator it = sortedMap.entrySet().iterator();
-                        while (it.hasNext()) {
-                            Map.Entry pair = (Map.Entry) it.next();
-                            String key = (String) pair.getKey();
-                            ArrayList<ResponseEnvelope.Item> ar = (ArrayList<ResponseEnvelope.Item>) pair.getValue();
-                            Log.e("Size ", "" + ar.size());
-                            Double amount = 0.00;
-                            for (int i = 0; i < ar.size(); i++) {
-                                amount = amount + Double.parseDouble(ar.get(i).getDMBTR());
-                                if (i == 0) {
-                                    groupar.add(ar.get(i).getZFBDT() + " / " + ar.get(i).getBELNR());
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    return date1.compareTo(date2);
+
                                 }
-                            }
-                            amountar.add(amount);
-                        }
+                            });
 
-                        MyExpandableListAdapter expandableListAdapter = new MyExpandableListAdapter(getActivity(), sortedMap, groupar, amountar);
-                        expandableListView.setAdapter(expandableListAdapter);
+                            for (int i = 0; i < response.body().getBody().getZCISResponse().getI_REC().size(); i++) {
+                                Log.d("after sorting", response.body().getBody().getZCISResponse().getI_REC().get(i).getZFBDT());
+                            }
+                            List<String> itemsCategory = new ArrayList<String>();
+                            for (ResponseEnvelope.Item item : response.body().getBody().getZCISResponse().getI_REC()) {
+                                itemsCategory.add(item.getZFBDT());
+                            }
+                            TreeSet<String> categories = new TreeSet<>();
+                            categories.addAll(itemsCategory);
+
+
+                            for(String s:categories){
+                                Log.e("HASH SET",s);
+                            }
+
+                            for (String s : categories) {
+                                ArrayList<ResponseEnvelope.Item> items = new ArrayList<ResponseEnvelope.Item>();
+                                for (ResponseEnvelope.Item item :response.body().getBody().getZCISResponse().getI_REC()) {
+                                    if (s.equals(item.getZFBDT())) {
+                                        Log.e("loop",item.getZFBDT());
+                                        items.add(item);
+                                    }
+                                }
+                                Log.e("KEY "+s," Value "+items.get(0).getZFBDT());
+                                hashMap.put(s, items);
+                            }
+
+                            for(String s:hashMap.keySet()){
+
+                                Log.e(s+"  ===>  ",hashMap.get(s).get(0).getZFBDT());
+                            }
+
+                            Map<String, ArrayList<ResponseEnvelope.Item>> sortedMap=hashMap.descendingMap();
+
+                            for(String s:sortedMap.keySet())
+                            {
+                                Log.e(s+" SORTED  ===>  ",sortedMap.get(s).get(0).getZFBDT());
+                            }
+
+                            ArrayList<String> groupar = new ArrayList<>();
+                            ArrayList<Double> amountar = new ArrayList<Double>();
+                            Log.e("HashMap ", new Gson().toJson(hashMap) + "");
+
+                            Iterator it = sortedMap.entrySet().iterator();
+                            while (it.hasNext()) {
+                                Map.Entry pair = (Map.Entry) it.next();
+                                String key = (String) pair.getKey();
+                                ArrayList<ResponseEnvelope.Item> ar = (ArrayList<ResponseEnvelope.Item>) pair.getValue();
+                                Log.e("Size ", "" + ar.size());
+                                Double amount = 0.00;
+                                for (int i = 0; i < ar.size(); i++) {
+                                    amount = amount + Double.parseDouble(ar.get(i).getDMBTR());
+                                    if (i == 0) {
+                                        groupar.add(ar.get(i).getZFBDT() + " / " + ar.get(i).getBELNR());
+                                    }
+                                }
+                                amountar.add(amount);
+                            }
+
+                            MyExpandableListAdapter expandableListAdapter = new MyExpandableListAdapter(getActivity(), sortedMap, groupar, amountar);
+                            expandableListView.setAdapter(expandableListAdapter);
+
+                        }
 
                     }
 

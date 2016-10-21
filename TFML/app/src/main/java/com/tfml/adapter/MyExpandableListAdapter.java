@@ -135,11 +135,12 @@ public class MyExpandableListAdapter  extends BaseExpandableListAdapter implemen
         }
         else
         holder = (MyHolder) convertView.getTag();
-        rcDate=item.getZFBDT();
-        rcNo=item.getBELNR();
-        holder.txtReceiptDate.setText(item.getZFBDT() + " / " + item.getBELNR());
+
+        rcDate=item.getZFBDT()==null?"":item.getZFBDT().toString();
+        rcNo=item.getBELNR()==null?"":item.getBELNR().toString();
+        holder.txtReceiptDate.setText(rcDate + " / " + rcNo);
         holder.ll_header_row.setVisibility(View.VISIBLE);
-        String amountstr = item.getDMBTR() ;
+        String amountstr = item.getDMBTR()==null?"":item.getDMBTR().toString() ;
         holder.txtReceiptAmount.setText("Rs."+amountstr);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -151,9 +152,9 @@ public class MyExpandableListAdapter  extends BaseExpandableListAdapter implemen
             holder.lexpandList.setBackground(context.getDrawable(R.drawable.list_row));
         }
 
-        holder.txtInstNo.setText(item.getCHECT());
-        holder.txtMode.setText(item.getSHKZG());
-        holder.txtType.setText(item.getANBWA());
+        holder.txtInstNo.setText(item.getCHECT()==null?"":item.getCHECT().toString());
+        holder.txtMode.setText(item.getSHKZG()==null?"":item.getSHKZG().toString());
+        holder.txtType.setText(item.getANBWA()==null?"":item.getANBWA().toString());
         holder.imgPdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

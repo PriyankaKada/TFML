@@ -1,12 +1,14 @@
 package com.tfml.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.tfml.R;
@@ -27,16 +29,19 @@ public class EmiExpandableListView extends BaseExpandableListAdapter {
     ArrayList<Datum> childData;
     LayoutInflater layoutInflater;
     EmiViewHolder emiViewHolder;
-    DateFormat inputFormat,outputFormat;
+    DateFormat inputFormat, outputFormat;
     Date date;
     String outputDateStr;
-    public EmiExpandableListView(Context context, ArrayList<Datum> parent,ArrayList<Datum> child){
 
-        mContext=context;
-        parentData=parent;
-        childData=child;
-        layoutInflater=LayoutInflater.from(mContext);
+    public EmiExpandableListView(Context context, ArrayList<Datum> parent, ArrayList<Datum> child) {
+
+        mContext = context;
+        parentData = parent;
+        childData = child;
+        if (mContext != null)
+            layoutInflater = LayoutInflater.from(mContext);
     }
+
     @Override
     public int getGroupCount() {
         return parentData.size();
@@ -75,59 +80,70 @@ public class EmiExpandableListView extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 
-        emiViewHolder=new EmiViewHolder();
-        if(convertView==null){
+        emiViewHolder = new EmiViewHolder();
+        if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.group_row_emi_detail, null);
 
         }
         emiViewHolder.txtEmiDate = (TextView) convertView.findViewById(R.id.txtEmiDate);
         emiViewHolder.txtEmiAmount = (TextView) convertView.findViewById(R.id.txtEmiAmount);
-        emiViewHolder.txtCount=(TextView)convertView.findViewById(R.id.txtCount);
+        emiViewHolder.txtCount = (TextView) convertView.findViewById(R.id.txtCount);
 
-        if((groupPosition+1)<=9){
-            emiViewHolder.txtCount.setText("0"+(groupPosition+1));
+        emiViewHolder.llRootHeader = (LinearLayout) convertView.findViewById(R.id.llRootHeader);
+        emiViewHolder.rlEmiDetail = (RelativeLayout) convertView.findViewById(R.id.rlEmiDetail);
+
+        if (isExpanded) {
+            emiViewHolder.rlEmiDetail.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.list_row));
+            emiViewHolder.llRootHeader.setBackgroundDrawable(null);
+        } else {
+            emiViewHolder.rlEmiDetail.setBackgroundDrawable(null);
+            emiViewHolder.llRootHeader.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.list_row));
         }
-        else {
-            emiViewHolder.txtCount.setText(""+(groupPosition+1));
+
+        if ((groupPosition + 1) <= 9) {
+            emiViewHolder.txtCount.setText("0" + (groupPosition + 1));
+        } else {
+            emiViewHolder.txtCount.setText("" + (groupPosition + 1));
         }
 
         //Format date here
-         inputFormat = new SimpleDateFormat("yyyy-MM-dd");
-         outputFormat = new SimpleDateFormat("dd MMM yyyy");
+        inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        outputFormat = new SimpleDateFormat("dd MMM yyyy");
 
-        if(parentData.get(groupPosition).getADATE()!=null)
+        if (parentData.get(groupPosition).getADATE() != null)
             try {
-                 date = inputFormat.parse(parentData.get(groupPosition).getADATE().toString());
-                 outputDateStr = outputFormat.format(date);
-                 emiViewHolder.txtEmiDate.setText(outputDateStr);
+                date = inputFormat.parse(parentData.get(groupPosition).getADATE().toString());
+                outputDateStr = outputFormat.format(date);
+                emiViewHolder.txtEmiDate.setText(outputDateStr);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 
 
-
-        if(parentData.get(groupPosition).getAMOUNT()!=null)
+        if (parentData.get(groupPosition).getAMOUNT() != null)
             emiViewHolder.txtEmiAmount.setText(parentData.get(groupPosition).getAMOUNT().toString());
         return convertView;
     }
 
-    EmiChildViewHolder emiChildViewHolder=null;
+    EmiChildViewHolder emiChildViewHolder = null;
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
-        emiChildViewHolder=new EmiChildViewHolder();
-        if(convertView==null){
-            convertView=layoutInflater.inflate(R.layout.child_row_emi_details,null);
+        emiChildViewHolder = new EmiChildViewHolder();
+        if (convertView == null) {
+            convertView = layoutInflater.inflate(R.layout.child_row_emi_details, null);
 
         }
-        emiChildViewHolder.txtEmiInsurance=(TextView)convertView.findViewById(R.id.txtEmiInsurance);
-        emiChildViewHolder.txtEmiInterest=(TextView)convertView.findViewById(R.id.txtEmiInterest);
-        emiChildViewHolder.txtEmiOsPrinciple=(TextView)convertView.findViewById(R.id.txtEmiOsPrinciple);
-        emiChildViewHolder.txtEmiPrinciple=(TextView)convertView.findViewById(R.id.txtEmiPrinciple);
-        emiChildViewHolder.txtEmiInsurance.setText(childData.get(groupPosition).getINSAMT().toString());
-        emiChildViewHolder.txtEmiInterest.setText(childData.get(groupPosition).getFINCHRG());
-        emiChildViewHolder.txtEmiOsPrinciple.setText(childData.get(groupPosition).getPRIAMT());
+
+
+        emiChildViewHolder.txtEmiInsurance = (TextView) convertView.findViewById(R.id.txtEmiInsurance);
+        emiChildViewHolder.txtEmiInterest = (TextView) convertView.findViewById(R.id.txtEmiInterest);
+        emiChildViewHolder.txtEmiOsPrinciple = (TextView) convertView.findViewById(R.id.txtEmiOsPrinciple);
+        emiChildViewHolder.txtEmiPrinciple = (TextView) convertView.findViewById(R.id.txtEmiPrinciple);
+        emiChildViewHolder.txtEmiInsurance.setText(childData.get(groupPosition).getINSAMT()==null?"":childData.get(groupPosition).getINSAMT().toString());
+        emiChildViewHolder.txtEmiInterest.setText(childData.get(groupPosition).getFINCHRG()==null?"":childData.get(groupPosition).getFINCHRG().toString());
+        emiChildViewHolder.txtEmiOsPrinciple.setText(childData.get(groupPosition).getPRIAMT()==null?"":childData.get(groupPosition).getPRIAMT().toString());
 
 
         return convertView;
@@ -140,12 +156,15 @@ public class EmiExpandableListView extends BaseExpandableListAdapter {
 
 
     public class EmiViewHolder {
-        TextView txtEmiDate, txtEmiAmount,txtCount;
+        TextView txtEmiDate, txtEmiAmount, txtCount;
+        LinearLayout llRootHeader;
+        RelativeLayout rlEmiDetail;
 
     }
-    public class EmiChildViewHolder{
 
-        TextView txtEmiInterest,txtEmiPrinciple,txtEmiInsurance,txtEmiOsPrinciple;
+    public class EmiChildViewHolder {
+
+        TextView txtEmiInterest, txtEmiPrinciple, txtEmiInsurance, txtEmiOsPrinciple;
 
     }
 }

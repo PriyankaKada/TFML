@@ -75,12 +75,12 @@ public class ReceiptListAdapter extends BaseAdapter {
         else
 
         holder=(Holder)convertView.getTag();
-            holder.txtReceiptDate.setText(responseEnvelope.getZCISResponse().getI_REC().get(position).getZFBDT()+" / "+responseEnvelope.getZCISResponse().getI_REC().get(position).getBELNR());
-            holder.txtReceiptAmount.setText(responseEnvelope.getZCISResponse().getI_REC().get(position).getDMBTR());
+            holder.txtReceiptDate.setText(responseEnvelope.getZCISResponse().getI_REC().get(position).getZFBDT()==null?"":responseEnvelope.getZCISResponse().getI_REC().get(position).getZFBDT()+" / "+responseEnvelope.getZCISResponse().getI_REC().get(position).getBELNR()==null?"":responseEnvelope.getZCISResponse().getI_REC().get(position).getBELNR());
+            holder.txtReceiptAmount.setText(responseEnvelope.getZCISResponse().getI_REC().get(position).getDMBTR()==null?"":responseEnvelope.getZCISResponse().getI_REC().get(position).getDMBTR());
          //   holder.txtReceiptNo.setText(responseEnvelope.getZCISResponse().getI_REC().get(i).getBELNR());
-            holder.txtInstNo.setText(responseEnvelope.getZCISResponse().getI_REC().get(position).getCHECT());
-            holder.txtMode.setText(responseEnvelope.getZCISResponse().getI_REC().get(position).getSHKZG());
-            holder.txtType.setText(responseEnvelope.getZCISResponse().getI_REC().get(position).getANBWA());
+            holder.txtInstNo.setText(responseEnvelope.getZCISResponse().getI_REC().get(position).getCHECT()==null?"":responseEnvelope.getZCISResponse().getI_REC().get(position).getCHECT());
+            holder.txtMode.setText(responseEnvelope.getZCISResponse().getI_REC().get(position).getSHKZG()==null?"":responseEnvelope.getZCISResponse().getI_REC().get(position).getSHKZG());
+            holder.txtType.setText(responseEnvelope.getZCISResponse().getI_REC().get(position).getANBWA()==null?"":responseEnvelope.getZCISResponse().getI_REC().get(position).getANBWA());
 
         final Holder finalHolder = holder;
         holder.img_expand.setOnClickListener(new View.OnClickListener() {

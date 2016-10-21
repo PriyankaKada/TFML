@@ -59,10 +59,10 @@ public class PreClosureAdapter extends BaseAdapter {
 
         }
 
-        holder.txtDesc.setText(responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(position).getDESCP());
-        holder.txtDueAmt.setText(responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(position).getDUE());
-        holder.txtNetBal.setText(responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(position).getNET());
-        holder.txtRecAmt.setText(responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(position).getREC());
+        holder.txtDesc.setText(responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(position).getDESCP()==null?"":responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(position).getDESCP());
+        holder.txtDueAmt.setText(responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(position).getDUE()==null?"":responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(position).getDUE());
+        holder.txtNetBal.setText(responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(position).getNET()==null?"":responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(position).getNET());
+        holder.txtRecAmt.setText(responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(position).getREC()==null?"":responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get(position).getREC());
         return  convertView;
     }
     public class Holder

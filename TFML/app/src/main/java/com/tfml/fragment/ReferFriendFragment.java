@@ -265,29 +265,29 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		if ( productCode != null && productCode != "-1" ) {
 			inputReferFriendModel.setProductId( productCode );
 		}
-		else {
+		/*else {
 			Toast.makeText( getContext(), "Please Select Product Type", Toast.LENGTH_SHORT ).show();
-		}
+		}*/
 		if ( branchStateCode != null && branchStateCode != "-1" ) {
 			inputReferFriendModel.setBranchState( branchStateCode );
 
 		}
-		else {
+		/*else {
 			Toast.makeText( getContext(), "Please Select Branch State", Toast.LENGTH_SHORT ).show();
-		}
+		}*/
 		if ( branchCityCode != null && branchCityCode != "-1" ) {
 			inputReferFriendModel.setBranchCity( branchCityCode );
 		}
-		else {
+		/*else {
 			Toast.makeText( getContext(), "Please Select Branch City", Toast.LENGTH_SHORT ).show();
-		}
+		}*/
 
 		if ( branchCode != null && branchCode != "-1" ) {
 			inputReferFriendModel.setBranch( branchCode );
 		}
-		else {
+		/*else {
 			Toast.makeText( getContext(), "Please Select Branch", Toast.LENGTH_SHORT ).show();
-		}
+		}*/
 
 		if ( stateCode != null && stateCode != "-1" ) {
 			inputReferFriendModel.setState( stateCode );
@@ -345,14 +345,18 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 			@Override
 			public void onResponse( Call< ReferFriendResponseModel > call, Response< ReferFriendResponseModel > response ) {
 				CommonUtils.closeProgressDialog();
-				if ( response.body().getStatus().contains( "success" ) ) {
-					Log.e( "getFriendResponse", response.body().getStatus() );
-				showAlert( getActivity(), "Refer Friends", "Thanks for this approach", true );
+				if(response.body()!=null)
+				{
+					if ( response.body().getStatus().contains( "success" ) ) {
+						Log.e( "getFriendResponse", response.body().getStatus() );
+						showAlert( getActivity(), "Refer Friends", "Thanks for this approach", true );
 
+					}
+					else {
+						Toast.makeText( getActivity(), response.body().getErrors().get( 0 ), Toast.LENGTH_LONG ).show();
+					}
 				}
-				else {
-					Toast.makeText( getActivity(), response.body().getErrors().get( 0 ), Toast.LENGTH_LONG ).show();
-				}
+
 
 			}
 
