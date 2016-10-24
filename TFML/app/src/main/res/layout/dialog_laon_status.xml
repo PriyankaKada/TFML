@@ -14,9 +14,16 @@
         android:textColor="#000000"
         android:maxLength="12"
         android:maxLines="1"
+        android:padding="10dp"
+        android:background="@null"
         android:inputType="phone"
         android:hint=" * Enter Mobile No." />
-
+    <View
+        android:id="@+id/UnderLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="2dp"
+        android:background="@color/color_grey" />
     <EditText
         android:id="@+id/edt_otp_no"
         android:layout_width="match_parent"
@@ -24,9 +31,16 @@
         android:layout_marginTop="10dp"
         android:textColor="#000000"
         android:maxLines="1"
+        android:padding="10dp"
+        android:background="@null"
         android:inputType="textPassword"
         android:hint=" * Enter OTP No." />
-
+    <View
+        android:id="@+id/UnderLine2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="2dp"
+        android:background="@color/color_grey" />
     <Button
         android:id="@+id/btn_loan_status"
         android:layout_width="wrap_content"

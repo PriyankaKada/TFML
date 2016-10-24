@@ -94,7 +94,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
     private TextView txtAccDate;
     LogInputModel logInputModel;
     LogResponseModel logResponseModel;
-
+    private boolean submitClicked = false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -238,19 +238,23 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
                 selectDate();
                 break;
             case R.id.btn_submit:
+                submitClicked=true;
                 callCheckLogin();
                 break;
             case R.id.img_download:
-                try {
-                    if (CommonUtils.isNetworkAvailable(getActivity())) {
-                        callDownloadService();
-                        CommonUtils.showProgressDialog(getActivity(),"File downloading...");
-                        getDownloadData(preClosureInputModel);
-                    } else {
-                        Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+                if(submitClicked==true)
+                {
+                    try {
+                        if (CommonUtils.isNetworkAvailable(getActivity())) {
+                            callDownloadService();
+                            CommonUtils.showProgressDialog(getActivity(),"File downloading...");
+                            getDownloadData(preClosureInputModel);
+                        } else {
+                            Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
 
                 break;

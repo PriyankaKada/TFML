@@ -68,9 +68,10 @@ public class BannerFragment extends Fragment implements ViewPager.OnPageChangeLi
                 @Override
                 public void onResponse(Call<BannerlistResponse> call, Response<BannerlistResponse> response) {
                     BannerlistResponse bannerlistResponse = response.body();
-                    CommonUtils.closeProgressDialog();
+
                     if(response.body().getStatus()!=null && response.body().getStatus().equals("success"))
                     {
+                        CommonUtils.closeProgressDialog();
                         Log.e("BannerlistResponse",new Gson().toJson(response.body().getStatus()));
                         Log.e("CallbannerListResponse",""+bannerlistResponse.getBanners().getData().get(0).getImage());
                         bannerAdapter=new BannerAdapter(getActivity(), (ArrayList<Datum>) bannerlistResponse.getBanners().getData());
@@ -82,6 +83,7 @@ public class BannerFragment extends Fragment implements ViewPager.OnPageChangeLi
                     }
                     else
                     {
+                        CommonUtils.closeProgressDialog();
                         Log.e("ErrorResponse",response.errorBody().toString());
                     }
 
@@ -89,7 +91,7 @@ public class BannerFragment extends Fragment implements ViewPager.OnPageChangeLi
 
                 @Override
                 public void onFailure(Call<BannerlistResponse> call, Throwable t) {
-                    Log.e("Resp", "Error");
+                //    Log.e("Resp", "Error");
                     CommonUtils.closeProgressDialog();
                 }
             });

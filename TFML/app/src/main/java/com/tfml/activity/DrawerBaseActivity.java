@@ -222,7 +222,7 @@ public class DrawerBaseActivity extends BaseActivity {
 
            @Override
            public void onFailure(Call<LogoutResponseModel> call, Throwable t) {
-            Log.e("onFailure",t.getMessage().toString());
+          //  Log.e("onFailure",t.getMessage().toString());
            }
        });
 

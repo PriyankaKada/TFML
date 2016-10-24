@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tfml.R;
 import com.tfml.model.soapModel.response.ResponseEnvelope;
@@ -67,6 +68,11 @@ public class BasicDetailFragment extends Fragment {
             }
 
             init();
+        }
+        else
+        {
+            if(getActivity()!=null)
+                Toast.makeText(getActivity(),"Basic Detail Data Not Found",Toast.LENGTH_SHORT).show();
         }
 
 

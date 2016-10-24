@@ -160,6 +160,11 @@ public class SocialUtil {
                   CallLoanStatusModel(loanStatusInputModel,context);
 
               }
+              else
+              {
+                  Toast.makeText(context,"Please Enter Mobile Number and OTP Number",Toast.LENGTH_SHORT).show();
+              }
+
 
           }
       });

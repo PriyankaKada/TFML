@@ -46,7 +46,6 @@
     <string name="txt_total">Total</string>
     <string name="txt_terminated">Terminated</string>
     <string name="txt_live">Live</string>
-
     <string name="txt_due_date">Due Date :</string>
     <string name="txt_emi_amount">EMI Amount :</string>
     <string name="txt_repayment_mode">Repayment Mode :</string>
@@ -55,6 +54,14 @@
     <string name="txt_finance_charges">Finance Charges</string>
     <string name="txt_insurance_provision">Insurance Provision</string>
     <string name="txt_option_money">Option Money</string>
+    <string name="txt_receipt_no_header">Receipt No.</string>
+    <string name="txt_receipt_date_header">Receipt Date</string>
+    <string name="txt_receipt_instr_mode_header">Instrument Mode (give description as cash / cheque etc)</string>
+    <string name="txt_receipt_instr_no_header">Instrument No.</string>
+    <string name="txt_receipt_bank_header">Bank</string>
+    <string name="txt_receipt_total_amount">Receipt Amount (Total of breakup)</string>
+    <string name="txt_receipt_detail_type">Type (with details as we get in pdf file)</string>
+    <string name="txt_receipt_amount_detail">Amount</string>
     <string name="txt_total_receivable">Total Receivable</string>
     <string name="txt_amount_credit_upto">Amount Credited upto </string>
     <string name="txt_amount_credited_from">Amount Credited from </string>

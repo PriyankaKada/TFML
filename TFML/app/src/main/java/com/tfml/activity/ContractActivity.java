@@ -162,7 +162,16 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
                 Log.e("ResponseBody",new Gson().toJson(response.body()));
                // List<ContractModel>model= (List<ContractModel>) response.body().getData();
                 ArrayList<ContractModel>models=new ArrayList<ContractModel>();
-                models.addAll(response.body().getData().getActive().getContracts());
+                if(response.body().getData().getActive().getContracts()!=null)
+                {
+                    models.addAll(response.body().getData().getActive().getContracts());
+                }
+                else
+                {
+                    Toast.makeText(getBaseContext(),"No Data Founnd",Toast.LENGTH_SHORT).show();
+
+                }
+
                if(response.body().getData().getTerminated().getCount()!=0)
                 models.add(null);
                 models.addAll(response.body().getData().getTerminated().getContracts());

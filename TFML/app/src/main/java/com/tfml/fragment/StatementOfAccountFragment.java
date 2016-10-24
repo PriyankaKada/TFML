@@ -1,22 +1,27 @@
 package com.tfml.fragment;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompatSideChannelService;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,7 +64,9 @@ import com.tfml.util.SetFonts;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -103,7 +110,9 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
     LogInputModel logInputModel;
     LogResponseModel logResponseModel;
     private String overdue="";
-
+    final private int REQUEST_CODE_MULTIPLE_PERMISSIONS = 125;
+    private boolean submitClicked = false;
+    private  boolean financeDetailClicked=false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -254,6 +263,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
                 selectDate();
                 break;
             case R.id.btn_submit:
+                submitClicked=true;
                 if(!TextUtils.isEmpty(txtAccDate.getText().toString()))
                 {
                     CommonUtils.showProgressDialog(getActivity(), "Getting Your Information");
@@ -265,43 +275,38 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 
                 break;
             case R.id.img_download:
-                if (CommonUtils.isNetworkAvailable(getActivity())) {
-                    callDownloadService();
-                    CommonUtils.showProgressDialog(getActivity(),"File downloading...");
-                    getDownloadData(accountStatementInputModel);
-                } else {
-                    Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
-                }
+                permissionGrantWithDownloadData();
+
                 break;
             case R.id.btn_basic_detail:
                 setColorButtonBasic();
-                if (!TextUtils.isEmpty(txtAccDate.getText().toString()))
+                if(submitClicked==true)
                 {
-                    callBasicDetail();
+                    if (!TextUtils.isEmpty(txtAccDate.getText().toString()))
+                    {
+                        callBasicDetail();
+                    }
                 }
+
 
                 break;
             case R.id.btn_finance_detail:
                 setColorButtonFinance();
-                if(!TextUtils.isEmpty(txtAccDate.getText().toString()))
+                financeDetailClicked=true;
+                if(submitClicked==true)
                 {
-                    fragmentManager = getActivity().getSupportFragmentManager();
-                    fragmentTransaction = fragmentManager.beginTransaction();
-                    frmFinanceDetail = new FinanceDetailFragment();
-                    if(responseEnvelope!=null)
+                    if(!TextUtils.isEmpty(txtAccDate.getText().toString()))
                     {
-                        Bundle bundle1 = new Bundle();
-                        bundle1.putSerializable("ResponseModel", responseEnvelope);
-                        frmFinanceDetail.setArguments(bundle1);
+                        callFinanceDetail();
+
                     }
-                    fragmentTransaction.add(R.id.frm_acc_detail, frmFinanceDetail);
-                    fragmentTransaction.commit();
                 }
 
                 break;
 
         }
     }
+
 
     public void callSoapRequest() {
         RequestEnvelpe requestEnvelpe = new RequestEnvelpe();
@@ -333,7 +338,19 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
                     Log.e("EngineNO", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getENGINE_NO());
                     Log.e("Chasis No", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getCHASIS_NO());
                     Log.e("RC NO", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getREG_NO());
-                    callBasicDetail();
+                    if(submitClicked==true)
+                    {
+                        if(financeDetailClicked==false)
+                        {
+                            callBasicDetail();
+                        }
+                        else
+                        {
+                            callFinanceDetail();
+
+                        }
+                    }
+
                 }
                else
                 {
@@ -365,6 +382,21 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
         fragmentTransaction.commit();
 
 
+    }
+
+    public void callFinanceDetail()
+    {
+        fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        frmFinanceDetail = new FinanceDetailFragment();
+        if(responseEnvelope!=null)
+        {
+            Bundle bundle1 = new Bundle();
+            bundle1.putSerializable("ResponseModel", responseEnvelope);
+            frmFinanceDetail.setArguments(bundle1);
+        }
+        fragmentTransaction.add(R.id.frm_acc_detail, frmFinanceDetail);
+        fragmentTransaction.commit();
     }
 
 
@@ -459,6 +491,16 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
         });
     }
 
+     public void callDownload()
+     {
+         if (CommonUtils.isNetworkAvailable(getActivity())) {
+             callDownloadService();
+             CommonUtils.showProgressDialog(getActivity(),"File downloading...");
+             getDownloadData(accountStatementInputModel);
+         } else {
+             Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+         }
+     }
 
     @Override
     public void onDateChange(String date, String picker) {
@@ -527,8 +569,6 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
                                 linAccDetail.setVisibility(View.VISIBLE);
                             }
 
-
-
                     } else {
                         Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
                     }
@@ -554,5 +594,99 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 
     }
 
+    private void permissionGrantWithDownloadData() {
+        List<String> permissionsNeeded = new ArrayList<String>();
+
+        final List<String> permissionsList = new ArrayList<String>();
+         if(!addPermission(permissionsList,Manifest.permission.WRITE_EXTERNAL_STORAGE))
+            permissionsNeeded.add("Write External Storage");
+        if(!addPermission(permissionsList,Manifest.permission.READ_EXTERNAL_STORAGE))
+            permissionsNeeded.add("Read External Storage");
+        if(!addPermission(permissionsList,Manifest.permission.READ_PHONE_STATE))
+            permissionsList.add("Read Phone State");
+        if (permissionsList.size() > 0) {
+            if (permissionsNeeded.size() > 0) {
+                // Need Rationale
+                String message = "You need to grant access to " + permissionsNeeded.get(0);
+                for (int i = 1; i < permissionsNeeded.size(); i++)
+                    message = message + ", " + permissionsNeeded.get(i);
+                 showMessageOKCancel(message,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                    requestPermissions(permissionsList.toArray(new String[permissionsList.size()]),
+                                            REQUEST_CODE_MULTIPLE_PERMISSIONS);
+                                }
+                            }
+                        });
+                return;
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(permissionsList.toArray(new String[permissionsList.size()]),
+                        REQUEST_CODE_MULTIPLE_PERMISSIONS);
+            }
+            return;
+        }
+          if(submitClicked==true)
+          {
+              callDownload();
+          }
+    }
+
+    private boolean addPermission(List<String> permissionsList, String permission) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (getActivity().checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+                permissionsList.add(permission);
+                // Check for Rationale Option
+                if (!shouldShowRequestPermissionRationale(permission))
+                    return false;
+            }
+        }
+        return true;
+    }
+
+
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(getActivity())
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_MULTIPLE_PERMISSIONS: {
+                Map<String, Integer> perms = new HashMap<String, Integer>();
+                // Initial
+
+                perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.READ_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.READ_PHONE_STATE,PackageManager.PERMISSION_GRANTED);
+                // Fill with results
+                for (int i = 0; i < permissions.length; i++)
+                    perms.put(permissions[i], grantResults[i]);
+                // Check for ACCESS_FINE_LOCATION
+                if (perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                        && perms.get(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                        && perms.get(Manifest.permission.READ_PHONE_STATE)==PackageManager.PERMISSION_GRANTED
+                        ) {
+                    // All Permissions Granted
+                    callDownload();
+                } else {
+                    // Permission Denied
+                    Toast.makeText(getActivity(), "Some Permission is Denied", Toast.LENGTH_SHORT)
+                            .show();
+                }
+            }
+            break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
 
 }

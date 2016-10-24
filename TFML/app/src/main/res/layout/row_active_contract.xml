@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:text="RC No. : "
                 android:textSize="14sp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:textColor="@color/white"
                 android:layout_gravity="center"/>
 
