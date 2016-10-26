@@ -94,7 +94,6 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
             callCheckLogin();
         }
 
-
     }
 
     @Override

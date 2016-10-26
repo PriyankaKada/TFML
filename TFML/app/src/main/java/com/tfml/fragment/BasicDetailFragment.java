@@ -69,11 +69,6 @@ public class BasicDetailFragment extends Fragment {
 
             init();
         }
-        else
-        {
-            if(getActivity()!=null)
-                Toast.makeText(getActivity(),"Basic Detail Data Not Found",Toast.LENGTH_SHORT).show();
-        }
 
 
         return view;

@@ -62,12 +62,6 @@ public class FinanceDetailFragment extends Fragment {
 
             init();
         }
-        else
-        {
-            if(getActivity()!=null)
-                Toast.makeText(getActivity(),"Finance Detail Data Not Found",Toast.LENGTH_SHORT).show();
-        }
-
 
         return view;
     }

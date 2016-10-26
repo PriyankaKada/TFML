@@ -85,7 +85,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
     private ImageView[] dots;
     private int dotsCount;
     LinearLayout linSchemes, linApplyLoan, linReferFriend, linLoanStaus, linLogin;
-    private TextView txtSchemes, txtApplyLoan, txtReferFriend, txtLoanStatus, txtLogin;g
+    private TextView txtSchemes, txtApplyLoan, txtReferFriend, txtLoanStatus, txtLogin;
     private ImageView imgSchemes, imgApplyLoan, imgReferFriend, imgLoanStatus, imgLogin;
     String errormsg;
     View selectedView;

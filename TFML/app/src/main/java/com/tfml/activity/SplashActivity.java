@@ -91,6 +91,8 @@ public class SplashActivity extends BaseActivity {
             permissionsNeeded.add("Read External Storage");
         if(!addPermission(permissionsList,Manifest.permission.READ_PHONE_STATE))
             permissionsList.add("Read Phone State");
+        if(!addPermission(permissionsList,Manifest.permission.CAMERA))
+            permissionsList.add("Camera");
         if (permissionsList.size() > 0) {
             if (permissionsNeeded.size() > 0) {
                 // Need Rationale
@@ -200,6 +202,7 @@ public class SplashActivity extends BaseActivity {
                 perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
                 perms.put(Manifest.permission.READ_EXTERNAL_STORAGE, PackageManager.PERMISSION_GRANTED);
                 perms.put(Manifest.permission.READ_PHONE_STATE,PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.CAMERA,PackageManager.PERMISSION_GRANTED);
                 // Fill with results
                 for (int i = 0; i < permissions.length; i++)
                     perms.put(permissions[i], grantResults[i]);
@@ -210,6 +213,7 @@ public class SplashActivity extends BaseActivity {
                         && perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
                         && perms.get(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
                         && perms.get(Manifest.permission.READ_PHONE_STATE)==PackageManager.PERMISSION_GRANTED
+                        && perms.get(Manifest.permission.CAMERA)==PackageManager.PERMISSION_GRANTED
                         ) {
                     // All Permissions Granted
                     checkAlreadyLogin();

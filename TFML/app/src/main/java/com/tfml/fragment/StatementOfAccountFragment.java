@@ -228,7 +228,6 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
                    callCheckLogin();
                }
 
-
             }
 
             @Override

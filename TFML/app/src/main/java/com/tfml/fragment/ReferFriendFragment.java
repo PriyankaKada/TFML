@@ -131,8 +131,6 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		List<CityResponseModel> dummyCityList=new ArrayList();
 		dummyCityList.add(0,cityModel);
 		spSelectCity.setAdapter(new CityAdapter(getActivity(),dummyCityList));
-
-
 		return view;
 	}
 

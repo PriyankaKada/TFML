@@ -278,7 +278,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/xy"
+                    android:background="@drawable/dotted_bg"
                     />
                 <TextView
                     android:id="@+id/lbl_due_amount"
@@ -293,7 +293,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/xy"
+                    android:background="@drawable/dotted_bg"
                     />
                 <TextView
                     android:layout_height="wrap_content"
@@ -308,7 +308,7 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/xy"
+                    android:background="@drawable/dotted_bg"
                     />
                 <TextView
                     android:text="NET BALANCE"

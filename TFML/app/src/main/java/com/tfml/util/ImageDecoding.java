@@ -21,7 +21,7 @@ import java.util.Locale;
  */
 public class ImageDecoding {
 
-    private static final String IMAGE_DIRECTORY_NAME = "SKINEXAM";
+    private static final String IMAGE_DIRECTORY_NAME = "TMFL";
     public static final int MEDIA_TYPE_IMAGE = 1;
 
     public static Uri getOutputMediaFileUri(int type) {
