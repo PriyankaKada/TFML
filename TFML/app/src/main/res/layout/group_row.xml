@@ -1,70 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
     <LinearLayout
         android:id="@+id/ll_header_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:padding="5dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:background="@drawable/list_row"
             android:layout_height="wrap_content"
-            >
+            android:background="@drawable/list_row"
+            android:padding="5dp">
 
             <LinearLayout
                 android:id="@+id/ll_daterow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="5dp"
-                android:layout_toLeftOf="@+id/img_expand"
-                android:weightSum="10">
+                >
 
                 <TextView
                     android:id="@+id/txtReceiptDate"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    android:textSize="12sp"
-                    android:gravity="left|center"
-                    android:text="Receipt Date/ReceiptNo"/>
+                    android:layout_weight="5"
+                    android:text="Receipt Date/ReceiptNo"
+                    android:textSize="12sp"/>
 
                 <TextView
                     android:id="@+id/txtAmount"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
-                    android:textSize="12sp"
-                    android:gravity="left|center"
-                    android:text="Receipt Amount"/>
+                    android:text="Receipt Amount"
+                    android:textSize="12sp"/>
+
+                <ImageView
+                    android:id="@+id/imgPdf"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/img_expand"
+                    android:src="@drawable/ic_pdf"/>
+
+                <ImageView
+                    android:id="@+id/img_expand"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/ic_spin_bg_small"/>
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/img_expand"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_alignParentRight="true"
-                android:layout_margin="5dp"
-                android:src="@drawable/ic_spin_bg_small"/>
+            <LinearLayout
+                android:id="@+id/llInstNoRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_daterow"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/txtMode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:text="Mode"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:id="@+id/txtInstNo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="Inst No"
+                    android:textSize="12sp"
+                    />
+
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="5dp"
+                    android:visibility="invisible"/>
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_margin="5dp"
+                    android:visibility="invisible"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtBank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llInstNoRow"
+                android:text="Bank"
+                android:textSize="12sp"
+                />
 
         </RelativeLayout>
+
         <TextView
             android:id="@+id/txtAmount2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:textSize="12sp"
-            android:text="Receipt Amount"
             android:layout_marginLeft="180dp"
+            android:layout_weight="4"
+            android:text="Receipt Amount"
+            android:textSize="12sp"
             android:visibility="gone"
             />
     </LinearLayout>
-
 
 </LinearLayout>

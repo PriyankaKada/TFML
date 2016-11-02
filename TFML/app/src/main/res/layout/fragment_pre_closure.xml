@@ -1,9 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.tfml.fragment.PreClosureFragment">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,15 +14,15 @@
             android:id="@+id/spnContractNo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="0.5"
             android:background="@drawable/selector_spinner"
-            android:layout_gravity="center"
             android:drawSelectorOnTop="false"
             android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:popupBackground="@color/white"
             android:scrollbars="none"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:spinnerMode="dropdown"/>
 
         <LinearLayout
@@ -77,9 +76,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
                     android:gravity="center"
                     android:text="@string/txt_due_date"
-                    android:layout_marginLeft="5dp"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -102,9 +101,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
                     android:gravity="center"
                     android:text="@string/txt_emi_amount"
-                    android:layout_marginLeft="5dp"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -138,8 +137,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="center"
                     android:layout_marginLeft="5dp"
+                    android:gravity="center"
                     android:text="@string/txt_overdue"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
@@ -163,9 +162,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
                     android:gravity="center"
                     android:text="@string/txt_repayment_mode"
-                    android:layout_marginLeft="5dp"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -178,6 +177,7 @@
                     android:textSize="14sp"/>
             </LinearLayout>
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -189,18 +189,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
+
         <LinearLayout
-            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_weight="3"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginRight="10dp"
-                android:layout_height="wrap_content">
+                android:layout_weight="3">
 
                 <TextView
                     android:id="@+id/txt_acc_select_date"
@@ -208,118 +209,127 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/whit_rect_bg"
                     android:gravity="left|center"
-                    android:padding="10dp"
                     android:hint="@string/txt_select_date"
+                    android:padding="10dp"
                     android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
+
                 <ImageView
                     android:id="@+id/imgCalender"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_margin="5dp"
                     android:layout_alignParentRight="true"
+                    android:layout_margin="5dp"
                     android:src="@drawable/ic_calendar"/>
             </RelativeLayout>
 
             <TextView
                 android:id="@+id/btn_submit"
                 android:layout_width="0dp"
-                android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:padding="10dp"
-                android:background="@color/colorPrimaryDark"
-                android:text="@string/txt_submit"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_weight="2"
+                android:background="@color/colorPrimaryDark"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/txt_submit"
                 android:textAllCaps="false"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"/>
+
             <ImageView
                 android:id="@+id/img_download"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center|end"
                 android:layout_marginLeft="10dp"
-                android:src="@drawable/ic_download" />
+                android:src="@drawable/ic_download"/>
         </LinearLayout>
-
 
 
         <LinearLayout
             android:id="@+id/linTabledesc"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:visibility="visible"
+            android:layout_weight="1"
             android:background="@drawable/whit_rect_bg"
+            android:orientation="vertical"
+            android:visibility="visible"
             android:weightSum="4">
 
             <LinearLayout
                 android:id="@+id/lstHeader"
-                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
+                android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal"
+                android:visibility="gone">
+
                 <TextView
                     android:id="@+id/lbl_receipt_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/white"
-                    android:gravity="center"
                     android:layout_gravity="center"
-                    android:textSize="12sp"
-                    android:text="DESCRIPTION"/>
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="DESCRIPTION"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"/>
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/dotted_bg"
                     />
+
                 <TextView
                     android:id="@+id/lbl_due_amount"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:layout_gravity="center"
-                    android:textSize="12sp"
-                    android:text="DUE AMOUNT"/>
+                    android:text="DUE AMOUNT"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"/>
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/dotted_bg"
                     />
+
                 <TextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="RECEIVED AMOUNT"
-                    android:layout_width="0dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="RECEIVED AMOUNT"
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     />
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/dotted_bg"
                     />
+
                 <TextView
-                    android:text="NET BALANCE"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="12sp"
-                    android:layout_gravity="center"
+                    android:text="NET BALANCE"
                     android:textColor="@color/white"
-                    android:layout_height="wrap_content" />
+                    android:textSize="12sp"/>
             </LinearLayout>
+
             <ListView
                 android:id="@+id/lst_pre_closure"
                 android:layout_width="match_parent"
@@ -328,6 +338,7 @@
             </ListView>
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ll_footerclouser"
             android:layout_width="match_parent"
@@ -339,24 +350,24 @@
                 android:id="@+id/txtGeneratedOn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="Generated On"
-                android:textSize="12sp"
-                android:padding="5dp"
-                android:textColor="@color/overdues_count_bg"
                 android:background="@drawable/list_row"
+                android:gravity="right"
+                android:padding="5dp"
+                android:text="Generated On "
+                android:textColor="@color/overdues_count_bg"
+                android:textSize="12sp"
                 />
 
             <TextView
                 android:id="@+id/txtFooter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="10sp"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:text="Total Balance"/>
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:text="Total Balance"
+                android:textSize="10sp"/>
         </LinearLayout>
 
 
