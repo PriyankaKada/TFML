@@ -8,43 +8,43 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class BranchCityResponseModel {
-    @SerializedName("terr_territoryid")
-    @Expose
-    private String terrTerritoryid;
-    @SerializedName("terr_caption")
-    @Expose
-    private String terrCaption;
+	@SerializedName( "terr_territoryid" )
+	@Expose
+	private String terrTerritoryid;
+	@SerializedName( "terr_caption" )
+	@Expose
+	private String terrCaption;
 
-    /**
-     * @return The terrTerritoryid
-     */
-    public String getTerrTerritoryid() {
-        return terrTerritoryid;
-    }
+	/**
+	 * @return The terrTerritoryid
+	 */
+	public String getTerrTerritoryid() {
+		return terrTerritoryid;
+	}
 
-    /**
-     * @param terrTerritoryid The terr_territoryid
-     */
-    public void setTerrTerritoryid(String terrTerritoryid) {
-        this.terrTerritoryid = terrTerritoryid;
-    }
+	/**
+	 * @param terrTerritoryid The terr_territoryid
+	 */
+	public void setTerrTerritoryid( String terrTerritoryid ) {
+		this.terrTerritoryid = terrTerritoryid;
+	}
 
-    /**
-     * @return The terrCaption
-     */
-    public String getTerrCaption() {
-        return terrCaption;
-    }
+	/**
+	 * @return The terrCaption
+	 */
+	public String getTerrCaption() {
+		return terrCaption;
+	}
 
-    /**
-     * @param terrCaption The terr_caption
-     */
-    public void setTerrCaption(String terrCaption) {
-        this.terrCaption = terrCaption;
-    }
+	/**
+	 * @param terrCaption The terr_caption
+	 */
+	public void setTerrCaption( String terrCaption ) {
+		this.terrCaption = terrCaption;
+	}
 
-    @Override
-    public String toString() {
-        return this.terrCaption;
-    }
+	@Override
+	public String toString() {
+		return this.terrCaption;
+	}
 }

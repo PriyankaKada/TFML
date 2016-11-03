@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="192dp">
+             android:layout_width="match_parent"
+             android:layout_height="192dp">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/whit_rect_bg" />
+        android:src="@drawable/whit_rect_bg"/>
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|right"
         android:layout_marginRight="10dp"
-        android:visibility="gone"
-        android:src="@drawable/ic_cancel"/>
+        android:src="@drawable/ic_cancel"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,32 +26,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:padding="30dp"
             android:layout_marginBottom="50dp"
-            android:src="@drawable/ic_profile" />
+            android:padding="30dp"
+            android:src="@drawable/ic_profile"/>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Welcom"
                 android:padding="5dp"
-                android:textColor="@color/tab_bg"
+                android:text="Welcom"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textStyle="bold" />
+                android:textColor="@color/tab_bg"
+                android:textStyle="bold"/>
 
             <TextView
-                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/tab_bg"
+                android:layout_marginTop="5dp"
                 android:text="Satyawan.hajare"
+                android:textColor="@color/tab_bg"
                 />
         </LinearLayout>
 

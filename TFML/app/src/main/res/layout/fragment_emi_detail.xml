@@ -1,39 +1,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.tfml.fragment.EmiDetailFragment">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@drawable/selector_layout_rectangle">
+        android:background="@drawable/selector_layout_rectangle"
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/btnReciept"
-                android:padding="10dp"
                 android:orientation="vertical"
-                android:layout_alignParentLeft="true">
+                android:padding="10dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Installment Pattern : "
-                        android:textStyle="bold"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp"
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:id="@+id/txt_install_pattern"
@@ -46,16 +46,17 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal"
-                    android:layout_marginTop="10dp">
+                    android:visibility="gone">
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Initial O/S Principal : "
-                        android:textStyle="bold"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp"
+                        android:textStyle="bold"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -66,42 +67,45 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="EMI Details"
-                    android:textColor="#164d74"
-                    android:textStyle="bold"/>
-
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:padding="10dp"
+                android:text="EMI Details"
+                android:textColor="#164d74"
+                android:textStyle="bold"/>
 
             <Button
                 android:id="@+id/btnReciept"
                 android:layout_width="100dp"
                 android:layout_height="35dp"
                 android:layout_alignParentRight="true"
-                android:background="@color/colorPrimaryDark"
-                android:textAllCaps="false"
-                android:text="Receipts"
-                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:textColor="#ffffff"
-                android:layout_centerHorizontal="true"/>
+                android:layout_marginTop="10dp"
+                android:background="@color/colorPrimaryDark"
+                android:text="Receipts"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"/>
 
         </RelativeLayout>
 
 
         <ExpandableListView
             android:id="@+id/expandableListViewEmi"
-            android:layout_height="match_parent"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_margin="10dp"
+            android:background="@color/white"
             android:divider="@null"
-            android:groupIndicator="@null"
             android:dividerHeight="0.5dp"
-            android:background="@color/white"/>
+            android:groupIndicator="@null"/>
 
     </LinearLayout>
 

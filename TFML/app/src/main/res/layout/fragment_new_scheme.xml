@@ -1,10 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp"
-    tools:context="com.tfml.fragment.NewSchemeFragment">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="10dp"
+              tools:context="com.tfml.fragment.NewSchemeFragment">
 
     <TextView
         android:id="@+id/new_schemes_header"
@@ -14,15 +14,17 @@
         android:text="We pleased to introduce NEW OFFERS"
         android:textSize="18sp"
         />
-     <LinearLayout
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:orientation="vertical">
-         <ListView
-             android:id="@+id/lst_new_schemes"
-             android:layout_width="match_parent"
-             android:padding="10dp"
-             android:layout_height="wrap_content">
-         </ListView>
-     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/lst_new_schemes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+        </ListView>
+    </LinearLayout>
 </LinearLayout>

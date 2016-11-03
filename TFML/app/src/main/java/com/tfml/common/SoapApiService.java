@@ -19,41 +19,40 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
  */
 
 public class SoapApiService {
-    TmflApi services;
-    static SoapApiService apiService;
-    private static Retrofit retrofit;
+	static         SoapApiService apiService;
+	private static Retrofit       retrofit;
+	TmflApi services;
+
+	public static SoapApiService getInstance() {
+		if ( apiService == null ) {
+			synchronized ( SoapApiService.class ) {
+
+				apiService = new SoapApiService();
+				HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+
+				interceptor.setLevel( HttpLoggingInterceptor.Level.BODY );
+				Strategy strategy = new AnnotationStrategy();
+
+				Serializer serializer = new Persister( strategy );
+
+				OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+				httpClient.networkInterceptors().add( new StethoInterceptor() );
+				httpClient.addInterceptor( interceptor );
+
+				retrofit = new Retrofit.Builder()
+						.baseUrl( Constant.SOAP_BASE )
+						.client( httpClient.build() )
+						.addConverterFactory( SimpleXmlConverterFactory.create( serializer ) )
+						.build();
+			}
+		}
+		return apiService;
+	}
 
 
-    public static SoapApiService getInstance() {
-        if (apiService == null) {
-            synchronized (SoapApiService.class) {
-
-                apiService = new SoapApiService();
-                HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-
-                interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-                Strategy strategy = new AnnotationStrategy();
-
-                Serializer serializer = new Persister(strategy);
-
-                OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-                httpClient.networkInterceptors().add(new StethoInterceptor());
-                httpClient.addInterceptor(interceptor);
-
-                retrofit = new Retrofit.Builder()
-                        .baseUrl(Constant.SOAP_BASE)
-                        .client(httpClient.build())
-                        .addConverterFactory( SimpleXmlConverterFactory.create(serializer))
-                        .build();
-            }
-        }
-        return apiService;
-    }
-
-
-    public TmflApi call() {
-        services = retrofit.create(TmflApi.class);
-        return services;
-    }
+	public TmflApi call() {
+		services = retrofit.create( TmflApi.class );
+		return services;
+	}
 
 }

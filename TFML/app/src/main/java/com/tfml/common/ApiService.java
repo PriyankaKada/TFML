@@ -13,35 +13,34 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class ApiService {
-    TmflApi services;
-    static ApiService apiService;
-    private static Retrofit retrofit;
+	static         ApiService apiService;
+	private static Retrofit   retrofit;
+	TmflApi services;
+
+	public static ApiService getInstance() {
+		if ( apiService == null ) {
+			synchronized ( ApiService.class ) {
+
+				apiService = new ApiService();
 
 
-    public static ApiService getInstance() {
-        if (apiService == null) {
-            synchronized (ApiService.class) {
-
-                apiService = new ApiService();
-
-
-                OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-                httpClient.networkInterceptors().add(new StethoInterceptor());
-                retrofit = new Retrofit.Builder()
-                        .baseUrl(Constant.BASE_URL)
-                        .client(httpClient.build())
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-            }
-        }
-        return apiService;
-    }
+				OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+				httpClient.networkInterceptors().add( new StethoInterceptor() );
+				retrofit = new Retrofit.Builder()
+						.baseUrl( Constant.BASE_URL )
+						.client( httpClient.build() )
+						.addConverterFactory( GsonConverterFactory.create() )
+						.build();
+			}
+		}
+		return apiService;
+	}
 
 
-    public TmflApi call() {
-        services = retrofit.create(TmflApi.class);
-        return services;
-    }
+	public TmflApi call() {
+		services = retrofit.create( TmflApi.class );
+		return services;
+	}
 
 
 }

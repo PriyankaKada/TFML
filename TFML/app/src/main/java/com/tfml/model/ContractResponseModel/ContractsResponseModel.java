@@ -10,25 +10,21 @@ import com.google.gson.annotations.SerializedName;
 public class ContractsResponseModel {
 
 
-    @SerializedName("data")
-    @Expose
-    private ContractsDataModel data;
+	@SerializedName( "data" )
+	@Expose
+	private ContractsDataModel data;
 
-    /**
-     *
-     * @return
-     * The data
-     */
-    public ContractsDataModel getData() {
-        return data;
-    }
+	/**
+	 * @return The data
+	 */
+	public ContractsDataModel getData() {
+		return data;
+	}
 
-    /**
-     *
-     * @param data
-     * The data
-     */
-    public void setData(ContractsDataModel data) {
-        this.data = data;
-    }
+	/**
+	 * @param data The data
+	 */
+	public void setData( ContractsDataModel data ) {
+		this.data = data;
+	}
 }

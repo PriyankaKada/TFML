@@ -1,9 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.tfml.fragment.StatementOfAccountFragment">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.tfml.fragment.StatementOfAccountFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,15 +15,15 @@
             android:id="@+id/spnContractNo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="0.5"
             android:background="@drawable/selector_spinner"
-            android:layout_gravity="center"
             android:drawSelectorOnTop="false"
             android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:popupBackground="@color/white"
             android:scrollbars="none"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:spinnerMode="dropdown"/>
 
         <LinearLayout
@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-       >
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -77,8 +77,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="center"
                     android:layout_marginLeft="5dp"
+                    android:gravity="center"
                     android:text="@string/txt_due_date"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
@@ -102,9 +102,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
                     android:gravity="center"
                     android:text="@string/txt_emi_amount"
-                    android:layout_marginLeft="5dp"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -138,9 +138,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
                     android:gravity="center"
                     android:text="@string/txt_overdue"
-                    android:layout_marginLeft="5dp"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -163,9 +163,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
                     android:gravity="center"
                     android:text="@string/txt_repayment_mode"
-                    android:layout_marginLeft="5dp"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -178,6 +178,7 @@
                     android:textSize="14sp"/>
             </LinearLayout>
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -188,19 +189,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
->
+        >
+
         <LinearLayout
-            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_weight="3"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginRight="10dp"
-                android:layout_height="wrap_content">
+                android:layout_weight="3">
 
                 <TextView
                     android:id="@+id/txt_acc_select_date"
@@ -208,76 +210,82 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/whit_rect_bg"
                     android:gravity="left|center"
-                    android:padding="10dp"
                     android:hint="@string/txt_select_date"
+                    android:padding="10dp"
                     android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
+
                 <ImageView
                     android:id="@+id/imgCalender"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_margin="5dp"
                     android:layout_alignParentRight="true"
+                    android:layout_margin="5dp"
                     android:src="@drawable/ic_calendar"/>
             </RelativeLayout>
 
             <TextView
                 android:id="@+id/btn_submit"
                 android:layout_width="0dp"
-                android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:padding="10dp"
-                android:background="@color/colorPrimaryDark"
-                android:text="@string/txt_submit"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_weight="2"
+                android:background="@color/colorPrimaryDark"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/txt_submit"
                 android:textAllCaps="false"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"/>
+
             <ImageView
                 android:id="@+id/img_download"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center|end"
                 android:layout_marginLeft="10dp"
-                android:src="@drawable/ic_download" />
+                android:src="@drawable/ic_download"/>
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/lin_acc_detail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="visible"
+            android:layout_margin="10dp"
             android:background="@drawable/whit_rect_bg"
-            android:layout_margin="10dp">
+            android:orientation="vertical"
+            android:visibility="visible">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="1"
                 android:orientation="horizontal"
+                android:weightSum="1"
                 >
+
                 <Button
                     android:id="@+id/btn_basic_detail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:background="@color/tab_bg"
                     android:text="@string/txt_basic_details"
                     android:textAllCaps="false"
-                    android:background="@color/tab_bg"
-                    android:textColor="@color/white"
-                    android:layout_weight="0.5"/>
+                    android:textColor="@color/white"/>
 
                 <Button
                     android:id="@+id/btn_finance_detail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/tab_bg"
-                    android:textAllCaps="false"
-                    android:text="@string/txt_finance_details"
                     android:layout_marginLeft="5dp"
-                    android:textColor="@color/white"
-                    android:layout_weight="0.5"/>
+                    android:layout_weight="0.5"
+                    android:background="@color/tab_bg"
+                    android:text="@string/txt_finance_details"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"/>
             </LinearLayout>
+
             <FrameLayout
                 android:id="@+id/frm_acc_detail"
                 android:layout_width="match_parent"

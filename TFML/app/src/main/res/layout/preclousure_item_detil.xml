@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/llParent"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="4"
-    android:layout_marginBottom="2dp"
-    android:layout_marginLeft="2dp"
-    android:layout_marginRight="2dp"
+<LinearLayout android:id="@+id/llParent"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginBottom="2dp"
+              android:layout_marginLeft="2dp"
+              android:layout_marginRight="2dp"
+              android:orientation="vertical"
+              android:weightSum="4"
     >
+
     <LinearLayout
         android:id="@+id/lin_preclouser"
         android:layout_width="match_parent"
@@ -17,6 +18,7 @@
         android:orientation="vertical"
         android:padding="2dp"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,113 +26,125 @@
             android:orientation="horizontal"
 
             android:weightSum="4">
+
             <LinearLayout
                 android:id="@+id/lin_desc"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/dotted_bg"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:background="@drawable/dotted_bg"
                 android:padding="10dp"
                 >
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
                     android:layout_marginLeft="10dp"
+                    android:gravity="center"
                     android:orientation="vertical">
+
                     <TextView
                         android:id="@+id/txtDesc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:text="Description"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        android:text="Description"
+                        android:textSize="12sp"
                         />
 
                 </LinearLayout>
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/lin_due_amount"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/dotted_bg"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:background="@drawable/dotted_bg"
                 >
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     >
+
                     <TextView
                         android:id="@+id/txtDueAmount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:text="DueAmount"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        android:text="DueAmount"
+                        android:textSize="12sp"
                         />
 
                 </LinearLayout>
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/lin_rec_amount"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/dotted_bg"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:background="@drawable/dotted_bg"
                 >
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     >
+
                     <TextView
                         android:id="@+id/txtRecAmt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:text="RecievedAmount"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        android:text="RecievedAmount"
+                        android:textSize="12sp"
                         />
 
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/lin_netBal"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@color/white"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:background="@color/white"
                 >
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
                     android:layout_marginRight="10dp"
+                    android:gravity="center"
 
                     >
+
                     <TextView
                         android:id="@+id/txtNetBal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:text="NetBal"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        android:text="NetBal"
+                        android:textSize="12sp"
                         />
 
                 </LinearLayout>
@@ -145,36 +159,39 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginRight="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_large"
         android:background="@null"
         android:orientation="vertical"
-        android:layout_marginTop="@dimen/margin_large"
-        android:layout_marginRight="@dimen/margin_medium"
         android:visibility="gone"
-        android:layout_marginLeft="@dimen/margin_medium"
         android:weightSum="4">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="Generated on 11-02-2016 | 01:03 PM"
-            android:textColor="@color/text_black"
             android:layout_gravity="right"
             android:gravity="center"
+            android:text="Generated on 11-02-2016 | 01:03 PM"
+            android:textColor="@color/text_black"
+            android:textSize="12sp"
             />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@drawable/dotted_bg"
             android:layout_marginTop="@dimen/margin_large"
-        />
+            android:background="@drawable/dotted_bg"
+            />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="@color/color_grey"
             android:layout_gravity="center"
-            android:gravity="center"
             android:layout_margin="@dimen/margin_medium"
+            android:gravity="center"
+            android:textColor="@color/color_grey"
+            android:textSize="12sp"
             />
-        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

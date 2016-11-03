@@ -7,17 +7,17 @@ import org.simpleframework.xml.Root;
  * Created by Satyawan on 23/9/16.
  */
 
-@Root(name = "soapenv:Body", strict = false)
+@Root( name = "soapenv:Body", strict = false )
 public class ReqBody {
 
-    @Element(name = "urn:ZCIS",required = false)
-    ReqData reqData;
+	@Element( name = "urn:ZCIS", required = false )
+	ReqData reqData;
 
-    public ReqData getReqData() {
-        return reqData;
-    }
+	public ReqData getReqData() {
+		return reqData;
+	}
 
-    public void setReqData(ReqData reqData) {
-        this.reqData = reqData;
-    }
+	public void setReqData( ReqData reqData ) {
+		this.reqData = reqData;
+	}
 }

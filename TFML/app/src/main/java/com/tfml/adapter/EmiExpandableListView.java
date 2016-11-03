@@ -83,12 +83,10 @@ public class EmiExpandableListView extends BaseExpandableListAdapter {
 		emiViewHolder = new EmiViewHolder();
 		if ( convertView == null ) {
 			convertView = layoutInflater.inflate( R.layout.group_row_emi_detail, null );
-
 		}
 		emiViewHolder.txtEmiDate = ( TextView ) convertView.findViewById( R.id.txtEmiDate );
 		emiViewHolder.txtEmiAmount = ( TextView ) convertView.findViewById( R.id.txtEmiAmount );
 		emiViewHolder.txtCount = ( TextView ) convertView.findViewById( R.id.txtCount );
-
 		emiViewHolder.llRootHeader = ( LinearLayout ) convertView.findViewById( R.id.llRootHeader );
 		emiViewHolder.rlEmiDetail = ( RelativeLayout ) convertView.findViewById( R.id.rlEmiDetail );
 
@@ -100,6 +98,7 @@ public class EmiExpandableListView extends BaseExpandableListAdapter {
 			emiViewHolder.rlEmiDetail.setBackgroundDrawable( null );
 			emiViewHolder.llRootHeader.setBackgroundDrawable( mContext.getResources().getDrawable( R.drawable.list_row ) );
 		}
+
 
 		if ( ( groupPosition + 1 ) <= 9 ) {
 			emiViewHolder.txtCount.setText( "0" + ( groupPosition + 1 ) );
@@ -114,21 +113,18 @@ public class EmiExpandableListView extends BaseExpandableListAdapter {
 
 		if ( parentData.get( groupPosition ).getADATE() != null ) {
 			try {
-				date = inputFormat.parse( parentData.get( groupPosition ).getADATE().toString() );
+				date = inputFormat.parse( parentData.get( groupPosition ).getADATE() );
 				outputDateStr = outputFormat.format( date );
-				if ( !parentData.get( groupPosition ).getADATE().equalsIgnoreCase( "0000-00-00" ) ) {
-					emiViewHolder.txtEmiDate.setText( outputDateStr );
-				}
+				emiViewHolder.txtEmiDate.setText( outputDateStr );
 			}
 			catch ( ParseException e ) {
 				e.printStackTrace();
 			}
 		}
-
-
 		if ( parentData.get( groupPosition ).getAMOUNT() != null ) {
-			emiViewHolder.txtEmiAmount.setText( parentData.get( groupPosition ).getAMOUNT().toString() );
+			emiViewHolder.txtEmiAmount.setText( parentData.get( groupPosition ).getAMOUNT() );
 		}
+
 		return convertView;
 	}
 
@@ -138,18 +134,16 @@ public class EmiExpandableListView extends BaseExpandableListAdapter {
 		emiChildViewHolder = new EmiChildViewHolder();
 		if ( convertView == null ) {
 			convertView = layoutInflater.inflate( R.layout.child_row_emi_details, null );
-
 		}
-
 
 		emiChildViewHolder.txtEmiInsurance = ( TextView ) convertView.findViewById( R.id.txtEmiInsurance );
 		emiChildViewHolder.txtEmiInterest = ( TextView ) convertView.findViewById( R.id.txtEmiInterest );
 		emiChildViewHolder.txtEmiOsPrinciple = ( TextView ) convertView.findViewById( R.id.txtEmiOsPrinciple );
 		emiChildViewHolder.txtEmiPrinciple = ( TextView ) convertView.findViewById( R.id.txtEmiPrinciple );
-		emiChildViewHolder.txtEmiInsurance.setText( childData.get( groupPosition ).getINSAMT() == null ? "" : childData.get( groupPosition ).getINSAMT().toString() );
-		emiChildViewHolder.txtEmiInterest.setText( childData.get( groupPosition ).getFINCHRG() == null ? "" : childData.get( groupPosition ).getFINCHRG().toString() );
-		emiChildViewHolder.txtEmiOsPrinciple.setText( childData.get( groupPosition ).getPRIAMT() == null ? "" : childData.get( groupPosition ).getPRIAMT().toString() );
-
+		emiChildViewHolder.txtEmiInsurance.setText( childData.get( groupPosition ).getINSAMT() == null ? "-" : childData.get( groupPosition ).getINSAMT() );
+		emiChildViewHolder.txtEmiInterest.setText( childData.get( groupPosition ).getFINCHRG() == null ? "-" : childData.get( groupPosition ).getFINCHRG() );
+		emiChildViewHolder.txtEmiOsPrinciple.setText( childData.get( groupPosition ).getPRIAMT() == null ? "-" : childData.get( groupPosition ).getPRIAMT() );
+		emiChildViewHolder.txtEmiPrinciple.setText( childData.get( groupPosition ).getPRINCP() == null ? "-" : childData.get( groupPosition ).getPRINCP() );
 
 		return convertView;
 	}
@@ -164,12 +158,9 @@ public class EmiExpandableListView extends BaseExpandableListAdapter {
 		TextView txtEmiDate, txtEmiAmount, txtCount;
 		LinearLayout   llRootHeader;
 		RelativeLayout rlEmiDetail;
-
 	}
 
 	public class EmiChildViewHolder {
-
 		TextView txtEmiInterest, txtEmiPrinciple, txtEmiInsurance, txtEmiOsPrinciple;
-
 	}
 }

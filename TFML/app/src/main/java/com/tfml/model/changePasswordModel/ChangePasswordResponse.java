@@ -11,46 +11,38 @@ import java.util.List;
  */
 
 public class ChangePasswordResponse {
-    @SerializedName("status")
-    @Expose
-    private String status;
-    @SerializedName("error")
-    @Expose
-    private List<String> error = new ArrayList<String>();
+	@SerializedName( "status" )
+	@Expose
+	private String status;
+	@SerializedName( "error" )
+	@Expose
+	private List< String > error = new ArrayList< String >();
 
-    /**
-     *
-     * @return
-     * The status
-     */
-    public String getStatus() {
-        return status;
-    }
+	/**
+	 * @return The status
+	 */
+	public String getStatus() {
+		return status;
+	}
 
-    /**
-     *
-     * @param status
-     * The status
-     */
-    public void setStatus(String status) {
-        this.status = status;
-    }
+	/**
+	 * @param status The status
+	 */
+	public void setStatus( String status ) {
+		this.status = status;
+	}
 
-    /**
-     *
-     * @return
-     * The error
-     */
-    public List<String> getError() {
-        return error;
-    }
+	/**
+	 * @return The error
+	 */
+	public List< String > getError() {
+		return error;
+	}
 
-    /**
-     *
-     * @param error
-     * The error
-     */
-    public void setError(List<String> error) {
-        this.error = error;
-    }
+	/**
+	 * @param error The error
+	 */
+	public void setError( List< String > error ) {
+		this.error = error;
+	}
 }

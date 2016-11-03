@@ -9,68 +9,56 @@ import com.google.gson.annotations.SerializedName;
 
 public class ContactListResponseModel {
 
-    @SerializedName("email")
-    @Expose
-    private String email;
-    @SerializedName("whatsapp_no")
-    @Expose
-    private String whatsappNo;
-    @SerializedName("phone_no")
-    @Expose
-    private String phoneNo;
+	@SerializedName( "email" )
+	@Expose
+	private String email;
+	@SerializedName( "whatsapp_no" )
+	@Expose
+	private String whatsappNo;
+	@SerializedName( "phone_no" )
+	@Expose
+	private String phoneNo;
 
-    /**
-     *
-     * @return
-     * The email
-     */
-    public String getEmail() {
-        return email;
-    }
+	/**
+	 * @return The email
+	 */
+	public String getEmail() {
+		return email;
+	}
 
-    /**
-     *
-     * @param email
-     * The email
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	/**
+	 * @param email The email
+	 */
+	public void setEmail( String email ) {
+		this.email = email;
+	}
 
-    /**
-     *
-     * @return
-     * The whatsappNo
-     */
-    public String getWhatsappNo() {
-        return whatsappNo;
-    }
+	/**
+	 * @return The whatsappNo
+	 */
+	public String getWhatsappNo() {
+		return whatsappNo;
+	}
 
-    /**
-     *
-     * @param whatsappNo
-     * The whatsapp_no
-     */
-    public void setWhatsappNo(String whatsappNo) {
-        this.whatsappNo = whatsappNo;
-    }
+	/**
+	 * @param whatsappNo The whatsapp_no
+	 */
+	public void setWhatsappNo( String whatsappNo ) {
+		this.whatsappNo = whatsappNo;
+	}
 
-    /**
-     *
-     * @return
-     * The phoneNo
-     */
-    public String getPhoneNo() {
-        return phoneNo;
-    }
+	/**
+	 * @return The phoneNo
+	 */
+	public String getPhoneNo() {
+		return phoneNo;
+	}
 
-    /**
-     *
-     * @param phoneNo
-     * The phone_no
-     */
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
-    }
+	/**
+	 * @param phoneNo The phone_no
+	 */
+	public void setPhoneNo( String phoneNo ) {
+		this.phoneNo = phoneNo;
+	}
 
 }

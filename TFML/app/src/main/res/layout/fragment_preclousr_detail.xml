@@ -1,142 +1,158 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.tfml.fragment.PreclousrDetailFragment">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.tfml.fragment.PreclousrDetailFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp"
-        android:weightSum="4"
-        android:layout_height="wrap_content">
+        android:weightSum="4">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
             android:orientation="vertical"
             >
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:orientation="horizontal"
                 android:weightSum="4">
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/dotted_bg"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:background="@drawable/dotted_bg"
                     android:padding="10dp"
                     >
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_marginLeft="10dp"
+                        android:gravity="center"
                         android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/txtDesc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:text="DESCRIPTION"
                             android:layout_gravity="center"
                             android:gravity="center"
+                            android:text="DESCRIPTION"
+                            android:textSize="12sp"
                             />
 
                     </LinearLayout>
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/dotted_bg"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:background="@drawable/dotted_bg"
                     >
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         >
+
                         <TextView
                             android:id="@+id/txtDueAmount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:text="DUE AMOUNT"
                             android:layout_gravity="center"
                             android:gravity="center"
+                            android:text="DUE AMOUNT"
+                            android:textSize="12sp"
                             />
 
                     </LinearLayout>
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@drawable/dotted_bg"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:background="@drawable/dotted_bg"
                     >
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         >
+
                         <TextView
                             android:id="@+id/txtRecAmt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:text="RECEIVED AMOUNT"
                             android:layout_gravity="center"
                             android:gravity="center"
+                            android:text="RECEIVED AMOUNT"
+                            android:textSize="12sp"
                             />
 
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:background="@color/white"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:background="@color/white"
                     >
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_marginRight="10dp"
+                        android:gravity="center"
 
                         >
+
                         <TextView
                             android:id="@+id/txtNetBal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="12sp"
-                            android:text="NET BAL"
                             android:layout_gravity="center"
                             android:gravity="center"
+                            android:text="NET BAL"
+                            android:textSize="12sp"
                             />
 
                     </LinearLayout>
 
                 </LinearLayout>
-    </LinearLayout>
+            </LinearLayout>
 
-</LinearLayout>
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/lst_pre_closure"></ListView>
         </LinearLayout>
+
+        <ListView
+            android:id="@+id/lst_pre_closure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
     </LinearLayout>
+</LinearLayout>
 

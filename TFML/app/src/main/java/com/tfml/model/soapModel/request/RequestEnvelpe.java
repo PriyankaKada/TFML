@@ -9,22 +9,22 @@ import org.simpleframework.xml.Root;
  * Created by Satyawan on 23/9/16.
  */
 
-@Root(name = "soapenv:Envelope")
-@NamespaceList({
-        @Namespace( prefix = "soapenv", reference = "http://schemas.xmlsoap.org/soap/envelope/"),
-        @Namespace( prefix = "urn", reference = "urn:sap-com:document:sap:rfc:functions")
-})
+@Root( name = "soapenv:Envelope" )
+@NamespaceList( {
+		@Namespace( prefix = "soapenv", reference = "http://schemas.xmlsoap.org/soap/envelope/" ),
+		@Namespace( prefix = "urn", reference = "urn:sap-com:document:sap:rfc:functions" )
+} )
 public class RequestEnvelpe {
 
-    @Element(name = "soapenv:Body", required = false)
-    ReqBody reqBody;
+	@Element( name = "soapenv:Body", required = false )
+	ReqBody reqBody;
 
 
-    public ReqBody getReqBody() {
-        return reqBody;
-    }
+	public ReqBody getReqBody() {
+		return reqBody;
+	}
 
-    public void setReqBody(ReqBody reqBody) {
-        this.reqBody = reqBody;
-    }
+	public void setReqBody( ReqBody reqBody ) {
+		this.reqBody = reqBody;
+	}
 }

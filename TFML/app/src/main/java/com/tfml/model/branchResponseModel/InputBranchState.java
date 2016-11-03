@@ -9,20 +9,17 @@ import com.google.gson.annotations.SerializedName;
 
 public class InputBranchState {
 
-    @SerializedName("state_id")
-    @Expose
-    private String stateId;
+	@SerializedName( "state_id" )
+	@Expose
+	private String stateId;
 
-    public String getStateId() {
-        return stateId;
-    }
+	public String getStateId() {
+		return stateId;
+	}
 
-    public void setStateId(String stateId) {
-        this.stateId = stateId;
-    }
-
-
-
+	public void setStateId( String stateId ) {
+		this.stateId = stateId;
+	}
 
 
 }

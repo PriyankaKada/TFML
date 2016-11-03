@@ -8,27 +8,28 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class EmiListInputModel {
-    @SerializedName("contract_no")
-    @Expose
-    public String contractNo;
-    @SerializedName("api_token")
-    @Expose
-    public String apiToken;
-    public String getApiToken() {
-        return apiToken;
-    }
+	@SerializedName( "contract_no" )
+	@Expose
+	public String contractNo;
+	@SerializedName( "api_token" )
+	@Expose
+	public String apiToken;
 
-    public void setApiToken(String apiToken) {
-        this.apiToken = apiToken;
-    }
+	public String getApiToken() {
+		return apiToken;
+	}
 
-    public String getContractNo() {
-        return contractNo;
-    }
+	public void setApiToken( String apiToken ) {
+		this.apiToken = apiToken;
+	}
 
-    public void setContractNo(String contractNo) {
-        this.contractNo = contractNo;
-    }
+	public String getContractNo() {
+		return contractNo;
+	}
+
+	public void setContractNo( String contractNo ) {
+		this.contractNo = contractNo;
+	}
 
 
 }

@@ -12,46 +12,38 @@ import java.util.List;
 
 public class TerminatedContractsModel {
 
-    @SerializedName("contracts")
-    @Expose
-    private List<ContractModel> contracts = new ArrayList<ContractModel>();
-    @SerializedName("count")
-    @Expose
-    private Integer count;
+	@SerializedName( "contracts" )
+	@Expose
+	private List< ContractModel > contracts = new ArrayList< ContractModel >();
+	@SerializedName( "count" )
+	@Expose
+	private Integer count;
 
-    /**
-     *
-     * @return
-     * The contracts
-     */
-    public List<ContractModel> getContracts() {
-        return contracts;
-    }
+	/**
+	 * @return The contracts
+	 */
+	public List< ContractModel > getContracts() {
+		return contracts;
+	}
 
-    /**
-     *
-     * @param contracts
-     * The contracts
-     */
-    public void setContracts(List<ContractModel> contracts) {
-        this.contracts = contracts;
-    }
+	/**
+	 * @param contracts The contracts
+	 */
+	public void setContracts( List< ContractModel > contracts ) {
+		this.contracts = contracts;
+	}
 
-    /**
-     *
-     * @return
-     * The count
-     */
-    public Integer getCount() {
-        return count;
-    }
+	/**
+	 * @return The count
+	 */
+	public Integer getCount() {
+		return count;
+	}
 
-    /**
-     *
-     * @param count
-     * The count
-     */
-    public void setCount(Integer count) {
-        this.count = count;
-    }
+	/**
+	 * @param count The count
+	 */
+	public void setCount( Integer count ) {
+		this.count = count;
+	}
 }

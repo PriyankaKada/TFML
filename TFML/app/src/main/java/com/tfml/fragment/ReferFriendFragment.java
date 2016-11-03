@@ -57,14 +57,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ReferFriendFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, RadioGroup.OnCheckedChangeListener,EditText.OnEditorActionListener {
+public class ReferFriendFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, RadioGroup.OnCheckedChangeListener, EditText.OnEditorActionListener {
 
-    private EditText  edtFirstName, edtLastName, edtMobileNumber, edtLandlineNumber, edtEmailAddress, edtOrgnizationName, edtCode;
-    private Spinner spnProduct, spSelectBranchState, spSelectBranchCity, spSelectBranch, spSelectCity, spSelectState, spOffers;
-    private RadioButton rdbLeadTypeIndividual, rdbLeadTypeOrganizational, rdbVecTypeCommercial, rdbVechTypeRefinance, rdbVechPassanger;
-    private Button btnCancel, btnReferFriends;
-    private List<String> branchStateList, branchCityList, branchList, cityList, stateList;
-    private RadioGroup radioGroupLeadType, radioGroupVehicleType;
 	String strLeadTypechk  = "";
 	String strVechicalType = "";
 	TmflApi               tmflApi;
@@ -77,6 +71,12 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 	ArrayList< String > spOfferList;
 	String              strUserid, strOfferId;
 	View view;
+	private EditText edtFirstName, edtLastName, edtMobileNumber, edtLandlineNumber, edtEmailAddress, edtOrgnizationName, edtCode;
+	private Spinner spnProduct, spSelectBranchState, spSelectBranchCity, spSelectBranch, spSelectCity, spSelectState, spOffers;
+	private RadioButton rdbLeadTypeIndividual, rdbLeadTypeOrganizational, rdbVecTypeCommercial, rdbVechTypeRefinance, rdbVechPassanger;
+	private Button btnCancel, btnReferFriends;
+	private List< String > branchStateList, branchCityList, branchList, cityList, stateList;
+	private RadioGroup radioGroupLeadType, radioGroupVehicleType;
 
 	@Override
 	public View onCreateView( LayoutInflater inflater, ViewGroup container,
@@ -97,40 +97,40 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		}
 		spOffers.setAdapter( new ArrayAdapter< Datum >( getActivity(), R.layout.layout_spinner_textview, arDatumList ) );
 
-		BranchResponseModel branchResponseModel=new BranchResponseModel();
-		branchResponseModel.setTerrCaption("Select Branch");
-		branchResponseModel.setTerrTerritoryid("-1");
-		List<BranchResponseModel>dummyBranchList=new ArrayList<>();
-		dummyBranchList.add(0,branchResponseModel);
-		spSelectBranch.setAdapter(new BranchListAdapter(getActivity(),dummyBranchList));
+		BranchResponseModel branchResponseModel = new BranchResponseModel();
+		branchResponseModel.setTerrCaption( "Select Branch" );
+		branchResponseModel.setTerrTerritoryid( "-1" );
+		List< BranchResponseModel > dummyBranchList = new ArrayList<>();
+		dummyBranchList.add( 0, branchResponseModel );
+		spSelectBranch.setAdapter( new BranchListAdapter( getActivity(), dummyBranchList ) );
 
-		BranchCityResponseModel branchCityResponseModel=new BranchCityResponseModel();
-		branchCityResponseModel.setTerrCaption("Select Branch City");
-		branchCityResponseModel.setTerrTerritoryid("-1");
-		List<BranchCityResponseModel>dummyBranchCityList=new ArrayList<>();
-		dummyBranchCityList.add(0,branchCityResponseModel);
-		spSelectBranchCity.setAdapter(new BranchCityAdapter(getActivity(),dummyBranchCityList));
-		BranchStateResponseModel branchStateResponseModel=new BranchStateResponseModel();
-		branchStateResponseModel.setTerrCaption("Select Branch State");
-		branchStateResponseModel.setTerrTerritoryid("-1");
-		List<BranchStateResponseModel>dummyBranchStateList=new ArrayList<>();
-		dummyBranchStateList.add(0,branchStateResponseModel);
-		spSelectBranchState.setAdapter(new BranchStateAdapter(getActivity(),dummyBranchStateList));
+		BranchCityResponseModel branchCityResponseModel = new BranchCityResponseModel();
+		branchCityResponseModel.setTerrCaption( "Select Branch City" );
+		branchCityResponseModel.setTerrTerritoryid( "-1" );
+		List< BranchCityResponseModel > dummyBranchCityList = new ArrayList<>();
+		dummyBranchCityList.add( 0, branchCityResponseModel );
+		spSelectBranchCity.setAdapter( new BranchCityAdapter( getActivity(), dummyBranchCityList ) );
+		BranchStateResponseModel branchStateResponseModel = new BranchStateResponseModel();
+		branchStateResponseModel.setTerrCaption( "Select Branch State" );
+		branchStateResponseModel.setTerrTerritoryid( "-1" );
+		List< BranchStateResponseModel > dummyBranchStateList = new ArrayList<>();
+		dummyBranchStateList.add( 0, branchStateResponseModel );
+		spSelectBranchState.setAdapter( new BranchStateAdapter( getActivity(), dummyBranchStateList ) );
 
-		StateResponseModel stateResponseModel=new StateResponseModel();
-		stateResponseModel.setName("Select State");
-		stateResponseModel.setId("-1");
-		List<StateResponseModel>dummyStatList=new ArrayList<>();
-		dummyStatList.add(0,stateResponseModel);
-		spSelectState.setAdapter(new StateAdapter(getActivity(),dummyStatList));
+		StateResponseModel stateResponseModel = new StateResponseModel();
+		stateResponseModel.setName( "Select State" );
+		stateResponseModel.setId( "-1" );
+		List< StateResponseModel > dummyStatList = new ArrayList<>();
+		dummyStatList.add( 0, stateResponseModel );
+		spSelectState.setAdapter( new StateAdapter( getActivity(), dummyStatList ) );
 
-		CityResponseModel cityModel=new CityResponseModel();
-		cityModel.setName("Select City");
-		cityModel.setId("-1");
+		CityResponseModel cityModel = new CityResponseModel();
+		cityModel.setName( "Select City" );
+		cityModel.setId( "-1" );
 
-		List<CityResponseModel> dummyCityList=new ArrayList();
-		dummyCityList.add(0,cityModel);
-		spSelectCity.setAdapter(new CityAdapter(getActivity(),dummyCityList));
+		List< CityResponseModel > dummyCityList = new ArrayList();
+		dummyCityList.add( 0, cityModel );
+		spSelectCity.setAdapter( new CityAdapter( getActivity(), dummyCityList ) );
 		return view;
 	}
 
@@ -190,8 +190,8 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		inputBranchModel = new InputBranchModel();
 		btnCancel.setOnClickListener( this );
 		btnReferFriends.setOnClickListener( this );
-		edtMobileNumber.setOnEditorActionListener(this);
-		edtLandlineNumber.setOnEditorActionListener(this);
+		edtMobileNumber.setOnEditorActionListener( this );
+		edtLandlineNumber.setOnEditorActionListener( this );
 	}
 
 	@Override
@@ -239,26 +239,24 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 			loadReferFriendsResponse( inputReferFriendModel );
 		}
 		else {
-			Toast.makeText(getActivity(), "Please Fill the Required Detail", Toast.LENGTH_SHORT).show();
+			Toast.makeText( getActivity(), "Please Fill the Required Detail", Toast.LENGTH_SHORT ).show();
 			CommonUtils.closeProgressDialog();
 		}
 	}
 
 	public void callReferFriendService() {
-		strUserid = PreferenceHelper.getString(PreferenceHelper.USER_ID);
-		if(strUserid!=null)
-		{
-			inputReferFriendModel.setUserId(strUserid);
+		strUserid = PreferenceHelper.getString( PreferenceHelper.USER_ID );
+		if ( strUserid != null ) {
+			inputReferFriendModel.setUserId( strUserid );
 		}
-		else
-		{
-			inputReferFriendModel.setUserId("0");
+		else {
+			inputReferFriendModel.setUserId( "0" );
 		}
 		inputReferFriendModel.setOfferId( strOfferId );
 		inputReferFriendModel.setFirstName( edtFirstName.getText().toString() );
 		inputReferFriendModel.setLastName( edtLastName.getText().toString() );
 		inputReferFriendModel.setMobileNumber( edtMobileNumber.getText().toString() );
-		inputReferFriendModel.setLandlineNumber(edtLandlineNumber.getText().toString() );
+		inputReferFriendModel.setLandlineNumber( edtLandlineNumber.getText().toString() );
 		inputReferFriendModel.setEmailAddress( edtEmailAddress.getText().toString() );
 		if ( productCode != null && productCode != "-1" ) {
 			inputReferFriendModel.setProductId( productCode );
@@ -309,13 +307,11 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		inputReferFriendModel.setLeadType( strLeadTypechk );
 		inputReferFriendModel.setOrganisationName( edtOrgnizationName.getText().toString() );
 		inputReferFriendModel.setVehicalType( strVechicalType );
-		if((PreferenceHelper.getString(PreferenceHelper.USER_ID))!=null)
-		{
-			inputReferFriendModel.setReferedBy(PreferenceHelper.getString(PreferenceHelper.USER_ID) );
+		if ( ( PreferenceHelper.getString( PreferenceHelper.USER_ID ) ) != null ) {
+			inputReferFriendModel.setReferedBy( PreferenceHelper.getString( PreferenceHelper.USER_ID ) );
 		}
-		else
-		{
-			inputReferFriendModel.setReferedBy("0");
+		else {
+			inputReferFriendModel.setReferedBy( "0" );
 		}
 
 
@@ -343,8 +339,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 			@Override
 			public void onResponse( Call< ReferFriendResponseModel > call, Response< ReferFriendResponseModel > response ) {
 				CommonUtils.closeProgressDialog();
-				if(response.body()!=null)
-				{
+				if ( response.body() != null ) {
 					if ( response.body().getStatus().contains( "success" ) ) {
 						Log.e( "getFriendResponse", response.body().getStatus() );
 						showAlert( getActivity(), "Refer Friends", "Thanks for this approach", true );
@@ -432,19 +427,19 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 
 	@Override
 	public void onCheckedChanged( RadioGroup group, int checkedId ) {
-		switch (group.getCheckedRadioButtonId() ) {
+		switch ( group.getCheckedRadioButtonId() ) {
 			case R.id.rdb_organization:
 				if ( checkedId == R.id.rdb_organization ) {
 					strLeadTypechk = "Organizational";
 					inputReferFriendModel.setLeadType( strLeadTypechk );
-					edtOrgnizationName.setVisibility(View.VISIBLE);
+					edtOrgnizationName.setVisibility( View.VISIBLE );
 				}
 				break;
 			case R.id.rdb_individual:
 				if ( checkedId == R.id.rdb_individual ) {
 					strLeadTypechk = "0";
 					inputReferFriendModel.setLeadType( strLeadTypechk );
-					edtOrgnizationName.setVisibility(View.GONE);
+					edtOrgnizationName.setVisibility( View.GONE );
 				}
 				break;
 			case R.id.rdb_commercial:
@@ -467,44 +462,42 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 				break;
 		}
 	}
-	public void clearData()
-	{
-		edtFirstName.setText("");
-		edtLastName.setText("");
-		edtMobileNumber.setText("");
-		edtLandlineNumber.setText("");
-		edtEmailAddress.setText("");
-		edtOrgnizationName.setText("");
-		edtCode.setText("");
+
+	public void clearData() {
+		edtFirstName.setText( "" );
+		edtLastName.setText( "" );
+		edtMobileNumber.setText( "" );
+		edtLandlineNumber.setText( "" );
+		edtEmailAddress.setText( "" );
+		edtOrgnizationName.setText( "" );
+		edtCode.setText( "" );
 		radioGroupLeadType.clearCheck();
 		radioGroupVehicleType.clearCheck();
-		spnProduct.setSelection(0);
-		spSelectBranchState.setSelection(0);
-		spSelectBranchCity.setSelection(0);
-		spSelectBranch.setSelection(0);
-		spSelectCity.setSelection(0);
-		spSelectState.setSelection(0);
-		spOffers.setSelection(0);
+		spnProduct.setSelection( 0 );
+		spSelectBranchState.setSelection( 0 );
+		spSelectBranchCity.setSelection( 0 );
+		spSelectBranch.setSelection( 0 );
+		spSelectCity.setSelection( 0 );
+		spSelectState.setSelection( 0 );
+		spOffers.setSelection( 0 );
 	}
 
 	private void hideKeyboard() {
 		// Check if no view has focus:
 		View view = getActivity().getCurrentFocus();
-		if (view != null) {
-			InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-			inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+		if ( view != null ) {
+			InputMethodManager inputManager = ( InputMethodManager ) getActivity().getSystemService( Context.INPUT_METHOD_SERVICE );
+			inputManager.hideSoftInputFromWindow( view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS );
 		}
 	}
-	public void showAlert( Context ctx, String title, String message, boolean cancelable )
-	{
+
+	public void showAlert( Context ctx, String title, String message, boolean cancelable ) {
 		new AlertDialog.Builder( ctx )
 				.setTitle( title )
 				.setCancelable( cancelable )
 				.setMessage( message )
-				.setPositiveButton( android.R.string.yes, new DialogInterface.OnClickListener()
-				{
-					public void onClick( DialogInterface dialog, int which )
-					{
+				.setPositiveButton( android.R.string.yes, new DialogInterface.OnClickListener() {
+					public void onClick( DialogInterface dialog, int which ) {
 						clearData();
 					}
 				} ).show();
@@ -512,8 +505,8 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 
 
 	@Override
-	public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-		if (actionId == EditorInfo.IME_ACTION_GO) {
+	public boolean onEditorAction( TextView v, int actionId, KeyEvent event ) {
+		if ( actionId == EditorInfo.IME_ACTION_GO ) {
 			//Handle go key click
 			hideKeyboard();
 			return true;

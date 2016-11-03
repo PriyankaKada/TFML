@@ -1,265 +1,297 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/list_row"
-        android:padding="5dp"
-        >
+        android:padding="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/lbl_amount_financed"
+            android:background="@drawable/list_row"
+            android:orientation="vertical"
+            android:padding="5dp"
+            >
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_black"
-                android:text="@string/txt_amount_financed"/>
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lbl_amount_financed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/txt_amount_financed"
+                    android:textColor="@color/text_black"/>
+
+                <TextView
+                    android:id="@+id/txt_amount_financed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lbl_finance_charges"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/txt_finance_charges"
+                    android:textColor="@color/text_black"/>
+
+                <TextView
+                    android:id="@+id/txt_finance_charges"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lbl_insurance_provision"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/txt_insurance_provision"
+                    android:textColor="@color/text_black"/>
+
+                <TextView
+                    android:id="@+id/txt_insurance_provision"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="0.00"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lbl_option_money"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/txt_option_money"
+                    android:textColor="@color/text_black"/>
+
+                <TextView
+                    android:id="@+id/txt_option_money"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="0.00"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lbl_total_receivable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/txt_total_receivable"
+                    android:textColor="@color/text_black"/>
+
+                <TextView
+                    android:id="@+id/txt_total_receivable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        <!-- <View
+             android:layout_width="match_parent"
+             android:layout_height="3dp"
+             android:layout_marginTop="10dp"
+             android:background="@drawable/vertical_line" />-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_row"
+            android:orientation="vertical"
+            android:padding="5dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lbl_amt_credited"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/txt_amount_credit_upto"
+                    android:textColor="@color/text_black"/>
+
+                <TextView
+                    android:id="@+id/txt_amt_credited"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lbl_amt_credited_economic_year"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/txt_amount_credited_from"
+                    android:textColor="@color/text_black"/>
+
+                <TextView
+                    android:id="@+id/txt_amt_credited_economic_year"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="0.00"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_row"
+            android:orientation="vertical"
+            android:padding="5dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lbl_total_credit_uptop_31mar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/txt_total_credit_upto"
+                    android:textColor="@color/text_black"/>
+
+                <TextView
+                    android:id="@+id/txt_total_credit_uptop_31mar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lbl_balance_payable_on_contract"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/txt_balance_payable_amount_contract"
+                    android:textColor="@color/text_black"/>
+
+                <TextView
+                    android:id="@+id/txt_balance_payable_on_contract"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="0.00"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
 
             <TextView
-                android:id="@+id/txt_amount_financed"
+                android:id="@+id/lbl_principal_period"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/txt_principal_for_the_period"
+                android:textColor="@color/text_black"/>
+
+            <TextView
+                android:id="@+id/txt_principal_period"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
-                />
+                android:text="0.00"/>
         </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/lbl_finance_charges"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_black"
-            android:text="@string/txt_finance_charges"/>
-        <TextView
-            android:id="@+id/txt_finance_charges"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-           />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/lbl_insurance_provision"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_black"
-            android:text="@string/txt_insurance_provision"/>
-        <TextView
-            android:id="@+id/txt_insurance_provision"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="0.00"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/lbl_option_money"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_black"
-            android:text="@string/txt_option_money"/>
-        <TextView
-            android:id="@+id/txt_option_money"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="0.00"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/lbl_total_receivable"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_black"
-            android:text="@string/txt_total_receivable"/>
-        <TextView
-            android:id="@+id/txt_total_receivable"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            />
-    </LinearLayout>
-        </LinearLayout>
-       <!-- <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/vertical_line" />-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/list_row"
-        android:padding="5dp"
-        >
         <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/lbl_amt_credited"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_black"
-            android:text="@string/txt_amount_credit_upto"/>
-        <TextView
-            android:id="@+id/txt_amt_credited"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/lbl_amt_credited_economic_year"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_black"
-            android:text="@string/txt_amount_credited_from"/>
-        <TextView
-            android:id="@+id/txt_amt_credited_economic_year"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="0.00"/>
-    </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/list_row"
-        android:padding="5dp"
-        >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/lbl_total_credit_uptop_31mar"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_black"
-            android:text="@string/txt_total_credit_upto"/>
-        <TextView
-            android:id="@+id/txt_total_credit_uptop_31mar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-           />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/lbl_balance_payable_on_contract"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_black"
-            android:text="@string/txt_balance_payable_amount_contract"/>
-        <TextView
-            android:id="@+id/txt_balance_payable_on_contract"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="0.00"/>
-    </LinearLayout>
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:padding="5dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/lbl_principal_period"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_black"
-            android:text="@string/txt_principal_for_the_period"/>
-        <TextView
-            android:id="@+id/txt_principal_period"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="0.00"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/lbl_finance_charges_economy_year"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_black"
-            android:text="@string/txt_finance_charges_for_the_period"/>
-        <TextView
-            android:id="@+id/txt_finance_charges_economy_year"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="0.00"/>
-    </LinearLayout>
+            <TextView
+                android:id="@+id/lbl_finance_charges_economy_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/txt_finance_charges_for_the_period"
+                android:textColor="@color/text_black"/>
+
+            <TextView
+                android:id="@+id/txt_finance_charges_economy_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="0.00"/>
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

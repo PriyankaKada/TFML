@@ -10,34 +10,33 @@ import android.widget.TextView;
 import com.tfml.R;
 import com.tfml.model.productResponseModel.ProductListResponseModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by webwerks on 23/8/16.
  */
 
-public class ProductAdapter extends ArrayAdapter<ProductListResponseModel> {
-    private Context context;
+public class ProductAdapter extends ArrayAdapter< ProductListResponseModel > {
+	private Context context;
 
-    public ProductAdapter(Context context, List<ProductListResponseModel> data) {
-        super(context,0, data);
-        this.context=context;
-    }
+	public ProductAdapter( Context context, List< ProductListResponseModel > data ) {
+		super( context, 0, data );
+		this.context = context;
+	}
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-        if (row == null) {
-            row = LayoutInflater.from(context).inflate(R.layout.layout_spinner_textview, parent, false);
-        }
-        TextView ProductName = (TextView) row.findViewById(R.id.txtValue);
-        ProductName.setText(getItem(position).getProdName());
-        return row;
-    }
+	@Override
+	public View getView( int position, View convertView, ViewGroup parent ) {
+		View row = convertView;
+		if ( row == null ) {
+			row = LayoutInflater.from( context ).inflate( R.layout.layout_spinner_textview, parent, false );
+		}
+		TextView ProductName = ( TextView ) row.findViewById( R.id.txtValue );
+		ProductName.setText( getItem( position ).getProdName() );
+		return row;
+	}
 
-    @Override
-    public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        return getView(position,convertView,parent);
-    }
+	@Override
+	public View getDropDownView( int position, View convertView, ViewGroup parent ) {
+		return getView( position, convertView, parent );
+	}
 }

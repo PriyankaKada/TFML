@@ -15,8 +15,7 @@ import com.tfml.R;
 /**
  * Created by Satyawan on 1/8/16.
  */
-public class CommonUtils
-{
+public class CommonUtils {
 	private static ProgressDialog mProgress;
 
 	/**
@@ -25,8 +24,7 @@ public class CommonUtils
 	 * @param ctx
 	 * @return
 	 */
-	public static boolean isNetworkAvailable( Context ctx )
-	{
+	public static boolean isNetworkAvailable( Context ctx ) {
 		ConnectivityManager cm = ( ConnectivityManager ) ctx.getSystemService( Context.CONNECTIVITY_SERVICE );
 		NetworkInfo         ni = cm.getActiveNetworkInfo();
 		return ni != null;
@@ -38,16 +36,16 @@ public class CommonUtils
 	 * @param ctx
 	 * @param message
 	 */
-	public static void showProgressDialog( Context ctx, String message )
-	{
+	public static void showProgressDialog( Context ctx, String message ) {
 		/**
 		 * In Marshmallow the progressbar takes Accent color & the current accent color is white,
 		 * so the dialog appears as not having the progressbar.
 		 * Apply style to change the color of the progressbar.
 		 */
 
-		if(mProgress == null)
-		mProgress = new ProgressDialog(ctx, R.style.AppCompatProgressDialogStyle );
+		if ( mProgress == null ) {
+			mProgress = new ProgressDialog( ctx, R.style.AppCompatProgressDialogStyle );
+		}
 		mProgress.setMessage( message );
 		mProgress.setCancelable( false );
 		mProgress.show();
@@ -57,15 +55,14 @@ public class CommonUtils
 		 * So Make it Match parent.
 		 */
 		Window window = mProgress.getWindow();
-		window.setLayout( WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+		window.setLayout( WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT );
 	}
 
 	/**
 	 * Dismisses the Progress Bar
 	 */
-	public static void closeProgressDialog()
-	{
-		if( mProgress != null ){
+	public static void closeProgressDialog() {
+		if ( mProgress != null ) {
 			mProgress.dismiss();
 			mProgress = null;
 		}
@@ -79,23 +76,17 @@ public class CommonUtils
 	 * @param message
 	 * @param cancelable
 	 */
-	public static void showAlert1( Context ctx, String title, String message, boolean cancelable )
-	{
+	public static void showAlert1( Context ctx, String title, String message, boolean cancelable ) {
 		new AlertDialog.Builder( ctx )
 				.setTitle( title )
 				.setCancelable( cancelable )
 				.setMessage( message )
-				.setPositiveButton( android.R.string.yes, new DialogInterface.OnClickListener()
-				{
-					public void onClick( DialogInterface dialog, int which )
-					{
+				.setPositiveButton( android.R.string.yes, new DialogInterface.OnClickListener() {
+					public void onClick( DialogInterface dialog, int which ) {
 						// do nothing..
 					}
 				} ).show();
 	}
-
-
-
 
 
 }

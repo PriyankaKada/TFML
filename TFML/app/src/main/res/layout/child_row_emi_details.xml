@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,13 +27,13 @@
                     style="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Interest" />
+                    android:text="Interest"/>
 
                 <TextView
                     android:id="@+id/txtEmiInterest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                   />
+                    />
             </LinearLayout>
 
 
@@ -48,7 +48,7 @@
                     style="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Principle" />
+                    android:text="Principle"/>
 
                 <TextView
                     android:id="@+id/txtEmiPrinciple"
@@ -68,13 +68,13 @@
                     style="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Insurance" />
+                    android:text="Insurance"/>
 
                 <TextView
                     android:id="@+id/txtEmiInsurance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0.00" />
+                    android:text="0.00"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:gravity="left"
-                android:text="O/S Principle " />
+                android:text="O/S Principle "/>
 
             <TextView
                 android:id="@+id/txtEmiOsPrinciple"
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="0.00"
-                android:textColor="#11d911" />
+                android:textColor="#11d911"/>
 
         </LinearLayout>
     </LinearLayout>

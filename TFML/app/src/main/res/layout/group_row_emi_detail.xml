@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/llRootHeader"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/list_row"
-    android:orientation="vertical"
-
-    >
+<LinearLayout android:id="@+id/llRootHeader"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/list_row"
+              android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/ll_header_row"
@@ -27,6 +25,7 @@
                 android:id="@+id/ll_daterow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
@@ -35,53 +34,44 @@
                 <TextView
                     android:id="@+id/txtCount"
                     style="@style/Base.TextAppearance.AppCompat.Subhead"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="01" />
+                    android:text=""/>
 
 
                 <TextView
                     android:id="@+id/txtEmiDate"
                     style="@style/Base.TextAppearance.AppCompat.Subhead"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:layout_weight="4"
                     android:gravity="left|center"
-                    android:text="Receipt Date/ReceiptNo"
-                    android:textSize="12sp" />
+                    android:text=""
+                    android:textSize="12sp"/>
 
                 <TextView
                     android:id="@+id/txtEmiAmount"
                     style="@style/Base.TextAppearance.AppCompat.Subhead"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:layout_weight="4"
                     android:gravity="left|center"
-                    android:text="Receipt Amount"
-                    android:textSize="12sp" />
+                    android:text=""
+                    android:textSize="12sp"/>
 
                 <ImageView
                     android:id="@+id/img_expand"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
                     android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/ic_spin_bg_small" />
+                    android:src="@drawable/ic_spin_bg_small"/>
             </LinearLayout>
 
-
         </RelativeLayout>
-
-        <TextView
-            android:id="@+id/txtAmount2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="180dp"
-            android:layout_weight="4"
-            android:text="Receipt Amount"
-            android:textSize="12sp"
-            android:visibility="gone" />
     </LinearLayout>
-
 </LinearLayout>

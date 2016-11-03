@@ -1,9 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.tfml.fragment.EmiPatternFragment">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.tfml.fragment.EmiPatternFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,16 +15,16 @@
             android:id="@+id/spnContractNo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="0.5"
             android:background="@drawable/selector_spinner"
-            android:layout_gravity="center"
             android:drawSelectorOnTop="false"
             android:gravity="left"
+            android:paddingBottom="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
             android:popupBackground="@color/white"
             android:scrollbars="none"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp"
             android:spinnerMode="dropdown"/>
 
         <LinearLayout
@@ -58,8 +59,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:elevation="5dp">
+        android:elevation="5dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,8 +73,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:paddingLeft="5dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -132,8 +133,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:paddingLeft="5dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -177,6 +178,7 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
     <FrameLayout
         android:id="@+id/frm_emi_detail"
         android:layout_width="match_parent"

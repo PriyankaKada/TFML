@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp"
-    android:layout_margin="10dp">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_margin="10dp"
+              android:orientation="vertical"
+              android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-       <EditText
-           android:id="@+id/edt_mobile_no"
-           android:layout_width="0dp"
-           android:layout_weight="1"
-           android:layout_height="wrap_content"
-           android:textColor="@color/text_black"
-           android:maxLength="12"
-           android:inputType="phone"
-           android:maxLines="1"
-           android:imeOptions="actionDone"
-           android:padding="10dp"
-           android:background="@null"
-           android:hint=" * Enter Mobile No." />
+        <EditText
+            android:id="@+id/edt_mobile_no"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint=" * Enter Mobile No."
+            android:imeOptions="actionDone"
+            android:inputType="phone"
+            android:maxLength="12"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="@color/text_black"/>
 
         <ImageView
             android:id="@+id/img_Refresh_token"
@@ -32,43 +32,45 @@
             android:src="@mipmap/ic_refresh_otp"
             android:visibility="gone"/>
     </LinearLayout>
+
     <View
         android:id="@+id/UnderLine"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="2dp"
-        android:background="@color/color_grey" />
+        android:background="@color/color_grey"/>
 
-       <EditText
-           android:id="@+id/edt_otp_no"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="10dp"
-           android:padding="10dp"
-           android:maxLines="1"
-           android:background="@null"
-           android:maxLength="12"
-           android:textColor="@color/text_black"
-           android:hint=" * Enter OTP No." />
+    <EditText
+        android:id="@+id/edt_otp_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:hint=" * Enter OTP No."
+        android:maxLength="12"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:textColor="@color/text_black"/>
+
     <View
         android:id="@+id/UnderLine2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="2dp"
-        android:background="@color/color_grey" />
+        android:background="@color/color_grey"/>
 
     <TextView
-           android:id="@+id/txt_submit"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_gravity="center"
-           android:gravity="center"
-           android:layout_marginTop="20dp"
-           android:background="@color/tab_bg"
-           android:padding="10dp"
-           android:text="@string/btn_submit"
-           android:textColor="@color/white" />
+        android:id="@+id/txt_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@color/tab_bg"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/btn_submit"
+        android:textColor="@color/white"/>
 
-   </LinearLayout>
+</LinearLayout>
 
 

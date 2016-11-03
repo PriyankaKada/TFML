@@ -8,29 +8,28 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class LoanStatusInputModel {
-    @SerializedName("otp")
-    @Expose
-    private String otpNumber;
-    @SerializedName("mobile_no")
-    @Expose()
-    private String mobileNumber;
+	@SerializedName( "otp" )
+	@Expose
+	private String otpNumber;
+	@SerializedName( "mobile_no" )
+	@Expose()
+	private String mobileNumber;
 
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
 
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
+	public void setMobileNumber( String mobileNumber ) {
+		this.mobileNumber = mobileNumber;
+	}
 
-    public String getOtpNumber() {
-        return otpNumber;
-    }
+	public String getOtpNumber() {
+		return otpNumber;
+	}
 
-    public void setOtpNumber(String otpNumber) {
-        this.otpNumber = otpNumber;
-    }
-
+	public void setOtpNumber( String otpNumber ) {
+		this.otpNumber = otpNumber;
+	}
 
 
 }

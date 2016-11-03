@@ -16,26 +16,27 @@ import java.util.List;
  * Created by webwerks on 24/8/16.
  */
 
-public class BranchListAdapter extends ArrayAdapter<BranchResponseModel> {
-    Context context;
-    public BranchListAdapter(Context context, List<BranchResponseModel> data) {
-        super(context, 0,data);
-        this.context=context;
-    }
+public class BranchListAdapter extends ArrayAdapter< BranchResponseModel > {
+	Context context;
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-        if (row == null) {
-            row = LayoutInflater.from(context).inflate(R.layout.layout_spinner_textview, parent, false);
-        }
-        TextView branchName = (TextView) row.findViewById(R.id.txtValue);
-        branchName.setText(getItem(position).getTerrCaption());
-        return row;
-    }
+	public BranchListAdapter( Context context, List< BranchResponseModel > data ) {
+		super( context, 0, data );
+		this.context = context;
+	}
 
-    @Override
-    public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        return getView(position,convertView,parent);
-    }
+	@Override
+	public View getView( int position, View convertView, ViewGroup parent ) {
+		View row = convertView;
+		if ( row == null ) {
+			row = LayoutInflater.from( context ).inflate( R.layout.layout_spinner_textview, parent, false );
+		}
+		TextView branchName = ( TextView ) row.findViewById( R.id.txtValue );
+		branchName.setText( getItem( position ).getTerrCaption() );
+		return row;
+	}
+
+	@Override
+	public View getDropDownView( int position, View convertView, ViewGroup parent ) {
+		return getView( position, convertView, parent );
+	}
 }

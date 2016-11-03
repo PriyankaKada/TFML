@@ -77,9 +77,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 //                Log.e("item adapter date",""+item.getBLDAT());
 			}
 		}
-
 	}
-
 
 	@Override
 	public Object getChild( int groupPosition, int childPosititon ) {
@@ -130,9 +128,9 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 			holder = ( MyHolder ) convertView.getTag();
 		}
 
+//		holder.txtReceiptDate.setText( rcDate + " / " + rcNo );
 		rcDate = item.getZFBDT() == null ? "" : item.getZFBDT().toString();
 		rcNo = item.getBELNR() == null ? "" : item.getBELNR().toString();
-//		holder.txtReceiptDate.setText( rcDate + " / " + rcNo );
 		holder.ll_header_row.setVisibility( View.VISIBLE );
 		String amountstr = item.getDMBTR() == null ? "" : item.getDMBTR().toString();
 		holder.txtReceiptAmount.setText( "Rs." + amountstr );
@@ -144,10 +142,15 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 		else {
 			holder.lexpandList.setBackground( context.getDrawable( R.drawable.list_row ) );
 		}
-
 //		holder.txtInstNo.setText( item.getCHECT() == null ? "" : item.getCHECT().toString() );
 //		holder.txtMode.setText( item.getSHKZG() == null ? "" : item.getSHKZG().toString() );
-		holder.txtType.setText( item.getANBWA() == null ? "" : item.getANBWA().toString() );
+
+		if ( item.getANBWA() != null ) {
+			holder.txtType.setText( setType( item.getANBWA() ) );
+		}
+		else {
+			holder.txtType.setText( "-" );
+		}
 		/*holder.imgPdf.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
@@ -185,18 +188,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 
 	@Override
 	public int getGroupCount() {
-	  /*  if(groupar.size()>=5)
-	    {
-            return 5;
-        }
-        else
-        {
-            return groupar.size();
-        }*/
-
 		return groupar.size();
-
-
 	}
 
 	@Override
@@ -205,14 +197,12 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 	}
 
 	@Override
-	public View getGroupView( final int groupPosition, final boolean isExpanded,
-	                          View convertView, final ViewGroup parent ) {
+	public View getGroupView( final int groupPosition, final boolean isExpanded, View convertView, final ViewGroup parent ) {
 		final ResponseEnvelope.Item item = ( ResponseEnvelope.Item ) getChild( groupPosition, 0 );
 		headerTitle = ( String ) getGroup( groupPosition );
 		grpholder = new MyGroupHolder();
 		if ( convertView == null ) {
-			LayoutInflater infalInflater = ( LayoutInflater ) context
-					.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+			LayoutInflater infalInflater = ( LayoutInflater ) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
 			convertView = infalInflater.inflate( R.layout.group_row, null );
 		}
 		grpholder.txtReceiptDate = ( TextView ) convertView.findViewById( R.id.txtReceiptDate );
@@ -251,11 +241,17 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 		SetFonts.setFonts( context, grpholder.txtMode, 5 );
 		SetFonts.setFonts( context, grpholder.txtBank, 5 );
 
-		grpholder.txtInstNo.setText( item.getCHECT() == null ? "" : item.getCHECT() );
-//		grpholder.txtInstNo.setText( Childar.get( groupPosition ).getCHECT() );
-		grpholder.txtMode.setText( item.getSHKZG() == null ? "" : item.getSHKZG() );
-//		grpholder.txtMode.setText( Childar.get( groupPosition ).getSHKZG() );
+		grpholder.txtInstNo.setText( item.getCHECT() == null ? "-" : item.getCHECT() );
+
+		if ( item.getSHKZG() != null ) {
+			grpholder.txtMode.setText( setMode( item.getSHKZG() ) );
+		}
+		else {
+			grpholder.txtMode.setText( "-" );
+		}
 		grpholder.txtBank.setText( "-" );
+//		grpholder.txtInstNo.setText( Childar.get( groupPosition ).getCHECT() );
+//		grpholder.txtMode.setText( Childar.get( groupPosition ).getSHKZG() );
 
 		return convertView;
 	}
@@ -299,17 +295,171 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 						CommonUtils.closeProgressDialog();
 						Toast.makeText( context, "Server Under Maintenance,Please try after Sometime ", Toast.LENGTH_LONG ).show();
 					}
-
 				}
-
 			}
-
 
 			@Override
 			public void onFailure( Call< MyReceiptResponseModel > call, Throwable t ) {
 				CommonUtils.closeProgressDialog();
 			}
 		} );
+	}
+
+	public String setMode( String mode ) {
+		switch ( mode ) {
+			case "C":
+				return "CASH";
+
+			case "H":
+				return "CHEQUE";
+
+			case "D":
+				return "DD";
+
+			case "R":
+				return "RTGS";
+			default:
+				return "-";
+		}
+	}
+
+	public String setType( String type ) {
+		switch ( type ) {
+			case "ZAC":
+				return "Statement of Account charges";
+
+			case "ZAE":
+				return "Advance EMI";
+
+			case "ZAN":
+				return "Duplicate NOC Charges";
+
+			case "ZAS":
+				return "Additional Service Charges";
+
+			case "ZBC":
+				return "Bank Charges";
+
+			case "ZCC":
+				return "Cancellation Charges";
+
+			case "ZCO":
+				return "Collection Agency Charges";
+
+			case "ZDC":
+				return "Document Charges";
+
+			case "ZDP":
+				return "Down Payment";
+
+			case "ZFI":
+				return "FI-3 Agency Charges";
+
+			case "ZFP":
+				return "Settlement amount";
+
+			case "ZHC":
+				return "Holding Charges";
+
+			case "ZHP":
+				return "Installment amount";
+
+			case "ZIN":
+				return "1st Year Insurance Charges";
+
+			case "ZIP":
+				return "Insurance Provision";
+
+			case "ZLE":
+				return "Legal Expenses";
+
+			case "ZLM":
+				return "Lease Management Fees";
+
+			case "ZLP":
+				return "Overdue Interest";
+
+			case "ZLT":
+				return "Lease Tax";
+
+			case "ZOE":
+				return "Other Expenses";
+
+			case "ZOM":
+				return "Option Money";
+
+			case "ZPC":
+				return "Residual Value Processing Charges";
+
+			case "ZPD":
+				return "Post Disbursal Document";
+
+			case "ZPK":
+				return "Parking Charges";
+
+			case "ZPT":
+				return "PMT Charges";
+
+			case "ZRA":
+				return "RTO Agent Charges";
+
+			case "ZRC":
+				return "Repossession Charges";
+
+			case "ZRE":
+				return "Retainer Charges";
+
+			case "ZRO":
+				return "RTO Office Payments";
+
+			case "ZRT":
+				return "RTO Charges";
+
+			case "ZRV":
+				return "Residual Value";
+
+			case "ZRZ":
+				return "ROC charges";
+
+			case "ZSC":
+				return "Service Charges";
+
+			case "ZSD":
+				return "Security Deposit";
+
+			case "ZSE":
+				return "Service Tax on Expenses";
+
+			case "ZSL":
+				return "Sale Amount";
+
+			case "ZSR":
+				return "Stamp Recovery";
+
+			case "ZST":
+				return "Sales Tax";
+
+			case "ZSW":
+				return "Swapping charges";
+
+			case "ZVT":
+				return "Value Added Tax";
+
+			case "ZZZ":
+				return "Collections (Gross)";
+
+			case "ZMI":
+				return "Income";
+
+			case "ZTR":
+				return "Terminal Dues Billing";
+
+			case "ZWO":
+				return "Write-off";
+
+			default:
+				return "-";
+		}
 	}
 
 	public class MyHolder {

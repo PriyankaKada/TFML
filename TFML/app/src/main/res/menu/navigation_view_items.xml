@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-          <item
-            android:id="@+id/navigation_item_new_scheme"
-            android:icon="@drawable/ic_scheme_selected"
-            android:title="New Scheme" />
-        <item
-            android:id="@+id/navigation_item_apply_loan"
-            android:icon="@drawable/ic_apply_loan_selected"
-            android:title="@string/apply_loan" />
+    <item
+        android:id="@+id/navigation_item_new_scheme"
+        android:icon="@drawable/ic_scheme_selected"
+        android:title="New Scheme"/>
+    <item
+        android:id="@+id/navigation_item_apply_loan"
+        android:icon="@drawable/ic_apply_loan_selected"
+        android:title="@string/apply_loan"/>
 
     <item
         android:id="@+id/navigation_item_refer_friend"
         android:icon="@drawable/ic_refer_friends_selected"
-        android:title="@string/refer_friend" />
+        android:title="@string/refer_friend"/>
 
     <item
         android:id="@+id/navigation_item_download"
         android:icon="@drawable/ic_download"
-        android:title="Download" />
+        android:title="Download"/>
     <item
         android:id="@+id/navigation_item_change_password"
         android:icon="@drawable/ic_change_pass_selected"
@@ -36,19 +36,19 @@
             <item
                 android:id="@+id/navigation_item_phone_call"
                 android:icon="@drawable/ic_call_selected"
-                android:title="Phone Call" />
+                android:title="Phone Call"/>
             <item
                 android:id="@+id/navigation_item_whatsapp"
                 android:icon="@drawable/icon_whatsapp"
-                android:title="Whatsapp Call" />
+                android:title="Whatsapp Call"/>
             <item
                 android:id="@+id/navigation_item_message"
                 android:icon="@drawable/ic_email"
-                android:title="Send Mail" />
+                android:title="Send Mail"/>
             <item
                 android:id="@+id/navigation_item_map"
                 android:icon="@drawable/ic_locate_us"
-                android:title="Locate Map" />
+                android:title="Locate Map"/>
         </menu>
     </item>
 </menu>

@@ -1,7 +1,6 @@
 package com.tfml.auth;
 
 
-import com.tfml.model.ContractResponseModel.ContractModel;
 import com.tfml.model.ContractResponseModel.ContractsInputModel;
 import com.tfml.model.ContractResponseModel.ContractsResponseModel;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusInputModel;
@@ -12,6 +11,7 @@ import com.tfml.model.accountStmtPdfResponseModel.AccountStatementInputModel;
 import com.tfml.model.accountStmtPdfResponseModel.AccountStmtResponse;
 import com.tfml.model.applyLoanResponseModel.ApplyLoanResponse;
 import com.tfml.model.applyLoanResponseModel.InputModel;
+import com.tfml.model.bannerResponseModel.BannerlistResponse;
 import com.tfml.model.branchResponseModel.BranchResponseModel;
 import com.tfml.model.branchResponseModel.InputBranchModel;
 import com.tfml.model.branchResponseModel.InputBranchState;
@@ -21,7 +21,6 @@ import com.tfml.model.cityResponseModel.BranchCityResponseModel;
 import com.tfml.model.cityResponseModel.CityResponseModel;
 import com.tfml.model.cityResponseModel.InputCityModel;
 import com.tfml.model.downloadResponseModel.DownloadResponse;
-import com.tfml.model.bannerResponseModel.BannerlistResponse;
 import com.tfml.model.emiListReponseModel.EmiListInputModel;
 import com.tfml.model.emiListReponseModel.EmiListResponseModel;
 import com.tfml.model.forgotPasswordResponseModel.ForgotInputModel;
@@ -40,17 +39,14 @@ import com.tfml.model.productResponseModel.ProductListResponseModel;
 import com.tfml.model.referFriendResponseModel.ReferFriendInputModel;
 import com.tfml.model.referFriendResponseModel.ReferFriendResponseModel;
 import com.tfml.model.schemesResponseModel.SchemesResponse;
-import com.tfml.model.soapModel.preClosureRequest.ReqData;
 import com.tfml.model.soapModel.preClosureRequest.RequestEnvelope;
+import com.tfml.model.soapModel.request.RequestEnvelpe;
 import com.tfml.model.soapModel.response.ResponseEnvelope;
 import com.tfml.model.socialResponseModel.ContactListResponseModel;
 import com.tfml.model.stateResponseModel.BranchStateResponseModel;
 import com.tfml.model.stateResponseModel.StateResponseModel;
-import com.tfml.model.soapModel.request.RequestEnvelpe;
-import com.tfml.model.uploadRcResponseModel.RcUploadDataInputModel;
 import com.tfml.model.uploadRcResponseModel.RcUploadResponseModel;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -74,95 +70,100 @@ import retrofit2.http.Url;
 
 public interface TmflApi {
 
-    @POST(Constant.BANNER)
-    Call<BannerlistResponse> getBannerResponse();
+	@POST( Constant.BANNER )
+	Call< BannerlistResponse > getBannerResponse();
 
-    @POST(Constant.DOWNLOADS)
-    Call<DownloadResponse> getDownloadResponse();
+	@POST( Constant.DOWNLOADS )
+	Call< DownloadResponse > getDownloadResponse();
 
-    @POST(Constant.SCHEMES)
-    Call<SchemesResponse> getSchemesResponse();
+	@POST( Constant.SCHEMES )
+	Call< SchemesResponse > getSchemesResponse();
 
-    @POST(Constant.APPLYLOAN)
-    Call<ApplyLoanResponse> getApplyLoanResponse(@Body InputModel inputModel);
+	@POST( Constant.APPLYLOAN )
+	Call< ApplyLoanResponse > getApplyLoanResponse( @Body InputModel inputModel );
 
-    @POST(Constant.REFERFRIEND)
-    Call<ReferFriendResponseModel> getFriendResponse(@Body ReferFriendInputModel referFriendInputModel);
+	@POST( Constant.REFERFRIEND )
+	Call< ReferFriendResponseModel > getFriendResponse( @Body ReferFriendInputModel referFriendInputModel );
 
-    @POST(Constant.REQUESTQUICKCALL)
-    Call<QuickCallResponse> getQuickCallResponse(@Body QuickCallInputModel quickCallInputModel);
+	@POST( Constant.REQUESTQUICKCALL )
+	Call< QuickCallResponse > getQuickCallResponse( @Body QuickCallInputModel quickCallInputModel );
 
-    @POST(Constant.VERIFYOTP)
-    Call<LoanStatusResponse> getOtpResponse(@Body LoanStatusInputModel loanStatusInputModel);
+	@POST( Constant.VERIFYOTP )
+	Call< LoanStatusResponse > getOtpResponse( @Body LoanStatusInputModel loanStatusInputModel );
 
-    @GET(Constant.CONTACTDETAILS)
-    Call<ContactListResponseModel> getContactList();
+	@GET( Constant.CONTACTDETAILS )
+	Call< ContactListResponseModel > getContactList();
 
-    @GET(Constant.PRODUCTS)
-    Call<List<ProductListResponseModel>> getProductList();
+	@GET( Constant.PRODUCTS )
+	Call< List< ProductListResponseModel > > getProductList();
 
-    @GET(Constant.STATES)
-    Call<List<BranchStateResponseModel>> getBranchStateList();
+	@GET( Constant.STATES )
+	Call< List< BranchStateResponseModel > > getBranchStateList();
 
-    @POST(Constant.GETCITIES)
-    Call<List<BranchCityResponseModel>> getBranchCityList(@Body InputCityModel inputCityModel);
+	@POST( Constant.GETCITIES )
+	Call< List< BranchCityResponseModel > > getBranchCityList( @Body InputCityModel inputCityModel );
 
-    @POST(Constant.GETBRANCHES)
-    Call<List<BranchResponseModel>> getBranchList(@Body InputBranchModel inputBranchModel);
+	@POST( Constant.GETBRANCHES )
+	Call< List< BranchResponseModel > > getBranchList( @Body InputBranchModel inputBranchModel );
 
-    @GET(Constant.STATELIST)
-    Call<List<StateResponseModel>> getStateListData();
+	@GET( Constant.STATELIST )
+	Call< List< StateResponseModel > > getStateListData();
 
-    @POST(Constant.CITYLIST)
-    Call<List<CityResponseModel>> getCityListData(@Body InputCityModel inputCityModel);
-    @Multipart
-    @POST(Constant.UPDATERC)
-    Call<RcUploadResponseModel> getRcUploadData(@PartMap Map<String, RequestBody>  params, @Part MultipartBody.Part image);
+	@POST( Constant.CITYLIST )
+	Call< List< CityResponseModel > > getCityListData( @Body InputCityModel inputCityModel );
 
-    @GET
-    @Streaming
-    Call<ResponseBody> getFile(@Url String url);
+	@Multipart
+	@POST( Constant.UPDATERC )
+	Call< RcUploadResponseModel > getRcUploadData( @PartMap Map< String, RequestBody > params, @Part MultipartBody.Part image );
 
-    @POST(Constant.STATEBRNCHES)
-    Call<List<BranchResponseModel>> getStateBranches(@Body InputBranchState inputBranchState);
+	@GET
+	@Streaming
+	Call< ResponseBody > getFile( @Url String url );
 
-    @Headers({
-            "SOAPAction : http://sap.com/xi/WebService/soap1.1/StmtOfAcc_Out",
-            "Authorization : Basic cHJkX3BpX3dlYjpsb3NAMTIzNA=="
-    })
-    @POST("MessageServlet?senderParty=&senderService=Service_TMFUniverse&receiverParty=&receiverService=&interface=StmtOfAcc_Out&interfaceNamespace=http://tmf.com:TMFUniverse")
-    Call<ResponseEnvelope> callStmtAcRequest(@Body RequestEnvelpe requestEnvelope);
+	@POST( Constant.STATEBRNCHES )
+	Call< List< BranchResponseModel > > getStateBranches( @Body InputBranchState inputBranchState );
 
-    @Headers({
-            "SOAPAction : http://sap.com/xi/WebService/soap1.1/TerminalDues_Out",
-            "Authorization : Basic cHJkX3BpX3dlYjpsb3NAMTIzNA=="
-    })
-    @POST("MessageServlet?senderParty=&senderService=Service_TMFUniverse&receiverParty=&receiverService=&interface=TerminalDues_Out&interfaceNamespace=http://tmf.com:TMFUniverse")
-    Call<com.tfml.model.soapModel.preClousreResponse.ResponseEnvelope> callClosureTableRequest(@Body RequestEnvelope requestEnvelope);
+	@Headers( {
+			"SOAPAction : http://sap.com/xi/WebService/soap1.1/StmtOfAcc_Out",
+			"Authorization : Basic cHJkX3BpX3dlYjpsb3NAMTIzNA=="
+	} )
+	@POST( "MessageServlet?senderParty=&senderService=Service_TMFUniverse&receiverParty=&receiverService=&interface=StmtOfAcc_Out&interfaceNamespace=http://tmf.com:TMFUniverse" )
+	Call< ResponseEnvelope > callStmtAcRequest( @Body RequestEnvelpe requestEnvelope );
 
-    @POST(Constant.MYCONTRACT)
-    Call<ContractsResponseModel> getContractListData(@Body ContractsInputModel contractsInputModel);
+	@Headers( {
+			"SOAPAction : http://sap.com/xi/WebService/soap1.1/TerminalDues_Out",
+			"Authorization : Basic cHJkX3BpX3dlYjpsb3NAMTIzNA=="
+	} )
+	@POST( "MessageServlet?senderParty=&senderService=Service_TMFUniverse&receiverParty=&receiverService=&interface=TerminalDues_Out&interfaceNamespace=http://tmf.com:TMFUniverse" )
+	Call< com.tfml.model.soapModel.preClousreResponse.ResponseEnvelope > callClosureTableRequest( @Body RequestEnvelope requestEnvelope );
 
-    @POST(Constant.LOGIN)
-    Call<LoginResponseModel> getLoginResponse(@Body LoginRequestModel loginRequestModel);
+	@POST( Constant.MYCONTRACT )
+	Call< ContractsResponseModel > getContractListData( @Body ContractsInputModel contractsInputModel );
 
-    @POST(Constant.ACCOUNT_STATEMENT_DOWNLOAD)
-    Call<AccountStmtResponse> getAccStmtDownload(@Body AccountStatementInputModel accountStatementInputModel);
+	@POST( Constant.LOGIN )
+	Call< LoginResponseModel > getLoginResponse( @Body LoginRequestModel loginRequestModel );
 
-    @POST(Constant.PRECLOSURE_STATEMENT_DOWNLOAD)
-    Call<PreClosureStmtPdfResponse> getPreClosureDownload(@Body PreClosureInputModel preClosureInputModel);
+	@POST( Constant.ACCOUNT_STATEMENT_DOWNLOAD )
+	Call< AccountStmtResponse > getAccStmtDownload( @Body AccountStatementInputModel accountStatementInputModel );
 
-    @POST(Constant.FORGOT_PASSWORD)
-    Call<ForgotResponse> getForgotResponse(@Body ForgotInputModel forgotInputModel);
+	@POST( Constant.PRECLOSURE_STATEMENT_DOWNLOAD )
+	Call< PreClosureStmtPdfResponse > getPreClosureDownload( @Body PreClosureInputModel preClosureInputModel );
 
-    @POST(Constant.LOGGEDIN)
-    Call<LogResponseModel> getLogResponse(@Body LogInputModel logInputModel);
-    @POST(Constant.EMILIST)
-    Call<EmiListResponseModel>getEmiListResponse(@Body EmiListInputModel emiListInputModel);
-    @POST(Constant.CHANGPASSWORD)
-    Call<ChangePasswordResponse>getChangePassResponse(@Body ChangePasswordInputModel changePasswordInputModel);
-    @POST(Constant.RECEIPTPDF)
-    Call<MyReceiptResponseModel>getMyReceiptResponse(@Body MyReceiptInputModel myReceiptInputModel);
-    @POST(Constant.LOGOUT)
-    Call<LogoutResponseModel>getLogoutResponse(@Body LogoutInputModel logoutInputModel);
+	@POST( Constant.FORGOT_PASSWORD )
+	Call< ForgotResponse > getForgotResponse( @Body ForgotInputModel forgotInputModel );
+
+	@POST( Constant.LOGGEDIN )
+	Call< LogResponseModel > getLogResponse( @Body LogInputModel logInputModel );
+
+	@POST( Constant.EMILIST )
+	Call< EmiListResponseModel > getEmiListResponse( @Body EmiListInputModel emiListInputModel );
+
+	@POST( Constant.CHANGPASSWORD )
+	Call< ChangePasswordResponse > getChangePassResponse( @Body ChangePasswordInputModel changePasswordInputModel );
+
+	@POST( Constant.RECEIPTPDF )
+	Call< MyReceiptResponseModel > getMyReceiptResponse( @Body MyReceiptInputModel myReceiptInputModel );
+
+	@POST( Constant.LOGOUT )
+	Call< LogoutResponseModel > getLogoutResponse( @Body LogoutInputModel logoutInputModel );
 }

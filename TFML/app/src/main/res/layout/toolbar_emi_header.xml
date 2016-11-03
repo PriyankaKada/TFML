@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_emi"
         android:layout_width="match_parent"
@@ -17,7 +18,8 @@
             android:layout_height="30dp"
             android:layout_gravity="start"
             android:layout_marginLeft="5dp"
-            android:src="@drawable/ic_back_arrow" />
+            android:src="@drawable/ic_back_arrow"/>
+
         <TextView
             android:id="@+id/txt_titel_emi"
             android:layout_width="wrap_content"
@@ -25,10 +27,11 @@
             android:layout_gravity="left"
             android:layout_marginLeft="25dp"
             android:text="TATA Tiago"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/white"
             ></TextView>
+
         <ImageView
             android:id="@+id/img_drawer_emi"
             android:layout_width="30dp"

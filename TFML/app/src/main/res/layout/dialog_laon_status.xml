@@ -1,46 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:layout_margin="20dp"
-    android:background="@drawable/box"
-    android:orientation="vertical"
-    android:padding="18dp">
+              android:layout_width="match_parent"
+              android:layout_height="200dp"
+              android:layout_margin="20dp"
+              android:background="@drawable/box"
+              android:orientation="vertical"
+              android:padding="18dp">
 
     <EditText
         android:id="@+id/edt_mobile_no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#000000"
+        android:background="@null"
+        android:hint=" * Enter Mobile No."
+        android:inputType="phone"
         android:maxLength="12"
         android:maxLines="1"
         android:padding="10dp"
-        android:background="@null"
-        android:inputType="phone"
-        android:hint=" * Enter Mobile No." />
+        android:textColor="#000000"/>
+
     <View
         android:id="@+id/UnderLine"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="2dp"
-        android:background="@color/color_grey" />
+        android:background="@color/color_grey"/>
+
     <EditText
         android:id="@+id/edt_otp_no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textColor="#000000"
+        android:background="@null"
+        android:hint=" * Enter OTP No."
+        android:inputType="textPassword"
         android:maxLines="1"
         android:padding="10dp"
-        android:background="@null"
-        android:inputType="textPassword"
-        android:hint=" * Enter OTP No." />
+        android:textColor="#000000"/>
+
     <View
         android:id="@+id/UnderLine2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="2dp"
-        android:background="@color/color_grey" />
+        android:background="@color/color_grey"/>
+
     <Button
         android:id="@+id/btn_loan_status"
         android:layout_width="wrap_content"
@@ -50,5 +54,5 @@
         android:background="@color/tab_bg"
         android:padding="10dp"
         android:text="Get Loan Application Status"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"/>
 </LinearLayout>

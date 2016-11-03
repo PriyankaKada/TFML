@@ -7,15 +7,15 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class ForgotInputModel {
-    public String getUserID() {
-        return UserID;
-    }
+	@SerializedName( "user_id" )
+	String UserID;
 
-    public void setUserID(String userID) {
-        UserID = userID;
-    }
+	public String getUserID() {
+		return UserID;
+	}
 
-    @SerializedName("user_id")
-    String UserID;
+	public void setUserID( String userID ) {
+		UserID = userID;
+	}
 
 }

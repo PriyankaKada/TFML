@@ -11,25 +11,21 @@ import java.util.List;
  */
 
 public class Error {
-    @SerializedName("mobile_no")
-    @Expose
-    private List<String> mobileNo = new ArrayList<String>();
+	@SerializedName( "mobile_no" )
+	@Expose
+	private List< String > mobileNo = new ArrayList< String >();
 
-    /**
-     *
-     * @return
-     * The mobileNo
-     */
-    public List<String> getMobileNo() {
-        return mobileNo;
-    }
+	/**
+	 * @return The mobileNo
+	 */
+	public List< String > getMobileNo() {
+		return mobileNo;
+	}
 
-    /**
-     *
-     * @param mobileNo
-     * The mobile_no
-     */
-    public void setMobileNo(List<String> mobileNo) {
-        this.mobileNo = mobileNo;
-    }
+	/**
+	 * @param mobileNo The mobile_no
+	 */
+	public void setMobileNo( List< String > mobileNo ) {
+		this.mobileNo = mobileNo;
+	}
 }

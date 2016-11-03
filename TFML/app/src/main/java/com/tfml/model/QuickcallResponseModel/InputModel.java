@@ -8,15 +8,15 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class InputModel {
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
+	@SerializedName( "mobile_no" )
+	@Expose()
+	private String mobileNumber;
 
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
 
-    @SerializedName("mobile_no")
-    @Expose()
-    private String mobileNumber;
+	public void setMobileNumber( String mobileNumber ) {
+		this.mobileNumber = mobileNumber;
+	}
 }

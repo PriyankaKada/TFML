@@ -7,26 +7,26 @@ import android.util.Log;
  */
 
 public class Logger {
-    private static final String TAG = "TMFL";
+	private static final String TAG = "TMFL";
 
-    public static void i(Class clazz, String msg) {
+	public static void i( Class clazz, String msg ) {
 
-        Log.i(TAG, clazz.getSimpleName() + " -> " + msg);
-    }
+		Log.i( TAG, clazz.getSimpleName() + " -> " + msg );
+	}
 
-    public static void e(Class clazz, String msg) {
+	public static void e( Class clazz, String msg ) {
 
-        Log.e(TAG, clazz.getSimpleName() + " -> " + msg);
-    }
+		Log.e( TAG, clazz.getSimpleName() + " -> " + msg );
+	}
 
-    public static void d(Class clazz, String msg) {
+	public static void d( Class clazz, String msg ) {
 
-        Log.d(TAG, clazz.getSimpleName() + " -> " + msg);
-    }
+		Log.d( TAG, clazz.getSimpleName() + " -> " + msg );
+	}
 
-    public static void v(Class clazz, String msg) {
+	public static void v( Class clazz, String msg ) {
 
-        Log.v(TAG, clazz.getSimpleName() + " -> " + msg);
-    }
+		Log.v( TAG, clazz.getSimpleName() + " -> " + msg );
+	}
 
 }

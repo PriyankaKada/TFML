@@ -8,16 +8,17 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class QuickCallInputModel {
-    @SerializedName("mobile_no")
-    @Expose()
-    private String mobileNumber;
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
+	@SerializedName( "mobile_no" )
+	@Expose()
+	private String mobileNumber;
 
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	public void setMobileNumber( String mobileNumber ) {
+		this.mobileNumber = mobileNumber;
+	}
 
 
 }

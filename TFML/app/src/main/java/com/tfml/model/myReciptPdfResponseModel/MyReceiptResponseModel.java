@@ -8,15 +8,15 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class MyReceiptResponseModel extends GenericResponse {
-    @SerializedName("filepath")
-    @Expose
-    private String filepath;
+	@SerializedName( "filepath" )
+	@Expose
+	private String filepath;
 
-    public String getFilepath() {
-        return filepath;
-    }
+	public String getFilepath() {
+		return filepath;
+	}
 
-    public void setFilepath(String filepath) {
-        this.filepath = filepath;
-    }
+	public void setFilepath( String filepath ) {
+		this.filepath = filepath;
+	}
 }

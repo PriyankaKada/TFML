@@ -7,33 +7,34 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class PreClosureInputModel {
-    @SerializedName("contract_no")
-    public String contractNo;
-    @SerializedName("api_token")
-    public String apiToken;
-    @SerializedName("request_date")
-    public String requestDate;
-    public String getRequestDate() {
-        return requestDate;
-    }
+	@SerializedName( "contract_no" )
+	public String contractNo;
+	@SerializedName( "api_token" )
+	public String apiToken;
+	@SerializedName( "request_date" )
+	public String requestDate;
 
-    public void setRequestDate(String requestDate) {
-        this.requestDate = requestDate;
-    }
+	public String getRequestDate() {
+		return requestDate;
+	}
 
-    public String getApiToken() {
-        return apiToken;
-    }
+	public void setRequestDate( String requestDate ) {
+		this.requestDate = requestDate;
+	}
 
-    public void setApiToken(String apiToken) {
-        this.apiToken = apiToken;
-    }
+	public String getApiToken() {
+		return apiToken;
+	}
 
-    public String getContractNo() {
-        return contractNo;
-    }
+	public void setApiToken( String apiToken ) {
+		this.apiToken = apiToken;
+	}
 
-    public void setContractNo(String contractNo) {
-        this.contractNo = contractNo;
-    }
+	public String getContractNo() {
+		return contractNo;
+	}
+
+	public void setContractNo( String contractNo ) {
+		this.contractNo = contractNo;
+	}
 }

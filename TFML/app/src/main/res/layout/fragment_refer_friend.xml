@@ -87,11 +87,11 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/whit_rect_bg"
             android:hint="* Enter Organization"
-            android:visibility="gone"
             android:maxLength="120"
             android:maxLines="1"
             android:padding="10dp"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -164,8 +164,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/whit_rect_bg"
                 android:hint=" * Enter First Name"
-                android:maxLines="1"
                 android:maxLength="120"
+                android:maxLines="1"
                 android:padding="10dp"
                 android:textSize="14sp"/>
 
@@ -195,10 +195,10 @@
                     android:layout_weight="1"
                     android:background="@drawable/whit_rect_bg"
                     android:hint="* Enter Mobile No."
+                    android:imeOptions="actionGo"
                     android:inputType="number"
                     android:maxLength="12"
                     android:maxLines="1"
-                    android:imeOptions="actionGo"
                     android:padding="10dp"
                     android:textSize="14sp"/>
 
@@ -210,9 +210,9 @@
                     android:layout_weight="1"
                     android:background="@drawable/whit_rect_bg"
                     android:hint="Enter Landline No."
+                    android:imeOptions="actionGo"
                     android:inputType="number"
                     android:maxLength="12"
-                    android:imeOptions="actionGo"
                     android:maxLines="1"
                     android:padding="10dp"
                     android:textSize="14sp"/>

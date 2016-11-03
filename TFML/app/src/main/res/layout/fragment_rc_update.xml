@@ -1,9 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.tfml.fragment.RcUpdateFragment">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.tfml.fragment.RcUpdateFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             android:paddingTop="10dp"
             android:popupBackground="@color/white"
             android:scrollbars="none"
-            android:spinnerMode="dropdown" />
+            android:spinnerMode="dropdown"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -42,16 +42,16 @@
                 android:text="RC No. :"
                 android:textColor="#ffffff"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <TextView
-               android:id="@+id/txt_rc_update_no"
+                android:id="@+id/txt_rc_update_no"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="left|center"
                 android:paddingLeft="5dp"
                 android:textColor="#ffffff"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -76,11 +76,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
                     android:gravity="center"
                     android:text="@string/txt_due_date"
-                    android:layout_marginLeft="5dp"
                     android:textSize="13sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/txt_duedate"
@@ -88,7 +88,7 @@
                     android:layout_height="match_parent"
                     android:gravity="left|center"
                     android:paddingLeft="5dp"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -101,11 +101,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
                     android:gravity="center"
                     android:text="@string/txt_emi_amount"
-                    android:layout_marginLeft="5dp"
                     android:textSize="13sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/txt_emiamount"
@@ -113,7 +113,7 @@
                     android:layout_height="match_parent"
                     android:gravity="left|center"
                     android:paddingLeft="5dp"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
 
             </LinearLayout>
 
@@ -137,11 +137,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
                     android:gravity="center"
                     android:text="@string/txt_overdue"
-                    android:layout_marginLeft="5dp"
                     android:textSize="13sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/txt_dueamount"
@@ -149,7 +149,7 @@
                     android:layout_height="match_parent"
                     android:gravity="left|center"
                     android:paddingLeft="5dp"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -162,11 +162,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
                     android:gravity="center"
                     android:text="@string/txt_repayment_mode"
-                    android:layout_marginLeft="5dp"
                     android:textSize="13sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/txt_repaymentmode"
@@ -174,14 +174,14 @@
                     android:layout_height="match_parent"
                     android:gravity="left|center"
                     android:paddingLeft="5dp"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
             </LinearLayout>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/color_grey" />
+            android:background="@color/color_grey"/>
     </LinearLayout>
 
     <LinearLayout
@@ -201,7 +201,7 @@
             android:hint="@string/hint_txt_rc_number"
             android:maxLines="1"
             android:padding="10dp"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
 
         <Button
             android:id="@+id/btn_rc_upload"
@@ -212,7 +212,7 @@
             android:background="@color/colorPrimaryDark"
             android:text="@string/btn_rc_upload_image"
             android:textAllCaps="false"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"/>
     </LinearLayout>
 
     <LinearLayout
@@ -231,7 +231,7 @@
             android:layout_marginRight="20dp"
             android:padding="10dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_image" />
+            android:src="@drawable/ic_image"/>
     </LinearLayout>
 
 </LinearLayout>
