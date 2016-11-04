@@ -55,12 +55,12 @@ import retrofit2.Response;
 public class BannerActivity extends BaseActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 	//String email,whatsAppNo,phoneNo;
 	final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
-	public  ViewPager recentViewpager;
-	Toolbar mToolbar;
+	public ViewPager recentViewpager;
+	Toolbar             mToolbar;
 	CirclePageIndicator circlePageIndicator;
 	TmflApi             tmflApi;
 	BannerAdapter       bannerAdapter;
-	LinearLayout linSchemes, linApplyLoan, linReferFriend, linLoanStaus, linLogin;
+	LinearLayout        linSchemes, linApplyLoan, linReferFriend, linLoanStaus, linLogin;
 	String errormsg;
 	View   selectedView;
 	String strQuickCall, strOtpNo, strMobileNo;
@@ -71,10 +71,10 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 	QuickCallInputModel quickCallInputModel;
 	private BannerFragment bannerFragment;
 	private ImageView      imgQuickCall, imgSocial;
-	private TextView  txtTitle;
+	private TextView    txtTitle;
 	private ImageView[] dots;
 	private int         dotsCount;
-	private TextView txtSchemes, txtApplyLoan, txtReferFriend, txtLoanStatus, txtLogin;
+	private TextView    txtSchemes, txtApplyLoan, txtReferFriend, txtLoanStatus, txtLogin;
 	private ImageView imgSchemes, imgApplyLoan, imgReferFriend, imgLoanStatus, imgLogin;
 
 	protected void onCreate( Bundle savedInstanceState ) {
@@ -235,6 +235,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				break;
 			case R.id.linLogin:
 				startActivity( new Intent( BannerActivity.this, LoginActivity.class ) );
+				finish();
 				break;
 
 		}

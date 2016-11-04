@@ -89,6 +89,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 	DownloadManager  downloadmanager;
 	LogInputModel    logInputModel;
 	LogResponseModel logResponseModel;
+	LinearLayout     linAccDetail1;
 	private TextView txtAccDate, btnSubmit;
 	/**
 	 * The Ondate.
@@ -260,9 +261,9 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 		txt_rc_no.setText( model.getRcNumber() == null ? "" : model.getRcNumber().toString() );
 		txt_duedate.setText( model.getDueDate() == null ? "" : model.getDueDate().toString() );
 		// txt_dueamount.setText(model.getDueAmount()==null?"":"Rs. "+model.getDueAmount().toString());
-		txt_emiamount.setText( model.getDueAmount() == null ? "" : "Rs. " + model.getDueAmount().toString() );
-		txt_repaymentmode.setText( model.getPdcFlag() == null ? "" : model.getPdcFlag().toString() );
-		txt_dueamount.setText( model.getTotalCurrentDue() == null ? "" : "Rs." + model.getTotalCurrentDue().toString() );
+		txt_emiamount.setText( model.getDueAmount() == null ? "" : "Rs." + model.getDueAmount().toString() );
+		txt_repaymentmode.setText( model.getPdcFlag() == null ? "" : model.getPdcFlag() );
+		txt_dueamount.setText( model.getOdAmt() == null ? "" : "Rs." + model.getOdAmt() );
 
 	}
 
@@ -325,7 +326,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 				if ( response.body() != null ) {
 					responseEnvelope = response.body().getBody();
 					PreferenceHelper.insertObject( PreferenceHelper.SOAPSTATMENTOFACCOUNTRESPONSE, responseEnvelope );
-					Log.e( "Response ", responseEnvelope.getZCISResponse().getIT_CARDEX1().getItem().getREQDATE() );
+				/*	Log.e( "Response ", responseEnvelope.getZCISResponse().getIT_CARDEX1().getItem().getREQDATE() );
 					Log.e( "Response ", response.body().getBody().getZCISResponse().getIT_CARDEX2().getItem().getZZDATE() );
 					Log.e( "Response ", response.body().getBody().getZCISResponse().getIT_DUES1().getItem().getCONTRACTNO() );
 					Log.e( "Response ", response.body().getBody().getZCISResponse().getIT_DUES2().getItem().getODC_CHRG_DUE() );
@@ -339,7 +340,10 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 					Log.e( "TenureUNIT", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getTENURE_UNIT() );
 					Log.e( "EngineNO", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getENGINE_NO() );
 					Log.e( "Chasis No", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getCHASIS_NO() );
-					Log.e( "RC NO", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getREG_NO() );
+					Log.e( "RC NO", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getREG_NO() );*/
+
+					linAccDetail.setVisibility( View.VISIBLE );
+
 					if ( submitClicked == true ) {
 						if ( financeDetailClicked == false ) {
 							callBasicDetail();
@@ -469,8 +473,6 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 					}
 
 				}
-
-
 			}
 
 			@Override
@@ -535,7 +537,6 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 					if ( CommonUtils.isNetworkAvailable( getActivity() ) ) {
 						if ( !TextUtils.isEmpty( txtAccDate.getText().toString() ) ) {
 							callSoapRequest();
-							linAccDetail.setVisibility( View.VISIBLE );
 						}
 
 					}

@@ -32,8 +32,7 @@
             android:text="Download"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:textStyle="bold"
-            ></TextView>
+            android:textStyle="bold"/>
 
         <ImageView
             android:id="@+id/img_drawer_download"
@@ -41,21 +40,21 @@
             android:layout_height="30dp"
             android:layout_gravity="end"
             android:layout_marginRight="5dp"
-            android:src="@drawable/ic_drawer"
-            ></ImageView>
+            android:src="@drawable/ic_drawer"/>
     </android.support.v7.widget.Toolbar>
 
     <View
         android:layout_width="wrap_content"
         android:layout_height="0.5dp"
         android:background="@color/white"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/list_row"
-        android:padding="10dp"
-        android:text="Frequently asked questions(FAQ)"/>
+    <!--
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_row"
+            android:padding="10dp"
+            android:text="Frequently asked questions(FAQ)"
+            android:visibility="gone"/>-->
 
     <TextView
         android:layout_width="match_parent"
@@ -69,8 +68,7 @@
         android:id="@+id/lst_download_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3">
-    </ListView>
+        android:layout_weight="3"/>
 
     <ImageView
         android:id="@+id/img_result"
@@ -78,5 +76,7 @@
         android:layout_height="400dp"
         android:layout_weight="2"
         android:background="@color/color_grey"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        android:visibility="gone"/>
+
 </LinearLayout>

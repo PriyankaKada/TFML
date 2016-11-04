@@ -1,9 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context="com.tfml.fragment.StatementOfAccountFragment">
+              android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -255,9 +253,10 @@
             android:layout_margin="10dp"
             android:background="@drawable/whit_rect_bg"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <LinearLayout
+                android:id="@+id/llBasicFinDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"

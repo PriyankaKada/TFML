@@ -66,7 +66,7 @@
     <string name="txt_amount_credit_upto">Amount Credited upto </string>
     <string name="txt_amount_credited_from">Amount Credited from </string>
     <string name="txt_total_credit_upto">Total Credit upto </string>
-    <string name="txt_balance_payable_amount_contract">Balance payable+amount on Contract.</string>
+    <string name="txt_balance_payable_amount_contract">Balance Payable on Contract</string>
     <string name="txt_principal_for_the_period">Principal for the period</string>
     <string name="txt_finance_charges_for_the_period">Finance Charges for the period</string>
     <string name="txt_total_bal">\"TOTAL BALANCE\" amount shown above is \"subject to providing clearance proof of all prior Receipts\" \n * The \"TOTAL BALANCE\" will change if not paid on </string>

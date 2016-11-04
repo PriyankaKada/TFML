@@ -124,7 +124,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 					strEmail = response.body().getData().getEmail() == null ? "" : response.body().getData().getEmail().toString();
 					PreferenceHelper.insertBoolean( "SaveLogin", true );
 					Log.e( "API TOKEN", strApiToken );
-	              /*  if (chkRememberMe.isChecked()) {
+				  /*  if (chkRememberMe.isChecked()) {
                         PreferenceHelper.insertBoolean("SaveLogin", true);
                     }
                     else

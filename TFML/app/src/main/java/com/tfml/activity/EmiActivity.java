@@ -193,7 +193,8 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 	public void onClick( View v ) {
 		switch ( v.getId() ) {
 			case R.id.img_emi_back:
-				startActivity( new Intent( EmiActivity.this, ContractActivity.class ) );
+//				startActivity( new Intent( EmiActivity.this, ContractActivity.class ) );
+				finish();
 				break;
 			case R.id.img_drawer_emi:
 				//  Toast.makeText(getBaseContext(),"I am in Nav Drawer",Toast.LENGTH_SHORT).show();

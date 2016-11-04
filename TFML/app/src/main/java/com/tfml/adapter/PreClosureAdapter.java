@@ -60,14 +60,12 @@ public class PreClosureAdapter extends BaseAdapter {
 		}
 		else {
 			holder = ( Holder ) convertView.getTag();
-
 		}
 
 		holder.txtDesc.setText( responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( position ).getDESCP() == null ? "" : responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( position ).getDESCP() );
 		holder.txtDueAmt.setText( responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( position ).getDUE() == null ? "" : responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( position ).getDUE() );
 		holder.txtNetBal.setText( responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( position ).getNET() == null ? "" : responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( position ).getNET() );
 		holder.txtRecAmt.setText( responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( position ).getREC() == null ? "" : responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( position ).getREC() );
-
 
 		if ( position == getCount() - 1 ) {
 			//for change color of TOTAL ROW
@@ -90,5 +88,4 @@ public class PreClosureAdapter extends BaseAdapter {
 		TextView txtDesc, txtDueAmt, txtNetBal, txtRecAmt;
 		LinearLayout lin_desc, lin_due_amount, lin_rec_amount, lin_netBal;
 	}
-
 }

@@ -115,6 +115,7 @@
             android:paddingLeft="10dp"
             android:text="@string/txt_remember_pass"
             android:textColor="@color/white"
+            android:visibility="gone"
             />
 
         <TextView

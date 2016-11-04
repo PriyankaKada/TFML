@@ -167,7 +167,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 			for ( int i = 0; i < modelArrayList.size(); i++ ) {
 				ContractModel model = modelArrayList.get( i );
 			   /* if (model != null)
-		            contractLst.add(model.getUsrConNo());*/
+			        contractLst.add(model.getUsrConNo());*/
 			}
 		}
 
@@ -396,8 +396,8 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 					e.printStackTrace();
 				}
 
-				txtGenDate.setText( "Generated On" + strDate + "|" + strTime );
-				txtBal.setText( getActivity().getResources().getString( R.string.txt_total_bal ) + " " + txtAccDate.getText().toString() );
+				txtGenDate.setText( "Generated On " + strDate + "|" + strTime );
+				txtBal.setText( getActivity().getResources().getString( R.string.txt_total_bal ) + " " + strDate );
 				callSoapDataRequest();
 
 

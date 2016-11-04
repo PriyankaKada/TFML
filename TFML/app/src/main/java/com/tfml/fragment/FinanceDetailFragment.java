@@ -2,6 +2,7 @@ package com.tfml.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import com.tfml.R;
 import com.tfml.model.soapModel.response.ResponseEnvelope;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -85,8 +87,10 @@ public class FinanceDetailFragment extends Fragment {
 		txtInsurancePrvision.setText( strInsPro );
 		txtOptionMoney.setText( strOptionMoney );
 
-		String totalReceivable = String.valueOf( Double.parseDouble( strFinAmt ) + Double.parseDouble( strFinCharge )
-				                                         + Double.parseDouble( strInsPro ) + Double.parseDouble( strOptionMoney ) );
+
+		String totalReceivable = new DecimalFormat( "00.00" ).format( Double.parseDouble( strFinAmt ) + Double.parseDouble( strFinCharge )
+				                                                              + Double.parseDouble( strInsPro ) + Double.parseDouble( strOptionMoney ) );
+		Log.d( "amounts", strFinAmt + " " + strFinCharge + " " + strInsPro + " " + strOptionMoney + totalReceivable );
 		txtTotalReceivable.setText( totalReceivable );
 		txtAmtCreditedLbl.setText( "Amount Credited Upto " + strToDate );
 		txtAmtCredited.setText( strSoaPrvAmt );
@@ -95,7 +99,7 @@ public class FinanceDetailFragment extends Fragment {
 		txtyTotalCreditLbl.setText( "Total Credit Upto " + strToDate );
 		txtTotalCredit.setText( strCred );
 
-		String balPayable = String.valueOf( Double.parseDouble( totalReceivable ) - Double.parseDouble( strCred ) );
+		String balPayable = new DecimalFormat( "00.00" ).format( Double.parseDouble( totalReceivable ) - Double.parseDouble( strCred ) );
 		txtBalPayable.setText( balPayable );
 		txtPrincipalPeriodLbl.setText( "Principal for the Period " + strFromDate + " To " + strToDate );
 		txtPrincipalPeriod.setText( strSoaPrincipal );

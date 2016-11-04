@@ -24,7 +24,6 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:orientation="horizontal"
-
             android:weightSum="4">
 
             <LinearLayout
@@ -35,27 +34,16 @@
                 android:background="@drawable/dotted_bg"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="10dp"
-                >
+                android:padding="10dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
+                <TextView
+                    android:id="@+id/txtDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtDesc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="Description"
-                        android:textSize="12sp"
-                        />
-
-                </LinearLayout>
+                    android:text="Description"
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -65,28 +53,17 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/dotted_bg"
-                android:gravity="center"
+                android:gravity="right|center_vertical"
                 android:orientation="vertical"
-                >
+                android:paddingRight="5dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                <TextView
+                    android:id="@+id/txtDueAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    >
-
-                    <TextView
-                        android:id="@+id/txtDueAmount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="DueAmount"
-                        android:textSize="12sp"
-                        />
-
-                </LinearLayout>
-
+                    android:text="DueAmount"
+                    android:textSize="12sp"/>
 
             </LinearLayout>
 
@@ -96,27 +73,18 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/dotted_bg"
-                android:gravity="center"
+                android:gravity="right|center_vertical"
                 android:orientation="vertical"
-                >
+                android:paddingRight="5dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                <TextView
+                    android:id="@+id/txtRecAmt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    >
+                    android:text="RecievedAmount"
+                    android:textSize="12sp"/>
 
-                    <TextView
-                        android:id="@+id/txtRecAmt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="RecievedAmount"
-                        android:textSize="12sp"
-                        />
-
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -125,35 +93,19 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@color/white"
-                android:gravity="center"
+                android:gravity="right|center_vertical"
                 android:orientation="vertical"
-                >
+                android:paddingRight="5dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
+                <TextView
+                    android:id="@+id/txtNetBal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-
-                    >
-
-                    <TextView
-                        android:id="@+id/txtNetBal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="NetBal"
-                        android:textSize="12sp"
-                        />
-
-                </LinearLayout>
-
+                    android:text="NetBal"
+                    android:textSize="12sp"/>
             </LinearLayout>
-
-
         </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout
@@ -174,15 +126,13 @@
             android:gravity="center"
             android:text="Generated on 11-02-2016 | 01:03 PM"
             android:textColor="@color/text_black"
-            android:textSize="12sp"
-            />
+            android:textSize="12sp"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="@dimen/margin_large"
-            android:background="@drawable/dotted_bg"
-            />
+            android:background="@drawable/dotted_bg"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -191,7 +141,7 @@
             android:layout_margin="@dimen/margin_medium"
             android:gravity="center"
             android:textColor="@color/color_grey"
-            android:textSize="12sp"
-            />
+            android:textSize="12sp"/>
+
     </LinearLayout>
 </LinearLayout>
