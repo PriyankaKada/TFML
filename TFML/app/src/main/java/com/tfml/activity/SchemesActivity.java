@@ -40,13 +40,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SchemesActivity extends BaseActivity implements View.OnClickListener {
-	Toolbar toolbarschemes;
+	Toolbar   toolbarschemes;
 	TabLayout tabLayout;
-	View view1, view2, view3;
+	View      view1, view2, view3;
 	TmflApi   tmflApi;
 	ViewPager viewPager;
-	Bundle bundle1;
-	private TextView txtschemestitle;
+	Bundle    bundle1;
+	private TextView  txtschemestitle;
 	private ImageView imgtoolbarhome, imgSocial;
 	private ArrayList< Datum > datumArrayList;
 
@@ -318,7 +318,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 	}
 
 	public void sendMail() {
-		Log.i( "Send email", "" );
+		Log.i( "Send emailId", "" );
 		String[] TO          = { "" };
 		String[] CC          = { "" };
 		Intent   emailIntent = new Intent( Intent.ACTION_SEND );
@@ -333,10 +333,10 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		try {
 			startActivity( Intent.createChooser( emailIntent, "Send mail..." ) );
 			finish();
-			Log.i( "Finish sending email...", "" );
+			Log.i( "Finish sending emailId...", "" );
 		}
 		catch ( android.content.ActivityNotFoundException ex ) {
-			Toast.makeText( SchemesActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT ).show();
+			Toast.makeText( SchemesActivity.this, "There is no emailId client installed.", Toast.LENGTH_SHORT ).show();
 		}
 	}
 

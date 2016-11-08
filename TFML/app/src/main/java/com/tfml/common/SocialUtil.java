@@ -68,20 +68,26 @@ public class SocialUtil {
 	}
 
 	public static void sendMail( Context context, String email ) {
-		Intent intent = new Intent( android.content.Intent.ACTION_SEND );
-		intent.setType( "text/html" );
-		List< ResolveInfo > resInfo = context.getPackageManager().queryIntentActivities( intent, 0 );
 
-		if ( !resInfo.isEmpty() ) {
-			for ( ResolveInfo info : resInfo ) {
-				if ( info.activityInfo.packageName.toLowerCase().contains( "email" ) || info.activityInfo.name.toLowerCase().contains( "email" ) ) {
-					intent.putExtra( android.content.Intent.EXTRA_TEXT, "Welcome to TMFL" );
-					intent.putExtra( Intent.EXTRA_EMAIL, new String[]{ email } );
-					intent.setPackage( info.activityInfo.packageName );
-					context.startActivity( Intent.createChooser( intent, "Sending mail Through TMFL" ) );
-				}
-			}
-		}
+		Intent intent = new Intent( Intent.ACTION_SENDTO );
+		intent.setType( "message/rfc822" );
+		List< ResolveInfo > resInfo = context.getPackageManager().queryIntentActivities( intent, 0 );
+		intent.setData( Uri.parse( "mailto:" + email ) );
+//		intent.putExtra( Intent.EXTRA_EMAIL, new String[]{ email } );
+		intent.putExtra( Intent.EXTRA_TEXT, "Welcome to TFML" );
+
+		context.startActivity( Intent.createChooser( intent, "Choose an Email client :" ) );
+
+//		if ( !resInfo.isEmpty() ) {
+//			for ( ResolveInfo info : resInfo ) {
+//				if ( info.activityInfo.packageName.toLowerCase().contains( "email" ) || info.activityInfo.name.toLowerCase().contains( "email" ) ) {
+//					intent.putExtra( android.content.Intent.EXTRA_TEXT, "Welcome to TMFL" );
+//					intent.putExtra( Intent.EXTRA_EMAIL, new String[]{ email } );
+//					intent.setPackage( info.activityInfo.packageName );
+//					context.startActivity( Intent.createChooser( intent, "Sending mail Through TMFL" ) );
+//				}
+//			}
+//		}
 	}
 
 	public static void sendWhatsAppMsg( Context context, String whatsAppNo ) {
@@ -91,10 +97,9 @@ public class SocialUtil {
 			Uri    uri        = Uri.parse( "smsto:" + whatsAppNo );
 			Intent sendIntent = new Intent( Intent.ACTION_SENDTO, uri );
 			sendIntent.putExtra( Intent.EXTRA_TEXT, "Hai Good Morning" );
-	       /* sendIntent.setType("text/plain");*/
+		   /* sendIntent.setType("text/plain");*/
 			sendIntent.setPackage( "com.whatsapp" );
 			context.startActivity( sendIntent );
-
 		}
 		else {
 			Toast.makeText( context, "WhatsApp not Installed",
@@ -102,7 +107,6 @@ public class SocialUtil {
 			Uri    uri        = Uri.parse( "https://play.google.com/store/apps/details?id=com.whatsapp&hl=en" );
 			Intent goToMarket = new Intent( Intent.ACTION_VIEW, uri );
 			context.startActivity( goToMarket );
-
 		}
 
 	}
@@ -213,8 +217,6 @@ public class SocialUtil {
 					phoneNo = response.body().getPhoneNo().toString();
 					Log.e( "getContactlist", email + "" + '\t' + whatsAppNo + "" + phoneNo );
 				}
-
-
 			}
 
 			@Override

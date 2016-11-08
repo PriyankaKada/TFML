@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class ContactListResponseModel {
 
-	@SerializedName( "email" )
+	@SerializedName( "emailId" )
 	@Expose
 	private String email;
 	@SerializedName( "whatsapp_no" )
@@ -20,14 +20,14 @@ public class ContactListResponseModel {
 	private String phoneNo;
 
 	/**
-	 * @return The email
+	 * @return The emailId
 	 */
 	public String getEmail() {
 		return email;
 	}
 
 	/**
-	 * @param email The email
+	 * @param email The emailId
 	 */
 	public void setEmail( String email ) {
 		this.email = email;

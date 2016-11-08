@@ -67,8 +67,6 @@ public class DownloadDataActivity extends DrawerBaseActivity implements View.OnC
 		else {
 			CommonUtils.showAlert1( this, "Network Error", "Please Check Network Connection", false );
 		}
-
-
 	}
 
 

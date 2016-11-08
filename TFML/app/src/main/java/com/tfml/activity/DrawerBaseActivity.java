@@ -43,9 +43,9 @@ public class DrawerBaseActivity extends BaseActivity {
 	ListView              lsvNavList;
 	ImageView             imgCancel;
 	TextView              txtUserName;
-	LogoutInputModel    logoutInputModel;
-	LogoutResponseModel logoutResponseModel;
-	TmflApi             tmflApi;
+	LogoutInputModel      logoutInputModel;
+	LogoutResponseModel   logoutResponseModel;
+	TmflApi               tmflApi;
 	String TITLES[] = { "New Offers", "Apply Loan", "Refer Friend", "Downloads",
 			"Change Password", "Logout", "Contact Us", "Phone Call", "WhatsApp Call", "Mail Us", "Locate us" };
 	int    ICONS[]  = { R.drawable.ic_scheme_selected, R.drawable.ic_apply_loan_selected, R.drawable.ic_refer_friends_selected,
@@ -150,7 +150,8 @@ public class DrawerBaseActivity extends BaseActivity {
 					case 9://Send Mail
 						if ( CommonUtils.isNetworkAvailable( DrawerBaseActivity.this ) ) {
 							SocialUtil.getContactList();
-							SocialUtil.sendMail( DrawerBaseActivity.this, SocialUtil.email );
+//							Log.d( "to emailid", SocialUtil.emailId );
+							SocialUtil.sendMail( DrawerBaseActivity.this, SocialUtil.emailId );
 						}
 						else {
 							Toast.makeText( getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT ).show();

@@ -235,7 +235,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 		imgMessage.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
-				SocialUtil.sendMail( ContractActivity.this, SocialUtil.email );
+				SocialUtil.sendMail( ContractActivity.this, SocialUtil.emailId );
 			}
 		} );
 		imgPhoneCall.setOnClickListener( new View.OnClickListener() {

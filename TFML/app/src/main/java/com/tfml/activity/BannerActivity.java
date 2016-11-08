@@ -53,7 +53,7 @@ import retrofit2.Response;
 
 
 public class BannerActivity extends BaseActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
-	//String email,whatsAppNo,phoneNo;
+	//String emailId,whatsAppNo,phoneNo;
 	final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
 	public ViewPager recentViewpager;
 	Toolbar             mToolbar;
@@ -430,7 +430,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		imgMessage.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
-				SocialUtil.sendMail( BannerActivity.this, SocialUtil.email );
+				SocialUtil.sendMail( BannerActivity.this, SocialUtil.emailId );
 			}
 		} );
 		imgPhoneCall.setOnClickListener( new View.OnClickListener() {
