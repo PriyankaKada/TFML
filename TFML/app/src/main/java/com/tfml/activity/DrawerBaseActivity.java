@@ -151,7 +151,9 @@ public class DrawerBaseActivity extends BaseActivity {
 						if ( CommonUtils.isNetworkAvailable( DrawerBaseActivity.this ) ) {
 							SocialUtil.getContactList();
 //							Log.d( "to emailid", SocialUtil.emailId );
-							SocialUtil.sendMail( DrawerBaseActivity.this, SocialUtil.emailId );
+
+//							Log.d( "email", PreferenceHelper.getString( Constant.EMAIL ) );
+							SocialUtil.sendMail( DrawerBaseActivity.this, PreferenceHelper.getString( Constant.EMAIL ) );
 						}
 						else {
 							Toast.makeText( getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT ).show();

@@ -28,6 +28,7 @@ import com.tfml.adapter.BranchStateAdapter;
 import com.tfml.adapter.CityAdapter;
 import com.tfml.adapter.ProductAdapter;
 import com.tfml.adapter.StateAdapter;
+import com.tfml.auth.Constant;
 import com.tfml.auth.TmflApi;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusInputModel;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusResponse;
@@ -41,6 +42,7 @@ import com.tfml.model.productResponseModel.ProductListResponseModel;
 import com.tfml.model.socialResponseModel.ContactListResponseModel;
 import com.tfml.model.stateResponseModel.BranchStateResponseModel;
 import com.tfml.model.stateResponseModel.StateResponseModel;
+import com.tfml.util.PreferenceHelper;
 import com.tfml.util.SetFonts;
 
 import java.util.List;
@@ -212,9 +214,14 @@ public class SocialUtil {
 			public void onResponse( Call< ContactListResponseModel > call, Response< ContactListResponseModel > response ) {
 				//  Log.e("getContactList",response.body().);
 				if ( response != null ) {
-					email = response.body().getEmail().toString();
-					whatsAppNo = response.body().getWhatsappNo().toString();
-					phoneNo = response.body().getPhoneNo().toString();
+					email = response.body().getEmail();
+					whatsAppNo = response.body().getWhatsappNo();
+					phoneNo = response.body().getPhoneNo();
+
+					PreferenceHelper.insertString( Constant.EMAIL, email );
+
+//					Log.d( "email", PreferenceHelper.getString( Constant.EMAIL ) );
+//					PreferenceHelper.insertObject( Constant.CONTACTDETAILS_RESPONSE, response.body() );
 					Log.e( "getContactlist", email + "" + '\t' + whatsAppNo + "" + phoneNo );
 				}
 			}

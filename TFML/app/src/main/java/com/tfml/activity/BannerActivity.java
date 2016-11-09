@@ -430,7 +430,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		imgMessage.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
-				SocialUtil.sendMail( BannerActivity.this, SocialUtil.emailId );
+				SocialUtil.sendMail( BannerActivity.this, SocialUtil.email );
 			}
 		} );
 		imgPhoneCall.setOnClickListener( new View.OnClickListener() {

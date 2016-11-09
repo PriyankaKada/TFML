@@ -31,10 +31,14 @@ public class Constant {
 	public static final String LOGIN_PREF                    = "loginPrefs";
 	public static final String ACCOUNT_STATEMENT_DOWNLOAD    = "customer/accountStatement";
 	public static final String PRECLOSURE_STATEMENT_DOWNLOAD = "customer/preClosureStatement";
-	public static final String FORGOT_PASSWORD               = "api/forgotPassword";
-	public static final String LOGGEDIN                      = "api/isLoggedIn";
-	public static final String RECEIPTPDF                    = "customer/myReceipts";
-	public static final String CHANGPASSWORD                 = "customer/changePassword";
-	public static final String EMILIST                       = "customer/emiList";
-	public static final String LOGOUT                        = "customer/logoutCustomer";
+	public static final String FORGOT_PASSWORD      = "api/forgotPassword";
+	public static final String LOGGEDIN             = "api/isLoggedIn";
+	public static final String RECEIPTPDF           = "customer/myReceipts";
+	public static final String CHANGPASSWORD        = "customer/changePassword";
+	public static final String EMILIST              = "customer/emiList";
+	public static final String LOGOUT               = "customer/logoutCustomer";
+	public static final String CONTACTDETAILS_RESPONSE = "contactDetailsResponse";
+
+	public static final String EMAIL     = "email";
+	public static final String PDF_FILE_URL = "pdfFileUrl";
 }

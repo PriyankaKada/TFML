@@ -9,6 +9,7 @@
     <color name="tab_selector">#003668</color>
     <color name="tab_bg">#004c92</color>
     <color name="color_grey">#bbbbbb</color>
+    <color name="color_grey_light">#EEEEEE</color>
     <color name="total_lin_bg">#27AE61</color>
     <color name="total_count_bg">#239655</color>
     <color name="terminated_lin_bg">#E84C3D</color>

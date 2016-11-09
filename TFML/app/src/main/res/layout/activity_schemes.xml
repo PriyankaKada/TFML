@@ -64,8 +64,7 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/tab_bg"
             android:elevation="6dp"
@@ -75,6 +74,7 @@
             app:tabSelectedTextColor="@color/tab_selector"
             app:tabTextColor="@color/tab_selector"
             />
+
         <!-- <com.astuetz.PagerSlidingTabStrip
              android:id="@+id/tab_layout"
              android:layout_width="match_parent"
@@ -86,6 +86,7 @@
              app:tabTextColor="@color/tab_selector"
              app:tabMinWidth="100dp"
              app:pstsShouldExpand="true"/>-->
+
     </LinearLayout>
 
 </LinearLayout>

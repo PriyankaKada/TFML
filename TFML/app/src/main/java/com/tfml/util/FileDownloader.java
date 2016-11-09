@@ -1,5 +1,7 @@
 package com.tfml.util;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -8,6 +10,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * Created by webwerks on 4/10/16.
@@ -46,4 +49,30 @@ public class FileDownloader {
 			e.printStackTrace();
 		}
 	}
+
+	public static void downloadPdfFile( String url, File outputFile ) {
+		try {
+			URL           u             = new URL( url );
+			URLConnection conn          = u.openConnection();
+			int           contentLength = conn.getContentLength();
+
+			DataInputStream stream = new DataInputStream( u.openStream() );
+
+			byte[] buffer = new byte[contentLength];
+			stream.readFully( buffer );
+			stream.close();
+
+			DataOutputStream fos = new DataOutputStream( new FileOutputStream( outputFile ) );
+			fos.write( buffer );
+			fos.flush();
+			fos.close();
+		}
+		catch ( FileNotFoundException e ) {
+			return; // swallow a 404
+		}
+		catch ( IOException e ) {
+			return; // swallow a 404
+		}
+	}
+
 }

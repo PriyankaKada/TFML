@@ -101,7 +101,6 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		tabLayout.getTabAt( 2 ).setCustomView( tabThree );
 	}
 
-
 	private void setupViewPager( ViewPager viewPager ) {
 		SchemesPagerAdapter adapter = new SchemesPagerAdapter( getSupportFragmentManager() );
 		System.out.println( "------------dgdsgdf----------->" + datumArrayList );
@@ -204,12 +203,10 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 			case R.id.img_toolbar_home:
 
 				if ( PreferenceHelper.getBoolean( "SaveLogin" ) ) {
-
 					startActivity( new Intent( SchemesActivity.this, ContractActivity.class ) );
 					finish();
 				}
 				else {
-
 					startActivity( new Intent( SchemesActivity.this, BannerActivity.class ) );
 					finish();
 				}
@@ -219,30 +216,31 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 				socialDialog();
 				break;
 		}
-
 	}
 
 	public void socialDialog() {
 		imgSocial.setVisibility( View.INVISIBLE );
-		final Dialog socialdialog = new Dialog( SchemesActivity.this, android.R.style.Theme_Holo_Dialog_NoActionBar );
-		socialdialog.getWindow().setBackgroundDrawable( new ColorDrawable( android.graphics.Color.TRANSPARENT ) );
-		socialdialog.setContentView( R.layout.dialog_social );
-		WindowManager.LayoutParams params = socialdialog.getWindow().getAttributes();
+		final Dialog socialDialog = new Dialog( SchemesActivity.this, android.R.style.Theme_Holo_Dialog_NoActionBar );
+		socialDialog.getWindow().setBackgroundDrawable( new ColorDrawable( android.graphics.Color.TRANSPARENT ) );
+		socialDialog.setContentView( R.layout.dialog_social );
+		WindowManager.LayoutParams params = socialDialog.getWindow().getAttributes();
 		params.y = 5;
 		params.x = 5;
 		params.gravity = Gravity.TOP | Gravity.RIGHT;
-		socialdialog.getWindow().setAttributes( params );
-		socialdialog.getWindow().getAttributes().windowAnimations = R.style.animationdialog;
-		socialdialog.setCancelable( true );
-		final ImageView imgMessage   = ( ImageView ) socialdialog.findViewById( R.id.imgmsg );
-		final ImageView imgMap       = ( ImageView ) socialdialog.findViewById( R.id.imgmap );
-		final ImageView imgWhatsApp  = ( ImageView ) socialdialog.findViewById( R.id.imgwhatsapp );
-		final ImageView imgPhoneCall = ( ImageView ) socialdialog.findViewById( R.id.imgcall );
-		final ImageView imgcancel    = ( ImageView ) socialdialog.findViewById( R.id.imgcancel );
+		socialDialog.getWindow().setAttributes( params );
+		socialDialog.getWindow().getAttributes().windowAnimations = R.style.animationdialog;
+		socialDialog.setCancelable( true );
+
+		final ImageView imgMessage   = ( ImageView ) socialDialog.findViewById( R.id.imgmsg );
+		final ImageView imgMap       = ( ImageView ) socialDialog.findViewById( R.id.imgmap );
+		final ImageView imgWhatsApp  = ( ImageView ) socialDialog.findViewById( R.id.imgwhatsapp );
+		final ImageView imgPhoneCall = ( ImageView ) socialDialog.findViewById( R.id.imgcall );
+		final ImageView imgcancel    = ( ImageView ) socialDialog.findViewById( R.id.imgcancel );
+
 		imgcancel.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
-				socialdialog.dismiss();
+				socialDialog.dismiss();
 				imgSocial.setVisibility( View.VISIBLE );
 			}
 		} );
@@ -266,7 +264,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		} );
 
 
-		socialdialog.show();
+		socialDialog.show();
 
 	}
 
@@ -362,7 +360,6 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 				setupViewPager( viewPager );
 
 			}
-
 
 			@Override
 			public void onFailure( Call< SchemesResponse > call, Throwable t ) {

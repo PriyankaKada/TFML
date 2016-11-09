@@ -1,9 +1,14 @@
 package com.tfml.adapter;
 
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.net.Uri;
+import android.os.Environment;
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +17,12 @@ import android.widget.TextView;
 
 import com.tfml.R;
 import com.tfml.activity.DownloadDataActivity;
+import com.tfml.auth.Constant;
 import com.tfml.auth.TmflApi;
 import com.tfml.model.downloadResponseModel.Datum;
+import com.tfml.util.PreferenceHelper;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -69,7 +77,23 @@ public class DownloadAdapter extends BaseAdapter {
 				String fileUrl        = downloadList.get( position ).getFile();
 				Intent downloadIntent = new Intent( context, DownloadDataActivity.class );
 				downloadIntent.putExtra( "URL", fileUrl );
-				context.startActivity( downloadIntent );
+				Log.d( "fileUrl", fileUrl );
+				PreferenceHelper.insertString( Constant.PDF_FILE_URL, fileUrl );
+
+				String path = Environment.getExternalStorageDirectory().toString()
+						+ "/TMFL/Download/";
+				File file = new File( path );
+//				fileUrl = PreferenceHelper.getString( Constant.PDF_FILE_URL );
+
+//				FileDownloader.downloadPdfFile( fileUrl, file );
+				Uri                     uri     = Uri.parse( fileUrl );
+				DownloadManager.Request request = new DownloadManager.Request( uri );
+				request.allowScanningByMediaScanner();
+				request.setNotificationVisibility( DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED );
+				request.setDestinationInExternalPublicDir( Environment.DIRECTORY_DOWNLOADS, "TFML/Downloads" + SystemClock.currentThreadTimeMillis() );
+				DownloadManager manager = ( DownloadManager ) context.getSystemService( Context.DOWNLOAD_SERVICE );
+				manager.enqueue( request );
+//				context.startActivity( downloadIntent );
 
 			}
 		} );

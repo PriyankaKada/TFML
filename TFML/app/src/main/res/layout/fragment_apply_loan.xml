@@ -1,10 +1,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:isScrollContainer="false"
-    android:orientation="vertical"
-    tools:context="com.tfml.fragment.ApplyLoanFragment">
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:isScrollContainer="false"
+            android:orientation="vertical"
+            tools:context="com.tfml.fragment.ApplyLoanFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:text="@string/txt_offers"
             android:textColor="@color/text_black"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <Spinner
             android:id="@+id/sp_offers"
@@ -39,7 +39,7 @@
             android:text="@string/txt_lead_type"
             android:textColor="@color/text_black"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,7 +62,7 @@
                     android:button="@drawable/checkbox_selector"
                     android:paddingLeft="10dp"
                     android:text="@string/txt_individual"
-                    android:textColor="#6b6b6b" />
+                    android:textColor="#6b6b6b"/>
 
                 <RadioButton
                     android:id="@+id/rdb_organization"
@@ -72,7 +72,7 @@
                     android:button="@drawable/checkbox_selector"
                     android:paddingLeft="10dp"
                     android:text="@string/txt_organizational"
-                    android:textColor="#6b6b6b" />
+                    android:textColor="#6b6b6b"/>
             </RadioGroup>
 
         </LinearLayout>
@@ -90,7 +90,7 @@
             android:maxLines="1"
             android:padding="10dp"
             android:textSize="14sp"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -100,7 +100,7 @@
             android:text="@string/txt_vehicle_type"
             android:textColor="@color/text_black"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -123,7 +123,7 @@
                     android:button="@drawable/checkbox_selector"
                     android:paddingLeft="10dp"
                     android:text="@string/txt_commercial"
-                    android:textColor="#6b6b6b" />
+                    android:textColor="#6b6b6b"/>
 
                 <RadioButton
                     android:id="@+id/rdb_passenger"
@@ -133,7 +133,7 @@
                     android:button="@drawable/checkbox_selector"
                     android:paddingLeft="10dp"
                     android:text="@string/txt_passenger"
-                    android:textColor="#6b6b6b" />
+                    android:textColor="#6b6b6b"/>
 
                 <RadioButton
                     android:id="@+id/rdb_refinance"
@@ -143,7 +143,7 @@
                     android:button="@drawable/checkbox_selector"
                     android:paddingLeft="10dp"
                     android:text="@string/txt_Refinance"
-                    android:textColor="#6b6b6b" />
+                    android:textColor="#6b6b6b"/>
             </RadioGroup>
 
         </LinearLayout>
@@ -164,7 +164,7 @@
                 android:maxLength="120"
                 android:maxLines="1"
                 android:padding="10dp"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <EditText
                 android:id="@+id/edt_last_name"
@@ -177,7 +177,7 @@
                 android:maxLength="120"
                 android:maxLines="1"
                 android:padding="10dp"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -197,7 +197,7 @@
                     android:maxLength="12"
                     android:maxLines="1"
                     android:padding="10dp"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
 
                 <EditText
                     android:id="@+id/edt_landline_no"
@@ -212,7 +212,7 @@
                     android:maxLength="12"
                     android:maxLines="1"
                     android:padding="10dp"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
 
             </LinearLayout>
 
@@ -227,9 +227,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/spinner_bg">
-
-                </Spinner>
+                    android:background="@drawable/spinner_bg"/>
 
                 <Spinner
                     android:id="@+id/sp_select_branch_state"
@@ -237,9 +235,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/spinner_bg">
+                    android:background="@drawable/spinner_bg"/>
 
-                </Spinner>
             </LinearLayout>
 
             <LinearLayout
@@ -255,7 +252,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/spinner_bg">
-
                 </Spinner>
 
                 <Spinner
@@ -264,7 +260,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/spinner_bg" />
+                    android:background="@drawable/spinner_bg"/>
             </LinearLayout>
 
             <EditText
@@ -277,7 +273,7 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:padding="10dp"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -292,7 +288,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/spinner_bg">
-
                 </Spinner>
 
                 <Spinner
@@ -301,7 +296,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/spinner_bg" />
+                    android:background="@drawable/spinner_bg"/>
             </LinearLayout>
 
             <LinearLayout
@@ -321,14 +316,14 @@
                     android:maxLength="6"
                     android:maxLines="1"
                     android:padding="8dp"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    android:padding="10dp" />
+                    android:padding="10dp"/>
 
             </LinearLayout>
 
@@ -343,6 +338,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:background="@color/tab_bg"
                     android:gravity="center"
@@ -350,14 +346,14 @@
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 <Button
                     android:id="@+id/btn_apply_laon"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:background="@color/tab_bg"
                     android:gravity="center"
@@ -365,7 +361,7 @@
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

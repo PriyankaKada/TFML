@@ -11,9 +11,7 @@
     <ImageView
         android:id="@+id/imgQuickCall"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
+        android:layout_height="wrap_content"
         android:src="@drawable/ic_call_non_selected"/>
 
     <TextView
@@ -25,7 +23,7 @@
         android:text="@string/title_welcome"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:textStyle="bold"></TextView>
+        android:textStyle="bold"/>
 
     <ImageView
         android:id="@+id/imgSocial"
@@ -33,6 +31,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:layout_marginRight="5dp"
-        android:src="@drawable/ic_mobile"></ImageView>
+        android:src="@drawable/ic_mobile"/>
 </android.support.v7.widget.Toolbar>
 
