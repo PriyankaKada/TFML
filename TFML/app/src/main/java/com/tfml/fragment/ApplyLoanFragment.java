@@ -240,6 +240,12 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		if ( !Validation.hasText( edtCode, "Please enter Pincode number" ) ) {
 			ret = false;
 		}
+
+		if ( edtCode.getText().toString().length() != 6 ) {
+			edtCode.setError( "Pincode should be of 6 digits!" );
+			ret = false;
+		}
+
 		if ( spnProduct.getSelectedItemPosition() == 0 ) {
 			ret = false;
 		}
@@ -310,22 +316,22 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		if ( branchCode != null && branchCode != "-1" ) {
 			inputLoanModel.setBranch( branchCode );
 		} /*else {
-	        Toast.makeText(getContext(), "Please Select Branch", Toast.LENGTH_SHORT).show();
+		    Toast.makeText(getContext(), "Please Select Branch", Toast.LENGTH_SHORT).show();
         }
 */
 		if ( stateCode != null && stateCode != "-1" ) {
 			inputLoanModel.setState( stateCode );
 
 		} /*else {
-            Toast.makeText(getContext(), "Please Select State", Toast.LENGTH_SHORT).show();
+		    Toast.makeText(getContext(), "Please Select State", Toast.LENGTH_SHORT).show();
         }*/
 
 
 		if ( cityCode != null && cityCode != "-1" ) {
 			inputLoanModel.setCity( cityCode );
 		}
-       /* else {
-            Toast.makeText(getContext(), "Please Select City", Toast.LENGTH_SHORT).show();
+	   /* else {
+	        Toast.makeText(getContext(), "Please Select City", Toast.LENGTH_SHORT).show();
         }*/
 
 		inputLoanModel.setEmailAddress( edtEmailAddress.getText().toString() );

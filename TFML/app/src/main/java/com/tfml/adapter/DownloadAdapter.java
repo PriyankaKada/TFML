@@ -12,17 +12,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.tfml.R;
 import com.tfml.activity.DownloadDataActivity;
-import com.tfml.auth.Constant;
 import com.tfml.auth.TmflApi;
 import com.tfml.model.downloadResponseModel.Datum;
-import com.tfml.util.PreferenceHelper;
 
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 /**
@@ -78,33 +77,43 @@ public class DownloadAdapter extends BaseAdapter {
 				Intent downloadIntent = new Intent( context, DownloadDataActivity.class );
 				downloadIntent.putExtra( "URL", fileUrl );
 				Log.d( "fileUrl", fileUrl );
-				PreferenceHelper.insertString( Constant.PDF_FILE_URL, fileUrl );
 
-				String path = Environment.getExternalStorageDirectory().toString()
-						+ "/TMFL/Download/";
-				File file = new File( path );
-//				fileUrl = PreferenceHelper.getString( Constant.PDF_FILE_URL );
+				Uri uri = Uri.parse( fileUrl );
 
-//				FileDownloader.downloadPdfFile( fileUrl, file );
-				Uri                     uri     = Uri.parse( fileUrl );
+				String mime = fileUrl.substring( fileUrl.lastIndexOf( "." ), fileUrl.length() );
+
+				Log.d( "mime type", mime );
+
 				DownloadManager.Request request = new DownloadManager.Request( uri );
 				request.allowScanningByMediaScanner();
 				request.setNotificationVisibility( DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED );
-				request.setDestinationInExternalPublicDir( Environment.DIRECTORY_DOWNLOADS, "TFML/Downloads" + SystemClock.currentThreadTimeMillis() );
-				DownloadManager manager = ( DownloadManager ) context.getSystemService( Context.DOWNLOAD_SERVICE );
+				request.setDestinationInExternalPublicDir( Environment.DIRECTORY_DOWNLOADS, "TFML/Downloads"
+						+ SystemClock.currentThreadTimeMillis() + mime );
+
+				DownloadManager manager           = ( DownloadManager ) context.getSystemService( Context.DOWNLOAD_SERVICE );
+				Long            downloadReference = manager.enqueue( request );
+				try {
+					manager.openDownloadedFile( downloadReference );
+				}
+				catch ( FileNotFoundException e ) {
+					e.printStackTrace();
+				}
 				manager.enqueue( request );
 //				context.startActivity( downloadIntent );
 
 			}
 		} );
 		return convertView;
+	}
 
-
+	private String getMimeFromFileName( String fileName ) {
+		MimeTypeMap map = MimeTypeMap.getSingleton();
+		String      ext = MimeTypeMap.getFileExtensionFromUrl( fileName );
+		return map.getMimeTypeFromExtension( ext );
 	}
 
 	public class Holder {
 		TextView txtFile;
 	}
-
 
 }
