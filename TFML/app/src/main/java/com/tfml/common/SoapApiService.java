@@ -26,7 +26,6 @@ public class SoapApiService {
 	public static SoapApiService getInstance() {
 		if ( apiService == null ) {
 			synchronized ( SoapApiService.class ) {
-
 				apiService = new SoapApiService();
 				HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
 
@@ -49,10 +48,8 @@ public class SoapApiService {
 		return apiService;
 	}
 
-
 	public TmflApi call() {
 		services = retrofit.create( TmflApi.class );
 		return services;
 	}
-
 }

@@ -32,11 +32,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SplashActivity extends BaseActivity {
-	final private int    REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
+	final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
 	TmflApi          tmflApi;
 	LogInputModel    logInputModel;
 	LogResponseModel logResponseModel;
-	private       String TAG                                   = "SplashLog";
+	private String TAG = "SplashLog";
 	Handler handler = new Handler() {
 		@Override
 		public void handleMessage( Message msg ) {

@@ -116,6 +116,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 		tmflApi.getLoginResponse( loginRequestModel ).enqueue( new Callback< LoginResponseModel >() {
 			@Override
 			public void onResponse( Call< LoginResponseModel > call, Response< LoginResponseModel > response ) {
+
 				CommonUtils.closeProgressDialog();
 				if ( response.body() != null && response.body().getStatus().toString().contains( "success" ) ) {
 					PreferenceHelper.insertBoolean( "SaveLogin", true );
@@ -125,7 +126,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 					PreferenceHelper.insertBoolean( "SaveLogin", true );
 					Log.e( "API TOKEN", strApiToken );
 				  /*  if (chkRememberMe.isChecked()) {
-                        PreferenceHelper.insertBoolean("SaveLogin", true);
+				        PreferenceHelper.insertBoolean("SaveLogin", true);
                     }
                     else
                     {
@@ -147,6 +148,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
 			@Override
 			public void onFailure( Call< LoginResponseModel > call, Throwable t ) {
+				Log.d( "error", t.getMessage() );
 				CommonUtils.closeProgressDialog();
 			}
 		} );

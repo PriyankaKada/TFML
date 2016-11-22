@@ -70,12 +70,14 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 
 		viewPager = ( ViewPager ) findViewById( R.id.pager );
 
+
 		view1 = findViewById( R.id.view1 );
 		view2 = findViewById( R.id.view2 );
 		view3 = findViewById( R.id.view3 );
 
 		SetFonts.setFonts( this, txtschemestitle, 2 );
 		bundle1 = getIntent().getExtras();
+		setupViewPager( viewPager );
 
 	}
 
@@ -356,8 +358,6 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 				if ( model != null ) {
 					PreferenceHelper.insertObject( "Scheme response", model );
 				}
-
-				setupViewPager( viewPager );
 
 			}
 

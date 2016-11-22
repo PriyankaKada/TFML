@@ -12,13 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.MimeTypeMap;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.tfml.R;
 import com.tfml.activity.DownloadDataActivity;
-import com.tfml.auth.TmflApi;
 import com.tfml.model.downloadResponseModel.Datum;
 
 import java.io.FileNotFoundException;
@@ -31,7 +29,6 @@ import java.util.List;
 public class DownloadAdapter extends BaseAdapter {
 	List< Datum > downloadList;
 	Context       context;
-	TmflApi       tmflApi;
 
 	public DownloadAdapter( Context context, List< Datum > downloadList ) {
 		this.context = context;
@@ -99,21 +96,13 @@ public class DownloadAdapter extends BaseAdapter {
 					e.printStackTrace();
 				}
 				manager.enqueue( request );
-//				context.startActivity( downloadIntent );
 
 			}
 		} );
 		return convertView;
 	}
 
-	private String getMimeFromFileName( String fileName ) {
-		MimeTypeMap map = MimeTypeMap.getSingleton();
-		String      ext = MimeTypeMap.getFileExtensionFromUrl( fileName );
-		return map.getMimeTypeFromExtension( ext );
-	}
-
 	public class Holder {
 		TextView txtFile;
 	}
-
 }
