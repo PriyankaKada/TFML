@@ -45,7 +45,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 public class MyReceiptFragment extends Fragment implements View.OnClickListener {
 	Button                btnBack;
 	View                  view;
@@ -59,9 +58,18 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 	HashMap< String, ArrayList< ResponseEnvelope.Item > > hashMap = new HashMap< String, ArrayList< ResponseEnvelope.Item > >();
 	TmflApi tmflApi, tmflLogin;
 
+	public static void longInfo( String str ) {
+		if ( str.length() > 4000 ) {
+			Log.i( "response TAG", str.substring( 0, 4000 ) );
+			longInfo( str.substring( 4000 ) );
+		}
+		else {
+			Log.i( "response TAG", str );
+		}
+	}
+
 	@Override
-	public View onCreateView( LayoutInflater inflater, ViewGroup container,
-	                          Bundle savedInstanceState ) {
+	public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
 		// Inflate the layout for this fragment
 		view = inflater.inflate( R.layout.fragment_my_receipt, container, false );
 		tmflLogin = ApiService.getInstance().call();
@@ -83,7 +91,6 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 		if ( modifiedDate != null ) {
 			callCheckLogin();
 		}
-
 	}
 
 	@Override
@@ -117,18 +124,14 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 				if ( response.body().getStatus().toString().contains( "Success" ) ) {
 					if ( getActivity() != null ) {
 						if ( CommonUtils.isNetworkAvailable( getActivity() ) ) {
-
 							CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
 							callSoapRequest();
-
 						}
 						else {
 							Toast.makeText( getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT ).show();
 						}
 					}
-
 				}
-
 				else {
 					Toast.makeText( getActivity(), "User Logged in from another Device", Toast.LENGTH_LONG ).show();
 					Intent loginIntent = new Intent( getActivity(), LoginActivity.class );
@@ -136,16 +139,12 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 				}
 			}
 
-
 			@Override
 			public void onFailure( Call< LogResponseModel > call, Throwable t ) {
 				Log.e( "ERROR", t.getMessage() );
 			}
 		} );
-
-
 	}
-
 
 	public void callSoapRequest() {
 		RequestEnvelpe requestEnvelpe = new RequestEnvelpe();
@@ -156,7 +155,6 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 			reqData.setContactId( PreferenceHelper.getString( PreferenceHelper.CONTRACT_NO ) );
 		}
 		else {
-
 			reqData.setContactId( PreferenceHelper.getString( PreferenceHelper.CONTRACT_NO ) );
 		}
 		reqData.setREQDATE( modifiedDate );
@@ -168,33 +166,30 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 			public void onResponse( Call< ResponseEnvelope > call, Response< ResponseEnvelope > response ) {
 				CommonUtils.closeProgressDialog();
 				if ( response.body() != null ) {
-
 					responseEnvelope = response.body().getBody();
 
 					if ( responseEnvelope != null ) {
-
 						Log.e( "SIZE ", response.body().getBody().getZCISResponse().getI_REC().size() + "" );
 
 						if ( response.body().getBody().getZCISResponse().getI_REC().size() != 0 ) {
 							TreeMap< String, ArrayList< ResponseEnvelope.Item > > hashMap = new TreeMap< String, ArrayList< ResponseEnvelope.Item > >();
 
 							Collections.sort( response.body().getBody().getZCISResponse().getI_REC(), new Comparator< ResponseEnvelope.Item >() {
+
 								@Override
 								public int compare( ResponseEnvelope.Item lhs, ResponseEnvelope.Item rhs ) {
 									SimpleDateFormat form  = new SimpleDateFormat( "yyyy-MM-dd" );
 									Date             date1 = null;
 									Date             date2 = null;
+
 									try {
 										date1 = form.parse( lhs.getZFBDT() );
 										date2 = form.parse( rhs.getZFBDT() );
-
 									}
 									catch ( Exception e ) {
 										e.printStackTrace();
 									}
-
 									return date1.compareTo( date2 );
-
 								}
 							} );
 
@@ -207,7 +202,6 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 							}
 							TreeSet< String > categories = new TreeSet<>();
 							categories.addAll( itemsCategory );
-
 
 							for ( String s : categories ) {
 								Log.e( "HASH SET", s );
@@ -240,6 +234,8 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 							ArrayList< Double > amountar = new ArrayList< Double >();
 							Log.e( "HashMap ", new Gson().toJson( hashMap ) + "" );
 
+							longInfo( new Gson().toJson( hashMap ) );
+
 							Iterator it = sortedMap.entrySet().iterator();
 							while ( it.hasNext() ) {
 								Map.Entry                          pair = ( Map.Entry ) it.next();
@@ -258,16 +254,12 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 
 							MyExpandableListAdapter expandableListAdapter = new MyExpandableListAdapter( getActivity(), sortedMap, groupar, amountar );
 							expandableListView.setAdapter( expandableListAdapter );
-
 						}
-
 					}
-
 				}
 				else {
 					Toast.makeText( getActivity(), "Server Under Maintenance,Please try after Sometime ", Toast.LENGTH_LONG ).show();
 				}
-
 			}
 
 			@Override
@@ -276,6 +268,5 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 				CommonUtils.closeProgressDialog();
 			}
 		} );
-
 	}
 }

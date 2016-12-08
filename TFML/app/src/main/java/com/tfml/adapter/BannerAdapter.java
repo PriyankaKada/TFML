@@ -45,7 +45,9 @@ public class BannerAdapter extends PagerAdapter {
 		View itemView = LayoutInflater.from( mContext ).inflate( R.layout.swipe_fragment, container, false );
 
 		ImageView imageView = ( ImageView ) itemView.findViewById( R.id.imageView );
-		Picasso.with( mContext ).load( String.valueOf( "" + bannerlist.get( position ).getImage() ) ).into( imageView );
+		imageView.setAdjustViewBounds( true );
+		Picasso.with( mContext ).load( String.valueOf( "" + bannerlist.get( position ).getImage() ) )
+				.into( imageView );
 		Log.e( "instantiateItem", "" + "http://staging.php-dev.in:8844/tatamotors/public/" + bannerlist.get( position ).getImage() );
 		container.addView( itemView );
 

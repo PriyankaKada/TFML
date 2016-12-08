@@ -163,54 +163,70 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 		spnContractNo = ( Spinner ) view.findViewById( R.id.spnContractNo );
 		contractLst = new ArrayList< String >();
 		if ( modelArrayList.size() > 0 ) {
-			contractLst.add( datavalue );
+
 			for ( int i = 0; i < modelArrayList.size(); i++ ) {
+				contractLst.add( modelArrayList.get( i ).getUsrConNo() );
 				ContractModel model = modelArrayList.get( i );
 			   /* if (model != null)
 			        contractLst.add(model.getUsrConNo());*/
 			}
-		}
 
-		spnContractNo.setSelection( 1 );
-		ArrayAdapter< String > madapter = new ArrayAdapter< String >( getActivity(), R.layout.spinner_row, contractLst ) {
+			ArrayAdapter< String > madapter = new ArrayAdapter< String >( getActivity(), R.layout.spinner_row, contractLst ) {
 
-			@Override
-			public boolean isEnabled( int position ) {
-				return true;
-			}
+				@Override
+				public boolean isEnabled( int position ) {
+					return true;
+				}
 
-			@Override
-			public View getDropDownView( int position, View convertView,
-			                             ViewGroup parent ) {
-				View     view = super.getDropDownView( position, convertView, parent );
-				TextView tv   = ( TextView ) view;
-				tv.setTextColor( Color.BLACK );
-				return view;
-			}
-		};
-		madapter.setDropDownViewResource( R.layout.spinner_item );
-		spnContractNo.setAdapter( madapter );
-		madapter.notifyDataSetChanged();
+				@Override
+				public View getDropDownView( int position, View convertView,
+				                             ViewGroup parent ) {
+					View     view = super.getDropDownView( position, convertView, parent );
+					TextView tv   = ( TextView ) view;
+					tv.setTextColor( Color.BLACK );
+					return view;
+				}
+			};
+			madapter.setDropDownViewResource( R.layout.spinner_item );
+			spnContractNo.setAdapter( madapter );
+			madapter.notifyDataSetChanged();
 
-		spnContractNo.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
-			@Override
-			public void onItemSelected( AdapterView< ? > parent, View view, int position, long id ) {
-				strContractNo = spnContractNo.getSelectedItem().toString();
-				itemindex = position;
-				if ( itemindex > 0 ) {
-					ContractModel model = modelArrayList.get( itemindex );
-					setData( model );
-					callCheckLogin();
-
-
+			for ( int i = 0; i < contractLst.size(); i++ ) {
+				if ( contractLst.get( i ).equalsIgnoreCase( datavalue ) ) {
+					spnContractNo.setSelection( i );
+					Log.d( "contractList", contractLst.get( i ) );
 				}
 			}
+		}
 
+//		spnContractNo.setSelection( 1 );
+
+
+		spnContractNo.post( new Runnable() {
 			@Override
-			public void onNothingSelected( AdapterView< ? > parent ) {
+			public void run() {
+				spnContractNo.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
+					@Override
+					public void onItemSelected( AdapterView< ? > parent, View view, int position, long id ) {
+						strContractNo = spnContractNo.getSelectedItem().toString();
+						itemindex = position;
+						if ( itemindex > 0 ) {
+							ContractModel model = modelArrayList.get( itemindex );
+							setData( model );
+							callCheckLogin();
 
+
+						}
+					}
+
+					@Override
+					public void onNothingSelected( AdapterView< ? > parent ) {
+
+					}
+				} );
 			}
 		} );
+
 
 		date = new DatePickerFragment();
 		btnSubmit.setOnClickListener( this );

@@ -70,14 +70,12 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 
 		viewPager = ( ViewPager ) findViewById( R.id.pager );
 
-
 		view1 = findViewById( R.id.view1 );
 		view2 = findViewById( R.id.view2 );
 		view3 = findViewById( R.id.view3 );
 
 		SetFonts.setFonts( this, txtschemestitle, 2 );
 		bundle1 = getIntent().getExtras();
-		setupViewPager( viewPager );
 
 	}
 
@@ -88,7 +86,6 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		SetFonts.setFonts( this, tabOne, 2 );
 		tabOne.setCompoundDrawablesWithIntrinsicBounds( 0, R.drawable.ic_scheme_non_selected, 0, 0 );
 		tabLayout.getTabAt( 0 ).setCustomView( tabOne );
-
 
 		TextView tabTwo = ( TextView ) LayoutInflater.from( this ).inflate( R.layout.custom_tab, null );
 		tabTwo.setText( "Apply Loan" );
@@ -164,18 +161,15 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		tabLayout = ( TabLayout ) findViewById( R.id.tab_layout );
 		tabLayout.setupWithViewPager( viewPager );
 		String myTabselected = bundle1.getString( "TAB_SELECTED" );
-		setupTabIcons();
 		imgtoolbarhome.setOnClickListener( this );
+		setupTabIcons();
 		imgSocial.setOnClickListener( this );
 
 		if ( myTabselected.equals( "Offers" ) ) {
 			tabLayout.getTabAt( 0 ).select();
-
-
 		}
 		else if ( myTabselected.equals( "ApplyLoan" ) ) {
 			tabLayout.getTabAt( 1 ).select();
-
 		}
 		else if ( myTabselected.equals( "ReferFriend" ) ) {
 			tabLayout.getTabAt( 2 ).select();
@@ -357,6 +351,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 				SchemesResponse model = response.body();
 				if ( model != null ) {
 					PreferenceHelper.insertObject( "Scheme response", model );
+					setupViewPager( viewPager );
 				}
 
 			}

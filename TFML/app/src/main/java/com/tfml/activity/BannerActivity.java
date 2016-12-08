@@ -44,6 +44,8 @@ import com.tfml.util.SetFonts;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,6 +71,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 	EasyDialog dialog;
 	EditText   edtQuickCall, edtOtpNo;
 	QuickCallInputModel quickCallInputModel;
+	int count = 0;
 	private BannerFragment bannerFragment;
 	private ImageView      imgQuickCall, imgSocial;
 	private TextView    txtTitle;
@@ -76,6 +79,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 	private int         dotsCount;
 	private TextView    txtSchemes, txtApplyLoan, txtReferFriend, txtLoanStatus, txtLogin;
 	private ImageView imgSchemes, imgApplyLoan, imgReferFriend, imgLoanStatus, imgLogin;
+	private Timer timer;
 
 	protected void onCreate( Bundle savedInstanceState ) {
 		super.onCreate( savedInstanceState );
@@ -124,7 +128,6 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		linLoanStaus.setOnClickListener( this );
 		linLogin.setOnClickListener( this );
 
-
 	}
 
 	public void loadBannerData() {
@@ -154,6 +157,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 						bannerAdapter = new BannerAdapter( BannerActivity.this, ( ArrayList< Datum > ) bannerlistResponse.getBanners().getData() );
 						recentViewpager.setAdapter( bannerAdapter );
 						setUiPageViewController();
+
 						recentViewpager.setCurrentItem( 0 );
 						circlePageIndicator.setViewPager( recentViewpager );
 
@@ -199,6 +203,27 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		}
 
 		dots[0].setImageDrawable( getResources().getDrawable( R.drawable.selecteditem_dot ) );
+
+		timer = new Timer();
+		timer.schedule( new TimerTask() {
+			@Override
+			public void run() {
+				runOnUiThread( new Runnable() {
+					@Override
+					public void run() {
+
+						if ( count <= dotsCount ) {
+							recentViewpager.setCurrentItem( count );
+							count++;
+						}
+						else {
+							count = 0;
+							recentViewpager.setCurrentItem( count );
+						}
+					}
+				} );
+			}
+		}, 1500, 1500 );
 	}
 
 

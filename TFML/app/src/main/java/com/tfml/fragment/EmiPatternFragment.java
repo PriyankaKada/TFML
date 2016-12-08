@@ -24,12 +24,12 @@ import java.util.ArrayList;
 
 public class EmiPatternFragment extends Fragment {
 
-	FrameLayout         frmEmiPattern;
-	View                view;
-	FragmentManager     fragmentManager;
-	FragmentTransaction fragmentTransaction;
-	EmiDetailFragment   emiDetailFragment;
-	Spinner             spnContractNo;
+	FrameLayout                frmEmiPattern;
+	View                       view;
+	FragmentManager            fragmentManager;
+	FragmentTransaction        fragmentTransaction;
+	EmiDetailFragment          emiDetailFragment;
+	Spinner                    spnContractNo;
 	ArrayList< ContractModel > modelArrayList;
 	TextView                   txt_repaymentmode, txt_emiamount, txt_dueamount, txt_duedate, txt_rc_no;
 	int itemindex = 0;
@@ -51,7 +51,8 @@ public class EmiPatternFragment extends Fragment {
 		Bundle bundle = intent.getExtras();
 		modelArrayList =
 				( ArrayList< ContractModel > ) bundle.getSerializable( "datamodel" );
-		datavalue = ( String ) bundle.getString( "datamodelvalue" );
+//		datavalue = ( String ) bundle.getString( "datamodelvalue" );
+		datavalue = PreferenceHelper.getString( PreferenceHelper.CONTRACT_NO );
 		PreferenceHelper.insertString( PreferenceHelper.CONTRACT_NO, datavalue );
 		rcNo = ( String ) bundle.getString( "RCNO" );
 		dueDate = ( String ) bundle.getString( "DUEDATE" );
@@ -68,40 +69,43 @@ public class EmiPatternFragment extends Fragment {
 
 		contractLst = new ArrayList< String >();
 		if ( modelArrayList.size() > 0 ) {
-			contractLst.add( datavalue );
 			for ( int i = 0; i < modelArrayList.size(); i++ ) {
-				ContractModel model = modelArrayList.get( i );
-/*
-                if (model != null){}
-                    contractLst.add(model.getUsrConNo());
-*/
+				contractLst.add( modelArrayList.get( i ).getUsrConNo() );
+			}
 
+			ArrayAdapter< String > madapter = new ArrayAdapter< String >( getActivity(), R.layout.spinner_row, contractLst ) {
+
+				@Override
+				public boolean isEnabled( int position ) {
+					return true;
+				}
+
+				@Override
+				public View getDropDownView( int position, View convertView,
+				                             ViewGroup parent ) {
+					View     view = super.getDropDownView( position, convertView, parent );
+					TextView tv   = ( TextView ) view;
+					tv.setTextColor( Color.BLACK );
+					return view;
+				}
+			};
+			madapter.setDropDownViewResource( R.layout.spinner_item );
+			spnContractNo.setAdapter( madapter );
+			madapter.notifyDataSetChanged();
+
+			Log.d( "datavalue", datavalue + contractLst.size() );
+			for ( int i = 0; i < contractLst.size(); i++ ) {
+				if ( contractLst.get( i ).equalsIgnoreCase( datavalue ) ) {
+					spnContractNo.setSelection( i );
+					Log.d( "contractList", contractLst.get( i ) );
+				}
 			}
 		}
 
-		spnContractNo.setSelection( 1 );
+//		spnContractNo.setSelection( 1 );
 //         spnContractNo.setAdapter(new ArrayAdapter<String>(getActivity(),R.layout.spinner_row,contractLst));
 
 
-		ArrayAdapter< String > madapter = new ArrayAdapter< String >( getActivity(), R.layout.spinner_row, contractLst ) {
-
-			@Override
-			public boolean isEnabled( int position ) {
-				return true;
-			}
-
-			@Override
-			public View getDropDownView( int position, View convertView,
-			                             ViewGroup parent ) {
-				View     view = super.getDropDownView( position, convertView, parent );
-				TextView tv   = ( TextView ) view;
-				tv.setTextColor( Color.BLACK );
-				return view;
-			}
-		};
-		madapter.setDropDownViewResource( R.layout.spinner_item );
-		spnContractNo.setAdapter( madapter );
-		madapter.notifyDataSetChanged();
 		txt_rc_no = ( TextView ) view.findViewById( R.id.txt_rc_no );
 		frmEmiPattern = ( FrameLayout ) view.findViewById( R.id.frm_emi_detail );
 		txt_repaymentmode = ( TextView ) view.findViewById( R.id.txt_repaymentmode );
@@ -124,25 +128,28 @@ public class EmiPatternFragment extends Fragment {
 			txt_dueamount.setText( overdue );
 		}
 
-		spnContractNo.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
+		spnContractNo.post( new Runnable() {
 			@Override
-			public void onItemSelected( AdapterView< ? > parent, View view, int position, long id ) {
-				itemindex = position;
-				if ( itemindex > 0 ) {
-					ContractModel model = modelArrayList.get( itemindex );
-					setData( model );
-					Log.e( "ID", " " + modelArrayList.get( position ).getUsrConNo() );
-					PreferenceHelper.insertString( PreferenceHelper.CONTRACT_NO, modelArrayList.get( position ).getUsrConNo() );
-					getActivity().getSupportFragmentManager().beginTransaction().replace( R.id.frm_emi_detail, new MyReceiptFragment() ).commit();
+			public void run() {
+				spnContractNo.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
+					@Override
+					public void onItemSelected( AdapterView< ? > parent, View view, int position, long id ) {
+						itemindex = position;
+						ContractModel model = modelArrayList.get( itemindex );
+						setData( model );
+						Log.e( "ID", " " + modelArrayList.get( position ).getUsrConNo() );
+						PreferenceHelper.insertString( PreferenceHelper.CONTRACT_NO, modelArrayList.get( position ).getUsrConNo() );
+						getActivity().getSupportFragmentManager().beginTransaction().replace( R.id.frm_emi_detail, new MyReceiptFragment() ).commit();
+					}
 
-				}
-			}
+					@Override
+					public void onNothingSelected( AdapterView< ? > parent ) {
 
-			@Override
-			public void onNothingSelected( AdapterView< ? > parent ) {
-
+					}
+				} );
 			}
 		} );
+
 		loadEmiDetail();
 
 	}
@@ -157,7 +164,6 @@ public class EmiPatternFragment extends Fragment {
 			txt_dueamount.setText( model.getTotalCurrentDue() == null ? "" : "Rs." + model.getTotalCurrentDue().toString() );
 		}
 
-
 	}
 
 	public void loadEmiDetail() {
@@ -168,6 +174,5 @@ public class EmiPatternFragment extends Fragment {
 		bundle.putString( "datamodelvalue", datavalue );
 		fragmentTransaction.add( R.id.frm_emi_detail, emiDetailFragment );
 		fragmentTransaction.commit();
-
 	}
 }

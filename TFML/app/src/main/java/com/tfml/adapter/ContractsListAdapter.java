@@ -8,11 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.tfml.R;
 import com.tfml.activity.EmiActivity;
+import com.tfml.auth.Constant;
 import com.tfml.model.ContractResponseModel.ContractModel;
+import com.tfml.util.PreferenceHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,10 +33,11 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 			txt_last_payment_date, txt_next_due_date, txt_overdue_amount, txt_repayment_mode;
 
 	TextView txtContractNoTerm, txt_rc_no_term, txt_terminated_name, txt_terminated_date;
-	TextView btn_pay_emi, btn_more_detail;
+	TextView /*btn_pay_emi*/   btn_more_detail;
 	ArrayList< ContractModel > arrayList;
 	SimpleDateFormat           dateFormat, format2;
 	Date varDate;
+	private Button btn_pay_emi;
 
 	public ContractsListAdapter( Context context, ArrayList< ContractModel > objects ) {
 		super( context, 0, objects );
@@ -59,7 +63,7 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 			txt_last_payment_date = ( TextView ) convertView.findViewById( R.id.txt_last_payment_date );
 		  /*  btn_pay_emi=(Button) convertView.findViewById(R.id.btn_pay_emi);
 		    btn_more_detail=(Button)convertView.findViewById(R.id.btn_more_detail);*/
-			btn_pay_emi = ( TextView ) convertView.findViewById( R.id.btn_pay_emi );
+			btn_pay_emi = ( Button ) convertView.findViewById( R.id.btn_pay_emi );
 			btn_more_detail = ( TextView ) convertView.findViewById( R.id.btn_more_detail );
 			txt_product_name.setText( model.getProduct() == null ? "" : model.getProduct().toString() );
 			txt_contract_no.setText( model.getUsrConNo() == null ? "" : model.getUsrConNo() );
@@ -87,13 +91,14 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 					Intent intent            = new Intent( mContext, EmiActivity.class );
 					Bundle bundle            = new Bundle();
 					bundle.putSerializable( "datamodel", arrayList );
-					bundle.putString( "datamodelvalue", senddatavalue );
-					bundle.putString( "RCNO", sendRcno );
-					bundle.putString( "OVERDUEAMT", sendOverdueAmt );
-					bundle.putString( "REPAYMENT", sendRepaymentMode );
-					bundle.putString( "DUEDATE", sendNextDueDate );
-					bundle.putString( "CURRENTEMI", sendCurrentEmiAmt );
-					bundle.putString( "LASTPAYMODE", sendLastPay );
+					bundle.putString( "datamodelvalue", model.getUsrConNo() );
+					PreferenceHelper.insertString( PreferenceHelper.CONTRACT_NO , model.getUsrConNo());
+					bundle.putString( "RCNO", model.getRcNumber() );
+					bundle.putString( "OVERDUEAMT", model.getOdAmt() );
+					bundle.putString( "REPAYMENT", model.getPdcFlag() );
+					bundle.putString( "DUEDATE", String.valueOf( model.getDueDate() ) );
+					bundle.putString( "CURRENTEMI", String.valueOf( model.getDueAmount() ) );
+					bundle.putString( "LASTPAYMODE", model.getLastReceiptDate() );
 					intent.putExtras( bundle );
 					mContext.startActivity( intent );
 				}

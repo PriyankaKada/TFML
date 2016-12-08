@@ -3,7 +3,7 @@ package com.tfml.auth;
 /**
  * Created by webwerks on 29/7/16.
  */
-
+//http://203.201.252.137:83/XISOAPAdapter/
 public class Constant {
 	public static final String SOAP_BASE                     = "http://203.201.252.137:83/XISOAPAdapter/";
 	public static final String BASE_URL                      = "http://staging.php-dev.in:8844/tatamotors/public/";
@@ -39,6 +39,7 @@ public class Constant {
 	public static final String LOGOUT               = "customer/logoutCustomer";
 	public static final String CONTACTDETAILS_RESPONSE = "contactDetailsResponse";
 
-	public static final String EMAIL     = "email";
+	public static final String EMAIL        = "email";
 	public static final String PDF_FILE_URL = "pdfFileUrl";
+	public static final String CONTRACT_NO  = "contractNo";
 }

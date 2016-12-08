@@ -39,18 +39,15 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
 		super.onCreate( savedInstanceState );
-		//  setContentView(R.layout.activity_emi);
 		View view = getLayoutInflater().inflate( R.layout.activity_emi, frameLayout );
 		toolbarEmi = ( Toolbar ) findViewById( R.id.toolbar_emi );
 		setSupportActionBar( toolbarEmi );
 		getSupportActionBar().setTitle( "" );
 		Intent intent = this.getIntent();
 		Bundle bundle = intent.getExtras();
-		modelArrayList =
-				( ArrayList< ContractModel > ) bundle.getSerializable( "datamodel" );
+		modelArrayList = ( ArrayList< ContractModel > ) bundle.getSerializable( "datamodel" );
 		datavalue = ( String ) bundle.getString( "datamodelvalue" );
 		init( view );
-
 	}
 
 	public void init( View view ) {
@@ -69,7 +66,6 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 		setupTabIcon();
 		imgEmiBack.setOnClickListener( this );
 		imgDrawer.setOnClickListener( this );
-
 	}
 
 
@@ -85,7 +81,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 		bundle.putString( "datamodelvalue", datavalue );
 
 		adapter.addFrag( emiPatternFrag, "EMI pattern" );
-		adapter.addFrag( statementOfAccountFragment, "Statment of account" );
+		adapter.addFrag( statementOfAccountFragment, "Statement of account" );
 		adapter.addFrag( rcUpdateFragment, "RC update" );
 		adapter.addFrag( closureFragment, "Pre-closure statement" );
 		viewPager.setAdapter( adapter );
@@ -143,8 +139,6 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 
 			}
 		} );
-
-
 	}
 
 	public String getPageTitle( int position ) {
@@ -167,24 +161,21 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 		TextView tabOne = ( TextView ) LayoutInflater.from( this ).inflate( R.layout.custom_tab, null );
 		tabOne.setText( "EMI pattern" );
 		SetFonts.setFonts( this, tabOne, 2 );
-		//tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_scheme_non_selected, 0, 0);
 		emiTabLayout.getTabAt( 0 ).setCustomView( tabOne );
 
 		TextView tabTwo = ( TextView ) LayoutInflater.from( this ).inflate( R.layout.custom_tab, null );
-		tabTwo.setText( "Statment of account" );
+		tabTwo.setText( "Statement of account" );
 		SetFonts.setFonts( this, tabTwo, 2 );
-		// tabTwo.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_apply_loan_non_selected, 0, 0);
 		emiTabLayout.getTabAt( 1 ).setCustomView( tabTwo );
 
 		TextView tabThree = ( TextView ) LayoutInflater.from( this ).inflate( R.layout.custom_tab, null );
 		tabThree.setText( "RC update" );
 		SetFonts.setFonts( this, tabThree, 2 );
-		// tabThree.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_refer_friends_non_selected, 0, 0);
 		emiTabLayout.getTabAt( 2 ).setCustomView( tabThree );
+
 		TextView tabFour = ( TextView ) LayoutInflater.from( this ).inflate( R.layout.custom_tab, null );
 		tabFour.setText( "Pre-closure statement" );
 		SetFonts.setFonts( this, tabFour, 2 );
-		// tabFour.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_refer_friends_non_selected, 0, 0);
 		emiTabLayout.getTabAt( 3 ).setCustomView( tabFour );
 	}
 
@@ -193,11 +184,9 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 	public void onClick( View v ) {
 		switch ( v.getId() ) {
 			case R.id.img_emi_back:
-//				startActivity( new Intent( EmiActivity.this, ContractActivity.class ) );
 				finish();
 				break;
 			case R.id.img_drawer_emi:
-				//  Toast.makeText(getBaseContext(),"I am in Nav Drawer",Toast.LENGTH_SHORT).show();
 				openDrawer();
 				break;
 

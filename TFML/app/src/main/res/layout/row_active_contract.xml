@@ -256,20 +256,19 @@
             android:orientation="horizontal"
             android:weightSum="1">
 
-            <TextView
+            <Button
                 android:id="@+id/btn_pay_emi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:background="@drawable/btn_bg"
                 android:gravity="center"
                 android:padding="7dp"
-                android:text="Pay EMI"
+                android:text="Pay Now"
                 android:textAllCaps="false"
                 android:textColor="@color/text_black"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:visibility="gone"/>
+                android:visibility="visible"/>
 
             <Button
                 android:id="@+id/btn_more_detail"

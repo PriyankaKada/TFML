@@ -65,6 +65,16 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 		dividelistmap( hashMap );
 	}
 
+	public static void longInfo( String str ) {
+		if ( str.length() > 4000 ) {
+			Log.i( "response TAG", str.substring( 0, 4000 ) );
+			longInfo( str.substring( 4000 ) );
+		}
+		else {
+			Log.i( "response TAG", str );
+		}
+	}
+
 	private void dividelistmap( Map< String, ArrayList< ResponseEnvelope.Item > > map ) {
 		Iterator it = hashMap.entrySet().iterator();
 		while ( it.hasNext() ) {
@@ -129,7 +139,11 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 		}
 
 //		holder.txtReceiptDate.setText( rcDate + " / " + rcNo );
-		rcDate = item.getZFBDT() == null ? "" : item.getZFBDT().toString();
+		rcDate = item.getZFBDT() == null ? "" : item.getZFBDT().toString();/*
+		        if (model != null){}
+                    contractLst.add(model.getUsrConNo());
+*/
+
 		rcNo = item.getBELNR() == null ? "" : item.getBELNR().toString();
 		holder.ll_header_row.setVisibility( View.VISIBLE );
 		String amountstr = item.getDMBTR() == null ? "" : item.getDMBTR().toString();
@@ -173,7 +187,6 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 		holder.lexpandList.setVisibility( View.VISIBLE );
 		return convertView;
 	}
-
 
 	@Override
 	public int getChildrenCount( int groupPosition ) {
@@ -244,7 +257,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 		grpholder.txtInstNo.setText( item.getCHECT() == null ? "-" : item.getCHECT() );
 
 		if ( item.getSHKZG() != null ) {
-			grpholder.txtMode.setText( setMode( item.getSHKZG() ) );
+			grpholder.txtMode.setText( setMode( item.getINST_TYPE() ) );
 		}
 		else {
 			grpholder.txtMode.setText( "-" );

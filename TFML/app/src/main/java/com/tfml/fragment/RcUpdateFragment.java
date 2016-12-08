@@ -60,16 +60,16 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 	int                        mtype;
 	RcUploadDataInputModel     rcUploadDataInputModel;
 	ArrayList< ContractModel > modelArrayList;
-	String contractNo;
-	TextView txt_repaymentmode, txt_emiamount, txt_dueamount, txt_duedate, txt_rc_update_no;
+	String                     contractNo;
+	TextView                   txt_repaymentmode, txt_emiamount, txt_dueamount, txt_duedate, txt_rc_update_no;
 	MultipartBody.Part body = null;
-	private EditText  edt_rc_no;
-	private Button    btnRcUpload;
-	private View      view;
-	private ImageView img_upload;
+	private EditText       edt_rc_no;
+	private Button         btnRcUpload;
+	private View           view;
+	private ImageView      img_upload;
 	private Spinner        spnContractNo;
 	private List< String > contractLst;
-	private int itemindex = 0;
+	private int    itemindex     = 0;
 	private String datavalue     = "";
 	private String rcNo          = "";
 	private String dueDate       = "";
@@ -103,38 +103,44 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 		spnContractNo = ( Spinner ) view.findViewById( R.id.spnContractNo );
 		contractLst = new ArrayList< String >();
 		if ( modelArrayList.size() > 0 ) {
-			contractLst.add( datavalue );
+
 			for ( int i = 0; i < modelArrayList.size(); i++ ) {
-				ContractModel model = modelArrayList.get( i );
-	           /* if (model != null)
-                    contractLst.add(model.getUsrConNo());*/
-//                 System.out.println("::::: "+model.getDueDate() +" :::: "+model.getDueAmount());
+				contractLst.add( modelArrayList.get( i ).getUsrConNo() );
 			}
+
+			ArrayAdapter< String > madapter = new ArrayAdapter< String >( getActivity(), R.layout.spinner_row, contractLst ) {
+
+				@Override
+				public boolean isEnabled( int position ) {
+					return true;
+				}
+
+				@Override
+				public View getDropDownView( int position, View convertView,
+				                             ViewGroup parent ) {
+					View     view = super.getDropDownView( position, convertView, parent );
+					TextView tv   = ( TextView ) view;
+					tv.setTextColor( Color.BLACK );
+					return view;
+				}
+			};
+			madapter.setDropDownViewResource( R.layout.spinner_item );
+			spnContractNo.setAdapter( madapter );
+			madapter.notifyDataSetChanged();
+
+
+			for ( int i = 0; i < contractLst.size(); i++ ) {
+				if ( contractLst.get( i ).equalsIgnoreCase( datavalue ) ) {
+					spnContractNo.setSelection( i );
+					Log.d( "contractList", contractLst.get( i ) );
+				}
+			}
+
 		}
 
-		spnContractNo.setSelection( 1 );
+//		spnContractNo.setSelection( 1 );
 //         spnContractNo.setAdapter(new ArrayAdapter<String>(getActivity(),R.layout.spinner_row,contractLst));
 
-
-		ArrayAdapter< String > madapter = new ArrayAdapter< String >( getActivity(), R.layout.spinner_row, contractLst ) {
-
-			@Override
-			public boolean isEnabled( int position ) {
-				return true;
-			}
-
-			@Override
-			public View getDropDownView( int position, View convertView,
-			                             ViewGroup parent ) {
-				View     view = super.getDropDownView( position, convertView, parent );
-				TextView tv   = ( TextView ) view;
-				tv.setTextColor( Color.BLACK );
-				return view;
-			}
-		};
-		madapter.setDropDownViewResource( R.layout.spinner_item );
-		spnContractNo.setAdapter( madapter );
-		madapter.notifyDataSetChanged();
 
 		edt_rc_no = ( EditText ) view.findViewById( R.id.edt_rc_no );
 		btnRcUpload = ( Button ) view.findViewById( R.id.btn_rc_upload );
@@ -162,17 +168,20 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 		}
 		SetFonts.setFonts( getActivity(), btnRcUpload, 2 );
 
+		spnContractNo.post( new Runnable() {
+			@Override
+			public void run() {
+
+			}
+		} );
+
 		spnContractNo.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected( AdapterView< ? > parent, View view, int position, long id ) {
 				contractNo = spnContractNo.getSelectedItem().toString();
 				itemindex = position;
-				if ( itemindex > 0 ) {
-					ContractModel model = modelArrayList.get( itemindex );
-					setData( model );
-
-				}
-
+				ContractModel model = modelArrayList.get( itemindex );
+				setData( model );
 			}
 
 			@Override
@@ -189,8 +198,6 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 		txt_emiamount.setText( model.getDueAmount() == null ? "" : "Rs. " + model.getDueAmount().toString() );
 		txt_repaymentmode.setText( model.getPdcFlag() == null ? "" : model.getPdcFlag().toString() );
 		txt_dueamount.setText( model.getTotalCurrentDue() == null ? "" : "Rs." + model.getTotalCurrentDue().toString() );
-
-
 	}
 
 	@Override
@@ -273,7 +280,7 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 			}
 
 			if ( CommonUtils.isNetworkAvailable( getActivity() ) ) {
-				CommonUtils.showProgressDialog( getActivity(), "Please Wait Uploading Data....." );
+				CommonUtils.showProgressDialog( getActivity(), "Please Wait Uploading Data..." );
 
 				callRcUploadData( rcUploadDataInputModel, body );
 			}
