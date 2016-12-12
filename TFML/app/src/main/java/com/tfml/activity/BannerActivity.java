@@ -52,8 +52,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 //import static com.tfml.R.id.imageView1;
-
-
 public class BannerActivity extends BaseActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 	//String emailId,whatsAppNo,phoneNo;
 	final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
@@ -109,7 +107,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		linReferFriend = ( LinearLayout ) findViewById( R.id.linReferFriend );
 		linLoanStaus = ( LinearLayout ) findViewById( R.id.linLoanStaus );
 		linLogin = ( LinearLayout ) findViewById( R.id.linLogin );
-		selectedView = ( View ) findViewById( R.id.viewId );
+		selectedView = findViewById( R.id.viewId );
 		circlePageIndicator.setRadius( 8.0f );
 		txtTitle.setText( "Welcome to TMFL" );
 		SetFonts.setFonts( this, txtTitle, 2 );
@@ -125,9 +123,9 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		linSchemes.setOnClickListener( this );
 		linApplyLoan.setOnClickListener( this );
 		linReferFriend.setOnClickListener( this );
+		linReferFriend.setVisibility( View.GONE );
 		linLoanStaus.setOnClickListener( this );
 		linLogin.setOnClickListener( this );
-
 	}
 
 	public void loadBannerData() {
@@ -139,9 +137,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		else {
 			Toast.makeText( getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT ).show();
 		}
-
 	}
-
 
 	public void callBannerList() {
 		tmflApi.getBannerResponse().enqueue( new Callback< BannerlistResponse >() {
@@ -160,8 +156,6 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 
 						recentViewpager.setCurrentItem( 0 );
 						circlePageIndicator.setViewPager( recentViewpager );
-
-
 					}
 					else {
 						Log.e( "ErrorResponse", response.errorBody().toString() );
@@ -170,8 +164,6 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				else {
 					Toast.makeText( getBaseContext(), "Server Error........", Toast.LENGTH_LONG ).show();
 				}
-
-
 			}
 
 			@Override
@@ -180,7 +172,6 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				CommonUtils.closeProgressDialog();
 			}
 		} );
-
 	}
 
 	private void setUiPageViewController() {
@@ -193,11 +184,8 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 			dots[i] = new ImageView( BannerActivity.this );
 			dots[i].setImageDrawable( getResources().getDrawable( R.drawable.nonselecteditem_dot ) );
 
-			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-					LinearLayout.LayoutParams.WRAP_CONTENT,
-					LinearLayout.LayoutParams.WRAP_CONTENT
-			);
-
+			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.WRAP_CONTENT,
+			                                                                  LinearLayout.LayoutParams.WRAP_CONTENT );
 			params.setMargins( 4, 0, 4, 0 );
 			recentViewpager.addView( dots[i], params );
 		}
@@ -211,7 +199,6 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				runOnUiThread( new Runnable() {
 					@Override
 					public void run() {
-
 						if ( count <= dotsCount ) {
 							recentViewpager.setCurrentItem( count );
 							count++;
@@ -225,7 +212,6 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 			}
 		}, 1500, 1500 );
 	}
-
 
 	@Override
 	public void onClick( View v ) {
@@ -262,7 +248,6 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				startActivity( new Intent( BannerActivity.this, LoginActivity.class ) );
 				finish();
 				break;
-
 		}
 	}
 
@@ -275,7 +260,6 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		}
 	}
 
-
 	public void quickCallDialog() {
 
 		View view = LayoutInflater.from( this ).inflate( R.layout.dialog_quick_calling, null );
@@ -283,7 +267,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				.setLayout( view )
 				.setBackgroundColor( Color.parseColor( "#FFFFFF" ) )
 				.setLocationByAttachedView( imgQuickCall )
-				.setGravity( EasyDialog.GRAVITY_BOTTOM )
+				.setGravity( EasyDialog.GRAVITY_TOP )
 				.setAnimationTranslationShow( EasyDialog.DIRECTION_Y, 500, 800, 0 )
 				.setAnimationAlphaShow( 500, 0, 0.5f, 1 )
 				.setAnimationTranslationDismiss( EasyDialog.DIRECTION_Y, 500, -50, 800 )
@@ -293,7 +277,6 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				.setMarginLeftAndRight( 25, 25 )
 				.setOutsideColor( ContextCompat.getColor( this, R.color.background_color_black ) )
 				.show();
-
 
 		edtQuickCall = ( EditText ) view.findViewById( R.id.edt_mobile_no );
 		edtOtpNo = ( EditText ) view.findViewById( R.id.edt_otp_no );
@@ -327,40 +310,30 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 			}
 		} );
 
+		txtSubmit.setOnClickListener( new View.OnClickListener() {
+			@Override
+			public void onClick( View v ) {
 
-		txtSubmit.setOnClickListener( new View.OnClickListener()
+				if ( TextUtils.isEmpty( edtQuickCall.getText().toString() ) ) {
+					Toast.makeText( BannerActivity.this, "Please Enter Mobile Number", Toast.LENGTH_SHORT ).show();
+				}
 
-		                              {
-
-			                              @Override
-			                              public void onClick( View v ) {
-
-				                              if ( TextUtils.isEmpty( edtQuickCall.getText().toString() ) ) {
-					                              Toast.makeText( BannerActivity.this, "Please Enter Mobile Number", Toast.LENGTH_SHORT ).show();
-				                              }
-
-				                              if ( TextUtils.isEmpty( edtOtpNo.getText().toString() ) ) {
-					                              Toast.makeText( BannerActivity.this, "Please Enter OTP Number", Toast.LENGTH_SHORT ).show();
-				                              }
-				                              if ( !TextUtils.isEmpty( edtQuickCall.getText().toString() ) && !TextUtils.isEmpty( edtOtpNo.getText().toString() ) ) {
-					                              LoanStatusInputModel loanStatusInputModel = new LoanStatusInputModel();
-					                              loanStatusInputModel.setOtpNumber( edtOtpNo.getText().toString() );
-					                              loanStatusInputModel.setMobileNumber( edtQuickCall.getText().toString() );
-					                              if ( edtQuickCall.getText().toString().length() == 10 || edtQuickCall.getText().toString().length() == 12 ) {
-						                              CallLoanStatusModel( loanStatusInputModel );
-					                              }
-					                              else {
-						                              Toast.makeText( BannerActivity.this, "Mobile Number must between 10 or 15 digit", Toast.LENGTH_SHORT ).show();
-					                              }
-
-				                              }
-
-			                              }
-		                              }
-
-		);
-
-
+				if ( TextUtils.isEmpty( edtOtpNo.getText().toString() ) ) {
+					Toast.makeText( BannerActivity.this, "Please Enter OTP Number", Toast.LENGTH_SHORT ).show();
+				}
+				if ( !TextUtils.isEmpty( edtQuickCall.getText().toString() ) && !TextUtils.isEmpty( edtOtpNo.getText().toString() ) ) {
+					LoanStatusInputModel loanStatusInputModel = new LoanStatusInputModel();
+					loanStatusInputModel.setOtpNumber( edtOtpNo.getText().toString() );
+					loanStatusInputModel.setMobileNumber( edtQuickCall.getText().toString() );
+					if ( edtQuickCall.getText().toString().length() == 10 || edtQuickCall.getText().toString().length() == 12 ) {
+						CallLoanStatusModel( loanStatusInputModel );
+					}
+					else {
+						Toast.makeText( BannerActivity.this, "Mobile Number must between 10 or 15 digit", Toast.LENGTH_SHORT ).show();
+					}
+				}
+			}
+		} );
 	}
 
 	public void callResponseModel( QuickCallInputModel quickCallInputModel ) {
@@ -390,7 +363,6 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 
 			}
 		} );
-
 	}
 
 	public void CallLoanStatusModel( LoanStatusInputModel loanStatusInputModel ) {
@@ -409,9 +381,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				if ( response.body().getStatus().contains( "error" ) ) {
 					//  Log.e("CallLoanStatusModel", response.body().getError());
 					Toast.makeText( BannerActivity.this, response.body().getError(), Toast.LENGTH_SHORT ).show();
-
 				}
-
 			}
 
 			@Override
@@ -429,7 +399,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		WindowManager.LayoutParams params = socialdialog.getWindow().getAttributes();
 		params.y = 5;
 		params.x = 5;
-		params.gravity = Gravity.TOP | Gravity.RIGHT;
+		params.gravity = Gravity.TOP | Gravity.LEFT;
 		socialdialog.getWindow().setAttributes( params );
 		socialdialog.getWindow().getAttributes().windowAnimations = R.style.animationdialog;
 		socialdialog.setCancelable( true );

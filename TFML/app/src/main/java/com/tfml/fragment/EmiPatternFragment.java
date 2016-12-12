@@ -41,6 +41,15 @@ public class EmiPatternFragment extends Fragment {
 	private String currentEmi    = "";
 	private String overdue       = "";
 
+	public static String trimLeadingZeros( String source ) {
+		for ( int i = 0; i < source.length(); ++i ) {
+			char c = source.charAt( i );
+			if ( c != '0' && !Character.isSpaceChar( c ) ) {
+				return source.substring( i );
+			}
+		}
+		return null;
+	}
 
 	@Override
 	public View onCreateView( LayoutInflater inflater, ViewGroup container,
@@ -70,7 +79,7 @@ public class EmiPatternFragment extends Fragment {
 		contractLst = new ArrayList< String >();
 		if ( modelArrayList.size() > 0 ) {
 			for ( int i = 0; i < modelArrayList.size(); i++ ) {
-				contractLst.add( modelArrayList.get( i ).getUsrConNo() );
+				contractLst.add( trimLeadingZeros( modelArrayList.get( i ).getUsrConNo() ) );
 			}
 
 			ArrayAdapter< String > madapter = new ArrayAdapter< String >( getActivity(), R.layout.spinner_row, contractLst ) {
@@ -153,7 +162,6 @@ public class EmiPatternFragment extends Fragment {
 		loadEmiDetail();
 
 	}
-
 
 	private void setData( ContractModel model ) {
 		if ( model != null ) {

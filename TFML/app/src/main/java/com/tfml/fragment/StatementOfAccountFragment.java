@@ -122,6 +122,16 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 	private boolean submitClicked        = false;
 	private boolean financeDetailClicked = false;
 
+	public static String trimLeadingZeros( String source ) {
+		for ( int i = 0; i < source.length(); ++i ) {
+			char c = source.charAt( i );
+			if ( c != '0' && !Character.isSpaceChar( c ) ) {
+				return source.substring( i );
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public View onCreateView( LayoutInflater inflater, ViewGroup container,
 	                          Bundle savedInstanceState ) {
@@ -197,7 +207,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 		contractLst = new ArrayList< String >();
 		if ( modelArrayList.size() > 0 ) {
 			for ( int i = 0; i < modelArrayList.size(); i++ ) {
-				contractLst.add( modelArrayList.get( i ).getUsrConNo() );
+				contractLst.add( trimLeadingZeros( modelArrayList.get( i ).getUsrConNo() ) );
 				ContractModel model = modelArrayList.get( i );
 			}
 
@@ -232,7 +242,6 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 
 //		spnContractNo.setSelection( 1 );
 //         spnContractNo.setAdapter(new ArrayAdapter<String>(getActivity(),R.layout.spinner_row,contractLst));
-
 
 
 		spnContractNo.post( new Runnable() {
@@ -523,7 +532,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 		/**
 		 * Set Call back to capture selected date
 		 */
-		date.setCallBack( ondate );
+		date.setCallBack( ondate, "statementOfAccount" );
 		date.show( getFragmentManager(), "Date Picker" );
 	}
 

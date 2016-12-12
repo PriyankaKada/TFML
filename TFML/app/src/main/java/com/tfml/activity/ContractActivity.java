@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -25,6 +26,8 @@ import com.tfml.auth.TmflApi;
 import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
 import com.tfml.common.SocialUtil;
+import com.tfml.fragment.ApplyLoanFragment;
+import com.tfml.fragment.ReferFriendFragment;
 import com.tfml.model.ContractResponseModel.ContractModel;
 import com.tfml.model.ContractResponseModel.ContractsInputModel;
 import com.tfml.model.ContractResponseModel.ContractsResponseModel;
@@ -116,14 +119,30 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 				startActivity( intentSchema );
 				break;
 			case R.id.linApplyLoan:
-				Intent intentApplyLoan = new Intent( this, SchemesActivity.class );
+				/*Intent intentApplyLoan = new Intent( this, SchemesActivity.class );
 				intentApplyLoan.putExtra( "TAB_SELECTED", Constant.ISAPPLYLOANSELECT );
-				startActivity( intentApplyLoan );
+				startActivity( intentApplyLoan );*/
+
+				getSupportFragmentManager().popBackStack( null, FragmentManager.POP_BACK_STACK_INCLUSIVE );
+
+				getSupportFragmentManager().beginTransaction()
+						.addToBackStack( getClass().getName() )
+						.replace( R.id.frame_container_contract, new ApplyLoanFragment() )
+						.commit();
+
 				break;
 			case R.id.linReferFriend:
-				Intent intentReferFriend = new Intent( this, SchemesActivity.class );
+				/*Intent intentReferFriend = new Intent( this, SchemesActivity.class );
 				intentReferFriend.putExtra( "TAB_SELECTED", Constant.ISREFERFREINDSELECT );
-				startActivity( intentReferFriend );
+				startActivity( intentReferFriend );*/
+
+				getSupportFragmentManager().popBackStack( null, FragmentManager.POP_BACK_STACK_INCLUSIVE );
+
+				getSupportFragmentManager().beginTransaction()
+						.addToBackStack( getClass().getName() )
+						.replace( R.id.frame_container_contract, new ReferFriendFragment() )
+						.commit();
+
 				break;
 			case R.id.linLoanStaus:
 				linLoanStausClick();
@@ -235,7 +254,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 		imgMessage.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
-				SocialUtil.sendMail( ContractActivity.this, SocialUtil.email);
+				SocialUtil.sendMail( ContractActivity.this, SocialUtil.email );
 			}
 		} );
 		imgPhoneCall.setOnClickListener( new View.OnClickListener() {

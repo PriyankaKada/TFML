@@ -11,13 +11,15 @@ import java.util.Date;
 public class DatePickerFragment extends DialogFragment {
 	OnDateSetListener ondateSet;
 	DatePickerDialog  datePickerDialog;
+	String            from;
 	private int year, month, day;
 
 	public DatePickerFragment() {
 	}
 
-	public void setCallBack( OnDateSetListener ondate ) {
+	public void setCallBack( OnDateSetListener ondate, String from ) {
 		ondateSet = ondate;
+		this.from = from;
 	}
 
 	@Override
@@ -31,7 +33,9 @@ public class DatePickerFragment extends DialogFragment {
 	@Override
 	public Dialog onCreateDialog( Bundle savedInstanceState ) {
 		datePickerDialog = new DatePickerDialog( getActivity(), ondateSet, year, month, day );
-		datePickerDialog.getDatePicker().setMaxDate( new Date().getTime() );
+		if ( from.equalsIgnoreCase( "statementOfAccount" ) ) {
+			datePickerDialog.getDatePicker().setMaxDate( new Date().getTime() );
+		}
 		return datePickerDialog;
 	}
 }

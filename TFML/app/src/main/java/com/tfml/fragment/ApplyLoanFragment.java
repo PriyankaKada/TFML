@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -91,13 +92,21 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 
 		arDatumList = response.getData();
 
+
 		init();
 		spOfferList = new ArrayList<>();
 
 		for ( int i = 0; i < arDatumList.size(); i++ ) {
 			spOfferList.add( response.getData().get( i ).getTitle() );
 		}
-		spOffers.setAdapter( new ArrayAdapter< Datum >( getActivity(), R.layout.layout_spinner_textview, arDatumList ) );
+
+		List< Datum > offerList = new ArrayList<>();
+		Datum         datum     = new Datum();
+		datum.setTitle( "Select Offers" );
+		offerList.add( datum );
+		offerList.addAll( arDatumList );
+
+		spOffers.setAdapter( new ArrayAdapter< Datum >( getActivity(), R.layout.layout_spinner_textview, offerList ) );
 		branchStateList = new ArrayList< String >();
 
 		BranchResponseModel branchResponseModel = new BranchResponseModel();
@@ -343,8 +352,8 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 	}
 
 	public void loadApplyLoanResponse( InputModel inputmodel ) {
-       /* Log.e("getFirstName", inputmodel.getFirstName());
-        Log.e("getLastName", inputmodel.getLastName());
+	   /* Log.e("getFirstName", inputmodel.getFirstName());
+	    Log.e("getLastName", inputmodel.getLastName());
         Log.e("getMobileNumber", inputmodel.getMobileNumber());
         Log.e("getLandlineNumber", inputmodel.getLandlineNumber());
         Log.e("getProductId", inputmodel.getProductId());

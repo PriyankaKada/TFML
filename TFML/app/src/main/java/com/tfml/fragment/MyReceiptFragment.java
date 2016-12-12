@@ -60,11 +60,11 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 
 	public static void longInfo( String str ) {
 		if ( str.length() > 4000 ) {
-			Log.i( "response TAG", str.substring( 0, 4000 ) );
+			Log.i( "response reciept", str.substring( 0, 4000 ) );
 			longInfo( str.substring( 4000 ) );
 		}
 		else {
-			Log.i( "response TAG", str );
+			Log.i( "response reciept", str );
 		}
 	}
 
@@ -169,6 +169,7 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 					responseEnvelope = response.body().getBody();
 
 					if ( responseEnvelope != null ) {
+						longInfo( new Gson().toJson( responseEnvelope ) );
 						Log.e( "SIZE ", response.body().getBody().getZCISResponse().getI_REC().size() + "" );
 
 						if ( response.body().getBody().getZCISResponse().getI_REC().size() != 0 ) {
@@ -198,7 +199,7 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 							}
 							List< String > itemsCategory = new ArrayList< String >();
 							for ( ResponseEnvelope.Item item : response.body().getBody().getZCISResponse().getI_REC() ) {
-								itemsCategory.add( item.getZFBDT() );
+								itemsCategory.add( item.getBELNR() );
 							}
 							TreeSet< String > categories = new TreeSet<>();
 							categories.addAll( itemsCategory );
@@ -210,24 +211,24 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 							for ( String s : categories ) {
 								ArrayList< ResponseEnvelope.Item > items = new ArrayList< ResponseEnvelope.Item >();
 								for ( ResponseEnvelope.Item item : response.body().getBody().getZCISResponse().getI_REC() ) {
-									if ( s.equals( item.getZFBDT() ) ) {
-										Log.e( "loop", item.getZFBDT() );
+									if ( s.equals( item.getBELNR() ) ) {
+										Log.e( "loop", item.getBELNR() );
 										items.add( item );
 									}
 								}
-								Log.e( "KEY " + s, " Value " + items.get( 0 ).getZFBDT() );
+								Log.e( "KEY " + s, " Value " + items.get( 0 ).getBELNR() );
 								hashMap.put( s, items );
 							}
 
 							for ( String s : hashMap.keySet() ) {
 
-								Log.e( s + "  ===>  ", hashMap.get( s ).get( 0 ).getZFBDT() );
+								Log.e( s + "  ===>  ", hashMap.get( s ).get( 0 ).getBELNR() );
 							}
 
 							Map< String, ArrayList< ResponseEnvelope.Item > > sortedMap = hashMap.descendingMap();
 
 							for ( String s : sortedMap.keySet() ) {
-								Log.e( s + " SORTED  ===>  ", sortedMap.get( s ).get( 0 ).getZFBDT() );
+								Log.e( s + " SORTED  ===>  ", sortedMap.get( s ).get( 0 ).getBELNR() );
 							}
 
 							ArrayList< String > groupar  = new ArrayList<>();
