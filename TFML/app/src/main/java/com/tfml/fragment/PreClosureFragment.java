@@ -106,6 +106,17 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 	};
 	private boolean submitClicked = false;
 
+
+	public static String trimLeadingZeros( String source ) {
+		for ( int i = 0; i < source.length(); ++i ) {
+			char c = source.charAt( i );
+			if ( c != '0' && !Character.isSpaceChar( c ) ) {
+				return source.substring( i );
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public View onCreateView( LayoutInflater inflater, ViewGroup container,
 	                          Bundle savedInstanceState ) {
@@ -165,7 +176,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 		if ( modelArrayList.size() > 0 ) {
 
 			for ( int i = 0; i < modelArrayList.size(); i++ ) {
-				contractLst.add( modelArrayList.get( i ).getUsrConNo() );
+				contractLst.add( trimLeadingZeros( modelArrayList.get( i ).getUsrConNo() ) );
 				ContractModel model = modelArrayList.get( i );
 			   /* if (model != null)
 			        contractLst.add(model.getUsrConNo());*/
@@ -309,7 +320,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 		/**
 		 * Set Call back to capture selected date
 		 */
-		date.setCallBack( ondate );
+		date.setCallBack( ondate, "preclosure" );
 		date.show( getFragmentManager(), "Date Picker" );
 	}
 

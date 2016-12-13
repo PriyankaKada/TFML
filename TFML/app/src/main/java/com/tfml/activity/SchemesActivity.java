@@ -12,7 +12,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -27,7 +26,6 @@ import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
 import com.tfml.fragment.ApplyLoanFragment;
 import com.tfml.fragment.NewSchemeFragment;
-import com.tfml.fragment.ReferFriendFragment;
 import com.tfml.model.schemesResponseModel.Datum;
 import com.tfml.model.schemesResponseModel.SchemesResponse;
 import com.tfml.util.PreferenceHelper;
@@ -76,40 +74,39 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 
 		SetFonts.setFonts( this, txtschemestitle, 2 );
 		bundle1 = getIntent().getExtras();
-
 	}
 
-	private void setupTabIcons() {
-
-		TextView tabOne = ( TextView ) LayoutInflater.from( this ).inflate( R.layout.custom_tab, null );
-		tabOne.setText( "Offers" );
-		SetFonts.setFonts( this, tabOne, 2 );
-		tabOne.setCompoundDrawablesWithIntrinsicBounds( 0, R.drawable.ic_scheme_non_selected, 0, 0 );
-		tabLayout.getTabAt( 0 ).setCustomView( tabOne );
-
-		TextView tabTwo = ( TextView ) LayoutInflater.from( this ).inflate( R.layout.custom_tab, null );
-		tabTwo.setText( "Apply Loan" );
-		SetFonts.setFonts( this, tabTwo, 2 );
-		tabTwo.setCompoundDrawablesWithIntrinsicBounds( 0, R.drawable.ic_apply_loan_non_selected, 0, 0 );
-		tabLayout.getTabAt( 1 ).setCustomView( tabTwo );
-
-		TextView tabThree = ( TextView ) LayoutInflater.from( this ).inflate( R.layout.custom_tab, null );
-		tabThree.setText( "Refer Friend" );
-		SetFonts.setFonts( this, tabThree, 2 );
-		tabThree.setCompoundDrawablesWithIntrinsicBounds( 0, R.drawable.ic_refer_friends_non_selected, 0, 0 );
-		tabLayout.getTabAt( 2 ).setCustomView( tabThree );
-	}
+//	private void setupTabIcons() {
+//
+//		TextView tabOne = ( TextView ) LayoutInflater.from( this ).inflate( R.layout.custom_tab, null );
+//		tabOne.setText( "Offers" );
+//		SetFonts.setFonts( this, tabOne, 2 );
+//		tabOne.setCompoundDrawablesWithIntrinsicBounds( 0, R.drawable.ic_scheme_non_selected, 0, 0 );
+//		tabLayout.getTabAt( 0 ).setCustomView( tabOne );
+//
+//		TextView tabTwo = ( TextView ) LayoutInflater.from( this ).inflate( R.layout.custom_tab, null );
+//		tabTwo.setText( "Apply Loan" );
+//		SetFonts.setFonts( this, tabTwo, 2 );
+//		tabTwo.setCompoundDrawablesWithIntrinsicBounds( 0, R.drawable.ic_apply_loan_non_selected, 0, 0 );
+//		tabLayout.getTabAt( 1 ).setCustomView( tabTwo );
+//
+//		/*TextView tabThree = ( TextView ) LayoutInflater.from( this ).inflate( R.layout.custom_tab, null );
+//		tabThree.setText( "Refer Friend" );
+//		SetFonts.setFonts( this, tabThree, 2 );
+//		tabThree.setCompoundDrawablesWithIntrinsicBounds( 0, R.drawable.ic_refer_friends_non_selected, 0, 0 );
+//		tabLayout.getTabAt( 2 ).setCustomView( tabThree );*/
+//	}
 
 	private void setupViewPager( ViewPager viewPager ) {
 		SchemesPagerAdapter adapter = new SchemesPagerAdapter( getSupportFragmentManager() );
 		System.out.println( "------------dgdsgdf----------->" + datumArrayList );
 
-		Fragment newSchemeFragment   = new NewSchemeFragment();
-		Fragment applyLoanFragment   = new ApplyLoanFragment();
-		Fragment referFriendFragment = new ReferFriendFragment();
+		Fragment newSchemeFragment = new NewSchemeFragment();
+		Fragment applyLoanFragment = new ApplyLoanFragment();
+//		Fragment referFriendFragment = new ReferFriendFragment();
 		adapter.addFrag( newSchemeFragment, "Offers" );
 		adapter.addFrag( applyLoanFragment, "Apply Loan" );
-		adapter.addFrag( referFriendFragment, "Refer Friends" );
+//		adapter.addFrag( referFriendFragment, "Refer Friends" );
 		viewPager.setAdapter( adapter );
 		viewPager.setCurrentItem( 0 );
 		viewPager.addOnPageChangeListener( new ViewPager.OnPageChangeListener() {
@@ -127,25 +124,25 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 					case 0:
 						view1.setBackgroundResource( R.drawable.selector_tab_indicator_white );
 						view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
-						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+//						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						break;
 
 					case 1:
 						view1.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view2.setBackgroundResource( R.drawable.selector_tab_indicator_white );
-						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+//						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						break;
 
-					case 2:
+					/*case 2:
 						view1.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view3.setBackgroundResource( R.drawable.selector_tab_indicator_white );
-						break;
+						break;*/
 
 					default:
 						view1.setBackgroundResource( R.drawable.selector_tab_indicator_white );
 						view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
-						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+//						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						break;
 				}
 			}
@@ -158,11 +155,11 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 
 		viewPager.setOffscreenPageLimit( 3 );
 		// Give the TabLayout the ViewPager
-		tabLayout = ( TabLayout ) findViewById( R.id.tab_layout );
+		/*tabLayout = ( TabLayout ) findViewById( R.id.tab_layout );
 		tabLayout.setupWithViewPager( viewPager );
 		String myTabselected = bundle1.getString( "TAB_SELECTED" );
 		imgtoolbarhome.setOnClickListener( this );
-		setupTabIcons();
+//		setupTabIcons();
 		imgSocial.setOnClickListener( this );
 
 		if ( myTabselected.equals( "Offers" ) ) {
@@ -170,10 +167,10 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		}
 		else if ( myTabselected.equals( "ApplyLoan" ) ) {
 			tabLayout.getTabAt( 1 ).select();
-		}
-		else if ( myTabselected.equals( "ReferFriend" ) ) {
+		}*/
+		/*else if ( myTabselected.equals( "ReferFriend" ) ) {
 			tabLayout.getTabAt( 2 ).select();
-		}
+		}*/
 	}
 
 	public void setTitle( String name ) {
@@ -186,8 +183,8 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 				return "New Offers";
 			case 1:
 				return "Apply Loans";
-			case 2:
-				return "Refer Friends";
+//			case 2:
+//				return "Refer Friends";
 			default:
 				return "";
 		}
@@ -259,9 +256,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 			}
 		} );
 
-
 		socialDialog.show();
-
 	}
 
 	public void sendWhatsAppMsg() {
@@ -286,9 +281,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 			Uri    uri        = Uri.parse( "market://details?id=com.whatsapp" );
 			Intent goToMarket = new Intent( Intent.ACTION_VIEW, uri );
 			startActivity( goToMarket );
-
 		}
-
 	}
 
 	private boolean whatsappInstalledOrNot( String uri ) {
@@ -334,7 +327,6 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		}
 	}
 
-
 	public void callSchemesResponseModel() {
 
 		tmflApi.getSchemesResponse().enqueue( new Callback< SchemesResponse >() {
@@ -353,7 +345,6 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 					PreferenceHelper.insertObject( "Scheme response", model );
 					setupViewPager( viewPager );
 				}
-
 			}
 
 			@Override
@@ -362,7 +353,5 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 				CommonUtils.closeProgressDialog();
 			}
 		} );
-
 	}
-
 }

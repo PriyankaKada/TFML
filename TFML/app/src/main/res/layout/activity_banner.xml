@@ -11,7 +11,7 @@
         android:id="@+id/upper"
         layout="@layout/toolbar_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="?attr/actionBarSize" />
 
     <View
         android:layout_width="wrap_content"
@@ -37,7 +37,6 @@
             android:layout_weight="2"
             android:background="@color/white" />
 
-
         <com.viewpagerindicator.CirclePageIndicator
             android:id="@+id/titles"
             android:layout_width="match_parent"
@@ -51,7 +50,6 @@
             app:strokeColor="@android:color/darker_gray" />
 
     </FrameLayout>
-
 
     <LinearLayout
         android:id="@+id/llBottom"
@@ -206,18 +204,19 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imgLogin"
+                android:id="@+id/imgQuickCall"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/logictab_icon" />
+                android:src="@drawable/ic_call_non_selected" />
 
             <TextView
                 android:id="@+id/txtLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/txt_login"
+                android:gravity="center"
+                android:text="Quick\nCall"
                 android:textColor="#FFFFFF" />
 
         </LinearLayout>

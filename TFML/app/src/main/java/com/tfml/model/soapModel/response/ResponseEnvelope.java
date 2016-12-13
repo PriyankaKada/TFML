@@ -301,1546 +301,1167 @@ public class ResponseEnvelope implements Serializable {
 	}
 
 	public static class Item implements Serializable {
-
 		@Element( name = "CONTRACTNO", required = false )
 		String cONTRACTNO;
-
-
 		@Element( name = "REQDATE", required = false )
 		String rEQDATE;
-
-
 		@Element( name = "VZSKZ", required = false )
 		String vZSKZ;
-
-
 		@Element( name = "OBJECTID", required = false )
 		String oBJECTID;
-
-
 		@Element( name = "CONTSTARTDT", required = false )
 		String cONTSTARTDT;
-
-
 		@Element( name = "CONTENDDT", required = false )
 		String cONTENDDT;
-
-
 		@Element( name = "ASSET", required = false )
 		String aSSET;
-
-
 		@Element( name = "ASSET_TXT", required = false )
 		String aSSET_TXT;
-
-
 		@Element( name = "STATUS", required = false )
 		String sTATUS;
-
-
 		@Element( name = "STAT_DATE", required = false )
 		String sTAT_DATE;
-
-
 		@Element( name = "TYPE", required = false )
 		String tYPE;
-
-
 		@Element( name = "DCH_TXT", required = false )
 		String dCH_TXT;
-
-
 		@Element( name = "CLIENT", required = false )
 		String cLIENT;
-
-
 		@Element( name = "GUARANTOR", required = false )
 		String gUARANTOR;
-
-
 		@Element( name = "DEALER", required = false )
 		String dEALER;
-
-
 		@Element( name = "SUPPLIER", required = false )
 		String sUPPLIER;
-
-
 		@Element( name = "COMPANY_NAME", required = false )
 		String cOMPANY_NAME;
-
-
 		@Element( name = "CLIENT_NAME", required = false )
 		String cLIENT_NAME;
-
-
 		@Element( name = "DEALER_NAME", required = false )
 		String dEALER_NAME;
-
-
 		@Element( name = "SUPPLIER_NAME", required = false )
 		String sUPPLIER_NAME;
-
-
 		@Element( name = "DSA", required = false )
 		String dSA;
-
-
 		@Element( name = "DSA_NAME", required = false )
 		String dSA_NAME;
-
-
 		@Element( name = "DMA", required = false )
 		String dMA;
-
-
 		@Element( name = "DMA_NAME", required = false )
 		String dMA_NAME;
-
-
 		@Element( name = "ACT_MGR_NAME", required = false )
 		String aCT_MGR_NAME;
-
-
 		@Element( name = "REGION", required = false )
 		String rEGION;
-
-
 		@Element( name = "BRANCH", required = false )
 		String bRANCH;
-
-
 		@Element( name = "SALES_OFFICE", required = false )
 		String sALES_OFFICE;
-
-
 		@Element( name = "IBC", required = false )
 		String iBC;
-
-
 		@Element( name = "AREA", required = false )
 		String aREA;
-
-
 		@Element( name = "INV_DATE", required = false )
 		String iNV_DATE;
-
-
 		@Element( name = "TA_ADJ_DATE", required = false )
 		String tA_ADJ_DATE;
-
-
 		@Element( name = "DISB_DATE", required = false )
 		String dISB_DATE;
-
-
 		@Element( name = "FIRST_INST_DATE", required = false )
 		String fIRST_INST_DATE;
-
-
 		@Element( name = "MATURITY_DATE", required = false )
 		String mATURITY_DATE;
-
-
 		@Element( name = "FIA_I", required = false )
 		String fIA_I;
-
-
 		@Element( name = "FIA_II", required = false )
 		String fIA_II;
-
-
 		@Element( name = "COLLECTION_AG", required = false )
 		String cOLLECTION_AG;
-
-
 		@Element( name = "LODGING", required = false )
 		String lODGING;
-
-
 		@Element( name = "MSP", required = false )
 		String mSP;
-
-
 		@Element( name = "SCHEME_CODE", required = false )
 		String sCHEME_CODE;
-
-
 		@Element( name = "FIN_CHRG_RATE", required = false )
 		String fIN_CHRG_RATE;
-
-
 		@Element( name = "PPR", required = false )
 		String pPR;
-
-
 		@Element( name = "TENURE", required = false )
 		String tENURE;
-
-
 		@Element( name = "TENURE_UNIT", required = false )
 		String tENURE_UNIT;
-
-
 		@Element( name = "TERM", required = false )
 		String tERM;
-
-
 		@Element( name = "TERM_REC", required = false )
 		String tERM_REC;
-
-
 		@Element( name = "LEAD_PRD", required = false )
 		String lEAD_PRD;
-
-
 		@Element( name = "LEAD_PRD_UNIT", required = false )
 		String lEAD_PRD_UNIT;
-
-
 		@Element( name = "ADV_EMI", required = false )
 		String aDV_EMI;
-
-
 		@Element( name = "INST_FREQ", required = false )
 		String iNST_FREQ;
-
-
 		@Element( name = "SD_AMT", required = false )
 		String sD_AMT;
-
-
 		@Element( name = "SD_INT_RATE", required = false )
 		String sD_INT_RATE;
-
-
 		@Element( name = "SD_INT_TYPE", required = false )
 		String sD_INT_TYPE;
-
-
 		@Element( name = "SD_INT_TYPE_TXT", required = false )
 		String sD_INT_TYPE_TXT;
-
-
 		@Element( name = "SERV_CHRG", required = false )
 		String sERV_CHRG;
-
-
 		@Element( name = "INVOICE_NO", required = false )
 		String iNVOICE_NO;
-
-
 		@Element( name = "MODEL", required = false )
 		String mODEL;
-
-
 		@Element( name = "ENGINE_NO", required = false )
 		String eNGINE_NO;
-
-
 		@Element( name = "CHASIS_NO", required = false )
 		String cHASIS_NO;
-
-
 		@Element( name = "REG_NO", required = false )
 		String rEG_NO;
-
-
 		@Element( name = "INS_POLICY_NO", required = false )
 		String iNS_POLICY_NO;
-
-
 		@Element( name = "POLICY_START_DT", required = false )
 		String pOLICY_START_DT;
-
-
 		@Element( name = "POLICY_EXPR_DT", required = false )
 		String pOLICY_EXPR_DT;
-
-
 		@Element( name = "ADV_INS", required = false )
 		String aDV_INS;
-
-
 		@Element( name = "INV_AMT", required = false )
 		String iNV_AMT;
-
-
 		@Element( name = "INITIAL_HIRE", required = false )
 		String iNITIAL_HIRE;
-
-
 		@Element( name = "FIN_AMT", required = false )
 		String fIN_AMT;
-
-
 		@Element( name = "FIN_CHRG", required = false )
 		String fIN_CHRG;
-
-
 		@Element( name = "INS_PROV", required = false )
 		String iNS_PROV;
-
-
 		@Element( name = "OPTION_MONEY", required = false )
 		String oPTION_MONEY;
-
-
 		@Element( name = "PDC", required = false )
 		String pDC;
-
-
 		@Element( name = "CONTR_VAL", required = false )
 		String cONTR_VAL;
-
-
 		@Element( name = "DUE_TILL_DATE", required = false )
 		String dUE_TILL_DATE;
-
-
 		@Element( name = "REC_TILL_DATE", required = false )
 		String rEC_TILL_DATE;
-
-
 		@Element( name = "ODC_RATE", required = false )
 		String oDC_RATE;
-
-
 		@Element( name = "OVERDUE", required = false )
 		String oVERDUE;
-
-
 		@Element( name = "ACCRUED_ODC", required = false )
 		String aCCRUED_ODC;
-
-
 		@Element( name = "SECURITIZATION", required = false )
 		String sECURITIZATION;
-
-
 		@Element( name = "ZZPOOLNUMBER", required = false )
 		String zZPOOLNUMBER;
-
-
 		@Element( name = "ZZRATE", required = false )
 		String zZRATE;
-
-
 		@Element( name = "ZZDATE", required = false )
 		String zZDATE;
-
-
 		@Element( name = "LEGAL_STATUS", required = false )
 		String lEGAL_STATUS;
-
-
 		@Element( name = "REPO_FLAG", required = false )
 		String rEPO_FLAG;
-
-
 		@Element( name = "WRITE_OFF", required = false )
 		String wRITE_OFF;
-
-
 		@Element( name = "REMEDIAL_STATUS", required = false )
 		String rEMEDIAL_STATUS;
-
-
 		@Element( name = "NORM", required = false )
 		String nORM;
-
-
 		@Element( name = "VEH_USAGE", required = false )
 		String vEH_USAGE;
-
-
 		@Element( name = "SOA_DATE_FROM", required = false )
 		String sOA_DATE_FROM;
-
-
 		@Element( name = "SOA_DATE_TO", required = false )
 		String sOA_DATE_TO;
-
-
 		@Element( name = "SOA_PRV_AMT", required = false )
 		String sOA_PRV_AMT;
-
-
 		@Element( name = "SOA_PRD_AMT", required = false )
 		String sOA_PRD_AMT;
-
-
 		@Element( name = "SOA_PRINCIPAL", required = false )
 		String sOA_PRINCIPAL;
-
-
 		@Element( name = "SOA_FIN_CHRG", required = false )
 		String sOA_FIN_CHRG;
-
-
 		@Element( name = "SOA_ADV_EMI", required = false )
 		String sOA_ADV_EMI;
-
-
 		@Element( name = "BODY_CHASIS", required = false )
 		String bODY_CHASIS;
-
-
 		@Element( name = "EXCESS_RECD", required = false )
 		String eXCESS_RECD;
-
-
 		@Element( name = "EXPENSES_DUE", required = false )
 		String eXPENSES_DUE;
-
-
 		@Element( name = "COVER_NOTENO", required = false )
 		String cOVER_NOTENO;
-
-
 		@Element( name = "COVER_NOTEDT", required = false )
 		String cOVER_NOTEDT;
-
-
 		@Element( name = "TOTAL_LOSS", required = false )
 		String tOTAL_LOSS;
-
-
 		@Element( name = "BUKRS", required = false )
 		String bUKRS;
-
-
 		@Element( name = "PDC_TYPE", required = false )
 		String pDC_TYPE;
-
-
 		@Element( name = "LPO_STATUS", required = false )
 		String lPO_STATUS;
-
-
 		@Element( name = "MANDT", required = false )
 		String mANDT;
-
-
 		@Element( name = "CATEGORY", required = false )
 		String cATEGORY;
-
-
 		@Element( name = "CHQ_CLEARED", required = false )
 		String cHQ_CLEARED;
-
-
 		@Element( name = "VZSKZ_DF", required = false )
 		String vZSKZ_DF;
-
-
 		@Element( name = "ODC_IND_REQ", required = false )
 		String oDC_IND_REQ;
-
-
 		@Element( name = "ODC_IND_AP", required = false )
 		String oDC_IND_AP;
-
-
 		@Element( name = "WORKING_IND", required = false )
 		String wORKING_IND;
-
-
 		@Element( name = "ODC_RATE_D_DF", required = false )
 		String oDC_RATE_D_DF;
-
-
 		@Element( name = "ODC_RATE_C_DF", required = false )
 		String oDC_RATE_C_DF;
-
-
 		@Element( name = "ODC_RATE_REQ", required = false )
 		String oDC_RATE_REQ;
-
-
 		@Element( name = "ODC_RATE_AP", required = false )
 		String oDC_RATE_AP;
-
-
 		@Element( name = "WORKING_RATE_D", required = false )
 		String wORKING_RATE_D;
-
-
 		@Element( name = "WORKING_RATE_C", required = false )
 		String wORKING_RATE_C;
-
-
 		@Element( name = "ODC_WAIVER_REQ", required = false )
 		String oDC_WAIVER_REQ;
-
-
 		@Element( name = "EXP_WAIVER_REQ", required = false )
 		String eXP_WAIVER_REQ;
-
-
 		@Element( name = "ODC_WAIVER", required = false )
 		String oDC_WAIVER;
-
-
 		@Element( name = "EXP_WAIVER", required = false )
 		String eXP_WAIVER;
-
-
 		@Element( name = "VAL_WAIVER", required = false )
 		String vAL_WAIVER;
-
-
 		@Element( name = "WAIVER_ENTRY", required = false )
 		String wAIVER_ENTRY;
-
-
 		@Element( name = "VKBUR", required = false )
 		String vKBUR;
-
-
 		@Element( name = "SPART", required = false )
 		String sPART;
-
-
 		@Element( name = "AUTH_IND", required = false )
 		String aUTH_IND;
-
-
 		@Element( name = "STATUS_WF_DESC", required = false )
 		String sTATUS_WF_DESC;
-
-
 		@Element( name = "STATUS_WF", required = false )
 		String sTATUS_WF;
-
-
 		@Element( name = "ACTION", required = false )
 		String aCTION;
-
-
 		@Element( name = "DECISION_MADE", required = false )
 		String dECISION_MADE;
-
-
 		@Element( name = "OBJID", required = false )
 		String oBJID;
-
-
 		@Element( name = "ADJUST_SD", required = false )
 		String aDJUST_SD;
-
-
 		@Element( name = "ADJUST_PPR", required = false )
 		String aDJUST_PPR;
-
-
 		@Element( name = "PPR_SCH_RATE", required = false )
 		String pPR_SCH_RATE;
-
-
 		@Element( name = "PPR_PRO_RATE", required = false )
 		String pPR_PRO_RATE;
-
-
 		@Element( name = "PPR_PRORATA_NOS", required = false )
 		String pPR_PRORATA_NOS;
-
-
 		@Element( name = "TOTAL_DUE", required = false )
 		String tOTAL_DUE;
-
-
 		@Element( name = "TOTAL_REC", required = false )
 		String tOTAL_REC;
-
-
 		@Element( name = "TOTAL_NET", required = false )
 		String tOTAL_NET;
-
-
 		@Element( name = "BILLED_DUE", required = false )
 		String bILLED_DUE;
-
-
 		@Element( name = "BILLED_REC", required = false )
 		String bILLED_REC;
-
-
 		@Element( name = "BILLED2_DUE", required = false )
 		String bILLED2_DUE;
-
-
 		@Element( name = "BILLED2_REC", required = false )
 		String bILLED2_REC;
-
-
 		@Element( name = "COLL2_DUE", required = false )
 		String cOLL2_DUE;
-
-
 		@Element( name = "COLL2_REC", required = false )
 		String cOLL2_REC;
-
-
 		@Element( name = "NONBILLED_DUE", required = false )
 		String nONBILLED_DUE;
-
-
 		@Element( name = "PRINCIPAL_DUE", required = false )
 		String pRINCIPAL_DUE;
-
-
 		@Element( name = "CONTR_FILA_DUE", required = false )
 		String cONTR_FILA_DUE;
-
-
 		@Element( name = "CONTR_VAL_DUE", required = false )
 		String cONTR_VAL_DUE;
-
-
 		@Element( name = "CONTR_VAL_REC", required = false )
 		String cONTR_VAL_REC;
-
-
 		@Element( name = "FIN_AMT_DUE", required = false )
 		String fIN_AMT_DUE;
-
-
 		@Element( name = "FIN_CHRG_DUE", required = false )
 		String fIN_CHRG_DUE;
-
-
 		@Element( name = "INS_FILA_DUE", required = false )
 		String iNS_FILA_DUE;
-
-
 		@Element( name = "INSURANCE_DUE", required = false )
 		String iNSURANCE_DUE;
-
-
 		@Element( name = "INSURANCE_REC", required = false )
 		String iNSURANCE_REC;
-
-
 		@Element( name = "INS_ACCT_DUE", required = false )
 		String iNS_ACCT_DUE;
-
-
 		@Element( name = "INS_ACCT_REC", required = false )
 		String iNS_ACCT_REC;
-
-
 		@Element( name = "INS_CLAIM_DUE", required = false )
 		String iNS_CLAIM_DUE;
-
-
 		@Element( name = "INS_CLAIM_REC", required = false )
 		String iNS_CLAIM_REC;
-
-
 		@Element( name = "INS_CHRG_DUE", required = false )
 		String iNS_CHRG_DUE;
-
-
 		@Element( name = "INS_CHRG_REC", required = false )
 		String iNS_CHRG_REC;
-
-
 		@Element( name = "INS_PROV_DUE", required = false )
 		String iNS_PROV_DUE;
-
-
 		@Element( name = "INS_PROV_REC", required = false )
 		String iNS_PROV_REC;
-
-
 		@Element( name = "COLL_CHRG_DUE", required = false )
 		String cOLL_CHRG_DUE;
-
-
 		@Element( name = "COLL_CHRG_REC", required = false )
 		String cOLL_CHRG_REC;
-
-
 		@Element( name = "COLL_GROS_DUE", required = false )
 		String cOLL_GROS_DUE;
-
-
 		@Element( name = "COLL_GROS_REC", required = false )
 		String cOLL_GROS_REC;
-
-
 		@Element( name = "BANK_CHRG_DUE", required = false )
 		String bANK_CHRG_DUE;
-
-
 		@Element( name = "BANK_CHRG_REC", required = false )
 		String bANK_CHRG_REC;
-
-
 		@Element( name = "REPO_CHRG_DUE", required = false )
 		String rEPO_CHRG_DUE;
-
-
 		@Element( name = "REPO_CHRG_REC", required = false )
 		String rEPO_CHRG_REC;
-
-
 		@Element( name = "LEGL_EXP_DUE", required = false )
 		String lEGL_EXP_DUE;
-
-
 		@Element( name = "LEGL_EXP_REC", required = false )
 		String lEGL_EXP_REC;
-
-
 		@Element( name = "PDD_CHRG_DUE", required = false )
 		String pDD_CHRG_DUE;
-
-
 		@Element( name = "PDD_CHRG_REC", required = false )
 		String pDD_CHRG_REC;
-
-
 		@Element( name = "STAMP_DUTY_DUE", required = false )
 		String sTAMP_DUTY_DUE;
-
-
 		@Element( name = "STAMP_DUTY_REC", required = false )
 		String sTAMP_DUTY_REC;
-
-
 		@Element( name = "STAMP_DUTY_M_DUE", required = false )
 		String sTAMP_DUTY_M_DUE;
-
-
 		@Element( name = "STAMP_DUTY_M_REC", required = false )
 		String sTAMP_DUTY_M_REC;
-
-
 		@Element( name = "DOCU_CHRG_M_DUE", required = false )
 		String dOCU_CHRG_M_DUE;
-
-
 		@Element( name = "DOCU_CHRG_M_REC", required = false )
 		String dOCU_CHRG_M_REC;
-
-
 		@Element( name = "SWAP_CHRG_DUE", required = false )
 		String sWAP_CHRG_DUE;
-
-
 		@Element( name = "SWAP_CHRG_REC", required = false )
 		String sWAP_CHRG_REC;
-
-
 		@Element( name = "ODC_CHRG_DUE", required = false )
 		String oDC_CHRG_DUE;
-
-
 		@Element( name = "ODC_CHRG_REC", required = false )
 		String oDC_CHRG_REC;
-
-
 		@Element( name = "ODC_POSTED_DUE", required = false )
 		String oDC_POSTED_DUE;
-
-
 		@Element( name = "ODC_POSTED_REC", required = false )
 		String oDC_POSTED_REC;
-
-
 		@Element( name = "OPT_MONEY_DUE", required = false )
 		String oPT_MONEY_DUE;
-
-
 		@Element( name = "OPT_MONEY_REC", required = false )
 		String oPT_MONEY_REC;
-
-
 		@Element( name = "PREPAY_REB_DUE", required = false )
 		String pREPAY_REB_DUE;
-
-
 		@Element( name = "PREPAY_REB_REC", required = false )
 		String pREPAY_REB_REC;
-
-
 		@Element( name = "OS_PRI_DUE", required = false )
 		String oS_PRI_DUE;
-
-
 		@Element( name = "OS_PRI_REC", required = false )
 		String oS_PRI_REC;
-
-
 		@Element( name = "LAST_INT_DUE", required = false )
 		String lAST_INT_DUE;
-
-
 		@Element( name = "LAST_INT_REC", required = false )
 		String lAST_INT_REC;
-
-
 		@Element( name = "PMT_AMT_DUE", required = false )
 		String pMT_AMT_DUE;
-
-
 		@Element( name = "PMT_AMT_REC", required = false )
 		String pMT_AMT_REC;
-
-
 		@Element( name = "SD_AMT_DUE", required = false )
 		String sD_AMT_DUE;
-
-
 		@Element( name = "SD_AMT_REC", required = false )
 		String sD_AMT_REC;
-
-
 		@Element( name = "SD_INT_DUE", required = false )
 		String sD_INT_DUE;
-
-
 		@Element( name = "SD_INT_REC", required = false )
 		String sD_INT_REC;
-
-
 		@Element( name = "PPR_DUE", required = false )
 		String pPR_DUE;
-
-
 		@Element( name = "PPR_REC", required = false )
 		String pPR_REC;
-
-
 		@Element( name = "RES_VAL_DUE", required = false )
 		String rES_VAL_DUE;
-
-
 		@Element( name = "RES_VAL_REC", required = false )
 		String rES_VAL_REC;
-
-
 		@Element( name = "LM_FEE_DUE", required = false )
 		String lM_FEE_DUE;
-
-
 		@Element( name = "LM_FEE_REC", required = false )
 		String lM_FEE_REC;
-
-
 		@Element( name = "DOWNPAY_DUE", required = false )
 		String dOWNPAY_DUE;
-
-
 		@Element( name = "DOWNPAY_REC", required = false )
 		String dOWNPAY_REC;
-
-
 		@Element( name = "OTH_EXP_DUE", required = false )
 		String oTH_EXP_DUE;
-
-
 		@Element( name = "OTH_EXP_REC", required = false )
 		String oTH_EXP_REC;
-
-
 		@Element( name = "WRITE_OFF_DUE", required = false )
 		String wRITE_OFF_DUE;
-
-
 		@Element( name = "WRITE_OFF_REC", required = false )
 		String wRITE_OFF_REC;
-
-
 		@Element( name = "DEALER_LIAB_DUE", required = false )
 		String dEALER_LIAB_DUE;
-
-
 		@Element( name = "DEALER_LIAB_REC", required = false )
 		String dEALER_LIAB_REC;
-
-
 		@Element( name = "ADV_EMI_DUE", required = false )
 		String aDV_EMI_DUE;
-
-
 		@Element( name = "ADV_EMI_REC", required = false )
 		String aDV_EMI_REC;
-
-
 		@Element( name = "AD_SERV_CHRG_DUE", required = false )
 		String aD_SERV_CHRG_DUE;
-
-
 		@Element( name = "AD_SERV_CHRG_REC", required = false )
 		String aD_SERV_CHRG_REC;
-
-
 		@Element( name = "CANC_CHRG_DUE", required = false )
 		String cANC_CHRG_DUE;
-
-
 		@Element( name = "CANC_CHRG_REC", required = false )
 		String cANC_CHRG_REC;
-
-
 		@Element( name = "FI3_AG_CHRG_DUE", required = false )
 		String fI3_AG_CHRG_DUE;
-
-
 		@Element( name = "FI3_AG_CHRG_REC", required = false )
 		String fI3_AG_CHRG_REC;
-
-
 		@Element( name = "HOLD_CHRG_DUE", required = false )
 		String hOLD_CHRG_DUE;
-
-
 		@Element( name = "HOLD_CHRG_REC", required = false )
 		String hOLD_CHRG_REC;
-
-
 		@Element( name = "LEASE_TAX_DUE", required = false )
 		String lEASE_TAX_DUE;
-
-
 		@Element( name = "LEASE_TAX_REC", required = false )
 		String lEASE_TAX_REC;
-
-
 		@Element( name = "MISC_DUE", required = false )
 		String mISC_DUE;
-
-
 		@Element( name = "MISC_REC", required = false )
 		String mISC_REC;
-
-
 		@Element( name = "RET_CHRG_DUE", required = false )
 		String rET_CHRG_DUE;
-
-
 		@Element( name = "RET_CHRG_REC", required = false )
 		String rET_CHRG_REC;
-
-
 		@Element( name = "RTO_CHRG_DUE", required = false )
 		String rTO_CHRG_DUE;
-
-
 		@Element( name = "RTO_CHRG_REC", required = false )
 		String rTO_CHRG_REC;
-
-
 		@Element( name = "SERV_CHRG_DUE", required = false )
 		String sERV_CHRG_DUE;
-
-
 		@Element( name = "SERV_CHRG_REC", required = false )
 		String sERV_CHRG_REC;
-
-
 		@Element( name = "SERV_TAX_EX_DUE", required = false )
 		String sERV_TAX_EX_DUE;
-
-
 		@Element( name = "SERV_TAX_EX_REC", required = false )
 		String sERV_TAX_EX_REC;
-
-
 		@Element( name = "SALES_TAX_DUE", required = false )
 		String sALES_TAX_DUE;
-
-
 		@Element( name = "SALES_TAX_REC", required = false )
 		String sALES_TAX_REC;
-
-
 		@Element( name = "VAL_ADD_TAX_DUE", required = false )
 		String vAL_ADD_TAX_DUE;
-
-
 		@Element( name = "VAL_ADD_TAX_REC", required = false )
 		String vAL_ADD_TAX_REC;
-
-
 		@Element( name = "WAIVER_DUE", required = false )
 		String wAIVER_DUE;
-
-
 		@Element( name = "WAIVER_REC", required = false )
 		String wAIVER_REC;
-
-
 		@Element( name = "INCOME_DUE", required = false )
 		String iNCOME_DUE;
-
-
 		@Element( name = "INCOME_REC", required = false )
 		String iNCOME_REC;
-
-
 		@Element( name = "TRANS_DUE", required = false )
 		String tRANS_DUE;
-
-
 		@Element( name = "TRANS_REC", required = false )
 		String tRANS_REC;
-
-
 		@Element( name = "COLL_AG_CHRG_DUE", required = false )
 		String cOLL_AG_CHRG_DUE;
-
-
 		@Element( name = "COLL_AG_CHRG_REC", required = false )
 		String cOLL_AG_CHRG_REC;
-
-
 		@Element( name = "SALE_AMT_REC", required = false )
 		String sALE_AMT_REC;
-
-
 		@Element( name = "ST_BRI_DUE", required = false )
 		String sT_BRI_DUE;
-
-
 		@Element( name = "ST_BRI_REC", required = false )
 		String sT_BRI_REC;
-
-
 		@Element( name = "ST_INT_DUE", required = false )
 		String sT_INT_DUE;
-
-
 		@Element( name = "ST_INT_REC", required = false )
 		String sT_INT_REC;
-
-
 		@Element( name = "EC_INT_DUE", required = false )
 		String eC_INT_DUE;
-
-
 		@Element( name = "EC_INT_REC", required = false )
 		String eC_INT_REC;
-
-
 		@Element( name = "ST_LAST_INT_DUE", required = false )
 		String sT_LAST_INT_DUE;
-
-
 		@Element( name = "ST_LAST_INT_REC", required = false )
 		String sT_LAST_INT_REC;
-
-
 		@Element( name = "EC_LAST_INT_DUE", required = false )
 		String eC_LAST_INT_DUE;
-
-
 		@Element( name = "EC_LAST_INT_REC", required = false )
 		String eC_LAST_INT_REC;
-
-
 		@Element( name = "ST_ODC_DUE", required = false )
 		String sT_ODC_DUE;
-
-
 		@Element( name = "ST_ODC_REC", required = false )
 		String sT_ODC_REC;
-
-
 		@Element( name = "EC_ODC_DUE", required = false )
 		String eC_ODC_DUE;
-
-
 		@Element( name = "EC_ODC_REC", required = false )
 		String eC_ODC_REC;
-
-
 		@Element( name = "ST_PMT_DUE", required = false )
 		String sT_PMT_DUE;
-
-
 		@Element( name = "ST_PMT_REC", required = false )
 		String sT_PMT_REC;
-
-
 		@Element( name = "EC_PMT_DUE", required = false )
 		String eC_PMT_DUE;
-
-
 		@Element( name = "EC_PMT_REC", required = false )
 		String eC_PMT_REC;
-
-
 		@Element( name = "TOT_EXP_DUE", required = false )
 		String tOT_EXP_DUE;
-
-
 		@Element( name = "TOT_EXP_REC", required = false )
 		String tOT_EXP_REC;
-
-
 		@Element( name = "DEALER_LIAB_RATE", required = false )
 		String dEALER_LIAB_RATE;
-
-
 		@Element( name = "DEALER_LIAB", required = false )
 		String dEALER_LIAB;
-
-
 		@Element( name = "PER_DAY_INT", required = false )
 		String pER_DAY_INT;
-
-
 		@Element( name = "REASON_REQ", required = false )
 		String rEASON_REQ;
-
-
 		@Element( name = "REASON_RECOM", required = false )
 		String rEASON_RECOM;
-
-
 		@Element( name = "REMARK", required = false )
 		String rEMARK;
-
-
 		@Element( name = "REMARK_HO", required = false )
 		String rEMARK_HO;
-
-
 		@Element( name = "BILLING", required = false )
 		String bILLING;
-
-
 		@Element( name = "UNAME", required = false )
 		String uNAME;
-
-
 		@Element( name = "DATE_R", required = false )
 		String dATE_R;
-
-
 		@Element( name = "TIMESTAMP", required = false )
 		String tIMESTAMP;
-
-
 		@Element( name = "UNAME_WF_CR", required = false )
 		String uNAME_WF_CR;
-
-
 		@Element( name = "TS_WF_CR", required = false )
 		String tS_WF_CR;
-
-
 		@Element( name = "UNAME_WF_DM", required = false )
 		String uNAME_WF_DM;
-
-
 		@Element( name = "TS_WF_DM", required = false )
 		String tS_WF_DM;
-
-
 		@Element( name = "UNAME_APPL", required = false )
 		String uNAME_APPL;
-
-
 		@Element( name = "DATE_A", required = false )
 		String dATE_A;
-
-
 		@Element( name = "TS_APPL", required = false )
 		String tS_APPL;
-
-
 		@Element( name = "UNAME_TERM", required = false )
 		String uNAME_TERM;
-
-
 		@Element( name = "DATE_T", required = false )
 		String dATE_T;
-
-
 		@Element( name = "TS_TERM", required = false )
 		String tS_TERM;
-
-
 		@Element( name = "PRINT_BLOCK", required = false )
 		String pRINT_BLOCK;
-
-
 		@Element( name = "PRINT_STATUS", required = false )
 		String pRINT_STATUS;
-
-
 		@Element( name = "PRINT_UNAME", required = false )
 		String pRINT_UNAME;
-
-
 		@Element( name = "PRINT_DATUM", required = false )
 		String pRINT_DATUM;
-
-
 		@Element( name = "PRINT_TIME", required = false )
 		String pRINT_TIME;
-
-
 		@Element( name = "PRINT_COLL_BY", required = false )
 		String pRINT_COLL_BY;
-
-
 		@Element( name = "PRINT_COLL_DT", required = false )
 		String pRINT_COLL_DT;
-
-
 		@Element( name = "RTO_REF_NO", required = false )
 		String rTO_REF_NO;
-
-
 		@Element( name = "RTO_REF_DATE", required = false )
 		String rTO_REF_DATE;
-
-
 		@Element( name = "OBJECTID_CP", required = false )
 		String oBJECTID_CP;
-
-
 		@Element( name = "BTR_INIT", required = false )
 		String bTR_INIT;
-
-
 		@Element( name = "BTR_UNAME", required = false )
 		String bTR_UNAME;
-
-
 		@Element( name = "BTR_INIT_DT", required = false )
 		String bTR_INIT_DT;
-
-
 		@Element( name = "BTR_COMP", required = false )
 		String bTR_COMP;
-
-
 		@Element( name = "BTR_SELE", required = false )
 		String bTR_SELE;
-
-
 		@Element( name = "BTR_ERR", required = false )
 		String bTR_ERR;
-
-
 		@Element( name = "ST_GL_DUE", required = false )
 		String sT_GL_DUE;
-
-
 		@Element( name = "ST_GL_REC", required = false )
 		String sT_GL_REC;
-
-
 		@Element( name = "CA_CHRG_DUE", required = false )
 		String cA_CHRG_DUE;
-
-
 		@Element( name = "CA_CHRG_REC", required = false )
 		String cA_CHRG_REC;
-
-
 		@Element( name = "PENDRC_REC", required = false )
 		String pENDRC_REC;
-
-
 		@Element( name = "PENDRC_DUE", required = false )
 		String pENDRC_DUE;
-
-
 		@Element( name = "COLL2_ZXY_REC", required = false )
 		String cOLL2_ZXY_REC;
-
-
 		@Element( name = "COLL2_ZXY_DUE", required = false )
 		String cOLL2_ZXY_DUE;
-
-
 		@Element( name = "ZDATE", required = false )
 		String zDATE;
-
-
 		@Element( name = "SHKZG", required = false )
 		String sHKZG;
-
-
 		@Element( name = "SRNO", required = false )
 		String sRNO;
-
-
 		@Element( name = "SECCO", required = false )
 		String sECCO;
-
-
 		@Element( name = "GJAHR", required = false )
 		String gJAHR;
-
-
 		@Element( name = "BELNR", required = false )
 		String bELNR;
-
-
 		@Element( name = "BUZEI", required = false )
 		String bUZEI;
-
-
 		@Element( name = "BLART", required = false )
 		String bLART;
-
-
 		@Element( name = "BUDAT", required = false )
 		String bUDAT;
-
-
 		@Element( name = "BLDAT", required = false )
 		String bLDAT;
-
-
 		@Element( name = "ZFBDT", required = false )
 		String zFBDT;
-
-
 		@Element( name = "ANBWA", required = false )
 		String aNBWA;
-
-
 		@Element( name = "DESCP", required = false )
 		String dESCP;
-
-
 		@Element( name = "PAN_ID", required = false )
 		String pAN_ID;
-
-
 		@Element( name = "PAN_NO", required = false )
 		String pAN_NO;
-
-
 		@Element( name = "INST_TYPE", required = false )
 		String iNST_TYPE;
-
-
 		@Element( name = "INST_NO", required = false )
 		String iNST_NO;
-
-
 		@Element( name = "INST_DATE", required = false )
 		String iNST_DATE;
-
-
 		@Element( name = "DRAW_BNK", required = false )
 		String dRAW_BNK;
-
-
 		@Element( name = "DMBTR", required = false )
 		String dMBTR;
-
-
 		@Element( name = "DUE", required = false )
 		String dUE;
-
-
 		@Element( name = "REC", required = false )
 		String rEC;
-
-
 		@Element( name = "BAL", required = false )
 		String bAL;
-
-
 		@Element( name = "ZDAYS", required = false )
 		String zDAYS;
-
-
 		@Element( name = "ODC", required = false )
 		String oDC;
-
-
 		@Element( name = "ODC_POS", required = false )
 		String oDC_POS;
-
-
 		@Element( name = "ODC_NEG", required = false )
 		String oDC_NEG;
-
-
 		@Element( name = "C_DUE", required = false )
 		String c_DUE;
-
-
 		@Element( name = "C_REC", required = false )
 		String c_REC;
-
-
 		@Element( name = "SGTXT", required = false )
 		String sGTXT;
-
-
 		@Element( name = "DRCR", required = false )
 		String dRCR;
-
-
 		@Element( name = "CPUDT", required = false )
 		String cPUDT;
-
-
 		@Element( name = "TDS_FLAG", required = false )
 		String tDS_FLAG;
-
-
 		@Element( name = "TANNO", required = false )
 		String tANNO;
-
-
 		@Element( name = "PDC_TEXT", required = false )
 		String pDC_TEXT;
-
-
 		@Element( name = "AD", required = false )
 		String aD;
-
-
 		@Element( name = "PD", required = false )
 		String pD;
-
-
 		@Element( name = "INST_FR", required = false )
 		String iNST_FR;
-
-
 		@Element( name = "INST_TO", required = false )
 		String iNST_TO;
-
-
 		@Element( name = "AMOUNT", required = false )
 		String aMOUNT;
-
-
 		@Element( name = "ZYEAR", required = false )
 		String zYEAR;
-
-
 		@Element( name = "PROVISON_AMT", required = false )
 		String pROVISON_AMT;
-
-
 		@Element( name = "STOCKID", required = false )
 		String sTOCKID;
-
-
 		@Element( name = "TRANSID", required = false )
 		String tRANSID;
-
-
 		@Element( name = "SEQNR", required = false )
 		String sEQNR;
-
-
 		@Element( name = "RWBTR", required = false )
 		String rWBTR;
-
-
 		@Element( name = "PDCTYPE", required = false )
 		String pDCTYPE;
-
-
 		@Element( name = "PDCTYPE_TXT", required = false )
 		String pDCTYPE_TXT;
-
-
 		@Element( name = "PDCBANK", required = false )
 		String pDCBANK;
-
-
 		@Element( name = "BRNCH", required = false )
 		String bRNCH;
-
-
 		@Element( name = "CHECTDATE", required = false )
 		String cHECTDATE;
-
-
 		@Element( name = "BANKDATE", required = false )
 		String bANKDATE;
-
-
 		@Element( name = "CHECT", required = false )
 		String cHECT;
-
-
 		@Element( name = "STATUS_TXT", required = false )
 		String sTATUS_TXT;
-
-
 		@Element( name = "NOTE", required = false )
 		String nOTE;
-
-
 		@Element( name = "NOTE1", required = false )
 		String nOTE1;
-
-
 		@Element( name = "NOTE2", required = false )
 		String nOTE2;
-
-
 		@Element( name = "ID", required = false )
 		String iD;
-
-
 		@Element( name = "NUMBER", required = false )
 		String nUMBER;
-
-
 		@Element( name = "MESSAGE", required = false )
 		String mESSAGE;
-
-
 		@Element( name = "LOG_NO", required = false )
 		String lOG_NO;
-
-
 		@Element( name = "LOG_MSG_NO", required = false )
 		String lOG_MSG_NO;
-
-
 		@Element( name = "MESSAGE_V1", required = false )
 		String mESSAGE_V1;
-
-
 		@Element( name = "MESSAGE_V2", required = false )
 		String mESSAGE_V2;
-
-
 		@Element( name = "MESSAGE_V3", required = false )
 		String mESSAGE_V3;
-
-
 		@Element( name = "MESSAGE_V4", required = false )
 		String mESSAGE_V4;
-
-
 		@Element( name = "PARAMETER", required = false )
 		String pARAMETER;
-
-
 		@Element( name = "ROW", required = false )
 		String rOW;
-
-
 		@Element( name = "FIELD", required = false )
 		String fIELD;
-
-
 		@Element( name = "SYSTEM", required = false )
 		String sYSTEM;
 
+		@Override
+		public String toString() {
+			return "Item{" +
+					"aCCRUED_ODC='" + aCCRUED_ODC + '\'' +
+					", cONTRACTNO='" + cONTRACTNO + '\'' +
+					", rEQDATE='" + rEQDATE + '\'' +
+					", vZSKZ='" + vZSKZ + '\'' +
+					", oBJECTID='" + oBJECTID + '\'' +
+					", cONTSTARTDT='" + cONTSTARTDT + '\'' +
+					", cONTENDDT='" + cONTENDDT + '\'' +
+					", aSSET='" + aSSET + '\'' +
+					", aSSET_TXT='" + aSSET_TXT + '\'' +
+					", sTATUS='" + sTATUS + '\'' +
+					", sTAT_DATE='" + sTAT_DATE + '\'' +
+					", tYPE='" + tYPE + '\'' +
+					", dCH_TXT='" + dCH_TXT + '\'' +
+					", cLIENT='" + cLIENT + '\'' +
+					", gUARANTOR='" + gUARANTOR + '\'' +
+					", dEALER='" + dEALER + '\'' +
+					", sUPPLIER='" + sUPPLIER + '\'' +
+					", cOMPANY_NAME='" + cOMPANY_NAME + '\'' +
+					", cLIENT_NAME='" + cLIENT_NAME + '\'' +
+					", dEALER_NAME='" + dEALER_NAME + '\'' +
+					", sUPPLIER_NAME='" + sUPPLIER_NAME + '\'' +
+					", dSA='" + dSA + '\'' +
+					", dSA_NAME='" + dSA_NAME + '\'' +
+					", dMA='" + dMA + '\'' +
+					", dMA_NAME='" + dMA_NAME + '\'' +
+					", aCT_MGR_NAME='" + aCT_MGR_NAME + '\'' +
+					", rEGION='" + rEGION + '\'' +
+					", bRANCH='" + bRANCH + '\'' +
+					", sALES_OFFICE='" + sALES_OFFICE + '\'' +
+					", iBC='" + iBC + '\'' +
+					", aREA='" + aREA + '\'' +
+					", iNV_DATE='" + iNV_DATE + '\'' +
+					", tA_ADJ_DATE='" + tA_ADJ_DATE + '\'' +
+					", dISB_DATE='" + dISB_DATE + '\'' +
+					", fIRST_INST_DATE='" + fIRST_INST_DATE + '\'' +
+					", mATURITY_DATE='" + mATURITY_DATE + '\'' +
+					", fIA_I='" + fIA_I + '\'' +
+					", fIA_II='" + fIA_II + '\'' +
+					", cOLLECTION_AG='" + cOLLECTION_AG + '\'' +
+					", lODGING='" + lODGING + '\'' +
+					", mSP='" + mSP + '\'' +
+					", sCHEME_CODE='" + sCHEME_CODE + '\'' +
+					", fIN_CHRG_RATE='" + fIN_CHRG_RATE + '\'' +
+					", pPR='" + pPR + '\'' +
+					", tENURE='" + tENURE + '\'' +
+					", tENURE_UNIT='" + tENURE_UNIT + '\'' +
+					", tERM='" + tERM + '\'' +
+					", tERM_REC='" + tERM_REC + '\'' +
+					", lEAD_PRD='" + lEAD_PRD + '\'' +
+					", lEAD_PRD_UNIT='" + lEAD_PRD_UNIT + '\'' +
+					", aDV_EMI='" + aDV_EMI + '\'' +
+					", iNST_FREQ='" + iNST_FREQ + '\'' +
+					", sD_AMT='" + sD_AMT + '\'' +
+					", sD_INT_RATE='" + sD_INT_RATE + '\'' +
+					", sD_INT_TYPE='" + sD_INT_TYPE + '\'' +
+					", sD_INT_TYPE_TXT='" + sD_INT_TYPE_TXT + '\'' +
+					", sERV_CHRG='" + sERV_CHRG + '\'' +
+					", iNVOICE_NO='" + iNVOICE_NO + '\'' +
+					", mODEL='" + mODEL + '\'' +
+					", eNGINE_NO='" + eNGINE_NO + '\'' +
+					", cHASIS_NO='" + cHASIS_NO + '\'' +
+					", rEG_NO='" + rEG_NO + '\'' +
+					", iNS_POLICY_NO='" + iNS_POLICY_NO + '\'' +
+					", pOLICY_START_DT='" + pOLICY_START_DT + '\'' +
+					", pOLICY_EXPR_DT='" + pOLICY_EXPR_DT + '\'' +
+					", aDV_INS='" + aDV_INS + '\'' +
+					", iNV_AMT='" + iNV_AMT + '\'' +
+					", iNITIAL_HIRE='" + iNITIAL_HIRE + '\'' +
+					", fIN_AMT='" + fIN_AMT + '\'' +
+					", fIN_CHRG='" + fIN_CHRG + '\'' +
+					", iNS_PROV='" + iNS_PROV + '\'' +
+					", oPTION_MONEY='" + oPTION_MONEY + '\'' +
+					", pDC='" + pDC + '\'' +
+					", cONTR_VAL='" + cONTR_VAL + '\'' +
+					", dUE_TILL_DATE='" + dUE_TILL_DATE + '\'' +
+					", rEC_TILL_DATE='" + rEC_TILL_DATE + '\'' +
+					", oDC_RATE='" + oDC_RATE + '\'' +
+					", oVERDUE='" + oVERDUE + '\'' +
+					", sECURITIZATION='" + sECURITIZATION + '\'' +
+					", zZPOOLNUMBER='" + zZPOOLNUMBER + '\'' +
+					", zZRATE='" + zZRATE + '\'' +
+					", zZDATE='" + zZDATE + '\'' +
+					", lEGAL_STATUS='" + lEGAL_STATUS + '\'' +
+					", rEPO_FLAG='" + rEPO_FLAG + '\'' +
+					", wRITE_OFF='" + wRITE_OFF + '\'' +
+					", rEMEDIAL_STATUS='" + rEMEDIAL_STATUS + '\'' +
+					", nORM='" + nORM + '\'' +
+					", vEH_USAGE='" + vEH_USAGE + '\'' +
+					", sOA_DATE_FROM='" + sOA_DATE_FROM + '\'' +
+					", sOA_DATE_TO='" + sOA_DATE_TO + '\'' +
+					", sOA_PRV_AMT='" + sOA_PRV_AMT + '\'' +
+					", sOA_PRD_AMT='" + sOA_PRD_AMT + '\'' +
+					", sOA_PRINCIPAL='" + sOA_PRINCIPAL + '\'' +
+					", sOA_FIN_CHRG='" + sOA_FIN_CHRG + '\'' +
+					", sOA_ADV_EMI='" + sOA_ADV_EMI + '\'' +
+					", bODY_CHASIS='" + bODY_CHASIS + '\'' +
+					", eXCESS_RECD='" + eXCESS_RECD + '\'' +
+					", eXPENSES_DUE='" + eXPENSES_DUE + '\'' +
+					", cOVER_NOTENO='" + cOVER_NOTENO + '\'' +
+					", cOVER_NOTEDT='" + cOVER_NOTEDT + '\'' +
+					", tOTAL_LOSS='" + tOTAL_LOSS + '\'' +
+					", bUKRS='" + bUKRS + '\'' +
+					", pDC_TYPE='" + pDC_TYPE + '\'' +
+					", lPO_STATUS='" + lPO_STATUS + '\'' +
+					", mANDT='" + mANDT + '\'' +
+					", cATEGORY='" + cATEGORY + '\'' +
+					", cHQ_CLEARED='" + cHQ_CLEARED + '\'' +
+					", vZSKZ_DF='" + vZSKZ_DF + '\'' +
+					", oDC_IND_REQ='" + oDC_IND_REQ + '\'' +
+					", oDC_IND_AP='" + oDC_IND_AP + '\'' +
+					", wORKING_IND='" + wORKING_IND + '\'' +
+					", oDC_RATE_D_DF='" + oDC_RATE_D_DF + '\'' +
+					", oDC_RATE_C_DF='" + oDC_RATE_C_DF + '\'' +
+					", oDC_RATE_REQ='" + oDC_RATE_REQ + '\'' +
+					", oDC_RATE_AP='" + oDC_RATE_AP + '\'' +
+					", wORKING_RATE_D='" + wORKING_RATE_D + '\'' +
+					", wORKING_RATE_C='" + wORKING_RATE_C + '\'' +
+					", oDC_WAIVER_REQ='" + oDC_WAIVER_REQ + '\'' +
+					", eXP_WAIVER_REQ='" + eXP_WAIVER_REQ + '\'' +
+					", oDC_WAIVER='" + oDC_WAIVER + '\'' +
+					", eXP_WAIVER='" + eXP_WAIVER + '\'' +
+					", vAL_WAIVER='" + vAL_WAIVER + '\'' +
+					", wAIVER_ENTRY='" + wAIVER_ENTRY + '\'' +
+					", vKBUR='" + vKBUR + '\'' +
+					", sPART='" + sPART + '\'' +
+					", aUTH_IND='" + aUTH_IND + '\'' +
+					", sTATUS_WF_DESC='" + sTATUS_WF_DESC + '\'' +
+					", sTATUS_WF='" + sTATUS_WF + '\'' +
+					", aCTION='" + aCTION + '\'' +
+					", dECISION_MADE='" + dECISION_MADE + '\'' +
+					", oBJID='" + oBJID + '\'' +
+					", aDJUST_SD='" + aDJUST_SD + '\'' +
+					", aDJUST_PPR='" + aDJUST_PPR + '\'' +
+					", pPR_SCH_RATE='" + pPR_SCH_RATE + '\'' +
+					", pPR_PRO_RATE='" + pPR_PRO_RATE + '\'' +
+					", pPR_PRORATA_NOS='" + pPR_PRORATA_NOS + '\'' +
+					", tOTAL_DUE='" + tOTAL_DUE + '\'' +
+					", tOTAL_REC='" + tOTAL_REC + '\'' +
+					", tOTAL_NET='" + tOTAL_NET + '\'' +
+					", bILLED_DUE='" + bILLED_DUE + '\'' +
+					", bILLED_REC='" + bILLED_REC + '\'' +
+					", bILLED2_DUE='" + bILLED2_DUE + '\'' +
+					", bILLED2_REC='" + bILLED2_REC + '\'' +
+					", cOLL2_DUE='" + cOLL2_DUE + '\'' +
+					", cOLL2_REC='" + cOLL2_REC + '\'' +
+					", nONBILLED_DUE='" + nONBILLED_DUE + '\'' +
+					", pRINCIPAL_DUE='" + pRINCIPAL_DUE + '\'' +
+					", cONTR_FILA_DUE='" + cONTR_FILA_DUE + '\'' +
+					", cONTR_VAL_DUE='" + cONTR_VAL_DUE + '\'' +
+					", cONTR_VAL_REC='" + cONTR_VAL_REC + '\'' +
+					", fIN_AMT_DUE='" + fIN_AMT_DUE + '\'' +
+					", fIN_CHRG_DUE='" + fIN_CHRG_DUE + '\'' +
+					", iNS_FILA_DUE='" + iNS_FILA_DUE + '\'' +
+					", iNSURANCE_DUE='" + iNSURANCE_DUE + '\'' +
+					", iNSURANCE_REC='" + iNSURANCE_REC + '\'' +
+					", iNS_ACCT_DUE='" + iNS_ACCT_DUE + '\'' +
+					", iNS_ACCT_REC='" + iNS_ACCT_REC + '\'' +
+					", iNS_CLAIM_DUE='" + iNS_CLAIM_DUE + '\'' +
+					", iNS_CLAIM_REC='" + iNS_CLAIM_REC + '\'' +
+					", iNS_CHRG_DUE='" + iNS_CHRG_DUE + '\'' +
+					", iNS_CHRG_REC='" + iNS_CHRG_REC + '\'' +
+					", iNS_PROV_DUE='" + iNS_PROV_DUE + '\'' +
+					", iNS_PROV_REC='" + iNS_PROV_REC + '\'' +
+					", cOLL_CHRG_DUE='" + cOLL_CHRG_DUE + '\'' +
+					", cOLL_CHRG_REC='" + cOLL_CHRG_REC + '\'' +
+					", cOLL_GROS_DUE='" + cOLL_GROS_DUE + '\'' +
+					", cOLL_GROS_REC='" + cOLL_GROS_REC + '\'' +
+					", bANK_CHRG_DUE='" + bANK_CHRG_DUE + '\'' +
+					", bANK_CHRG_REC='" + bANK_CHRG_REC + '\'' +
+					", rEPO_CHRG_DUE='" + rEPO_CHRG_DUE + '\'' +
+					", rEPO_CHRG_REC='" + rEPO_CHRG_REC + '\'' +
+					", lEGL_EXP_DUE='" + lEGL_EXP_DUE + '\'' +
+					", lEGL_EXP_REC='" + lEGL_EXP_REC + '\'' +
+					", pDD_CHRG_DUE='" + pDD_CHRG_DUE + '\'' +
+					", pDD_CHRG_REC='" + pDD_CHRG_REC + '\'' +
+					", sTAMP_DUTY_DUE='" + sTAMP_DUTY_DUE + '\'' +
+					", sTAMP_DUTY_REC='" + sTAMP_DUTY_REC + '\'' +
+					", sTAMP_DUTY_M_DUE='" + sTAMP_DUTY_M_DUE + '\'' +
+					", sTAMP_DUTY_M_REC='" + sTAMP_DUTY_M_REC + '\'' +
+					", dOCU_CHRG_M_DUE='" + dOCU_CHRG_M_DUE + '\'' +
+					", dOCU_CHRG_M_REC='" + dOCU_CHRG_M_REC + '\'' +
+					", sWAP_CHRG_DUE='" + sWAP_CHRG_DUE + '\'' +
+					", sWAP_CHRG_REC='" + sWAP_CHRG_REC + '\'' +
+					", oDC_CHRG_DUE='" + oDC_CHRG_DUE + '\'' +
+					", oDC_CHRG_REC='" + oDC_CHRG_REC + '\'' +
+					", oDC_POSTED_DUE='" + oDC_POSTED_DUE + '\'' +
+					", oDC_POSTED_REC='" + oDC_POSTED_REC + '\'' +
+					", oPT_MONEY_DUE='" + oPT_MONEY_DUE + '\'' +
+					", oPT_MONEY_REC='" + oPT_MONEY_REC + '\'' +
+					", pREPAY_REB_DUE='" + pREPAY_REB_DUE + '\'' +
+					", pREPAY_REB_REC='" + pREPAY_REB_REC + '\'' +
+					", oS_PRI_DUE='" + oS_PRI_DUE + '\'' +
+					", oS_PRI_REC='" + oS_PRI_REC + '\'' +
+					", lAST_INT_DUE='" + lAST_INT_DUE + '\'' +
+					", lAST_INT_REC='" + lAST_INT_REC + '\'' +
+					", pMT_AMT_DUE='" + pMT_AMT_DUE + '\'' +
+					", pMT_AMT_REC='" + pMT_AMT_REC + '\'' +
+					", sD_AMT_DUE='" + sD_AMT_DUE + '\'' +
+					", sD_AMT_REC='" + sD_AMT_REC + '\'' +
+					", sD_INT_DUE='" + sD_INT_DUE + '\'' +
+					", sD_INT_REC='" + sD_INT_REC + '\'' +
+					", pPR_DUE='" + pPR_DUE + '\'' +
+					", pPR_REC='" + pPR_REC + '\'' +
+					", rES_VAL_DUE='" + rES_VAL_DUE + '\'' +
+					", rES_VAL_REC='" + rES_VAL_REC + '\'' +
+					", lM_FEE_DUE='" + lM_FEE_DUE + '\'' +
+					", lM_FEE_REC='" + lM_FEE_REC + '\'' +
+					", dOWNPAY_DUE='" + dOWNPAY_DUE + '\'' +
+					", dOWNPAY_REC='" + dOWNPAY_REC + '\'' +
+					", oTH_EXP_DUE='" + oTH_EXP_DUE + '\'' +
+					", oTH_EXP_REC='" + oTH_EXP_REC + '\'' +
+					", wRITE_OFF_DUE='" + wRITE_OFF_DUE + '\'' +
+					", wRITE_OFF_REC='" + wRITE_OFF_REC + '\'' +
+					", dEALER_LIAB_DUE='" + dEALER_LIAB_DUE + '\'' +
+					", dEALER_LIAB_REC='" + dEALER_LIAB_REC + '\'' +
+					", aDV_EMI_DUE='" + aDV_EMI_DUE + '\'' +
+					", aDV_EMI_REC='" + aDV_EMI_REC + '\'' +
+					", aD_SERV_CHRG_DUE='" + aD_SERV_CHRG_DUE + '\'' +
+					", aD_SERV_CHRG_REC='" + aD_SERV_CHRG_REC + '\'' +
+					", cANC_CHRG_DUE='" + cANC_CHRG_DUE + '\'' +
+					", cANC_CHRG_REC='" + cANC_CHRG_REC + '\'' +
+					", fI3_AG_CHRG_DUE='" + fI3_AG_CHRG_DUE + '\'' +
+					", fI3_AG_CHRG_REC='" + fI3_AG_CHRG_REC + '\'' +
+					", hOLD_CHRG_DUE='" + hOLD_CHRG_DUE + '\'' +
+					", hOLD_CHRG_REC='" + hOLD_CHRG_REC + '\'' +
+					", lEASE_TAX_DUE='" + lEASE_TAX_DUE + '\'' +
+					", lEASE_TAX_REC='" + lEASE_TAX_REC + '\'' +
+					", mISC_DUE='" + mISC_DUE + '\'' +
+					", mISC_REC='" + mISC_REC + '\'' +
+					", rET_CHRG_DUE='" + rET_CHRG_DUE + '\'' +
+					", rET_CHRG_REC='" + rET_CHRG_REC + '\'' +
+					", rTO_CHRG_DUE='" + rTO_CHRG_DUE + '\'' +
+					", rTO_CHRG_REC='" + rTO_CHRG_REC + '\'' +
+					", sERV_CHRG_DUE='" + sERV_CHRG_DUE + '\'' +
+					", sERV_CHRG_REC='" + sERV_CHRG_REC + '\'' +
+					", sERV_TAX_EX_DUE='" + sERV_TAX_EX_DUE + '\'' +
+					", sERV_TAX_EX_REC='" + sERV_TAX_EX_REC + '\'' +
+					", sALES_TAX_DUE='" + sALES_TAX_DUE + '\'' +
+					", sALES_TAX_REC='" + sALES_TAX_REC + '\'' +
+					", vAL_ADD_TAX_DUE='" + vAL_ADD_TAX_DUE + '\'' +
+					", vAL_ADD_TAX_REC='" + vAL_ADD_TAX_REC + '\'' +
+					", wAIVER_DUE='" + wAIVER_DUE + '\'' +
+					", wAIVER_REC='" + wAIVER_REC + '\'' +
+					", iNCOME_DUE='" + iNCOME_DUE + '\'' +
+					", iNCOME_REC='" + iNCOME_REC + '\'' +
+					", tRANS_DUE='" + tRANS_DUE + '\'' +
+					", tRANS_REC='" + tRANS_REC + '\'' +
+					", cOLL_AG_CHRG_DUE='" + cOLL_AG_CHRG_DUE + '\'' +
+					", cOLL_AG_CHRG_REC='" + cOLL_AG_CHRG_REC + '\'' +
+					", sALE_AMT_REC='" + sALE_AMT_REC + '\'' +
+					", sT_BRI_DUE='" + sT_BRI_DUE + '\'' +
+					", sT_BRI_REC='" + sT_BRI_REC + '\'' +
+					", sT_INT_DUE='" + sT_INT_DUE + '\'' +
+					", sT_INT_REC='" + sT_INT_REC + '\'' +
+					", eC_INT_DUE='" + eC_INT_DUE + '\'' +
+					", eC_INT_REC='" + eC_INT_REC + '\'' +
+					", sT_LAST_INT_DUE='" + sT_LAST_INT_DUE + '\'' +
+					", sT_LAST_INT_REC='" + sT_LAST_INT_REC + '\'' +
+					", eC_LAST_INT_DUE='" + eC_LAST_INT_DUE + '\'' +
+					", eC_LAST_INT_REC='" + eC_LAST_INT_REC + '\'' +
+					", sT_ODC_DUE='" + sT_ODC_DUE + '\'' +
+					", sT_ODC_REC='" + sT_ODC_REC + '\'' +
+					", eC_ODC_DUE='" + eC_ODC_DUE + '\'' +
+					", eC_ODC_REC='" + eC_ODC_REC + '\'' +
+					", sT_PMT_DUE='" + sT_PMT_DUE + '\'' +
+					", sT_PMT_REC='" + sT_PMT_REC + '\'' +
+					", eC_PMT_DUE='" + eC_PMT_DUE + '\'' +
+					", eC_PMT_REC='" + eC_PMT_REC + '\'' +
+					", tOT_EXP_DUE='" + tOT_EXP_DUE + '\'' +
+					", tOT_EXP_REC='" + tOT_EXP_REC + '\'' +
+					", dEALER_LIAB_RATE='" + dEALER_LIAB_RATE + '\'' +
+					", dEALER_LIAB='" + dEALER_LIAB + '\'' +
+					", pER_DAY_INT='" + pER_DAY_INT + '\'' +
+					", rEASON_REQ='" + rEASON_REQ + '\'' +
+					", rEASON_RECOM='" + rEASON_RECOM + '\'' +
+					", rEMARK='" + rEMARK + '\'' +
+					", rEMARK_HO='" + rEMARK_HO + '\'' +
+					", bILLING='" + bILLING + '\'' +
+					", uNAME='" + uNAME + '\'' +
+					", dATE_R='" + dATE_R + '\'' +
+					", tIMESTAMP='" + tIMESTAMP + '\'' +
+					", uNAME_WF_CR='" + uNAME_WF_CR + '\'' +
+					", tS_WF_CR='" + tS_WF_CR + '\'' +
+					", uNAME_WF_DM='" + uNAME_WF_DM + '\'' +
+					", tS_WF_DM='" + tS_WF_DM + '\'' +
+					", uNAME_APPL='" + uNAME_APPL + '\'' +
+					", dATE_A='" + dATE_A + '\'' +
+					", tS_APPL='" + tS_APPL + '\'' +
+					", uNAME_TERM='" + uNAME_TERM + '\'' +
+					", dATE_T='" + dATE_T + '\'' +
+					", tS_TERM='" + tS_TERM + '\'' +
+					", pRINT_BLOCK='" + pRINT_BLOCK + '\'' +
+					", pRINT_STATUS='" + pRINT_STATUS + '\'' +
+					", pRINT_UNAME='" + pRINT_UNAME + '\'' +
+					", pRINT_DATUM='" + pRINT_DATUM + '\'' +
+					", pRINT_TIME='" + pRINT_TIME + '\'' +
+					", pRINT_COLL_BY='" + pRINT_COLL_BY + '\'' +
+					", pRINT_COLL_DT='" + pRINT_COLL_DT + '\'' +
+					", rTO_REF_NO='" + rTO_REF_NO + '\'' +
+					", rTO_REF_DATE='" + rTO_REF_DATE + '\'' +
+					", oBJECTID_CP='" + oBJECTID_CP + '\'' +
+					", bTR_INIT='" + bTR_INIT + '\'' +
+					", bTR_UNAME='" + bTR_UNAME + '\'' +
+					", bTR_INIT_DT='" + bTR_INIT_DT + '\'' +
+					", bTR_COMP='" + bTR_COMP + '\'' +
+					", bTR_SELE='" + bTR_SELE + '\'' +
+					", bTR_ERR='" + bTR_ERR + '\'' +
+					", sT_GL_DUE='" + sT_GL_DUE + '\'' +
+					", sT_GL_REC='" + sT_GL_REC + '\'' +
+					", cA_CHRG_DUE='" + cA_CHRG_DUE + '\'' +
+					", cA_CHRG_REC='" + cA_CHRG_REC + '\'' +
+					", pENDRC_REC='" + pENDRC_REC + '\'' +
+					", pENDRC_DUE='" + pENDRC_DUE + '\'' +
+					", cOLL2_ZXY_REC='" + cOLL2_ZXY_REC + '\'' +
+					", cOLL2_ZXY_DUE='" + cOLL2_ZXY_DUE + '\'' +
+					", zDATE='" + zDATE + '\'' +
+					", sHKZG='" + sHKZG + '\'' +
+					", sRNO='" + sRNO + '\'' +
+					", sECCO='" + sECCO + '\'' +
+					", gJAHR='" + gJAHR + '\'' +
+					", bELNR='" + bELNR + '\'' +
+					", bUZEI='" + bUZEI + '\'' +
+					", bLART='" + bLART + '\'' +
+					", bUDAT='" + bUDAT + '\'' +
+					", bLDAT='" + bLDAT + '\'' +
+					", zFBDT='" + zFBDT + '\'' +
+					", aNBWA='" + aNBWA + '\'' +
+					", dESCP='" + dESCP + '\'' +
+					", pAN_ID='" + pAN_ID + '\'' +
+					", pAN_NO='" + pAN_NO + '\'' +
+					", iNST_TYPE='" + iNST_TYPE + '\'' +
+					", iNST_NO='" + iNST_NO + '\'' +
+					", iNST_DATE='" + iNST_DATE + '\'' +
+					", dRAW_BNK='" + dRAW_BNK + '\'' +
+					", dMBTR='" + dMBTR + '\'' +
+					", dUE='" + dUE + '\'' +
+					", rEC='" + rEC + '\'' +
+					", bAL='" + bAL + '\'' +
+					", zDAYS='" + zDAYS + '\'' +
+					", oDC='" + oDC + '\'' +
+					", oDC_POS='" + oDC_POS + '\'' +
+					", oDC_NEG='" + oDC_NEG + '\'' +
+					", c_DUE='" + c_DUE + '\'' +
+					", c_REC='" + c_REC + '\'' +
+					", sGTXT='" + sGTXT + '\'' +
+					", dRCR='" + dRCR + '\'' +
+					", cPUDT='" + cPUDT + '\'' +
+					", tDS_FLAG='" + tDS_FLAG + '\'' +
+					", tANNO='" + tANNO + '\'' +
+					", pDC_TEXT='" + pDC_TEXT + '\'' +
+					", aD='" + aD + '\'' +
+					", pD='" + pD + '\'' +
+					", iNST_FR='" + iNST_FR + '\'' +
+					", iNST_TO='" + iNST_TO + '\'' +
+					", aMOUNT='" + aMOUNT + '\'' +
+					", zYEAR='" + zYEAR + '\'' +
+					", pROVISON_AMT='" + pROVISON_AMT + '\'' +
+					", sTOCKID='" + sTOCKID + '\'' +
+					", tRANSID='" + tRANSID + '\'' +
+					", sEQNR='" + sEQNR + '\'' +
+					", rWBTR='" + rWBTR + '\'' +
+					", pDCTYPE='" + pDCTYPE + '\'' +
+					", pDCTYPE_TXT='" + pDCTYPE_TXT + '\'' +
+					", pDCBANK='" + pDCBANK + '\'' +
+					", bRNCH='" + bRNCH + '\'' +
+					", cHECTDATE='" + cHECTDATE + '\'' +
+					", bANKDATE='" + bANKDATE + '\'' +
+					", cHECT='" + cHECT + '\'' +
+					", sTATUS_TXT='" + sTATUS_TXT + '\'' +
+					", nOTE='" + nOTE + '\'' +
+					", nOTE1='" + nOTE1 + '\'' +
+					", nOTE2='" + nOTE2 + '\'' +
+					", iD='" + iD + '\'' +
+					", nUMBER='" + nUMBER + '\'' +
+					", mESSAGE='" + mESSAGE + '\'' +
+					", lOG_NO='" + lOG_NO + '\'' +
+					", lOG_MSG_NO='" + lOG_MSG_NO + '\'' +
+					", mESSAGE_V1='" + mESSAGE_V1 + '\'' +
+					", mESSAGE_V2='" + mESSAGE_V2 + '\'' +
+					", mESSAGE_V3='" + mESSAGE_V3 + '\'' +
+					", mESSAGE_V4='" + mESSAGE_V4 + '\'' +
+					", pARAMETER='" + pARAMETER + '\'' +
+					", rOW='" + rOW + '\'' +
+					", fIELD='" + fIELD + '\'' +
+					", sYSTEM='" + sYSTEM + '\'' +
+					'}';
+		}
 
 		public String getCONTRACTNO() {
 			return this.cONTRACTNO;

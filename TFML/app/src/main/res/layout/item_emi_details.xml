@@ -88,7 +88,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:gravity="left|center"
-                android:text="Principle"
+                android:text="Principal"
                 android:textSize="12sp"
                 android:textStyle="bold"/>
 
@@ -146,7 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="left|center"
-                android:text="O/S Principle - "
+                android:text="O/S Principal - "
                 android:textSize="12sp"
                 android:textStyle="bold"/>
 

@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.tfml.R;
 import com.tfml.activity.EmiActivity;
-import com.tfml.auth.Constant;
 import com.tfml.model.ContractResponseModel.ContractModel;
 import com.tfml.util.PreferenceHelper;
 
@@ -45,6 +44,16 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 		this.arrayList = objects;
 	}
 
+	public static String trimLeadingZeros( String source ) {
+		for ( int i = 0; i < source.length(); ++i ) {
+			char c = source.charAt( i );
+			if ( c != '0' && !Character.isSpaceChar( c ) ) {
+				return source.substring( i );
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public View getView( int position, View convertView, ViewGroup parent ) {
 		final ContractModel model = getItem( position );
@@ -66,7 +75,11 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 			btn_pay_emi = ( Button ) convertView.findViewById( R.id.btn_pay_emi );
 			btn_more_detail = ( TextView ) convertView.findViewById( R.id.btn_more_detail );
 			txt_product_name.setText( model.getProduct() == null ? "" : model.getProduct().toString() );
-			txt_contract_no.setText( model.getUsrConNo() == null ? "" : model.getUsrConNo() );
+
+//			trimLeadingZeros( model.getUsrConNo() );
+//			Log.d( "new con no", trimLeadingZeros( model.getUsrConNo() ) );
+
+			txt_contract_no.setText( model.getUsrConNo() == null ? "" : trimLeadingZeros( model.getUsrConNo() ) );
 			txt_rc_no.setText( model.getRcNumber() == null ? "" : model.getRcNumber() );
 			//getTotalCurrentDue instead of getOdAmt()
 			txt_overdue_amount.setText( model.getOdAmt() == null ? "" : "Rs." + model.getOdAmt() );
@@ -92,7 +105,7 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 					Bundle bundle            = new Bundle();
 					bundle.putSerializable( "datamodel", arrayList );
 					bundle.putString( "datamodelvalue", model.getUsrConNo() );
-					PreferenceHelper.insertString( PreferenceHelper.CONTRACT_NO , model.getUsrConNo());
+					PreferenceHelper.insertString( PreferenceHelper.CONTRACT_NO, trimLeadingZeros( model.getUsrConNo() ) );
 					bundle.putString( "RCNO", model.getRcNumber() );
 					bundle.putString( "OVERDUEAMT", model.getOdAmt() );
 					bundle.putString( "REPAYMENT", model.getPdcFlag() );
@@ -113,7 +126,7 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 			txt_terminated_date = ( TextView ) convertView.findViewById( R.id.txt_terminated_date );
 			if ( model.getContractStatusDate() != null ) {
 				txt_terminated_name.setText( model.getProduct() == null ? "" : model.getProduct().toString() );
-				txtContractNoTerm.setText( model.getUsrConNo() == null ? "" : model.getUsrConNo().toString() );
+				txtContractNoTerm.setText( model.getUsrConNo() == null ? "" : trimLeadingZeros( model.getUsrConNo() ) );
 				txt_rc_no_term.setText( model.getRcNumber() == null ? "" : model.getRcNumber().toString() );
 
 				dateFormat = new SimpleDateFormat( "dd-MMM-yyyy" );
@@ -131,9 +144,6 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 				}
 			}
 		}
-
 		return convertView;
 	}
-
-
 }
