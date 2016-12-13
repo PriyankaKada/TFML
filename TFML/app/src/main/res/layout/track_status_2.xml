@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtThankYou"
+        android:text="Thank you!"
+        android:textColor="@color/tab_bg"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:padding="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtReferenceNo"
+        android:text="Your reference number is 2478914"
+        android:textColor="@color/color_DARKgrey"
+        android:gravity="center"
+        android:textSize="18sp"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtCallScript"
+        android:text="Call Script:"
+        android:layout_marginTop="20dp"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtDayAndTime"
+        android:text="Monday - saturday 7.30am to 7.30pm"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:textColor="@color/color_DARKgrey"
+        android:padding="10dp"
+        android:layout_marginTop="15dp"/>
+
+</LinearLayout>

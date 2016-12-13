@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:id="@+id/mainLayout"
+    android:background="@color/white">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtContractNo"
+        android:text="*Contract No"
+        android:textSize="18sp"
+        android:padding="15dp"
+        android:textColor="@color/color_grey"
+        android:background="@drawable/btn_bg"
+        android:drawableRight="@drawable/ic_spin_bg_small"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/txtEnterYourMessage"
+        android:text="*Enter Your Message"
+        android:padding="15dp"
+        android:textSize="18sp"
+        android:gravity="start"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/color_grey"
+        android:background="@drawable/btn_bg"
+        android:layout_below="@+id/txtContractNo"/>
+
+
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/btnSubmit"
+    android:text="Submit"
+    android:textSize="14sp"
+    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+    android:textColor="@color/white"
+    android:background="@color/tab_bg"
+    android:layout_gravity="end"
+    android:textStyle="bold"
+    android:layout_alignParentBottom="true"/>
+</RelativeLayout>
