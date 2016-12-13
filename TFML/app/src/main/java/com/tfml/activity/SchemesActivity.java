@@ -298,7 +298,6 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 	}
 
 	public void dialPhoneCall() {
-
 		Intent callIntent = new Intent( Intent.ACTION_DIAL );
 		callIntent.setData( Uri.parse( "tel:18002090188" ) );
 		startActivity( callIntent );
