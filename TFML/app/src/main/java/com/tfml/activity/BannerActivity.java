@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,6 +37,7 @@ import com.tfml.common.ApiService;
 import com.tfml.common.CommonUtils;
 import com.tfml.common.SocialUtil;
 import com.tfml.fragment.BannerFragment;
+import com.tfml.fragment.ComplaintsFragment;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusInputModel;
 import com.tfml.model.LoanStatusResponseModel.LoanStatusResponse;
 import com.tfml.model.QuickcallResponseModel.QuickCallInputModel;
@@ -80,6 +84,8 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 	private TextView    txtSchemes, txtApplyLoan, txtReferFriend, txtLoanStatus, txtLogin;
 	private ImageView imgSchemes, imgApplyLoan, imgReferFriend, imgLoanStatus, imgLogin;
 	private Timer timer;
+	ComplaintsFragment complaintsFragment;
+	FrameLayout containerFrameLayout;
 
 	protected void onCreate( Bundle savedInstanceState ) {
 		super.onCreate( savedInstanceState );
@@ -110,6 +116,8 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		linLoanStaus = ( LinearLayout ) findViewById( R.id.linLoanStaus );
 		linLogin = ( LinearLayout ) findViewById( R.id.linLogin );
 		selectedView = ( View ) findViewById( R.id.viewId );
+		containerFrameLayout=(FrameLayout) findViewById(R.id.containerFrameLayout);
+		complaintsFragment= new ComplaintsFragment();
 		circlePageIndicator.setRadius( 8.0f );
 		txtTitle.setText( "Welcome to TMFL" );
 		SetFonts.setFonts( this, txtTitle, 2 );
@@ -255,8 +263,24 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				startActivity( intentReferFriend );
 				break;
 			case R.id.linLoanStaus:
-				linLoanStausClick();
-				SocialUtil.loanStatusDialog( BannerActivity.this, linLoanStaus, selectedView );
+				/*linLoanStausClick();
+				SocialUtil.loanStatusDialog( BannerActivity.this, linLoanStaus, selectedView );*/
+				if(complaintsFragment.isAdded()){
+					FragmentManager fm1 = getSupportFragmentManager();
+					FragmentTransaction ft1 = fm1.beginTransaction();
+					ft1.replace(R.id.frame_banner, complaintsFragment);
+					ft1.commit();
+				}else {
+					FragmentManager fm = getSupportFragmentManager();
+					FragmentTransaction ft = fm.beginTransaction();
+					ft.add(R.id.frame_banner, complaintsFragment);
+					ft.commit();
+					Log.e("Replace Fragment", "Fragment Found");
+				}
+
+
+
+
 				break;
 			case R.id.linLogin:
 				startActivity( new Intent( BannerActivity.this, LoginActivity.class ) );

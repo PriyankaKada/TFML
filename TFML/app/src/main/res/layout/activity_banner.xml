@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:id="@+id/activity_banner"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context="com.tfml.activity.BannerActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_banner"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.tfml.activity.BannerActivity">
 
     <include
         android:id="@+id/upper"
         layout="@layout/toolbar_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <View
         android:layout_width="wrap_content"
         android:layout_height="0.5dp"
         android:layout_above="@+id/frame_banner"
         android:layout_below="@+id/upper"
-        android:background="#FFFFFF"/>
+        android:background="#FFFFFF" />
 
     <FrameLayout
         android:id="@+id/frame_banner"
@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:background="@color/white"/>
+            android:background="@color/white" />
 
 
         <com.viewpagerindicator.CirclePageIndicator
@@ -48,7 +48,7 @@
             app:fillColor="@color/color_grey"
             app:pageColor="@android:color/white"
             app:radius="4dp"
-            app:strokeColor="@android:color/darker_gray"/>
+            app:strokeColor="@android:color/darker_gray" />
 
     </FrameLayout>
 
@@ -80,7 +80,7 @@
                 android:layout_height="30dp"
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_scheme_non_selected"/>
+                android:src="@drawable/ic_scheme_non_selected" />
 
             <TextView
                 android:id="@+id/txtSchemes"
@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/schemes"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
 
@@ -110,7 +110,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_apply_loan_non_selected"/>
+                android:src="@drawable/ic_apply_loan_non_selected" />
 
             <TextView
                 android:id="@+id/txtApplyLoan"
@@ -119,7 +119,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="@string/apply_loan"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
 
@@ -141,7 +141,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_refer_friends_non_selected"/>
+                android:src="@drawable/ic_refer_friends_non_selected" />
 
             <TextView
                 android:id="@+id/txtReferFriend"
@@ -150,8 +150,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="@string/refer_friend"
-                android:textColor="#FFFFFF"
-                />
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
 
@@ -171,7 +170,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:background="@color/white"
-                android:visibility="invisible"/>
+                android:visibility="invisible" />
 
             <ImageView
                 android:id="@+id/imgLoanStatus"
@@ -179,7 +178,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="7dp"
-                android:src="@drawable/ic_loan_status_non_selected"/>
+                android:src="@drawable/ic_loan_status_non_selected" />
 
             <TextView
                 android:id="@+id/txtLoanStatus"
@@ -188,8 +187,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="@string/loan_status"
-                android:textColor="#FFFFFF"
-                />
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
 
@@ -212,7 +210,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/logictab_icon"/>
+                android:src="@drawable/logictab_icon" />
 
             <TextView
                 android:id="@+id/txtLogin"
@@ -220,7 +218,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/txt_login"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
     </LinearLayout>

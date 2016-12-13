@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/txtCaseIdValue"
+    android:text="2479707"
+    android:textColor="@color/color_DARKgrey"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:padding="5dp"
+    />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtRegDateValue"
+        android:text="10.11.2016"
+        android:textColor="@color/color_DARKgrey"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtDescValue"
+        android:text="Test Comment"
+        android:textColor="@color/color_DARKgrey"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtUploadFileValue"
+        android:text="View/\nUpload file"
+        android:textColor="@color/color_DARKgrey"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="5dp"/>
+
+</LinearLayout>

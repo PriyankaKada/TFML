@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@color/white">
+
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/txtComplainCaseId"
+       android:text="Case Id"
+       android:textSize="20sp"
+       android:textColor="@color/color_grey"
+       android:padding="15dp"
+       android:textStyle="bold"
+       android:background="@drawable/btn_bg"
+       android:drawableRight="@drawable/ic_spin_bg_small"
+       />
+
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="10dp"
+       >
+
+      <EditText
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/txtFromDate"
+          android:text="From Date"
+          android:textColor="@color/color_grey"
+          android:padding="15dp"
+          android:textStyle="bold"
+          android:layout_weight="1"
+          android:background="@drawable/btn_bg"
+          android:drawableRight="@drawable/calendar"
+          android:layout_marginRight="5dp"/>
+
+
+      <EditText
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/txtToDate"
+          android:text="To Date"
+          android:textColor="@color/color_grey"
+          android:padding="15dp"
+          android:textStyle="bold"
+          android:layout_weight="1"
+          android:background="@drawable/btn_bg"
+          android:drawableRight="@drawable/calendar"
+          android:layout_marginLeft="5dp"/>
+   </LinearLayout>
+
+
+   <Button
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/btnGo"
+       android:text="Go"
+       android:textStyle="bold"
+       android:textSize="16sp"
+       android:textColor="@color/white"
+       android:background="@color/tab_bg"
+       android:layout_marginTop="20dp"
+       />
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="20dp"
+       android:id="@+id/linearLayout"
+       android:orientation="horizontal"
+      android:weightSum="4"
+       android:visibility="gone">
+
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:id="@+id/txtCaseId"
+          android:text="CASE ID"
+          android:textColor="@color/white"
+          android:background="@color/tab_bg"
+          android:padding="10dp"
+          android:textSize="12sp"
+          android:layout_weight="0.8"
+          android:gravity="center"/>
+
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:id="@+id/txtReqComplaintDate"
+          android:text="RQUEST/ \nCOMPLAINT \nREGISTRATION \nDATE"
+          android:textColor="@color/white"
+          android:background="@color/tab_bg"
+          android:padding="10dp"
+          android:textSize="12sp"
+          android:layout_weight="1.2"
+          android:gravity="center"/>
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:id="@+id/txtDesc"
+          android:text="DESCRIPTION"
+          android:background="@color/tab_bg"
+          android:textColor="@color/white"
+          android:padding="5dp"
+          android:textSize="12sp"
+          android:layout_weight="1.2"
+          android:gravity="center"/>
+
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:id="@+id/txtUploadFile"
+          android:text="VIEW/UPLOAD \nFILE"
+          android:background="@color/tab_bg"
+          android:textColor="@color/white"
+          android:textSize="12sp"
+          android:layout_weight="0.8"
+          android:gravity="center"/>
+
+   </LinearLayout>
+
+   <ListView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/lstComplaints"
+       android:visibility="gone"/>
+
+</LinearLayout>

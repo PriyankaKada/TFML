@@ -1,0 +1,28 @@
+package com.tfml.fragment;
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.tfml.R;
+
+/**
+ * Created by webwerks1 on 12/12/16.
+ */
+
+public class TrackStatusFragment extends Fragment {
+
+    Button btnSubmit;
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView;
+        rootView=inflater.inflate(R.layout.track_status,container,false);
+
+        return rootView;
+    }
+}
