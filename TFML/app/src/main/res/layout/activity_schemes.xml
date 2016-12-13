@@ -5,7 +5,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context="com.tfml.activity.SchemesActivity">
+              tools:context="com.tmfl.activity.SchemesActivity">
 
     <include
         android:id="@+id/upper"
@@ -16,10 +16,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/llBottom"
-        android:layout_below="@+id/upper"
-        android:orientation="vertical"
-        android:weightSum="3">
+        android:orientation="vertical">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
@@ -32,8 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="5dp"
             android:background="@color/tab_bg"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
             <View
                 android:id="@+id/view1"
@@ -41,7 +37,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/selector_tab_indicator_white"
-                android:elevation="10dp"/>
+                />
 
             <View
                 android:id="@+id/view2"
@@ -49,7 +45,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/selector_tab_indicator_blue"
-                android:elevation="10dp"/>
+                />
 
             <View
                 android:id="@+id/view3"
@@ -77,15 +73,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:background="@color/tab_bg"
-            android:elevation="6dp">
+            android:elevation="6dp"
+            android:gravity="center_vertical">
 
             <LinearLayout
-                android:id="@+id/linSchemes"
+                android:id="@+id/llSchemes"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:background="?attr/selectableItemBackground"
                 android:gravity="start"
@@ -110,11 +106,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linApplyLoan"
+                android:id="@+id/llApplyLoan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:background="?attr/selectableItemBackground"
                 android:orientation="vertical">

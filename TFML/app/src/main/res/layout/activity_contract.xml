@@ -5,7 +5,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                tools:context="com.tfml.activity.ContractActivity">
+                tools:context="com.tmfl.activity.ContractActivity">
 
     <include
         android:id="@+id/upper"
@@ -168,7 +168,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/linSchemes"
+            android:id="@+id/llSchemes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -199,14 +199,14 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linApplyLoan"
+            android:id="@+id/llApplyLoan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/linSchemes"
+            android:layout_toRightOf="@+id/llSchemes"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:orientation="vertical">
@@ -237,7 +237,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="2dp"
             android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/linApplyLoan"
+            android:layout_toRightOf="@+id/llApplyLoan"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:orientation="vertical">

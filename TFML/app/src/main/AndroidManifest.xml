@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.tfml"
+<manifest package="com.tmfl"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -20,14 +20,14 @@
     <uses-permission android:name="com.problemio.permission.C2D_MESSAGE"/>
 
     <application
-        android:name="com.tfml.util.AppController"
+        android:name="com.tmfl.util.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/app_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.SplashActivity"
+            android:name="com.tmfl.activity.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -37,30 +37,30 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.BannerActivity"
+            android:name="com.tmfl.activity.BannerActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".activity.SchemesActivity"
+            android:name="com.tmfl.activity.SchemesActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity
-            android:name=".activity.LoginActivity"
+            android:name="com.tmfl.activity.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
-            android:name=".activity.LoanStatusActivity"
+            android:name="com.tmfl.activity.LoanStatusActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activity.ContractActivity"
+            android:name="com.tmfl.activity.ContractActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".activity.DrawerBaseActivity"
+            android:name="com.tmfl.activity.DrawerBaseActivity"
             android:screenOrientation="portrait">
 
             <!--
@@ -72,26 +72,26 @@
             -->
         </activity>
         <activity
-            android:name=".activity.EmiActivity"
+            android:name="com.tmfl.activity.EmiActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan|adjustResize"/>
         <activity
-            android:name=".activity.ChangePasswordActivity"
+            android:name="com.tmfl.activity.ChangePasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".activity.ForgotPasswordActivity"
+            android:name="com.tmfl.activity.ForgotPasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".activity.DownloadDataActivity"
+            android:name="com.tmfl.activity.DownloadDataActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".activity.DownloadResultActivity"
+        <activity android:name="com.tmfl.activity.DownloadResultActivity"
             />
         <activity
-            android:name=".activity.LocateUsActivity"
+            android:name="com.tmfl.activity.LocateUsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
