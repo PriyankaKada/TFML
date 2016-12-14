@@ -1,49 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<LinearLayout
+    android:id="@+id/llComplaintListHeader"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-<TextView
-    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/txtCaseIdValue"
-    android:text="2479707"
-    android:textColor="@color/color_DARKgrey"
-    android:layout_weight="1"
-    android:gravity="center"
-    android:padding="5dp"
-    />
+    android:orientation="horizontal"
+    android:visibility="visible">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/txtCaseId"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/txtRegDateValue"
-        android:text="10.11.2016"
-        android:textColor="@color/color_DARKgrey"
-        android:layout_weight="1"
+        android:layout_weight="0.8"
         android:gravity="center"
-        android:padding="5dp"/>
+        android:padding="5dp"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="12sp"/>
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/complaint_list_dotted"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/txtReqComplaintDate"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/txtDescValue"
-        android:text="Test Comment"
-        android:textColor="@color/color_DARKgrey"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
         android:gravity="center"
-        android:padding="5dp"/>
+        android:padding="5dp"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="12sp"/>
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/complaint_list_dotted"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/txtDesc"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/txtUploadFileValue"
-        android:text="View/\nUpload file"
-        android:textColor="@color/color_DARKgrey"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
         android:gravity="center"
-        android:padding="5dp"/>
+        android:padding="5dp"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="12sp"/>
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/complaint_list_dotted"/>
+
+    <TextView
+        android:id="@+id/txtUploadFile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8"
+        android:gravity="center"
+        android:padding="5dp"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="12sp"/>
 
 </LinearLayout>

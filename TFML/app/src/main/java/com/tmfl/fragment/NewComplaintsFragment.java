@@ -26,7 +26,7 @@ public class NewComplaintsFragment extends Fragment implements View.OnClickListe
 
 	TextView txtComplainCaseId, txtFromDate, txtToDate;
 	Button       btnGo;
-	LinearLayout linearLayout;
+	LinearLayout llComplaintListHeader;
 	ListView     list;
 	android.app.DatePickerDialog.OnDateSetListener fromDate = new android.app.DatePickerDialog.OnDateSetListener() {
 		@Override
@@ -59,7 +59,7 @@ public class NewComplaintsFragment extends Fragment implements View.OnClickListe
 		txtFromDate = ( TextView ) rootView.findViewById( R.id.txtFromDate );
 		txtToDate = ( TextView ) rootView.findViewById( R.id.txtToDate );
 		btnGo = ( Button ) rootView.findViewById( R.id.btnGo );
-		linearLayout = ( LinearLayout ) rootView.findViewById( R.id.linearLayout );
+		llComplaintListHeader = ( LinearLayout ) rootView.findViewById( R.id.llComplaintListHeader );
 		list = ( ListView ) rootView.findViewById( R.id.lstComplaints );
 
 		txtFromDate.setOnClickListener( this );
@@ -70,13 +70,7 @@ public class NewComplaintsFragment extends Fragment implements View.OnClickListe
 	@Override
 	public void onViewCreated( View view, @Nullable Bundle savedInstanceState ) {
 		super.onViewCreated( view, savedInstanceState );
-		btnGo.setOnClickListener( new View.OnClickListener() {
-			@Override
-			public void onClick( View view ) {
-				linearLayout.setVisibility( View.VISIBLE );
-				list.setVisibility( View.VISIBLE );
-			}
-		} );
+		btnGo.setOnClickListener( this );
 	}
 
 	public void selectDate( String from ) {
@@ -112,6 +106,13 @@ public class NewComplaintsFragment extends Fragment implements View.OnClickListe
 			case R.id.txtToDate:
 
 				selectDate( "toDate" );
+
+				break;
+
+			case R.id.btnGo:
+
+				llComplaintListHeader.setVisibility( View.VISIBLE );
+				list.setVisibility( View.VISIBLE );
 
 				break;
 		}

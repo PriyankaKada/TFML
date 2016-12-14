@@ -22,7 +22,7 @@ public class DatePickerDialog extends AlertDialog implements android.app.DatePic
 		super( context );
 		this.listener = listener;
 		this.picker = picker;
-		View view = LayoutInflater.from( context ).inflate( R.layout.datepicker_dailog, null );
+		View view = LayoutInflater.from( context ).inflate( R.layout.dialog_datepicker, null );
 		datePicker = ( DatePicker ) view.findViewById( R.id.date_picker );
 		view.findViewById( R.id.btnDone ).setOnClickListener( this );
 		setView( view );

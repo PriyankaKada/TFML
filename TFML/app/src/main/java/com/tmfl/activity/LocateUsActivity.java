@@ -34,7 +34,7 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
 		super.onCreate( savedInstanceState );
-		setContentView( R.layout.branch_locator_dialog );
+		setContentView( R.layout.dialog_branch_locator );
 		init();
 		stateList = new ArrayList< String >();
 		stateList.add( "Select State" );

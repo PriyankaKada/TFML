@@ -1,342 +1,382 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="8dp">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="5dp">
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/txtCaseId"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtCaseId"
+                android:padding="5dp"
                 android:text="Case Id"
-                android:textSize="18sp"
-                android:padding="8dp"
-                android:textStyle="bold"
-                android:textColor="@color/tab_bg"/>
+                android:textColor="@color/tab_bg"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
             <View
-                android:layout_width="1dp"
+                android:layout_width="2dp"
                 android:layout_height="match_parent"
-                android:background="#000000"/>
+                android:background="@drawable/dotted_bg"/>
+
             <TextView
+                android:id="@+id/txtCaseIdValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtCaseIdValue"
+                android:padding="5dp"
                 android:text="1234567"
-                android:textSize="18sp"
-                android:padding="8dp"
-                android:textStyle="bold"
                 android:textColor="@color/tab_bg"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 />
 
         </TableRow>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000"/>
+            android:background="@color/color_grey"/>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/txtStatus"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtStatus"
+                android:padding="5dp"
                 android:text="Status"
-                android:textSize="14sp"
-                android:padding="8dp"/>
+                android:textSize="14sp"/>
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#000000"/>
+                android:background="@drawable/dotted_bg"/>
+
             <TextView
+                android:id="@+id/txtStatusValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtStatusValue"
+                android:padding="5dp"
                 android:text="Closed"
                 android:textSize="14sp"
-                android:padding="8dp"
                 />
 
         </TableRow>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000"/>
+            android:background="@color/color_grey"/>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:id="@+id/txtVehicleType"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:text="Types of your vehicle"
-                android:textSize="14sp"
-                android:padding="8dp"/>
+                android:textSize="14sp"/>
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#000000"/>
+                android:background="@drawable/dotted_bg"/>
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/txtVehicleTypeValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:text=""
                 android:textSize="14sp"
-                android:padding="8dp"
                 />
 
         </TableRow>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000"/>
+            android:background="@color/color_grey"/>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:id="@+id/txtVehicleModel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:text="Vehicle Model"
-                android:textSize="14sp"
-                android:padding="8dp"/>
+                android:textSize="14sp"/>
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#000000"/>
+                android:background="@drawable/dotted_bg"/>
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/txtVehicleModelValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:text=""
                 android:textSize="14sp"
-                android:padding="8dp"
                 />
 
         </TableRow>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000"/>
+            android:background="@color/color_grey"/>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:id="@+id/txtBusinessPorcess"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:text="Business Process"
-                android:textSize="14sp"
-                android:padding="8dp"/>
+                android:textSize="14sp"/>
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#000000"/>
+                android:background="@drawable/dotted_bg"/>
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/txtBusinessProcessValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:text=""
                 android:textSize="14sp"
-                android:padding="8dp"
                 />
 
         </TableRow>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000"/>
+            android:background="@color/color_grey"/>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:id="@+id/txtQRC"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:text="QRC Attribute"
-                android:textSize="14sp"
-                android:padding="8dp"/>
+                android:textSize="14sp"/>
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#000000"/>
+                android:background="@drawable/dotted_bg"/>
+
             <TextView
+                android:id="@+id/txtQRCValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtQRCValue"
+                android:padding="5dp"
                 android:text=""
                 android:textSize="14sp"
-                android:padding="8dp"
                 />
 
         </TableRow>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000"/>
+            android:background="@color/color_grey"/>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/txtQueryRequest"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtQueryRequest"
+                android:padding="5dp"
                 android:text="Query/Request"
-                android:textSize="14sp"
-                android:padding="8dp"/>
+                android:textSize="14sp"/>
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#000000"/>
+                android:background="@drawable/dotted_bg"/>
+
             <TextView
+                android:id="@+id/txtQueryRequestValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtQueryRequestValue"
+                android:padding="5dp"
                 android:text="NA"
                 android:textSize="14sp"
-                android:padding="8dp"
                 />
 
         </TableRow>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000"/>
+            android:background="@color/color_grey"/>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/txtDateCaseReg"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtDateCaseReg"
+                android:padding="5dp"
                 android:text="Date of Case Registration"
-                android:textSize="14sp"
-                android:padding="8dp"/>
+                android:textSize="14sp"/>
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#000000"/>
+                android:background="@drawable/dotted_bg"/>
+
             <TextView
+                android:id="@+id/txtDateCaseRegValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtDateCaseRegValue"
+                android:padding="5dp"
                 android:text="10/11/2016"
                 android:textSize="14sp"
-                android:padding="8dp"
                 />
 
         </TableRow>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000"/>
+            android:background="@color/color_grey"/>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/txtRemarks"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtRemarks"
+                android:padding="5dp"
                 android:text="Remarks"
-                android:textSize="14sp"
-                android:padding="8dp"/>
+                android:textSize="14sp"/>
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#000000"/>
+                android:background="@drawable/dotted_bg"/>
+
             <TextView
+                android:id="@+id/txtRemarksValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtRemarksValue"
+                android:padding="5dp"
                 android:text="NA"
                 android:textSize="14sp"
-                android:padding="8dp"
                 />
 
         </TableRow>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000"/>
+            android:background="@color/color_grey"/>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/txtActualResolutionDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtActualResolutionDate"
+                android:padding="5dp"
                 android:text="Actual Resolution Date"
-                android:textSize="14sp"
-                android:padding="8dp"/>
+                android:textSize="14sp"/>
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#000000"/>
+                android:background="@drawable/dotted_bg"/>
+
             <TextView
+                android:id="@+id/txtActualResolutionDateValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtActualResolutionDateValue"
+                android:padding="5dp"
                 android:text="10/11/2016  17:25:15"
                 android:textSize="14sp"
-                android:padding="8dp"
                 />
 
         </TableRow>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000"/>
+            android:background="@color/color_grey"/>
+
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/txtExpectedResolutionDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtExpectedResolutionDate"
+                android:padding="5dp"
                 android:text="Expected Resolution Date"
-                android:textSize="14sp"
-                android:padding="8dp"/>
+                android:textSize="14sp"/>
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="#000000"/>
+                android:background="@drawable/dotted_bg"/>
+
             <TextView
+                android:id="@+id/txtExpectedResolutionDateValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtExpectedResolutionDateValue"
+                android:padding="5dp"
                 android:text="10/11/2016  17:25:15"
                 android:textSize="14sp"
-                android:padding="8dp"
                 />
-
         </TableRow>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000"/>
+            android:background="@color/color_grey"/>
 
     </TableLayout>
-
 
 </LinearLayout>
