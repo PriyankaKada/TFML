@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Status"
-                android:textSize="14sp"/>
+                android:textSize="12sp"/>
 
             <View
                 android:layout_width="1dp"
@@ -70,8 +70,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="Closed"
-                android:textSize="14sp"
+                android:text=""
+                android:textSize="12sp"
                 />
 
         </TableRow>
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Types of your vehicle"
-                android:textSize="14sp"/>
+                android:textSize="12sp"/>
 
             <View
                 android:layout_width="1dp"
@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text=""
-                android:textSize="14sp"
+                android:textSize="12sp"
                 />
 
         </TableRow>
@@ -124,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Vehicle Model"
-                android:textSize="14sp"/>
+                android:textSize="12sp"/>
 
             <View
                 android:layout_width="1dp"
@@ -137,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text=""
-                android:textSize="14sp"
+                android:textSize="12sp"
                 />
 
         </TableRow>
@@ -157,7 +157,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Business Process"
-                android:textSize="14sp"/>
+                android:textSize="12sp"/>
 
             <View
                 android:layout_width="1dp"
@@ -170,7 +170,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text=""
-                android:textSize="14sp"
+                android:textSize="12sp"
                 />
 
         </TableRow>
@@ -190,7 +190,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="QRC Attribute"
-                android:textSize="14sp"/>
+                android:textSize="12sp"/>
 
             <View
                 android:layout_width="1dp"
@@ -203,7 +203,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text=""
-                android:textSize="14sp"
+                android:textSize="12sp"
                 />
 
         </TableRow>
@@ -223,7 +223,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Query/Request"
-                android:textSize="14sp"/>
+                android:textSize="12sp"/>
 
             <View
                 android:layout_width="1dp"
@@ -235,8 +235,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="NA"
-                android:textSize="14sp"
+                android:text=""
+                android:textSize="12sp"
                 />
 
         </TableRow>
@@ -256,7 +256,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Date of Case Registration"
-                android:textSize="14sp"/>
+                android:textSize="12sp"/>
 
             <View
                 android:layout_width="1dp"
@@ -268,8 +268,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="10/11/2016"
-                android:textSize="14sp"
+                android:text=""
+                android:textSize="12sp"
                 />
 
         </TableRow>
@@ -289,7 +289,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Remarks"
-                android:textSize="14sp"/>
+                android:textSize="12sp"/>
 
             <View
                 android:layout_width="1dp"
@@ -301,8 +301,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="NA"
-                android:textSize="14sp"
+                android:text=""
+                android:textSize="12sp"
                 />
 
         </TableRow>
@@ -322,7 +322,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Actual Resolution Date"
-                android:textSize="14sp"/>
+                android:textSize="12sp"/>
 
             <View
                 android:layout_width="1dp"
@@ -334,8 +334,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="10/11/2016  17:25:15"
-                android:textSize="14sp"
+                android:text=""
+                android:textSize="12sp"
                 />
 
         </TableRow>
@@ -355,7 +355,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:text="Expected Resolution Date"
-                android:textSize="14sp"/>
+                android:textSize="12sp"/>
 
             <View
                 android:layout_width="1dp"
@@ -367,8 +367,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="10/11/2016  17:25:15"
-                android:textSize="14sp"
+                android:text=""
+                android:textSize="12sp"
                 />
         </TableRow>
 
@@ -376,7 +376,5 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/color_grey"/>
-
     </TableLayout>
-
 </LinearLayout>

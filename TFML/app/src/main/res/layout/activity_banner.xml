@@ -27,8 +27,7 @@
         android:layout_above="@+id/llBottom"
         android:layout_below="@+id/upper"
         android:orientation="vertical"
-        android:padding="10dp"
-        >
+        android:padding="5dp">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/recentViewpager"
@@ -48,7 +47,6 @@
             app:pageColor="@android:color/white"
             app:radius="4dp"
             app:strokeColor="@android:color/darker_gray"/>
-
     </FrameLayout>
 
     <LinearLayout
@@ -58,8 +56,9 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:background="@color/tab_bg"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp">
 
         <LinearLayout
             android:id="@+id/llSchemes"
@@ -67,7 +66,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:gravity="center_vertical"
             android:orientation="vertical">
 
             <View
@@ -126,7 +124,6 @@
                 android:gravity="center"
                 android:text="@string/apply_loan"
                 android:textColor="#FFFFFF"/>
-
         </LinearLayout>
 
         <LinearLayout
@@ -135,7 +132,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <View
                 android:id="@+id/viewId3"
@@ -184,7 +182,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:padding="2dp"
-                android:src="@drawable/ic_loan_status_non_selected"/>
+                android:src="@drawable/ic_complaint"/>
 
             <TextView
                 android:id="@+id/txtLoanStatus"
@@ -192,9 +190,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="@string/loan_status"
+                android:text="Complaint"
                 android:textColor="#FFFFFF"/>
-
         </LinearLayout>
 
         <LinearLayout
@@ -226,7 +223,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Quick\nCall"
+                android:text="Quick Call"
                 android:textColor="#FFFFFF"/>
 
         </LinearLayout>

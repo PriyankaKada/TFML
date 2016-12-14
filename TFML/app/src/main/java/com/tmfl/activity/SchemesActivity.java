@@ -69,7 +69,6 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		llApplyLoan.setOnClickListener( this );
 		llSchemes.setOnClickListener( this );
 		viewPager = ( ViewPager ) findViewById( R.id.pager );
-		setupViewPager( viewPager );
 
 		view1 = findViewById( R.id.view1 );
 		view2 = findViewById( R.id.view2 );
@@ -78,7 +77,16 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		bundle1 = getIntent().getExtras();
 		String myTabselected = bundle1.getString( "TAB_SELECTED" );
 
-		assert myTabselected != null;
+		Log.d( "tab", myTabselected );
+		tmflApi = ApiService.getInstance().call();
+
+		if ( CommonUtils.isNetworkAvailable( SchemesActivity.this ) ) {
+			callSchemesResponseModel();
+		}
+		else {
+			Toast.makeText( getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT ).show();
+		}
+
 		if ( myTabselected.equalsIgnoreCase( Constant.ISSCHEMASTABSELECT ) ) {
 			viewPager.setCurrentItem( 0 );
 		}
@@ -86,36 +94,8 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 			viewPager.setCurrentItem( 1 );
 		}
 
-		tmflApi = ApiService.getInstance().call();
-		if ( CommonUtils.isNetworkAvailable( SchemesActivity.this ) ) {
-			callSchemesResponseModel();
-		}
-		else {
-			Toast.makeText( getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT ).show();
-		}
 		SetFonts.setFonts( this, txtschemestitle, 2 );
 	}
-
-//	private void setupTabIcons() {
-//
-//		TextView tabOne = ( TextView ) LayoutInflater.from( this ).inflate( R.layout.custom_tab, null );
-//		tabOne.setText( "Offers" );
-//		SetFonts.setFonts( this, tabOne, 2 );
-//		tabOne.setCompoundDrawablesWithIntrinsicBounds( 0, R.drawable.ic_scheme_non_selected, 0, 0 );
-//		tabLayout.getTabAt( 0 ).setCustomView( tabOne );
-//
-//		TextView tabTwo = ( TextView ) LayoutInflater.from( this ).inflate( R.layout.custom_tab, null );
-//		tabTwo.setText( "Apply Loan" );
-//		SetFonts.setFonts( this, tabTwo, 2 );
-//		tabTwo.setCompoundDrawablesWithIntrinsicBounds( 0, R.drawable.ic_apply_loan_non_selected, 0, 0 );
-//		tabLayout.getTabAt( 1 ).setCustomView( tabTwo );
-//
-//		/*TextView tabThree = ( TextView ) LayoutInflater.from( this ).inflate( R.layout.custom_tab, null );
-//		tabThree.setText( "Refer Friend" );
-//		SetFonts.setFonts( this, tabThree, 2 );
-//		tabThree.setCompoundDrawablesWithIntrinsicBounds( 0, R.drawable.ic_refer_friends_non_selected, 0, 0 );
-//		tabLayout.getTabAt( 2 ).setCustomView( tabThree );*/
-//	}
 
 	private void setupViewPager( ViewPager viewPager ) {
 		List< Fragment > fragList = new ArrayList<>();
@@ -123,17 +103,13 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 
 		final Fragment newSchemeFragment = new NewSchemeFragment();
 		final Fragment applyLoanFragment = new ApplyLoanFragment();
-//		Fragment referFriendFragment = new ReferFriendFragment();
 
-//		adapter.addFrag( applyLoanFragment, "Apply Loan" );
-//		adapter.addFrag( referFriendFragment, "Refer Friends" );
 		fragList.add( newSchemeFragment );
 		fragList.add( applyLoanFragment );
 
 		Log.d( "fraglistsize", String.valueOf( fragList.size() ) );
 		adapter = new SchemesPagerAdapter( getSupportFragmentManager(), fragList );
 		viewPager.setAdapter( adapter );
-		viewPager.setCurrentItem( 0 );
 		viewPager.addOnPageChangeListener( new ViewPager.OnPageChangeListener() {
 			@Override
 			public void onPageScrolled( int position, float positionOffset, int positionOffsetPixels ) {
@@ -147,22 +123,16 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 				switch ( position ) {
 
 					case 0:
-						view1.setBackgroundResource( R.drawable.selector_tab_indicator_white );
-						view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+						view1.setVisibility( View.VISIBLE );
+						view2.setVisibility( View.INVISIBLE );
 //						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						break;
 
 					case 1:
-						view1.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
-						view2.setBackgroundResource( R.drawable.selector_tab_indicator_white );
+						view1.setVisibility( View.INVISIBLE );
+						view2.setVisibility( View.VISIBLE );
 //						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						break;
-
-					/*case 2:
-						view1.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
-						view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
-						view3.setBackgroundResource( R.drawable.selector_tab_indicator_white );
-						break;*/
 
 					default:
 						view1.setBackgroundResource( R.drawable.selector_tab_indicator_white );
@@ -177,24 +147,6 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 
 			}
 		} );
-
-		// Give the TabLayout the ViewPager
-		/*tabLayout = ( TabLayout ) findViewById( R.id.tab_layout );
-		tabLayout.setupWithViewPager( viewPager );
-		String myTabselected = bundle1.getString( "TAB_SELECTED" );
-		imgtoolbarhome.setOnClickListener( this );
-//		setupTabIcons();
-		imgSocial.setOnClickListener( this );
-
-		if ( myTabselected.equals( "Offers" ) ) {
-			tabLayout.getTabAt( 0 ).select();
-		}
-		else if ( myTabselected.equals( "ApplyLoan" ) ) {
-			tabLayout.getTabAt( 1 ).select();
-		}*/
-		/*else if ( myTabselected.equals( "ReferFriend" ) ) {
-			tabLayout.getTabAt( 2 ).select();
-		}*/
 	}
 
 	public void setTitle( String name ) {
@@ -207,8 +159,6 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 				return "New Offers";
 			case 1:
 				return "Apply Loans";
-//			case 2:
-//				return "Refer Friends";
 			default:
 				return "";
 		}
@@ -373,16 +323,16 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 			@Override
 			public void onResponse( Call< SchemesResponse > call, Response< SchemesResponse > response ) {
 
-				Log.e( "Respobnse", new Gson().toJson( response.body() ) );
 				CommonUtils.closeProgressDialog();
 				Log.e( "SchemesResponse", new Gson().toJson( response.body() ) );
-				System.out.println( "----------Response------------->" + datumArrayList );
+				System.out.println( "----------Response-------------" + datumArrayList );
 
 				datumArrayList = response.body().getData();
 
 				SchemesResponse model = response.body();
 				if ( model != null ) {
 					PreferenceHelper.insertObject( "Scheme response", model );
+					setupViewPager( viewPager );
 				}
 			}
 

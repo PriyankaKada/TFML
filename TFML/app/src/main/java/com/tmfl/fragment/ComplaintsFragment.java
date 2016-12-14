@@ -23,11 +23,11 @@ public class ComplaintsFragment extends Fragment {
 
 	@Override
 	public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
-		View rootView;
-		rootView = inflater.inflate( R.layout.fragment_complaint, container, false );
-		txtNewComplaint = ( TextView ) rootView.findViewById( R.id.txtNewComplain );
-		txtTrackStatus = ( TextView ) rootView.findViewById( R.id.txttrackStatus );
-		return rootView;
+		View view;
+		view = inflater.inflate( R.layout.fragment_complaint, container, false );
+		txtNewComplaint = ( TextView ) view.findViewById( R.id.txtNewComplain );
+		txtTrackStatus = ( TextView ) view.findViewById( R.id.txttrackStatus );
+		return view;
 	}
 
 	@Override
@@ -41,11 +41,11 @@ public class ComplaintsFragment extends Fragment {
 		txtTrackStatus.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View view ) {
-				txtTrackStatus.setBackgroundColor( ContextCompat.getColor( getContext(), R.color.tab_bg ) );
-				txtTrackStatus.setTextColor( ContextCompat.getColor( getContext(), R.color.white ) );
-				txtNewComplaint.setBackgroundColor( ContextCompat.getColor( getContext(), R.color.white ) );
-				txtNewComplaint.setTextColor( ContextCompat.getColor( getContext(), R.color.tab_bg ) );
-				getFragmentManager().beginTransaction().add( R.id.frame_complaint_container, trackStatusFragment ).commit();
+				txtTrackStatus.setBackgroundColor( ContextCompat.getColor( getContext(), R.color.white ) );
+				txtTrackStatus.setTextColor( ContextCompat.getColor( getContext(), R.color.tab_bg ) );
+				txtNewComplaint.setBackgroundColor( ContextCompat.getColor( getContext(), R.color.tab_bg ) );
+				txtNewComplaint.setTextColor( ContextCompat.getColor( getContext(), R.color.white ) );
+				getFragmentManager().beginTransaction().replace( R.id.frame_complaint_container, newComplaintsFragment ).commit();
 
 			}
 		} );
@@ -53,11 +53,11 @@ public class ComplaintsFragment extends Fragment {
 		txtNewComplaint.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View view ) {
-				txtTrackStatus.setBackgroundColor( ContextCompat.getColor( getContext(), R.color.white ) );
-				txtTrackStatus.setTextColor( ContextCompat.getColor( getContext(), R.color.tab_bg ) );
-				txtNewComplaint.setBackgroundColor( ContextCompat.getColor( getContext(), R.color.tab_bg ) );
-				txtNewComplaint.setTextColor( ContextCompat.getColor( getContext(), R.color.white ) );
-				getFragmentManager().beginTransaction().replace( R.id.frame_complaint_container, newComplaintsFragment ).commit();
+				txtTrackStatus.setBackgroundColor( ContextCompat.getColor( getContext(), R.color.tab_bg ) );
+				txtTrackStatus.setTextColor( ContextCompat.getColor( getContext(), R.color.white ) );
+				txtNewComplaint.setBackgroundColor( ContextCompat.getColor( getContext(), R.color.white ) );
+				txtNewComplaint.setTextColor( ContextCompat.getColor( getContext(), R.color.tab_bg ) );
+				getFragmentManager().beginTransaction().add( R.id.frame_complaint_container, trackStatusFragment ).commit();
 			}
 		} );
 	}

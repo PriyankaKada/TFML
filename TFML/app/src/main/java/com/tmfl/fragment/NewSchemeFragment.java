@@ -51,9 +51,6 @@ public class NewSchemeFragment extends Fragment {
 		if ( arDatumList != null && arDatumList.size() > 0 ) {
 			lstnewschemes.setAdapter( new SchemesListAdapter( getActivity(), arDatumList ) );
 		}
-
 	}
-
-
 }
 
