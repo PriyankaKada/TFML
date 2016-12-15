@@ -94,6 +94,9 @@
             android:name="com.tmfl.activity.LocateUsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ebd9a9a140ae3d6e3228fac7e763e1beb295b9b8" />
     </application>
 
 </manifest>
