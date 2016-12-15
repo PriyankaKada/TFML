@@ -48,7 +48,7 @@
                     style="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Principle"/>
+                    android:text="Principal"/>
 
                 <TextView
                     android:id="@+id/txtEmiPrinciple"
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:gravity="left"
-                android:text="O/S Principle "/>
+                android:text="O/S Principal "/>
 
             <TextView
                 android:id="@+id/txtEmiOsPrinciple"
