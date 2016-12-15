@@ -42,7 +42,7 @@ import com.tmfl.model.cityResponseModel.InputCityModel;
 import com.tmfl.model.productResponseModel.ProductListResponseModel;
 import com.tmfl.model.referFriendResponseModel.ReferFriendInputModel;
 import com.tmfl.model.referFriendResponseModel.ReferFriendResponseModel;
-import com.tmfl.model.schemesResponseModel.Datum;
+import com.tmfl.model.schemesResponseModel.NewOfferData;
 import com.tmfl.model.schemesResponseModel.SchemesResponse;
 import com.tmfl.model.stateResponseModel.BranchStateResponseModel;
 import com.tmfl.model.stateResponseModel.StateResponseModel;
@@ -66,10 +66,10 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 	InputCityModel        inputCityModel;
 	InputBranchModel      inputBranchModel;
 	String                productCode, branchStateCode, branchCityCode, branchCode, stateCode, cityCode;
-	List< Datum >       arDatumList;
-	SchemesResponse     response;
-	ArrayList< String > spOfferList;
-	String              strUserid, strOfferId;
+	List< NewOfferData > arDatumList;
+	SchemesResponse      response;
+	ArrayList< String >  spOfferList;
+	String               strUserid, strOfferId;
 	View view;
 	private EditText edtFirstName, edtLastName, edtMobileNumber, edtLandlineNumber, edtEmailAddress, edtOrgnizationName, edtCode;
 	private Spinner spnProduct, spSelectBranchState, spSelectBranchCity, spSelectBranch, spSelectCity, spSelectState, spOffers;
@@ -90,21 +90,21 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 
 		response = ( SchemesResponse ) PreferenceHelper.getObject( "Scheme response", SchemesResponse.class );
 
-		arDatumList = response.getData();
+		arDatumList = response.getOfferData().getNEW();
 
 		spOfferList = new ArrayList<>();
 
 		for ( int i = 0; i < arDatumList.size(); i++ ) {
-			spOfferList.add( response.getData().get( i ).getTitle() );
+			spOfferList.add( response.getOfferData().getNEW().get( i ).getTitle() );
 		}
 
-		List< Datum > offerList = new ArrayList<>();
-		Datum         datum     = new Datum();
+		List< NewOfferData > offerList = new ArrayList<>();
+		NewOfferData         datum     = new NewOfferData();
 		datum.setTitle( "Select Offers" );
 		offerList.add( datum );
 		offerList.addAll( arDatumList );
 
-		spOffers.setAdapter( new ArrayAdapter< Datum >( getActivity(), R.layout.layout_spinner_textview, offerList ) );
+		spOffers.setAdapter( new ArrayAdapter< NewOfferData >( getActivity(), R.layout.layout_spinner_textview, offerList ) );
 
 		BranchResponseModel branchResponseModel = new BranchResponseModel();
 		branchResponseModel.setTerrCaption( "Select Branch" );

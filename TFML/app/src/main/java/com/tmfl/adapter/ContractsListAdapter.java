@@ -37,6 +37,7 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 	SimpleDateFormat           dateFormat, format2;
 	Date varDate;
 	private Button btn_pay_emi;
+	private View   viewBlueMark, viewGreenMark;
 
 	public ContractsListAdapter( Context context, ArrayList< ContractModel > objects ) {
 		super( context, 0, objects );
@@ -61,6 +62,7 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 			convertView = LayoutInflater.from( mContext ).inflate( R.layout.header_terminated_contract, parent, false );
 		}
 		else if ( model.getContractStatus().equalsIgnoreCase( "L" ) ) {
+
 			convertView = LayoutInflater.from( mContext ).inflate( R.layout.row_active_contract, parent, false );
 			txt_product_name = ( TextView ) convertView.findViewById( R.id.txt_product_name );
 			txt_contract_no = ( TextView ) convertView.findViewById( R.id.txt_contract_no );
@@ -70,18 +72,24 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 			txt_overdue_amount = ( TextView ) convertView.findViewById( R.id.txt_overdue_amount );
 			txt_repayment_mode = ( TextView ) convertView.findViewById( R.id.txt_repayment_mode );
 			txt_last_payment_date = ( TextView ) convertView.findViewById( R.id.txt_last_payment_date );
-		  /*  btn_pay_emi=(Button) convertView.findViewById(R.id.btn_pay_emi);
-		    btn_more_detail=(Button)convertView.findViewById(R.id.btn_more_detail);*/
 			btn_pay_emi = ( Button ) convertView.findViewById( R.id.btn_pay_emi );
 			btn_more_detail = ( TextView ) convertView.findViewById( R.id.btn_more_detail );
+
+			viewBlueMark = convertView.findViewById( R.id.viewBlueMark );
+			viewGreenMark = convertView.findViewById( R.id.viewGreenMark );
+
+			if ( model.getUsrConCompCode().equalsIgnoreCase( "5000" ) ) {
+				viewGreenMark.setVisibility( View.VISIBLE );
+				viewBlueMark.setVisibility( View.GONE );
+			}
+			else if ( model.getUsrConCompCode().equalsIgnoreCase( "8000" ) ) {
+				viewGreenMark.setVisibility( View.GONE );
+				viewBlueMark.setVisibility( View.VISIBLE );
+			}
+
 			txt_product_name.setText( model.getProduct() == null ? "" : model.getProduct().toString() );
-
-//			trimLeadingZeros( model.getUsrConNo() );
-//			Log.d( "new con no", trimLeadingZeros( model.getUsrConNo() ) );
-
 			txt_contract_no.setText( model.getUsrConNo() == null ? "" : trimLeadingZeros( model.getUsrConNo() ) );
 			txt_rc_no.setText( model.getRcNumber() == null ? "" : model.getRcNumber() );
-			//getTotalCurrentDue instead of getOdAmt()
 			txt_overdue_amount.setText( model.getOdAmt() == null ? "" : "Rs." + model.getOdAmt() );
 			txt_repayment_mode.setText( model.getPdcFlag() == null ? "" : model.getPdcFlag() );
 			txt_next_due_date.setText( model.getDueDate() == null ? "" : model.getDueDate().toString() );

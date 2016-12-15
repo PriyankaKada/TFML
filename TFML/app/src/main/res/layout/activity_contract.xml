@@ -165,15 +165,14 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:background="@color/tab_bg"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp">
 
         <LinearLayout
             android:id="@+id/llSchemes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:gravity="start"
@@ -202,11 +201,6 @@
             android:id="@+id/llApplyLoan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/llSchemes"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:orientation="vertical">
@@ -233,11 +227,6 @@
             android:id="@+id/linReferFriend"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/llApplyLoan"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:orientation="vertical">
@@ -264,17 +253,14 @@
             android:id="@+id/linLoanStaus"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="2dp"
-            android:layout_toRightOf="@+id/linReferFriend"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:orientation="vertical">
 
             <View
-                android:id="@+id/viewId"
+                android:id="@+id/viewId4"
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
+                android:layout_height="2dp"
                 android:background="@color/white"
                 android:visibility="invisible"/>
 
@@ -283,8 +269,8 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="7dp"
-                android:src="@drawable/ic_loan_status_non_selected"/>
+                android:padding="2dp"
+                android:src="@drawable/ic_complaint"/>
 
             <TextView
                 android:id="@+id/txtLoanStatus"
@@ -292,21 +278,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="@string/loan_status"
+                android:text="Complaint"
                 android:textColor="#FFFFFF"/>
-
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/lin_contact_us"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/linLoanStaus"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackground"
             android:orientation="vertical">

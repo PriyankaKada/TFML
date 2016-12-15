@@ -18,5 +18,6 @@
     <color name="overdues_count_bg">#da8c10</color>
     <color name="detail_frag_bg">#EEEEEE</color>
     <color name="color_DARKgrey">#6D6D6D</color>
+    <color name="green">#00ff00</color>
 
 </resources>

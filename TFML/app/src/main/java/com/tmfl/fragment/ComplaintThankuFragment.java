@@ -3,6 +3,7 @@ package com.tmfl.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,6 @@ public class ComplaintThankuFragment extends Fragment {
 		txtReferenceNo = ( TextView ) view.findViewById( R.id.txtReferenceNo );
 
 		String textCallScript = "<font color=#f00>CallScript: </font>" + "<font color=#6D6D6D> " + getString( R.string.call_script ) + "</font>";
-		txtCallScript.setText( textCallScript );
+		txtCallScript.setText( Html.fromHtml( textCallScript ) );
 	}
 }

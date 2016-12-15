@@ -1,49 +1,173 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:id="@+id/mainLayout"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="10dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical"
+              android:padding="10dp">
 
     <EditText
-        android:id="@+id/txtContractNo"
+        android:id="@+id/txtComplainCaseId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/spinner_bg"
-        android:hint="*Contract No"
+        android:hint="Case Id"
         android:padding="10dp"
         android:textColor="@color/color_grey"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
+        />
 
-    <EditText
-        android:id="@+id/txtEnterYourMessage"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtContractNo"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/whit_rect_bg"
-        android:gravity="top"
-        android:hint="*Enter Your Message"
-        android:minHeight="200dp"
-        android:padding="10dp"
-        android:textColor="@color/color_grey"
-        android:textSize="16sp"/>
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/txtFromDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/whit_rect_bg"
+                android:gravity="left|center"
+                android:hint="From Date"
+                android:padding="10dp"
+                android:textSize="16sp"
+                />
+
+            <ImageView
+                android:id="@+id/imgCalenderFromDate"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_calendar"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/txtToDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/whit_rect_bg"
+                android:gravity="left|center"
+                android:hint="To Date"
+                android:padding="10dp"
+                android:textSize="16sp"
+                />
+
+            <ImageView
+                android:id="@+id/imgCalenderToDate"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_calendar"/>
+        </RelativeLayout>
+    </LinearLayout>
+
 
     <Button
-        android:id="@+id/btnSubmit"
+        android:id="@+id/btnGo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="end"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
         android:background="@color/tab_bg"
-        android:text="Submit"
+        android:text="Go"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="16sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        />
 
-</RelativeLayout>
+    <LinearLayout
+        android:id="@+id/llComplaintListHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/tab_bg"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/txtCaseId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:text="CASE ID"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/dotted_bg"/>
+
+        <TextView
+            android:id="@+id/txtReqComplaintDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="RQUEST/\nCOMPLAINT\nREGISTRATION\nDATE"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/dotted_bg"/>
+
+        <TextView
+            android:id="@+id/txtDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:text="DESCRIPTION"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/dotted_bg"/>
+
+        <TextView
+            android:id="@+id/txtUploadFile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:text="VIEW/UPLOAD\nFILE"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lstComplaints"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:visibility="gone"/>
+
+</LinearLayout>

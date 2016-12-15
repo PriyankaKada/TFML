@@ -42,7 +42,6 @@ public class SplashActivity extends BaseActivity {
 		public void handleMessage( Message msg ) {
 			super.handleMessage( msg );
 			checkPermissionWithCallService();
-
 		}
 	};
 

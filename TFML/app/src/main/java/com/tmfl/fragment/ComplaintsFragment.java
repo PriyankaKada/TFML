@@ -18,8 +18,8 @@ import com.tmfl.R;
 public class ComplaintsFragment extends Fragment {
 
 	TextView txtNewComplaint, txtTrackStatus;
-	private NewComplaintsFragment newComplaintsFragment;
-	private TrackStatusFragment   trackStatusFragment;
+	private TrackStatusFragment  trackStatusFragment;
+	private NewComplaintFragment newComplaintFragment;
 
 	@Override
 	public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
@@ -33,32 +33,40 @@ public class ComplaintsFragment extends Fragment {
 	@Override
 	public void onViewCreated( View view, @Nullable Bundle savedInstanceState ) {
 		super.onViewCreated( view, savedInstanceState );
-		newComplaintsFragment = new NewComplaintsFragment();
 		trackStatusFragment = new TrackStatusFragment();
+		newComplaintFragment = new NewComplaintFragment();
 
-		getFragmentManager().beginTransaction().replace( R.id.frame_complaint_container, newComplaintsFragment ).commit();
+		getFragmentManager().beginTransaction().add( R.id.frame_complaint_container, newComplaintFragment ).commit();
+		setNewComplaintLayout();
 
 		txtTrackStatus.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View view ) {
-				txtTrackStatus.setBackgroundColor( ContextCompat.getColor( getContext(), R.color.white ) );
-				txtTrackStatus.setTextColor( ContextCompat.getColor( getContext(), R.color.tab_bg ) );
-				txtNewComplaint.setBackgroundColor( ContextCompat.getColor( getContext(), R.color.tab_bg ) );
-				txtNewComplaint.setTextColor( ContextCompat.getColor( getContext(), R.color.white ) );
-				getFragmentManager().beginTransaction().replace( R.id.frame_complaint_container, newComplaintsFragment ).commit();
-
+				setTrackStatusLayout();
+				getFragmentManager().beginTransaction().replace( R.id.frame_complaint_container, trackStatusFragment ).commit();
 			}
 		} );
 
 		txtNewComplaint.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View view ) {
-				txtTrackStatus.setBackgroundColor( ContextCompat.getColor( getContext(), R.color.tab_bg ) );
-				txtTrackStatus.setTextColor( ContextCompat.getColor( getContext(), R.color.white ) );
-				txtNewComplaint.setBackgroundColor( ContextCompat.getColor( getContext(), R.color.white ) );
-				txtNewComplaint.setTextColor( ContextCompat.getColor( getContext(), R.color.tab_bg ) );
-				getFragmentManager().beginTransaction().add( R.id.frame_complaint_container, trackStatusFragment ).commit();
+				setNewComplaintLayout();
+				getFragmentManager().beginTransaction().replace( R.id.frame_complaint_container, newComplaintFragment ).commit();
 			}
 		} );
+	}
+
+	public void setNewComplaintLayout() {
+		txtTrackStatus.setBackgroundColor( ContextCompat.getColor( getContext(), R.color.tab_bg ) );
+		txtTrackStatus.setTextColor( ContextCompat.getColor( getContext(), R.color.white ) );
+		txtNewComplaint.setBackgroundColor( ContextCompat.getColor( getContext(), R.color.white ) );
+		txtNewComplaint.setTextColor( ContextCompat.getColor( getContext(), R.color.tab_bg ) );
+	}
+
+	public void setTrackStatusLayout() {
+		txtTrackStatus.setBackgroundColor( ContextCompat.getColor( getContext(), R.color.white ) );
+		txtTrackStatus.setTextColor( ContextCompat.getColor( getContext(), R.color.tab_bg ) );
+		txtNewComplaint.setBackgroundColor( ContextCompat.getColor( getContext(), R.color.tab_bg ) );
+		txtNewComplaint.setTextColor( ContextCompat.getColor( getContext(), R.color.white ) );
 	}
 }

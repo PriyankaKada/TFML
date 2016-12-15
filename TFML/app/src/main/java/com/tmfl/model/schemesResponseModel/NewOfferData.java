@@ -3,14 +3,10 @@ package com.tmfl.model.schemesResponseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
 /**
- * Created by webwerks on 29/7/16.
+ * Created by webwerks on 15/12/16.
  */
-
-public class Datum implements Serializable {
-
+public class NewOfferData {
 	@SerializedName( "id" )
 	@Expose
 	private Integer id;
@@ -163,4 +159,5 @@ public class Datum implements Serializable {
 	public void setDeletedAt( Object deletedAt ) {
 		this.deletedAt = deletedAt;
 	}
+
 }

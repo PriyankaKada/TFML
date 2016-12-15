@@ -277,8 +277,6 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				break;
 
 			case R.id.linLoanStaus:
-			    /*linLoanStausClick();
-			    SocialUtil.loanStatusDialog( BannerActivity.this, linLoanStaus, view1 );*/
 
 				view4.setVisibility( View.VISIBLE );
 				view1.setVisibility( View.GONE );
@@ -447,6 +445,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		final Dialog socialdialog = new Dialog( BannerActivity.this, android.R.style.Theme_Holo_Dialog_NoActionBar );
 		socialdialog.getWindow().setBackgroundDrawable( new ColorDrawable( android.graphics.Color.TRANSPARENT ) );
 		socialdialog.setContentView( R.layout.dialog_social );
+
 		WindowManager.LayoutParams params = socialdialog.getWindow().getAttributes();
 		params.y = 5;
 		params.x = 5;

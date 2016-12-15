@@ -44,8 +44,9 @@ import com.tmfl.model.cityResponseModel.BranchCityResponseModel;
 import com.tmfl.model.cityResponseModel.CityResponseModel;
 import com.tmfl.model.cityResponseModel.InputCityModel;
 import com.tmfl.model.productResponseModel.ProductListResponseModel;
-import com.tmfl.model.schemesResponseModel.Datum;
+import com.tmfl.model.schemesResponseModel.NewOfferData;
 import com.tmfl.model.schemesResponseModel.SchemesResponse;
+import com.tmfl.model.schemesResponseModel.UsedOfferData;
 import com.tmfl.model.stateResponseModel.BranchStateResponseModel;
 import com.tmfl.model.stateResponseModel.StateResponseModel;
 import com.tmfl.util.PreferenceHelper;
@@ -68,8 +69,9 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 	InputCityModel   inputCityModel;
 	InputBranchModel inputBranchModel;
 	String           productCode, branchStateCode, branchCityCode, branchCode, stateCode, cityCode, strOfferId, strUserid;
-	List< Datum >   arDatumList;
-	SchemesResponse response;
+	List< NewOfferData >  newOfferList;
+	List< UsedOfferData > usedOfferList;
+	SchemesResponse       response;
 	private EditText edtFirstName, edtLastName, edtMobileNumber, edtLandlineNumber, edtEmailAddress, edtOrgnizationName, edtCode;
 	private Spinner spnProduct, spSelectBranchState, spSelectBranchCity, spSelectBranch, spSelectCity, spSelectState, spOffers;
 	private RadioButton rdbLeadTypeIndividual, rdbLeadTypeOrganizational, rdbVecTypeCommercial, rdbVechTypeRefinance, rdbVechPassanger;
@@ -89,23 +91,26 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 
 		response = ( SchemesResponse ) PreferenceHelper.getObject( "Scheme response", SchemesResponse.class );
 
-		arDatumList = response.getData();
+		newOfferList = new ArrayList<>();
+		usedOfferList = new ArrayList<>();
 
+		newOfferList = response.getOfferData().getNEW();
+		usedOfferList = response.getOfferData().getUSED();
 
 		init();
 		spOfferList = new ArrayList<>();
 
-		for ( int i = 0; i < arDatumList.size(); i++ ) {
-			spOfferList.add( response.getData().get( i ).getTitle() );
+		for ( int i = 0; i < newOfferList.size(); i++ ) {
+			spOfferList.add( response.getOfferData().getNEW().get( i ).getTitle() );
 		}
 
-		List< Datum > offerList = new ArrayList<>();
-		Datum         datum     = new Datum();
+		List< NewOfferData > newOfferList = new ArrayList<>();
+		NewOfferData         datum        = new NewOfferData();
 		datum.setTitle( "Select Offers" );
-		offerList.add( datum );
-		offerList.addAll( arDatumList );
+		newOfferList.add( datum );
+		newOfferList.addAll( this.newOfferList );
 
-		spOffers.setAdapter( new ArrayAdapter< Datum >( getActivity(), R.layout.layout_spinner_textview, offerList ) );
+		spOffers.setAdapter( new ArrayAdapter< NewOfferData >( getActivity(), R.layout.layout_spinner_textview, newOfferList ) );
 		branchStateList = new ArrayList< String >();
 
 		BranchResponseModel branchResponseModel = new BranchResponseModel();
@@ -451,7 +456,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 				break;
 			case R.id.sp_offers:
 
-				strOfferId = String.valueOf( arDatumList.get( position ).getId() );
+				strOfferId = String.valueOf( newOfferList.get( position ).getId() );
 				Log.d( "offer id", strOfferId );
 
 				break;

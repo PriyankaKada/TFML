@@ -2,7 +2,6 @@ package com.tmfl.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.tmfl.R;
-import com.tmfl.model.schemesResponseModel.Datum;
+import com.tmfl.model.schemesResponseModel.NewOfferData;
+import com.tmfl.model.schemesResponseModel.UsedOfferData;
 import com.tmfl.util.SetFonts;
 
 import java.util.List;
@@ -26,21 +26,37 @@ public class SchemesListAdapter extends BaseAdapter {
 
 	private static LayoutInflater inflater = null;
 	Context context;
-	private List< Datum > data;
+	private List< NewOfferData >  newOfferData;
+	private List< UsedOfferData > usedOfferData;
+	private int                   offerType;
 
-	public SchemesListAdapter( Context context, List< Datum > data ) {
+	public SchemesListAdapter( Context context, List< NewOfferData > newOfferDataList, List< UsedOfferData > usedOfferDataList, int offerType ) {
 		this.context = context;
-		this.data = data;
+		this.newOfferData = newOfferDataList;
+		this.usedOfferData = usedOfferDataList;
+		this.offerType = offerType;
 	}
 
 	@Override
 	public int getCount() {
-		return data.size();
+
+		if ( offerType == 1 ) {
+			return newOfferData.size();
+		}
+		else {
+			return usedOfferData.size();
+		}
 	}
 
 	@Override
 	public Object getItem( int position ) {
-		return data.get( position );
+
+		if ( offerType == 1 ) {
+			return newOfferData.get( position );
+		}
+		else {
+			return usedOfferData.get( position );
+		}
 	}
 
 	@Override
@@ -66,13 +82,19 @@ public class SchemesListAdapter extends BaseAdapter {
 		else {
 			holder = ( Holder ) convertView.getTag();
 		}
-		holder.txt_title.setText( data.get( position ).getTitle() );
-		holder.txt_description.setText( data.get( position ).getShortDescription() );
-		Picasso.with( this.context ).load( data.get( position ).getImage() ).into( holder.img_new_schemes );
-		Log.e( "Getimagurl", "" + data.get( position ).getImage() );
+
+		if ( offerType == 1 ) {
+			holder.txt_title.setText( newOfferData.get( position ).getTitle() );
+			holder.txt_description.setText( newOfferData.get( position ).getShortDescription() );
+			Picasso.with( this.context ).load( newOfferData.get( position ).getImage() ).into( holder.img_new_schemes );
+		}
+		else {
+			holder.txt_title.setText( usedOfferData.get( position ).getTitle() );
+			holder.txt_description.setText( usedOfferData.get( position ).getShortDescription() );
+			Picasso.with( this.context ).load( usedOfferData.get( position ).getImage() ).into( holder.img_new_schemes );
+		}
 
 		return convertView;
-
 	}
 
 	public class Holder {

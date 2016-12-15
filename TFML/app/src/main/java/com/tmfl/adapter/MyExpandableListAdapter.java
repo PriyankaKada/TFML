@@ -165,25 +165,6 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 		else {
 			holder.txtType.setText( "-" );
 		}
-		/*holder.imgPdf.setOnClickListener( new View.OnClickListener() {
-			@Override
-			public void onClick( View v ) {
-				myReceiptInputModel = new MyReceiptInputModel();
-				myReceiptResponseModel = new MyReceiptResponseModel();
-				myReceiptInputModel.setApi_token( PreferenceHelper.getString( PreferenceHelper.API_TOKEN ) );
-				myReceiptInputModel.setContract_no( PreferenceHelper.getString( PreferenceHelper.CONTRACT_NO ) );
-				myReceiptInputModel.setReceipt_no( rcNo );
-				myReceiptInputModel.setRequest_date( rcDate );
-				Log.e( "ReceiptIPMODEL", "" + myReceiptInputModel.getApi_token() + "Contract no" + myReceiptInputModel.getContract_no() + "RC" + myReceiptInputModel.getReceipt_no() + "RCDATAE" + myReceiptInputModel.getRequest_date() );
-				if ( CommonUtils.isNetworkAvailable( context ) ) {
-					CommonUtils.showProgressDialog( context, "File downloading..." );
-					callDownloadData( myReceiptInputModel );
-				}
-				else {
-					Toast.makeText( context, "Please Check Network Connection", Toast.LENGTH_SHORT ).show();
-				}
-			}
-		} );*/
 		holder.lexpandList.setVisibility( View.VISIBLE );
 		return convertView;
 	}

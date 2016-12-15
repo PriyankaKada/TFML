@@ -27,6 +27,7 @@ import com.tmfl.common.ApiService;
 import com.tmfl.common.CommonUtils;
 import com.tmfl.common.SocialUtil;
 import com.tmfl.fragment.ApplyLoanFragment;
+import com.tmfl.fragment.ComplaintsFragment;
 import com.tmfl.fragment.ReferFriendFragment;
 import com.tmfl.model.ContractResponseModel.ContractModel;
 import com.tmfl.model.ContractResponseModel.ContractsInputModel;
@@ -86,7 +87,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 		linLoanStaus = ( LinearLayout ) findViewById( R.id.linLoanStaus );
 		linContactUs = ( LinearLayout ) findViewById( R.id.lin_contact_us );
 		imgDrawer = ( ImageView ) findViewById( R.id.img_drawer );
-		selectedView = ( View ) findViewById( R.id.viewId );
+//		selectedView = ( View ) findViewById( R.id.viewId );
 		SetFonts.setFonts( this, txtTitleContract, 2 );
 		linSchemes.setOnClickListener( this );
 		linApplyLoan.setOnClickListener( this );
@@ -145,8 +146,16 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 
 				break;
 			case R.id.linLoanStaus:
-				linLoanStausClick();
-				SocialUtil.loanStatusDialog( ContractActivity.this, linLoanStaus, selectedView );
+			/*	linLoanStausClick();
+				SocialUtil.loanStatusDialog( ContractActivity.this, linLoanStaus, selectedView );*/
+
+				if ( new ComplaintsFragment().isAdded() ) {
+					getSupportFragmentManager().beginTransaction().replace( R.id.frame_container_contract, new ComplaintsFragment() ).commit();
+				}
+				else {
+					getSupportFragmentManager().beginTransaction().add( R.id.frame_container_contract, new ComplaintsFragment() ).commit();
+				}
+
 				break;
 			case R.id.lin_contact_us:
 				contactDialog();

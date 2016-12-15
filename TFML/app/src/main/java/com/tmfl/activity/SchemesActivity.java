@@ -28,8 +28,9 @@ import com.tmfl.common.ApiService;
 import com.tmfl.common.CommonUtils;
 import com.tmfl.fragment.ApplyLoanFragment;
 import com.tmfl.fragment.NewSchemeFragment;
-import com.tmfl.model.schemesResponseModel.Datum;
+import com.tmfl.model.schemesResponseModel.NewOfferData;
 import com.tmfl.model.schemesResponseModel.SchemesResponse;
+import com.tmfl.model.schemesResponseModel.UsedOfferData;
 import com.tmfl.util.PreferenceHelper;
 import com.tmfl.util.SetFonts;
 
@@ -49,16 +50,18 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 	Bundle    bundle1;
 	private TextView  txtschemestitle;
 	private ImageView imgtoolbarhome, imgSocial;
-	private ArrayList< Datum > datumArrayList;
-	private LinearLayout       llSchemes, llApplyLoan;
-	private SchemesPagerAdapter adapter;
+	private List< NewOfferData > newOfferList;
+	private LinearLayout         llSchemes, llApplyLoan;
+	private SchemesPagerAdapter   adapter;
+	private List< UsedOfferData > usedOfferList;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
 		super.onCreate( savedInstanceState );
 		setContentView( R.layout.activity_schemes );
 
-		datumArrayList = new ArrayList<>();
+		newOfferList = new ArrayList<>();
+		usedOfferList = new ArrayList<>();
 		toolbarschemes = ( Toolbar ) findViewById( R.id.toolbar_schemes );
 		txtschemestitle = ( TextView ) findViewById( R.id.txt_schemes_title );
 		imgtoolbarhome = ( ImageView ) findViewById( R.id.img_toolbar_home );
@@ -68,38 +71,31 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 
 		llApplyLoan.setOnClickListener( this );
 		llSchemes.setOnClickListener( this );
-		viewPager = ( ViewPager ) findViewById( R.id.pager );
 
 		view1 = findViewById( R.id.view1 );
 		view2 = findViewById( R.id.view2 );
 		view3 = findViewById( R.id.view3 );
 
 		bundle1 = getIntent().getExtras();
-		String myTabselected = bundle1.getString( "TAB_SELECTED" );
 
-		Log.d( "tab", myTabselected );
 		tmflApi = ApiService.getInstance().call();
 
 		if ( CommonUtils.isNetworkAvailable( SchemesActivity.this ) ) {
+			CommonUtils.showProgressDialog( this, "Please wait..." );
 			callSchemesResponseModel();
 		}
 		else {
 			Toast.makeText( getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT ).show();
 		}
 
-		if ( myTabselected.equalsIgnoreCase( Constant.ISSCHEMASTABSELECT ) ) {
-			viewPager.setCurrentItem( 0 );
-		}
-		else if ( myTabselected.equalsIgnoreCase( Constant.ISAPPLYLOANSELECT ) ) {
-			viewPager.setCurrentItem( 1 );
-		}
+		viewPager = ( ViewPager ) findViewById( R.id.pager );
 
 		SetFonts.setFonts( this, txtschemestitle, 2 );
 	}
 
 	private void setupViewPager( ViewPager viewPager ) {
 		List< Fragment > fragList = new ArrayList<>();
-		System.out.println( "------------dgdsgdf----------->" + datumArrayList );
+		System.out.println( "------------dgdsgdf----------->" + newOfferList );
 
 		final Fragment newSchemeFragment = new NewSchemeFragment();
 		final Fragment applyLoanFragment = new ApplyLoanFragment();
@@ -147,6 +143,19 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 
 			}
 		} );
+
+		String myTabselected = bundle1.getString( "TAB_SELECTED" );
+
+		if ( myTabselected.equalsIgnoreCase( Constant.ISSCHEMASTABSELECT ) ) {
+			viewPager.setCurrentItem( 0 );
+			view1.setVisibility( View.VISIBLE );
+			view2.setVisibility( View.INVISIBLE );
+		}
+		else if ( myTabselected.equalsIgnoreCase( Constant.ISAPPLYLOANSELECT ) ) {
+			viewPager.setCurrentItem( 1 );
+			view1.setVisibility( View.INVISIBLE );
+			view2.setVisibility( View.VISIBLE );
+		}
 	}
 
 	public void setTitle( String name ) {
@@ -325,9 +334,10 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 
 				CommonUtils.closeProgressDialog();
 				Log.e( "SchemesResponse", new Gson().toJson( response.body() ) );
-				System.out.println( "----------Response-------------" + datumArrayList );
+				System.out.println( "----------Response-------------" + newOfferList );
 
-				datumArrayList = response.body().getData();
+				newOfferList = response.body().getOfferData().getNEW();
+				usedOfferList = response.body().getOfferData().getUSED();
 
 				SchemesResponse model = response.body();
 				if ( model != null ) {
@@ -338,7 +348,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 
 			@Override
 			public void onFailure( Call< SchemesResponse > call, Throwable t ) {
-				//  Log.e("Resp", "Error");
+				Log.e( "Resp", t.getMessage() + "  " + new Gson().toJson( call.toString() ) );
 				CommonUtils.closeProgressDialog();
 			}
 		} );
