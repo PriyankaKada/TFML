@@ -42,7 +42,6 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 
 				getFragmentManager()
 						.beginTransaction()
-						.addToBackStack( getClass().getName() )
 						.replace( R.id.frame_complaint_container, new ComplaintThankuFragment() )
 						.commit();
 

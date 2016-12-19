@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,9 +25,7 @@ import com.tmfl.auth.TmflApi;
 import com.tmfl.common.ApiService;
 import com.tmfl.common.CommonUtils;
 import com.tmfl.common.SocialUtil;
-import com.tmfl.fragment.ApplyLoanFragment;
 import com.tmfl.fragment.ComplaintsFragment;
-import com.tmfl.fragment.ReferFriendFragment;
 import com.tmfl.model.ContractResponseModel.ContractModel;
 import com.tmfl.model.ContractResponseModel.ContractsInputModel;
 import com.tmfl.model.ContractResponseModel.ContractsResponseModel;
@@ -105,10 +102,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 
 		callContractWebservice();
 		CommonUtils.showProgressDialog( ContractActivity.this, "Getting Your Information" );
-		{
-			loadContractDetailService( contractsInputModel );
-		}
-
+		loadContractDetailService( contractsInputModel );
 	}
 
 	@Override
@@ -116,34 +110,42 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 		switch ( v.getId() ) {
 			case R.id.llSchemes:
 				Intent intentSchema = new Intent( this, SchemesActivity.class );
-				intentSchema.putExtra( "TAB_SELECTED", Constant.ISSCHEMASTABSELECT );
+				intentSchema.putExtra( "TAB_SELECTED", Constant.ISSCHEMASTABSELECT ).putExtra( "LOGGED_IN", "true" );
 				startActivity( intentSchema );
+
+				/*getSupportFragmentManager().popBackStack( null, FragmentManager.POP_BACK_STACK_INCLUSIVE );
+
+				getSupportFragmentManager().beginTransaction()
+						.addToBackStack( getClass().getName() )
+						.replace( R.id.frame_container_contract, new NewSchemeFragment() )
+						.commit();*/
+
 				break;
 			case R.id.llApplyLoan:
-				/*Intent intentApplyLoan = new Intent( this, SchemesActivity.class );
-				intentApplyLoan.putExtra( "TAB_SELECTED", Constant.ISAPPLYLOANSELECT );
-				startActivity( intentApplyLoan );*/
+				Intent intentApplyLoan = new Intent( this, SchemesActivity.class );
+				intentApplyLoan.putExtra( "TAB_SELECTED", Constant.ISAPPLYLOANSELECT ).putExtra( "LOGGED_IN", "true" );
+				startActivity( intentApplyLoan );
 
-				getSupportFragmentManager().popBackStack( null, FragmentManager.POP_BACK_STACK_INCLUSIVE );
+				/*getSupportFragmentManager().popBackStack( null, FragmentManager.POP_BACK_STACK_INCLUSIVE );
 
 				getSupportFragmentManager().beginTransaction()
 						.addToBackStack( getClass().getName() )
 						.replace( R.id.frame_container_contract, new ApplyLoanFragment() )
-						.commit();
+						.commit();*/
 
 				break;
 			case R.id.linReferFriend:
-				/*Intent intentReferFriend = new Intent( this, SchemesActivity.class );
-				intentReferFriend.putExtra( "TAB_SELECTED", Constant.ISREFERFREINDSELECT );
-				startActivity( intentReferFriend );*/
+				Intent intentReferFriend = new Intent( this, SchemesActivity.class );
+				intentReferFriend.putExtra( "TAB_SELECTED", Constant.ISREFERFREINDSELECT ).putExtra( "LOGGED_IN", "true" );
+				startActivity( intentReferFriend );
 
-				getSupportFragmentManager().popBackStack( null, FragmentManager.POP_BACK_STACK_INCLUSIVE );
+				/*getSupportFragmentManager().popBackStack( null, FragmentManager.POP_BACK_STACK_INCLUSIVE );
 
 				getSupportFragmentManager().beginTransaction()
 						.addToBackStack( getClass().getName() )
 						.replace( R.id.frame_container_contract, new ReferFriendFragment() )
 						.commit();
-
+*/
 				break;
 			case R.id.linLoanStaus:
 			/*	linLoanStausClick();
@@ -183,6 +185,8 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 				ArrayList< ContractModel > models = new ArrayList< ContractModel >();
 				if ( response.body().getData().getActive().getContracts() != null ) {
 					models.addAll( response.body().getData().getActive().getContracts() );
+
+					PreferenceHelper.insertObject( Constant.ONGOING_LOAN, response.body().getData().getActive() );
 				}
 				else {
 					Toast.makeText( getBaseContext(), "No Data Founnd", Toast.LENGTH_SHORT ).show();
@@ -191,7 +195,11 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 
 				if ( response.body().getData().getTerminated().getCount() != 0 ) {
 					models.add( null );
+
+					PreferenceHelper.insertObject( Constant.TERMINATED_LOAN, response.body().getData().getTerminated() );
 				}
+
+
 				models.addAll( response.body().getData().getTerminated().getContracts() );
 				lstCotractList.setAdapter( new ContractsListAdapter( ContractActivity.this, models ) );
 				strTotal = response.body().getData().getTotal().toString();
@@ -287,6 +295,4 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 		contactDialog.show();
 
 	}
-
-
 }

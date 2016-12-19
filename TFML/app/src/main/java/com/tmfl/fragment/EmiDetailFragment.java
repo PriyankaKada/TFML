@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.tmfl.R;
 import com.tmfl.activity.LoginActivity;
 import com.tmfl.adapter.EmiExpandableListView;
+import com.tmfl.auth.Constant;
 import com.tmfl.auth.TmflApi;
 import com.tmfl.common.ApiService;
 import com.tmfl.common.CommonUtils;
@@ -60,6 +61,7 @@ public class EmiDetailFragment extends Fragment implements View.OnClickListener 
 	}
 
 	public void init() {
+
 		tmflLogin = ApiService.getInstance().call();
 		tmflApi = ApiService.getInstance().call();
 		callCheckLogin();
@@ -71,9 +73,15 @@ public class EmiDetailFragment extends Fragment implements View.OnClickListener 
 		Log.e( "Req ", new Gson().toJson( emiListInputModel ) );
 		expandableListViewEmi = ( ExpandableListView ) view.findViewById( R.id.expandableListViewEmi );
 		btnReciept = ( Button ) view.findViewById( R.id.btnReciept );
+
 		btnReciept.setOnClickListener( this );
 		SetFonts.setFonts( getActivity(), btnReciept, 2 );
 		Log.e( "Req EMI", new Gson().toJson( emiListInputModel ) + "" );
+
+		if ( PreferenceHelper.getBoolean( Constant.SHOW_RECEIPT ) ) {
+			btnReciept.performClick();
+		}
+
 		callCheckLogin();
 
 	}

@@ -88,19 +88,43 @@ public class DrawerBaseActivity extends BaseActivity {
 				switch ( position ) {
 					case 0://New Schemes
 						Intent intentSchema = new Intent( DrawerBaseActivity.this, SchemesActivity.class );
-						intentSchema.putExtra( "TAB_SELECTED", Constant.ISSCHEMASTABSELECT );
+						intentSchema.putExtra( "TAB_SELECTED", Constant.ISSCHEMASTABSELECT ).putExtra( "LOGGED_IN", "true" );
 						startActivity( intentSchema );
+
+						/*getSupportFragmentManager().popBackStack( null, FragmentManager.POP_BACK_STACK_INCLUSIVE );
+
+						getSupportFragmentManager().beginTransaction()
+								.addToBackStack( getClass().getName() )
+								.replace( R.id.frame_container_contract, new NewSchemeFragment() )
+								.commit();*/
+
 						break;
 
 					case 1://Apply Loan
-						Intent intentApplyLoan = new Intent( DrawerBaseActivity.this, SchemesActivity.class );
+						Intent intentApplyLoan = new Intent( DrawerBaseActivity.this, SchemesActivity.class ).putExtra( "LOGGED_IN", "true" );
 						intentApplyLoan.putExtra( "TAB_SELECTED", Constant.ISAPPLYLOANSELECT );
 						startActivity( intentApplyLoan );
+
+					/*	getSupportFragmentManager().popBackStack( null, FragmentManager.POP_BACK_STACK_INCLUSIVE );
+
+						getSupportFragmentManager().beginTransaction()
+								.addToBackStack( getClass().getName() )
+								.replace( R.id.frame_container_contract, new ApplyLoanFragment() )
+								.commit();*/
+
 						break;
 					case 2://Refer Friends
 						Intent intentReferFriend = new Intent( DrawerBaseActivity.this, SchemesActivity.class );
-						intentReferFriend.putExtra( "TAB_SELECTED", Constant.ISREFERFREINDSELECT );
+						intentReferFriend.putExtra( "TAB_SELECTED", Constant.ISREFERFREINDSELECT ).putExtra( "LOGGED_IN", "true" );
 						startActivity( intentReferFriend );
+
+						/*getSupportFragmentManager().popBackStack( null, FragmentManager.POP_BACK_STACK_INCLUSIVE );
+
+						getSupportFragmentManager().beginTransaction()
+								.addToBackStack( getClass().getName() )
+								.replace( R.id.frame_container_contract, new ReferFriendFragment() )
+								.commit();*/
+
 						break;
 					case 3://Download
 						startActivity( new Intent( DrawerBaseActivity.this, DownloadDataActivity.class ) );

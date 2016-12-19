@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -44,6 +45,7 @@ import com.tmfl.model.referFriendResponseModel.ReferFriendInputModel;
 import com.tmfl.model.referFriendResponseModel.ReferFriendResponseModel;
 import com.tmfl.model.schemesResponseModel.NewOfferData;
 import com.tmfl.model.schemesResponseModel.SchemesResponse;
+import com.tmfl.model.schemesResponseModel.UsedOfferData;
 import com.tmfl.model.stateResponseModel.BranchStateResponseModel;
 import com.tmfl.model.stateResponseModel.StateResponseModel;
 import com.tmfl.util.PreferenceHelper;
@@ -57,7 +59,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ReferFriendFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, RadioGroup.OnCheckedChangeListener, EditText.OnEditorActionListener {
+public class ReferFriendFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, RadioGroup.OnCheckedChangeListener, EditText.OnEditorActionListener, CompoundButton.OnCheckedChangeListener {
 
 	String strLeadTypechk  = "";
 	String strVechicalType = "";
@@ -66,17 +68,23 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 	InputCityModel        inputCityModel;
 	InputBranchModel      inputBranchModel;
 	String                productCode, branchStateCode, branchCityCode, branchCode, stateCode, cityCode;
-	List< NewOfferData > arDatumList;
-	SchemesResponse      response;
-	ArrayList< String >  spOfferList;
-	String               strUserid, strOfferId;
+	List< NewOfferData >  arDatumList;
+	List< NewOfferData >  newOfferList;
+	List< UsedOfferData > usedOfferList;
+	SchemesResponse       response;
+	ArrayList< String >   spOfferList;
+	String                strUserid, strOfferId;
 	View view;
+	List< UsedOfferData > usedOfferListNew = new ArrayList<>();
+	List< NewOfferData >  newOfferListNew  = new ArrayList<>();
 	private EditText edtFirstName, edtLastName, edtMobileNumber, edtLandlineNumber, edtEmailAddress, edtOrgnizationName, edtCode;
 	private Spinner spnProduct, spSelectBranchState, spSelectBranchCity, spSelectBranch, spSelectCity, spSelectState, spOffers;
 	private RadioButton rdbLeadTypeIndividual, rdbLeadTypeOrganizational, rdbVecTypeCommercial, rdbVechTypeRefinance, rdbVechPassanger;
 	private Button btnCancel, btnReferFriends;
 	private List< String > branchStateList, branchCityList, branchList, cityList, stateList;
 	private RadioGroup radioGroupLeadType, radioGroupVehicleType;
+	private int         offer;
+	private RadioButton rdNewOffers, rdUsedOffers;
 
 	@Override
 	public View onCreateView( LayoutInflater inflater, ViewGroup container,
@@ -98,13 +106,49 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 			spOfferList.add( response.getOfferData().getNEW().get( i ).getTitle() );
 		}
 
-		List< NewOfferData > offerList = new ArrayList<>();
+		newOfferList = response.getOfferData().getNEW();
+		usedOfferList = response.getOfferData().getUSED();
+
+	/*	List< NewOfferData > offerList = new ArrayList<>();
 		NewOfferData         datum     = new NewOfferData();
 		datum.setTitle( "Select Offers" );
 		offerList.add( datum );
-		offerList.addAll( arDatumList );
+		offerList.addAll( arDatumList );*/
 
-		spOffers.setAdapter( new ArrayAdapter< NewOfferData >( getActivity(), R.layout.layout_spinner_textview, offerList ) );
+		NewOfferData datum = new NewOfferData();
+		datum.setTitle( "Select Offers" );
+		newOfferListNew.add( datum );
+		newOfferListNew.addAll( this.newOfferList );
+
+		UsedOfferData usedOfferData = new UsedOfferData();
+		usedOfferData.setTitle( "Select Offers" );
+		usedOfferListNew.add( usedOfferData );
+		usedOfferListNew.addAll( this.usedOfferList );
+
+		spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, newOfferListNew ) );
+
+
+		rdNewOffers.setOnCheckedChangeListener( new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged( CompoundButton compoundButton, boolean b ) {
+
+				if ( b ) {
+					offer = 1;
+					Log.e( "inside offer", " inside offer new Offer" + offer );
+					spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, newOfferListNew ) );
+
+				}
+				else {
+					offer = 2;
+					Log.e( "inside offer", " inside offer new Offer" + offer );
+					spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, usedOfferListNew ) );
+
+
+				}
+			}
+		} );
+
+		rdNewOffers.setChecked( true );
 
 		BranchResponseModel branchResponseModel = new BranchResponseModel();
 		branchResponseModel.setTerrCaption( "Select Branch" );
@@ -187,6 +231,10 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		rdbVechPassanger = ( RadioButton ) view.findViewById( R.id.rdb_passenger );
 		btnCancel = ( Button ) view.findViewById( R.id.btn_cancel );
 		btnReferFriends = ( Button ) view.findViewById( R.id.btn_refer_friends );
+
+		rdNewOffers = ( RadioButton ) view.findViewById( R.id.rdNewOffers );
+		rdUsedOffers = ( RadioButton ) view.findViewById( R.id.rdUsedOffers );
+
 		SetFonts.setFonts( getActivity(), btnCancel, 2 );
 		SetFonts.setFonts( getActivity(), btnReferFriends, 2 );
 
@@ -443,13 +491,16 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 				break;
 			case R.id.sp_offers:
 				if ( position != 0 ) {
-					strOfferId = String.valueOf( arDatumList.get( position ).getId() );
+					if ( offer == 1 ) {
+						strOfferId = String.valueOf( ( ( NewOfferData ) parent.getItemAtPosition( position ) ).getId() );
+					}
+					else if ( offer == 2 ) {
+						strOfferId = String.valueOf( ( ( UsedOfferData ) parent.getItemAtPosition( position ) ).getId() );
+					}
 					Log.d( "offer id", strOfferId );
 				}
 				break;
-
 		}
-
 	}
 
 	@Override
@@ -544,5 +595,46 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void onCheckedChanged( CompoundButton compoundButton, boolean b ) {
+		/*switch ( compoundButton.getId() ) {
+
+			case R.id.rdNewOffers:
+
+				if ( b ) {
+					offer = 1;
+					spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, newOfferListNew ) );
+					Log.d( "new list", newOfferListNew.get( 0 ).getTitle() );
+				}
+
+
+				break;
+
+			case R.id.rdUsedOffers:
+
+				if ( b ) {
+					offer = 2;
+					spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, usedOfferListNew ) );
+					Log.d( "used list", usedOfferListNew.get( 0 ).getTitle() );
+				}
+
+				break;
+		}*/
+
+		if ( b ) {
+			offer = 1;
+			Log.e( "inside offer", " inside offer new Offer" + offer );
+			spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, newOfferListNew ) );
+
+		}
+		else {
+			offer = 2;
+			Log.e( "inside offer", " inside offer new Offer" + offer );
+			spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, usedOfferListNew ) );
+
+		}
+
 	}
 }

@@ -31,15 +31,25 @@ public class Constant {
 	public static final String LOGIN_PREF                    = "loginPrefs";
 	public static final String ACCOUNT_STATEMENT_DOWNLOAD    = "customer/accountStatement";
 	public static final String PRECLOSURE_STATEMENT_DOWNLOAD = "customer/preClosureStatement";
-	public static final String FORGOT_PASSWORD      = "api/forgotPassword";
-	public static final String LOGGEDIN             = "api/isLoggedIn";
-	public static final String RECEIPTPDF           = "customer/myReceipts";
-	public static final String CHANGPASSWORD        = "customer/changePassword";
-	public static final String EMILIST              = "customer/emiList";
-	public static final String LOGOUT               = "customer/logoutCustomer";
-	public static final String CONTACTDETAILS_RESPONSE = "contactDetailsResponse";
+	public static final String FORGOT_PASSWORD               = "api/forgotPassword";
+	public static final String LOGGEDIN                      = "api/isLoggedIn";
+	public static final String RECEIPTPDF                    = "customer/myReceipts";
+	public static final String CHANGPASSWORD                 = "customer/changePassword";
+	public static final String EMILIST                       = "customer/emiList";
+	public static final String LOGOUT                        = "customer/logoutCustomer";
+	public static final String CONTACTDETAILS_RESPONSE       = "contactDetailsResponse";
 
-	public static final String EMAIL        = "email";
-	public static final String PDF_FILE_URL = "pdfFileUrl";
-	public static final String CONTRACT_NO  = "contractNo";
+	public static final String EMAIL                = "email";
+	public static final String PDF_FILE_URL         = "pdfFileUrl";
+	public static final String CONTRACT_NO          = "contractNo";
+	public static final String RECEIPT              = "receipt";
+	public static final String SHOW_PAGE            = "page";
+	public static final String EMI_PATTERN          = "emiPattern";
+	public static final String STATEMENT_OF_ACCOUNT = "statementOfAccount";
+	public static final String RC_UPDATE            = "rcUpdate";
+	public static final String PRECLOSURE           = "preclosure";
+	public static final String ONGOING_LOAN         = "onGoingLoans";
+	public static final String TERMINATED_LOAN      = "terminatedLoans";
+	public static final String CONTRACT_DETAIL      = "contractDetail";
+	public static final String SHOW_RECEIPT         = "show_receipt";
 }

@@ -160,7 +160,6 @@ public class EmiPatternFragment extends Fragment {
 		} );
 
 		loadEmiDetail();
-
 	}
 
 	private void setData( ContractModel model ) {

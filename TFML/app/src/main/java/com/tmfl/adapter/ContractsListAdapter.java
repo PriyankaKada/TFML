@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.tmfl.R;
 import com.tmfl.activity.EmiActivity;
+import com.tmfl.auth.Constant;
+import com.tmfl.customview.MoreDetailDialog;
 import com.tmfl.model.ContractResponseModel.ContractModel;
 import com.tmfl.util.PreferenceHelper;
 
@@ -109,8 +111,11 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 					String sendNextDueDate   = txt_next_due_date.getText().toString();
 					String sendCurrentEmiAmt = txt_current_emi_amount.getText().toString();
 					String sendLastPay       = txt_last_payment_date.getText().toString();
-					Intent intent            = new Intent( mContext, EmiActivity.class );
-					Bundle bundle            = new Bundle();
+
+					PreferenceHelper.insertObject( Constant.CONTRACT_DETAIL, model );
+
+					Intent intent = new Intent( mContext, EmiActivity.class );
+					Bundle bundle = new Bundle();
 					bundle.putSerializable( "datamodel", arrayList );
 					bundle.putString( "datamodelvalue", model.getUsrConNo() );
 					PreferenceHelper.insertString( PreferenceHelper.CONTRACT_NO, trimLeadingZeros( model.getUsrConNo() ) );
@@ -121,7 +126,9 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 					bundle.putString( "CURRENTEMI", String.valueOf( model.getDueAmount() ) );
 					bundle.putString( "LASTPAYMODE", model.getLastReceiptDate() );
 					intent.putExtras( bundle );
-					mContext.startActivity( intent );
+//					mContext.startActivity( intent );
+
+					new MoreDetailDialog( mContext );
 				}
 			} );
 

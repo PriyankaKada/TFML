@@ -20,6 +20,30 @@
             android:textSize="18sp"
             android:textStyle="bold"/>
 
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rdNewOffers"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="New Vehicle"/>
+
+            <RadioButton
+                android:id="@+id/rdUsedOffers"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:text="Used Vehicle"/>
+
+        </RadioGroup>
+
         <Spinner
             android:id="@+id/sp_offers"
             android:layout_width="match_parent"

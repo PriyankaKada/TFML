@@ -28,6 +28,7 @@ import com.tmfl.common.ApiService;
 import com.tmfl.common.CommonUtils;
 import com.tmfl.fragment.ApplyLoanFragment;
 import com.tmfl.fragment.NewSchemeFragment;
+import com.tmfl.fragment.ReferFriendFragment;
 import com.tmfl.model.schemesResponseModel.NewOfferData;
 import com.tmfl.model.schemesResponseModel.SchemesResponse;
 import com.tmfl.model.schemesResponseModel.UsedOfferData;
@@ -51,7 +52,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 	private TextView  txtschemestitle;
 	private ImageView imgtoolbarhome, imgSocial;
 	private List< NewOfferData > newOfferList;
-	private LinearLayout         llSchemes, llApplyLoan;
+	private LinearLayout         llSchemes, llApplyLoan, linReferFriend;
 	private SchemesPagerAdapter   adapter;
 	private List< UsedOfferData > usedOfferList;
 
@@ -68,15 +69,28 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		imgSocial = ( ImageView ) findViewById( R.id.img_social );
 		llApplyLoan = ( LinearLayout ) findViewById( R.id.llApplyLoan );
 		llSchemes = ( LinearLayout ) findViewById( R.id.llSchemes );
+		linReferFriend = ( LinearLayout ) findViewById( R.id.linReferFriend );
 
 		llApplyLoan.setOnClickListener( this );
 		llSchemes.setOnClickListener( this );
+		linReferFriend.setOnClickListener( this );
+		imgtoolbarhome.setOnClickListener( this );
+		imgSocial.setOnClickListener( this );
 
 		view1 = findViewById( R.id.view1 );
 		view2 = findViewById( R.id.view2 );
 		view3 = findViewById( R.id.view3 );
 
 		bundle1 = getIntent().getExtras();
+		/*String isLoggedIn = bundle1.getString( "LOGGED_IN" );
+		if ( isLoggedIn.equalsIgnoreCase( "true" ) ) {
+			view3.setVisibility( View.VISIBLE );
+			linReferFriend.setVisibility( View.VISIBLE );
+		}
+		else {
+			view3.setVisibility( View.GONE );
+			linReferFriend.setVisibility( View.GONE );
+		}*/
 
 		tmflApi = ApiService.getInstance().call();
 
@@ -97,11 +111,17 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		List< Fragment > fragList = new ArrayList<>();
 		System.out.println( "------------dgdsgdf----------->" + newOfferList );
 
-		final Fragment newSchemeFragment = new NewSchemeFragment();
-		final Fragment applyLoanFragment = new ApplyLoanFragment();
+		final Fragment newSchemeFragment   = new NewSchemeFragment();
+		final Fragment applyLoanFragment   = new ApplyLoanFragment();
+		final Fragment referFriendFragment = new ReferFriendFragment();
 
 		fragList.add( newSchemeFragment );
 		fragList.add( applyLoanFragment );
+
+		String loggedIn = bundle1.getString( "LOGGED_IN" );
+		if ( loggedIn.equalsIgnoreCase( "true" ) ) {
+			fragList.add( referFriendFragment );
+		}
 
 		Log.d( "fraglistsize", String.valueOf( fragList.size() ) );
 		adapter = new SchemesPagerAdapter( getSupportFragmentManager(), fragList );
@@ -121,18 +141,37 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 					case 0:
 						view1.setVisibility( View.VISIBLE );
 						view2.setVisibility( View.INVISIBLE );
+						view3.setVisibility( View.INVISIBLE );
 //						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						break;
 
 					case 1:
 						view1.setVisibility( View.INVISIBLE );
 						view2.setVisibility( View.VISIBLE );
+						view3.setVisibility( View.INVISIBLE );
 //						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						break;
 
+					case 3:
+
+						view1.setVisibility( View.INVISIBLE );
+						view2.setVisibility( View.INVISIBLE );
+						String isLoggedIn = bundle1.getString( "LOGGED_IN" );
+						if ( isLoggedIn.equalsIgnoreCase( "true" ) ) {
+							view3.setVisibility( View.VISIBLE );
+						}
+						else {
+							view3.setVisibility( View.INVISIBLE );
+						}
+
+						break;
+
 					default:
-						view1.setBackgroundResource( R.drawable.selector_tab_indicator_white );
-						view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+//						view1.setBackgroundResource( R.drawable.selector_tab_indicator_white );
+//						view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+					/*	view1.setVisibility( View.INVISIBLE );
+						view2.setVisibility( View.INVISIBLE );
+						view3.setVisibility( View.VISIBLE );*/
 //						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						break;
 				}
@@ -150,11 +189,27 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 			viewPager.setCurrentItem( 0 );
 			view1.setVisibility( View.VISIBLE );
 			view2.setVisibility( View.INVISIBLE );
+			view3.setVisibility( View.INVISIBLE );
 		}
 		else if ( myTabselected.equalsIgnoreCase( Constant.ISAPPLYLOANSELECT ) ) {
 			viewPager.setCurrentItem( 1 );
 			view1.setVisibility( View.INVISIBLE );
 			view2.setVisibility( View.VISIBLE );
+			view3.setVisibility( View.INVISIBLE );
+		}
+		else if ( myTabselected.equalsIgnoreCase( Constant.ISREFERFREINDSELECT ) ) {
+
+			String isLoggedIn = bundle1.getString( "LOGGED_IN" );
+			if ( isLoggedIn.equalsIgnoreCase( "true" ) ) {
+				view3.setVisibility( View.VISIBLE );
+			}
+			else {
+				view3.setVisibility( View.GONE );
+			}
+			view2.setVisibility( View.INVISIBLE );
+			view1.setVisibility( View.INVISIBLE );
+
+			viewPager.setCurrentItem( 2 );
 		}
 	}
 
@@ -168,6 +223,8 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 				return "New Offers";
 			case 1:
 				return "Apply Loans";
+			case 2:
+				return "Refer Friend";
 			default:
 				return "";
 		}
@@ -197,6 +254,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 
 				view1.setVisibility( View.VISIBLE );
 				view2.setVisibility( View.INVISIBLE );
+				view3.setVisibility( View.INVISIBLE );
 				viewPager.setCurrentItem( 0 );
 
 				break;
@@ -205,7 +263,23 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 
 				view2.setVisibility( View.VISIBLE );
 				view1.setVisibility( View.INVISIBLE );
+				view3.setVisibility( View.INVISIBLE );
 				viewPager.setCurrentItem( 1 );
+
+				break;
+
+			case R.id.linReferFriend:
+
+				String isLoggedIn = bundle1.getString( "LOGGED_IN" );
+				if ( isLoggedIn.equalsIgnoreCase( "true" ) ) {
+					view3.setVisibility( View.VISIBLE );
+				}
+				else {
+					view3.setVisibility( View.GONE );
+				}
+				view2.setVisibility( View.INVISIBLE );
+				view1.setVisibility( View.INVISIBLE );
+				viewPager.setCurrentItem( 2 );
 
 				break;
 		}

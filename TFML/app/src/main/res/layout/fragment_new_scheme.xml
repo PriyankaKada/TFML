@@ -1,7 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:layout_margin="10dp"
               android:background="@color/color_grey_light"
               android:orientation="vertical">
 
@@ -18,7 +17,7 @@
             android:background="@color/tab_bg"
             android:gravity="center"
             android:padding="10dp"
-            android:text="New Offers"
+            android:text="New Vehicle"
             android:textColor="@color/white"
             android:textSize="16sp"/>
 
@@ -30,7 +29,7 @@
             android:background="@color/tab_bg"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Used Offers"
+            android:text="Used Vehicle"
             android:textColor="@color/white"
             android:textSize="16sp"/>
 

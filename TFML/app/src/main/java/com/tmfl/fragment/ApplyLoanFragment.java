@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -60,7 +61,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ApplyLoanFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, RadioGroup.OnCheckedChangeListener, TextView.OnEditorActionListener {
+public class ApplyLoanFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, RadioGroup.OnCheckedChangeListener, TextView.OnEditorActionListener, CompoundButton.OnCheckedChangeListener {
 
 	String strLeadTypechk  = "";
 	String strVechicalType = "";
@@ -72,6 +73,9 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 	List< NewOfferData >  newOfferList;
 	List< UsedOfferData > usedOfferList;
 	SchemesResponse       response;
+	int                   offer;
+	List< UsedOfferData > usedOfferListNew = new ArrayList<>();
+	List< NewOfferData >  newOfferListNew  = new ArrayList<>();
 	private EditText edtFirstName, edtLastName, edtMobileNumber, edtLandlineNumber, edtEmailAddress, edtOrgnizationName, edtCode;
 	private Spinner spnProduct, spSelectBranchState, spSelectBranchCity, spSelectBranch, spSelectCity, spSelectState, spOffers;
 	private RadioButton rdbLeadTypeIndividual, rdbLeadTypeOrganizational, rdbVecTypeCommercial, rdbVechTypeRefinance, rdbVechPassanger;
@@ -79,6 +83,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 	private View       view;
 	private RadioGroup radioGroupLeadType, radioGroupVehicleType;
 	private List< String > branchStateList, branchCityList, branchList, cityList, stateList, spOfferList;
+	private RadioButton rdNewOffers, rdUsedOffers;
 
 	@Override
 	public View onCreateView( LayoutInflater inflater, ViewGroup container,
@@ -104,13 +109,18 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 			spOfferList.add( response.getOfferData().getNEW().get( i ).getTitle() );
 		}
 
-		List< NewOfferData > newOfferList = new ArrayList<>();
-		NewOfferData         datum        = new NewOfferData();
+		NewOfferData datum = new NewOfferData();
 		datum.setTitle( "Select Offers" );
-		newOfferList.add( datum );
-		newOfferList.addAll( this.newOfferList );
+		newOfferListNew.add( datum );
+		newOfferListNew.addAll( this.newOfferList );
 
-		spOffers.setAdapter( new ArrayAdapter< NewOfferData >( getActivity(), R.layout.layout_spinner_textview, newOfferList ) );
+		UsedOfferData usedOfferData = new UsedOfferData();
+		usedOfferData.setTitle( "Select Offers" );
+		usedOfferListNew.add( usedOfferData );
+		usedOfferListNew.addAll( this.usedOfferList );
+
+		spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, newOfferListNew ) );
+
 		branchStateList = new ArrayList< String >();
 
 		BranchResponseModel branchResponseModel = new BranchResponseModel();
@@ -199,6 +209,15 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		btnApplyLoan = ( Button ) view.findViewById( R.id.btn_apply_laon );
 		SetFonts.setFonts( getActivity(), btnCancel, 2 );
 		SetFonts.setFonts( getActivity(), btnApplyLoan, 2 );
+
+		rdNewOffers = ( RadioButton ) view.findViewById( R.id.rdNewOffers );
+		rdUsedOffers = ( RadioButton ) view.findViewById( R.id.rdUsedOffers );
+		rdNewOffers.setOnCheckedChangeListener( this );
+
+
+		rdNewOffers.setChecked( true );
+		//rdUsedOffers.setOnCheckedChangeListener( this );
+
 		inputLoanModel = new InputModel();
 		inputCityModel = new InputCityModel();
 		inputBranchModel = new InputBranchModel();
@@ -212,7 +231,6 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		btnApplyLoan.setOnClickListener( this );
 		edtMobileNumber.setOnEditorActionListener( this );
 		edtLandlineNumber.setOnEditorActionListener( this );
-
 	}
 
 	@Override
@@ -392,8 +410,6 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 					}
 
 				}
-
-
 			}
 
 			@Override
@@ -456,8 +472,12 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 				break;
 			case R.id.sp_offers:
 
-				strOfferId = String.valueOf( newOfferList.get( position ).getId() );
-				Log.d( "offer id", strOfferId );
+				if ( offer == 1 ) {
+					strOfferId = String.valueOf( ( ( NewOfferData ) parent.getItemAtPosition( position ) ).getId() );
+				}
+				else if ( offer == 2 ) {
+					strOfferId = String.valueOf( ( ( UsedOfferData ) parent.getItemAtPosition( position ) ).getId() );
+				}
 
 				break;
 		}
@@ -472,6 +492,8 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 
 	@Override
 	public void onCheckedChanged( RadioGroup group, int checkedId ) {
+
+		Log.e( "inside check ", " inside check " );
 		switch ( group.getCheckedRadioButtonId() ) {
 			case R.id.rdb_organization:
 				if ( checkedId == R.id.rdb_organization ) {
@@ -560,5 +582,39 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		}
 
 		return false;
+	}
+
+	@Override
+	public void onCheckedChanged( CompoundButton compoundButton, boolean b ) {
+
+		if ( b ) {
+
+			offer = 1;
+			spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, newOfferListNew ) );
+		}
+		else {
+			offer = 2;
+			spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, usedOfferListNew ) );
+
+		}
+
+		/*switch ( compoundButton.getId() ) {
+
+			case R.id.rdNewOffers:
+
+				offer = 1;
+				spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, newOfferListNew ) );
+
+
+				break;
+
+			case R.id.rdUsedOffers:
+
+				offer = 2;
+				spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, usedOfferListNew ) );
+
+				break;
+		}*/
+
 	}
 }

@@ -1,13 +1,123 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:gravity="center_horizontal"
+              android:background="@android:color/transparent"
               android:orientation="vertical">
-    <!--
-        <android.support.v4.widget.CircleImageView
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <com.tmfl.util.CircleImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="2dp"
+            android:src="@drawable/ic_receipts"/>
+
+        <TextView
+            android:id="@+id/txtReceipt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src=""/>-->
+            android:layout_marginLeft="10dp"
+            android:text="Reciepts"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <com.tmfl.util.CircleImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="2dp"
+            android:src="@drawable/ic_emi_pattern"/>
+
+        <TextView
+            android:id="@+id/txtEmiPattern"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="EMI Pattern"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <com.tmfl.util.CircleImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="2dp"
+            android:src="@drawable/ic_statement_of_account"/>
+
+        <TextView
+            android:id="@+id/txtStatementOfAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Statement of Account"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <com.tmfl.util.CircleImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="2dp"
+            android:src="@drawable/ic_rc_update"/>
+
+        <TextView
+            android:id="@+id/txtRcUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="RC Update"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <com.tmfl.util.CircleImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="2dp"
+            android:src="@drawable/ic_pre_closure"/>
+
+        <TextView
+            android:id="@+id/txtPreClosure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Pre-Closure Statement"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+    </LinearLayout>
 
 </LinearLayout>

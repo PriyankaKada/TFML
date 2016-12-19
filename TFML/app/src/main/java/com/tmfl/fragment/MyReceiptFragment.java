@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.tmfl.R;
 import com.tmfl.activity.LoginActivity;
 import com.tmfl.adapter.MyExpandableListAdapter;
+import com.tmfl.auth.Constant;
 import com.tmfl.auth.TmflApi;
 import com.tmfl.common.ApiService;
 import com.tmfl.common.CommonUtils;
@@ -87,6 +88,7 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 		SetFonts.setFonts( getActivity(), btnBack, 2 );
 		date = new Date();
 		modifiedDate = new SimpleDateFormat( "yyyy-MM-dd" ).format( date );
+
 		Log.e( "ModifiedDate", modifiedDate );
 		if ( modifiedDate != null ) {
 			callCheckLogin();
@@ -97,6 +99,7 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 	public void onClick( View v ) {
 		switch ( v.getId() ) {
 			case R.id.btn_back:
+				PreferenceHelper.insertBoolean( Constant.SHOW_RECEIPT, false );
 				getActivity().getSupportFragmentManager().beginTransaction().replace( R.id.frm_emi_detail, new EmiDetailFragment() ).commit();
 				break;
 		}

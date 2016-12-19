@@ -8,7 +8,7 @@
 
     <View
         android:id="@+id/viewBlueMark"
-        android:layout_width="10dp"
+        android:layout_width="15dp"
         android:layout_height="match_parent"
         android:layout_marginLeft="5dp"
         android:background="@color/tab_bg"
@@ -16,10 +16,10 @@
 
     <View
         android:id="@+id/viewGreenMark"
-        android:layout_width="10dp"
+        android:layout_width="15dp"
         android:layout_height="match_parent"
         android:layout_marginLeft="5dp"
-        android:background="@color/green"
+        android:background="@color/total_lin_bg"
         android:visibility="gone"/>
 
     <LinearLayout

@@ -15,11 +15,13 @@ import android.widget.TextView;
 
 import com.tmfl.R;
 import com.tmfl.adapter.EmiPagerAdapter;
+import com.tmfl.auth.Constant;
 import com.tmfl.fragment.EmiPatternFragment;
 import com.tmfl.fragment.PreClosureFragment;
 import com.tmfl.fragment.RcUpdateFragment;
 import com.tmfl.fragment.StatementOfAccountFragment;
 import com.tmfl.model.ContractResponseModel.ContractModel;
+import com.tmfl.util.PreferenceHelper;
 import com.tmfl.util.SetFonts;
 
 import java.util.ArrayList;
@@ -38,8 +40,9 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
+
 		super.onCreate( savedInstanceState );
-		View view = getLayoutInflater().inflate( R.layout.activity_emi, frameLayout );
+		setContentView( R.layout.activity_emi );
 		toolbarEmi = ( Toolbar ) findViewById( R.id.toolbar_emi );
 		setSupportActionBar( toolbarEmi );
 		getSupportActionBar().setTitle( "" );
@@ -47,29 +50,69 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 		Bundle bundle = intent.getExtras();
 		modelArrayList = ( ArrayList< ContractModel > ) bundle.getSerializable( "datamodel" );
 		datavalue = ( String ) bundle.getString( "datamodelvalue" );
-		init( view );
+		init();
+
 	}
 
-	public void init( View view ) {
-		imgEmiBack = ( ImageView ) view.findViewById( R.id.img_emi_back );
-		txtEmiName = ( TextView ) view.findViewById( R.id.txt_titel_emi );
-		viewPager = ( ViewPager ) view.findViewById( R.id.pager );
-		setupViewPager( viewPager );
+	public void init() {
+
+		imgEmiBack = ( ImageView ) findViewById( R.id.img_emi_back );
+		txtEmiName = ( TextView ) findViewById( R.id.txt_titel_emi );
+		viewPager = ( ViewPager ) findViewById( R.id.pager );
 		view1 = findViewById( R.id.view1 );
 		view2 = findViewById( R.id.view2 );
 		view3 = findViewById( R.id.view3 );
 		view4 = findViewById( R.id.view4 );
-		emiTabLayout = ( TabLayout ) view.findViewById( R.id.tab_layout_emi );
+		emiTabLayout = ( TabLayout ) findViewById( R.id.tab_layout_emi );
+		setupViewPager( viewPager );
 		emiTabLayout.setupWithViewPager( viewPager );
-		imgEmiBack = ( ImageView ) view.findViewById( R.id.img_emi_back );
-		imgDrawer = ( ImageView ) view.findViewById( R.id.img_drawer_emi );
+		imgEmiBack = ( ImageView ) findViewById( R.id.img_emi_back );
+		imgDrawer = ( ImageView ) findViewById( R.id.img_drawer_emi );
 		setupTabIcon();
 		imgEmiBack.setOnClickListener( this );
 		imgDrawer.setOnClickListener( this );
+
+		String page = PreferenceHelper.getString( Constant.SHOW_PAGE );
+
+		switch ( page ) {
+			case Constant.EMI_PATTERN:
+
+				PreferenceHelper.insertBoolean( Constant.SHOW_RECEIPT, false );
+				viewPager.setCurrentItem( 0 );
+
+				break;
+
+			case Constant.STATEMENT_OF_ACCOUNT:
+
+				viewPager.setCurrentItem( 1 );
+
+				break;
+
+			case Constant.RC_UPDATE:
+
+				viewPager.setCurrentItem( 2 );
+
+				break;
+
+			case Constant.PRECLOSURE:
+
+				viewPager.setCurrentItem( 3 );
+
+				break;
+
+			case Constant.RECEIPT:
+
+				PreferenceHelper.insertBoolean( Constant.SHOW_RECEIPT, true );
+				viewPager.setCurrentItem( 0 );
+
+				break;
+		}
+
 	}
 
 
 	private void setupViewPager( ViewPager viewPager ) {
+
 		EmiPagerAdapter adapter                    = new EmiPagerAdapter( getSupportFragmentManager() );
 		Fragment        emiPatternFrag             = new EmiPatternFragment();
 		Fragment        statementOfAccountFragment = new StatementOfAccountFragment();
@@ -84,6 +127,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 		adapter.addFrag( statementOfAccountFragment, "Statement of account" );
 		adapter.addFrag( rcUpdateFragment, "RC update" );
 		adapter.addFrag( closureFragment, "Pre-closure statement" );
+
 		viewPager.setAdapter( adapter );
 		viewPager.setCurrentItem( 0 );
 		viewPager.addOnPageChangeListener( new ViewPager.OnPageChangeListener() {
@@ -103,6 +147,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 						view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view4.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+
 						break;
 
 					case 1:
@@ -110,6 +155,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 						view2.setBackgroundResource( R.drawable.selector_tab_indicator_white );
 						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view4.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+
 						break;
 
 					case 2:
@@ -117,6 +163,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 						view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view3.setBackgroundResource( R.drawable.selector_tab_indicator_white );
 						view4.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+
 						break;
 
 					case 3:
@@ -124,13 +171,17 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 						view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view4.setBackgroundResource( R.drawable.selector_tab_indicator_white );
+
 						break;
+
 					default:
 						view1.setBackgroundResource( R.drawable.selector_tab_indicator_white );
 						view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view4.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
+
 						break;
+
 				}
 			}
 
@@ -143,6 +194,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 
 	public String getPageTitle( int position ) {
 		switch ( position ) {
+
 			case 0:
 				return "TATA Tiago";
 			case 1:
@@ -153,6 +205,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 				return "TATA Tiago";
 			default:
 				return "TATA Tiago";
+
 		}
 	}
 
@@ -177,8 +230,8 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 		tabFour.setText( "Pre-closure statement" );
 		SetFonts.setFonts( this, tabFour, 2 );
 		emiTabLayout.getTabAt( 3 ).setCustomView( tabFour );
-	}
 
+	}
 
 	@Override
 	public void onClick( View v ) {
@@ -186,11 +239,10 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 			case R.id.img_emi_back:
 				finish();
 				break;
+
 			case R.id.img_drawer_emi:
 				openDrawer();
 				break;
-
 		}
-
 	}
 }

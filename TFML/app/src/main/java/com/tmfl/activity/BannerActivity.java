@@ -253,7 +253,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 
 				Intent intentSchema = new Intent( this, SchemesActivity.class );
 				intentSchema.addFlags( Intent.FLAG_ACTIVITY_NO_ANIMATION );
-				intentSchema.putExtra( "TAB_SELECTED", Constant.ISSCHEMASTABSELECT );
+				intentSchema.putExtra( "TAB_SELECTED", Constant.ISSCHEMASTABSELECT ).putExtra( "LOGGED_IN", "false" );
 				startActivity( intentSchema );
 				//
 				break;
@@ -266,13 +266,13 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				view4.setVisibility( View.GONE );
 
 				Intent intentApplyLoan = new Intent( this, SchemesActivity.class );
-				intentApplyLoan.putExtra( "TAB_SELECTED", Constant.ISAPPLYLOANSELECT );
+				intentApplyLoan.putExtra( "TAB_SELECTED", Constant.ISAPPLYLOANSELECT ).putExtra( "LOGGED_IN", "false" );
 				startActivity( intentApplyLoan );
 				break;
 
 			case R.id.linReferFriend:
 				Intent intentReferFriend = new Intent( this, SchemesActivity.class );
-				intentReferFriend.putExtra( "TAB_SELECTED", Constant.ISREFERFREINDSELECT );
+				intentReferFriend.putExtra( "TAB_SELECTED", Constant.ISREFERFREINDSELECT ).putExtra( "LOGGED_IN", "false" );
 				startActivity( intentReferFriend );
 				break;
 

@@ -54,9 +54,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/selector_tab_indicator_blue"
-                android:elevation="10dp"
-                android:visibility="gone"/>
+                android:background="@drawable/selector_tab_indicator_white"
+                android:visibility="invisible"/>
         </LinearLayout>
 
         <!-- <android.support.design.widget.TabLayout
@@ -130,6 +129,32 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="@string/apply_loan"
+                    android:textColor="#FFFFFF"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linReferFriend"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgReferFriend"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_refer_friends_non_selected"/>
+
+                <TextView
+                    android:id="@+id/txtReferFriend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/refer_friend"
                     android:textColor="#FFFFFF"/>
 
             </LinearLayout>
