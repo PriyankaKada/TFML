@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -82,6 +83,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 	private DatePickerFragment date;
 	private ListView           lstPreClosure;
 	private List< String >     contractLst;
+	private List< String >     nonzerocontractLst;
 	private Spinner            spnContractNo;
 	private int    itemindex     = 0;
 	private String datavalue     = "";
@@ -114,7 +116,10 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 				return source.substring( i );
 			}
 		}
-		return null;
+		return source;
+//		source.replaceFirst("^0+(?!$)", "");
+//	String s=	source;
+
 	}
 
 	@Override
@@ -134,6 +139,8 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 		currentEmi = ( String ) bundle.getString( "CURRENTEMI" );
 		overdue = ( String ) bundle.get( "OVERDUEAMT" );
 		tmflLogin = ApiService.getInstance().call();
+		((AppCompatActivity )getActivity()).getSupportActionBar().setTitle( R.string.preclosure_statement);
+
 		init();
 		return view;
 
@@ -173,16 +180,18 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 		SetFonts.setFonts( getActivity(), btnSubmit, 2 );
 		spnContractNo = ( Spinner ) view.findViewById( R.id.spnContractNo );
 		contractLst = new ArrayList< String >();
+		nonzerocontractLst=new ArrayList<String>(  );
 		if ( modelArrayList.size() > 0 ) {
 
 			for ( int i = 0; i < modelArrayList.size(); i++ ) {
-				contractLst.add( trimLeadingZeros( modelArrayList.get( i ).getUsrConNo() ) );
+				nonzerocontractLst.add( trimLeadingZeros( modelArrayList.get( i ).getUsrConNo() ) );
+				contractLst.add( modelArrayList.get( i ).getUsrConNo() );
 				ContractModel model = modelArrayList.get( i );
 			   /* if (model != null)
 			        contractLst.add(model.getUsrConNo());*/
 			}
 
-			ArrayAdapter< String > madapter = new ArrayAdapter< String >( getActivity(), R.layout.spinner_row, contractLst ) {
+			ArrayAdapter< String > madapter = new ArrayAdapter< String >( getActivity(), R.layout.spinner_row, nonzerocontractLst ) {
 
 				@Override
 				public boolean isEnabled( int position ) {
@@ -219,14 +228,12 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 				spnContractNo.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
 					@Override
 					public void onItemSelected( AdapterView< ? > parent, View view, int position, long id ) {
-						strContractNo = spnContractNo.getSelectedItem().toString();
+						strContractNo = modelArrayList.get( position ).getUsrConNo();
 						itemindex = position;
-						if ( itemindex > 0 ) {
+						if ( itemindex >= 0 ) {
 							ContractModel model = modelArrayList.get( itemindex );
 							setData( model );
 							callCheckLogin();
-
-
 						}
 					}
 

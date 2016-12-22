@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -96,6 +97,8 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 		tmflApi = ApiService.getInstance().call();
 		Intent intent = getActivity().getIntent();
 		Bundle bundle = intent.getExtras();
+		((AppCompatActivity )getActivity()).getSupportActionBar().setTitle( R.string.rc_update);
+
 		modelArrayList =
 				( ArrayList< ContractModel > ) bundle.getSerializable( "datamodel" );
 		datavalue = ( String ) bundle.getString( "datamodelvalue" );
@@ -106,6 +109,7 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 		currentEmi = ( String ) bundle.getString( "CURRENTEMI" );
 		overdue = ( String ) bundle.get( "OVERDUEAMT" );
 		init();
+
 		return view;
 	}
 

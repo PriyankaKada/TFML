@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.tmfl.R;
+import com.tmfl.activity.EmiActivity;
 import com.tmfl.activity.LoginActivity;
 import com.tmfl.adapter.EmiExpandableListView;
 import com.tmfl.auth.Constant;
@@ -45,6 +46,8 @@ public class EmiDetailFragment extends Fragment implements View.OnClickListener 
 	LogInputModel    logInputModel;
 	LogResponseModel logResponseModel;
 
+	EmiActivity emiActivity;
+
 	@Override
 	public View onCreateView( LayoutInflater inflater, ViewGroup container,
 	                          Bundle savedInstanceState ) {
@@ -56,6 +59,9 @@ public class EmiDetailFragment extends Fragment implements View.OnClickListener 
 		datavalue = ( String ) bundle.getString( "datamodelvalue" );
 		logInputModel = new LogInputModel();
 		logResponseModel = new LogResponseModel();
+
+		emiActivity = ( EmiActivity ) getActivity();
+
 		init();
 		return view;
 	}
@@ -153,7 +159,7 @@ public class EmiDetailFragment extends Fragment implements View.OnClickListener 
 					}
 					else if ( response.body().getStatus().toString().contains( "Failed" ) ) {
 						CommonUtils.closeProgressDialog();
-						Toast.makeText( getActivity(), "Server Under Maintenance,Please try after Sometime ", Toast.LENGTH_LONG ).show();
+						Toast.makeText( emiActivity, "Server Under Maintenance,Please try after Sometime ", Toast.LENGTH_LONG ).show();
 					}
 					else {
 						CommonUtils.closeProgressDialog();

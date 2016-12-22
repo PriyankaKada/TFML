@@ -6,6 +6,11 @@
     <string name="loan_status">Loan\nStatus</string>
     <string name="txt_login">Login</string>
     <string name="txt_change_pass">Change Password</string>
+    <string name="Emipattern">EMI Pattern</string>
+    <string name="rc_update">RC Update</string>
+    <string name="preclosure_statement">Pre-Closure Statement</string>
+    <string name="statement_of_account">Statement Of Account</string>
+
     <string name="contact_us">Contact Us</string>
     <string name="btn_change_pass">Change Password</string>
     <string name="title_activity_schemes">SchemesActivity</string>

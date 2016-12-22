@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +34,8 @@ public class EmiPatternFragment extends Fragment {
 	ArrayList< ContractModel > modelArrayList;
 	TextView                   txt_repaymentmode, txt_emiamount, txt_dueamount, txt_duedate, txt_rc_no;
 	int itemindex = 0;
-	private ArrayList< String > contractLst;
+	private ArrayList< String > nonzerocontractLst;
+	private ArrayList<String>contractlist;
 	private String datavalue     = "";
 	private String rcNo          = "";
 	private String dueDate       = "";
@@ -48,7 +50,10 @@ public class EmiPatternFragment extends Fragment {
 				return source.substring( i );
 			}
 		}
-		return null;
+		return source;
+//		source.replaceFirst("^0+(?!$)", "");
+//	String s=	source;
+
 	}
 
 	@Override
@@ -68,21 +73,30 @@ public class EmiPatternFragment extends Fragment {
 		repaymentMode = ( String ) bundle.getString( "REPAYMENT" );
 		currentEmi = ( String ) bundle.getString( "CURRENTEMI" );
 		overdue = ( String ) bundle.get( "OVERDUEAMT" );
+		((AppCompatActivity )getActivity()).getSupportActionBar().setTitle(R.string.Emipattern);
+
 
 		init();
 		return view;
+
 	}
 
 	public void init() {
 		spnContractNo = ( Spinner ) view.findViewById( R.id.spnContractNo );
 
-		contractLst = new ArrayList< String >();
+		contractlist = new ArrayList< String >();
+		nonzerocontractLst = new ArrayList< String >();
+
 		if ( modelArrayList.size() > 0 ) {
 			for ( int i = 0; i < modelArrayList.size(); i++ ) {
-				contractLst.add( trimLeadingZeros( modelArrayList.get( i ).getUsrConNo() ) );
+//			contractLst.add(modelArrayList.get( i ).getUsrConNo());
+//				contractlist.add( modelArrayList.get( i ).getUsrConNo());
+				nonzerocontractLst.add( trimLeadingZeros(modelArrayList.get( i ).getUsrConNo()) );
+//				contractLst.add(Integer.valueOf(modelArrayList.get( i ).getUsrConNo()).toString());
+
 			}
 
-			ArrayAdapter< String > madapter = new ArrayAdapter< String >( getActivity(), R.layout.spinner_row, contractLst ) {
+			ArrayAdapter< String > madapter = new ArrayAdapter< String >( getActivity(), R.layout.spinner_row, nonzerocontractLst ) {
 
 				@Override
 				public boolean isEnabled( int position ) {
@@ -102,11 +116,11 @@ public class EmiPatternFragment extends Fragment {
 			spnContractNo.setAdapter( madapter );
 			madapter.notifyDataSetChanged();
 
-			Log.d( "datavalue", datavalue + contractLst.size() );
-			for ( int i = 0; i < contractLst.size(); i++ ) {
-				if ( contractLst.get( i ).equalsIgnoreCase( datavalue ) ) {
+			Log.d( "datavalue", datavalue + contractlist.size() );
+			for ( int i = 0; i < contractlist.size(); i++ ) {
+				if ( contractlist.get( i ).equalsIgnoreCase( datavalue ) ) {
 					spnContractNo.setSelection( i );
-					Log.d( "contractList", contractLst.get( i ) );
+					Log.d( "contractList", contractlist.get( i ) );
 				}
 			}
 		}

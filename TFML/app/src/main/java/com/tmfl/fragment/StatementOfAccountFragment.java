@@ -21,6 +21,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -153,6 +154,8 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 		logResponseModel = new LogResponseModel();
 		accountStatementInputModel = new AccountStatementInputModel();
 		accountStmtResponse = new AccountStmtResponse();
+		((AppCompatActivity )getActivity()).getSupportActionBar().setTitle( R.string.statement_of_account);
+
 		init();
 		return view;
 	}
@@ -258,7 +261,6 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 						if ( txtAccDate.getText().toString() != null ) {
 							callCheckLogin();
 						}
-
 					}
 
 					@Override

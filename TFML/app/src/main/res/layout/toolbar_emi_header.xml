@@ -26,10 +26,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginLeft="25dp"
-            android:text="TATA Tiago"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:visibility="invisible"
             ></TextView>
 
         <ImageView

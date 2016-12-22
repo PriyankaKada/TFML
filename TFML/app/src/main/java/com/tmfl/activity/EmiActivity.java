@@ -77,6 +77,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 		switch ( page ) {
 			case Constant.EMI_PATTERN:
 
+
 				PreferenceHelper.insertBoolean( Constant.SHOW_RECEIPT, false );
 				viewPager.setCurrentItem( 0 );
 
@@ -84,11 +85,13 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 
 			case Constant.STATEMENT_OF_ACCOUNT:
 
+
 				viewPager.setCurrentItem( 1 );
 
 				break;
 
 			case Constant.RC_UPDATE:
+
 
 				viewPager.setCurrentItem( 2 );
 
@@ -96,11 +99,13 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 
 			case Constant.PRECLOSURE:
 
+
 				viewPager.setCurrentItem( 3 );
 
 				break;
 
 			case Constant.RECEIPT:
+
 
 				PreferenceHelper.insertBoolean( Constant.SHOW_RECEIPT, true );
 				viewPager.setCurrentItem( 0 );
@@ -196,15 +201,15 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 		switch ( position ) {
 
 			case 0:
-				return "TATA Tiago";
+				return "EMI Pattern";
 			case 1:
-				return "TATA Tiago";
+				return "Statement of Account";
 			case 2:
-				return "TATA Tiago";
+				return "RC Update";
 			case 3:
-				return "TATA Tiago";
+				return "Preclosure";
 			default:
-				return "TATA Tiago";
+				return "";
 
 		}
 	}

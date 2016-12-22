@@ -289,7 +289,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		imgSocial.setVisibility( View.INVISIBLE );
 		final Dialog socialDialog = new Dialog( SchemesActivity.this, android.R.style.Theme_Holo_Dialog_NoActionBar );
 		socialDialog.getWindow().setBackgroundDrawable( new ColorDrawable( android.graphics.Color.TRANSPARENT ) );
-		socialDialog.setContentView( R.layout.dialog_social );
+		socialDialog.setContentView( R.layout.dialog_social_mirror );
 		WindowManager.LayoutParams params = socialDialog.getWindow().getAttributes();
 		params.y = 5;
 		params.x = 5;

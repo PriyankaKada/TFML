@@ -118,7 +118,7 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 					Bundle bundle = new Bundle();
 					bundle.putSerializable( "datamodel", arrayList );
 					bundle.putString( "datamodelvalue", model.getUsrConNo() );
-					PreferenceHelper.insertString( PreferenceHelper.CONTRACT_NO, trimLeadingZeros( model.getUsrConNo() ) );
+					PreferenceHelper.insertString( PreferenceHelper.CONTRACT_NO, model.getUsrConNo() );
 					bundle.putString( "RCNO", model.getRcNumber() );
 					bundle.putString( "OVERDUEAMT", model.getOdAmt() );
 					bundle.putString( "REPAYMENT", model.getPdcFlag() );
