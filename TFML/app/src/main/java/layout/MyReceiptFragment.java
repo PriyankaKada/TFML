@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tmfl.R;
+import com.tfml.R;
 
 /**
  * A simple {@link Fragment} subclass.

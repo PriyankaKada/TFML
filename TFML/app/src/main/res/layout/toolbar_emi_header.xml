@@ -29,8 +29,7 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:visibility="invisible"
-            ></TextView>
+            />
 
         <ImageView
             android:id="@+id/img_drawer_emi"
@@ -39,7 +38,7 @@
             android:layout_gravity="end"
             android:layout_marginRight="5dp"
             android:src="@drawable/ic_drawer"
-            ></ImageView>
+            />
     </android.support.v7.widget.Toolbar>
 
 </LinearLayout>

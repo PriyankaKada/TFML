@@ -5,7 +5,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                tools:context="com.tmfl.activity.ContractActivity">
+                tools:context="com.tfml.activity.ContractActivity">
 
     <include
         android:id="@+id/upper"

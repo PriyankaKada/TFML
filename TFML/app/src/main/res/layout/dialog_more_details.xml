@@ -11,7 +11,7 @@
         android:orientation="horizontal"
         android:padding="5dp">
 
-        <com.tmfl.util.CircleImageView
+        <com.tfml.util.CircleImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:padding="2dp"
@@ -34,7 +34,7 @@
         android:orientation="horizontal"
         android:padding="5dp">
 
-        <com.tmfl.util.CircleImageView
+        <com.tfml.util.CircleImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:padding="2dp"
@@ -57,7 +57,7 @@
         android:orientation="horizontal"
         android:padding="5dp">
 
-        <com.tmfl.util.CircleImageView
+        <com.tfml.util.CircleImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:padding="2dp"
@@ -80,7 +80,7 @@
         android:orientation="horizontal"
         android:padding="5dp">
 
-        <com.tmfl.util.CircleImageView
+        <com.tfml.util.CircleImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:padding="2dp"
@@ -104,7 +104,7 @@
         android:orientation="horizontal"
         android:padding="5dp">
 
-        <com.tmfl.util.CircleImageView
+        <com.tfml.util.CircleImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:padding="2dp"

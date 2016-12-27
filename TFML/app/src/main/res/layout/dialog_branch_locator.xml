@@ -37,28 +37,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="10dp"
+        >
 
         <Spinner
             android:id="@+id/sp_select_state"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:background="@drawable/spinner_bg"
-            android:padding="10dp">
+            >
         </Spinner>
 
         <Spinner
             android:id="@+id/sp_select_branch_data"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:background="@drawable/spinner_bg"
-            android:padding="10dp">
+            >
         </Spinner>
-
     </LinearLayout>
 
     <LinearLayout
@@ -66,12 +66,11 @@
         android:layout_height="match_parent"
         android:padding="10dp">
 
-        <WebView
-            android:id="@+id/webView1"
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.MapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"/>
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 </LinearLayout>

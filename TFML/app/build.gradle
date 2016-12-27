@@ -75,4 +75,5 @@ dependencies {
         transitive = true;
     }
 
+    compile 'com.google.android.gms:play-services-appindexing:9.2.0'
 }
