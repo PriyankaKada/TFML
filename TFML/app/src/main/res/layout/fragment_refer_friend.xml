@@ -5,7 +5,7 @@
             android:background="@color/white"
             android:isScrollContainer="true"
             android:orientation="vertical"
-            tools:context="com.tfml.fragment.ReferFriendFragment">
+            tools:context="com.tmfl.fragment.ReferFriendFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

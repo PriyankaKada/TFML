@@ -5,7 +5,7 @@
               android:layout_height="wrap_content"
               android:orientation="vertical"
 
-              tools:context="com.tfml.fragment.BannerFragment">
+              tools:context="com.tmfl.fragment.BannerFragment">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/recentViewpager"

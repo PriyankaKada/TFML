@@ -7,7 +7,7 @@
               android:layout_height="match_parent"
               android:background="@drawable/login_bg1"
               android:orientation="vertical"
-              tools:context="com.tfml.activity.LoginActivity">
+              tools:context="com.tmfl.activity.LoginActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

@@ -6,7 +6,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context="com.tfml.activity.EmiActivity">
+              tools:context="com.tmfl.activity.EmiActivity">
 
     <include
         android:id="@+id/upper"
