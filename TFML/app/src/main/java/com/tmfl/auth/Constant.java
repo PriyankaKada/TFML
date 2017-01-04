@@ -52,4 +52,5 @@ public class Constant {
 	public static final String TERMINATED_LOAN      = "terminatedLoans";
 	public static final String CONTRACT_DETAIL      = "contractDetail";
 	public static final String SHOW_RECEIPT         = "show_receipt";
+	public static final String BILL_DESK_MESSAGE    = "customer/getBillDeskMsg";
 }
