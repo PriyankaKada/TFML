@@ -33,13 +33,12 @@ public class GetBillDeskMsg {
     String contract;
     ProgressDialog progressDialog;
     TmflApi tmflApi;
-    JSONArray list = new JSONArray();
+    String list;
 
 
     public GetBillDeskMsg(Context mContext, String contract) {
         this.context = mContext;
-        this.contract = contract;
-        list.put(contract);
+        this.list = contract;
         CommonUtils.showProgressDialog(context, "Getting Your Information");
         getBillDeskMsg();
 
@@ -52,7 +51,7 @@ public class GetBillDeskMsg {
     {
         tmflApi = ApiService.getInstance().call();
 
-        billDeskMsgInputModel.setContracts(list.toString().replaceAll(" \"", ""));
+        billDeskMsgInputModel.setContracts(list);
         billDeskMsgInputModel.setCustomer_id(PreferenceHelper.getString(PreferenceHelper.USER_ID));
         billDeskMsgInputModel.setApi_token(PreferenceHelper.getString(PreferenceHelper.API_TOKEN));
         billDeskMsgInputModel.setMobile_no("9892827269");
@@ -87,6 +86,8 @@ public class GetBillDeskMsg {
             @Override
             public void onFailure(Call<BillDeskMsgResponseModel> call, Throwable t) {
                 CommonUtils.closeProgressDialog();
+
+                Log.d("error", t.getMessage());
 
             }
 

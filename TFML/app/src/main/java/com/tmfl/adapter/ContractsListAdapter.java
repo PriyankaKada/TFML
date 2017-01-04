@@ -36,7 +36,7 @@ public class ContractsListAdapter extends ArrayAdapter<ContractModel> {
     ArrayList<ContractModel> arrayList;
     SimpleDateFormat dateFormat, format2;
     Date varDate;
-    String strMsg ="TATAMFLTES|CO2017010452830|NA|1|NA|NA|NA|INR|NA|R|tatamfl|NA|NA|F|1234@100,45678@150|58724@190,45678@200|58724@220,45678@2500|58724@300,45678@350|NA|2002680054|9892827269|http://staging.php-dev.in:8844/tatamotors/public/api/billDeskResponse|7389D48DFAAA73CF3EBA440DBB6BDB272B9FFF4FCF7EB063558DAE3C69032D5B";
+    String strMsg = "TATAMFLTES|CO2017010452830|NA|1|NA|NA|NA|INR|NA|R|tatamfl|NA|NA|F|1234@100,45678@150|58724@190,45678@200|58724@220,45678@2500|58724@300,45678@350|NA|2002680054|9892827269|http://staging.php-dev.in:8844/tatamotors/public/api/billDeskResponse|7389D48DFAAA73CF3EBA440DBB6BDB272B9FFF4FCF7EB063558DAE3C69032D5B";
     //String strMsg="TATAMFL|CO2017010300001|NA|1|NA|NA|NA|INR|NA|R|tatamfl|NA|NA|F|1234@0,45678@0|58724@0,45678@0|58724@1,45678@0|58724@0,45678@0|NA|2002680054|9892827269|http:\\/\\/staging.php-dev.in:8844\\/tatamotors\\/public\\/customer\\/billDeskResponse|590DF0C2844D2118C4E117FA9FDFA4F50B996F9C4B0C9A96E52CD862D5BE9B34";
     String strEmail = "NA";
     String strMobile = "9892827269";
@@ -143,7 +143,7 @@ public class ContractsListAdapter extends ArrayAdapter<ContractModel> {
 //                    intent.putExtra("user-mobile", strMobile);
 //                    intent.putExtra("callback", callbackObj);
 //                    mContext.startActivity(intent);
-                    new GetBillDeskMsg(mContext," [\"1234@100\",\"45678@150\",\"58724@190\",\"45678@200\",\"58724@220\",\"45678@2500\",\"58724@300\",\"45678@350\",\"58724@400\"]");
+                    new GetBillDeskMsg(mContext, "1234@100,45678@150,58724@190,45678@200,58724@220,45678@2500,58724@300,45678@350,58724@400");
 
 
                 }
