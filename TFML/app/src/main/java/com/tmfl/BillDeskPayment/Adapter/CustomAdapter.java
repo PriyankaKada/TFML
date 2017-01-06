@@ -16,7 +16,6 @@ import com.tmfl.BillDeskPayment.Activity.TotalBillPayActivity;
 import com.tmfl.BillDeskPayment.Models.Contract;
 import com.tmfl.R;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +62,9 @@ public class CustomAdapter extends ArrayAdapter<Contract> {
             holder.txtTotalDue = (TextView) convertView.findViewById(R.id.txtTotalDueValue);
             holder.txtEnterAmount = (EditText) convertView.findViewById(R.id.txtAmountValue);
             holder.mWatcher = new TextListener();
+//            holder.txtEnterAmount.setEnabled(listItems.get(position).getIsSelected());
             holder.txtEnterAmount.addTextChangedListener(holder.mWatcher);
+
             holder.imgTick = (ImageView) convertView.findViewById(R.id.imgTick);
 
             convertView.setTag(holder);
@@ -86,7 +87,7 @@ public class CustomAdapter extends ArrayAdapter<Contract> {
 
         holder.mWatcher.active = true;
         holder.imgTick.setImageResource(contract.getIsSelected() ? R.drawable.ic_check_circle_green : R.drawable.ic_check_circle_amber);
-        holder.txtEnterAmount.setEnabled(!contract.getIsSelected());
+//        holder.txtEnterAmount.setEnabled(!contract.getIsSelected());
 
 
         holder.imgTick.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +95,7 @@ public class CustomAdapter extends ArrayAdapter<Contract> {
             public void onClick(View view) {
                 listItems.get(position).setSelected(!listItems.get(position).getIsSelected());
                 holder.imgTick.setImageResource(listItems.get(position).getIsSelected() ? R.drawable.ic_check_circle_green : R.drawable.ic_check_circle_amber);
-                holder.txtEnterAmount.setEnabled(!listItems.get(position).getIsSelected());
+                holder.txtEnterAmount.setEnabled(listItems.get(position).getIsSelected());
 
                 ((TotalBillPayActivity) mContext).updateTotalAmount();
             }

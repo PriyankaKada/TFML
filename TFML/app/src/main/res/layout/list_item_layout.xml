@@ -257,6 +257,7 @@
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp"
                 android:text="4568"
+                android:enabled="false"
                 android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
