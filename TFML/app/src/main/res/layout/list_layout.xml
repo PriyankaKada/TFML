@@ -2,33 +2,79 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_grey_light">
+    android:background="@color/color_grey_light"
+    android:orientation="vertical">
 
     <TextView
+        android:id="@+id/btnPayNow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnPayNow"
-        android:background="@color/colorAccent"
-        android:text=" PAY NOW"
-        android:textColor="@color/white"
         android:layout_gravity="right"
+        android:layout_margin="10dp"
+        android:background="@color/colorAccent"
         android:padding="6dp"
-        android:layout_margin="10dp"/>
-
+        android:text=" PAY NOW"
+        android:textColor="@color/white" />
 
 
     <ListView
+        android:id="@+id/lstView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/lstView"
-        android:layout_marginBottom="20dp"
-        android:dividerHeight="15dp"
-        android:divider="@color/color_grey_light"
         android:layout_margin="20dp"
-        android:background="@color/white"/>
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:divider="@color/color_grey_light"
+        android:dividerHeight="15dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Amount :"
+            android:textColor="@color/text_black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/totalamounttextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/text_black"
+            android:textSize="18sp"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone :"
+            android:textColor="@color/text_black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtMobileNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/text_black"
+            android:textSize="18sp"
+            android:textStyle="normal" />
+    </LinearLayout>
 
 
 </LinearLayout>

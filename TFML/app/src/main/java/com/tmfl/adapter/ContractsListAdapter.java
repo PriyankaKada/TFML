@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.billdesk.sdk.PaymentOptions;
+import com.tmfl.BillDeskPayment.Activity.TotalBillPayActivity;
 import com.tmfl.BillDeskPayment.GetBillDeskMsg;
 import com.tmfl.BillDeskPayment.SampleCallBack;
 import com.tmfl.R;
@@ -143,9 +144,10 @@ public class ContractsListAdapter extends ArrayAdapter<ContractModel> {
 //                    intent.putExtra("user-mobile", strMobile);
 //                    intent.putExtra("callback", callbackObj);
 //                    mContext.startActivity(intent);
-                    new GetBillDeskMsg(mContext, "1234@100,45678@150,58724@190,45678@200,58724@220,45678@2500,58724@300,45678@350,58724@400");
+//                    new GetBillDeskMsg(mContext, "1234@100,45678@150,58724@190,45678@200,58724@220,45678@2500,58724@300,45678@350,58724@400");
 
-
+                           Intent intent=new Intent(mContext, TotalBillPayActivity.class);
+                           mContext.startActivity(intent);
                 }
             });
 

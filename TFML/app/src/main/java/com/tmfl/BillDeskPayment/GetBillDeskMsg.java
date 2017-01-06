@@ -3,6 +3,7 @@ package com.tmfl.BillDeskPayment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -54,7 +55,7 @@ public class GetBillDeskMsg {
         billDeskMsgInputModel.setContracts(list);
         billDeskMsgInputModel.setCustomer_id(PreferenceHelper.getString(PreferenceHelper.USER_ID));
         billDeskMsgInputModel.setApi_token(PreferenceHelper.getString(PreferenceHelper.API_TOKEN));
-        billDeskMsgInputModel.setMobile_no("9892827269");
+        billDeskMsgInputModel.setMobile_no(PreferenceHelper.getString(PreferenceHelper.MOBILE));
 
         tmflApi.getBillDeskMsgResponse(billDeskMsgInputModel).enqueue(new Callback<BillDeskMsgResponseModel>() {
             @Override
@@ -62,14 +63,26 @@ public class GetBillDeskMsg {
                 CommonUtils.closeProgressDialog();
                 if (response.body() != null) {
 
+                    String email, mobile;
+
+                    email = PreferenceHelper.getString(PreferenceHelper.EMAIL);
+                    if (TextUtils.isEmpty(email)) {
+                        email = "NA";
+                    }
+
+                    mobile = PreferenceHelper.getString(PreferenceHelper.MOBILE);
+                    if (TextUtils.isEmpty(mobile)) {
+                        mobile = "NA";
+                    }
+
                     SampleCallBack callbackObj = new SampleCallBack();
                     Intent intent = new Intent(context,
                             PaymentOptions.class);
                     Log.d("MSG", response.body().getMsg());
                     intent.putExtra("msg", response.body().getMsg()); // pg_msg
 //				intent.putExtra("token", strToken);
-                    intent.putExtra("user-email", "NA");
-                    intent.putExtra("user-mobile", "9892827269");
+                    intent.putExtra("user-email", email);
+                    intent.putExtra("user-mobile", mobile);
                     intent.putExtra("callback", callbackObj);
                     context.startActivity(intent);
 //                      {
