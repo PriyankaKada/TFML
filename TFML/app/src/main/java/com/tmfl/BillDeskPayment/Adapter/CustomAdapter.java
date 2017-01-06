@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tmfl.BillDeskPayment.Activity.TotalBillPayActivity;
 import com.tmfl.BillDeskPayment.Models.Contract;
@@ -89,21 +90,29 @@ public class CustomAdapter extends ArrayAdapter< Contract > {
 		holder.imgTick.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View view ) {
-				listItems.get( position ).setSelected( !listItems.get( position ).getIsSelected() );
-				holder.imgTick.setImageResource( listItems.get( position ).getIsSelected() ? R.drawable.ic_check_circle_green : R.drawable.ic_check_circle_amber );
-				holder.txtEnterAmount.setEnabled( !listItems.get( position ).getIsSelected() );
 
 				EditText editText = ( EditText ) view.getTag();
 				double value = Double.parseDouble( editText.getText().toString().trim().equalsIgnoreCase( "" )
 						                                   ? "0.0" : editText.getText().toString().trim() );
-				if ( listItems.get( position ).getIsSelected() ) {
-					totalAmount = totalAmount + value;
-					Log.d( "total amount", "inside customer + " + value );
-					( ( TotalBillPayActivity ) mContext ).updateTotalAmount( totalAmount, position );
+				listItems.get( position ).setSelected( !listItems.get( position ).getIsSelected() );
+				if ( listItems.get( position ).getIsSelected() && value > 100 ) {
+
+					holder.imgTick.setImageResource( listItems.get( position ).getIsSelected() ? R.drawable.ic_check_circle_green : R.drawable.ic_check_circle_amber );
+					holder.txtEnterAmount.setEnabled( !listItems.get( position ).getIsSelected() );
+
+					if ( listItems.get( position ).getIsSelected() ) {
+						totalAmount = totalAmount + value;
+						Log.d( "total amount", "inside customer + " + value );
+						( ( TotalBillPayActivity ) mContext ).updateTotalAmount( totalAmount, position );
+					}
+					else if ( !listItems.get( position ).getIsSelected() ) {
+						totalAmount = totalAmount - value;
+						( ( TotalBillPayActivity ) mContext ).updateTotalAmount( totalAmount, position );
+					}
 				}
-				else if ( !listItems.get( position ).getIsSelected() ) {
-					totalAmount = totalAmount - value;
-					( ( TotalBillPayActivity ) mContext ).updateTotalAmount( totalAmount, position );
+				else {
+					Toast.makeText( mContext, "Amount should be above 100!", Toast.LENGTH_LONG ).show();
+
 				}
 			}
 		} );
