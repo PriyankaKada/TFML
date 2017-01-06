@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tmfl.BillDeskPayment.Activity.TotalBillPayActivity;
 import com.tmfl.BillDeskPayment.Models.Contract;
@@ -22,14 +23,14 @@ import java.util.List;
 /**
  * Created by webwerks on 2/1/17.
  */
+
 public class CustomAdapter extends ArrayAdapter<Contract> {
 
     static int amount = 0;
+    static List<String> TotalAmount = new ArrayList<>();
     List<Contract> listItems;
     Context mContext;
-
-
-    static List<String> TotalAmount = new ArrayList<>();
+    double totalAmount = 0.0;
 
 
     public CustomAdapter(Context context, List<Contract> contract) {
@@ -37,7 +38,6 @@ public class CustomAdapter extends ArrayAdapter<Contract> {
         mContext = context;
         listItems = contract;
     }
-
 
     @Override
     public int getCount() {
@@ -47,6 +47,8 @@ public class CustomAdapter extends ArrayAdapter<Contract> {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final Contract contract = getItem(position);
+
+        Contract dummyContract = contract;
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
@@ -62,9 +64,7 @@ public class CustomAdapter extends ArrayAdapter<Contract> {
             holder.txtTotalDue = (TextView) convertView.findViewById(R.id.txtTotalDueValue);
             holder.txtEnterAmount = (EditText) convertView.findViewById(R.id.txtAmountValue);
             holder.mWatcher = new TextListener();
-//            holder.txtEnterAmount.setEnabled(listItems.get(position).getIsSelected());
             holder.txtEnterAmount.addTextChangedListener(holder.mWatcher);
-
             holder.imgTick = (ImageView) convertView.findViewById(R.id.imgTick);
 
             convertView.setTag(holder);
@@ -79,9 +79,7 @@ public class CustomAdapter extends ArrayAdapter<Contract> {
         holder.txtExpenses.setText(contract.getTotalExpenses());
         holder.txtTotalDue.setText(contract.getTotalCurrentDue());
 
-
         holder.mWatcher.active = false;
-
         holder.txtEnterAmount.setText(contract.getTotalCurrentDue() + "");
         holder.mWatcher.pos = position;
 
@@ -89,64 +87,58 @@ public class CustomAdapter extends ArrayAdapter<Contract> {
         holder.imgTick.setImageResource(contract.getIsSelected() ? R.drawable.ic_check_circle_green : R.drawable.ic_check_circle_amber);
 //        holder.txtEnterAmount.setEnabled(!contract.getIsSelected());
 
-
+        holder.imgTick.setTag(holder.txtEnterAmount);
         holder.imgTick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                EditText editText = (EditText) view.getTag();
+                double value = Double.parseDouble(editText.getText().toString().trim().equalsIgnoreCase("")
+                        ? "0.0" : editText.getText().toString().trim());
                 listItems.get(position).setSelected(!listItems.get(position).getIsSelected());
                 holder.imgTick.setImageResource(listItems.get(position).getIsSelected() ? R.drawable.ic_check_circle_green : R.drawable.ic_check_circle_amber);
-                holder.txtEnterAmount.setEnabled(listItems.get(position).getIsSelected());
+//                holder.txtEnterAmount.setEnabled(listItems.get(position).getIsSelected());
 
-                ((TotalBillPayActivity) mContext).updateTotalAmount();
+
+
+
+                    if (listItems.get(position).getIsSelected()) {
+                        holder.txtEnterAmount.setEnabled(true);
+                        totalAmount = totalAmount + value;
+                        Log.d("total amount", "inside customer + " + value);
+                        ((TotalBillPayActivity) mContext).updateTotalAmount(totalAmount, position);
+                    } else if (!listItems.get(position).getIsSelected()) {
+                        holder.txtEnterAmount.setEnabled(false);
+                        totalAmount = totalAmount - value;
+                        ((TotalBillPayActivity) mContext).updateTotalAmount(totalAmount, position);
+                    }
+
             }
         });
+
         return convertView;
     }
 
     @Override
     public void notifyDataSetChanged() {
         super.notifyDataSetChanged();
-
     }
 
-
     class ViewHolder {
+        public TextListener mWatcher;
         TextView txtContractNoValue, txtRcNo, txtMonthlyEMI, txtOverdue, txtOverdueChanged, txtExpenses, txtTotalDue;
         EditText txtEnterAmount;
         ImageView imgTick;
-        public TextListener mWatcher;
-
 
         public ViewHolder() {
-         /*   txtEnterAmount.addTextChangedListener(new TextWatcher() {
-                                                      @Override
-                                                      public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                                                      }
-
-                                                      @Override
-                                                      public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                                                      }
-
-                                                      @Override
-                                                      public void afterTextChanged(Editable editable) {
-                                                          listItems.get(referenceNumber).setOdcCollectioAmount(editable.toString());
-                                                      }
-                                                  }
-            );
-        }*/
-
 
         }
     }
-
 
     class TextListener implements TextWatcher {
 
         int pos;
         boolean active;
-
 
         public int getPos() {
             return pos;
@@ -177,9 +169,7 @@ public class CustomAdapter extends ArrayAdapter<Contract> {
         @Override
         public void afterTextChanged(Editable editable) {
             if (active) {
-                getItem(pos).setTotalCurrentDue(editable.toString());
-
-
+//				getItem( pos ).setTotalCurrentDue( editable.toString() );
             }
         }
     }

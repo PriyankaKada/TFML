@@ -134,7 +134,7 @@ public class SocialUtil {
 		WindowManager.LayoutParams params = loanstatusdialog.getWindow().getAttributes();
 		params.y = 120;
 		params.x = 120;
-		params.gravity = Gravity.BOTTOM | Gravity.CENTER;
+		params.gravity = Gravity.CENTER | Gravity.CENTER;
 		loanstatusdialog.getWindow().setAttributes( params );
 		loanstatusdialog.setCancelable( true );
 		loanstatusdialog.getWindow().getAttributes().windowAnimations = R.style.animationdialog;

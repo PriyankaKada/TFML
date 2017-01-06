@@ -1,11 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/color_grey_light"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/color_grey_light"
+              android:orientation="vertical"
+              tools:context="com.tmfl.BillDeskPayment.Activity.TotalBillPayActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <ImageView
+            android:id="@+id/img_contract"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="start"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_star"/>
+
+        <TextView
+            android:id="@+id/txt_title_contract"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="25dp"
+            android:text="My Contract"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/img_drawer_payament"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="5dp"
+
+            android:src="@drawable/ic_drawer"/>
+
+    </android.support.v7.widget.Toolbar>
 
     <TextView
         android:id="@+id/btnPayNow"
@@ -13,68 +51,24 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_margin="10dp"
-        android:background="@color/colorAccent"
+        android:background="@color/tab_bg"
         android:padding="6dp"
         android:text=" PAY NOW"
-        android:textColor="@color/white" />
-
+        android:textColor="@color/white"
+        android:textSize="14sp"/>
 
     <ListView
         android:id="@+id/lstView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
         android:layout_weight="1"
         android:background="@color/white"
         android:divider="@color/color_grey_light"
-        android:dividerHeight="15dp" />
+        android:dividerHeight="15dp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Total Amount :"
-            android:textColor="@color/text_black"
-            android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/totalamounttextview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/text_black"
-            android:textSize="18sp"
-            android:textStyle="normal" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Phone :"
-            android:textColor="@color/text_black"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/txtMobileNo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/text_black"
-            android:textSize="18sp"
-            android:textStyle="normal" />
-    </LinearLayout>
 
 
 </LinearLayout>

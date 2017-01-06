@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class EmiActivity extends DrawerBaseActivity implements View.OnClickListener {
 
 	Toolbar   toolbarEmi;
-	ImageView imgEmiBack, imgDrawer;
+	ImageView imgEmiBack, imgDrawerEmi;
 	TextView     txtEmiName;
 	TabLayout    emiTabLayout;
 	ViewPager    viewPager;
@@ -42,8 +42,9 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 	protected void onCreate( Bundle savedInstanceState ) {
 
 		super.onCreate( savedInstanceState );
-		setContentView( R.layout.activity_emi );
-		toolbarEmi = ( Toolbar ) findViewById( R.id.toolbar_emi );
+//		setContentView( R.layout.activity_emi );
+		View view = getLayoutInflater().inflate( R.layout.activity_emi, frameLayout );
+		toolbarEmi = ( Toolbar ) view.findViewById( R.id.toolbar_emi );
 		setSupportActionBar( toolbarEmi );
 		getSupportActionBar().setTitle( "" );
 		Intent intent = this.getIntent();
@@ -57,7 +58,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 	public void init() {
 
 		imgEmiBack = ( ImageView ) findViewById( R.id.img_emi_back );
-		txtEmiName = ( TextView ) findViewById( R.id.txt_titel_emi );
+		txtEmiName = ( TextView ) toolbarEmi.findViewById( R.id.txt_titel_emi );
 		viewPager = ( ViewPager ) findViewById( R.id.pager );
 
 		view1 = findViewById( R.id.view1 );
@@ -69,10 +70,10 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 		setupViewPager( viewPager );
 		emiTabLayout.setupWithViewPager( viewPager );
 		imgEmiBack = ( ImageView ) findViewById( R.id.img_emi_back );
-		imgDrawer = ( ImageView ) findViewById( R.id.img_drawer_emi );
+		imgDrawerEmi = ( ImageView ) findViewById( R.id.img_drawer_emi );
 		setupTabIcon();
 		imgEmiBack.setOnClickListener( this );
-		imgDrawer.setOnClickListener( this );
+		imgDrawerEmi.setOnClickListener( this );
 
 		String page = PreferenceHelper.getString( Constant.SHOW_PAGE );
 
@@ -80,6 +81,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 
 			case Constant.EMI_PATTERN:
 
+				txtEmiName.setText( "EMI Pattern" );
 				PreferenceHelper.insertBoolean( Constant.SHOW_RECEIPT, false );
 				viewPager.setCurrentItem( 0 );
 
@@ -87,24 +89,28 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 
 			case Constant.STATEMENT_OF_ACCOUNT:
 
+				txtEmiName.setText( "Statement of Account" );
 				viewPager.setCurrentItem( 1 );
 
 				break;
 
 			case Constant.RC_UPDATE:
 
+				txtEmiName.setText( "RC Update" );
 				viewPager.setCurrentItem( 2 );
 
 				break;
 
 			case Constant.PRECLOSURE:
 
+				txtEmiName.setText( "Preclosure" );
 				viewPager.setCurrentItem( 3 );
 
 				break;
 
 			case Constant.RECEIPT:
 
+				txtEmiName.setText( "EMI Pattern" );
 				PreferenceHelper.insertBoolean( Constant.SHOW_RECEIPT, true );
 				viewPager.setCurrentItem( 0 );
 
@@ -145,6 +151,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 				switch ( position ) {
 
 					case 0:
+						txtEmiName.setText( "EMI Pattern" );
 						view1.setBackgroundResource( R.drawable.selector_tab_indicator_white );
 						view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
@@ -153,6 +160,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 						break;
 
 					case 1:
+						txtEmiName.setText( "Statement of Account" );
 						view1.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view2.setBackgroundResource( R.drawable.selector_tab_indicator_white );
 						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
@@ -161,6 +169,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 						break;
 
 					case 2:
+						txtEmiName.setText( "RC Update" );
 						view1.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view3.setBackgroundResource( R.drawable.selector_tab_indicator_white );
@@ -169,6 +178,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 						break;
 
 					case 3:
+						txtEmiName.setText( "Preclosure" );
 						view1.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
