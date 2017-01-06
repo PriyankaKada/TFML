@@ -199,7 +199,6 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 					PreferenceHelper.insertObject( Constant.TERMINATED_LOAN, response.body().getData().getTerminated() );
 				}
 
-
 				models.addAll( response.body().getData().getTerminated().getContracts() );
 				lstCotractList.setAdapter( new ContractsListAdapter( ContractActivity.this, models ) );
 				strTotal = response.body().getData().getTotal().toString();
