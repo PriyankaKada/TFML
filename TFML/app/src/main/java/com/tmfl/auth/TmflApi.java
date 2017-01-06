@@ -1,6 +1,8 @@
 package com.tmfl.auth;
 
 
+import com.tmfl.BillDeskPayment.Models.Example;
+import com.tmfl.BillDeskPayment.Models.JSONData;
 import com.tmfl.model.ContractResponseModel.ContractsInputModel;
 import com.tmfl.model.ContractResponseModel.ContractsResponseModel;
 import com.tmfl.model.LoanStatusResponseModel.LoanStatusInputModel;
@@ -12,6 +14,8 @@ import com.tmfl.model.accountStmtPdfResponseModel.AccountStmtResponse;
 import com.tmfl.model.applyLoanResponseModel.ApplyLoanResponse;
 import com.tmfl.model.applyLoanResponseModel.InputModel;
 import com.tmfl.model.bannerResponseModel.BannerlistResponse;
+import com.tmfl.model.billDeskMsgResponseModel.BillDeskMsgInputModel;
+import com.tmfl.model.billDeskMsgResponseModel.BillDeskMsgResponseModel;
 import com.tmfl.model.branchResponseModel.BranchResponseModel;
 import com.tmfl.model.branchResponseModel.InputBranchModel;
 import com.tmfl.model.branchResponseModel.InputBranchState;
@@ -166,4 +170,10 @@ public interface TmflApi {
 
 	@POST( Constant.LOGOUT )
 	Call< LogoutResponseModel > getLogoutResponse( @Body LogoutInputModel logoutInputModel );
+
+	@POST(Constant.BILL_DESK_MESSAGE)
+	Call<BillDeskMsgResponseModel>getBillDeskMsgResponse(@Body BillDeskMsgInputModel billDeskMsgInputModel);
+	@POST( "customer/myContracts" )
+	Call<Example> getListData(@Body JSONData jsonData);
+
 }

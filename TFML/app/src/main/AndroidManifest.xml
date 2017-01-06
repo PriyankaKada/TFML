@@ -99,6 +99,40 @@
             android:name="com.tmfl.activity.LocateUsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="com.billdesk.sdk.PaymentOptions" />
+        <activity
+            android:name="com.billdesk.sdk.BankList"
+            android:theme="@style/Theme.BD_Dialog" />
+        <activity
+            android:name="com.billdesk.sdk.QuickPayView"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.billdesk.sdk.CreditCardView"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.billdesk.sdk.PaymentWebView"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.billdesk.utils.URLUtilActivity"
+            android:configChanges="keyboardHidden"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+
+
+        <!-- from BillDesk SDK v1.3.37 -->
+
+        <activity
+            android:name="com.billdesk.library.OtpDialogActivity"
+            android:theme="@android:style/Theme.Dialog" />
+
+
+        <!-- BillDesk code End -->
+
+        <!-- Below is the WrapperApp's (Not BillDesk SDK's) StatusActivity
+        to show response msg from BillDesk's PG -->
+        <activity android:name=".BillDeskPayment.StatusActivity" />
+
+
 
         <meta-data
             android:name="io.fabric.ApiKey"
