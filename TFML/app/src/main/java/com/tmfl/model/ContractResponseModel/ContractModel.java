@@ -116,6 +116,28 @@ public class ContractModel implements Serializable {
 	@SerializedName( "due_amount" )
 	@Expose
 	private String  dueAmount;
+	@SerializedName( "total_expenses" )
+	@Expose
+	private String totalExpenses;
+	@SerializedName( "odc_collection_amount" )
+	@Expose
+	private String odcCollectioAmount;
+
+	public String getTotalExpenses() {
+		return totalExpenses;
+	}
+
+	public void setTotalExpenses( String totalExpenses ) {
+		this.totalExpenses = totalExpenses;
+	}
+
+	public String getOdcCollectioAmount() {
+		return odcCollectioAmount;
+	}
+
+	public void setOdcCollectioAmount( String odcCollectioAmount ) {
+		this.odcCollectioAmount = odcCollectioAmount;
+	}
 
 	public String getProduct() {
 		return product;

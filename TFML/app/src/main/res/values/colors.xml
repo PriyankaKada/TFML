@@ -14,7 +14,7 @@
     <color name="total_count_bg">#239655</color>
     <color name="terminated_lin_bg">#E84C3D</color>
     <color name="terminated_count_bg">#D04437</color>
-    <color name="overdues_ling_bg">#F39C11</color>
+    <color name="overdues_ling_bg">#F96128</color>
     <color name="overdues_count_bg">#da8c10</color>
     <color name="detail_frag_bg">#EEEEEE</color>
     <color name="color_DARKgrey">#6D6D6D</color>

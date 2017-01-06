@@ -113,7 +113,7 @@ public class Contract {
 	@SerializedName("due_amount")
 	@Expose
 	private String dueAmount;
-	@SerializedName("odc_collectio_amount")
+	@SerializedName("odc_collection_amount")
 	@Expose
 	private String odcCollectioAmount;
 	@SerializedName("total_expenses")
