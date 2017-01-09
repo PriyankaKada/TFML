@@ -39,13 +39,13 @@ import retrofit2.Response;
 public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnClickListener {
 
 	static String total;
+	public String amount = "";
 	ListView       listView;
 	Contract       contractModel;
 	ProgressDialog dialog;
-	TextView       totalamounttextview, txtMobileNo, txt_title_contract;
+	TextView       totalamounttextview, txtMobileNo, txt_title_contract, total_amount;
 	double totalAmount = 0.0;
 	String queryString = "";
-	public String amount = "";
 	private List< Contract > listOfContract;
 	private ImageView        imgDrawerPayment, img_contract;
 	private Dialog payBillDialog;
@@ -65,6 +65,7 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 		img_contract = ( ImageView ) findViewById( R.id.img_contract );
 		txt_title_contract.setText( "Due Details" );
 		img_contract.setOnClickListener( this );
+
 		imgDrawerPayment = ( ImageView ) findViewById( R.id.img_drawer_payament );
 		imgDrawerPayment.setOnClickListener( this );
 		dialog = new ProgressDialog( TotalBillPayActivity.this );
@@ -87,15 +88,16 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 
 	private void callPayNow() {
 
+		queryString = "";
 		if ( listOfContract != null ) {
 			for ( Contract contract : listOfContract ) {
 				if ( contract.getIsSelected() ) {
 					if ( !TextUtils.isEmpty( queryString ) ) {
 						queryString = queryString + ",";
 					}
-					queryString = queryString + contract.getUsrConNo() + "@" + amount;
+					queryString = queryString + contract.getUsrConNo() + "@" + contract.getNewTotalCurrentDue();
 					if ( TextUtils.isDigitsOnly( contract.getTotalCurrentDue() ) ) {
-						totalAmount = totalAmount + Double.parseDouble( amount );
+						totalAmount = totalAmount + Double.parseDouble( contract.getNewTotalCurrentDue() );
 					}
 				}
 			}
@@ -146,6 +148,8 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 				else {
 					new GetBillDeskMsg( TotalBillPayActivity.this, queryString, monumber );
 				}
+
+
 			}
 		} );
 
@@ -246,21 +250,30 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 		} );
 	}
 
-	public void updateTotalAmount( double amount, int pos ) {
-		if ( listOfContract != null ) {
-			/*if ( listOfContract.get( pos ).getIsSelected() ) {
-				totalAmount = totalAmount + amount;
-			}
-			else if ( !listOfContract.get( pos ).getIsSelected() ) {
-				if ( totalAmount != 0 ) {
-					totalAmount = totalAmount - amount;
-				}
-			}*/
-			totalAmount = amount;
+	public void updateTotalAmount() {
 
+		totalAmount = 0;
+
+		if ( listOfContract != null ) {
+			for ( Contract contract : listOfContract ) {
+				if ( contract.getIsSelected() ) {
+
+					//queryString = queryString + contract.getUsrConNo() + "@" + contract.getNewTotalCurrentDue();
+					if ( !TextUtils.isEmpty( contract.getTotalCurrentDue() ) ) {
+						try {
+							totalAmount = totalAmount + Double.parseDouble( contract.getNewTotalCurrentDue() );
+						}
+						catch (
+								NumberFormatException e
+								) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
 		}
 		Log.e( "total amount ", " total amount " + totalAmount );
-//		( ( TextView ) findViewById( R.id.totalamounttextview ) ).setText( String.valueOf( totalAmount + "" ) );
+		( ( TextView ) findViewById( R.id.total_amount ) ).setText( String.valueOf( totalAmount + "" ) );
 	}
 
 	@Override

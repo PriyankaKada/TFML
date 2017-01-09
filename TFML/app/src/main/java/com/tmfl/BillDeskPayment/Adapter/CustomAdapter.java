@@ -2,7 +2,7 @@ package com.tmfl.BillDeskPayment.Adapter;
 
 import android.content.Context;
 import android.text.Editable;
-import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -82,8 +82,8 @@ public class CustomAdapter extends ArrayAdapter< Contract > {
 		holder.txtTotalDue.setText( contract.getTotalCurrentDue() );
 
 		holder.mWatcher.active = false;
-		holder.txtEnterAmount.setInputType( InputType.TYPE_NUMBER_FLAG_DECIMAL );
-		holder.txtEnterAmount.setText( contract.getNewTotalCurrentDue().equalsIgnoreCase( "" ) ? contract.getTotalCurrentDue() : contract.getNewTotalCurrentDue() );
+//		holder.txtEnterAmount.setInputType( InputType.TYPE_NUMBER_FLAG_DECIMAL );
+		holder.txtEnterAmount.setText( contract.getNewTotalCurrentDue() == null || contract.getNewTotalCurrentDue().equalsIgnoreCase( "" ) ? contract.getTotalCurrentDue() : contract.getNewTotalCurrentDue() );
 		holder.mWatcher.pos = position;
 
 		holder.mWatcher.active = true;
@@ -108,8 +108,8 @@ public class CustomAdapter extends ArrayAdapter< Contract > {
 				holder.imgTick.setImageResource( listItems.get( position ).getIsSelected() ? R.drawable.ic_check_circle_green : R.drawable.ic_check_circle_amber );
 				editText.setEnabled( listItems.get( position ).getIsSelected() );
 
-
-				if ( listItems.get( position ).getIsSelected() ) {
+				( ( TotalBillPayActivity ) mContext ).updateTotalAmount();
+				/*if ( listItems.get( position ).getIsSelected() ) {
 //					editText.setEnabled( true );
 					totalAmount = totalAmount + value;
 					Log.d( "total amount", "inside customer + " + value );
@@ -119,7 +119,7 @@ public class CustomAdapter extends ArrayAdapter< Contract > {
 //					editText.setEnabled( false );
 					totalAmount = totalAmount - value;
 					( ( TotalBillPayActivity ) mContext ).updateTotalAmount( totalAmount, position );
-				}
+				}*/
 
 			}
 		} );
@@ -178,9 +178,18 @@ public class CustomAdapter extends ArrayAdapter< Contract > {
 		public void afterTextChanged( Editable editable ) {
 			if ( active ) {
 //				getItem( pos ).setTotalCurrentDue( editable.toString() );
-				( ( TotalBillPayActivity ) mContext ).amount = editable.toString();
+
+				//( ( TotalBillPayActivity ) mContext ).amount = editable.toString();
 				getItem( pos ).setNewTotalCurrentDue( editable.toString() );
+
+				if ( TextUtils.isEmpty( editable.toString() ) ) {
+					getItem( pos ).setNewTotalCurrentDue( "0.0" );
+				}
+				//( ( TotalBillPayActivity ) mContext ).updateTotalAmount( 0, pos );
 			}
+
+
+			( ( TotalBillPayActivity ) mContext ).updateTotalAmount();
 		}
 	}
 }

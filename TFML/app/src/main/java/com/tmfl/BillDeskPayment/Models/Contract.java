@@ -100,31 +100,37 @@ public class Contract {
 	@Expose
 	private String  totalCurrentDue;
 
-	private String  newTotalCurrentDue;
+	private String newTotalCurrentDue;
 	@SerializedName( "con_outst_amt" )
 	@Expose
-	private String  conOutstAmt;
+	private String conOutstAmt;
 	@SerializedName( "product" )
 	@Expose
-	private String  product;
+	private String product;
 	@SerializedName( "contract_status_date" )
 	@Expose
-	private String  contractStatusDate;
+	private String contractStatusDate;
 	@SerializedName( "due_date" )
 	@Expose
-	private String  dueDate;
+	private String dueDate;
 	@SerializedName( "due_amount" )
 	@Expose
-	private String  dueAmount;
+	private String dueAmount;
 	@SerializedName( "odc_collection_amount" )
 	@Expose
-	private String  odcCollectioAmount;
+	private String odcCollectioAmount;
 	@SerializedName( "total_expenses" )
 	@Expose
-	private String  totalExpenses;
+	private String totalExpenses;
 
 	public String getNewTotalCurrentDue() {
-		return newTotalCurrentDue;
+		if ( newTotalCurrentDue != null ) {
+			return newTotalCurrentDue;
+		}
+		else {
+			return totalCurrentDue;
+		}
+
 	}
 
 	public void setNewTotalCurrentDue( String newTotalCurrentDue ) {
