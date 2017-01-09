@@ -144,7 +144,7 @@
                         android:id="@+id/txt_current_emi_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Due\nAmount : "
+                        android:text="Inst.\nAmount : "
                         android:textColor="@android:color/black"/>
 
                     <TextView

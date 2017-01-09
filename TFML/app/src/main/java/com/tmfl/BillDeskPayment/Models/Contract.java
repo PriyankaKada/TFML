@@ -8,123 +8,134 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Contract {
 
-	@SerializedName("id")
+	public  boolean isSelected;
+	@SerializedName( "id" )
 	@Expose
 	private Integer id;
-	@SerializedName("user_id")
+	@SerializedName( "user_id" )
 	@Expose
-	private String userId;
-	@SerializedName("usr_con_comp_code")
+	private String  userId;
+	@SerializedName( "usr_con_comp_code" )
 	@Expose
-	private String usrConCompCode;
-	@SerializedName("usr_con_no")
+	private String  usrConCompCode;
+	@SerializedName( "usr_con_no" )
 	@Expose
-	private String usrConNo;
-	@SerializedName("usr_crt_dt")
+	private String  usrConNo;
+	@SerializedName( "usr_crt_dt" )
 	@Expose
-	private String usrCrtDt;
-	@SerializedName("contract_status")
+	private String  usrCrtDt;
+	@SerializedName( "contract_status" )
 	@Expose
-	private String contractStatus;
-	@SerializedName("customer_contact1")
+	private String  contractStatus;
+	@SerializedName( "customer_contact1" )
 	@Expose
-	private String customerContact1;
-	@SerializedName("customer_contact2")
+	private String  customerContact1;
+	@SerializedName( "customer_contact2" )
 	@Expose
-	private String customerContact2;
-	@SerializedName("customer_contact3")
+	private String  customerContact2;
+	@SerializedName( "customer_contact3" )
 	@Expose
-	private String customerContact3;
-	@SerializedName("customer_contact4")
+	private String  customerContact3;
+	@SerializedName( "customer_contact4" )
 	@Expose
-	private String customerContact4;
-	@SerializedName("customer_contact5")
+	private String  customerContact4;
+	@SerializedName( "customer_contact5" )
 	@Expose
-	private String customerContact5;
-	@SerializedName("last_rec_amt")
+	private String  customerContact5;
+	@SerializedName( "last_rec_amt" )
 	@Expose
-	private String lastRecAmt;
-	@SerializedName("last_receipt_date")
+	private String  lastRecAmt;
+	@SerializedName( "last_receipt_date" )
 	@Expose
-	private String lastReceiptDate;
-	@SerializedName("last_receipt_no")
+	private String  lastReceiptDate;
+	@SerializedName( "last_receipt_no" )
 	@Expose
-	private String lastReceiptNo;
-	@SerializedName("od_no")
+	private String  lastReceiptNo;
+	@SerializedName( "od_no" )
 	@Expose
-	private String odNo;
-	@SerializedName("od_amt")
+	private String  odNo;
+	@SerializedName( "od_amt" )
 	@Expose
-	private String odAmt;
-	@SerializedName("pdc_flag")
+	private String  odAmt;
+	@SerializedName( "pdc_flag" )
 	@Expose
-	private String pdcFlag;
-	@SerializedName("rc_number")
+	private String  pdcFlag;
+	@SerializedName( "rc_number" )
 	@Expose
-	private String rcNumber;
-	@SerializedName("chass_no")
+	private String  rcNumber;
+	@SerializedName( "chass_no" )
 	@Expose
-	private String chassNo;
-	@SerializedName("engine_no")
+	private String  chassNo;
+	@SerializedName( "engine_no" )
 	@Expose
-	private String engineNo;
-	@SerializedName("contract_start_date")
+	private String  engineNo;
+	@SerializedName( "contract_start_date" )
 	@Expose
-	private String contractStartDate;
-	@SerializedName("maturity_date")
+	private String  contractStartDate;
+	@SerializedName( "maturity_date" )
 	@Expose
-	private String maturityDate;
-	@SerializedName("tenure")
+	private String  maturityDate;
+	@SerializedName( "tenure" )
 	@Expose
-	private String tenure;
-	@SerializedName("finance_amt")
+	private String  tenure;
+	@SerializedName( "finance_amt" )
 	@Expose
-	private String financeAmt;
-	@SerializedName("fin_charges")
+	private String  financeAmt;
+	@SerializedName( "fin_charges" )
 	@Expose
-	private String finCharges;
-	@SerializedName("ins_prov")
+	private String  finCharges;
+	@SerializedName( "ins_prov" )
 	@Expose
-	private String insProv;
-	@SerializedName("option_money")
+	private String  insProv;
+	@SerializedName( "option_money" )
 	@Expose
-	private String optionMoney;
-	@SerializedName("total_billed")
+	private String  optionMoney;
+	@SerializedName( "total_billed" )
 	@Expose
-	private String totalBilled;
-	@SerializedName("total_collected")
+	private String  totalBilled;
+	@SerializedName( "total_collected" )
 	@Expose
-	private String totalCollected;
-	@SerializedName("total_current_due")
+	private String  totalCollected;
+	@SerializedName( "total_current_due" )
 	@Expose
-	private String totalCurrentDue;
-	@SerializedName("con_outst_amt")
+	private String  totalCurrentDue;
+
+	private String  newTotalCurrentDue;
+	@SerializedName( "con_outst_amt" )
 	@Expose
-	private String conOutstAmt;
-	@SerializedName("product")
+	private String  conOutstAmt;
+	@SerializedName( "product" )
 	@Expose
-	private String product;
-	@SerializedName("contract_status_date")
+	private String  product;
+	@SerializedName( "contract_status_date" )
 	@Expose
-	private String contractStatusDate;
-	@SerializedName("due_date")
+	private String  contractStatusDate;
+	@SerializedName( "due_date" )
 	@Expose
-	private String dueDate;
-	@SerializedName("due_amount")
+	private String  dueDate;
+	@SerializedName( "due_amount" )
 	@Expose
-	private String dueAmount;
-	@SerializedName("odc_collection_amount")
+	private String  dueAmount;
+	@SerializedName( "odc_collection_amount" )
 	@Expose
-	private String odcCollectioAmount;
-	@SerializedName("total_expenses")
+	private String  odcCollectioAmount;
+	@SerializedName( "total_expenses" )
 	@Expose
-	private String totalExpenses;
+	private String  totalExpenses;
+
+	public String getNewTotalCurrentDue() {
+		return newTotalCurrentDue;
+	}
+
+	public void setNewTotalCurrentDue( String newTotalCurrentDue ) {
+		this.newTotalCurrentDue = newTotalCurrentDue;
+	}
 
 	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId( Integer id ) {
 		this.id = id;
 	}
 
@@ -132,7 +143,7 @@ public class Contract {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId( String userId ) {
 		this.userId = userId;
 	}
 
@@ -140,7 +151,7 @@ public class Contract {
 		return usrConCompCode;
 	}
 
-	public void setUsrConCompCode(String usrConCompCode) {
+	public void setUsrConCompCode( String usrConCompCode ) {
 		this.usrConCompCode = usrConCompCode;
 	}
 
@@ -148,7 +159,7 @@ public class Contract {
 		return usrConNo;
 	}
 
-	public void setUsrConNo(String usrConNo) {
+	public void setUsrConNo( String usrConNo ) {
 		this.usrConNo = usrConNo;
 	}
 
@@ -156,7 +167,7 @@ public class Contract {
 		return usrCrtDt;
 	}
 
-	public void setUsrCrtDt(String usrCrtDt) {
+	public void setUsrCrtDt( String usrCrtDt ) {
 		this.usrCrtDt = usrCrtDt;
 	}
 
@@ -164,7 +175,7 @@ public class Contract {
 		return contractStatus;
 	}
 
-	public void setContractStatus(String contractStatus) {
+	public void setContractStatus( String contractStatus ) {
 		this.contractStatus = contractStatus;
 	}
 
@@ -172,7 +183,7 @@ public class Contract {
 		return customerContact1;
 	}
 
-	public void setCustomerContact1(String customerContact1) {
+	public void setCustomerContact1( String customerContact1 ) {
 		this.customerContact1 = customerContact1;
 	}
 
@@ -180,7 +191,7 @@ public class Contract {
 		return customerContact2;
 	}
 
-	public void setCustomerContact2(String customerContact2) {
+	public void setCustomerContact2( String customerContact2 ) {
 		this.customerContact2 = customerContact2;
 	}
 
@@ -188,7 +199,7 @@ public class Contract {
 		return customerContact3;
 	}
 
-	public void setCustomerContact3(String customerContact3) {
+	public void setCustomerContact3( String customerContact3 ) {
 		this.customerContact3 = customerContact3;
 	}
 
@@ -196,7 +207,7 @@ public class Contract {
 		return customerContact4;
 	}
 
-	public void setCustomerContact4(String customerContact4) {
+	public void setCustomerContact4( String customerContact4 ) {
 		this.customerContact4 = customerContact4;
 	}
 
@@ -204,7 +215,7 @@ public class Contract {
 		return customerContact5;
 	}
 
-	public void setCustomerContact5(String customerContact5) {
+	public void setCustomerContact5( String customerContact5 ) {
 		this.customerContact5 = customerContact5;
 	}
 
@@ -212,7 +223,7 @@ public class Contract {
 		return lastRecAmt;
 	}
 
-	public void setLastRecAmt(String lastRecAmt) {
+	public void setLastRecAmt( String lastRecAmt ) {
 		this.lastRecAmt = lastRecAmt;
 	}
 
@@ -220,7 +231,7 @@ public class Contract {
 		return lastReceiptDate;
 	}
 
-	public void setLastReceiptDate(String lastReceiptDate) {
+	public void setLastReceiptDate( String lastReceiptDate ) {
 		this.lastReceiptDate = lastReceiptDate;
 	}
 
@@ -228,7 +239,7 @@ public class Contract {
 		return lastReceiptNo;
 	}
 
-	public void setLastReceiptNo(String lastReceiptNo) {
+	public void setLastReceiptNo( String lastReceiptNo ) {
 		this.lastReceiptNo = lastReceiptNo;
 	}
 
@@ -236,7 +247,7 @@ public class Contract {
 		return odNo;
 	}
 
-	public void setOdNo(String odNo) {
+	public void setOdNo( String odNo ) {
 		this.odNo = odNo;
 	}
 
@@ -244,7 +255,7 @@ public class Contract {
 		return odAmt;
 	}
 
-	public void setOdAmt(String odAmt) {
+	public void setOdAmt( String odAmt ) {
 		this.odAmt = odAmt;
 	}
 
@@ -252,7 +263,7 @@ public class Contract {
 		return pdcFlag;
 	}
 
-	public void setPdcFlag(String pdcFlag) {
+	public void setPdcFlag( String pdcFlag ) {
 		this.pdcFlag = pdcFlag;
 	}
 
@@ -260,7 +271,7 @@ public class Contract {
 		return rcNumber;
 	}
 
-	public void setRcNumber(String rcNumber) {
+	public void setRcNumber( String rcNumber ) {
 		this.rcNumber = rcNumber;
 	}
 
@@ -268,7 +279,7 @@ public class Contract {
 		return chassNo;
 	}
 
-	public void setChassNo(String chassNo) {
+	public void setChassNo( String chassNo ) {
 		this.chassNo = chassNo;
 	}
 
@@ -276,7 +287,7 @@ public class Contract {
 		return engineNo;
 	}
 
-	public void setEngineNo(String engineNo) {
+	public void setEngineNo( String engineNo ) {
 		this.engineNo = engineNo;
 	}
 
@@ -284,7 +295,7 @@ public class Contract {
 		return contractStartDate;
 	}
 
-	public void setContractStartDate(String contractStartDate) {
+	public void setContractStartDate( String contractStartDate ) {
 		this.contractStartDate = contractStartDate;
 	}
 
@@ -292,7 +303,7 @@ public class Contract {
 		return maturityDate;
 	}
 
-	public void setMaturityDate(String maturityDate) {
+	public void setMaturityDate( String maturityDate ) {
 		this.maturityDate = maturityDate;
 	}
 
@@ -300,7 +311,7 @@ public class Contract {
 		return tenure;
 	}
 
-	public void setTenure(String tenure) {
+	public void setTenure( String tenure ) {
 		this.tenure = tenure;
 	}
 
@@ -308,7 +319,7 @@ public class Contract {
 		return financeAmt;
 	}
 
-	public void setFinanceAmt(String financeAmt) {
+	public void setFinanceAmt( String financeAmt ) {
 		this.financeAmt = financeAmt;
 	}
 
@@ -316,7 +327,7 @@ public class Contract {
 		return finCharges;
 	}
 
-	public void setFinCharges(String finCharges) {
+	public void setFinCharges( String finCharges ) {
 		this.finCharges = finCharges;
 	}
 
@@ -324,7 +335,7 @@ public class Contract {
 		return insProv;
 	}
 
-	public void setInsProv(String insProv) {
+	public void setInsProv( String insProv ) {
 		this.insProv = insProv;
 	}
 
@@ -332,7 +343,7 @@ public class Contract {
 		return optionMoney;
 	}
 
-	public void setOptionMoney(String optionMoney) {
+	public void setOptionMoney( String optionMoney ) {
 		this.optionMoney = optionMoney;
 	}
 
@@ -340,7 +351,7 @@ public class Contract {
 		return totalBilled;
 	}
 
-	public void setTotalBilled(String totalBilled) {
+	public void setTotalBilled( String totalBilled ) {
 		this.totalBilled = totalBilled;
 	}
 
@@ -348,7 +359,7 @@ public class Contract {
 		return totalCollected;
 	}
 
-	public void setTotalCollected(String totalCollected) {
+	public void setTotalCollected( String totalCollected ) {
 		this.totalCollected = totalCollected;
 	}
 
@@ -356,7 +367,7 @@ public class Contract {
 		return totalCurrentDue;
 	}
 
-	public void setTotalCurrentDue(String totalCurrentDue) {
+	public void setTotalCurrentDue( String totalCurrentDue ) {
 		this.totalCurrentDue = totalCurrentDue;
 	}
 
@@ -364,7 +375,7 @@ public class Contract {
 		return conOutstAmt;
 	}
 
-	public void setConOutstAmt(String conOutstAmt) {
+	public void setConOutstAmt( String conOutstAmt ) {
 		this.conOutstAmt = conOutstAmt;
 	}
 
@@ -372,7 +383,7 @@ public class Contract {
 		return product;
 	}
 
-	public void setProduct(String product) {
+	public void setProduct( String product ) {
 		this.product = product;
 	}
 
@@ -380,7 +391,7 @@ public class Contract {
 		return contractStatusDate;
 	}
 
-	public void setContractStatusDate(String contractStatusDate) {
+	public void setContractStatusDate( String contractStatusDate ) {
 		this.contractStatusDate = contractStatusDate;
 	}
 
@@ -388,7 +399,7 @@ public class Contract {
 		return dueDate;
 	}
 
-	public void setDueDate(String dueDate) {
+	public void setDueDate( String dueDate ) {
 		this.dueDate = dueDate;
 	}
 
@@ -396,7 +407,7 @@ public class Contract {
 		return dueAmount;
 	}
 
-	public void setDueAmount(String dueAmount) {
+	public void setDueAmount( String dueAmount ) {
 		this.dueAmount = dueAmount;
 	}
 
@@ -404,7 +415,7 @@ public class Contract {
 		return odcCollectioAmount;
 	}
 
-	public void setOdcCollectioAmount(String odcCollectioAmount) {
+	public void setOdcCollectioAmount( String odcCollectioAmount ) {
 		this.odcCollectioAmount = odcCollectioAmount;
 	}
 
@@ -412,11 +423,9 @@ public class Contract {
 		return totalExpenses;
 	}
 
-	public void setTotalExpenses(String totalExpenses) {
+	public void setTotalExpenses( String totalExpenses ) {
 		this.totalExpenses = totalExpenses;
 	}
-
-	public boolean isSelected;
 
 	public boolean getIsSelected() {
 		return isSelected;

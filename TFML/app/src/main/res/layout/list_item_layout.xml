@@ -2,11 +2,11 @@
 
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:background="@color/white"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_margin="10dp"
+              android:background="@color/white"
+              android:orientation="vertical">
 
 
     <LinearLayout
@@ -21,7 +21,7 @@
             android:padding="8dp"
             android:text="Contract No"
             android:textColor="@color/overdues_ling_bg"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/txtContractNoValue"
@@ -42,13 +42,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="4dp"
-            android:src="@drawable/ic_check_circle_amber" />
+            android:src="@drawable/ic_check_circle_amber"/>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/overdues_ling_bg" />
+        android:background="@color/overdues_ling_bg"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -193,7 +193,7 @@
             android:layout_weight="1"
             android:padding="5dp"
             android:text="Expenses"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
 
         <TextView
@@ -224,7 +224,7 @@
             android:layout_weight="1"
             android:padding="5dp"
             android:text="Total due"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
 
         <TextView
@@ -256,7 +256,7 @@
             android:layout_weight="1"
             android:padding="5dp"
             android:text="Enter Amount"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
 
         <LinearLayout
@@ -270,10 +270,10 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/whit_rect_bg"
+                android:enabled="false"
                 android:hint=""
                 android:padding="5dp"
-                android:enabled="false"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
         </LinearLayout>
     </LinearLayout>
 

@@ -95,12 +95,26 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 			txt_product_name.setText( model.getProduct() == null ? "" : model.getProduct().toString() );
 			txt_contract_no.setText( model.getUsrConNo() == null ? "" : trimLeadingZeros( model.getUsrConNo() ) );
 			txt_rc_no.setText( model.getRcNumber() == null ? "" : model.getRcNumber() );
-			txt_overdue_amount.setText( model.getOdAmt() == null ? "" : "Rs." + model.getOdAmt() );
+			double overdueAmount = 0;
+			if ( !model.getOdAmt().equalsIgnoreCase( "" ) ) {
+				overdueAmount = Double.parseDouble( model.getOdAmt() );
+			}
+			double emiAmount = 0;
+			if ( !model.getDueAmount().toString().equalsIgnoreCase( "" ) ) {
+				emiAmount = Double.parseDouble( model.getDueAmount().toString() );
+			}
+
+			txt_overdue_amount.setText( model.getOdAmt() == null ? "" : "Rs." + String.valueOf( ( int ) overdueAmount ) );
 			txt_repayment_mode.setText( model.getPdcFlag() == null ? "" : model.getPdcFlag() );
 			txt_next_due_date.setText( model.getDueDate() == null ? "" : model.getDueDate().toString() );
 			txt_last_payment_date.setText( model.getLastReceiptDate() == null ? "" : model.getLastReceiptDate().toString() );
-			txt_current_emi_amount.setText( model.getDueAmount() == null ? "" : "Rs." + model.getDueAmount().toString() );
-			txtTotalDueAmount.setText( model.getOdAmt() );
+			txt_current_emi_amount.setText( model.getDueAmount() == null ? "" : "Rs." + String.valueOf( ( int ) emiAmount ) );
+			double totalDueAmount = 0;
+			if ( !model.getTotalCurrentDue().equalsIgnoreCase( "" ) ) {
+				totalDueAmount = Double.parseDouble( model.getTotalCurrentDue() );
+			}
+			txtTotalDueAmount.setText( model.getTotalCurrentDue() == null ? "" : String.valueOf( ( int ) totalDueAmount ) );
+
 			txtODC.setText( model.getOdcCollectioAmount() );
 			txtExpenses.setText( model.getTotalExpenses() );
 			Log.e( "DueAmount", model.getDueAmount().toString() );

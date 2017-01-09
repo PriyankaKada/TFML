@@ -55,6 +55,8 @@ public class GetBillDeskMsg {
 		billDeskMsgInputModel.setApi_token( PreferenceHelper.getString( PreferenceHelper.API_TOKEN ) );
 		billDeskMsgInputModel.setMobile_no( PreferenceHelper.getString( PreferenceHelper.MOBILE ) );
 
+		Log.d( "request", billDeskMsgInputModel.toString() );
+
 		tmflApi.getBillDeskMsgResponse( billDeskMsgInputModel ).enqueue( new Callback< BillDeskMsgResponseModel >() {
 			@Override
 			public void onResponse( Call< BillDeskMsgResponseModel > call, Response< BillDeskMsgResponseModel > response ) {
@@ -76,17 +78,16 @@ public class GetBillDeskMsg {
 					SampleCallBack callbackObj = new SampleCallBack();
 					Intent intent = new Intent( context,
 					                            PaymentOptions.class );
-					Log.d( "MSG", response.body().getMsg() );
-					Gson gson=new Gson();
+//					Log.d( "MSG", response.body().getMsg() );
+					Gson gson = new Gson();
 					gson.toString();
-					intent.putExtra( "msg",response.body().getMsg() ); // pg_msg
+					intent.putExtra( "msg", response.body().getMsg() ); // pg_msg
 //				intent.putExtra("token", strToken);
 					intent.putExtra( "user-email", email );
 					intent.putExtra( "user-mobile", mobile );
 					intent.putExtra( "callback", callbackObj );
 					context.startActivity( intent );
 					( ( TotalBillPayActivity ) context ).finish();
-
 				}
 			}
 
