@@ -51,7 +51,8 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 	private LocationManager locationManager;
 	private double          latitude;
 	private double          longitude;
-
+	public BranchResponseModel branchResponseModel;
+	Location location;
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
 		super.onCreate( savedInstanceState );
@@ -79,7 +80,7 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 			// for ActivityCompat#requestPermissions for more details.
 			return;
 		}
-		Location location = locationManager.getLastKnownLocation( provider );
+		 location = locationManager.getLastKnownLocation( provider );
 
 		if ( location != null ) {
 			System.out.println( "Provider " + provider + " has been selected." );
@@ -112,6 +113,7 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 		spnBranch.setOnItemSelectedListener( this );
 		SetFonts.setFonts( this, imgBack, 2 );
 		imgBack.setOnClickListener( this );
+		branchResponseModel= new BranchResponseModel();
 	}
 
 	@Override
@@ -135,12 +137,16 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 					CommonUtils.showProgressDialog( this, "Getting Your Information" );
 					SocialUtil.getStateBranchList( this, spnBranch, inputBranchState, "Select Branch" );
 				}
+				//https://www.google.co.in/search?client=ubuntu&channel=fs&q=service+connection+android&ie=utf-8&oe=utf-8&gfe_rd=cr&ei=Pth1WMOSCar98wf2mZ3AAg
 
 				break;
 			case R.id.sp_select_branch_data:
+				Log.e("LOng ANd LAt","Lat"+branchResponseModel.getTerrLatitude()+"Long"+branchResponseModel.getTerrLongitude());
 
-				double latitude = Double.parseDouble( ( ( BranchResponseModel ) parent.getItemAtPosition( position ) ).getTerrLatitude() );
-				double longitude = Double.parseDouble( ( ( BranchResponseModel ) parent.getItemAtPosition( position ) ).getTerrLongitude() );
+
+					latitude = Double.parseDouble( ( ( BranchResponseModel ) parent.getItemAtPosition( position ) ).getTerrLatitude() );
+					longitude = Double.parseDouble( ( ( BranchResponseModel ) parent.getItemAtPosition( position ) ).getTerrLongitude() );
+
 
 				if ( !( String.valueOf( latitude ).equalsIgnoreCase( "" ) || String.valueOf( longitude ).equalsIgnoreCase( "" ) ) ) {
 					if ( position != 0 ) {

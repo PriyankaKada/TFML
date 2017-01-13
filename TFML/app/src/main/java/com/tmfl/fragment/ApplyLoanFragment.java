@@ -131,7 +131,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		spSelectBranch.setAdapter( new BranchListAdapter( getActivity(), dummyBranchList ) );
 
 		BranchCityResponseModel branchCityResponseModel = new BranchCityResponseModel();
-		branchCityResponseModel.setTerrCaption( "Select Branch City" );
+		branchCityResponseModel.setTerrCaption( "Select City" );
 		branchCityResponseModel.setTerrTerritoryid( "-1" );
 		List< BranchCityResponseModel > dummyBranchCityList = new ArrayList<>();
 		dummyBranchCityList.add( 0, branchCityResponseModel );
@@ -183,7 +183,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		spSelectBranchState = ( Spinner ) view.findViewById( R.id.sp_select_branch_state );
 		spSelectBranchState.setOnItemSelectedListener( this );
 		CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
-		SocialUtil.getBranchStateListData( getActivity(), spSelectBranchState, "Select branch state" );
+		SocialUtil.getBranchStateListData( getActivity(), spSelectBranchState, "Select State" );
 		spSelectBranchCity = ( Spinner ) view.findViewById( R.id.sp_select_branch_city );
 		spSelectBranchCity.setOnItemSelectedListener( this );
 		spSelectBranch = ( Spinner ) view.findViewById( R.id.sp_select_branch );

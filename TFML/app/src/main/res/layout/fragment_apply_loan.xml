@@ -349,6 +349,25 @@
                     android:padding="10dp"/>
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp">
+
+         <CheckBox
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:id="@+id/chkTermsCond"
+             android:gravity="start"
+             />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/txtTermsCond"
+                    android:text="I authorize TMFL &amp; its representatives to call me or SMS me with reference to my interest shown in a loan from TMF . This consent will override any registration for DNC / NDNC.'
+                    Refer: http://tmf.co.in/tmfuniverse/tatamotorfinance/ApplyNowForTataProduct.jsp"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -386,6 +405,8 @@
                     android:textSize="16sp"
                     android:textStyle="bold"/>
             </LinearLayout>
+
+
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

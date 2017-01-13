@@ -137,7 +137,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		linSchemes.setOnClickListener( this );
 		linApplyLoan.setOnClickListener( this );
 		linReferFriend.setOnClickListener( this );
-		linReferFriend.setVisibility( View.GONE );
+		linReferFriend.setVisibility( View.VISIBLE );
 		linLoanStaus.setOnClickListener( this );
 		linLogin.setOnClickListener( this );
 	}
