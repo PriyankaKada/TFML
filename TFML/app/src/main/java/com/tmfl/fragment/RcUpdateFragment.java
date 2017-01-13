@@ -79,13 +79,13 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 
 
 	public static String trimLeadingZeros( String source ) {
-		for ( int i = 0; i < source.length(); ++i ) {
+		/*for ( int i = 0; i < source.length(); ++i ) {
 			char c = source.charAt( i );
 			if ( c != '0' && !Character.isSpaceChar( c ) ) {
 				return source.substring( i );
 			}
-		}
-		return null;
+		}*/
+		return source;
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 		if ( modelArrayList.size() > 0 ) {
 
 			for ( int i = 0; i < modelArrayList.size(); i++ ) {
-				contractLst.add(trimLeadingZeros( modelArrayList.get( i ).getUsrConNo() ) );
+				contractLst.add( trimLeadingZeros( modelArrayList.get( i ).getUsrConNo() ) );
 			}
 
 			ArrayAdapter< String > madapter = new ArrayAdapter< String >( getActivity(), R.layout.spinner_row, contractLst ) {
@@ -285,7 +285,8 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 				Log.e( "ImageUrl", imgPhotoUrl );
 				rcUploadDataInputModel = new RcUploadDataInputModel();
 				rcUploadDataInputModel.setUserId( PreferenceHelper.getString( PreferenceHelper.USER_ID ) );
-				rcUploadDataInputModel.setContractNo( contractNo );
+				contractNo = spnContractNo.getSelectedItem().toString();
+				rcUploadDataInputModel.setContractNo( spnContractNo.getSelectedItem().toString() );
 				rcUploadDataInputModel.setRcNo( edt_rc_no.getText().toString() );
 				File file = new File( imgPhotoUrl );
 				rcUploadDataInputModel.setImage( file );

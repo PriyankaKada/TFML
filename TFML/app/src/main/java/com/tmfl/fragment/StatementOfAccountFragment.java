@@ -123,13 +123,13 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 	private boolean financeDetailClicked = false;
 
 	public static String trimLeadingZeros( String source ) {
-		for ( int i = 0; i < source.length(); ++i ) {
+		/*for ( int i = 0; i < source.length(); ++i ) {
 			char c = source.charAt( i );
 			if ( c != '0' && !Character.isSpaceChar( c ) ) {
 				return source.substring( i );
 			}
-		}
-		return null;
+		}*/
+		return source;
 	}
 
 	@Override
@@ -205,7 +205,6 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 			}
 		}
 		spnContractNo.setSelection( 1 );
-		spnContractNo = ( Spinner ) view.findViewById( R.id.spnContractNo );
 		contractLst = new ArrayList< String >();
 		if ( modelArrayList.size() > 0 ) {
 			for ( int i = 0; i < modelArrayList.size(); i++ ) {
@@ -253,6 +252,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 					@Override
 					public void onItemSelected( AdapterView< ? > parent, View view, int position, long id ) {
 						contractNo = spnContractNo.getSelectedItem().toString();
+						Log.d( "contractNo", contractNo );
 						itemindex = position;
 
 						ContractModel model = modelArrayList.get( itemindex );
@@ -337,7 +337,8 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 		RequestEnvelpe requestEnvelpe = new RequestEnvelpe();
 		final ReqBody  reqBody        = new ReqBody();
 		ReqData        reqData        = new ReqData();
-		reqData.setContactId( contractNo );
+		contractNo = spnContractNo.getSelectedItem().toString();
+		reqData.setContactId( /*contractNo*/ spnContractNo.getSelectedItem().toString() );
 		reqData.setREQDATE( txtAccDate.getText().toString() );
 		reqBody.setReqData( reqData );
 		requestEnvelpe.setReqBody( reqBody );
