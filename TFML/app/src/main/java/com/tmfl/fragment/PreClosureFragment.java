@@ -109,12 +109,12 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 
 
 	public static String trimLeadingZeros( String source ) {
-		for ( int i = 0; i < source.length(); ++i ) {
+		/*for ( int i = 0; i < source.length(); ++i ) {
 			char c = source.charAt( i );
 			if ( c != '0' && !Character.isSpaceChar( c ) ) {
 				return source.substring( i );
 			}
-		}
+		}*/
 		return source;
 //		source.replaceFirst("^0+(?!$)", "");
 //	String s=	source;
@@ -334,7 +334,8 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 		final RequestEnvelope                              requestEnvelope = new RequestEnvelope();
 		com.tmfl.model.soapModel.preClosureRequest.ReqBody reqBody         = new com.tmfl.model.soapModel.preClosureRequest.ReqBody();
 		com.tmfl.model.soapModel.preClosureRequest.ReqData reqData         = new com.tmfl.model.soapModel.preClosureRequest.ReqData();
-		reqData.setContactId( strContractNo );
+		strContractNo = spnContractNo.getSelectedItem().toString();
+		reqData.setContactId( spnContractNo.getSelectedItem().toString() );
 		reqData.setAdustSd( "R" );
 		reqData.setReqDate( txtAccDate.getText().toString() );
 		reqBody.setReqData( reqData );

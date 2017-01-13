@@ -48,13 +48,13 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 	}
 
 	public static String trimLeadingZeros( String source ) {
-		for ( int i = 0; i < source.length(); ++i ) {
+		/*for ( int i = 0; i < source.length(); ++i ) {
 			char c = source.charAt( i );
 			if ( c != '0' && !Character.isSpaceChar( c ) ) {
 				return source.substring( i );
 			}
-		}
-		return null;
+		}*/
+		return source;
 	}
 
 	@Override

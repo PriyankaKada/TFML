@@ -138,26 +138,28 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 
 				break;
 			case R.id.sp_select_branch_data:
+				if ( position != 0 ) {
 
-				double latitude = Double.parseDouble( ( ( BranchResponseModel ) parent.getItemAtPosition( position ) ).getTerrLatitude() );
-				double longitude = Double.parseDouble( ( ( BranchResponseModel ) parent.getItemAtPosition( position ) ).getTerrLongitude() );
-
-				if ( !( String.valueOf( latitude ).equalsIgnoreCase( "" ) || String.valueOf( longitude ).equalsIgnoreCase( "" ) ) ) {
-					if ( position != 0 ) {
-
-						map.addMarker( new MarkerOptions()
-								               .draggable( true )
-								               .position( new LatLng( latitude, longitude ) ) );
-
-						map.moveCamera( CameraUpdateFactory.newLatLngZoom( new LatLng( latitude, longitude ), 13 ) );
+					if ( !( ( BranchResponseModel ) parent.getItemAtPosition( position ) ).getTerrLatitude().equalsIgnoreCase( "" )
+							&& ( ( BranchResponseModel ) parent.getItemAtPosition( position ) ).getTerrLatitude().equalsIgnoreCase( "" ) ) {
+						latitude = Double.parseDouble( ( ( BranchResponseModel ) parent.getItemAtPosition( position ) ).getTerrLatitude() );
+						longitude = Double.parseDouble( ( ( BranchResponseModel ) parent.getItemAtPosition( position ) ).getTerrLongitude() );
 					}
-				}
-				else {
-					Toast.makeText( this, "Invalid location!", Toast.LENGTH_SHORT ).show();
+					else {
+						Toast.makeText( this, "Invalid location!", Toast.LENGTH_SHORT ).show();
+					}
+
+
+					map.addMarker( new MarkerOptions()
+							               .draggable( true )
+							               .position( new LatLng( latitude, longitude ) ) );
+
+					map.moveCamera( CameraUpdateFactory.newLatLngZoom( new LatLng( latitude, longitude ), 13 ) );
 				}
 
 				break;
 		}
+
 	}
 
 	@Override
