@@ -18,7 +18,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,12 +37,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LocateUsActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, OnMapReadyCallback, LocationListener {
+	public BranchResponseModel branchResponseModel;
 	ImageView imgBack;
 	TextView  txtTitle;
 	Spinner   spnState, spnBranch;
 	String stateCode, branchCode;
 	InputBranchState inputBranchState;
 	WebView          webview;
+	Location         location;
 	private List< String > stateList, branchList;
 	private GoogleMap       map;
 	private MapFragment     mapFragment;
@@ -51,8 +52,7 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 	private LocationManager locationManager;
 	private double          latitude;
 	private double          longitude;
-	public BranchResponseModel branchResponseModel;
-	Location location;
+
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
 		super.onCreate( savedInstanceState );
@@ -80,7 +80,7 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 			// for ActivityCompat#requestPermissions for more details.
 			return;
 		}
-		 location = locationManager.getLastKnownLocation( provider );
+		location = locationManager.getLastKnownLocation( provider );
 
 		if ( location != null ) {
 			System.out.println( "Provider " + provider + " has been selected." );
@@ -113,7 +113,7 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 		spnBranch.setOnItemSelectedListener( this );
 		SetFonts.setFonts( this, imgBack, 2 );
 		imgBack.setOnClickListener( this );
-		branchResponseModel= new BranchResponseModel();
+		branchResponseModel = new BranchResponseModel();
 	}
 
 	@Override
@@ -137,7 +137,6 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 					CommonUtils.showProgressDialog( this, "Getting Your Information" );
 					SocialUtil.getStateBranchList( this, spnBranch, inputBranchState, "Select Branch" );
 				}
-				//https://www.google.co.in/search?client=ubuntu&channel=fs&q=service+connection+android&ie=utf-8&oe=utf-8&gfe_rd=cr&ei=Pth1WMOSCar98wf2mZ3AAg
 
 				break;
 			case R.id.sp_select_branch_data:
@@ -147,17 +146,18 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 							&& ( ( BranchResponseModel ) parent.getItemAtPosition( position ) ).getTerrLatitude().equalsIgnoreCase( "" ) ) {
 						latitude = Double.parseDouble( ( ( BranchResponseModel ) parent.getItemAtPosition( position ) ).getTerrLatitude() );
 						longitude = Double.parseDouble( ( ( BranchResponseModel ) parent.getItemAtPosition( position ) ).getTerrLongitude() );
+
+						map.addMarker( new MarkerOptions()
+								               .draggable( true )
+								               .position( new LatLng( latitude, longitude ) ) );
+
+						map.moveCamera( CameraUpdateFactory.newLatLngZoom( new LatLng( latitude, longitude ), 13 ) );
 					}
-					else {
+					/*else {
 						Toast.makeText( this, "Invalid location!", Toast.LENGTH_SHORT ).show();
-					}
+					}*/
 
 
-					map.addMarker( new MarkerOptions()
-							               .draggable( true )
-							               .position( new LatLng( latitude, longitude ) ) );
-
-					map.moveCamera( CameraUpdateFactory.newLatLngZoom( new LatLng( latitude, longitude ), 13 ) );
 				}
 
 				break;

@@ -82,7 +82,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		view3 = findViewById( R.id.view3 );
 
 		bundle1 = getIntent().getExtras();
-		/*String isLoggedIn = bundle1.getString( "LOGGED_IN" );
+		String isLoggedIn = bundle1.getString( "LOGGED_IN" );
 		if ( isLoggedIn.equalsIgnoreCase( "true" ) ) {
 			view3.setVisibility( View.VISIBLE );
 			linReferFriend.setVisibility( View.VISIBLE );
@@ -90,7 +90,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		else {
 			view3.setVisibility( View.GONE );
 			linReferFriend.setVisibility( View.GONE );
-		}*/
+		}
 
 		tmflApi = ApiService.getInstance().call();
 
@@ -135,32 +135,43 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 			@Override
 			public void onPageSelected( int position ) {
 				setTitle( getPageTitle( position ) );
+				String isLoggedIn = bundle1.getString( "LOGGED_IN" );
 
 				switch ( position ) {
 
 					case 0:
 						view1.setVisibility( View.VISIBLE );
 						view2.setVisibility( View.INVISIBLE );
-						view3.setVisibility( View.INVISIBLE );
+						if ( isLoggedIn.equalsIgnoreCase( "true" ) ) {
+							view3.setVisibility( View.INVISIBLE );
+						}
+						else {
+							view3.setVisibility( View.GONE );
+						}
 //						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						break;
 
 					case 1:
 						view1.setVisibility( View.INVISIBLE );
 						view2.setVisibility( View.VISIBLE );
-						view3.setVisibility( View.INVISIBLE );
+						if ( isLoggedIn.equalsIgnoreCase( "true" ) ) {
+							view3.setVisibility( View.INVISIBLE );
+						}
+						else {
+							view3.setVisibility( View.GONE );
+						}
 //						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						break;
 
 					case 3:
 						view1.setVisibility( View.INVISIBLE );
 						view2.setVisibility( View.INVISIBLE );
-						String isLoggedIn = bundle1.getString( "LOGGED_IN" );
+
 						if ( isLoggedIn.equalsIgnoreCase( "true" ) ) {
 							view3.setVisibility( View.VISIBLE );
 						}
 						else {
-							view3.setVisibility( View.INVISIBLE );
+							view3.setVisibility( View.GONE );
 						}
 
 						break;
@@ -179,21 +190,32 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 
 		String myTabselected = bundle1.getString( "TAB_SELECTED" );
 
+		String isLoggedIn = bundle1.getString( "LOGGED_IN" );
 		if ( myTabselected.equalsIgnoreCase( Constant.ISSCHEMASTABSELECT ) ) {
+
 			viewPager.setCurrentItem( 0 );
 			view1.setVisibility( View.VISIBLE );
 			view2.setVisibility( View.INVISIBLE );
-			view3.setVisibility( View.INVISIBLE );
+			if ( isLoggedIn.equalsIgnoreCase( "true" ) ) {
+				view3.setVisibility( View.INVISIBLE );
+			}
+			else {
+				view3.setVisibility( View.GONE );
+			}
 		}
 		else if ( myTabselected.equalsIgnoreCase( Constant.ISAPPLYLOANSELECT ) ) {
 			viewPager.setCurrentItem( 1 );
 			view1.setVisibility( View.INVISIBLE );
 			view2.setVisibility( View.VISIBLE );
-			view3.setVisibility( View.INVISIBLE );
+			if ( isLoggedIn.equalsIgnoreCase( "true" ) ) {
+				view3.setVisibility( View.INVISIBLE );
+			}
+			else {
+				view3.setVisibility( View.GONE );
+			}
 		}
 		else if ( myTabselected.equalsIgnoreCase( Constant.ISREFERFREINDSELECT ) ) {
 
-			String isLoggedIn = bundle1.getString( "LOGGED_IN" );
 			if ( isLoggedIn.equalsIgnoreCase( "true" ) ) {
 				view3.setVisibility( View.VISIBLE );
 			}
@@ -387,7 +409,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		try {
 			startActivity( Intent.createChooser( emailIntent, "Send mail..." ) );
 			finish();
-			Log.i( "Finish sending emailId...", "" );
+			Log.i( "Finish ", "sending emailId..." );
 		}
 		catch ( android.content.ActivityNotFoundException ex ) {
 			Toast.makeText( SchemesActivity.this, "There is no emailId client installed.", Toast.LENGTH_SHORT ).show();

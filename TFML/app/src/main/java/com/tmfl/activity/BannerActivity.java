@@ -90,7 +90,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 	}
 
 	public void init() {
-		
+
 		mToolbar = ( Toolbar ) findViewById( R.id.toolbar );
 		imgQuickCall = ( ImageView ) findViewById( R.id.imgQuickCall );
 		imgSocial = ( ImageView ) findViewById( R.id.imgSocial );
@@ -137,7 +137,6 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		linSchemes.setOnClickListener( this );
 		linApplyLoan.setOnClickListener( this );
 		linReferFriend.setOnClickListener( this );
-		linReferFriend.setVisibility( View.VISIBLE );
 		linLoanStaus.setOnClickListener( this );
 		linLogin.setOnClickListener( this );
 	}
@@ -297,6 +296,16 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				startActivity( new Intent( BannerActivity.this, LoginActivity.class ) );
 				finish();
 				break;
+
+			case R.id.img_Refresh_token:
+				if ( edtQuickCall.getText().toString().length() == 10 || edtQuickCall.getText().toString().length() == 12 ) {
+					quickCallInputModel = new QuickCallInputModel();
+					quickCallInputModel.setMobileNumber( edtQuickCall.getText().toString() );
+					CommonUtils.showProgressDialog( BannerActivity.this, "Please wait..." );
+					callResponseModel( quickCallInputModel );
+				}
+
+				break;
 		}
 	}
 
@@ -330,6 +339,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		edtQuickCall = ( EditText ) view.findViewById( R.id.edt_mobile_no );
 		edtOtpNo = ( EditText ) view.findViewById( R.id.edt_otp_no );
 		imgRefreshOtp = ( ImageView ) view.findViewById( R.id.img_Refresh_token );
+		imgRefreshOtp.setOnClickListener( this );
 		TextView txtSubmit = ( TextView ) view.findViewById( R.id.txt_submit );
 
 		edtQuickCall.addTextChangedListener( new TextWatcher() {
@@ -349,6 +359,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				if ( s.length() == 10 || s.length() == 12 ) {
 					quickCallInputModel = new QuickCallInputModel();
 					quickCallInputModel.setMobileNumber( edtQuickCall.getText().toString() );
+					CommonUtils.showProgressDialog( BannerActivity.this, "Please wait..." );
 					callResponseModel( quickCallInputModel );
 					imgRefreshOtp.postDelayed( new Runnable() {
 						public void run() {
@@ -392,10 +403,13 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 			public void onResponse( Call< QuickCallResponse > call, Response< QuickCallResponse > response ) {
 				Log.e( "getQuickCallResponse", new Gson().toJson( response.body() ) );
 
+				CommonUtils.closeProgressDialog();
+
 				if ( response != null && response.body().getStatus().contains( "success" ) ) {
 
-					// SocialUtil.loanStatusDialog(BannerActivity.this, linLoanStaus, view1);
-					// strOtpNo = response.body().getData().getOtp().toString();
+					SocialUtil.loanStatusDialog( BannerActivity.this, linLoanStaus, view1 );
+					strOtpNo = response.body().getData().getOtp();
+					edtOtpNo.setText( strOtpNo );
 
 				}
 				else {
@@ -409,6 +423,9 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 
 			@Override
 			public void onFailure( Call< QuickCallResponse > call, Throwable t ) {
+				Log.d( "error response", t.getMessage() );
+
+				CommonUtils.closeProgressDialog();
 
 			}
 		} );
