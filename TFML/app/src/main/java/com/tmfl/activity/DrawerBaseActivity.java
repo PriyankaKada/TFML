@@ -68,7 +68,7 @@ public class DrawerBaseActivity extends BaseActivity {
 			}
 		} );
 		if ( PreferenceHelper.getString( PreferenceHelper.USER_ID ) != null ) {
-			txtUserName.setText( PreferenceHelper.getString( PreferenceHelper.USER_ID ) );
+			txtUserName.setText( PreferenceHelper.getString( PreferenceHelper.USER_FIRT_NAME ) );
 		}
 
 

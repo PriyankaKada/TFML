@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.tmfl.R;
 import com.tmfl.model.bannerResponseModel.BannerlistResponse;
 import com.tmfl.model.bannerResponseModel.Datum;
@@ -46,7 +46,7 @@ public class BannerAdapter extends PagerAdapter {
 
 		ImageView imageView = ( ImageView ) itemView.findViewById( R.id.imageView );
 		imageView.setAdjustViewBounds( true );
-		Picasso.with( mContext ).load( String.valueOf( "" + bannerlist.get( position ).getImage() ) )
+		Glide.with( mContext ).load( String.valueOf( "" + bannerlist.get( position ).getImage() ) )
 				.into( imageView );
 		Log.e( "instantiateItem", "" + "http://staging.php-dev.in:8844/tatamotors/public/" + bannerlist.get( position ).getImage() );
 		container.addView( itemView );

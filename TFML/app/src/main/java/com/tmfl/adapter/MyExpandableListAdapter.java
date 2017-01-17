@@ -31,7 +31,11 @@ import com.tmfl.model.soapModel.response.ResponseEnvelope;
 import com.tmfl.util.PreferenceHelper;
 import com.tmfl.util.SetFonts;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -200,6 +204,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 			convertView = infalInflater.inflate( R.layout.group_row, null );
 		}
 		grpholder.txtReceiptDate = ( TextView ) convertView.findViewById( R.id.txtReceiptDate );
+		grpholder.txtInstDate = ( TextView ) convertView.findViewById( R.id.txtInstDate );
 		grpholder.txtReceiptAmount = ( TextView ) convertView.findViewById( R.id.txtAmount );
 		grpholder.txtBank = ( TextView ) convertView.findViewById( R.id.txtBank );
 		grpholder.txtInstNo = ( TextView ) convertView.findViewById( R.id.txtInstNo );
@@ -207,6 +212,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 		grpholder.img_expand = ( ImageView ) convertView.findViewById( R.id.img_expand );
 		grpholder.imgPdf = ( ImageView ) convertView.findViewById( R.id.imgPdf );
 
+		grpholder.imgPdf.setVisibility( View.GONE );
 		grpholder.imgPdf.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
@@ -227,15 +233,31 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 			}
 		} );
 		if ( titlear.size() == amountar.size() ) {
-			grpholder.txtReceiptDate.setText( titlear.get( groupPosition ) );
-			grpholder.txtReceiptAmount.setText( "Rs." + String.valueOf( amountar.get( groupPosition ) ) );
+
+			DateFormat inputFormatter1 = new SimpleDateFormat( "yyyy-MM-dd" );
+			Date       date1           = null;
+			try {
+				date1 = inputFormatter1.parse( titlear.get( groupPosition ) );
+				Log.d( "reciept", titlear.get( groupPosition ) );
+			}
+			catch ( ParseException e ) {
+				e.printStackTrace();
+			}
+
+			DateFormat outputFormatter1 = new SimpleDateFormat( "dd-MM-yyyy" );
+			String     output1          = outputFormatter1.format( date1 );
+
+			grpholder.txtReceiptDate.setText( output1 );
+			grpholder.txtReceiptAmount.setText( "Rs." + String.valueOf( amountar.get(
+					groupPosition ) ) );
 		}
 
 		SetFonts.setFonts( context, grpholder.txtInstNo, 5 );
 		SetFonts.setFonts( context, grpholder.txtMode, 5 );
 		SetFonts.setFonts( context, grpholder.txtBank, 5 );
 
-		grpholder.txtInstNo.setText( item.getCHECT() == null ? "-" : item.getCHECT() );
+		grpholder.txtInstNo.setText( item.getINST_NO() == null ? "-" : item.getINST_NO() );
+		grpholder.txtInstDate.setText( item.getINST_DATE() == null ? "-" : item.getINST_DATE() );
 
 		if ( item.getSHKZG() != null ) {
 			grpholder.txtMode.setText( setMode( item.getINST_TYPE() ) );
@@ -463,7 +485,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 	}
 
 	public class MyGroupHolder {
-		TextView txtReceiptDate, txtReceiptAmount, txtInstNo, txtMode, txtBank;
+		TextView txtReceiptDate, txtReceiptAmount, txtInstNo, txtMode, txtBank, txtInstDate;
 		ImageView img_expand, imgPdf;
 		LinearLayout ll_header_row, ll_daterow;
 	}

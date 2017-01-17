@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -204,20 +205,26 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		spnProduct.setOnItemSelectedListener( this );
 		CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
 		SocialUtil.getProductListData( getActivity(), spnProduct );
+
 		spSelectBranchState = ( Spinner ) view.findViewById( R.id.sp_select_branch_state );
 		spSelectBranchState.setOnItemSelectedListener( this );
 		CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
 		SocialUtil.getBranchStateListData( getActivity(), spSelectBranchState, "Select branch state" );
+
 		spSelectBranchCity = ( Spinner ) view.findViewById( R.id.sp_select_branch_city );
 		spSelectBranchCity.setOnItemSelectedListener( this );
 		spSelectBranch = ( Spinner ) view.findViewById( R.id.sp_select_branch );
 		spSelectBranch.setOnItemSelectedListener( this );
+
 		spSelectState = ( Spinner ) view.findViewById( R.id.sp_select_state );
 		spSelectState.setOnItemSelectedListener( this );
+		spSelectState.setVisibility( View.GONE );
+
 		CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
 		SocialUtil.getStateListData( getActivity(), spSelectState, "Select state" );
 		spSelectCity = ( Spinner ) view.findViewById( R.id.sp_select_city );
 		spSelectCity.setOnItemSelectedListener( this );
+		spSelectCity.setVisibility( View.GONE );
 		spOffers = ( Spinner ) view.findViewById( R.id.sp_offers );
 		spOffers.setOnItemSelectedListener( this );
 		radioGroupLeadType = ( RadioGroup ) view.findViewById( R.id.radio_group_lead_type );
@@ -298,12 +305,20 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		if ( spSelectBranchCity.getSelectedItemPosition() == 0 ) {
 			ret = false;
 		}
-		if ( spSelectCity.getSelectedItemPosition() == 0 ) {
+		/*if ( spSelectCity.getSelectedItemPosition() == 0 ) {
 			ret = false;
 		}
 		if ( spSelectState.getSelectedItemPosition() == 0 ) {
 			ret = false;
+		}*/
+
+		CheckBox checkBox = ( CheckBox ) view.findViewById( R.id.chkTermsCond );
+
+		if ( !checkBox.isChecked() ) {
+			Toast.makeText( getActivity(), "Please check the checkbox!", Toast.LENGTH_SHORT ).show();
+			ret = false;
 		}
+
 		return ret;
 	}
 
@@ -361,7 +376,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		}*/
 
 		if ( stateCode != null && stateCode != "-1" ) {
-			inputReferFriendModel.setState( stateCode );
+			inputReferFriendModel.setState( String.valueOf( 0 ) );
 
 		}
 		/*else {
@@ -370,7 +385,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 
 
 		if ( cityCode != null && cityCode != "-1" ) {
-			inputReferFriendModel.setCity( cityCode );
+			inputReferFriendModel.setCity( String.valueOf( 0 ) );
 		}
 		/*else {
 			Toast.makeText( getContext(), "Please Select City", Toast.LENGTH_SHORT ).show();
@@ -451,7 +466,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 					Log.e( "BRANCHSTATECODE", branchStateCode );
 					inputCityModel.setStateId( branchStateCode );
 					CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
-					SocialUtil.getBranchCityListData( getActivity(), spSelectBranchCity, inputCityModel, "Select Branch City" );
+					SocialUtil.getBranchCityListData( getActivity(), spSelectBranchCity, inputCityModel, "Select City" );
 					break;
 				}
 			case R.id.sp_select_branch_city:

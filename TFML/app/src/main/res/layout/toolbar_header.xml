@@ -18,11 +18,9 @@
 
         <ImageView
             android:id="@+id/imgSocial"
-            android:layout_width="wrap_content"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
             android:src="@drawable/ic_mobile"/>
 
         <TextView
@@ -48,11 +46,9 @@
 
             <ImageView
                 android:id="@+id/imgLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
                 android:src="@drawable/logictab_icon"/>
 
             <TextView

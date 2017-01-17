@@ -166,7 +166,7 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 //		totalAmountDialog.getWindow().setAttributes( params );
 //		totalAmountDialog.setCancelable( true );
 //		totalAmountDialog.getWindow().getAttributes().windowAnimations = R.style.animationdialog;
-//		final EditText edtmobileno         = ( EditText ) totalAmountDialog.findViewById( R.id.edt_mobile_no );
+//		final EditText edtmobileno         = ( EditText ) totalAmountDialog.findViewById( R.id.edt_moEEEbile_no );
 //		final TextView totalamounttextview = ( TextView ) totalAmountDialog.findViewById( R.id.total_amount );
 //		final Button   btnloanstatus       = ( Button ) totalAmountDialog.findViewById( R.id.btn_loan_status );
 //		edtmobileno.setText( PreferenceHelper.getString( PreferenceHelper.MOBILE ) );

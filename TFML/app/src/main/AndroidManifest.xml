@@ -44,8 +44,10 @@
         <activity
             android:name="com.tmfl.activity.BannerActivity"
             android:configChanges="keyboardHidden|orientation"
+            android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan|adjustResize"/>
         <activity
             android:name="com.tmfl.activity.SchemesActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -80,7 +82,8 @@
         <activity
             android:name=".BillDeskPayment.Activity.TotalBillPayActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateVisible">
 
 
             <!--

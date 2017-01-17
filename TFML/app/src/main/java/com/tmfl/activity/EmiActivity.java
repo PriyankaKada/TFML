@@ -83,28 +83,28 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 
 				txtEmiName.setText( "EMI Pattern" );
 				PreferenceHelper.insertBoolean( Constant.SHOW_RECEIPT, false );
-				viewPager.setCurrentItem( 0 );
+				viewPager.setCurrentItem( 0, true );
 
 				break;
 
 			case Constant.STATEMENT_OF_ACCOUNT:
 
 				txtEmiName.setText( "Statement of Account" );
-				viewPager.setCurrentItem( 1 );
+				viewPager.setCurrentItem( 1, true );
 
 				break;
 
 			case Constant.RC_UPDATE:
 
 				txtEmiName.setText( "RC Update" );
-				viewPager.setCurrentItem( 2 );
+				viewPager.setCurrentItem( 2, true );
 
 				break;
 
 			case Constant.PRECLOSURE:
 
 				txtEmiName.setText( "Preclosure" );
-				viewPager.setCurrentItem( 3 );
+				viewPager.setCurrentItem( 3, true );
 
 				break;
 
@@ -112,7 +112,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 
 				txtEmiName.setText( "EMI Pattern" );
 				PreferenceHelper.insertBoolean( Constant.SHOW_RECEIPT, true );
-				viewPager.setCurrentItem( 0 );
+				viewPager.setCurrentItem( 0, true );
 
 				break;
 		}
@@ -131,9 +131,9 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 		bundle.putString( "datamodelvalue", datavalue );
 
 		adapter.addFrag( emiPatternFrag, "EMI pattern" );
-		adapter.addFrag( statementOfAccountFragment, "Statement of account" );
-		adapter.addFrag( rcUpdateFragment, "RC update" );
-		adapter.addFrag( closureFragment, "Pre-closure statement" );
+		adapter.addFrag( statementOfAccountFragment, "Statement of Account" );
+		adapter.addFrag( rcUpdateFragment, "RC Update" );
+		adapter.addFrag( closureFragment, "Pre-closure Statement" );
 
 		viewPager.setAdapter( adapter );
 		viewPager.setCurrentItem( 0 );
@@ -178,7 +178,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 						break;
 
 					case 3:
-						txtEmiName.setText( "Preclosure" );
+						txtEmiName.setText( "Pre-closure Statement" );
 						view1.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
@@ -213,7 +213,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 			case 2:
 				return "RC Update";
 			case 3:
-				return "Preclosure";
+				return "Pre-closure Statement";
 			default:
 				return "";
 
@@ -228,17 +228,17 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 		emiTabLayout.getTabAt( 0 ).setCustomView( tabOne );
 
 		TextView tabTwo = ( TextView ) LayoutInflater.from( this ).inflate( R.layout.custom_tab, null );
-		tabTwo.setText( "Statement of account" );
+		tabTwo.setText( "Statement of Account" );
 		SetFonts.setFonts( this, tabTwo, 2 );
 		emiTabLayout.getTabAt( 1 ).setCustomView( tabTwo );
 
 		TextView tabThree = ( TextView ) LayoutInflater.from( this ).inflate( R.layout.custom_tab, null );
-		tabThree.setText( "RC update" );
+		tabThree.setText( "RC Update" );
 		SetFonts.setFonts( this, tabThree, 2 );
 		emiTabLayout.getTabAt( 2 ).setCustomView( tabThree );
 
 		TextView tabFour = ( TextView ) LayoutInflater.from( this ).inflate( R.layout.custom_tab, null );
-		tabFour.setText( "Pre-closure statement" );
+		tabFour.setText( "Pre-closure Statement" );
 		SetFonts.setFonts( this, tabFour, 2 );
 		emiTabLayout.getTabAt( 3 ).setCustomView( tabFour );
 

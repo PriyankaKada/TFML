@@ -32,6 +32,7 @@ import com.tmfl.model.ContractResponseModel.ContractsResponseModel;
 import com.tmfl.util.PreferenceHelper;
 import com.tmfl.util.SetFonts;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -44,7 +45,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 	ContractsInputModel    contractsInputModel;
 	ContractsResponseModel contractsResponseModel;
 	String                 strApiToken, strUserId, strTerCount, strOverdue, strTotal;
-	private TextView txtTitleContract, txtTotalCount, txtTerminatedCount, txtOverDueCount, txtContractNo, txtRcNo, txtNextDueDate, txtCurrentEmi, txtLastPayment, txtPreviousEmi, txtOverdueAmount, txtRepaymentMode, txtTerminitedContracName, txtTerminatedContractDate, txtSchemes, txtApplyLoan, txtReferFriend, txtLoanStatus, txtContactUs;
+	private TextView txtTitleContract, txtTotalCount, txtTerminatedCount, txtOverDueCount, txtCurrentDate, txtContractNo, txtRcNo, txtNextDueDate, txtCurrentEmi, txtLastPayment, txtPreviousEmi, txtOverdueAmount, txtRepaymentMode, txtTerminitedContracName, txtTerminatedContractDate, txtSchemes, txtApplyLoan, txtReferFriend, txtLoanStatus, txtContactUs;
 	private LinearLayout linSchemes, linApplyLoan, linReferFriend, linLoanStaus, linContactUs;
 	private ImageView imgDrawer;
 	private ListView  lstCotractList;
@@ -59,6 +60,12 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 		getSupportActionBar().setTitle( "" );
 		tmflApi = ApiService.getInstance().call();
 		init();
+
+		SimpleDateFormat date = new SimpleDateFormat( "EE, dd MMM yyyy" );
+
+		String newDate = date.format( System.currentTimeMillis() );
+		Log.d( "current date", newDate );
+		txtCurrentDate.setText( newDate );
 	}
 
 
@@ -73,6 +80,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 		txtLoanStatus = ( TextView ) findViewById( R.id.txtLoanStatus );
 		txtContactUs = ( TextView ) findViewById( R.id.txtContactUs );
 		lstCotractList = ( ListView ) findViewById( R.id.lstContact );
+		txtCurrentDate = ( TextView ) findViewById( R.id.txtCurrentDate );
 		SetFonts.setFonts( this, txtSchemes, 2 );
 		SetFonts.setFonts( this, txtApplyLoan, 2 );
 		SetFonts.setFonts( this, txtReferFriend, 2 );

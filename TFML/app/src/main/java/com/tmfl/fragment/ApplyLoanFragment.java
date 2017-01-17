@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -150,6 +151,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		List< StateResponseModel > dummyStatList = new ArrayList<>();
 		dummyStatList.add( 0, stateResponseModel );
 		spSelectState.setAdapter( new StateAdapter( getActivity(), dummyStatList ) );
+		spSelectState.setVisibility( View.GONE );
 
 		CityResponseModel cityModel = new CityResponseModel();
 		cityModel.setName( "Select City" );
@@ -194,6 +196,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		SocialUtil.getStateListData( getActivity(), spSelectState, "Select state" );
 		spSelectCity = ( Spinner ) view.findViewById( R.id.sp_select_city );
 		spSelectCity.setOnItemSelectedListener( this );
+		spSelectCity.setVisibility( View.GONE );
 		spOffers = ( Spinner ) view.findViewById( R.id.sp_offers );
 		spOffers.setOnItemSelectedListener( this );
 		radioGroupLeadType = ( RadioGroup ) view.findViewById( R.id.radio_group_lead_type );
@@ -286,12 +289,14 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		if ( spSelectBranchCity.getSelectedItemPosition() == 0 ) {
 			ret = false;
 		}
-		if ( spSelectCity.getSelectedItemPosition() == 0 ) {
+
+		CheckBox checkBox = ( CheckBox ) view.findViewById( R.id.chkTermsCond );
+
+		if ( !checkBox.isChecked() ) {
+			Toast.makeText( getActivity(), "Please check the checkbox!", Toast.LENGTH_SHORT ).show();
 			ret = false;
 		}
-		if ( spSelectState.getSelectedItemPosition() == 0 ) {
-			ret = false;
-		}
+
 		return ret;
 	}
 
@@ -325,42 +330,27 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		inputLoanModel.setEmailAddress( edtEmailAddress.getText().toString() );
 		if ( productCode != null && productCode != "-1" ) {
 			inputLoanModel.setProductId( productCode );
-		} /*else {
-		    Toast.makeText(getContext(), "Please Select Product Type", Toast.LENGTH_SHORT).show();
-        }*/
+		}
 
 		if ( branchStateCode != null && branchStateCode != "-1" ) {
 			inputLoanModel.setBranchState( branchStateCode );
+		}
 
-		} /*else {
-		    Toast.makeText(getContext(), "Please Select Branch State", Toast.LENGTH_SHORT).show();
-        }*/
 		if ( branchCityCode != null && branchCityCode != "-1" ) {
 			inputLoanModel.setBranchCity( branchCityCode );
-		} /*else {
-		    Toast.makeText(getContext(), "Please Select Branch City", Toast.LENGTH_SHORT).show();
-        }
-*/
+		}
+
 		if ( branchCode != null && branchCode != "-1" ) {
 			inputLoanModel.setBranch( branchCode );
-		} /*else {
-		    Toast.makeText(getContext(), "Please Select Branch", Toast.LENGTH_SHORT).show();
-        }
-*/
+		}
+
 		if ( stateCode != null && stateCode != "-1" ) {
-			inputLoanModel.setState( stateCode );
-
-		} /*else {
-		    Toast.makeText(getContext(), "Please Select State", Toast.LENGTH_SHORT).show();
-        }*/
-
+			inputLoanModel.setState( String.valueOf( 0 ) );
+		}
 
 		if ( cityCode != null && cityCode != "-1" ) {
-			inputLoanModel.setCity( cityCode );
+			inputLoanModel.setCity( String.valueOf( 0 ) );
 		}
-	   /* else {
-	        Toast.makeText(getContext(), "Please Select City", Toast.LENGTH_SHORT).show();
-        }*/
 
 		inputLoanModel.setEmailAddress( edtEmailAddress.getText().toString() );
 		inputLoanModel.setPincode( edtCode.getText().toString() );
@@ -405,7 +395,6 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 						//  Log.e("getApplyloanErr", response.body().getErrors().get(0));
 						CommonUtils.closeProgressDialog();
 					}
-
 				}
 			}
 
@@ -415,7 +404,6 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 			}
 		} );
 	}
-
 
 	@Override
 	public void onItemSelected( AdapterView< ? > parent, View view, int position, long id ) {
@@ -433,7 +421,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 					Log.e( "BRANCHSTATECODE", branchStateCode );
 					inputCityModel.setStateId( branchStateCode );
 					CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
-					SocialUtil.getBranchCityListData( getActivity(), spSelectBranchCity, inputCityModel, "Select Branch City" );
+					SocialUtil.getBranchCityListData( getActivity(), spSelectBranchCity, inputCityModel, "Select City" );
 					break;
 				}
 			case R.id.sp_select_branch_city:
@@ -594,24 +582,5 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 			spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, usedOfferListNew ) );
 
 		}
-
-		/*switch ( compoundButton.getId() ) {
-
-			case R.id.rdNewOffers:
-
-				offer = 1;
-				spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, newOfferListNew ) );
-
-
-				break;
-
-			case R.id.rdUsedOffers:
-
-				offer = 2;
-				spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, usedOfferListNew ) );
-
-				break;
-		}*/
-
 	}
 }

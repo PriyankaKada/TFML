@@ -81,6 +81,7 @@ public class CustomAdapter extends ArrayAdapter< Contract > {
 			holder.txtOverdueChanged.setText( contract.getDueAmount() );
 			holder.txtExpenses.setText( contract.getTotalExpenses() );
 			holder.txtTotalDue.setText( contract.getTotalCurrentDue() );
+			holder.txtMonthlyEMI.setText( contract.getDueAmount() );
 
 			holder.mWatcher.active = false;
 //		holder.txtEnterAmount.setInputType( InputType.TYPE_NUMBER_FLAG_DECIMAL );
@@ -171,11 +172,11 @@ public class CustomAdapter extends ArrayAdapter< Contract > {
 //				getItem( pos ).setTotalCurrentDue( editable.toString() );
 
 				//( ( TotalBillPayActivity ) mContext ).amount = editable.toString();
-				getItem( pos ).setNewTotalCurrentDue( editable.toString() );
 
 				if ( TextUtils.isEmpty( editable.toString() ) ) {
 					getItem( pos ).setNewTotalCurrentDue( "0.0" );
 				}
+				getItem( pos ).setNewTotalCurrentDue( editable.toString() );
 				//( ( TotalBillPayActivity ) mContext ).updateTotalAmount( 0, pos );
 			}
 

@@ -4,6 +4,8 @@ import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.tmfl.auth.Constant;
 import com.tmfl.auth.TmflApi;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -25,12 +27,17 @@ public class ApiService {
 
 
 				OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+
+				httpClient.readTimeout( 60, TimeUnit.SECONDS );
+				httpClient.connectTimeout( 60, TimeUnit.SECONDS );
+
 				httpClient.networkInterceptors().add( new StethoInterceptor() );
 				retrofit = new Retrofit.Builder()
 						.baseUrl( Constant.BASE_URL )
 						.client( httpClient.build() )
 						.addConverterFactory( GsonConverterFactory.create() )
 						.build();
+
 			}
 		}
 		return apiService;

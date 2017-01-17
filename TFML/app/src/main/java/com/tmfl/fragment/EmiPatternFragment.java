@@ -34,7 +34,7 @@ public class EmiPatternFragment extends Fragment {
 	TextView                   txt_repaymentmode, txt_emiamount, txt_dueamount, txt_duedate, txt_rc_no;
 	int itemindex = 0;
 	private ArrayList< String > nonzerocontractLst;
-	private ArrayList<String>contractlist;
+	private ArrayList< String > contractlist;
 	private String datavalue     = "";
 	private String rcNo          = "";
 	private String dueDate       = "";
@@ -90,7 +90,7 @@ public class EmiPatternFragment extends Fragment {
 			for ( int i = 0; i < modelArrayList.size(); i++ ) {
 //			contractLst.add(modelArrayList.get( i ).getUsrConNo());
 //				contractlist.add( modelArrayList.get( i ).getUsrConNo());
-				nonzerocontractLst.add( trimLeadingZeros(modelArrayList.get( i ).getUsrConNo()) );
+				nonzerocontractLst.add( trimLeadingZeros( modelArrayList.get( i ).getUsrConNo() ) );
 //				contractLst.add(Integer.valueOf(modelArrayList.get( i ).getUsrConNo()).toString());
 
 			}
@@ -183,7 +183,6 @@ public class EmiPatternFragment extends Fragment {
 			txt_repaymentmode.setText( model.getPdcFlag() == null ? "" : model.getPdcFlag().toString() );
 			txt_dueamount.setText( model.getTotalCurrentDue() == null ? "" : "Rs." + model.getTotalCurrentDue().toString() );
 		}
-
 	}
 
 	public void loadEmiDetail() {

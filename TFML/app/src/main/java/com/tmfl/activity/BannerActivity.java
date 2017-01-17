@@ -165,9 +165,10 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 						// Log.e("CallbannerListResponse", "" + bannerlistResponse.getBanners().getData().get(0).getImage());
 						bannerAdapter = new BannerAdapter( BannerActivity.this, ( ArrayList< Datum > ) bannerlistResponse.getBanners().getData() );
 						recentViewpager.setAdapter( bannerAdapter );
+						recentViewpager.setOffscreenPageLimit( 2 );
 						setUiPageViewController();
 
-						recentViewpager.setCurrentItem( 0 );
+						recentViewpager.setCurrentItem( 0, true );
 						circlePageIndicator.setViewPager( recentViewpager );
 					}
 					else {
@@ -213,17 +214,17 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 					@Override
 					public void run() {
 						if ( count <= dotsCount ) {
-							recentViewpager.setCurrentItem( count );
+							recentViewpager.setCurrentItem( count, true );
 							count++;
 						}
 						else {
 							count = 0;
-							recentViewpager.setCurrentItem( count );
+							recentViewpager.setCurrentItem( count, true );
 						}
 					}
 				} );
 			}
-		}, 1500, 1500 );
+		}, 1500, 2000 );
 	}
 
 	@Override

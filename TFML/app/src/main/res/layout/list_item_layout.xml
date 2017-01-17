@@ -159,7 +159,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="5dp"
-            android:text="Overdue Charged"
+            android:text="Overdue Charges"
             android:textSize="14sp"
 
             />
@@ -172,9 +172,7 @@
             android:layout_weight="2"
             android:gravity="left"
             android:padding="5dp"
-
             android:paddingLeft="20dp"
-
             android:text=""
             android:textColor="@color/text_black"
             android:textSize="14sp"
@@ -223,7 +221,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="5dp"
-            android:text="Total due"
+            android:text="Total Due"
             android:textSize="14sp"/>
 
 

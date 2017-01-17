@@ -74,7 +74,7 @@ public class BannerFragment extends Fragment implements ViewPager.OnPageChangeLi
 					bannerAdapter = new BannerAdapter( getActivity(), ( ArrayList< Datum > ) bannerlistResponse.getBanners().getData() );
 					recentViewpager.setAdapter( bannerAdapter );
 					setUiPageViewController();
-					recentViewpager.setCurrentItem( 0 );
+					recentViewpager.setCurrentItem( 0, true );
 					circlePageIndicator.setViewPager( recentViewpager );
 
 				}
