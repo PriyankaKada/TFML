@@ -22,7 +22,8 @@ public class BasicDetailFragment extends Fragment {
 	String aggrementNo, aggrementDate, maturityDate, tenure, tenure_unit, chasisNo, engineNo, strSoaDateTo, strSoaDateFrom, strClientName, strEmail;
 	String strFromDate, strToDate, strAggrementDate, strMaturityDate;
 	private View     view;
-	private TextView txtStmtofAc, txtContractNo, txtContractDate, txtMaturityDate, txtTenure, txtChasisNo, txtEngineNo, txtEmailId, txtClientName;
+	private TextView txtStmtofAc, txtContractNo, txtContractDate, txtMaturityDate, txtTenure, txtChasisNo, txtEngineNo, txtEmailId, txtClientName, txtRCNO, txtStatement_of_account;
+	private String rcNo, currentDate;
 
 	@Override
 	public View onCreateView( LayoutInflater inflater, ViewGroup container,
@@ -45,6 +46,7 @@ public class BasicDetailFragment extends Fragment {
 			chasisNo = body.getZCISResponse().getIT_CARDEX1().getItem().getCHASIS_NO() == null ? "" : body.getZCISResponse().getIT_CARDEX1().getItem().getCHASIS_NO();
 			engineNo = body.getZCISResponse().getIT_CARDEX1().getItem().getENGINE_NO() == null ? "" : body.getZCISResponse().getIT_CARDEX1().getItem().getENGINE_NO();
 			strEmail = PreferenceHelper.getString( PreferenceHelper.EMAIL );
+			rcNo = body.getZCISResponse().getIT_CARDEX1().getItem().getREG_NO();
 			DateFormat inputFormat  = new SimpleDateFormat( "yyyy-MM-dd" );
 			DateFormat outputFormat = new SimpleDateFormat( "dd-MMM-yyyy" );
 
@@ -57,6 +59,7 @@ public class BasicDetailFragment extends Fragment {
 				strFromDate = outputFormat.format( date1 );
 				strAggrementDate = outputFormat.format( date2 );
 				strMaturityDate = outputFormat.format( date3 );
+				currentDate = outputFormat.format( System.currentTimeMillis() );
 			}
 			catch ( ParseException e ) {
 				e.printStackTrace();
@@ -64,12 +67,13 @@ public class BasicDetailFragment extends Fragment {
 
 			init();
 		}
-
-
 		return view;
 	}
 
 	public void init() {
+
+		txtStatement_of_account = ( TextView ) view.findViewById( R.id.txtStatement_of_account );
+		txtRCNO = ( TextView ) view.findViewById( R.id.txtRCNO );
 		txtClientName = ( TextView ) view.findViewById( R.id.txt_client_name );
 		txtStmtofAc = ( TextView ) view.findViewById( R.id.txt_statement_of_account_detail );
 		txtContractNo = ( TextView ) view.findViewById( R.id.txt_agreement_no );
@@ -96,6 +100,8 @@ public class BasicDetailFragment extends Fragment {
 		txtEngineNo.setText( engineNo );
 		txtClientName.setText( strClientName );
 		txtEmailId.setText( strEmail );
+		txtRCNO.setText( rcNo );
+		txtStatement_of_account.setText( currentDate );
 
 	}
 

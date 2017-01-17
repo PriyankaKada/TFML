@@ -132,12 +132,7 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 
 				String monumber = edtmobileno.getText().toString();
 //				String otpnumber = edtotpno.getText().toString();
-				if ( TextUtils.isEmpty( monumber ) ) {
-					Toast.makeText( TotalBillPayActivity.this, "Please Enter Mobile Number", Toast.LENGTH_SHORT ).show();
-				}
-				else {
-					new GetBillDeskMsg( TotalBillPayActivity.this, queryString, monumber );
-				}
+				new GetBillDeskMsg( TotalBillPayActivity.this, queryString, monumber.length() == 10 ? PreferenceHelper.MOBILE : monumber );
 
 
 			}
@@ -146,61 +141,15 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 		btnLoanSkip.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View view ) {
-				payBillDialog.dismiss();
+
+//				String monumber = edtmobileno.getText().toString();
+//
+//				new GetBillDeskMsg( TotalBillPayActivity.this, queryString, monumber.length() == 0 ? PreferenceHelper.MOBILE : monumber );
 			}
 		} );
 
 		payBillDialog.show();
 
-//		String stringdouble = Double.toString( totalAmount );
-//		totalamounttextview.setText( stringdouble );
-//
-//		final Dialog totalAmountDialog = new Dialog( this, android.R.style.Theme_Holo_Dialog_NoActionBar );
-//
-//		totalAmountDialog.getWindow().setBackgroundDrawable( new ColorDrawable( android.graphics.Color.TRANSPARENT ) );
-//		totalAmountDialog.setContentView( R.layout.dialog_paynow );
-//		WindowManager.LayoutParams params = totalAmountDialog.getWindow().getAttributes();
-//		params.y = 120;
-//		params.x = 120;
-//		params.gravity = Gravity.CENTER | Gravity.CENTER;
-//		totalAmountDialog.getWindow().setAttributes( params );
-//		totalAmountDialog.setCancelable( true );
-//		totalAmountDialog.getWindow().getAttributes().windowAnimations = R.style.animationdialog;
-//		final EditText edtmobileno         = ( EditText ) totalAmountDialog.findViewById( R.id.edt_moEEEbile_no );
-//		final TextView totalamounttextview = ( TextView ) totalAmountDialog.findViewById( R.id.total_amount );
-//		final Button   btnloanstatus       = ( Button ) totalAmountDialog.findViewById( R.id.btn_loan_status );
-//		edtmobileno.setText( PreferenceHelper.getString( PreferenceHelper.MOBILE ) );
-//
-//		String stringdouble = Double.toString( totalAmount );
-//		totalamounttextview.setText( stringdouble );
-//
-//		SetFonts.setFonts( this, btnloanstatus, 2 );
-//		btnloanstatus.setOnClickListener( new View.OnClickListener() {
-//			@Override
-//			public void onClick( View v ) {
-//
-//				String monumber = edtmobileno.getText().toString();
-////				String otpnumber = edtotpno.getText().toString();
-//				if ( TextUtils.isEmpty( monumber ) ) {
-//					Toast.makeText( TotalBillPayActivity.this, "Please Enter Mobile Number", Toast.LENGTH_SHORT ).show();
-//				}
-//				else {
-//					new GetBillDeskMsg( TotalBillPayActivity.this, queryString, monumber );
-//
-//				}
-//
-//
-//			}
-//		} );
-//		totalAmountDialog.show();
-//		totalAmountDialog.setOnCancelListener( new DialogInterface.OnCancelListener() {
-//			@Override
-//			public void onCancel( DialogInterface dialog ) {
-////				linloanstatus.setBackgroundColor( Color.parseColor( "#004c92" ) );
-////				selectedView.setVisibility( View.INVISIBLE );
-//			}
-//		} );
-//
 	}
 
 	public void getData() {

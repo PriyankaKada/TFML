@@ -408,8 +408,6 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 		if ( txtAccDate.getText().toString() != null ) {
 			preClosureInputModel.setRequestDate( txtAccDate.getText().toString() );
 		}
-
-
 	}
 
 	public void SoapServiceResult() {
@@ -417,6 +415,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 			if ( !TextUtils.isEmpty( txtAccDate.getText().toString() ) ) {
 				// CommonUtils.showProgressDialog(getActivity(), "Getting Your Information");
 				String currentDateTimeString = DateFormat.getDateTimeInstance().format( new Date() );
+				String newDate               = null;
 				strAccdate = txtAccDate.getText().toString();
 				DateFormat       inputFormat  = new SimpleDateFormat( "yyyy-MM-dd" );
 				DateFormat       outputFormat = new SimpleDateFormat( "dd-MM-yyyy" );
@@ -425,12 +424,13 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 				try {
 					Date date = inputFormat.parse( strAccdate );
 					strDate = outputFormat.format( date );
+					newDate = outputFormat.format( System.currentTimeMillis() );
 				}
 				catch ( ParseException e ) {
 					e.printStackTrace();
 				}
 
-				txtGenDate.setText( "Generated On " + strDate + "|" + strTime );
+				txtGenDate.setText( "Generated On " + newDate + "|" + strTime );
 				txtBal.setText( getActivity().getResources().getString( R.string.txt_total_bal ) + " " + strDate );
 				callSoapDataRequest();
 

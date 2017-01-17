@@ -62,7 +62,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 	CirclePageIndicator circlePageIndicator;
 	TmflApi             tmflApi;
 	BannerAdapter       bannerAdapter;
-	LinearLayout        linSchemes, linApplyLoan, linReferFriend, linLoanStaus, linLogin;
+	LinearLayout        linSchemes, linApplyLoan, linReferFriend, linLoanStaus, linLogin, linQuickCall;
 	String errormsg;
 	View   view1, view2, view3, view4, view5;
 	String strQuickCall, strOtpNo, strMobileNo;
@@ -112,6 +112,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		linReferFriend = ( LinearLayout ) findViewById( R.id.linReferFriend );
 		linLoanStaus = ( LinearLayout ) findViewById( R.id.linLoanStaus );
 		linLogin = ( LinearLayout ) findViewById( R.id.linLogin );
+		linQuickCall = ( LinearLayout ) findViewById( R.id.linQuickCall );
 
 		containerFrameLayout = ( FrameLayout ) findViewById( R.id.frame_complaint_container );
 		complaintsFragment = new ComplaintsFragment();
@@ -139,6 +140,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		linReferFriend.setOnClickListener( this );
 		linLoanStaus.setOnClickListener( this );
 		linLogin.setOnClickListener( this );
+		linQuickCall.setOnClickListener( this );
 	}
 
 	public void loadBannerData() {
@@ -230,7 +232,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 	@Override
 	public void onClick( View v ) {
 		switch ( v.getId() ) {
-			case R.id.imgQuickCall:
+			case R.id.linQuickCall:
 
 				view5.setVisibility( View.VISIBLE );
 				view1.setVisibility( View.GONE );
@@ -439,7 +441,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 			public void onResponse( Call< LoanStatusResponse > call, Response< LoanStatusResponse > response ) {
 				if ( response.body().getStatus().contains( "success" ) ) {
 					//  Log.e("CallLoanStatusModel", response.body().getStatus());
-					Toast.makeText( BannerActivity.this, "Thanks for Quick calling ", Toast.LENGTH_SHORT ).show();
+					Toast.makeText( BannerActivity.this, "Our Call Centre will reach you within 2 working days.", Toast.LENGTH_SHORT ).show();
 					edtQuickCall.setText( "" );
 					edtOtpNo.setText( "" );
 					dialog.dismiss();

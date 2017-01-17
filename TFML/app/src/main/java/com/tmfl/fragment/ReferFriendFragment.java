@@ -86,6 +86,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 	private RadioGroup radioGroupLeadType, radioGroupVehicleType;
 	private int         offer;
 	private RadioButton rdNewOffers, rdUsedOffers;
+	private CheckBox checkBox;
 
 	@Override
 	public View onCreateView( LayoutInflater inflater, ViewGroup container,
@@ -194,6 +195,9 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 	}
 
 	public void init() {
+
+		checkBox = ( CheckBox ) view.findViewById( R.id.chkTermsCond );
+
 		edtFirstName = ( EditText ) view.findViewById( R.id.edt_first_name );
 		edtLastName = ( EditText ) view.findViewById( R.id.edt_last_name );
 		edtMobileNumber = ( EditText ) view.findViewById( R.id.edt_mobile_no );
@@ -312,10 +316,9 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 			ret = false;
 		}*/
 
-		CheckBox checkBox = ( CheckBox ) view.findViewById( R.id.chkTermsCond );
 
 		if ( !checkBox.isChecked() ) {
-			Toast.makeText( getActivity(), "Please check the checkbox!", Toast.LENGTH_SHORT ).show();
+			Toast.makeText( getActivity(), "You must agree to the terms first!", Toast.LENGTH_SHORT ).show();
 			ret = false;
 		}
 
@@ -328,10 +331,10 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 			callReferFriendService();
 			loadReferFriendsResponse( inputReferFriendModel );
 		}
-		else {
+		/*else {
 			Toast.makeText( getActivity(), "Please Fill the Required Detail", Toast.LENGTH_SHORT ).show();
 			CommonUtils.closeProgressDialog();
-		}
+		}*/
 	}
 
 	public void callReferFriendService() {
@@ -432,7 +435,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 				if ( response.body() != null ) {
 					if ( response.body().getStatus().contains( "success" ) ) {
 						Log.e( "getFriendResponse", response.body().getStatus() );
-						showAlert( getActivity(), "Refer Friends", "Thanks for this approach", true );
+						showAlert( getActivity(), "Refer Friends", " Thank You for referring friend. Our representative will contact him/her shortly.", true );
 
 					}
 					else {
@@ -466,7 +469,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 					Log.e( "BRANCHSTATECODE", branchStateCode );
 					inputCityModel.setStateId( branchStateCode );
 					CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
-					SocialUtil.getBranchCityListData( getActivity(), spSelectBranchCity, inputCityModel, "Select City" );
+					SocialUtil.getBranchCityListData( getActivity(), spSelectBranchCity, inputCityModel, "Selectf City" );
 					break;
 				}
 			case R.id.sp_select_branch_city:
@@ -575,6 +578,8 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		spSelectCity.setSelection( 0 );
 		spSelectState.setSelection( 0 );
 		spOffers.setSelection( 0 );
+		checkBox.setChecked( false );
+
 	}
 
 	private void hideKeyboard() {

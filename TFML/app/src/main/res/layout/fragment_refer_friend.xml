@@ -373,7 +373,7 @@
                     android:id="@+id/txtTermsCond"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="I authorize TMFL &amp; its representatives to call me or SMS me with reference to my interest shown in a loan from TMF . This consent will override any registration for DNC / NDNC. Refer: http://tmf.co.in/tmfuniverse/tatamotorfinance/ApplyNowForTataProduct.jsp"
+                    android:text="I authorize TMFL &amp; its representatives to call me or SMS me with reference to my interest shown in a loan from TMF . This consent will override any registration for DNC / NDNC."
                     android:textSize="14sp"/>
 
             </LinearLayout>

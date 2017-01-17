@@ -211,7 +211,7 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 		txt_duedate.setText( model.getDueDate() == null ? "" : model.getDueDate().toString() );
 		txt_emiamount.setText( model.getDueAmount() == null ? "" : "Rs. " + model.getDueAmount().toString() );
 		txt_repaymentmode.setText( model.getPdcFlag() == null ? "" : model.getPdcFlag().toString() );
-		txt_dueamount.setText( model.getTotalCurrentDue() == null ? "" : "Rs." + model.getTotalCurrentDue().toString() );
+		txt_dueamount.setText( model.getOdAmt() == null ? "" : "Rs." + model.getOdAmt().toString() );
 	}
 
 	@Override

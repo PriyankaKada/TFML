@@ -77,6 +77,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 	int                   offer;
 	List< UsedOfferData > usedOfferListNew = new ArrayList<>();
 	List< NewOfferData >  newOfferListNew  = new ArrayList<>();
+	CheckBox checkBox;
 	private EditText edtFirstName, edtLastName, edtMobileNumber, edtLandlineNumber, edtEmailAddress, edtOrgnizationName, edtCode;
 	private Spinner spnProduct, spSelectBranchState, spSelectBranchCity, spSelectBranch, spSelectCity, spSelectState, spOffers;
 	private RadioButton rdbLeadTypeIndividual, rdbLeadTypeOrganizational, rdbVecTypeCommercial, rdbVechTypeRefinance, rdbVechPassanger;
@@ -171,6 +172,9 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 	}
 
 	public void init() {
+
+		checkBox = ( CheckBox ) view.findViewById( R.id.chkTermsCond );
+
 		edtFirstName = ( EditText ) view.findViewById( R.id.edt_first_name );
 		edtLastName = ( EditText ) view.findViewById( R.id.edt_last_name );
 		edtMobileNumber = ( EditText ) view.findViewById( R.id.edt_mobile_no );
@@ -290,10 +294,8 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 			ret = false;
 		}
 
-		CheckBox checkBox = ( CheckBox ) view.findViewById( R.id.chkTermsCond );
-
 		if ( !checkBox.isChecked() ) {
-			Toast.makeText( getActivity(), "Please check the checkbox!", Toast.LENGTH_SHORT ).show();
+			Toast.makeText( getActivity(), "You must agree to the terms first!", Toast.LENGTH_SHORT ).show();
 			ret = false;
 		}
 
@@ -307,10 +309,10 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 			loadApplyLoanResponse( inputLoanModel );
 
 		}
-		else {
+		/*else {
 			Toast.makeText( getActivity(), "Please Fill the Required Detail", Toast.LENGTH_SHORT ).show();
 			CommonUtils.closeProgressDialog();
-		}
+		}*/
 	}
 
 	public void callApplyLoanService() {
@@ -387,7 +389,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 				if ( response.body() != null ) {
 					if ( response.body().getStatus().contains( "success" ) ) {
 						Log.e( "getApplyLoanResponse", response.body().getStatus() );
-						showAlert( getActivity(), "", "Apply Loan Successfully", true );
+						showAlert( getActivity(), "", "Thank You for your interest in Tata Product. Our representative will contact you shortly.", true );
 
 					}
 					else {
@@ -532,6 +534,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		spSelectCity.setSelection( 0 );
 		spSelectState.setSelection( 0 );
 		spOffers.setSelection( 0 );
+		checkBox.setChecked( false );
 	}
 
 

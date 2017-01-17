@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -153,11 +154,9 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 
 						map.moveCamera( CameraUpdateFactory.newLatLngZoom( new LatLng( latitude, longitude ), 13 ) );
 					}
-					/*else {
-						Toast.makeText( this, "Invalid location!", Toast.LENGTH_SHORT ).show();
-					}*/
-
-
+					else {
+						Toast.makeText( this, "Location not found!", Toast.LENGTH_SHORT ).show();
+					}
 				}
 
 				break;

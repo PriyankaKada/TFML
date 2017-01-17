@@ -130,7 +130,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 		bundle.putSerializable( "datamodel", modelArrayList );
 		bundle.putString( "datamodelvalue", datavalue );
 
-		adapter.addFrag( emiPatternFrag, "EMI pattern" );
+		adapter.addFrag( emiPatternFrag, "EMI Pattern" );
 		adapter.addFrag( statementOfAccountFragment, "Statement of Account" );
 		adapter.addFrag( rcUpdateFragment, "RC Update" );
 		adapter.addFrag( closureFragment, "Pre-closure Statement" );
@@ -223,7 +223,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 	public void setupTabIcon() {
 
 		TextView tabOne = ( TextView ) LayoutInflater.from( this ).inflate( R.layout.custom_tab, null );
-		tabOne.setText( "EMI pattern" );
+		tabOne.setText( "EMI Pattern" );
 		SetFonts.setFonts( this, tabOne, 2 );
 		emiTabLayout.getTabAt( 0 ).setCustomView( tabOne );
 
