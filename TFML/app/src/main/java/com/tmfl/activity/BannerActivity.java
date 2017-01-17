@@ -405,9 +405,9 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 
 				CommonUtils.closeProgressDialog();
 
-				if ( response != null && response.body().getStatus().contains( "success" ) ) {
+				if ( response != null && response.body().getStatus().equalsIgnoreCase( "success" ) ) {
 
-					SocialUtil.loanStatusDialog( BannerActivity.this, linLoanStaus, view1 );
+//					SocialUtil.loanStatusDialog( BannerActivity.this, linLoanStaus, view1 );
 					strOtpNo = response.body().getData().getOtp();
 					edtOtpNo.setText( strOtpNo );
 

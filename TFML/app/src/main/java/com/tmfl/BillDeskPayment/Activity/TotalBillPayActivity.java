@@ -38,17 +38,14 @@ import retrofit2.Response;
 
 public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnClickListener {
 
-	static String total;
 	public String amount = "";
 	ListView       listView;
-	Contract       contractModel;
 	ProgressDialog dialog;
-	TextView       totalamounttextview, txtMobileNo, txt_title_contract, total_amount;
+	TextView       txt_title_contract;
 	double totalAmount = 0.0;
 	String queryString = "";
 	private List< Contract > listOfContract;
-	private ImageView        imgDrawerPayment, img_contract;
-	private Dialog payBillDialog;
+	private Dialog           payBillDialog;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
@@ -59,27 +56,20 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 		setSupportActionBar( toolbar );
 		getSupportActionBar().setTitle( "" );
 		listView = ( ListView ) findViewById( R.id.lstView );
-//		totalamounttextview = ( TextView ) findViewById( R.id.totalamounttextview );
-//txtMobileNo = ( TextView ) findViewById( R.id.txtMobileNo );
 		txt_title_contract = ( TextView ) findViewById( R.id.txt_title_contract );
-		img_contract = ( ImageView ) findViewById( R.id.img_contract );
+		ImageView img_contract = ( ImageView ) findViewById( R.id.img_contract );
 		txt_title_contract.setText( "Due Details" );
 		img_contract.setOnClickListener( this );
 
-		imgDrawerPayment = ( ImageView ) findViewById( R.id.img_drawer_payament );
+		ImageView imgDrawerPayment = ( ImageView ) findViewById( R.id.img_drawer_payament );
 		imgDrawerPayment.setOnClickListener( this );
 		dialog = new ProgressDialog( TotalBillPayActivity.this );
-
-//		txtMobileNo.setText( ) );
 
 		findViewById( R.id.btnPayNow ).setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View view ) {
-
 				callPayNow();
 				showPayNowDialog();
-
-
 			}
 		} );
 		getData();

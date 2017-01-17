@@ -74,55 +74,46 @@ public class CustomAdapter extends ArrayAdapter< Contract > {
 		}
 
 		Log.e( "contract", contract.getRcNumber() );
-		holder.txtContractNoValue.setText( contract.getUsrConNo() );
-		holder.txtRcNo.setText( contract.getRcNumber() );
-		holder.txtOverdue.setText( contract.getOdAmt() );
-		holder.txtOverdueChanged.setText( contract.getDueAmount() );
-		holder.txtExpenses.setText( contract.getTotalExpenses() );
-		holder.txtTotalDue.setText( contract.getTotalCurrentDue() );
+		if ( contract.getUsrConCompCode().equalsIgnoreCase( "5000" ) ) {
+			holder.txtContractNoValue.setText( contract.getUsrConNo() );
+			holder.txtRcNo.setText( contract.getRcNumber() );
+			holder.txtOverdue.setText( contract.getOdAmt() );
+			holder.txtOverdueChanged.setText( contract.getDueAmount() );
+			holder.txtExpenses.setText( contract.getTotalExpenses() );
+			holder.txtTotalDue.setText( contract.getTotalCurrentDue() );
 
-		holder.mWatcher.active = false;
+			holder.mWatcher.active = false;
 //		holder.txtEnterAmount.setInputType( InputType.TYPE_NUMBER_FLAG_DECIMAL );
-		holder.txtEnterAmount.setText( contract.getNewTotalCurrentDue() == null || contract.getNewTotalCurrentDue().equalsIgnoreCase( "" ) ? contract.getTotalCurrentDue() : contract.getNewTotalCurrentDue() );
-		holder.mWatcher.pos = position;
+			holder.txtEnterAmount.setText( contract.getNewTotalCurrentDue() == null || contract.getNewTotalCurrentDue().equalsIgnoreCase( "" ) ? contract.getTotalCurrentDue() : contract.getNewTotalCurrentDue() );
+			holder.mWatcher.pos = position;
 
-		holder.mWatcher.active = true;
-		holder.imgTick.setImageResource( contract.getIsSelected() ? R.drawable.ic_check_circle_green : R.drawable.ic_check_circle_amber );
-		holder.txtEnterAmount.setEnabled( !contract.getIsSelected() );
+			holder.mWatcher.active = true;
+			holder.imgTick.setImageResource( contract.getIsSelected() ? R.drawable.ic_check_circle_green : R.drawable.ic_check_circle_amber );
+			holder.txtEnterAmount.setEnabled( !contract.getIsSelected() );
 
-		if ( contract.getIsSelected() ) {
-			holder.txtEnterAmount.setEnabled( true );
-		}
-		else {
-			holder.txtEnterAmount.setEnabled( false );
-		}
-		holder.imgTick.setTag( holder.txtEnterAmount );
-		holder.imgTick.setOnClickListener( new View.OnClickListener() {
-			@Override
-			public void onClick( View view ) {
-
-				EditText editText = ( EditText ) view.getTag();
-				double value = Double.parseDouble( editText.getText().toString().trim().equalsIgnoreCase( "" )
-						                                   ? "0.0" : editText.getText().toString().trim() );
-				listItems.get( position ).setSelected( !listItems.get( position ).getIsSelected() );
-				holder.imgTick.setImageResource( listItems.get( position ).getIsSelected() ? R.drawable.ic_check_circle_green : R.drawable.ic_check_circle_amber );
-				editText.setEnabled( listItems.get( position ).getIsSelected() );
-
-				( ( TotalBillPayActivity ) mContext ).updateTotalAmount();
-				/*if ( listItems.get( position ).getIsSelected() ) {
-//					editText.setEnabled( true );
-					totalAmount = totalAmount + value;
-					Log.d( "total amount", "inside customer + " + value );
-					( ( TotalBillPayActivity ) mContext ).updateTotalAmount( totalAmount, position );
-				}
-				else if ( !listItems.get( position ).getIsSelected() ) {
-//					editText.setEnabled( false );
-					totalAmount = totalAmount - value;
-					( ( TotalBillPayActivity ) mContext ).updateTotalAmount( totalAmount, position );
-				}*/
-
+			if ( contract.getIsSelected() ) {
+				holder.txtEnterAmount.setEnabled( true );
 			}
-		} );
+			else {
+				holder.txtEnterAmount.setEnabled( false );
+			}
+			holder.imgTick.setTag( holder.txtEnterAmount );
+			holder.imgTick.setOnClickListener( new View.OnClickListener() {
+				@Override
+				public void onClick( View view ) {
+
+					EditText editText = ( EditText ) view.getTag();
+					double value = Double.parseDouble( editText.getText().toString().trim().equalsIgnoreCase( "" )
+							                                   ? "0.0" : editText.getText().toString().trim() );
+					listItems.get( position ).setSelected( !listItems.get( position ).getIsSelected() );
+					holder.imgTick.setImageResource( listItems.get( position ).getIsSelected() ? R.drawable.ic_check_circle_green : R.drawable.ic_check_circle_amber );
+					editText.setEnabled( listItems.get( position ).getIsSelected() );
+
+					( ( TotalBillPayActivity ) mContext ).updateTotalAmount();
+
+				}
+			} );
+		}
 
 		return convertView;
 	}

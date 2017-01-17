@@ -280,9 +280,6 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		if ( !Validation.hasText( edtMobileNumber, "Please enter mobile number" ) ) {
 			ret = false;
 		}
-		if ( !Validation.hasText( edtLandlineNumber, "Please enter landline number" ) ) {
-			ret = false;
-		}
 		if ( !Validation.isValidEmail( edtEmailAddress.getText().toString() ) ) {
 			ret = false;
 		}
