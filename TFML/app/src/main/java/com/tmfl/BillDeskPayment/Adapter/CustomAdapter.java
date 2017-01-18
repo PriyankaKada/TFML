@@ -1,5 +1,6 @@
 package com.tmfl.BillDeskPayment.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -8,10 +9,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tmfl.BillDeskPayment.Activity.TotalBillPayActivity;
 import com.tmfl.BillDeskPayment.Models.Contract;
@@ -92,6 +95,7 @@ public class CustomAdapter extends ArrayAdapter< Contract > {
 			holder.imgTick.setImageResource( contract.getIsSelected() ? R.drawable.ic_check_circle_green : R.drawable.ic_check_circle_amber );
 			holder.txtEnterAmount.setEnabled( !contract.getIsSelected() );
 
+
 			if ( contract.getIsSelected() ) {
 				holder.txtEnterAmount.setEnabled( true );
 			}
@@ -110,8 +114,10 @@ public class CustomAdapter extends ArrayAdapter< Contract > {
 					holder.imgTick.setImageResource( listItems.get( position ).getIsSelected() ? R.drawable.ic_check_circle_green : R.drawable.ic_check_circle_amber );
 					editText.setEnabled( listItems.get( position ).getIsSelected() );
 
-					( ( TotalBillPayActivity ) mContext ).updateTotalAmount();
+					InputMethodManager imm = ( InputMethodManager ) mContext.getSystemService( Activity.INPUT_METHOD_SERVICE );
+					imm.toggleSoftInput( 0, InputMethodManager.HIDE_IMPLICIT_ONLY );
 
+					( ( TotalBillPayActivity ) mContext ).updateTotalAmount();
 				}
 			} );
 		}
@@ -169,14 +175,16 @@ public class CustomAdapter extends ArrayAdapter< Contract > {
 		@Override
 		public void afterTextChanged( Editable editable ) {
 			if ( active ) {
-//				getItem( pos ).setTotalCurrentDue( editable.toString() );
-
-				//( ( TotalBillPayActivity ) mContext ).amount = editable.toString();
 
 				if ( TextUtils.isEmpty( editable.toString() ) ) {
 					getItem( pos ).setNewTotalCurrentDue( "0.0" );
 				}
-				getItem( pos ).setNewTotalCurrentDue( editable.toString() );
+				if ( Integer.parseInt( editable.toString() ) > 100 ) {
+					getItem( pos ).setNewTotalCurrentDue( editable.toString() );
+				}
+				else {
+					Toast.makeText( mContext, "Amount should be above 100!", Toast.LENGTH_SHORT ).show();
+				}
 				//( ( TotalBillPayActivity ) mContext ).updateTotalAmount( 0, pos );
 			}
 

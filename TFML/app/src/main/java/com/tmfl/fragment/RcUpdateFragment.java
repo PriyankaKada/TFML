@@ -175,10 +175,10 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 			txt_duedate.setText( dueDate );
 		}
 		if ( currentEmi != null ) {
-			txt_emiamount.setText( currentEmi );
+			txt_emiamount.setText( "Rs." + currentEmi );
 		}
 		if ( overdue != null ) {
-			txt_dueamount.setText( overdue );
+			txt_dueamount.setText( "Rs." + overdue );
 		}
 		SetFonts.setFonts( getActivity(), btnRcUpload, 2 );
 

@@ -187,10 +187,10 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 			txt_duedate.setText( dueDate );
 		}
 		if ( currentEmi != null ) {
-			txt_emiamount.setText( currentEmi );
+			txt_emiamount.setText( "Rs." + currentEmi );
 		}
 		if ( overdue != null ) {
-			txt_dueamount.setText( overdue );
+			txt_dueamount.setText( "Rs." + overdue );
 		}
 		SetFonts.setFonts( getActivity(), btnSubmit, 2 );
 		date = new DatePickerFragment();

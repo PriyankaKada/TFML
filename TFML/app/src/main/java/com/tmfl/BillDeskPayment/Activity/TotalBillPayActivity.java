@@ -56,6 +56,7 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 		setSupportActionBar( toolbar );
 		getSupportActionBar().setTitle( "" );
 		listView = ( ListView ) findViewById( R.id.lstView );
+
 		txt_title_contract = ( TextView ) findViewById( R.id.txt_title_contract );
 		ImageView img_contract = ( ImageView ) findViewById( R.id.img_contract );
 		txt_title_contract.setText( "Due Details" );
@@ -175,8 +176,10 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 				for ( int i = 0; i < list.size(); i++ ) {
 					list.get( i ).setSelected( false );
 				}
+
 				CustomAdapter adapter = new CustomAdapter( TotalBillPayActivity.this, listOfContract = list );
 				listView.setAdapter( adapter );
+				listView.setDescendantFocusability( ViewGroup.FOCUS_AFTER_DESCENDANTS );
 				dialog.dismiss();
 				adapter.notifyDataSetChanged();
 			}

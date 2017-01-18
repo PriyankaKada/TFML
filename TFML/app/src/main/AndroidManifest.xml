@@ -83,7 +83,7 @@
             android:name=".BillDeskPayment.Activity.TotalBillPayActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize|stateVisible">
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible">
 
 
             <!--

@@ -66,8 +66,6 @@
                         android:textSize="12sp"/>
 
                 </LinearLayout>
-
-
             </LinearLayout>
 
             <TextView
@@ -96,7 +94,6 @@
 
         </RelativeLayout>
 
-
         <ExpandableListView
             android:id="@+id/expandableListViewEmi"
             android:layout_width="match_parent"
@@ -108,6 +105,4 @@
             android:groupIndicator="@null"/>
 
     </LinearLayout>
-
-
 </LinearLayout>
