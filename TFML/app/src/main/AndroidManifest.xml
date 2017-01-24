@@ -137,6 +137,10 @@
             android:theme="@android:style/Theme.Dialog">
         </activity>
 
+        <activity
+            android:name=".activity.TermsConditionActivity"
+            android:screenOrientation="portrait"/>
+
 
         <!-- from BillDesk SDK v1.3.37 -->
 

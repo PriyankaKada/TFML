@@ -25,6 +25,7 @@ import com.tmfl.BillDeskPayment.Models.JSONData;
 import com.tmfl.R;
 import com.tmfl.activity.BannerActivity;
 import com.tmfl.activity.DrawerBaseActivity;
+import com.tmfl.activity.TermsConditionActivity;
 import com.tmfl.auth.TmflApi;
 import com.tmfl.common.ApiService;
 import com.tmfl.util.PreferenceHelper;
@@ -41,7 +42,7 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 	public String amount = "";
 	ListView       listView;
 	ProgressDialog dialog;
-	TextView       txt_title_contract;
+	TextView       txt_title_contract, txtTermsCond, txtPrivacyPolicy;
 	double totalAmount = 0.0;
 	String queryString = "";
 	private List< Contract > listOfContract;
@@ -58,8 +59,12 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 		listView = ( ListView ) findViewById( R.id.lstView );
 
 		txt_title_contract = ( TextView ) findViewById( R.id.txt_title_contract );
-		ImageView img_contract = ( ImageView ) findViewById( R.id.img_contract );
 		txt_title_contract.setText( "Due Details" );
+		txtTermsCond = ( TextView ) findViewById( R.id.txtTermsCond );
+		txtPrivacyPolicy = ( TextView ) findViewById( R.id.txtPrivacyPolicy );
+		txtTermsCond.setOnClickListener( this );
+		txtPrivacyPolicy.setOnClickListener( this );
+		ImageView img_contract = ( ImageView ) findViewById( R.id.img_contract );
 		img_contract.setOnClickListener( this );
 
 		ImageView imgDrawerPayment = ( ImageView ) findViewById( R.id.img_drawer_payament );
@@ -70,7 +75,6 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 			@Override
 			public void onClick( View view ) {
 				callPayNow();
-				showPayNowDialog();
 			}
 		} );
 		getData();
@@ -91,7 +95,18 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 						totalAmount = totalAmount + Double.parseDouble( contract.getNewTotalCurrentDue() );
 					}
 				}
+
+				if ( Integer.parseInt( contract.getNewTotalCurrentDue() ) < 100 ) {
+					Toast.makeText( this, "Amount should be above 100!", Toast.LENGTH_SHORT ).show();
+				}
+				else if ( Integer.parseInt( contract.getNewTotalCurrentDue() ) > 10000000 ) {
+					Toast.makeText( this, "Please check entered amount!", Toast.LENGTH_SHORT ).show();
+				}
+				else {
+					showPayNowDialog();
+				}
 			}
+
 
 			Log.e( "total amount ", " total amount " + totalAmount );
 			//   ((TextView) findViewById(R.id.totalamounttextview)).setText(String.valueOf(totalAmount + ""));
@@ -132,8 +147,13 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 			public void onClick( View v ) {
 
 				String monumber = edtmobileno.getText().toString();
+				if ( monumber.length() == 0 || monumber.length() == 10 ) {
+					new GetBillDeskMsg( TotalBillPayActivity.this, queryString, monumber );
+				}
+				else {
+					Toast.makeText( TotalBillPayActivity.this, "Mobile No should be of 10 digits!", Toast.LENGTH_SHORT ).show();
+				}
 //				String otpnumber = edtotpno.getText().toString();
-				new GetBillDeskMsg( TotalBillPayActivity.this, queryString, monumber.length() == 10 ? PreferenceHelper.MOBILE : monumber );
 
 
 			}
@@ -144,7 +164,6 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 			public void onClick( View view ) {
 
 //				String monumber = edtmobileno.getText().toString();
-//
 //				new GetBillDeskMsg( TotalBillPayActivity.this, queryString, monumber.length() == 0 ? PreferenceHelper.MOBILE : monumber );
 			}
 		} );
@@ -205,9 +224,7 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 						try {
 							totalAmount = totalAmount + Double.parseDouble( contract.getNewTotalCurrentDue() );
 						}
-						catch (
-								NumberFormatException e
-								) {
+						catch ( NumberFormatException e ) {
 							e.printStackTrace();
 						}
 					}
@@ -237,6 +254,18 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 					startActivity( new Intent( TotalBillPayActivity.this, BannerActivity.class ) );
 					finish();
 				}
+
+				break;
+
+			case R.id.txtTermsCond:
+
+				startActivity( new Intent( this, TermsConditionActivity.class ).putExtra( "Terms", "1" ) );
+
+				break;
+
+			case R.id.txtPrivacyPolicy:
+
+				startActivity( new Intent( this, TermsConditionActivity.class ).putExtra( "Terms", "2" ) );
 
 				break;
 		}

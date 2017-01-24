@@ -95,7 +95,6 @@ public class CustomAdapter extends ArrayAdapter< Contract > {
 			holder.imgTick.setImageResource( contract.getIsSelected() ? R.drawable.ic_check_circle_green : R.drawable.ic_check_circle_amber );
 			holder.txtEnterAmount.setEnabled( !contract.getIsSelected() );
 
-
 			if ( contract.getIsSelected() ) {
 				holder.txtEnterAmount.setEnabled( true );
 			}
@@ -177,14 +176,18 @@ public class CustomAdapter extends ArrayAdapter< Contract > {
 			if ( active ) {
 
 				if ( TextUtils.isEmpty( editable.toString() ) ) {
-					getItem( pos ).setNewTotalCurrentDue( "0.0" );
+					getItem( pos ).setNewTotalCurrentDue( "0" );
 				}
-				if ( Integer.parseInt( editable.toString() ) > 100 ) {
+				/*else if ( Integer.parseInt( editable.toString() ) > 10000000 ) {
+					Toast.makeText( mContext, "Please check entered amount!", Toast.LENGTH_SHORT ).show();
+				}*/
+				else if ( Integer.parseInt( editable.toString() ) > 100 ) {
 					getItem( pos ).setNewTotalCurrentDue( editable.toString() );
 				}
 				else {
 					Toast.makeText( mContext, "Amount should be above 100!", Toast.LENGTH_SHORT ).show();
 				}
+
 				//( ( TotalBillPayActivity ) mContext ).updateTotalAmount( 0, pos );
 			}
 

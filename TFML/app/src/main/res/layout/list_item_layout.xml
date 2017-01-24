@@ -269,6 +269,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/whit_rect_bg"
                 android:hint=""
+                android:inputType="number"
                 android:padding="5dp"
                 android:textSize="14sp"/>
 
