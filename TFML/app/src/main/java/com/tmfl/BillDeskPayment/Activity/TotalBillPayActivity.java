@@ -30,6 +30,7 @@ import com.tmfl.auth.TmflApi;
 import com.tmfl.common.ApiService;
 import com.tmfl.util.PreferenceHelper;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 	ListView       listView;
 	ProgressDialog dialog;
 	TextView       txt_title_contract, txtTermsCond, txtPrivacyPolicy;
-	double totalAmount = 0.0;
+	double totalAmount = 0.00;
 	String queryString = "";
 	private List< Contract > listOfContract;
 	private Dialog           payBillDialog;
@@ -71,6 +72,8 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 		imgDrawerPayment.setOnClickListener( this );
 		dialog = new ProgressDialog( TotalBillPayActivity.this );
 
+		payBillDialog = new Dialog( this );
+
 		findViewById( R.id.btnPayNow ).setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View view ) {
@@ -96,10 +99,10 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 					}
 				}
 
-				if ( Integer.parseInt( contract.getNewTotalCurrentDue() ) < 100 ) {
+				if ( totalAmount < 100 ) {
 					Toast.makeText( this, "Amount should be above 100!", Toast.LENGTH_SHORT ).show();
 				}
-				else if ( Integer.parseInt( contract.getNewTotalCurrentDue() ) > 10000000 ) {
+				else if ( totalAmount > 10000000 ) {
 					Toast.makeText( this, "Please check entered amount!", Toast.LENGTH_SHORT ).show();
 				}
 				else {
@@ -127,7 +130,6 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 
 	private void showPayNowDialog() {
 
-		payBillDialog = new Dialog( this );
 		payBillDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
 		payBillDialog.setContentView( R.layout.dialog_paynow );
 		payBillDialog.getWindow().setLayout( ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT );
@@ -153,20 +155,14 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 				else {
 					Toast.makeText( TotalBillPayActivity.this, "Mobile No should be of 10 digits!", Toast.LENGTH_SHORT ).show();
 				}
-//				String otpnumber = edtotpno.getText().toString();
-
-
 			}
 		} );
 
-		btnLoanSkip.setOnClickListener( new View.OnClickListener() {
+		/*btnLoanSkip.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View view ) {
-
-//				String monumber = edtmobileno.getText().toString();
-//				new GetBillDeskMsg( TotalBillPayActivity.this, queryString, monumber.length() == 0 ? PreferenceHelper.MOBILE : monumber );
 			}
-		} );
+		} );*/
 
 		payBillDialog.show();
 
@@ -232,7 +228,7 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 			}
 		}
 		Log.e( "total amount ", " total amount " + totalAmount );
-		( ( TextView ) findViewById( R.id.total_amount ) ).setText( String.valueOf( totalAmount + "" ) );
+		( ( TextView ) findViewById( R.id.total_amount ) ).setText( new DecimalFormat( "##.00" ).format( totalAmount ) );
 	}
 
 	@Override

@@ -71,7 +71,12 @@ public class DrawerBaseActivity extends BaseActivity {
 			txtUserName.setText( PreferenceHelper.getString( PreferenceHelper.USER_FIRT_NAME ) );
 		}
 
-
+		if ( CommonUtils.isNetworkAvailable( this ) ) {
+			SocialUtil.getContactList();
+		}
+		else {
+			Toast.makeText( getBaseContext(), "Please Check Network Connection", Toast.LENGTH_SHORT ).show();
+		}
 		tmflApi = ApiService.getInstance().call();
 		initInstances();
 	}
@@ -157,7 +162,7 @@ public class DrawerBaseActivity extends BaseActivity {
 					case 7://Phone Call
 						if ( CommonUtils.isNetworkAvailable( DrawerBaseActivity.this ) ) {
 							SocialUtil.getContactList();
-							SocialUtil.dialPhoneCall( DrawerBaseActivity.this, SocialUtil.phoneNo );
+							SocialUtil.dialPhoneCall( DrawerBaseActivity.this, "18002090188" );
 							drawerLayout.closeDrawers();
 						}
 						else {

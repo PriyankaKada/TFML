@@ -219,6 +219,7 @@ public class SocialUtil {
 					phoneNo = response.body().getPhoneNo();
 
 					PreferenceHelper.insertString( Constant.EMAIL, email );
+					PreferenceHelper.insertString( Constant.PHONE, phoneNo );
 
 //					Log.d( "email", PreferenceHelper.getString( Constant.EMAIL ) );
 //					PreferenceHelper.insertObject( Constant.CONTACTDETAILS_RESPONSE, response.body() );
@@ -436,8 +437,6 @@ public class SocialUtil {
 							}
 						}
 					}
-
-
 				}
 
 				@Override

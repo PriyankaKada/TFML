@@ -202,7 +202,7 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 							}
 							List< String > itemsCategory = new ArrayList< String >();
 							for ( ResponseEnvelope.Item item : response.body().getBody().getZCISResponse().getI_REC() ) {
-								itemsCategory.add( item.getBELNR() );
+								itemsCategory.add( item.getZFBDT() );
 							}
 							TreeSet< String > categories = new TreeSet<>();
 							categories.addAll( itemsCategory );
@@ -214,24 +214,24 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 							for ( String s : categories ) {
 								ArrayList< ResponseEnvelope.Item > items = new ArrayList< ResponseEnvelope.Item >();
 								for ( ResponseEnvelope.Item item : response.body().getBody().getZCISResponse().getI_REC() ) {
-									if ( s.equals( item.getBELNR() ) ) {
-										Log.e( "loop", item.getBELNR() );
+									if ( s.equals( item.getZFBDT() ) ) {
+										Log.e( "loop", item.getZFBDT() );
 										items.add( item );
 									}
 								}
-								Log.e( "KEY " + s, " Value " + items.get( 0 ).getBELNR() );
+								Log.e( "KEY " + s, " Value " + items.get( 0 ).getZFBDT() );
 								hashMap.put( s, items );
 							}
 
 							for ( String s : hashMap.keySet() ) {
 
-								Log.e( s + "  ===>  ", hashMap.get( s ).get( 0 ).getBELNR() );
+								Log.e( s + "  ===>  ", hashMap.get( s ).get( 0 ).getZFBDT() );
 							}
 
 							Map< String, ArrayList< ResponseEnvelope.Item > > sortedMap = hashMap.descendingMap();
 
 							for ( String s : sortedMap.keySet() ) {
-								Log.e( s + " SORTED  ===>  ", sortedMap.get( s ).get( 0 ).getBELNR() );
+								Log.e( s + " SORTED  ===>  ", sortedMap.get( s ).get( 0 ).getZFBDT() );
 							}
 
 							ArrayList< String > groupar  = new ArrayList<>();

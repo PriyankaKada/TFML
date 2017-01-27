@@ -85,6 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:layout_marginRight="10dp"
         android:gravity="right"
         android:orientation="horizontal">
 
@@ -94,7 +95,7 @@
             android:layout_height="wrap_content"
             android:autoLink="web"
             android:padding="2dp"
-            android:text="Online Payment Terms Conditions"
+            android:text="Online Payment Terms &amp; Conditions"
             android:textColor="@color/tab_bg"
             android:textSize="12sp"/>
 

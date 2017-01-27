@@ -21,7 +21,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by webworks on 4/1/17.
+ * Created by Sandeep on 4/1/17.
  */
 
 public class GetBillDeskMsg {
@@ -33,21 +33,15 @@ public class GetBillDeskMsg {
 	TmflApi        tmflApi;
 	String         list, mobile;
 
-
 	public GetBillDeskMsg( Context mContext, String contract, String mobile ) {
 		this.context = mContext;
 		this.list = contract;
 		this.mobile = mobile;
 		CommonUtils.showProgressDialog( context, "Getting Your Information" );
 		getBillDeskMsg();
-
 	}
 
-
-	public void getBillDeskMsg()
-
-
-	{
+	public void getBillDeskMsg() {
 		tmflApi = ApiService.getInstance().call();
 
 		billDeskMsgInputModel.setContracts( list );
@@ -70,7 +64,6 @@ public class GetBillDeskMsg {
 						email = "NA";
 					}
 
-//					mobile = PreferenceHelper.getString( PreferenceHelper.MOBILE );
 					if ( TextUtils.isEmpty( mobile ) ) {
 						mobile = "NA";
 					}
@@ -81,8 +74,7 @@ public class GetBillDeskMsg {
 //					Log.d( "MSG", response.body().getMsg() );
 					Gson gson = new Gson();
 					gson.toString();
-					intent.putExtra( "msg", response.body().getMsg() ); // pg_msg
-//				intent.putExtra("token", strToken);
+					intent.putExtra( "msg", response.body().getMsg() );
 					intent.putExtra( "user-email", email );
 					intent.putExtra( "user-mobile", mobile );
 					intent.putExtra( "callback", callbackObj );
@@ -96,10 +88,7 @@ public class GetBillDeskMsg {
 				CommonUtils.closeProgressDialog();
 
 				Log.d( "error", t.getMessage() );
-
 			}
 		} );
-
 	}
-
 }

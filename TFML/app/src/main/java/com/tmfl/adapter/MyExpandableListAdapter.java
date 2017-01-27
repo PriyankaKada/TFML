@@ -232,11 +232,17 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 				}
 			}
 		} );
+
+		DateFormat outputFormatter1;
+		String     instDateFinal = null;
+
 		if ( titlear.size() == amountar.size() ) {
 
 			DateFormat inputFormatter1 = new SimpleDateFormat( "yyyy-MM-dd" );
 			Date       date1           = null;
+			Date       instDate        = null;
 			try {
+				instDate = inputFormatter1.parse( item.getINST_DATE() );
 				date1 = inputFormatter1.parse( titlear.get( groupPosition ) );
 				Log.d( "reciept", titlear.get( groupPosition ) );
 			}
@@ -244,20 +250,22 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 				e.printStackTrace();
 			}
 
-			DateFormat outputFormatter1 = new SimpleDateFormat( "dd-MM-yyyy" );
-			String     output1          = outputFormatter1.format( date1 );
 
-			grpholder.txtReceiptDate.setText( output1 );
-			grpholder.txtReceiptAmount.setText( "Rs." + String.valueOf( amountar.get(
-					groupPosition ) ) );
+			outputFormatter1 = new SimpleDateFormat( "dd-MM-yyyy" );
+			String output1 = outputFormatter1.format( date1 );
+			instDateFinal = outputFormatter1.format( instDate );
+
+			grpholder.txtReceiptDate.setText( output1 + "/" + item.getBELNR() + "" );
+			grpholder.txtReceiptAmount.setText( "Rs." + String.valueOf( amountar.get( groupPosition ) ) );
 		}
 
 		SetFonts.setFonts( context, grpholder.txtInstNo, 5 );
 		SetFonts.setFonts( context, grpholder.txtMode, 5 );
 		SetFonts.setFonts( context, grpholder.txtBank, 5 );
 
-		grpholder.txtInstNo.setText( item.getINST_NO() == null ? "-" : item.getINST_NO() );
-		grpholder.txtInstDate.setText( item.getINST_DATE() == null ? "-" : item.getINST_DATE() );
+
+		grpholder.txtInstNo.setText( instDateFinal == null ? "-" : instDateFinal );
+		grpholder.txtInstDate.setText( instDateFinal == null ? "-" : instDateFinal );
 
 		if ( item.getSHKZG() != null ) {
 			grpholder.txtMode.setText( setMode( item.getINST_TYPE() ) );

@@ -8,13 +8,13 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Data {
 
-	@SerializedName("total")
+	@SerializedName( "total" )
 	@Expose
-	private Integer total;
-	@SerializedName("active")
+	private Integer    total;
+	@SerializedName( "active" )
 	@Expose
-	private Active active;
-	@SerializedName("terminated")
+	private Active     active;
+	@SerializedName( "terminated" )
 	@Expose
 	private Terminated terminated;
 
@@ -22,7 +22,7 @@ public class Data {
 		return total;
 	}
 
-	public void setTotal(Integer total) {
+	public void setTotal( Integer total ) {
 		this.total = total;
 	}
 
@@ -30,7 +30,7 @@ public class Data {
 		return active;
 	}
 
-	public void setActive(Active active) {
+	public void setActive( Active active ) {
 		this.active = active;
 	}
 
@@ -38,7 +38,7 @@ public class Data {
 		return terminated;
 	}
 
-	public void setTerminated(Terminated terminated) {
+	public void setTerminated( Terminated terminated ) {
 		this.terminated = terminated;
 	}
 }

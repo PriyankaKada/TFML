@@ -304,4 +304,16 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 		contactDialog.show();
 
 	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+
+		if ( getSupportFragmentManager().findFragmentById( R.id.frame_complaint_container ) instanceof ComplaintsFragment ) {
+			txtTitleContract.setText( "Customer Care" );
+		}
+		else {
+			txtTitleContract.setText( "My Contract" );
+		}
+	}
 }

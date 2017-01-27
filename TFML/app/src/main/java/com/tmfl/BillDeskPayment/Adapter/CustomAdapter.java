@@ -14,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.tmfl.BillDeskPayment.Activity.TotalBillPayActivity;
 import com.tmfl.BillDeskPayment.Models.Contract;
@@ -44,7 +43,7 @@ public class CustomAdapter extends ArrayAdapter< Contract > {
 
 	@Override
 	public int getCount() {
-		return listItems.size();
+		return listItems.size() - 1;
 	}
 
 	@Override
@@ -176,23 +175,20 @@ public class CustomAdapter extends ArrayAdapter< Contract > {
 			if ( active ) {
 
 				if ( TextUtils.isEmpty( editable.toString() ) ) {
-					getItem( pos ).setNewTotalCurrentDue( "0" );
+					getItem( pos ).setNewTotalCurrentDue( "0.00" );
 				}
 				/*else if ( Integer.parseInt( editable.toString() ) > 10000000 ) {
 					Toast.makeText( mContext, "Please check entered amount!", Toast.LENGTH_SHORT ).show();
 				}*/
-				else if ( Integer.parseInt( editable.toString() ) > 100 ) {
-					getItem( pos ).setNewTotalCurrentDue( editable.toString() );
-				}
 				else {
-					Toast.makeText( mContext, "Amount should be above 100!", Toast.LENGTH_SHORT ).show();
+					getItem( pos ).setNewTotalCurrentDue( editable.toString() );
+
+					//( ( TotalBillPayActivity ) mContext ).updateTotalAmount( 0, pos );
 				}
 
-				//( ( TotalBillPayActivity ) mContext ).updateTotalAmount( 0, pos );
+
+				( ( TotalBillPayActivity ) mContext ).updateTotalAmount();
 			}
-
-
-			( ( TotalBillPayActivity ) mContext ).updateTotalAmount();
 		}
 	}
 }

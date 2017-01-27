@@ -91,68 +91,76 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 				viewGreenMark.setVisibility( View.GONE );
 				viewBlueMark.setVisibility( View.VISIBLE );
 			}
+			txt_product_name.setText( model.getProduct() == null ? "" : model.getProduct().toString() );
+			txt_contract_no.setText( model.getUsrConNo() == null ? "" : trimLeadingZeros( model.getUsrConNo() ) );
+			txt_rc_no.setText( model.getRcNumber() == null ? "" : model.getRcNumber() );
+			double overdueAmount = 0;
+			if ( !model.getOdAmt().equalsIgnoreCase( "" ) ) {
+				overdueAmount = Double.parseDouble( model.getOdAmt() );
+			}
+			double emiAmount = 0;
+			if ( !model.getDueAmount().toString().equalsIgnoreCase( "" ) ) {
+				emiAmount = Double.parseDouble( model.getDueAmount().toString() );
+			}
+
+			txt_overdue_amount.setText( model.getOdAmt() == null ? "" : "Rs." + String.valueOf( ( int ) overdueAmount ) );
+			txt_repayment_mode.setText( model.getPdcFlag() == null ? "" : model.getPdcFlag() );
+			txt_next_due_date.setText( model.getDueDate() == null ? "" : model.getDueDate().toString() );
+			txt_last_payment_date.setText( model.getLastReceiptDate() == null ? "" : model.getLastReceiptDate().toString() );
+			txt_current_emi_amount.setText( model.getDueAmount() == null ? "" : "Rs." + String.valueOf( ( int ) emiAmount ) );
+			double totalDueAmount = 0;
+			if ( !model.getTotalCurrentDue().equalsIgnoreCase( "" ) ) {
+				totalDueAmount = Double.parseDouble( model.getTotalCurrentDue() );
+			}
+			txtTotalDueAmount.setText( model.getTotalCurrentDue() == null ? "" : String.valueOf( ( int ) totalDueAmount ) );
+
+			txtODC.setText( model.getOdcCollectioAmount() );
+			txtExpenses.setText( model.getTotalExpenses() );
+			Log.e( "DueAmount", model.getDueAmount().toString() );
+			Log.e( "TDueAmount", txt_current_emi_amount.getText().toString() );
+
+			btn_more_detail.setOnClickListener( new View.OnClickListener() {
+				@Override
+				public void onClick( View v ) {
+					System.out.println( "arrayList---------->" + arrayList.size() );
+					String senddatavalue     = txt_contract_no.getText().toString();
+					String sendRcno          = txt_rc_no.getText().toString();
+					String sendOverdueAmt    = txt_overdue_amount.getText().toString();
+					String sendRepaymentMode = txt_repayment_mode.getText().toString();
+					String sendNextDueDate   = txt_next_due_date.getText().toString();
+					String sendCurrentEmiAmt = txt_current_emi_amount.getText().toString();
+					String sendLastPay       = txt_last_payment_date.getText().toString();
+
+					PreferenceHelper.insertObject( Constant.CONTRACT_DETAIL, model );
+
+					Intent intent = new Intent( mContext, EmiActivity.class );
+					Bundle bundle = new Bundle();
+					bundle.putSerializable( "datamodel", arrayList );
+					bundle.putString( "datamodelvalue", model.getUsrConNo() );
+					PreferenceHelper.insertString( PreferenceHelper.CONTRACT_NO, model.getUsrConNo() );
+					bundle.putString( "RCNO", model.getRcNumber() );
+					bundle.putString( "OVERDUEAMT", model.getOdAmt() );
+					bundle.putString( "REPAYMENT", model.getPdcFlag() );
+					bundle.putString( "DUEDATE", String.valueOf( model.getDueDate() ) );
+					bundle.putString( "CURRENTEMI", String.valueOf( model.getDueAmount() ) );
+					bundle.putString( "LASTPAYMODE", model.getLastReceiptDate() );
+					intent.putExtras( bundle );
+
+					new MoreDetailDialog( mContext );
+				}
+			} );
+
 			if ( model.getUsrConCompCode().equalsIgnoreCase( "5000" ) ) {
-				txt_product_name.setText( model.getProduct() == null ? "" : model.getProduct().toString() );
-				txt_contract_no.setText( model.getUsrConNo() == null ? "" : trimLeadingZeros( model.getUsrConNo() ) );
-				txt_rc_no.setText( model.getRcNumber() == null ? "" : model.getRcNumber() );
-				double overdueAmount = 0;
-				if ( !model.getOdAmt().equalsIgnoreCase( "" ) ) {
-					overdueAmount = Double.parseDouble( model.getOdAmt() );
-				}
-				double emiAmount = 0;
-				if ( !model.getDueAmount().toString().equalsIgnoreCase( "" ) ) {
-					emiAmount = Double.parseDouble( model.getDueAmount().toString() );
-				}
-
-				txt_overdue_amount.setText( model.getOdAmt() == null ? "" : "Rs." + String.valueOf( ( int ) overdueAmount ) );
-				txt_repayment_mode.setText( model.getPdcFlag() == null ? "" : model.getPdcFlag() );
-				txt_next_due_date.setText( model.getDueDate() == null ? "" : model.getDueDate().toString() );
-				txt_last_payment_date.setText( model.getLastReceiptDate() == null ? "" : model.getLastReceiptDate().toString() );
-				txt_current_emi_amount.setText( model.getDueAmount() == null ? "" : "Rs." + String.valueOf( ( int ) emiAmount ) );
-				double totalDueAmount = 0;
-				if ( !model.getTotalCurrentDue().equalsIgnoreCase( "" ) ) {
-					totalDueAmount = Double.parseDouble( model.getTotalCurrentDue() );
-				}
-				txtTotalDueAmount.setText( model.getTotalCurrentDue() == null ? "" : String.valueOf( ( int ) totalDueAmount ) );
-
-				txtODC.setText( model.getOdcCollectioAmount() );
-				txtExpenses.setText( model.getTotalExpenses() );
-				Log.e( "DueAmount", model.getDueAmount().toString() );
-				Log.e( "TDueAmount", txt_current_emi_amount.getText().toString() );
-
-				btn_more_detail.setOnClickListener( new View.OnClickListener() {
-					@Override
-					public void onClick( View v ) {
-						System.out.println( "arrayList---------->" + arrayList.size() );
-						String senddatavalue     = txt_contract_no.getText().toString();
-						String sendRcno          = txt_rc_no.getText().toString();
-						String sendOverdueAmt    = txt_overdue_amount.getText().toString();
-						String sendRepaymentMode = txt_repayment_mode.getText().toString();
-						String sendNextDueDate   = txt_next_due_date.getText().toString();
-						String sendCurrentEmiAmt = txt_current_emi_amount.getText().toString();
-						String sendLastPay       = txt_last_payment_date.getText().toString();
-
-						PreferenceHelper.insertObject( Constant.CONTRACT_DETAIL, model );
-
-						Intent intent = new Intent( mContext, EmiActivity.class );
-						Bundle bundle = new Bundle();
-						bundle.putSerializable( "datamodel", arrayList );
-						bundle.putString( "datamodelvalue", model.getUsrConNo() );
-						PreferenceHelper.insertString( PreferenceHelper.CONTRACT_NO, model.getUsrConNo() );
-						bundle.putString( "RCNO", model.getRcNumber() );
-						bundle.putString( "OVERDUEAMT", model.getOdAmt() );
-						bundle.putString( "REPAYMENT", model.getPdcFlag() );
-						bundle.putString( "DUEDATE", String.valueOf( model.getDueDate() ) );
-						bundle.putString( "CURRENTEMI", String.valueOf( model.getDueAmount() ) );
-						bundle.putString( "LASTPAYMODE", model.getLastReceiptDate() );
-						intent.putExtras( bundle );
-
-						new MoreDetailDialog( mContext );
-					}
-				} );
-				btn_pay_emi.setOnClickListener( new View.OnClickListener() {
-					@Override
-					public void onClick( View view ) {
+				btn_pay_emi.setEnabled( true );
+				btn_pay_emi.setVisibility( View.VISIBLE );
+			}
+			else {
+				btn_pay_emi.setEnabled( false );
+				btn_pay_emi.setVisibility( View.INVISIBLE );
+			}
+			btn_pay_emi.setOnClickListener( new View.OnClickListener() {
+				@Override
+				public void onClick( View view ) {
 //                    SampleCallBack callbackObj = new SampleCallBack();
 //                    Intent intent = new Intent(mContext,
 //                            PaymentOptions.class);
@@ -165,11 +173,10 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 //                    mContext.startActivity(intent);
 //                    new GetBillDeskMsg(mContext, "1234@100,45678@150,58724@190,45678@200,58724@220,45678@2500,58724@300,45678@350,58724@400");
 
-						Intent intent = new Intent( mContext, TotalBillPayActivity.class );
-						mContext.startActivity( intent );
-					}
-				} );
-			}
+					Intent intent = new Intent( mContext, TotalBillPayActivity.class );
+					mContext.startActivity( intent );
+				}
+			} );
 
 		}
 		else if ( model.getContractStatus().equalsIgnoreCase( "T" ) ) {
@@ -183,14 +190,25 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 				txtContractNoTerm.setText( model.getUsrConNo() == null ? "" : trimLeadingZeros( model.getUsrConNo() ) );
 				txt_rc_no_term.setText( model.getRcNumber() == null ? "" : model.getRcNumber().toString() );
 
+				viewBlueMark = convertView.findViewById( R.id.viewBlueMark );
+				viewGreenMark = convertView.findViewById( R.id.viewGreenMark );
+
+				if ( model.getUsrConCompCode().equalsIgnoreCase( "8000" ) ) {
+					viewGreenMark.setVisibility( View.VISIBLE );
+					viewBlueMark.setVisibility( View.GONE );
+				}
+				else if ( model.getUsrConCompCode().equalsIgnoreCase( "5000" ) ) {
+					viewGreenMark.setVisibility( View.GONE );
+					viewBlueMark.setVisibility( View.VISIBLE );
+				}
+
 				dateFormat = new SimpleDateFormat( "dd-MMM-yyyy" );
 				try {
-					if ( model.getContractStatusDate() != null ) {
-						varDate = dateFormat.parse( model.getContractStatusDate().toString() );
+					/*if ( model.getContractStatusDate() != null ) {
 						dateFormat = new SimpleDateFormat( "dd/MM/yyyy" );
-					}
-					txt_terminated_date.setText( model.getContractStatusDate() == null ? "" : "Terminated On " + dateFormat.format( varDate ) );
-
+						varDate = dateFormat.parse( model.getContractStatusDate().toString() );
+					}*/
+					txt_terminated_date.setText( model.getContractStatusDate() == null ? "" : "Terminated On " + model.getContractStatusDate() );
 				}
 				catch ( Exception e ) {
 					// TODO: handle exception

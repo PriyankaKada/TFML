@@ -94,7 +94,7 @@ public class FinanceDetailFragment extends Fragment {
 		txtTotalReceivable.setText( totalReceivable );
 		txtAmtCreditedLbl.setText( "Amount Credited Upto " + strToDate );
 		txtAmtCredited.setText( strSoaPrvAmt );
-		txtCreditedEconomicYearLbl.setText( "Amount Credited upto From " + strFromDate + " To " + strToDate );
+		txtCreditedEconomicYearLbl.setText( "Amount Credited from " + strFromDate + " To " + strToDate );
 		txtAmtCreditEconomicYear.setText( strSoaPrdAmt );
 		txtyTotalCreditLbl.setText( "Total Credit Upto " + strToDate );
 		txtTotalCredit.setText( strCred );

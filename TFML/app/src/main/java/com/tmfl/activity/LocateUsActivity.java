@@ -236,6 +236,9 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 		}
 		map.setMyLocationEnabled( true );
 
+		map.moveCamera( CameraUpdateFactory.newLatLngZoom( new LatLng( 20.5937, 78.9629 ), 3 ) );
+
+
 	}
 
 	@Override
@@ -243,6 +246,7 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 
 		latitude = location.getLatitude();
 		longitude = location.getLongitude();
+		map.moveCamera( CameraUpdateFactory.newLatLngZoom( new LatLng( 20.5937, 78.9629 ), 13 ) );
 
 	}
 

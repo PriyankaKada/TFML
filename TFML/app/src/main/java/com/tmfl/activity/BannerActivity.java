@@ -332,7 +332,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				.setAnimationTranslationShow( EasyDialog.DIRECTION_Y, 500, 800, 0 )
 				.setAnimationAlphaShow( 500, 0, 0.5f, 1 )
 				.setAnimationTranslationDismiss( EasyDialog.DIRECTION_Y, 500, -50, 800 )
-				.setAnimationAlphaDismiss( 500, 1, 0 )
+				.setAnimationAlphaDismiss( 150, 1, 0 )
 				.setTouchOutsideDismiss( true )
 				.setMatchParent( true )
 				.setMarginLeftAndRight( 25, 25 )
@@ -412,7 +412,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 
 //					SocialUtil.loanStatusDialog( BannerActivity.this, linLoanStaus, view1 );
 					strOtpNo = response.body().getData().getOtp();
-					edtOtpNo.setText( strOtpNo );
+//					edtOtpNo.setText( strOtpNo );
 
 				}
 				else {
@@ -442,6 +442,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				if ( response.body().getStatus().contains( "success" ) ) {
 					//  Log.e("CallLoanStatusModel", response.body().getStatus());
 					Toast.makeText( BannerActivity.this, "Our Call Centre will reach you within 2 working days.", Toast.LENGTH_SHORT ).show();
+					view5.setVisibility( View.GONE );
 					edtQuickCall.setText( "" );
 					edtOtpNo.setText( "" );
 					dialog.dismiss();
