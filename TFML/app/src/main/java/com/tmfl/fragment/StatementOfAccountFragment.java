@@ -144,7 +144,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 		datavalue = ( String ) bundle.getString( "datamodelvalue" );
 		rcNo = ( String ) bundle.getString( "RCNO" );
 		dueDate = ( String ) bundle.getString( "DUEDATE" );
-		repaymentMode = ( String ) bundle.getString( "OVERDUEAMT" );
+		repaymentMode = ( String ) bundle.getString( "REPAYMENT" );
 		currentEmi = ( String ) bundle.getString( "CURRENTEMI" );
 		overdue = ( String ) bundle.get( "OVERDUEAMT" );
 		tmflLogin = ApiService.getInstance().call();

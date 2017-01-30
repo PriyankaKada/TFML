@@ -28,10 +28,10 @@ import com.tmfl.common.CommonUtils;
 import com.tmfl.model.myReciptPdfResponseModel.MyReceiptInputModel;
 import com.tmfl.model.myReciptPdfResponseModel.MyReceiptResponseModel;
 import com.tmfl.model.soapModel.response.ResponseEnvelope;
-import com.tmfl.util.PreferenceHelper;
 import com.tmfl.util.SetFonts;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -151,7 +151,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 		rcNo = item.getBELNR() == null ? "" : item.getBELNR().toString();
 		holder.ll_header_row.setVisibility( View.VISIBLE );
 		String amountstr = item.getDMBTR() == null ? "" : item.getDMBTR().toString();
-		holder.txtReceiptAmount.setText( "Rs." + amountstr );
+		holder.txtReceiptAmount.setText( "Rs." + new DecimalFormat( "##.00" ).format( Double.valueOf( amountstr ) ) );
 
 		if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN ) {
 
@@ -210,28 +210,27 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 		grpholder.txtInstNo = ( TextView ) convertView.findViewById( R.id.txtInstNo );
 		grpholder.txtMode = ( TextView ) convertView.findViewById( R.id.txtMode );
 		grpholder.img_expand = ( ImageView ) convertView.findViewById( R.id.img_expand );
-		grpholder.imgPdf = ( ImageView ) convertView.findViewById( R.id.imgPdf );
+//		grpholder.imgPdf = ( ImageView ) convertView.findViewById( R.id.imgPdf );
 
-		grpholder.imgPdf.setVisibility( View.GONE );
-		grpholder.imgPdf.setOnClickListener( new View.OnClickListener() {
-			@Override
-			public void onClick( View v ) {
-				myReceiptInputModel = new MyReceiptInputModel();
-				myReceiptResponseModel = new MyReceiptResponseModel();
-				myReceiptInputModel.setApi_token( PreferenceHelper.getString( PreferenceHelper.API_TOKEN ) );
-				myReceiptInputModel.setContract_no( PreferenceHelper.getString( PreferenceHelper.CONTRACT_NO ) );
-				myReceiptInputModel.setReceipt_no( item.getBELNR() );
-				myReceiptInputModel.setRequest_date( item.getZFBDT() );
-				Log.e( "ReceiptIPMODEL", "" + myReceiptInputModel.getApi_token() + "Contract no" + myReceiptInputModel.getContract_no() + "RC" + myReceiptInputModel.getReceipt_no() + "RCDATAE" + myReceiptInputModel.getRequest_date() );
-				if ( CommonUtils.isNetworkAvailable( context ) ) {
-					CommonUtils.showProgressDialog( context, "File downloading..." );
-					callDownloadData( myReceiptInputModel );
-				}
-				else {
-					Toast.makeText( context, "Please Check Network Connection", Toast.LENGTH_SHORT ).show();
-				}
-			}
-		} );
+//		grpholder.imgPdf.setOnClickListener( new View.OnClickListener() {
+//			@Override
+//			public void onClick( View v ) {
+//				myReceiptInputModel = new MyReceiptInputModel();
+//				myReceiptResponseModel = new MyReceiptResponseModel();
+//				myReceiptInputModel.setApi_token( PreferenceHelper.getString( PreferenceHelper.API_TOKEN ) );
+//				myReceiptInputModel.setContract_no( PreferenceHelper.getString( PreferenceHelper.CONTRACT_NO ) );
+//				myReceiptInputModel.setReceipt_no( item.getBELNR() );
+//				myReceiptInputModel.setRequest_date( item.getZFBDT() );
+//				Log.e( "ReceiptIPMODEL", "" + myReceiptInputModel.getApi_token() + "Contract no" + myReceiptInputModel.getContract_no() + "RC" + myReceiptInputModel.getReceipt_no() + "RCDATAE" + myReceiptInputModel.getRequest_date() );
+//				if ( CommonUtils.isNetworkAvailable( context ) ) {
+//					CommonUtils.showProgressDialog( context, "File downloading..." );
+//					callDownloadData( myReceiptInputModel );
+//				}
+//				else {
+//					Toast.makeText( context, "Please Check Network Connection", Toast.LENGTH_SHORT ).show();
+//				}
+//			}
+//		} );
 
 		DateFormat outputFormatter1;
 		String     instDateFinal = null;
@@ -250,13 +249,12 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 				e.printStackTrace();
 			}
 
-
 			outputFormatter1 = new SimpleDateFormat( "dd-MM-yyyy" );
 			String output1 = outputFormatter1.format( date1 );
 			instDateFinal = outputFormatter1.format( instDate );
 
 			grpholder.txtReceiptDate.setText( output1 + "/" + item.getBELNR() + "" );
-			grpholder.txtReceiptAmount.setText( "Rs." + String.valueOf( amountar.get( groupPosition ) ) );
+			grpholder.txtReceiptAmount.setText( "Rs." + new DecimalFormat( "##.00" ).format( amountar.get( groupPosition ) ) );
 		}
 
 		SetFonts.setFonts( context, grpholder.txtInstNo, 5 );
@@ -264,7 +262,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter implement
 		SetFonts.setFonts( context, grpholder.txtBank, 5 );
 
 
-		grpholder.txtInstNo.setText( instDateFinal == null ? "-" : instDateFinal );
+		grpholder.txtInstNo.setText( item.getINST_NO() == null ? "-" : item.getINST_NO() );
 		grpholder.txtInstDate.setText( instDateFinal == null ? "-" : instDateFinal );
 
 		if ( item.getSHKZG() != null ) {

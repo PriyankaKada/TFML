@@ -144,7 +144,7 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 				if ( position != 0 ) {
 
 					if ( !( ( BranchResponseModel ) parent.getItemAtPosition( position ) ).getTerrLatitude().equalsIgnoreCase( "" )
-							&& ( ( BranchResponseModel ) parent.getItemAtPosition( position ) ).getTerrLatitude().equalsIgnoreCase( "" ) ) {
+							&& !( ( BranchResponseModel ) parent.getItemAtPosition( position ) ).getTerrLatitude().equalsIgnoreCase( "" ) ) {
 						latitude = Double.parseDouble( ( ( BranchResponseModel ) parent.getItemAtPosition( position ) ).getTerrLatitude() );
 						longitude = Double.parseDouble( ( ( BranchResponseModel ) parent.getItemAtPosition( position ) ).getTerrLongitude() );
 
@@ -246,7 +246,7 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 
 		latitude = location.getLatitude();
 		longitude = location.getLongitude();
-		map.moveCamera( CameraUpdateFactory.newLatLngZoom( new LatLng( 20.5937, 78.9629 ), 13 ) );
+//		map.moveCamera( CameraUpdateFactory.newLatLngZoom( new LatLng( 20.5937, 78.9629 ), 13 ) );
 
 	}
 

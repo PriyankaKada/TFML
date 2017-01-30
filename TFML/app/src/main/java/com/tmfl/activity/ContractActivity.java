@@ -45,10 +45,10 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 	ContractsInputModel    contractsInputModel;
 	ContractsResponseModel contractsResponseModel;
 	String                 strApiToken, strUserId, strTerCount, strOverdue, strTotal;
-	private TextView txtTitleContract, txtTotalCount, txtTerminatedCount, txtOverDueCount, txtCurrentDate, txtContractNo, txtRcNo, txtNextDueDate, txtCurrentEmi, txtLastPayment, txtPreviousEmi, txtOverdueAmount, txtRepaymentMode, txtTerminitedContracName, txtTerminatedContractDate, txtSchemes, txtApplyLoan, txtReferFriend, txtLoanStatus, txtContactUs;
+	private TextView txtTitleContract, txtTotalCount, txtTerminatedCount, txtOverDueCount, txtCurrentDate, txtName, txtContractNo, txtRcNo, txtNextDueDate, txtCurrentEmi, txtLastPayment, txtPreviousEmi, txtOverdueAmount, txtRepaymentMode, txtTerminitedContracName, txtTerminatedContractDate, txtSchemes, txtApplyLoan, txtReferFriend, txtLoanStatus, txtContactUs;
 	private LinearLayout linSchemes, linApplyLoan, linReferFriend, linLoanStaus, linContactUs;
 	private ImageView imgDrawer;
-	private ListView  lstCotractList;
+	private ListView  lstContractList;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
@@ -66,10 +66,13 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 		String newDate = date.format( System.currentTimeMillis() );
 		Log.d( "current date", newDate );
 		txtCurrentDate.setText( newDate );
+		txtName.setText( "Welcome, " + PreferenceHelper.getString( PreferenceHelper.USER_FIRT_NAME ) );
 	}
 
 
 	public void init() {
+
+		txtName = ( TextView ) findViewById( R.id.txtName );
 		txtTitleContract = ( TextView ) findViewById( R.id.txt_title_contract );
 		txtTotalCount = ( TextView ) findViewById( R.id.txt_total_count );
 		txtTerminatedCount = ( TextView ) findViewById( R.id.txt_terminated_count );
@@ -79,7 +82,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 		txtReferFriend = ( TextView ) findViewById( R.id.txtReferFriend );
 		txtLoanStatus = ( TextView ) findViewById( R.id.txtLoanStatus );
 		txtContactUs = ( TextView ) findViewById( R.id.txtContactUs );
-		lstCotractList = ( ListView ) findViewById( R.id.lstContact );
+		lstContractList = ( ListView ) findViewById( R.id.lstContact );
 		txtCurrentDate = ( TextView ) findViewById( R.id.txtCurrentDate );
 		SetFonts.setFonts( this, txtSchemes, 2 );
 		SetFonts.setFonts( this, txtApplyLoan, 2 );
@@ -210,7 +213,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 				}
 
 				models.addAll( response.body().getData().getTerminated().getContracts() );
-				lstCotractList.setAdapter( new ContractsListAdapter( ContractActivity.this, models ) );
+				lstContractList.setAdapter( new ContractsListAdapter( ContractActivity.this, models ) );
 				strTotal = response.body().getData().getTotal().toString();
 				strTerCount = response.body().getData().getTerminated().getCount().toString();
 				strOverdue = response.body().getData().getActive().getCount().toString();
@@ -281,24 +284,28 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 			@Override
 			public void onClick( View v ) {
 				SocialUtil.sendMail( ContractActivity.this, SocialUtil.email );
+				contactDialog.dismiss();
 			}
 		} );
 		imgPhoneCall.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
 				SocialUtil.dialPhoneCall( ContractActivity.this, SocialUtil.phoneNo );
+				contactDialog.dismiss();
 			}
 		} );
 		imgWhatsApp.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
 				SocialUtil.sendWhatsAppMsg( ContractActivity.this, SocialUtil.whatsAppNo );
+				contactDialog.dismiss();
 			}
 		} );
 		imgMap.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
-				Toast.makeText( ContractActivity.this, "Map service not avialable", Toast.LENGTH_SHORT ).show();
+				startActivity( new Intent( ContractActivity.this, LocateUsActivity.class ) );
+				contactDialog.dismiss();
 			}
 		} );
 		contactDialog.show();

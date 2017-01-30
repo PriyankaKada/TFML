@@ -26,8 +26,6 @@ import java.util.Calendar;
 public class TrackStatusFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateChangeListener {
 
 	TextView txtComplainCaseId, txtFromDate, txtToDate;
-	private
-	Button       btnGo;
 	LinearLayout llComplaintListHeader;
 	ListView     list;
 	OnDateSetListener fromDate = new OnDateSetListener() {
@@ -50,6 +48,8 @@ public class TrackStatusFragment extends Fragment implements View.OnClickListene
 
 		}
 	};
+	private
+	Button btnGo;
 	private DatePickerFragment date;
 
 	@Override

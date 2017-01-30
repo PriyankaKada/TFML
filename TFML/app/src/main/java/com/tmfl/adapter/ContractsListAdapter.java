@@ -63,7 +63,7 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 		if ( model == null ) {
 			convertView = LayoutInflater.from( mContext ).inflate( R.layout.header_terminated_contract, parent, false );
 		}
-		else if ( model.getContractStatus().equalsIgnoreCase( "L" ) ) {
+		else if ( !model.getContractStatus().equalsIgnoreCase( "T" ) ) {
 
 			convertView = LayoutInflater.from( mContext ).inflate( R.layout.row_active_contract, parent, false );
 			txt_product_name = ( TextView ) convertView.findViewById( R.id.txt_product_name );
@@ -91,6 +91,7 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 				viewGreenMark.setVisibility( View.GONE );
 				viewBlueMark.setVisibility( View.VISIBLE );
 			}
+
 			txt_product_name.setText( model.getProduct() == null ? "" : model.getProduct().toString() );
 			txt_contract_no.setText( model.getUsrConNo() == null ? "" : trimLeadingZeros( model.getUsrConNo() ) );
 			txt_rc_no.setText( model.getRcNumber() == null ? "" : model.getRcNumber() );
@@ -109,9 +110,11 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 			txt_last_payment_date.setText( model.getLastReceiptDate() == null ? "" : model.getLastReceiptDate().toString() );
 			txt_current_emi_amount.setText( model.getDueAmount() == null ? "" : "Rs." + String.valueOf( ( int ) emiAmount ) );
 			double totalDueAmount = 0;
+
 			if ( !model.getTotalCurrentDue().equalsIgnoreCase( "" ) ) {
 				totalDueAmount = Double.parseDouble( model.getTotalCurrentDue() );
 			}
+
 			txtTotalDueAmount.setText( model.getTotalCurrentDue() == null ? "" : String.valueOf( ( int ) totalDueAmount ) );
 
 			txtODC.setText( model.getOdcCollectioAmount() );
@@ -158,15 +161,15 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 				btn_pay_emi.setEnabled( false );
 				btn_pay_emi.setVisibility( View.INVISIBLE );
 			}
+
 			btn_pay_emi.setOnClickListener( new View.OnClickListener() {
 				@Override
 				public void onClick( View view ) {
 //                    SampleCallBack callbackObj = new SampleCallBack();
-//                    Intent intent = new Intent(mContext,
-//                            PaymentOptions.class);
+//					Intent intent = new Intent( mContext, PaymentOptions.class );
 //
 //                    intent.putExtra("msg", strMsg); // pg_msg
-////				intent.putExtra("token", strToken);
+//				      intent.putExtra("token", strToken);
 //                    intent.putExtra("user-email", strEmail);
 //                    intent.putExtra("user-mobile", strMobile);
 //                    intent.putExtra("callback", callbackObj);
@@ -179,10 +182,10 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 			} );
 
 		}
-		else if ( model.getContractStatus().equalsIgnoreCase( "T" ) ) {
+		else /*if ( model.getContractStatus().equalsIgnoreCase( "T" ) ) */ {
 			convertView = LayoutInflater.from( mContext ).inflate( R.layout.row_terminated_contract, parent, false );
-			txtContractNoTerm = ( TextView ) convertView.findViewById( R.id.txtContractNoTerm );
-			txt_rc_no_term = ( TextView ) convertView.findViewById( R.id.txt_rc_no_term );
+			txtContractNoTerm = ( TextView ) convertView.findViewById( R.id.txt_contract_no );
+			txt_rc_no_term = ( TextView ) convertView.findViewById( R.id.txt_rc_no );
 			txt_terminated_name = ( TextView ) convertView.findViewById( R.id.txt_terminated_name );
 			txt_terminated_date = ( TextView ) convertView.findViewById( R.id.txt_terminated_date );
 			if ( model.getContractStatusDate() != null ) {

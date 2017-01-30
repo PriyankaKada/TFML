@@ -70,6 +70,13 @@
                     android:text="Amount"
                     android:textColor="@color/white"/>
 
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_margin="5dp"
+                    android:visibility="invisible"/>
+
+
             </LinearLayout>
 
             <LinearLayout
@@ -95,6 +102,12 @@
                     android:gravity="start"
                     android:text="Inst No."
                     android:textColor="@color/white"/>
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_margin="5dp"
+                    android:visibility="invisible"/>
 
 
             </LinearLayout>
@@ -122,6 +135,12 @@
                     android:gravity="start"
                     android:text="Inst Date"
                     android:textColor="@color/white"/>
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_margin="5dp"
+                    android:visibility="invisible"/>
 
             </LinearLayout>
 
