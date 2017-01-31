@@ -59,7 +59,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_margin="5dp"
                     android:src="@drawable/ic_spin_bg_small"
-                    android:visibility="invisible"/>
+                    />
 
             </LinearLayout>
 
