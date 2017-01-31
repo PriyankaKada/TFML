@@ -245,7 +245,7 @@ public class SocialUtil {
 					CommonUtils.closeProgressDialog();
 					if ( response != null ) {
 						ProductListResponseModel model = new ProductListResponseModel();
-						model.setProdName( "Select product" );
+						model.setProdName( "* Select product" );
 						model.setProdProductid( "-1" );
 						response.body().add( 0, model );
 						spnProduct.setAdapter( new ProductAdapter( context, response.body() ) );

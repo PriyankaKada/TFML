@@ -126,14 +126,14 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		branchStateList = new ArrayList< String >();
 
 		BranchResponseModel branchResponseModel = new BranchResponseModel();
-		branchResponseModel.setTerrCaption( "Select Branch" );
+		branchResponseModel.setTerrCaption( "* Select Branch" );
 		branchResponseModel.setTerrTerritoryid( "-1" );
 		List< BranchResponseModel > dummyBranchList = new ArrayList<>();
 		dummyBranchList.add( 0, branchResponseModel );
 		spSelectBranch.setAdapter( new BranchListAdapter( getActivity(), dummyBranchList ) );
 
 		BranchCityResponseModel branchCityResponseModel = new BranchCityResponseModel();
-		branchCityResponseModel.setTerrCaption( "Select City" );
+		branchCityResponseModel.setTerrCaption( "* Select City" );
 		branchCityResponseModel.setTerrTerritoryid( "-1" );
 		List< BranchCityResponseModel > dummyBranchCityList = new ArrayList<>();
 		dummyBranchCityList.add( 0, branchCityResponseModel );
@@ -147,7 +147,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		spSelectBranchState.setAdapter( new BranchStateAdapter( getActivity(), dummyBranchStateList ) );
 
 		StateResponseModel stateResponseModel = new StateResponseModel();
-		stateResponseModel.setName( "Select State" );
+		stateResponseModel.setName( "* Select State" );
 		stateResponseModel.setId( "-1" );
 		List< StateResponseModel > dummyStatList = new ArrayList<>();
 		dummyStatList.add( 0, stateResponseModel );
@@ -155,7 +155,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		spSelectState.setVisibility( View.GONE );
 
 		CityResponseModel cityModel = new CityResponseModel();
-		cityModel.setName( "Select City" );
+		cityModel.setName( "* Select City" );
 		cityModel.setId( "-1" );
 
 		List< CityResponseModel > dummyCityList = new ArrayList();
@@ -189,7 +189,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		spSelectBranchState = ( Spinner ) view.findViewById( R.id.sp_select_branch_state );
 		spSelectBranchState.setOnItemSelectedListener( this );
 		CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
-		SocialUtil.getBranchStateListData( getActivity(), spSelectBranchState, "Select State" );
+		SocialUtil.getBranchStateListData( getActivity(), spSelectBranchState, "* Select State" );
 		spSelectBranchCity = ( Spinner ) view.findViewById( R.id.sp_select_branch_city );
 		spSelectBranchCity.setOnItemSelectedListener( this );
 		spSelectBranch = ( Spinner ) view.findViewById( R.id.sp_select_branch );
@@ -197,7 +197,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		spSelectState = ( Spinner ) view.findViewById( R.id.sp_select_state );
 		spSelectState.setOnItemSelectedListener( this );
 		CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
-		SocialUtil.getStateListData( getActivity(), spSelectState, "Select state" );
+		SocialUtil.getStateListData( getActivity(), spSelectState, "* Select state" );
 		spSelectCity = ( Spinner ) view.findViewById( R.id.sp_select_city );
 		spSelectCity.setOnItemSelectedListener( this );
 		spSelectCity.setVisibility( View.GONE );
@@ -282,19 +282,22 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		}
 
 		if ( spnProduct.getSelectedItemPosition() == 0 ) {
+			Toast.makeText( getActivity(), "Please select Product!", Toast.LENGTH_SHORT ).show();
 			ret = false;
 		}
-		if ( spSelectBranch.getSelectedItemPosition() == 0 ) {
+		else if ( spSelectBranch.getSelectedItemPosition() == 0 ) {
+			Toast.makeText( getActivity(), "Please select Branch!", Toast.LENGTH_SHORT ).show();
 			ret = false;
 		}
-		if ( spSelectBranchState.getSelectedItemPosition() == 0 ) {
+		else if ( spSelectBranchState.getSelectedItemPosition() == 0 ) {
+			Toast.makeText( getActivity(), "Please select Branch state!", Toast.LENGTH_SHORT ).show();
 			ret = false;
 		}
-		if ( spSelectBranchCity.getSelectedItemPosition() == 0 ) {
+		else if ( spSelectBranchCity.getSelectedItemPosition() == 0 ) {
+			Toast.makeText( getActivity(), "Please select Branch city!", Toast.LENGTH_SHORT ).show();
 			ret = false;
 		}
-
-		if ( !checkBox.isChecked() ) {
+		else if ( !checkBox.isChecked() ) {
 			Toast.makeText( getActivity(), "You must agree to the terms first!", Toast.LENGTH_SHORT ).show();
 			ret = false;
 		}
@@ -307,7 +310,6 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 			CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
 			callApplyLoanService();
 			loadApplyLoanResponse( inputLoanModel );
-
 		}
 		/*else {
 			Toast.makeText( getActivity(), "Please Fill the Required Detail", Toast.LENGTH_SHORT ).show();
@@ -424,7 +426,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 					Log.e( "BRANCHSTATECODE", branchStateCode );
 					inputCityModel.setStateId( branchStateCode );
 					CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
-					SocialUtil.getBranchCityListData( getActivity(), spSelectBranchCity, inputCityModel, "Select City" );
+					SocialUtil.getBranchCityListData( getActivity(), spSelectBranchCity, inputCityModel, "* Select City" );
 					break;
 				}
 			case R.id.sp_select_branch_city:
@@ -432,7 +434,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 					branchCityCode = ( ( BranchCityResponseModel ) parent.getItemAtPosition( position ) ).getTerrTerritoryid();
 					inputBranchModel.setCityId( branchCityCode );
 					CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
-					SocialUtil.getBranchList( getActivity(), spSelectBranch, inputBranchModel, "Select Branch" );
+					SocialUtil.getBranchList( getActivity(), spSelectBranch, inputBranchModel, "* Select Branch" );
 					break;
 				}
 			case R.id.sp_select_branch:
@@ -447,7 +449,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 					Log.e( "STATECODE", stateCode );
 					inputCityModel.setStateId( stateCode );
 					CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
-					SocialUtil.getCityListData( getActivity(), spSelectCity, inputCityModel, "Select City" );
+					SocialUtil.getCityListData( getActivity(), spSelectCity, inputCityModel, "* Select City" );
 				}
 
 				break;
