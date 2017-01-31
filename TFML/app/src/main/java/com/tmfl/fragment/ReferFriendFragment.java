@@ -449,6 +449,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 			@Override
 			public void onFailure( Call< ReferFriendResponseModel > call, Throwable t ) {
 				CommonUtils.closeProgressDialog();
+				Toast.makeText( getActivity(), t.getMessage(), Toast.LENGTH_LONG ).show();
 			}
 		} );
 	}

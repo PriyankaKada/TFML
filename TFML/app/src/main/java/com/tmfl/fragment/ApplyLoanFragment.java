@@ -403,6 +403,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 			@Override
 			public void onFailure( Call< ApplyLoanResponse > call, Throwable t ) {
 				CommonUtils.closeProgressDialog();
+				Toast.makeText( getActivity(), t.getMessage(), Toast.LENGTH_LONG ).show();
 			}
 		} );
 	}
