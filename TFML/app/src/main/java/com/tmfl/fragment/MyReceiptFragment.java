@@ -38,9 +38,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -176,9 +173,19 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 						Log.e( "SIZE ", response.body().getBody().getZCISResponse().getI_REC().size() + "" );
 
 						if ( response.body().getBody().getZCISResponse().getI_REC().size() != 0 ) {
-							TreeMap< String, ArrayList< ResponseEnvelope.Item > > hashMap = new TreeMap< String, ArrayList< ResponseEnvelope.Item > >();
+							HashMap< String, ArrayList< ResponseEnvelope.Item > > hashMap = new HashMap< String, ArrayList< ResponseEnvelope.Item > >();
 
-							Collections.sort( response.body().getBody().getZCISResponse().getI_REC(), new Comparator< ResponseEnvelope.Item >() {
+
+							List< String > itemsCategory = new ArrayList< String >();
+							for ( ResponseEnvelope.Item item : response.body().getBody().getZCISResponse().getI_REC() ) {
+								itemsCategory.add( item.getBELNR() );
+							}
+							List< String > categories = new ArrayList< String >();
+							//categories.addAll( itemsCategory );
+
+
+							List< ResponseEnvelope.Item > items = response.body().getBody().getZCISResponse().getI_REC();
+							Collections.sort( items, new Comparator< ResponseEnvelope.Item >() {
 
 								@Override
 								public int compare( ResponseEnvelope.Item lhs, ResponseEnvelope.Item rhs ) {
@@ -193,46 +200,60 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 									catch ( Exception e ) {
 										e.printStackTrace();
 									}
-									return date1.compareTo( date2 );
+									return date2.compareTo( date1 );
 								}
 							} );
 
-							for ( int i = 0; i < response.body().getBody().getZCISResponse().getI_REC().size(); i++ ) {
-								Log.d( "after sorting", response.body().getBody().getZCISResponse().getI_REC().get( i ).getZFBDT() );
-							}
-							List< String > itemsCategory = new ArrayList< String >();
-							for ( ResponseEnvelope.Item item : response.body().getBody().getZCISResponse().getI_REC() ) {
-								itemsCategory.add( item.getZFBDT() );
-							}
-							TreeSet< String > categories = new TreeSet<>();
-							categories.addAll( itemsCategory );
-
-							for ( String s : categories ) {
-								Log.e( "HASH SET", s );
+							for ( int i = 0; i < items.size(); i++ ) {
+								Log.d( "sorted dates", items.get( i ).getZFBDT() );
 							}
 
-							for ( String s : categories ) {
-								ArrayList< ResponseEnvelope.Item > items = new ArrayList< ResponseEnvelope.Item >();
-								for ( ResponseEnvelope.Item item : response.body().getBody().getZCISResponse().getI_REC() ) {
-									if ( s.equals( item.getZFBDT() ) ) {
-										Log.e( "loop", item.getZFBDT() );
-										items.add( item );
-									}
+							int j = 0;
+							/*for ( ResponseEnvelope.Item item : items ) {
+								if ( !isDataAvailabe( categories, item.getBELNR() ) ) {
+//									categories.add( item.getBELNR() );
+									hashMap.put( j, new ArrayList< ResponseEnvelope.Item >() );
 								}
-								Log.e( "KEY " + s, " Value " + items.get( 0 ).getZFBDT() );
-								hashMap.put( s, items );
+
+								hashMap.get( item.getBELNR() + "_" + j ).add( item );
+								Log.e( "date and receipt ", item.getBELNR() + "    " + item.getZFBDT() );
+								j++;
+							}*/
+
+							for ( int i = 0; i < items.size(); i++ ) {
+								hashMap.put( i + "", new ArrayList< ResponseEnvelope.Item >() );
+								hashMap.get( i + "" ).add( items.get( i ) );
 							}
 
-							for ( String s : hashMap.keySet() ) {
+							/*List< ResponseEnvelope.Item > items = response.body().getBody().getZCISResponse().getI_REC();
 
-								Log.e( s + "  ===>  ", hashMap.get( s ).get( 0 ).getZFBDT() );
+							for ( ResponseEnvelope.Item item : items ) {
+
+							}*/
+
+							/*for ( int i = 0; i < response.body().getBody().getZCISResponse().getI_REC().size(); i++ ) {
+								Log.d( "after sorting", response.body().getBody().getZCISResponse().getI_REC().get( i ).getZFBDT() );
+							}*/
+
+//							for ( String s : categories ) {
+
+							//Collections.reverse( items );
+
+							/*for ( ResponseEnvelope.Item item : response.body().getBody().getZCISResponse().getI_REC() ) {
+								if ( s.equals( item.getBELNR() ) ) {
+//										Log.e( "loop", item.getZFBDT() );
+									items.add( item );
+								}
 							}
+////*/								/*Log.e( "KEY " + s, " Value " + items.get( 0 ).getZFBDT() );
+//							hashMap.put( s, items );
+////							}*/
 
-							Map< String, ArrayList< ResponseEnvelope.Item > > sortedMap = hashMap.descendingMap();
+//							Map< String, ArrayList< ResponseEnvelope.Item > > sortedMap = hashMap.descendingMap();
 
-							for ( String s : sortedMap.keySet() ) {
-								Log.e( s + " SORTED  ===>  ", sortedMap.get( s ).get( 0 ).getZFBDT() );
-							}
+							/*for ( String s : sortedMap.keySet() ) {
+//								Log.e( s + " SORTED  ===>  ", sortedMap.get( s ).get( 0 ).getZFBDT() );
+							}*/
 
 							ArrayList< String > groupar  = new ArrayList<>();
 							ArrayList< Double > amountar = new ArrayList< Double >();
@@ -240,8 +261,24 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 
 							longInfo( new Gson().toJson( hashMap ) );
 
-							Iterator it = sortedMap.entrySet().iterator();
-							while ( it.hasNext() ) {
+							Iterator it = hashMap.entrySet().iterator();
+
+							for ( String key : hashMap.keySet() ) {
+								Double amount = 0.00;
+								Log.d( "key", key );
+								ArrayList< ResponseEnvelope.Item > itemss = hashMap.get( key );
+								for ( int i = 0; i < itemss.size(); i++ ) {
+									amount = amount + Double.parseDouble( itemss.get( i ).getDMBTR() );
+
+									Log.d( "date and recipt", itemss.get( i ).getZFBDT() + " " + itemss.get( i ).getBELNR() );
+
+									if ( i == 0 ) {
+										groupar.add( itemss.get( i ).getZFBDT() + " / " + itemss.get( i ).getBELNR() );
+									}
+								}
+								amountar.add( amount );
+							}
+							/*while ( it.hasNext() ) {
 								Map.Entry                          pair = ( Map.Entry ) it.next();
 								String                             key  = ( String ) pair.getKey();
 								ArrayList< ResponseEnvelope.Item > ar   = ( ArrayList< ResponseEnvelope.Item > ) pair.getValue();
@@ -255,8 +292,8 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 								}
 								amountar.add( amount );
 							}
-
-							MyExpandableListAdapter expandableListAdapter = new MyExpandableListAdapter( getActivity(), sortedMap, groupar, amountar );
+*/
+							MyExpandableListAdapter expandableListAdapter = new MyExpandableListAdapter( getActivity(), hashMap, groupar, amountar );
 							expandableListView.setAdapter( expandableListAdapter );
 						}
 					}
@@ -264,6 +301,16 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 				else {
 					Toast.makeText( getActivity(), "Server Under Maintenance,Please try after Sometime ", Toast.LENGTH_LONG ).show();
 				}
+			}
+
+			private boolean isDataAvailabe( List< String > stringList, String data ) {
+				for ( String str : stringList ) {
+					if ( data.equalsIgnoreCase( str ) ) {
+						return true;
+					}
+				}
+
+				return false;
 			}
 
 			@Override
