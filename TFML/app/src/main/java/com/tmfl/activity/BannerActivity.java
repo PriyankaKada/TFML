@@ -168,7 +168,8 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 						// Log.e("CallbannerListResponse", "" + bannerlistResponse.getBanners().getData().get(0).getImage());
 						bannerAdapter = new BannerAdapter( BannerActivity.this, ( ArrayList< Datum > ) bannerlistResponse.getBanners().getData() );
 						recentViewpager.setAdapter( bannerAdapter );
-						recentViewpager.setOffscreenPageLimit( 2 );
+						recentViewpager.setOffscreenPageLimit( 1 );
+						recentViewpager.animate();
 						recentViewpager.setScrollDurationFactor( 8 );
 						setUiPageViewController();
 
@@ -412,9 +413,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 
 				if ( response != null && response.body().getStatus().equalsIgnoreCase( "success" ) ) {
 
-//					SocialUtil.loanStatusDialog( BannerActivity.this, linLoanStaus, view1 );
 					strOtpNo = response.body().getData().getOtp();
-//					edtOtpNo.setText( strOtpNo );
 
 				}
 				else {

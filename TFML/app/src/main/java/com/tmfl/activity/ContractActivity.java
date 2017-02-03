@@ -124,12 +124,6 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 				intentSchema.putExtra( "TAB_SELECTED", Constant.ISSCHEMASTABSELECT ).putExtra( "LOGGED_IN", "true" );
 				startActivity( intentSchema );
 
-				/*getSupportFragmentManager().popBackStack( null, FragmentManager.POP_BACK_STACK_INCLUSIVE );
-
-				getSupportFragmentManager().beginTransaction()
-						.addToBackStack( getClass().getName() )
-						.replace( R.id.frame_container_contract, new NewSchemeFragment() )
-						.commit();*/
 
 				break;
 			case R.id.llApplyLoan:
@@ -137,12 +131,6 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 				intentApplyLoan.putExtra( "TAB_SELECTED", Constant.ISAPPLYLOANSELECT ).putExtra( "LOGGED_IN", "true" );
 				startActivity( intentApplyLoan );
 
-				/*getSupportFragmentManager().popBackStack( null, FragmentManager.POP_BACK_STACK_INCLUSIVE );
-
-				getSupportFragmentManager().beginTransaction()
-						.addToBackStack( getClass().getName() )
-						.replace( R.id.frame_container_contract, new ApplyLoanFragment() )
-						.commit();*/
 
 				break;
 			case R.id.linReferFriend:
@@ -150,17 +138,8 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 				intentReferFriend.putExtra( "TAB_SELECTED", Constant.ISREFERFREINDSELECT ).putExtra( "LOGGED_IN", "true" );
 				startActivity( intentReferFriend );
 
-				/*getSupportFragmentManager().popBackStack( null, FragmentManager.POP_BACK_STACK_INCLUSIVE );
-
-				getSupportFragmentManager().beginTransaction()
-						.addToBackStack( getClass().getName() )
-						.replace( R.id.frame_container_contract, new ReferFriendFragment() )
-						.commit();
-*/
 				break;
 			case R.id.linLoanStaus:
-			/*	linLoanStausClick();
-				SocialUtil.loanStatusDialog( ContractActivity.this, linLoanStaus, selectedView );*/
 
 				txtTitleContract.setText( "Customer Care" );
 				if ( new ComplaintsFragment().isAdded() ) {
@@ -194,7 +173,6 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 			public void onResponse( Call< ContractsResponseModel > call, Response< ContractsResponseModel > response ) {
 				CommonUtils.closeProgressDialog();
 				Log.e( "ResponseBody", new Gson().toJson( response.body() ) );
-				// List<ContractModel>model= (List<ContractModel>) response.body().getData();
 				ArrayList< ContractModel > models = new ArrayList< ContractModel >();
 				if ( response.body().getData().getActive().getContracts() != null ) {
 					models.addAll( response.body().getData().getActive().getContracts() );

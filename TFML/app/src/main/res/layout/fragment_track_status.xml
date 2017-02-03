@@ -16,6 +16,15 @@
         android:textSize="16sp"
         />
 
+    <Spinner
+        android:id="@+id/spnContractNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/spinner_bg"
+        android:hint="Case Id"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

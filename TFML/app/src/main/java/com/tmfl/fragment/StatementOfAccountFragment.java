@@ -139,8 +139,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 		view = inflater.inflate( R.layout.fragment_statment_of_account, container, false );
 		Intent intent = getActivity().getIntent();
 		Bundle bundle = intent.getExtras();
-		modelArrayList =
-				( ArrayList< ContractModel > ) bundle.getSerializable( "datamodel" );
+		modelArrayList = ( ArrayList< ContractModel > ) bundle.getSerializable( "datamodel" );
 		datavalue = ( String ) bundle.getString( "datamodelvalue" );
 		rcNo = ( String ) bundle.getString( "RCNO" );
 		dueDate = ( String ) bundle.getString( "DUEDATE" );
@@ -174,7 +173,6 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 		txt_dueamount = ( TextView ) view.findViewById( R.id.txt_dueamount );
 		txt_duedate = ( TextView ) view.findViewById( R.id.txt_duedate );
 		setColorButtonBasic();
-
 
 		//setColorButtonFinance();
 		if ( rcNo != null ) {

@@ -11,13 +11,19 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.tmfl.R;
+import com.tmfl.auth.Constant;
+import com.tmfl.model.ContractResponseModel.ActiveContractsModel;
 import com.tmfl.util.DatePickerDialog;
 import com.tmfl.util.DatePickerFragment;
+import com.tmfl.util.PreferenceHelper;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by webwerks1 on 12/12/16.
@@ -26,8 +32,10 @@ import java.util.Calendar;
 public class TrackStatusFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateChangeListener {
 
 	TextView txtComplainCaseId, txtFromDate, txtToDate;
+	Spinner      spnContractNo;
 	LinearLayout llComplaintListHeader;
 	ListView     list;
+
 	OnDateSetListener fromDate = new OnDateSetListener() {
 		@Override
 		public void onDateSet( DatePicker view, int year, int monthOfYear,
@@ -50,7 +58,9 @@ public class TrackStatusFragment extends Fragment implements View.OnClickListene
 	};
 	private
 	Button btnGo;
-	private DatePickerFragment date;
+	private DatePickerFragment           date;
+	private ActiveContractsModel         activeContractsModel;
+	private List< ActiveContractsModel > contractsModelList;
 
 	@Override
 	public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
@@ -63,6 +73,10 @@ public class TrackStatusFragment extends Fragment implements View.OnClickListene
 		btnGo = ( Button ) rootView.findViewById( R.id.btnGo );
 		llComplaintListHeader = ( LinearLayout ) rootView.findViewById( R.id.llComplaintListHeader );
 		list = ( ListView ) rootView.findViewById( R.id.lstComplaints );
+		spnContractNo = ( Spinner ) rootView.findViewById( R.id.spnContractNo );
+
+		activeContractsModel = ( ActiveContractsModel ) PreferenceHelper.getObject( Constant.ONGOING_LOAN, ActiveContractsModel.class );
+		contractsModelList = new ArrayList<>();
 
 		txtFromDate.setOnClickListener( this );
 		txtToDate.setOnClickListener( this );
@@ -76,12 +90,14 @@ public class TrackStatusFragment extends Fragment implements View.OnClickListene
 	}
 
 	public void selectDate( String from ) {
+
 		Calendar calender = Calendar.getInstance();
 		Bundle   args     = new Bundle();
 		args.putInt( "year", calender.get( Calendar.YEAR ) );
 		args.putInt( "month", calender.get( Calendar.MONTH ) );
 		args.putInt( "day", calender.get( Calendar.DAY_OF_MONTH ) );
 		date.setArguments( args );
+
 		/**
 		 * Set Call back to capture selected date
 		 */
@@ -97,25 +113,18 @@ public class TrackStatusFragment extends Fragment implements View.OnClickListene
 
 	@Override
 	public void onClick( View view ) {
-
 		switch ( view.getId() ) {
 			case R.id.txtFromDate:
-
 				selectDate( "fromDate" );
-
 				break;
 
 			case R.id.txtToDate:
-
 				selectDate( "toDate" );
-
 				break;
 
 			case R.id.btnGo:
-
 				llComplaintListHeader.setVisibility( View.VISIBLE );
 				list.setVisibility( View.VISIBLE );
-
 				break;
 		}
 	}
