@@ -37,6 +37,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -173,7 +174,7 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 						Log.e( "SIZE ", response.body().getBody().getZCISResponse().getI_REC().size() + "" );
 
 						if ( response.body().getBody().getZCISResponse().getI_REC().size() != 0 ) {
-							HashMap< String, ArrayList< ResponseEnvelope.Item > > hashMap = new HashMap< String, ArrayList< ResponseEnvelope.Item > >();
+							LinkedHashMap< String, ArrayList< ResponseEnvelope.Item > > hashMap = new LinkedHashMap< String, ArrayList< ResponseEnvelope.Item > >();
 
 
 							List< String > itemsCategory = new ArrayList< String >();
@@ -181,8 +182,6 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 								itemsCategory.add( item.getBELNR() );
 							}
 							List< String > categories = new ArrayList< String >();
-							//categories.addAll( itemsCategory );
-
 
 							List< ResponseEnvelope.Item > items = response.body().getBody().getZCISResponse().getI_REC();
 							Collections.sort( items, new Comparator< ResponseEnvelope.Item >() {
@@ -208,52 +207,17 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 								Log.d( "sorted dates", items.get( i ).getZFBDT() );
 							}
 
-							int j = 0;
-							/*for ( ResponseEnvelope.Item item : items ) {
-								if ( !isDataAvailabe( categories, item.getBELNR() ) ) {
-//									categories.add( item.getBELNR() );
-									hashMap.put( j, new ArrayList< ResponseEnvelope.Item >() );
-								}
-
-								hashMap.get( item.getBELNR() + "_" + j ).add( item );
-								Log.e( "date and receipt ", item.getBELNR() + "    " + item.getZFBDT() );
-								j++;
-							}*/
-
-							for ( int i = 0; i < items.size(); i++ ) {
-								hashMap.put( i + "", new ArrayList< ResponseEnvelope.Item >() );
-								hashMap.get( i + "" ).add( items.get( i ) );
-							}
-
-							/*List< ResponseEnvelope.Item > items = response.body().getBody().getZCISResponse().getI_REC();
-
 							for ( ResponseEnvelope.Item item : items ) {
-
-							}*/
-
-							/*for ( int i = 0; i < response.body().getBody().getZCISResponse().getI_REC().size(); i++ ) {
-								Log.d( "after sorting", response.body().getBody().getZCISResponse().getI_REC().get( i ).getZFBDT() );
-							}*/
-
-//							for ( String s : categories ) {
-
-							//Collections.reverse( items );
-
-							/*for ( ResponseEnvelope.Item item : response.body().getBody().getZCISResponse().getI_REC() ) {
-								if ( s.equals( item.getBELNR() ) ) {
-//										Log.e( "loop", item.getZFBDT() );
-									items.add( item );
+								if ( !isDataAvailabe( categories, item.getBELNR() ) ) {
+									categories.add( item.getBELNR() );
+									Log.e( " receipt ", item.getBELNR() );
+									hashMap.put( item.getBELNR(), new ArrayList< ResponseEnvelope.Item >() );
 								}
+
+								Log.e( "date and receipt ", item.getBELNR() + "    " + item.getZFBDT() );
+								hashMap.get( item.getBELNR() ).add( item );
 							}
-////*/								/*Log.e( "KEY " + s, " Value " + items.get( 0 ).getZFBDT() );
-//							hashMap.put( s, items );
-////							}*/
 
-//							Map< String, ArrayList< ResponseEnvelope.Item > > sortedMap = hashMap.descendingMap();
-
-							/*for ( String s : sortedMap.keySet() ) {
-//								Log.e( s + " SORTED  ===>  ", sortedMap.get( s ).get( 0 ).getZFBDT() );
-							}*/
 
 							ArrayList< String > groupar  = new ArrayList<>();
 							ArrayList< Double > amountar = new ArrayList< Double >();
@@ -264,35 +228,17 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 							Iterator it = hashMap.entrySet().iterator();
 
 							for ( String key : hashMap.keySet() ) {
-								Double amount = 0.00;
-								Log.d( "key", key );
+								Double                             amount = 0.00;
 								ArrayList< ResponseEnvelope.Item > itemss = hashMap.get( key );
 								for ( int i = 0; i < itemss.size(); i++ ) {
 									amount = amount + Double.parseDouble( itemss.get( i ).getDMBTR() );
-
-									Log.d( "date and recipt", itemss.get( i ).getZFBDT() + " " + itemss.get( i ).getBELNR() );
-
 									if ( i == 0 ) {
 										groupar.add( itemss.get( i ).getZFBDT() + " / " + itemss.get( i ).getBELNR() );
 									}
 								}
 								amountar.add( amount );
 							}
-							/*while ( it.hasNext() ) {
-								Map.Entry                          pair = ( Map.Entry ) it.next();
-								String                             key  = ( String ) pair.getKey();
-								ArrayList< ResponseEnvelope.Item > ar   = ( ArrayList< ResponseEnvelope.Item > ) pair.getValue();
-								Log.e( "Size ", "" + ar.size() );
-								Double amount = 0.00;
-								for ( int i = 0; i < ar.size(); i++ ) {
-									amount = amount + Double.parseDouble( ar.get( i ).getDMBTR() );
-									if ( i == 0 ) {
-										groupar.add( ar.get( i ).getZFBDT() + " / " + ar.get( i ).getBELNR() );
-									}
-								}
-								amountar.add( amount );
-							}
-*/
+
 							MyExpandableListAdapter expandableListAdapter = new MyExpandableListAdapter( getActivity(), hashMap, groupar, amountar );
 							expandableListView.setAdapter( expandableListAdapter );
 						}

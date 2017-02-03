@@ -43,6 +43,7 @@ import com.tmfl.model.QuickcallResponseModel.QuickCallResponse;
 import com.tmfl.model.bannerResponseModel.BannerlistResponse;
 import com.tmfl.model.bannerResponseModel.Datum;
 import com.tmfl.util.SetFonts;
+import com.tmfl.util.ViewPagerCustomDuration;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ import retrofit2.Response;
 public class BannerActivity extends BaseActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 	//String emailId,whatsAppNo,phoneNo;
 	final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
-	public ViewPager recentViewpager;
+	public ViewPagerCustomDuration recentViewpager;
 	Toolbar             mToolbar;
 	CirclePageIndicator circlePageIndicator;
 	TmflApi             tmflApi;
@@ -105,7 +106,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		imgReferFriend = ( ImageView ) findViewById( R.id.imgReferFriend );
 		imgLoanStatus = ( ImageView ) findViewById( R.id.imgLoanStatus );
 		imgLogin = ( ImageView ) findViewById( R.id.imgLogin );
-		recentViewpager = ( ViewPager ) findViewById( R.id.recentViewpager );
+		recentViewpager = ( ViewPagerCustomDuration ) findViewById( R.id.recentViewpager );
 		circlePageIndicator = ( CirclePageIndicator ) findViewById( R.id.titles );
 		linSchemes = ( LinearLayout ) findViewById( R.id.llSchemes );
 		linApplyLoan = ( LinearLayout ) findViewById( R.id.llApplyLoan );
@@ -168,6 +169,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 						bannerAdapter = new BannerAdapter( BannerActivity.this, ( ArrayList< Datum > ) bannerlistResponse.getBanners().getData() );
 						recentViewpager.setAdapter( bannerAdapter );
 						recentViewpager.setOffscreenPageLimit( 2 );
+						recentViewpager.setScrollDurationFactor( 8 );
 						setUiPageViewController();
 
 						recentViewpager.setCurrentItem( 0, true );
