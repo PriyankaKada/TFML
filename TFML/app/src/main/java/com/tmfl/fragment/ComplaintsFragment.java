@@ -10,9 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.tmfl.R;
-import com.tmfl.auth.Constant;
-import com.tmfl.model.ContractResponseModel.ActiveContractsModel;
-import com.tmfl.util.PreferenceHelper;
 
 /**
  * Created by webwerks1 on 12/12/16.

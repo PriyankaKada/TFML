@@ -3,6 +3,10 @@ package com.tmfl.auth;
 
 import com.tmfl.BillDeskPayment.Models.Example;
 import com.tmfl.BillDeskPayment.Models.JSONData;
+import com.tmfl.complaintnetwork.createcase.request.CreateCaseRequestEnvelope;
+import com.tmfl.complaintnetwork.createcase.response.CreateCaseResponseEnvelope;
+import com.tmfl.complaintnetwork.findcase.request.FindCaseRequestEnvelope;
+import com.tmfl.complaintnetwork.findcase.response.FindCaseResponseEnvelope;
 import com.tmfl.model.ContractResponseModel.ContractsInputModel;
 import com.tmfl.model.ContractResponseModel.ContractsResponseModel;
 import com.tmfl.model.LoanStatusResponseModel.LoanStatusInputModel;
@@ -141,6 +145,31 @@ public interface TmflApi {
 	@POST( "MessageServlet?senderParty=&senderService=Service_TMFUniverse&receiverParty=&receiverService=&interface=TerminalDues_Out&interfaceNamespace=http://tmf.com:TMFUniverse" )
 	Call< com.tmfl.model.soapModel.preClousreResponse.ResponseEnvelope > callClosureTableRequest( @Body RequestEnvelope requestEnvelope );
 
+	@Headers( {
+			"SOAPAction : http://tempuri.org/FindCase",
+			"Content-Type : text/xml; charset=utf-8"
+	} )
+	@POST( "CustOne_Case_Webservice?op=FindCase" )
+	Call< FindCaseResponseEnvelope > findCaseRequest( @Body FindCaseRequestEnvelope requestEnvelope );
+
+/*	@Headers( {
+			"SOAPAction : http://tempuri.org/FindCase",
+			"Content-Type : text/xml; charset=utf-8"
+	} )*/
+	/*@Multipart
+	@POST( "CustOne_Case_Webservice?op=CreateCase_CustOne" )
+	Call< CreateCaseResponseEnvelope > createCaseRequest( @PartMap Map< String, RequestBody > params,
+	                                                      @Part MultipartBody.Part file1
+	                                                      *//*@Part MultipartBody.Part file2,
+	                                                      @Part MultipartBody.Part file3*//* );*/
+
+	@Headers( {
+			"SOAPAction : http://tempuri.org/CreateCase_CustOne",
+			"Content-Type : text/xml; charset=utf-8"
+	} )
+	@POST( "CustOne_Case_Webservice?op=CreateCase_CustOne" )
+	Call< CreateCaseResponseEnvelope > createCaseRequest( @Body CreateCaseRequestEnvelope requestEnvelope);
+
 	@POST( Constant.MYCONTRACT )
 	Call< ContractsResponseModel > getContractListData( @Body ContractsInputModel contractsInputModel );
 
@@ -171,9 +200,10 @@ public interface TmflApi {
 	@POST( Constant.LOGOUT )
 	Call< LogoutResponseModel > getLogoutResponse( @Body LogoutInputModel logoutInputModel );
 
-	@POST(Constant.BILL_DESK_MESSAGE)
-	Call<BillDeskMsgResponseModel>getBillDeskMsgResponse(@Body BillDeskMsgInputModel billDeskMsgInputModel);
+	@POST( Constant.BILL_DESK_MESSAGE )
+	Call< BillDeskMsgResponseModel > getBillDeskMsgResponse( @Body BillDeskMsgInputModel billDeskMsgInputModel );
+
 	@POST( "customer/myContracts" )
-	Call<Example> getListData(@Body JSONData jsonData);
+	Call< Example > getListData( @Body JSONData jsonData );
 
 }

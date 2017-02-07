@@ -14,7 +14,7 @@ import com.tmfl.R;
 /**
  * Created by webwerks on 14/12/16.
  */
-public class ComplaintThankuFragment extends Fragment {
+public class ComplaintSubmitFeedbackFragment extends Fragment {
 
 	private TextView txtCallScript, txtReferenceNo;
 

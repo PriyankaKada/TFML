@@ -25,5 +25,4 @@ public class RequestEnvelope {
 		this.reqBody = reqBody;
 	}
 
-
 }

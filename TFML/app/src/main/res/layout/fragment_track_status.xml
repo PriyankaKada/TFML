@@ -9,7 +9,7 @@
         android:id="@+id/txtComplainCaseId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/spinner_bg"
+        android:background="@drawable/whit_rect_bg"
         android:hint="Case Id"
         android:padding="10dp"
         android:textColor="@color/color_grey"

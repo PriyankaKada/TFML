@@ -6,6 +6,7 @@ package com.tmfl.auth;
 //http://203.201.252.137:83/XISOAPAdapter/
 public class Constant {
 	public static final String SOAP_BASE                     = "http://203.201.252.137:83/XISOAPAdapter/";
+	public static final String COMPLAINT_BASE                = "http://rocuat.tmf.co.in/";
 	public static final String BASE_URL                      = "http://staging.php-dev.in:8844/tatamotors/public/";
 	public static final String LOGIN                         = "api/login";
 	public static final String BANNER                        = "banners";
@@ -54,4 +55,5 @@ public class Constant {
 	public static final String SHOW_RECEIPT         = "show_receipt";
 	public static final String BILL_DESK_MESSAGE    = "customer/getBillDeskMsg";
 	public static final String PHONE                = "phone";
+	public static final String FIND_CASE_RESPONSE   = "findCaseResponse";
 }
