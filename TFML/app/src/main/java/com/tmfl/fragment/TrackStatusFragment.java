@@ -16,7 +16,9 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.tmfl.R;
+import com.tmfl.adapter.ComplaintsToTrackListAdapter;
 import com.tmfl.auth.Constant;
 import com.tmfl.auth.TmflApi;
 import com.tmfl.common.ComplaintSoapApiService;
@@ -24,10 +26,15 @@ import com.tmfl.complaintnetwork.findcase.request.FindCaseBody;
 import com.tmfl.complaintnetwork.findcase.request.FindCaseData;
 import com.tmfl.complaintnetwork.findcase.request.FindCaseRequestEnvelope;
 import com.tmfl.complaintnetwork.findcase.response.FindCaseResponseEnvelope;
+import com.tmfl.complaintnetwork.findcase.response.FindCaseResult;
 import com.tmfl.model.ContractResponseModel.ActiveContractsModel;
 import com.tmfl.util.DatePickerDialog;
 import com.tmfl.util.DatePickerFragment;
 import com.tmfl.util.PreferenceHelper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.XML;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -115,10 +122,6 @@ public class TrackStatusFragment extends Fragment implements View.OnClickListene
 		args.putInt( "day", calender.get( Calendar.DAY_OF_MONTH ) );
 		date.setArguments( args );
 
-		/**
-		 * Set Call back to capture selected date
-		 */
-
 		if ( from.equalsIgnoreCase( "fromDate" ) ) {
 			date.setCallBack( fromDate, from );
 		}
@@ -140,9 +143,6 @@ public class TrackStatusFragment extends Fragment implements View.OnClickListene
 				break;
 
 			case R.id.btnGo:
-				llComplaintListHeader.setVisibility( View.VISIBLE );
-				list.setVisibility( View.VISIBLE );
-
 				findCase();
 				break;
 
@@ -165,14 +165,23 @@ public class TrackStatusFragment extends Fragment implements View.OnClickListene
 		FindCaseBody            findCaseReqBody = new FindCaseBody();
 		FindCaseData            findCaseReqData = new FindCaseData();
 
-		findCaseReqData.setCaseId( "1804428" );
-		findCaseReqData.setContractNo( "" );
-		findCaseReqData.setStartDate( "" );
-		findCaseReqData.setEndDate( "" );
+		if ( txtComplainCaseId.getText().toString().length() != 0 ) {
+			findCaseReqData.setCaseId( txtComplainCaseId.getText().toString().trim() );
+			findCaseReqData.setContractNo( "" );
+			findCaseReqData.setStartDate( "" );
+			findCaseReqData.setEndDate( "" );
+		}
+		else {
+			findCaseReqData.setCaseId( "" );
+			findCaseReqData.setContractNo( spnContractNo.getSelectedItem().toString() );
+			findCaseReqData.setStartDate( txtFromDate.getText().toString() );
+			findCaseReqData.setEndDate( txtToDate.getText().toString() );
+		}
 
 		findCaseReqBody.setReqData( findCaseReqData );
 		requestEnvelope.setCaseBody( findCaseReqBody );
 		TmflApi apiService = ComplaintSoapApiService.getInstance().call();
+
 		apiService.findCaseRequest( requestEnvelope ).enqueue( new Callback< FindCaseResponseEnvelope >() {
 			@Override
 			public void onResponse( Call< FindCaseResponseEnvelope > call, Response< FindCaseResponseEnvelope > response ) {
@@ -194,12 +203,20 @@ public class TrackStatusFragment extends Fragment implements View.OnClickListene
 
 	private void setCaseDetails( String findCaseResult ) {
 
-		/*try {
-//			XMLPullParserHandler.main( findCaseResult );
+		JSONObject jsonObject = new JSONObject();
+		try {
+			jsonObject = XML.toJSONObject( "<case><CaseId>1804428</CaseId><Casestage>Assigned</Casestage><CreatedDate>2/6/2017 12:51:08 PM</CreatedDate><Description>Test Case Description</Description></case><case><CaseId>1804428</CaseId><Casestage>Assigned</Casestage><CreatedDate>2/6/2017 12:51:08 PM</CreatedDate><Description>Test Case Description</Description></case><Result>1</Result><Message>Cases successfully retrieved.</Message>" );
+			Gson           gson       = new Gson();
+			FindCaseResult caseResult = gson.fromJson( jsonObject.toString(), FindCaseResult.class );
+
+
+			Log.d( "String", caseResult.getMessage() + " " + caseResult.toString() );
+			llComplaintListHeader.setVisibility( View.VISIBLE );
+			list.setAdapter( new ComplaintsToTrackListAdapter( getActivity(), 0, caseResult.getCase() ) );
 		}
-		catch ( XmlPullParserException | IOException e ) {
+		catch ( JSONException e ) {
 			e.printStackTrace();
-		}*/
+		}
 
 	}
 

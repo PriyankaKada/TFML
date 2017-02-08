@@ -12,14 +12,29 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.8"
         android:gravity="center"
-        android:padding="5dp"
-        android:textColor="@color/cardview_dark_background"
+        android:text=""
+        android:textColor="@color/text_black"
         android:textSize="12sp"/>
 
     <View
         android:layout_width="2dp"
         android:layout_height="match_parent"
-        android:background="@drawable/complaint_list_dotted"/>
+        android:background="@drawable/dotted_bg"/>
+
+    <TextView
+        android:id="@+id/txtCaseStage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/text_black"
+        android:textSize="12sp"/>
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/dotted_bg"/>
 
     <TextView
         android:id="@+id/txtReqComplaintDate"
@@ -28,13 +43,14 @@
         android:layout_weight="1.2"
         android:gravity="center"
         android:padding="5dp"
-        android:textColor="@color/cardview_dark_background"
+        android:text=""
+        android:textColor="@color/text_black"
         android:textSize="12sp"/>
 
     <View
         android:layout_width="2dp"
         android:layout_height="match_parent"
-        android:background="@drawable/complaint_list_dotted"/>
+        android:background="@drawable/dotted_bg"/>
 
     <TextView
         android:id="@+id/txtDesc"
@@ -42,23 +58,22 @@
         android:layout_height="wrap_content"
         android:layout_weight="1.2"
         android:gravity="center"
-        android:padding="5dp"
-        android:textColor="@color/cardview_dark_background"
+        android:text=""
+        android:textColor="@color/text_black"
         android:textSize="12sp"/>
 
     <View
         android:layout_width="2dp"
         android:layout_height="match_parent"
-        android:background="@drawable/complaint_list_dotted"/>
+        android:background="@drawable/dotted_bg"/>
 
-    <TextView
-        android:id="@+id/txtUploadFile"
+    <ImageView
+        android:id="@+id/imgUploadFile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.8"
         android:gravity="center"
-        android:padding="5dp"
-        android:textColor="@color/cardview_dark_background"
-        android:textSize="12sp"/>
+        android:src="@drawable/ic_attachment"
+        />
 
 </LinearLayout>

@@ -1,5 +1,7 @@
 package com.tmfl.complaintnetwork.findcase.response;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -11,6 +13,7 @@ public class FindCaseResult {
 
 	private String Message;
 
+	@SerializedName( "case" )
 	private List< Case > cases;
 
 	public String getResult() {
@@ -39,6 +42,6 @@ public class FindCaseResult {
 
 	@Override
 	public String toString() {
-		return "ClassPojo [Result = " + Result + ", Message = " + Message + ", case = " + cases +"]" ;
+		return "ClassPojo [Result = " + Result + ", Message = " + Message + ", case = " + cases + "]";
 	}
 }

@@ -25,6 +25,9 @@ public class ComplaintSubmitFeedbackFragment extends Fragment {
 
 		initView( view );
 
+		String id = getActivity().getIntent().getStringExtra( "caseId" );
+		txtReferenceNo.setText( "Your reference number is " + id );
+
 		return view;
 	}
 

@@ -111,7 +111,7 @@
         android:background="@color/tab_bg"
         android:gravity="center"
         android:orientation="horizontal"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/txtCaseId"
@@ -120,6 +120,21 @@
             android:layout_weight="0.8"
             android:gravity="center"
             android:text="CASE ID"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/dotted_bg"/>
+
+        <TextView
+            android:id="@+id/txtCaseStage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:text="CASE STAGE"
             android:textColor="@color/white"
             android:textSize="12sp"/>
 
