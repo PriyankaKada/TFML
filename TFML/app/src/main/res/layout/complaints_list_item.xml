@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center_vertical"
     android:orientation="horizontal"
     android:visibility="visible">
 
@@ -68,7 +69,7 @@
         android:background="@drawable/dotted_bg"/>
 
     <ImageView
-        android:id="@+id/imgUploadFile"
+        android:id="@+id/imgUploadFile1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.8"

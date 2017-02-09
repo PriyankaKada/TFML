@@ -10,14 +10,14 @@ import org.simpleframework.xml.Root;
 @Root( name = "soap12:Body", strict = false )
 public class UploadDocReqBody {
 
-	@Element( name = "SaveBytesToFile", required = false )
-	public UploadDocData uploadDocData;
+	@Element( name = "UploadDoc", required = false )
+	public UploadDocReqData uploadDocData;
 
-	public UploadDocData getUploadDocData() {
+	public UploadDocReqData getUploadDocData() {
 		return uploadDocData;
 	}
 
-	public void setUploadDocData( UploadDocData uploadDocData ) {
+	public void setUploadDocData( UploadDocReqData uploadDocData ) {
 		this.uploadDocData = uploadDocData;
 	}
 

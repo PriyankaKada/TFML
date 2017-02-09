@@ -137,12 +137,6 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 
 			case R.id.imgUpload1:
 
-				/*Intent intent = new Intent(
-						Intent.ACTION_PICK,
-						android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI );
-				intent.setType( "image*//*" );
-				startActivityForResult( intent, 1 );*/
-
 				intent = new Intent( Intent.ACTION_GET_CONTENT );
 				intent.setType( "text/plain|image/*|application/pdf" );
 				startActivityForResult( intent, 1 );

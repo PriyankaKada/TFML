@@ -37,14 +37,6 @@ public class DatePickerFragment extends DialogFragment {
 			datePickerDialog.getDatePicker().setMaxDate( new Date().getTime() );
 		}
 
-//		if ( from.equalsIgnoreCase( "fromDate" ) ) {
-//			datePickerDialog.getDatePicker().setMaxDate( new Date().getTime() );
-//		}
-//
-//		if ( from.equalsIgnoreCase( "toDate" ) ) {
-//			datePickerDialog.getDatePicker().setMinDate( new Date().getTime() );
-//		}
-
 		return datePickerDialog;
 	}
 }

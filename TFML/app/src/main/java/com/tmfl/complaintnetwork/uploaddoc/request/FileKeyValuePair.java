@@ -8,11 +8,20 @@ import org.simpleframework.xml.Element;
 
 public class FileKeyValuePair {
 
-	@Element( name = "key" )
+	@Element( name = "Key", required = false )
 	public String key;
 
-	@Element( name = "value" )
-	public byte[] value;
+	@Element( name = "Value", required = false )
+	public String value;
+
+	public FileKeyValuePair( String key, String value ) {
+		this.key = key;
+		this.value = value;
+	}
+
+	public FileKeyValuePair() {
+
+	}
 
 	public String getKey() {
 		return key;
@@ -22,11 +31,11 @@ public class FileKeyValuePair {
 		this.key = key;
 	}
 
-	public byte[] getValue() {
+	public String getValue() {
 		return value;
 	}
 
-	public void setValue( byte[] value ) {
+	public void setValue( String value ) {
 		this.value = value;
 	}
 }

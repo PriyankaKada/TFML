@@ -12,7 +12,7 @@
         android:background="@drawable/whit_rect_bg"
         android:hint="Case Id"
         android:padding="10dp"
-        android:textColor="@color/color_grey"
+        android:textColor="@color/text_black"
         android:textSize="16sp"
         />
 
@@ -46,6 +46,7 @@
                 android:gravity="left|center"
                 android:hint="From Date"
                 android:padding="10dp"
+                android:textColor="@color/text_black"
                 android:textSize="16sp"
                 />
 
@@ -75,6 +76,7 @@
                 android:gravity="left|center"
                 android:hint="To Date"
                 android:padding="10dp"
+                android:textColor="@color/text_black"
                 android:textSize="16sp"
                 />
 
@@ -114,7 +116,6 @@
         android:visibility="gone">
 
         <TextView
-            android:id="@+id/txtCaseId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
@@ -129,7 +130,6 @@
             android:background="@drawable/dotted_bg"/>
 
         <TextView
-            android:id="@+id/txtCaseStage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.2"
@@ -144,7 +144,6 @@
             android:background="@drawable/dotted_bg"/>
 
         <TextView
-            android:id="@+id/txtReqComplaintDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.2"
@@ -160,7 +159,6 @@
             android:background="@drawable/dotted_bg"/>
 
         <TextView
-            android:id="@+id/txtDesc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.2"
@@ -175,14 +173,93 @@
             android:background="@drawable/dotted_bg"/>
 
         <TextView
-            android:id="@+id/txtUploadFile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
             android:gravity="center"
-            android:text="VIEW/UPLOAD\nFILE"
+            android:text="UPLOAD\nFILE"
             android:textColor="@color/white"
             android:textSize="12sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llRow"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/txtCaseId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/text_black"
+            android:textSize="12sp"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/dotted_bg"/>
+
+        <TextView
+            android:id="@+id/txtCaseStage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/text_black"
+            android:textSize="12sp"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/dotted_bg"/>
+
+        <TextView
+            android:id="@+id/txtReqComplaintDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text=""
+            android:textColor="@color/text_black"
+            android:textSize="12sp"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/dotted_bg"/>
+
+        <TextView
+            android:id="@+id/txtDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/text_black"
+            android:textSize="12sp"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/dotted_bg"/>
+
+        <ImageView
+            android:id="@+id/imgUploadFile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:gravity="center"
+            android:src="@drawable/ic_attachment"
+            />
 
     </LinearLayout>
 
@@ -192,6 +269,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@color/white"
-        android:visibility="gone"/>
+        />
 
 </LinearLayout>

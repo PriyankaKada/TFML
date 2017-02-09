@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.internal.LinkedTreeMap;
 import com.tmfl.R;
-import com.tmfl.complaintnetwork.findcase.response.Case;
+import com.tmfl.complaintnetwork.uploaddoc.UploadFileInterface;
 
 import java.util.List;
 
@@ -16,16 +18,17 @@ import java.util.List;
  * Created by webwerks1 on 12/12/16.
  */
 
-public class ComplaintsToTrackListAdapter extends ArrayAdapter< Case > {
+public class ComplaintsToTrackListAdapter extends ArrayAdapter< LinkedTreeMap > {
 
-	private Context      mContext;
-	private List< Case > caseList;
+	private Context               mContext;
+	private List< LinkedTreeMap > caseList;
+	private UploadFileInterface   fileInterface;
 
-
-	public ComplaintsToTrackListAdapter( Context context, int resource, List< Case > objects ) {
+	public ComplaintsToTrackListAdapter( Context context, int resource, List< LinkedTreeMap > objects, UploadFileInterface fileInterface ) {
 		super( context, resource, objects );
 		mContext = context;
 		caseList = objects;
+		this.fileInterface = fileInterface;
 	}
 
 	@Override
@@ -38,7 +41,7 @@ public class ComplaintsToTrackListAdapter extends ArrayAdapter< Case > {
 
 		ViewHolder holder = null;
 
-		Case mCase = getItem( position );
+		final LinkedTreeMap mCase = getItem( position );
 
 		if ( convertView == null ) {
 
@@ -48,8 +51,8 @@ public class ComplaintsToTrackListAdapter extends ArrayAdapter< Case > {
 			holder.txtCaseId = ( TextView ) convertView.findViewById( R.id.txtCaseId );
 			holder.txtReqComplaintDate = ( TextView ) convertView.findViewById( R.id.txtReqComplaintDate );
 			holder.txtDesc = ( TextView ) convertView.findViewById( R.id.txtDesc );
-			holder.txtUploadFile = ( TextView ) convertView.findViewById( R.id.txtUploadFile );
 			holder.txtCaseStage = ( TextView ) convertView.findViewById( R.id.txtCaseStage );
+			holder.imgUploadFile = ( ImageView ) convertView.findViewById( R.id.imgUploadFile1 );
 
 			convertView.setTag( holder );
 		}
@@ -57,16 +60,22 @@ public class ComplaintsToTrackListAdapter extends ArrayAdapter< Case > {
 			holder = ( ViewHolder ) convertView.getTag();
 		}
 
-
-		holder.txtCaseId.setText( mCase.getCaseId() );
-		holder.txtDesc.setText( mCase.getDescription() );
-		holder.txtReqComplaintDate.setText( mCase.getCreatedDate() );
-		holder.txtCaseStage.setText( mCase.getCasestage() );
+		holder.txtCaseId.setText( mCase.get( "CaseId" ).toString() );
+		holder.txtDesc.setText( mCase.get( "Description" ).toString() );
+		holder.txtReqComplaintDate.setText( mCase.get( "CreatedDate" ).toString() );
+		holder.txtCaseStage.setText( mCase.get( "Casestage" ).toString() );
+		holder.imgUploadFile.setOnClickListener( new View.OnClickListener() {
+			@Override
+			public void onClick( View view ) {
+				fileInterface.uploadFile( mCase.get( "CaseId" ).toString().substring( 0, mCase.get( "CaseId" ).toString().lastIndexOf( "." ) ) );
+			}
+		} );
 
 		return convertView;
 	}
 
 	public class ViewHolder {
 		private TextView txtCaseId, txtReqComplaintDate, txtDesc, txtCaseStage, txtUploadFile;
+		private ImageView imgUploadFile;
 	}
 }

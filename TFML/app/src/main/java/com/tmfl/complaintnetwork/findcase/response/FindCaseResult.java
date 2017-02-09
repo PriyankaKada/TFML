@@ -2,19 +2,24 @@ package com.tmfl.complaintnetwork.findcase.response;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 /**
  * Created by Sandeep on 7/2/17.
  */
 public class FindCaseResult {
 
+	private String CaseCount;
 	private String Result;
-
 	private String Message;
-
 	@SerializedName( "case" )
-	private List< Case > cases;
+	private Object cases;
+
+	public String getCaseCount() {
+		return CaseCount;
+	}
+
+	public void setCaseCount( String caseCount ) {
+		CaseCount = caseCount;
+	}
 
 	public String getResult() {
 		return Result;
@@ -32,11 +37,11 @@ public class FindCaseResult {
 		this.Message = Message;
 	}
 
-	public List< Case > getCase() {
+	public Object getCase() {
 		return cases;
 	}
 
-	public void setCase( List< Case > cases ) {
+	public void setCase( Object cases ) {
 		this.cases = cases;
 	}
 
