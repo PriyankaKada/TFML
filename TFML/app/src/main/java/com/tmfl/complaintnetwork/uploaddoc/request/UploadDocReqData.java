@@ -1,6 +1,7 @@
 package com.tmfl.complaintnetwork.uploaddoc.request;
 
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Root;
 
 /**
@@ -8,6 +9,7 @@ import org.simpleframework.xml.Root;
  */
 
 @Root( name = "UploadDoc", strict = false )
+@Namespace( reference = "http://tempuri.org/" )
 public class UploadDocReqData {
 
 	@Element( name = "caseID", required = false )

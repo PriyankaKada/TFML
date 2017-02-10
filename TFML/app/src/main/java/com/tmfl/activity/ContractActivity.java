@@ -140,14 +140,9 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 
 				break;
 			case R.id.linLoanStaus:
-
-				txtTitleContract.setText( "Customer Care" );
-				if ( new ComplaintsFragment().isAdded() ) {
-					getSupportFragmentManager().beginTransaction().replace( R.id.frame_container_contract, new ComplaintsFragment() )
-							.addToBackStack( new ComplaintsFragment().getClass().getName() ).commit();
-				}
-				else {
-					getSupportFragmentManager().beginTransaction().addToBackStack( new ComplaintsFragment().getClass().getName() ).add( R.id.frame_container_contract, new ComplaintsFragment() ).commit();
+				if ( !( getSupportFragmentManager().findFragmentById( R.id.frame_complaint_container ) instanceof ComplaintsFragment ) ) {
+					txtTitleContract.setText( "Customer Care" );
+					getSupportFragmentManager().beginTransaction().addToBackStack( this.getClass().getName() ).replace( R.id.frame_container_contract, new ComplaintsFragment() ).commit();
 				}
 
 				break;

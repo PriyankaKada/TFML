@@ -12,6 +12,15 @@ public class FindCaseResult {
 	private String Message;
 	@SerializedName( "case" )
 	private Object cases;
+	private String Error;
+
+	public String getError() {
+		return Error;
+	}
+
+	public void setError( String error ) {
+		Error = error;
+	}
 
 	public String getCaseCount() {
 		return CaseCount;

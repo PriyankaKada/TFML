@@ -60,14 +60,14 @@ public class ComplaintsToTrackListAdapter extends ArrayAdapter< LinkedTreeMap > 
 			holder = ( ViewHolder ) convertView.getTag();
 		}
 
-		holder.txtCaseId.setText( mCase.get( "CaseId" ).toString() );
+		holder.txtCaseId.setText( mCase.get( "CaseId" ).toString().substring( 0, mCase.get( "CaseId" ).toString().indexOf( "." ) ) );
 		holder.txtDesc.setText( mCase.get( "Description" ).toString() );
 		holder.txtReqComplaintDate.setText( mCase.get( "CreatedDate" ).toString() );
 		holder.txtCaseStage.setText( mCase.get( "Casestage" ).toString() );
 		holder.imgUploadFile.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View view ) {
-				fileInterface.uploadFile( mCase.get( "CaseId" ).toString().substring( 0, mCase.get( "CaseId" ).toString().lastIndexOf( "." ) ) );
+				fileInterface.uploadFile( mCase.get( "CaseId" ).toString().substring( 0, mCase.get( "CaseId" ).toString().indexOf( "." ) ) );
 			}
 		} );
 

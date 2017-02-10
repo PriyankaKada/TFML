@@ -11,12 +11,12 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -34,6 +34,8 @@ import com.tmfl.adapter.ComplaintsToTrackListAdapter;
 import com.tmfl.auth.Constant;
 import com.tmfl.auth.TmflApi;
 import com.tmfl.common.ComplaintSoapApiService;
+import com.tmfl.complaintnetwork.XMLPullParser;
+import com.tmfl.complaintnetwork.createcase.response.ParsedResponse;
 import com.tmfl.complaintnetwork.findcase.request.FindCaseBody;
 import com.tmfl.complaintnetwork.findcase.request.FindCaseData;
 import com.tmfl.complaintnetwork.findcase.request.FindCaseRequestEnvelope;
@@ -94,7 +96,7 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 		public void onDateSet( DatePicker view, int year, int monthOfYear,
 		                       int dayOfMonth ) {
 			// txtAccDate.setText((dayOfMonth > 9 ? dayOfMonth : "0"+dayOfMonth) + "-" + ((monthOfYear + 1) > 9 ? (monthOfYear + 1) :("0"+(monthOfYear + 1))) + "-" + year);
-			txtFromDate.setText( ( dayOfMonth > 9 ? dayOfMonth : "0" + dayOfMonth ) + "-" + ( ( monthOfYear + 1 ) > 9 ? ( monthOfYear + 1 ) : ( "0" + ( monthOfYear + 1 ) ) ) + "-" + year );
+			txtFromDate.setText( year + "-" + ( ( monthOfYear + 1 ) > 9 ? ( monthOfYear + 1 ) : ( "0" + ( monthOfYear + 1 ) ) ) + "-" + ( dayOfMonth > 9 ? dayOfMonth : "0" + dayOfMonth ) );
 			//dob = ((monthOfYear + 1) > 9 ? (monthOfYear + 1) :("0"+(monthOfYear + 1))) + "/" + (dayOfMonth > 9 ? dayOfMonth : "0"+dayOfMonth) + "/" + year;
 		}
 	};
@@ -103,7 +105,7 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 		public void onDateSet( DatePicker view, int year, int monthOfYear,
 		                       int dayOfMonth ) {
 			// txtAccDate.setText((dayOfMonth > 9 ? dayOfMonth : "0"+dayOfMonth) + "-" + ((monthOfYear + 1) > 9 ? (monthOfYear + 1) :("0"+(monthOfYear + 1))) + "-" + year);
-			txtToDate.setText( ( dayOfMonth > 9 ? dayOfMonth : "0" + dayOfMonth ) + "-" + ( ( monthOfYear + 1 ) > 9 ? ( monthOfYear + 1 ) : ( "0" + ( monthOfYear + 1 ) ) ) + "-" + year );
+			txtToDate.setText( year + "-" + ( ( monthOfYear + 1 ) > 9 ? ( monthOfYear + 1 ) : ( "0" + ( monthOfYear + 1 ) ) ) + "-" + ( dayOfMonth > 9 ? dayOfMonth : "0" + dayOfMonth ) );
 			//dob = ((monthOfYear + 1) > 9 ? (monthOfYear + 1) :("0"+(monthOfYear + 1))) + "/" + (dayOfMonth > 9 ? dayOfMonth : "0"+dayOfMonth) + "/" + year;
 		}
 	};
@@ -164,7 +166,6 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 		txtDesc = ( TextView ) rootView.findViewById( R.id.txtDesc );
 		txtCaseStage = ( TextView ) rootView.findViewById( R.id.txtCaseStage );
 		imgUploadFile = ( ImageView ) rootView.findViewById( R.id.imgUploadFile );
-		fileDialog = new Dialog( getActivity() );
 
 		imgUploadFile.setOnClickListener( new View.OnClickListener() {
 			@Override
@@ -178,6 +179,7 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 		progressDialog.setCancelable( false );
 		progressDialog.setCanceledOnTouchOutside( false );
 
+		contractsModelList.add( "Select Contract" );
 		for ( int i = 0; i < activeContractsModel.getContracts().size(); i++ ) {
 			contractsModelList.add( activeContractsModel.getContracts().get( i ).getUsrConNo() );
 			Log.d( "contract no", contractsModelList.get( i ) + " " + activeContractsModel.getContracts().size() );
@@ -228,25 +230,27 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 				break;
 
 			case R.id.btnGo:
-				findCase();
+				if ( validate() ) {
+					findCase();
+				}
 				break;
 
 			case R.id.imgUploadFile1:
 				intent = new Intent( Intent.ACTION_GET_CONTENT );
-				intent.setType( "text/plain|image/*|application/pdf" );
+				intent.setType( "text/plain|image/*|application/*.pdf" );
 				startActivityForResult( intent, 1 );
 
 				break;
 
 			case R.id.imgUploadFile2:
 				intent = new Intent( Intent.ACTION_GET_CONTENT );
-				intent.setType( "text/plain|image/*|application/pdf" );
+				intent.setType( "text/plain|image/*|application/*.pdf" );
 				startActivityForResult( intent, 2 );
 				break;
 
 			case R.id.imgUploadFile3:
 				intent = new Intent( Intent.ACTION_GET_CONTENT );
-				intent.setType( "text/plain|image/*|application/pdf" );
+				intent.setType( "text/plain|image/*|application/*.pdf" );
 				startActivityForResult( intent, 3 );
 				break;
 
@@ -265,46 +269,35 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 
 	}
 
-	private void uploadDocs() {
+	private boolean validate() {
 
-		UploadDocRequestEnvelope requestEnvelope = new UploadDocRequestEnvelope();
-		UploadDocReqBody         reqBody         = new UploadDocReqBody();
-		UploadDocReqData         reqData         = new UploadDocReqData();
-
-		reqData.setCaseId( caseId );
-		reqData.setAttachFiles1( fileKeyValuePair1 );
-		reqData.setAttachFiles2( fileKeyValuePair2 );
-		reqData.setAttachFiles3( fileKeyValuePair3 );
-
-		reqBody.setUploadDocData( reqData );
-		requestEnvelope.setUploadDocReqBody( reqBody );
-
-		TmflApi apiService = ComplaintSoapApiService.getInstance().call();
-
-		progressDialog.show();
-		apiService.uploadDocRequest( requestEnvelope ).enqueue( new Callback< UploadDocResponseEnvelope >() {
-			@Override
-			public void onResponse( Call< UploadDocResponseEnvelope > call, Response< UploadDocResponseEnvelope > response ) {
-
-				progressDialog.dismiss();
-				Log.d( "success", response.body().getResponseBody().getResponse().getResult() );
-				fileDialog.dismiss();
-
-				txtComplainCaseId.setText( "" );
-				txtFromDate.setText( "" );
-				txtToDate.setText( "" );
+		if ( TextUtils.isEmpty( txtComplainCaseId.getText().toString().trim() ) ) {
+			if ( spnContractNo.getSelectedItemPosition() == 0 && TextUtils.isEmpty( txtFromDate.getText().toString().trim() ) && TextUtils.isEmpty( txtToDate.getText().toString().trim() ) ) {
+				txtComplainCaseId.setError( "Please enter Case Id!" );
+				return false;
 			}
-
-			@Override
-			public void onFailure( Call< UploadDocResponseEnvelope > call, Throwable t ) {
-
-				fileDialog.dismiss();
-				progressDialog.dismiss();
-				Log.d( "error", t.getMessage() );
-
+			else if ( spnContractNo.getSelectedItemPosition() == 0 ) {
+				Toast.makeText( getActivity(), "Please select Contract No!", Toast.LENGTH_SHORT ).show();
+//				txtComplainCaseId.setError( null );
+				return false;
 			}
-		} );
-
+			else if ( TextUtils.isEmpty( txtFromDate.getText().toString() ) ) {
+				txtFromDate.setError( "Please select From Date!" );
+//				txtComplainCaseId.setError( null );
+				return false;
+			}
+			else if ( TextUtils.isEmpty( txtToDate.getText().toString() ) ) {
+				txtToDate.setError( "Please select End Date!" );
+//				txtComplainCaseId.setError( null );
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+		else {
+			return true;
+		}
 
 	}
 
@@ -394,6 +387,11 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 
 				setCaseDetails( response.body().getFindCaseBody().getFindCaseResponse().getFindCaseResult() );
 
+				txtComplainCaseId.setText( "" );
+				txtFromDate.setText( "" );
+				spnContractNo.setSelection( 0 );
+				txtToDate.setText( "" );
+
 			}
 
 			@Override
@@ -403,6 +401,77 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 			}
 		} );
 
+	}
+
+	private void uploadDocs() {
+
+		UploadDocRequestEnvelope requestEnvelope = new UploadDocRequestEnvelope();
+		UploadDocReqBody         reqBody         = new UploadDocReqBody();
+		UploadDocReqData         reqData         = new UploadDocReqData();
+
+		reqData.setCaseId( caseId );
+		if ( fileKeyValuePair1.getKey() != null ) {
+			reqData.setAttachFiles1( fileKeyValuePair1 );
+		}
+		else {
+			reqData.setAttachFiles1( new FileKeyValuePair( "", "" ) );
+		}
+		if ( fileKeyValuePair2.getKey() != null ) {
+			reqData.setAttachFiles2( fileKeyValuePair2 );
+		}
+		else {
+			reqData.setAttachFiles2( new FileKeyValuePair( "", "" ) );
+		}
+		if ( fileKeyValuePair3.getKey() != null ) {
+			reqData.setAttachFiles3( fileKeyValuePair3 );
+		}
+		else {
+			reqData.setAttachFiles3( new FileKeyValuePair( "", "" ) );
+		}
+
+		reqBody.setUploadDocData( reqData );
+		requestEnvelope.setUploadDocReqBody( reqBody );
+
+		TmflApi apiService = ComplaintSoapApiService.getInstance().call();
+
+		progressDialog.show();
+		apiService.uploadDocRequest( requestEnvelope ).enqueue( new Callback< UploadDocResponseEnvelope >() {
+			@Override
+			public void onResponse( Call< UploadDocResponseEnvelope > call, Response< UploadDocResponseEnvelope > response ) {
+
+				progressDialog.dismiss();
+				Log.d( "success", response.body().getResponseBody().getResponse().getResult() );
+
+				XMLPullParser  xmlPullParser = new XMLPullParser( response.body().getResponseBody().getResponse().getResult() );
+				ParsedResponse caseFile      = xmlPullParser.parse();
+
+				if ( caseFile.getCaseFile().getResult().equalsIgnoreCase( "1" ) ) {
+					Toast.makeText( getActivity(), caseFile.getCaseFile().getMessage(), Toast.LENGTH_SHORT ).show();
+				}
+				else {
+					Toast.makeText( getActivity(), caseFile.getCaseFile().getMessage(), Toast.LENGTH_SHORT ).show();
+				}
+				fileDialog.dismiss();
+
+				txtComplainCaseId.setText( "" );
+				txtFromDate.setText( "" );
+				spnContractNo.setSelection( 0 );
+				txtToDate.setText( "" );
+			}
+
+			@Override
+			public void onFailure( Call< UploadDocResponseEnvelope > call, Throwable t ) {
+
+				fileDialog.dismiss();
+				progressDialog.dismiss();
+				Log.d( "error", t.getMessage() );
+
+				txtComplainCaseId.setText( "" );
+				txtFromDate.setText( "" );
+				spnContractNo.setSelection( 0 );
+				txtToDate.setText( "" );
+			}
+		} );
 	}
 
 	private void setCaseDetails( String findCaseResult ) {
@@ -418,12 +487,13 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 			if ( !caseResult.getCaseCount().equalsIgnoreCase( "0" ) ) {
 				llComplaintListHeader.setVisibility( View.VISIBLE );
 				if ( caseResult.getCase() instanceof List ) {
+					linearLayout.setVisibility( View.GONE );
 					list.setAdapter( new ComplaintsToTrackListAdapter( getActivity(), 0, ( List< LinkedTreeMap > ) caseResult.getCase(), this ) );
 				}
 				else {
 					LinkedTreeMap map = ( LinkedTreeMap ) caseResult.getCase();
 					linearLayout.setVisibility( View.VISIBLE );
-					txtCaseId.setText( map.get( "CaseId" ).toString() );
+					txtCaseId.setText( map.get( "CaseId" ).toString().substring( 0, map.get( "CaseId" ).toString().indexOf( "." ) ) );
 					txtCaseStage.setText( map.get( "Casestage" ).toString() );
 					txtDesc.setText( map.get( "Description" ).toString() );
 					txtReqComplaintDate.setText( map.get( "CreatedDate" ).toString() );
@@ -450,15 +520,15 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 	@Override
 	public void uploadFile( String mCase ) {
 
+		fileDialog = new Dialog( getActivity() );
 
-		caseId = mCase;
-		fileDialog.requestWindowFeature( Window.FEATURE_NO_TITLE );
 		fileDialog.setContentView( R.layout.dialog_upload_file );
 		fileDialog.getWindow().setLayout( MATCH_PARENT, WRAP_CONTENT );
 		fileDialog.setCancelable( false );
 
 		fileDialog.show();
 
+		caseId = mCase;
 		txtFileName1 = ( TextView ) fileDialog.findViewById( R.id.txtFileName1 );
 		txtFileName2 = ( TextView ) fileDialog.findViewById( R.id.txtFileName2 );
 		txtFileName3 = ( TextView ) fileDialog.findViewById( R.id.txtFileName3 );

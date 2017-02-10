@@ -1,4 +1,7 @@
-package com.tmfl.complaintnetwork.createcase.response;
+package com.tmfl.complaintnetwork;
+
+import com.tmfl.complaintnetwork.createcase.response.CaseFile;
+import com.tmfl.complaintnetwork.createcase.response.ParsedResponse;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -63,6 +66,9 @@ public class XMLPullParser {
 						}
 						else if ( tagname.equalsIgnoreCase( "Result" ) ) {
 							caseFile.setResult( text );
+						}
+						else if ( tagname.equalsIgnoreCase( "Error" ) ) {
+							caseFile.setError( text );
 						}
 
 						break;

@@ -162,7 +162,7 @@ public interface TmflApi {
 	Call< CreateCaseResponseEnvelope > createCaseRequest( @Body CreateCaseRequestEnvelope requestEnvelope );
 
 	@Headers( {
-			"SOAPAction : http://tempuri.org/CreateCase_CustOne",
+			"SOAPAction : http://tempuri.org/UploadDoc",
 			"Content-Type : text/xml; charset=utf-8"
 	} )
 	@POST( "CustOne_Case_Webservice?op=UploadDoc" )

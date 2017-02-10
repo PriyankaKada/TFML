@@ -25,9 +25,6 @@ public class ComplaintSubmitFeedbackFragment extends Fragment {
 
 		initView( view );
 
-		String id = getActivity().getIntent().getStringExtra( "caseId" );
-		txtReferenceNo.setText( "Your reference number is " + id );
-
 		return view;
 	}
 
@@ -35,7 +32,11 @@ public class ComplaintSubmitFeedbackFragment extends Fragment {
 		txtCallScript = ( TextView ) view.findViewById( R.id.txtCallScript );
 		txtReferenceNo = ( TextView ) view.findViewById( R.id.txtReferenceNo );
 
-		String textCallScript = "<font color=#f00>CallScript: </font>" + "<font color=#6D6D6D> " + getString( R.string.call_script ) + "</font>";
+		String id      = getArguments().getString( "caseId" );
+		String message = getArguments().getString( "message" );
+		txtReferenceNo.setText( "Your reference number is " + id );
+
+		String textCallScript = "<font color=#f00>CallScript: </font>" + "<font color=#6D6D6D> " + message + "</font>";
 		txtCallScript.setText( Html.fromHtml( textCallScript ) );
 	}
 }
