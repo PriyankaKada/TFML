@@ -34,6 +34,7 @@
     <string name="txt_individual">Individual</string>
     <string name="txt_organizational">Organization</string>
     <string name="txt_overdue">Overdue :</string>
+    <string name="txt_overdue_amt">Overdue Amt:</string>
     <string name="txt_vehicle_type">VEHICLE TYPE</string>
     <string name="txt_commercial">Commercial</string>
     <string name="txt_passenger">Passenger</string>

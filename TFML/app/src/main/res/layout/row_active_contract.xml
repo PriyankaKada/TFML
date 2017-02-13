@@ -40,15 +40,25 @@
                 android:layout_marginRight="3dp"
                 android:layout_weight="0.5"
                 android:background="#F26711"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="5dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_loan_ac_no."
+                    android:text="Loan A/C No. :"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:layout_gravity="center"
+
+                    />
 
                 <TextView
                     android:id="@+id/txt_contract_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:padding="10dp"
                     android:text=""
                     android:textColor="@color/white"
                     android:textSize="15sp"/>
@@ -61,7 +71,8 @@
                 android:layout_marginLeft="3dp"
                 android:layout_weight="0.5"
                 android:background="#F39C11"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -122,7 +133,7 @@
                         android:id="@+id/txt_next_due_date_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Due\nDate : "
+                        android:text="Next \nDue Date : "
                         android:textColor="@android:color/black"/>
 
                     <TextView
@@ -224,7 +235,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="@string/txt_overdue"
+                        android:text="@string/txt_overdue_amt"
                         android:textColor="@android:color/black"/>
 
                     <TextView
@@ -280,7 +291,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="Expenses : "
+                        android:text="O/S Expenses : "
                         android:textColor="@android:color/black"/>
 
                     <TextView
@@ -305,7 +316,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="ODC : "
+                        android:text="Net Overdue \nInterest : "
                         android:textColor="@android:color/black"/>
 
                     <TextView

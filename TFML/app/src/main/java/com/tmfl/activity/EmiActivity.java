@@ -81,7 +81,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 
 			case Constant.EMI_PATTERN:
 
-				txtEmiName.setText( "EMI Pattern" );
+				txtEmiName.setText( "EMI Schedule" );
 				PreferenceHelper.insertBoolean( Constant.SHOW_RECEIPT, false );
 				viewPager.setCurrentItem( 0, true );
 
@@ -110,7 +110,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 
 			case Constant.RECEIPT:
 
-				txtEmiName.setText( "EMI Pattern" );
+				txtEmiName.setText( "EMI Schedule" );
 				PreferenceHelper.insertBoolean( Constant.SHOW_RECEIPT, true );
 				viewPager.setCurrentItem( 0, true );
 

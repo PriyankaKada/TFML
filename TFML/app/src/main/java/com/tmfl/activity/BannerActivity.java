@@ -18,6 +18,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -71,12 +72,13 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 	ImageView  imgRefreshOtp;
 	EasyDialog dialog;
 	EditText   edtQuickCall, edtOtpNo;
+	CheckBox checkBox;
 	QuickCallInputModel quickCallInputModel;
 	int count = 0;
 	ComplaintsFragment complaintsFragment;
 	FrameLayout        containerFrameLayout;
 	private BannerFragment bannerFragment;
-	private ImageView      imgQuickCall, imgSocial;
+	private ImageView      imgQuickCall;
 	private TextView    txtTitle;
 	private ImageView[] dots;
 	private int         dotsCount;
@@ -94,7 +96,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 
 		mToolbar = ( Toolbar ) findViewById( R.id.toolbar );
 		imgQuickCall = ( ImageView ) findViewById( R.id.imgQuickCall );
-		imgSocial = ( ImageView ) findViewById( R.id.imgSocial );
+		//imgSocial = ( ImageView ) findViewById( R.id.imgSocial );
 		txtTitle = ( TextView ) findViewById( R.id.txtTitle );
 		txtSchemes = ( TextView ) findViewById( R.id.txtSchemes );
 		txtApplyLoan = ( TextView ) findViewById( R.id.txtApplyLoan );
@@ -114,6 +116,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		linLoanStaus = ( LinearLayout ) findViewById( R.id.linLoanStaus );
 		linLogin = ( LinearLayout ) findViewById( R.id.linLogin );
 		linQuickCall = ( LinearLayout ) findViewById( R.id.linQuickCall );
+		checkBox=(CheckBox ) findViewById( R.id.chkTermsCond ) ;
 
 		containerFrameLayout = ( FrameLayout ) findViewById( R.id.frame_complaint_container );
 		complaintsFragment = new ComplaintsFragment();
@@ -134,8 +137,8 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		SetFonts.setFonts( this, txtLogin, 2 );
 		loadBannerData();
 		imgQuickCall.setOnClickListener( this );
-		imgSocial.setOnClickListener( this );
-		imgSocial.setVisibility( View.VISIBLE );
+		//imgSocial.setOnClickListener( this );
+		//imgSocial.setVisibility( View.GONE );
 		linSchemes.setOnClickListener( this );
 		linApplyLoan.setOnClickListener( this );
 		linReferFriend.setOnClickListener( this );
@@ -246,9 +249,9 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				quickCallDialog();
 				break;
 
-			case R.id.imgSocial:
+			/*case R.id.imgSocial:
 				socialDialog();
-				break;
+				break;*/
 			case R.id.llSchemes:
 
 				view1.setVisibility( View.GONE );
@@ -387,6 +390,11 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				if ( TextUtils.isEmpty( edtOtpNo.getText().toString() ) ) {
 					Toast.makeText( BannerActivity.this, "Please Enter OTP Number", Toast.LENGTH_SHORT ).show();
 				}
+
+				if ( !checkBox.isChecked() ) {
+					Toast.makeText( BannerActivity.this, "You must agree to the terms first!", Toast.LENGTH_SHORT ).show();
+
+				}
 				if ( !TextUtils.isEmpty( edtQuickCall.getText().toString() ) && !TextUtils.isEmpty( edtOtpNo.getText().toString() ) ) {
 					LoanStatusInputModel loanStatusInputModel = new LoanStatusInputModel();
 					loanStatusInputModel.setOtpNumber( edtOtpNo.getText().toString() );
@@ -463,7 +471,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 	}
 
 	public void socialDialog() {
-		imgSocial.setVisibility( View.INVISIBLE );
+		//imgSocial.setVisibility( View.INVISIBLE );
 		final Dialog socialdialog = new Dialog( BannerActivity.this, android.R.style.Theme_Holo_Dialog_NoActionBar );
 		socialdialog.getWindow().setBackgroundDrawable( new ColorDrawable( android.graphics.Color.TRANSPARENT ) );
 		socialdialog.setContentView( R.layout.dialog_social );
@@ -491,7 +499,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 			@Override
 			public void onClick( View v ) {
 				socialdialog.dismiss();
-				imgSocial.setVisibility( View.VISIBLE );
+				//imgSocial.setVisibility( View.VISIBLE );
 			}
 		} );
 		imgMessage.setOnClickListener( new View.OnClickListener() {
@@ -517,7 +525,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 			public void onClick( View v ) {
 				startActivity( new Intent( BannerActivity.this, LocateUsActivity.class ) );
 				socialdialog.dismiss();
-				imgSocial.setVisibility( View.VISIBLE );
+				//imgSocial.setVisibility( View.VISIBLE );
 			}
 		} );
 
@@ -525,7 +533,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		socialdialog.setOnCancelListener( new DialogInterface.OnCancelListener() {
 			@Override
 			public void onCancel( DialogInterface dialog ) {
-				imgSocial.setVisibility( View.VISIBLE );
+				//imgSocial.setVisibility( View.VISIBLE );
 			}
 		} );
 

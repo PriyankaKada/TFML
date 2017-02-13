@@ -47,7 +47,7 @@ public class DrawerBaseActivity extends BaseActivity {
 	LogoutResponseModel   logoutResponseModel;
 	TmflApi               tmflApi;
 	String TITLES[] = { "New Offers", "Apply Loan", "Refer Friend", "Downloads",
-			"Change Password", "Logout", "Contact Us", "Phone Call", "WhatsApp Call", "Mail Us", "Locate us" };
+			"Change Password", "Logout", "Contact Us", "Toll-free Number", "WhatsApp", "Mail Us", "Locate us" };
 	int    ICONS[]  = { R.drawable.ic_scheme_selected, R.drawable.ic_apply_loan_selected, R.drawable.ic_refer_friends_selected,
 			R.drawable.ic_download, R.drawable.ic_change_pass_selected, R.drawable.ic_logout,
 			R.drawable.ic_checked, R.drawable.ic_call_non_selected, R.drawable.icon_whatsapp,
