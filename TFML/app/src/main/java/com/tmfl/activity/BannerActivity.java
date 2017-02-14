@@ -322,9 +322,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				view2.setVisibility( View.GONE );
 				view3.setVisibility( View.GONE );
 				view4.setVisibility( View.GONE );
-
 				quickCallDialog();
-
 				break;
 		}
 	}

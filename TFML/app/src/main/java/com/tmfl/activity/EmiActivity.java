@@ -151,7 +151,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 				switch ( position ) {
 
 					case 0:
-						txtEmiName.setText( "EMI Pattern" );
+						txtEmiName.setText( "EMI Schedule" );
 						view1.setBackgroundResource( R.drawable.selector_tab_indicator_white );
 						view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
@@ -223,7 +223,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 	public void setupTabIcon() {
 
 		TextView tabOne = ( TextView ) LayoutInflater.from( this ).inflate( R.layout.custom_tab, null );
-		tabOne.setText( "EMI Pattern" );
+		tabOne.setText( "EMI Schedule" );
 		SetFonts.setFonts( this, tabOne, 2 );
 		emiTabLayout.getTabAt( 0 ).setCustomView( tabOne );
 

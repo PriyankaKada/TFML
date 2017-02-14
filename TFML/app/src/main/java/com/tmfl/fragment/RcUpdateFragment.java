@@ -209,9 +209,9 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 	private void setData( ContractModel model ) {
 		txt_rc_update_no.setText( model.getRcNumber() == null ? "" : model.getRcNumber().toString() );
 		txt_duedate.setText( model.getDueDate() == null ? "" : model.getDueDate().toString() );
-		txt_emiamount.setText( model.getDueAmount() == null ? "" : "Rs. " + model.getDueAmount().toString() );
+		txt_emiamount.setText( model.getDueAmount() == null ? "Rs. 0" : "Rs." + model.getDueAmount().toString() );
 		txt_repaymentmode.setText( model.getPdcFlag() == null ? "" : model.getPdcFlag().toString() );
-		txt_dueamount.setText( model.getOdAmt() == null ? "" : "Rs." + model.getOdAmt().toString() );
+		txt_dueamount.setText( model.getOdAmt() == null ? "Rs. 0" : "Rs." + model.getOdAmt().toString() );
 	}
 
 	@Override

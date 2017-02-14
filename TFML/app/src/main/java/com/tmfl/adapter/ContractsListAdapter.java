@@ -115,10 +115,10 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 				totalDueAmount = Double.parseDouble( model.getTotalCurrentDue() );
 			}
 
-			txtTotalDueAmount.setText( model.getTotalCurrentDue() == null ? "" : String.valueOf( ( int ) totalDueAmount ) );
+			txtTotalDueAmount.setText( model.getTotalCurrentDue() == null ? "Rs. 0" : "Rs." + String.valueOf( ( int ) totalDueAmount ) );
 
 			txtODC.setText( model.getOdcCollectioAmount() );
-			txtExpenses.setText( model.getTotalExpenses() );
+			txtExpenses.setText( model.getTotalExpenses() == null? "Rs. 0":"Rs." + model.getTotalExpenses());
 			Log.e( "DueAmount", model.getDueAmount().toString() );
 			Log.e( "TDueAmount", txt_current_emi_amount.getText().toString() );
 

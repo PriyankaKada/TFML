@@ -54,6 +54,7 @@
     <string name="txt_terminated">Terminated</string>
     <string name="txt_live">Live</string>
     <string name="txt_due_date">Due Date :</string>
+    <string name="txt_next_due_date">Next \nDue Date :</string>
     <string name="txt_emi_amount">EMI Amount :</string>
     <string name="txt_repayment_mode">Repayment Mode :</string>
     <string name="hint_txt_rc_number">*Enter RC Number</string>

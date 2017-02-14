@@ -282,9 +282,9 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 		txt_rc_no.setText( model.getRcNumber() == null ? "" : model.getRcNumber().toString() );
 		txt_duedate.setText( model.getDueDate() == null ? "" : model.getDueDate().toString() );
 		// txt_dueamount.setText(model.getDueAmount()==null?"":"Rs. "+model.getDueAmount().toString());
-		txt_emiamount.setText( model.getDueAmount() == null ? "" : "Rs." + model.getDueAmount().toString() );
+		txt_emiamount.setText( model.getDueAmount() == null ? "Rs. 0" : "Rs." + model.getDueAmount().toString() );
 		txt_repaymentmode.setText( model.getPdcFlag() == null ? "" : model.getPdcFlag() );
-		txt_dueamount.setText( model.getOdAmt() == null ? "" : "Rs." + model.getOdAmt() );
+		txt_dueamount.setText( model.getOdAmt() == null ? "Rs. 0" : "Rs." + model.getOdAmt() );
 
 	}
 

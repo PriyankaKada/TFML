@@ -9,14 +9,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="1">
+       >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Loan A/C No. :"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:background="#F26711"
+            />
 
         <Spinner
             android:id="@+id/spnContractNo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_weight="0.5"
+            android:layout_weight="0.7"
             android:background="@drawable/selector_spinner"
             android:drawSelectorOnTop="false"
             android:gravity="left"
@@ -31,7 +43,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:background="#F39C11"
             android:orientation="horizontal"
             android:padding="10dp">
@@ -79,8 +91,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/txt_due_date"
+
+                    android:text="@string/txt_next_due_date"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
@@ -139,8 +151,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/txt_overdue"
+                    android:text="@string/txt_overdue_amt"
                     android:textSize="13sp"
                     android:textStyle="bold"/>
 
