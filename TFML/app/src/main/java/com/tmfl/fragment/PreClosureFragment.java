@@ -37,6 +37,8 @@ import com.tmfl.model.logResponseModel.LogInputModel;
 import com.tmfl.model.logResponseModel.LogResponseModel;
 import com.tmfl.model.preClosurePdfResponseModel.PreClosureInputModel;
 import com.tmfl.model.preClosurePdfResponseModel.PreClosureStmtPdfResponse;
+import com.tmfl.model.soapModel.preClosureRequest.ReqBody;
+import com.tmfl.model.soapModel.preClosureRequest.ReqData;
 import com.tmfl.model.soapModel.preClosureRequest.RequestEnvelope;
 import com.tmfl.model.soapModel.preClousreResponse.ResponseEnvelope;
 import com.tmfl.model.soapModel.preClousreResponse.ResponseEnvelope.Body;
@@ -323,19 +325,31 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 		args.putInt( "month", calender.get( Calendar.MONTH ) );
 		args.putInt( "day", calender.get( Calendar.DAY_OF_MONTH ) );
 		date.setArguments( args );
+
 		/**
 		 * Set Call back to capture selected date
 		 */
+
 		date.setCallBack( ondate, "preclosure" );
 		date.show( getFragmentManager(), "Date Picker" );
 	}
 
 	public void callSoapDataRequest() {
-		final RequestEnvelope                              requestEnvelope = new RequestEnvelope();
-		com.tmfl.model.soapModel.preClosureRequest.ReqBody reqBody         = new com.tmfl.model.soapModel.preClosureRequest.ReqBody();
-		com.tmfl.model.soapModel.preClosureRequest.ReqData reqData         = new com.tmfl.model.soapModel.preClosureRequest.ReqData();
+		final RequestEnvelope requestEnvelope = new RequestEnvelope();
+		ReqBody               reqBody         = new ReqBody();
+		ReqData               reqData         = new ReqData();
 		strContractNo = spnContractNo.getSelectedItem().toString();
-		reqData.setContactId( spnContractNo.getSelectedItem().toString() );
+
+		int    zeroCount = 16 - strContractNo.length();
+		String zero      = "";
+
+		for ( int i = 0; i < zeroCount; i++ ) {
+			zero = zero + "0";
+		}
+
+		Log.d( "zeros", zero );
+		strContractNo = zero + strContractNo;
+		reqData.setContactId( strContractNo );
 		reqData.setAdustSd( "R" );
 		reqData.setReqDate( txtAccDate.getText().toString() );
 		reqBody.setReqData( reqData );
@@ -354,7 +368,6 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 					ResponseEnvelope.Z_TERMINALDUESResponse z_terminalduesResponse = new ResponseEnvelope.Z_TERMINALDUESResponse();
 					List< ResponseEnvelope.Item >           items                  = new ArrayList< ResponseEnvelope.Item >();
 
-
 					List< String > stringList = new ArrayList< String >();
 					if ( responseEnvelope != null ) {
 						for ( int i = 0; i < responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().size(); i++ ) {
@@ -368,7 +381,6 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 							else {
 								stringList.add( responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( i ).getDESCP() );
 							}
-
 						}
 
 						z_terminalduesResponse.setI_DTL( items );
@@ -377,15 +389,11 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 							Log.e( "String", "" + s );
 						}
 						lstPreClosure.setAdapter( new PreClosureAdapter( getActivity(), dummy ) );
-
-
 					}
 
 					linTable.setVisibility( View.VISIBLE );
 					llHeader.setVisibility( View.VISIBLE );
 				}
-
-
 			}
 
 			@Override
@@ -433,8 +441,6 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 				txtGenDate.setText( "Generated On " + newDate + "|" + strTime );
 				txtBal.setText( getActivity().getResources().getString( R.string.txt_total_bal ) + " " + strDate );
 				callSoapDataRequest();
-
-
 			}
 			else {
 				Toast.makeText( getActivity(), "Please Select Date", Toast.LENGTH_SHORT ).show();
@@ -469,7 +475,6 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 						getActivity().finish();
 					}
 				}
-
 			}
 
 			@Override
@@ -510,7 +515,5 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 				Log.e( "ERROR", t.getMessage() );
 			}
 		} );
-
-
 	}
 }

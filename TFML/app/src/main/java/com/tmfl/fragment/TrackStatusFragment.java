@@ -87,36 +87,37 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 	ImageView imgFile1, imgFile2, imgFile3, imgUploadFile;
 	FileKeyValuePair fileKeyValuePair1, fileKeyValuePair2, fileKeyValuePair3;
 	File   file;
-	String path;
+	String path, startDate, endDate;
 	byte[] fileByte;
 	String base64File;
 	Uri    uri;
+
 	OnDateSetListener fromDate = new OnDateSetListener() {
 		@Override
-		public void onDateSet( DatePicker view, int year, int monthOfYear,
-		                       int dayOfMonth ) {
+		public void onDateSet( DatePicker view, int year, int monthOfYear, int dayOfMonth ) {
 			// txtAccDate.setText((dayOfMonth > 9 ? dayOfMonth : "0"+dayOfMonth) + "-" + ((monthOfYear + 1) > 9 ? (monthOfYear + 1) :("0"+(monthOfYear + 1))) + "-" + year);
-			txtFromDate.setText( year + "-" + ( ( monthOfYear + 1 ) > 9 ? ( monthOfYear + 1 ) : ( "0" + ( monthOfYear + 1 ) ) ) + "-" + ( dayOfMonth > 9 ? dayOfMonth : "0" + dayOfMonth ) );
+			txtFromDate.setText( ( dayOfMonth > 9 ? dayOfMonth : "0" + dayOfMonth ) + "-" + ( ( monthOfYear + 1 ) > 9 ? ( monthOfYear + 1 ) : ( "0" + ( monthOfYear + 1 ) ) ) + "-" + year );
+			startDate = year + "-" + ( ( monthOfYear + 1 ) > 9 ? ( monthOfYear + 1 ) : ( "0" + ( monthOfYear + 1 ) ) ) + "-" + ( dayOfMonth > 9 ? dayOfMonth : "0" + dayOfMonth );
 			//dob = ((monthOfYear + 1) > 9 ? (monthOfYear + 1) :("0"+(monthOfYear + 1))) + "/" + (dayOfMonth > 9 ? dayOfMonth : "0"+dayOfMonth) + "/" + year;
 		}
 	};
-	OnDateSetListener toDate   = new OnDateSetListener() {
+
+	OnDateSetListener toDate = new OnDateSetListener() {
 		@Override
-		public void onDateSet( DatePicker view, int year, int monthOfYear,
-		                       int dayOfMonth ) {
+		public void onDateSet( DatePicker view, int year, int monthOfYear, int dayOfMonth ) {
 			// txtAccDate.setText((dayOfMonth > 9 ? dayOfMonth : "0"+dayOfMonth) + "-" + ((monthOfYear + 1) > 9 ? (monthOfYear + 1) :("0"+(monthOfYear + 1))) + "-" + year);
-			txtToDate.setText( year + "-" + ( ( monthOfYear + 1 ) > 9 ? ( monthOfYear + 1 ) : ( "0" + ( monthOfYear + 1 ) ) ) + "-" + ( dayOfMonth > 9 ? dayOfMonth : "0" + dayOfMonth ) );
+			txtToDate.setText( ( dayOfMonth > 9 ? dayOfMonth : "0" + dayOfMonth ) + "-" + ( ( monthOfYear + 1 ) > 9 ? ( monthOfYear + 1 ) : ( "0" + ( monthOfYear + 1 ) ) ) + "-" + year );
+			endDate = year + "-" + ( ( monthOfYear + 1 ) > 9 ? ( monthOfYear + 1 ) : ( "0" + ( monthOfYear + 1 ) ) ) + "-" + ( dayOfMonth > 9 ? dayOfMonth : "0" + dayOfMonth );
 			//dob = ((monthOfYear + 1) > 9 ? (monthOfYear + 1) :("0"+(monthOfYear + 1))) + "/" + (dayOfMonth > 9 ? dayOfMonth : "0"+dayOfMonth) + "/" + year;
 		}
 	};
+
 	private TextView txtCaseId, txtReqComplaintDate, txtDesc, txtCaseStage, txtUploadFile;
-	private Button               btnGo;
-	private DatePickerFragment   date;
-	private ActiveContractsModel activeContractsModel;
-	private ArrayList< String >  contractsModelList;
-	private ProgressDialog       progressDialog;
-	private String               caseId;
-	private LinearLayout         linearLayout;
+	private Button             btnGo;
+	private DatePickerFragment date;
+	private ProgressDialog     progressDialog;
+	private String             caseId;
+	private LinearLayout       linearLayout;
 
 	public static byte[] convertFileToByteArray( File f ) {
 		byte[] byteArray = null;
@@ -152,8 +153,8 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 		list = ( ListView ) rootView.findViewById( R.id.lstComplaints );
 		spnContractNo = ( Spinner ) rootView.findViewById( R.id.spnContractNo );
 
-		activeContractsModel = ( ActiveContractsModel ) PreferenceHelper.getObject( Constant.ONGOING_LOAN, ActiveContractsModel.class );
-		contractsModelList = new ArrayList<>();
+		ActiveContractsModel activeContractsModel = ( ActiveContractsModel ) PreferenceHelper.getObject( Constant.ONGOING_LOAN, ActiveContractsModel.class );
+		ArrayList< String >  contractsModelList   = new ArrayList<>();
 
 		linearLayout = ( LinearLayout ) rootView.findViewById( R.id.llRow );
 
@@ -239,13 +240,14 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 			case R.id.imgUploadFile1:
 				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
 					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
+					intent.putExtra( "CONTENT_TYPE", "text/plain|image/*|application/*.pdf" );
 					intent.addCategory( Intent.CATEGORY_DEFAULT );
 				}
 				else {
 					intent = new Intent( Intent.ACTION_GET_CONTENT );
+					intent.setType( "text/plain|image/*|application/*.pdf" );
 					intent.addCategory( Intent.CATEGORY_OPENABLE );
 				}
-				intent.setType( "text/plain|image/*|application/*.pdf" );
 				startActivityForResult( intent, 1 );
 
 				break;
@@ -253,10 +255,12 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 			case R.id.imgUploadFile2:
 				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
 					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
+					intent.putExtra( "CONTENT_TYPE", "text/plain|image/*|application/*.pdf" );
 					intent.addCategory( Intent.CATEGORY_DEFAULT );
 				}
 				else {
 					intent = new Intent( Intent.ACTION_GET_CONTENT );
+					intent.setType( "text/plain|image/*|application/*.pdf" );
 					intent.addCategory( Intent.CATEGORY_OPENABLE );
 				}
 				intent.setType( "text/plain|image/*|application/*.pdf" );
@@ -266,10 +270,12 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 			case R.id.imgUploadFile3:
 				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
 					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
+					intent.putExtra( "CONTENT_TYPE", "text/plain|image/*|application/*.pdf" );
 					intent.addCategory( Intent.CATEGORY_DEFAULT );
 				}
 				else {
 					intent = new Intent( Intent.ACTION_GET_CONTENT );
+					intent.setType( "text/plain|image/*|application/*.pdf" );
 					intent.addCategory( Intent.CATEGORY_OPENABLE );
 				}
 				intent.setType( "text/plain|image/*|application/*.pdf" );
@@ -390,8 +396,8 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 		else {
 			findCaseReqData.setCaseId( "" );
 			findCaseReqData.setContractNo( spnContractNo.getSelectedItem().toString() );
-			findCaseReqData.setStartDate( txtFromDate.getText().toString() );
-			findCaseReqData.setEndDate( txtToDate.getText().toString() );
+			findCaseReqData.setStartDate( startDate );
+			findCaseReqData.setEndDate( endDate );
 		}
 
 		findCaseReqBody.setReqData( findCaseReqData );
