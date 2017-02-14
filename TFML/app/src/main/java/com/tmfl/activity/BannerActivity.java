@@ -72,17 +72,17 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 	ImageView  imgRefreshOtp;
 	EasyDialog dialog;
 	EditText   edtQuickCall, edtOtpNo;
-	CheckBox checkBox;
+	CheckBox            checkBox;
 	QuickCallInputModel quickCallInputModel;
 	int count = 0;
 	ComplaintsFragment complaintsFragment;
 	FrameLayout        containerFrameLayout;
 	private BannerFragment bannerFragment;
 	private ImageView      imgQuickCall;
-	private TextView    txtTitle;
-	private ImageView[] dots;
-	private int         dotsCount;
-	private TextView    txtSchemes, txtApplyLoan, txtReferFriend, txtLoanStatus, txtLogin;
+	private TextView       txtTitle;
+	private ImageView[]    dots;
+	private int            dotsCount;
+	private TextView       txtSchemes, txtApplyLoan, txtReferFriend, txtLoanStatus, txtLogin;
 	private ImageView imgSchemes, imgApplyLoan, imgReferFriend, imgLoanStatus, imgLogin;
 	private Timer timer;
 
@@ -116,7 +116,6 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		linLoanStaus = ( LinearLayout ) findViewById( R.id.linLoanStaus );
 		linLogin = ( LinearLayout ) findViewById( R.id.linLogin );
 		linQuickCall = ( LinearLayout ) findViewById( R.id.linQuickCall );
-		checkBox=(CheckBox ) findViewById( R.id.chkTermsCond ) ;
 
 		containerFrameLayout = ( FrameLayout ) findViewById( R.id.frame_complaint_container );
 		complaintsFragment = new ComplaintsFragment();
@@ -315,6 +314,18 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				}
 
 				break;
+
+			case R.id.imgQuickCall:
+
+				view5.setVisibility( View.VISIBLE );
+				view1.setVisibility( View.GONE );
+				view2.setVisibility( View.GONE );
+				view3.setVisibility( View.GONE );
+				view4.setVisibility( View.GONE );
+
+				quickCallDialog();
+
+				break;
 		}
 	}
 
@@ -350,6 +361,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		imgRefreshOtp = ( ImageView ) view.findViewById( R.id.img_Refresh_token );
 		imgRefreshOtp.setOnClickListener( this );
 		TextView txtSubmit = ( TextView ) view.findViewById( R.id.txt_submit );
+		checkBox = ( CheckBox ) view.findViewById( R.id.chkTermsCond );
 
 		edtQuickCall.addTextChangedListener( new TextWatcher() {
 			@Override

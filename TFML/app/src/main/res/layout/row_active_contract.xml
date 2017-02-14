@@ -44,13 +44,13 @@
                 android:padding="5dp">
 
                 <TextView
+                    android:id="@+id/txt_loan_ac_no."
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txt_loan_ac_no."
+                    android:layout_gravity="center"
                     android:text="Loan A/C No. :"
                     android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:layout_gravity="center"
+                    android:textSize="13sp"
 
                     />
 
@@ -61,7 +61,7 @@
                     android:layout_gravity="center"
                     android:text=""
                     android:textColor="@color/white"
-                    android:textSize="15sp"/>
+                    android:textSize="13sp"/>
 
             </LinearLayout>
 
@@ -72,7 +72,7 @@
                 android:layout_weight="0.5"
                 android:background="#F39C11"
                 android:orientation="horizontal"
-                android:padding="5dp">
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -81,7 +81,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="RC No. : "
                     android:textColor="@color/white"
-                    android:textSize="14sp"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/txt_rc_no"
@@ -90,7 +90,7 @@
                     android:layout_gravity="center"
                     android:text="xyz"
                     android:textColor="@color/white"
-                    android:textSize="15sp"/>
+                    android:textSize="13sp"/>
 
             </LinearLayout>
         </LinearLayout>
@@ -134,13 +134,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Next \nDue Date : "
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"/>
 
                     <TextView
                         android:id="@+id/txt_next_due_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         />
                 </LinearLayout>
 
@@ -156,13 +157,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Inst.\nAmount : "
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"/>
 
                     <TextView
                         android:id="@+id/txt_current_emi_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         />
 
                 </LinearLayout>
@@ -179,7 +181,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="Last Payment :"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"/>
 
                 <TextView
                     android:id="@+id/txt_last_payment_date"
@@ -187,7 +190,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     />
             </LinearLayout>
 
@@ -236,7 +239,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="@string/txt_overdue_amt"
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"/>
 
                     <TextView
                         android:id="@+id/txt_overdue_amount"
@@ -244,7 +248,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
-                        android:textSize="15sp"/>
+                        android:textSize="14sp"/>
 
                 </LinearLayout>
 
@@ -260,7 +264,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="Repayment\nMode :"
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"/>
 
                     <TextView
                         android:id="@+id/txt_repayment_mode"
@@ -269,7 +274,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
                         android:text="Waiver"
-                        android:textSize="15sp"/>
+                        android:textSize="14sp"/>
 
                 </LinearLayout>
 
@@ -292,7 +297,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="O/S Expenses : "
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"/>
 
                     <TextView
                         android:id="@+id/txtExpenses"
@@ -301,7 +307,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
                         android:text=""
-                        android:textSize="15sp"/>
+                        android:textSize="14sp"/>
 
                 </LinearLayout>
 
@@ -317,7 +323,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="Net Overdue \nInterest : "
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp"/>
 
                     <TextView
                         android:id="@+id/txtODC"
@@ -326,7 +333,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
                         android:text=""
-                        android:textSize="15sp"/>
+                        android:textSize="14sp"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -342,7 +349,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="Total Due Amount :"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"/>
 
                 <TextView
                     android:id="@+id/txtTotalDueAmount"
@@ -350,7 +358,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     />
             </LinearLayout>
 
@@ -398,7 +406,7 @@
                  android:layout_height="wrap_content"
                  android:layout_alignBaseline="@+id/txt_current_emi_label"
                  android:layout_alignParentRight="true"
-                 android:textSize="15sp"
+                 android:textSize="14sp"
                  />
 
              <TextView

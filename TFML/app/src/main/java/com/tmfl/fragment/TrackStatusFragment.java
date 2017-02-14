@@ -218,7 +218,8 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 	@Override
 	public void onClick( View view ) {
 
-		Intent intent = new Intent();
+		Intent intent       = new Intent();
+		String manufactures = android.os.Build.MANUFACTURER;
 
 		switch ( view.getId() ) {
 			case R.id.txtFromDate:
@@ -236,20 +237,35 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 				break;
 
 			case R.id.imgUploadFile1:
-				intent = new Intent( Intent.ACTION_GET_CONTENT );
+				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
+					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
+				}
+				else {
+					intent = new Intent( Intent.ACTION_GET_CONTENT );
+				}
 				intent.setType( "text/plain|image/*|application/*.pdf" );
 				startActivityForResult( intent, 1 );
 
 				break;
 
 			case R.id.imgUploadFile2:
-				intent = new Intent( Intent.ACTION_GET_CONTENT );
+				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
+					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
+				}
+				else {
+					intent = new Intent( Intent.ACTION_GET_CONTENT );
+				}
 				intent.setType( "text/plain|image/*|application/*.pdf" );
 				startActivityForResult( intent, 2 );
 				break;
 
 			case R.id.imgUploadFile3:
-				intent = new Intent( Intent.ACTION_GET_CONTENT );
+				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
+					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
+				}
+				else {
+					intent = new Intent( Intent.ACTION_GET_CONTENT );
+				}
 				intent.setType( "text/plain|image/*|application/*.pdf" );
 				startActivityForResult( intent, 3 );
 				break;

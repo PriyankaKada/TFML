@@ -146,6 +146,8 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 	@Override
 	public void onClick( View view ) {
 		Intent intent;
+		String manufactures = android.os.Build.MANUFACTURER;
+
 		switch ( view.getId() ) {
 
 			case R.id.btnSubmit:
@@ -158,7 +160,12 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 
 			case R.id.imgUpload1:
 
-				intent = new Intent( Intent.ACTION_GET_CONTENT );
+				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
+					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
+				}
+				else {
+					intent = new Intent( Intent.ACTION_GET_CONTENT );
+				}
 				intent.setType( "text/plain|image/*|application/*.pdf" );
 				intent.addCategory( Intent.CATEGORY_OPENABLE );
 				startActivityForResult( intent, 1 );
@@ -167,7 +174,12 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 
 			case R.id.imgUpload2:
 
-				intent = new Intent( Intent.ACTION_GET_CONTENT );
+				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
+					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
+				}
+				else {
+					intent = new Intent( Intent.ACTION_GET_CONTENT );
+				}
 				intent.setType( "text/plain|image/*|application/*.pdf" );
 				intent.addCategory( Intent.CATEGORY_OPENABLE );
 				startActivityForResult( intent, 2 );
@@ -176,7 +188,12 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 
 			case R.id.imgUpload3:
 
-				intent = new Intent( Intent.ACTION_GET_CONTENT );
+				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
+					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
+				}
+				else {
+					intent = new Intent( Intent.ACTION_GET_CONTENT );
+				}
 				intent.setType( "text/plain|image/*|application/*.pdf" );
 				intent.addCategory( Intent.CATEGORY_OPENABLE );
 				startActivityForResult( intent, 3 );
