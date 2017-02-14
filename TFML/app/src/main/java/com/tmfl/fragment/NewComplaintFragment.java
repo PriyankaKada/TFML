@@ -162,12 +162,14 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 
 				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
 					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
+					intent.putExtra( "CONTENT_TYPE", "text/plain|image/*|application/*.pdf" );
+					intent.addCategory( Intent.CATEGORY_DEFAULT );
 				}
 				else {
 					intent = new Intent( Intent.ACTION_GET_CONTENT );
+					intent.setType( "text/plain|image/*|application/*.pdf" );
+					intent.addCategory( Intent.CATEGORY_OPENABLE );
 				}
-				intent.setType( "text/plain|image/*|application/*.pdf" );
-				intent.addCategory( Intent.CATEGORY_OPENABLE );
 				startActivityForResult( intent, 1 );
 
 				break;
@@ -176,12 +178,14 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 
 				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
 					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
+					intent.putExtra( "CONTENT_TYPE", "text/plain|image/*|application/*.pdf" );
+					intent.addCategory( Intent.CATEGORY_DEFAULT );
 				}
 				else {
 					intent = new Intent( Intent.ACTION_GET_CONTENT );
+					intent.setType( "text/plain|image/*|application/*.pdf" );
+					intent.addCategory( Intent.CATEGORY_OPENABLE );
 				}
-				intent.setType( "text/plain|image/*|application/*.pdf" );
-				intent.addCategory( Intent.CATEGORY_OPENABLE );
 				startActivityForResult( intent, 2 );
 
 				break;
@@ -190,12 +194,14 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 
 				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
 					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
+					intent.putExtra( "CONTENT_TYPE", "text/plain|image/*|application/*.pdf" );
+					intent.addCategory( Intent.CATEGORY_DEFAULT );
 				}
 				else {
 					intent = new Intent( Intent.ACTION_GET_CONTENT );
+					intent.setType( "text/plain|image/*|application/*.pdf" );
+					intent.addCategory( Intent.CATEGORY_OPENABLE );
 				}
-				intent.setType( "text/plain|image/*|application/*.pdf" );
-				intent.addCategory( Intent.CATEGORY_OPENABLE );
 				startActivityForResult( intent, 3 );
 
 				break;

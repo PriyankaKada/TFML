@@ -239,9 +239,11 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 			case R.id.imgUploadFile1:
 				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
 					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
+					intent.addCategory( Intent.CATEGORY_DEFAULT );
 				}
 				else {
 					intent = new Intent( Intent.ACTION_GET_CONTENT );
+					intent.addCategory( Intent.CATEGORY_OPENABLE );
 				}
 				intent.setType( "text/plain|image/*|application/*.pdf" );
 				startActivityForResult( intent, 1 );
@@ -251,9 +253,11 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 			case R.id.imgUploadFile2:
 				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
 					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
+					intent.addCategory( Intent.CATEGORY_DEFAULT );
 				}
 				else {
 					intent = new Intent( Intent.ACTION_GET_CONTENT );
+					intent.addCategory( Intent.CATEGORY_OPENABLE );
 				}
 				intent.setType( "text/plain|image/*|application/*.pdf" );
 				startActivityForResult( intent, 2 );
@@ -262,9 +266,11 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 			case R.id.imgUploadFile3:
 				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
 					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
+					intent.addCategory( Intent.CATEGORY_DEFAULT );
 				}
 				else {
 					intent = new Intent( Intent.ACTION_GET_CONTENT );
+					intent.addCategory( Intent.CATEGORY_OPENABLE );
 				}
 				intent.setType( "text/plain|image/*|application/*.pdf" );
 				startActivityForResult( intent, 3 );
