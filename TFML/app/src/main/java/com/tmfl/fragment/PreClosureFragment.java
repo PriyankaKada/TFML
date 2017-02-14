@@ -335,7 +335,17 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 		com.tmfl.model.soapModel.preClosureRequest.ReqBody reqBody         = new com.tmfl.model.soapModel.preClosureRequest.ReqBody();
 		com.tmfl.model.soapModel.preClosureRequest.ReqData reqData         = new com.tmfl.model.soapModel.preClosureRequest.ReqData();
 		strContractNo = spnContractNo.getSelectedItem().toString();
-		reqData.setContactId( spnContractNo.getSelectedItem().toString() );
+
+		int    zeroCount = 16 - strContractNo.length();
+		String zero      = "";
+
+		for ( int i = 0; i < zeroCount; i++ ) {
+			zero = zero + "0";
+		}
+
+		Log.d( "zeros", zero );
+		strContractNo = zero + strContractNo;
+		reqData.setContactId( strContractNo );
 		reqData.setAdustSd( "R" );
 		reqData.setReqDate( txtAccDate.getText().toString() );
 		reqBody.setReqData( reqData );

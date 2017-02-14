@@ -86,8 +86,10 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		if ( isLoggedIn.equalsIgnoreCase( "true" ) ) {
 			view3.setVisibility( View.VISIBLE );
 			linReferFriend.setVisibility( View.VISIBLE );
+			imgSocial.setVisibility( View.VISIBLE );
 		}
 		else {
+			imgSocial.setVisibility( View.GONE );
 			view3.setVisibility( View.GONE );
 			linReferFriend.setVisibility( View.GONE );
 		}
