@@ -53,7 +53,6 @@ public class ComplaintsToTrackListAdapter extends ArrayAdapter< LinkedTreeMap > 
 			holder.txtDesc = ( TextView ) convertView.findViewById( R.id.txtDesc );
 			holder.txtCaseStage = ( TextView ) convertView.findViewById( R.id.txtCaseStage );
 			holder.imgUploadFile = ( ImageView ) convertView.findViewById( R.id.imgUploadFile1 );
-
 			convertView.setTag( holder );
 		}
 		else {

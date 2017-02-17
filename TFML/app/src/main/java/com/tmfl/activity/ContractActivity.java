@@ -50,6 +50,9 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 	private ImageView imgDrawer;
 	private ListView  lstContractList;
 
+
+	boolean flag=false;
+
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
 		super.onCreate( savedInstanceState );
@@ -105,7 +108,6 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 		imgDrawer.setOnClickListener( this );
 		contractsInputModel = new ContractsInputModel();
 		contractsResponseModel = new ContractsResponseModel();
-
 		strApiToken = PreferenceHelper.getString( PreferenceHelper.API_TOKEN );
 		strUserId = PreferenceHelper.getString( PreferenceHelper.USER_ID );
 		Log.e( "strApiToken", strApiToken );
@@ -140,9 +142,10 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 
 				break;
 			case R.id.linLoanStaus:
-				if ( !( getSupportFragmentManager().findFragmentById( R.id.frame_complaint_container ) instanceof ComplaintsFragment ) ) {
+				if ( !flag ) {
 					txtTitleContract.setText( "Customer Care" );
 					getSupportFragmentManager().beginTransaction().addToBackStack( this.getClass().getName() ).replace( R.id.frame_container_contract, new ComplaintsFragment() ).commit();
+					flag=true;
 				}
 
 				break;
@@ -291,9 +294,14 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 
 		if ( getSupportFragmentManager().findFragmentById( R.id.frame_complaint_container ) instanceof ComplaintsFragment ) {
 			txtTitleContract.setText( "Customer Care" );
+			flag=true;
 		}
 		else {
 			txtTitleContract.setText( "My Contract" );
+			flag=false;
 		}
+
+
+
 	}
 }

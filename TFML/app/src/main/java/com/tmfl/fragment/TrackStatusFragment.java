@@ -168,10 +168,11 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 		txtCaseStage = ( TextView ) rootView.findViewById( R.id.txtCaseStage );
 		imgUploadFile = ( ImageView ) rootView.findViewById( R.id.imgUploadFile );
 
+
 		imgUploadFile.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View view ) {
-				fileDialog.show();
+				uploadFile(  txtCaseId.getText().toString());
 			}
 		} );
 
@@ -185,7 +186,7 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 			contractsModelList.add( activeContractsModel.getContracts().get( i ).getUsrConNo() );
 			Log.d( "contract no", contractsModelList.get( i ) + " " + activeContractsModel.getContracts().size() );
 		}
-		spnContractNo.setAdapter( new ArrayAdapter< String >( getActivity(), R.layout.spinner_row, contractsModelList ) );
+		spnContractNo.setAdapter( new ArrayAdapter< String >( getActivity(), R.layout.spinner_complaint_row, contractsModelList ) );
 
 		txtFromDate.setOnClickListener( this );
 		txtToDate.setOnClickListener( this );

@@ -113,7 +113,7 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 			contractsModelList.add( activeContractsModel.getContracts().get( i ).getUsrConNo() );
 			Log.d( "contract no", contractsModelList.get( i ) + " " + activeContractsModel.getContracts().size() );
 		}
-		spnContractNo.setAdapter( new ArrayAdapter< String >( getActivity(), R.layout.spinner_row, contractsModelList ) );
+		spnContractNo.setAdapter( new ArrayAdapter< String >( getActivity(), R.layout.spinner_complaint_row, contractsModelList ) );
 
 		return view;
 	}
@@ -137,7 +137,6 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 		txtContractNo = ( TextView ) view.findViewById( R.id.txtContractNo );
 		btnSubmit = ( Button ) view.findViewById( R.id.btnSubmit );
 		btnSubmit.setOnClickListener( this );
-
 		imgUpload1.setOnClickListener( this );
 		imgUpload2.setOnClickListener( this );
 		imgUpload3.setOnClickListener( this );

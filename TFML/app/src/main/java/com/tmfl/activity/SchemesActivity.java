@@ -165,7 +165,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 //						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						break;
 
-					case 3:
+					case 2:
 						view1.setVisibility( View.INVISIBLE );
 						view2.setVisibility( View.INVISIBLE );
 
