@@ -133,7 +133,7 @@ public class EmiExpandableListView extends BaseExpandableListAdapter {
 
 		emiChildViewHolder = new EmiChildViewHolder();
 		if ( convertView == null ) {
-			convertView = layoutInflater.inflate( R.layout.child_row_emi_details, null );
+			convertView = layoutInflater.inflate( R.layout.child_row_emi_details, parent,false );
 		}
 
 		emiChildViewHolder.txtEmiInsurance = ( TextView ) convertView.findViewById( R.id.txtEmiInsurance );

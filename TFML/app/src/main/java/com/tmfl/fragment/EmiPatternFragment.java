@@ -29,6 +29,7 @@ public class EmiPatternFragment extends Fragment {
 	FragmentManager            fragmentManager;
 	FragmentTransaction        fragmentTransaction;
 	EmiDetailFragment          emiDetailFragment;
+	MyReceiptFragment           myReceiptFragment;
 	Spinner                    spnContractNo;
 	ArrayList< ContractModel > modelArrayList;
 	TextView                   txt_repaymentmode, txt_emiamount, txt_dueamount, txt_duedate, txt_rc_no;
@@ -150,6 +151,8 @@ public class EmiPatternFragment extends Fragment {
 			txt_dueamount.setText( "Rs." + overdue );
 		}
 
+		loadEmiDetail();
+
 		spnContractNo.post( new Runnable() {
 			@Override
 			public void run() {
@@ -172,7 +175,7 @@ public class EmiPatternFragment extends Fragment {
 			}
 		} );
 
-		loadEmiDetail();
+
 	}
 
 	private void setData( ContractModel model ) {
@@ -188,10 +191,11 @@ public class EmiPatternFragment extends Fragment {
 	public void loadEmiDetail() {
 		fragmentManager = getActivity().getSupportFragmentManager();
 		fragmentTransaction = fragmentManager.beginTransaction();
-		emiDetailFragment = new EmiDetailFragment();
+		myReceiptFragment=new MyReceiptFragment();
+		//emiDetailFragment = new EmiDetailFragment();
 		Bundle bundle = new Bundle();
 		bundle.putString( "datamodelvalue", datavalue );
-		fragmentTransaction.add( R.id.frm_emi_detail, emiDetailFragment );
+		fragmentTransaction.add( R.id.frm_emi_detail, myReceiptFragment );
 		fragmentTransaction.commit();
 	}
 }

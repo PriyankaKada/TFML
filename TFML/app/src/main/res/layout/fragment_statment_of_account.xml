@@ -7,25 +7,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:baselineAligned="false"
         >
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Loan A/C No. :"
             android:textColor="#ffffff"
             android:textSize="14sp"
             android:textStyle="bold"
             android:background="#F26711"
+            android:paddingLeft="5dp"
             />
 
         <Spinner
             android:id="@+id/spnContractNo"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="0.7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/selector_spinner"
             android:drawSelectorOnTop="false"
             android:gravity="left"
@@ -36,6 +41,7 @@
             android:scrollbars="none"
             android:spinnerMode="dropdown"/>
 
+        </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
