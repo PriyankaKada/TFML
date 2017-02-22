@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -26,29 +25,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tmfl.R;
-import com.tmfl.adapter.BranchCityAdapter;
-import com.tmfl.adapter.BranchListAdapter;
-import com.tmfl.adapter.BranchStateAdapter;
-import com.tmfl.adapter.CityAdapter;
-import com.tmfl.adapter.StateAdapter;
 import com.tmfl.auth.TmflApi;
 import com.tmfl.common.ApiService;
 import com.tmfl.common.CommonUtils;
-import com.tmfl.common.SocialUtil;
 import com.tmfl.common.Validation;
-import com.tmfl.model.branchResponseModel.BranchResponseModel;
 import com.tmfl.model.branchResponseModel.InputBranchModel;
-import com.tmfl.model.cityResponseModel.BranchCityResponseModel;
-import com.tmfl.model.cityResponseModel.CityResponseModel;
 import com.tmfl.model.cityResponseModel.InputCityModel;
-import com.tmfl.model.productResponseModel.ProductListResponseModel;
-import com.tmfl.model.referFriendResponseModel.ReferFriendInputModel;
+import com.tmfl.model.referFriendResponseModel.ReferFriend;
 import com.tmfl.model.referFriendResponseModel.ReferFriendResponseModel;
 import com.tmfl.model.schemesResponseModel.NewOfferData;
 import com.tmfl.model.schemesResponseModel.SchemesResponse;
 import com.tmfl.model.schemesResponseModel.UsedOfferData;
-import com.tmfl.model.stateResponseModel.BranchStateResponseModel;
-import com.tmfl.model.stateResponseModel.StateResponseModel;
 import com.tmfl.util.PreferenceHelper;
 import com.tmfl.util.SetFonts;
 
@@ -65,7 +52,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 	String strLeadTypechk  = "";
 	String strVechicalType = "";
 	TmflApi               tmflApi;
-	ReferFriendInputModel inputReferFriendModel;
+	ReferFriend inputReferFriendModel;
 	InputCityModel        inputCityModel;
 	InputBranchModel      inputBranchModel;
 	String                productCode, branchStateCode, branchCityCode, branchCode, stateCode, cityCode;
@@ -100,7 +87,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 
 		response = ( SchemesResponse ) PreferenceHelper.getObject( "Scheme response", SchemesResponse.class );
 
-		arDatumList = response.getOfferData().getNEW();
+	/*	arDatumList = response.getOfferData().getNEW();
 
 		spOfferList = new ArrayList<>();
 
@@ -109,7 +96,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		}
 
 		newOfferList = response.getOfferData().getNEW();
-		usedOfferList = response.getOfferData().getUSED();
+		usedOfferList = response.getOfferData().getUSED();*/
 
 	/*	List< NewOfferData > offerList = new ArrayList<>();
 		NewOfferData         datum     = new NewOfferData();
@@ -117,7 +104,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		offerList.add( datum );
 		offerList.addAll( arDatumList );*/
 
-		NewOfferData datum = new NewOfferData();
+/*		NewOfferData datum = new NewOfferData();
 		datum.setTitle( "Select Offers" );
 		newOfferListNew.add( datum );
 		newOfferListNew.addAll( this.newOfferList );
@@ -185,7 +172,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 
 		List< CityResponseModel > dummyCityList = new ArrayList();
 		dummyCityList.add( 0, cityModel );
-		spSelectCity.setAdapter( new CityAdapter( getActivity(), dummyCityList ) );
+		spSelectCity.setAdapter( new CityAdapter( getActivity(), dummyCityList ) );*/
 		return view;
 	}
 
@@ -199,34 +186,34 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		checkBox = ( CheckBox ) view.findViewById( R.id.chkTermsCond );
 
 		edtFirstName = ( EditText ) view.findViewById( R.id.edt_first_name );
-		edtLastName = ( EditText ) view.findViewById( R.id.edt_last_name );
+		//edtLastName = ( EditText ) view.findViewById( R.id.edt_last_name );
 		edtMobileNumber = ( EditText ) view.findViewById( R.id.edt_mobile_no );
-		edtLandlineNumber = ( EditText ) view.findViewById( R.id.edt_landline_no );
-		edtEmailAddress = ( EditText ) view.findViewById( R.id.edt_email_address );
-		edtOrgnizationName = ( EditText ) view.findViewById( R.id.edt_orgnization_name );
-		edtCode = ( EditText ) view.findViewById( R.id.edt_pincode );
-		spnProduct = ( Spinner ) view.findViewById( R.id.sp_select_product );
-		spnProduct.setOnItemSelectedListener( this );
-		CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
-		SocialUtil.getProductListData( getActivity(), spnProduct );
+		//edtLandlineNumber = ( EditText ) view.findViewById( R.id.edt_landline_no );
+		//edtEmailAddress = ( EditText ) view.findViewById( R.id.edt_email_address );
+		//edtOrgnizationName = ( EditText ) view.findViewById( R.id.edt_orgnization_name );
+		//edtCode = ( EditText ) view.findViewById( R.id.edt_pincode );
+		//spnProduct = ( Spinner ) view.findViewById( R.id.sp_select_product );
+		//spnProduct.setOnItemSelectedListener( this );
+		//CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
+		//SocialUtil.getProductListData( getActivity(), spnProduct );
 
-		spSelectBranchState = ( Spinner ) view.findViewById( R.id.sp_select_branch_state );
-		spSelectBranchState.setOnItemSelectedListener( this );
-		CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
-		SocialUtil.getBranchStateListData( getActivity(), spSelectBranchState, "Select branch state" );
+		//spSelectBranchState = ( Spinner ) view.findViewById( R.id.sp_select_branch_state );
+		//spSelectBranchState.setOnItemSelectedListener( this );
+		//CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
+		//SocialUtil.getBranchStateListData( getActivity(), spSelectBranchState, "Select branch state" );
 
-		spSelectBranchCity = ( Spinner ) view.findViewById( R.id.sp_select_branch_city );
-		spSelectBranchCity.setOnItemSelectedListener( this );
-		spSelectBranch = ( Spinner ) view.findViewById( R.id.sp_select_branch );
-		spSelectBranch.setOnItemSelectedListener( this );
+		//spSelectBranchCity = ( Spinner ) view.findViewById( R.id.sp_select_branch_city );
+		//spSelectBranchCity.setOnItemSelectedListener( this );
+		//spSelectBranch = ( Spinner ) view.findViewById( R.id.sp_select_branch );
+		//spSelectBranch.setOnItemSelectedListener( this );
 
-		spSelectState = ( Spinner ) view.findViewById( R.id.sp_select_state );
-		spSelectState.setOnItemSelectedListener( this );
-		spSelectState.setVisibility( View.GONE );
+		//spSelectState = ( Spinner ) view.findViewById( R.id.sp_select_state );
+		//spSelectState.setOnItemSelectedListener( this );
+		//spSelectState.setVisibility( View.GONE );
 
-		CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
-		SocialUtil.getStateListData( getActivity(), spSelectState, "Select state" );
-		spSelectCity = ( Spinner ) view.findViewById( R.id.sp_select_city );
+	//	CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
+	//	SocialUtil.getStateListData( getActivity(), spSelectState, "Select state" );
+		/*spSelectCity = ( Spinner ) view.findViewById( R.id.sp_select_city );
 		spSelectCity.setOnItemSelectedListener( this );
 		spSelectCity.setVisibility( View.GONE );
 		spOffers = ( Spinner ) view.findViewById( R.id.sp_offers );
@@ -239,27 +226,27 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		rdbLeadTypeOrganizational = ( RadioButton ) view.findViewById( R.id.rdb_organization );
 		rdbVecTypeCommercial = ( RadioButton ) view.findViewById( R.id.rdb_commercial );
 		rdbVechTypeRefinance = ( RadioButton ) view.findViewById( R.id.rdb_refinance );
-		rdbVechPassanger = ( RadioButton ) view.findViewById( R.id.rdb_passenger );
+		rdbVechPassanger = ( RadioButton ) view.findViewById( R.id.rdb_passenger );*/
 		btnCancel = ( Button ) view.findViewById( R.id.btn_cancel );
 		btnReferFriends = ( Button ) view.findViewById( R.id.btn_refer_friends );
 
-		rdNewOffers = ( RadioButton ) view.findViewById( R.id.rdNewOffers );
-		rdUsedOffers = ( RadioButton ) view.findViewById( R.id.rdUsedOffers );
+		//rdNewOffers = ( RadioButton ) view.findViewById( R.id.rdNewOffers );
+		//rdUsedOffers = ( RadioButton ) view.findViewById( R.id.rdUsedOffers );
 
 		SetFonts.setFonts( getActivity(), btnCancel, 2 );
 		SetFonts.setFonts( getActivity(), btnReferFriends, 2 );
 
-		spnProduct.setSelection( 1 );
-		spSelectCity.setSelection( 1 );
-		spSelectState.setSelection( 1 );
-		spSelectBranch.setSelection( 1 );
-		inputReferFriendModel = new ReferFriendInputModel();
+		//spnProduct.setSelection( 1 );
+		//spSelectCity.setSelection( 1 );
+		//spSelectState.setSelection( 1 );
+		//spSelectBranch.setSelection( 1 );
+		inputReferFriendModel = new ReferFriend();
 		inputCityModel = new InputCityModel();
 		inputBranchModel = new InputBranchModel();
 		btnCancel.setOnClickListener( this );
 		btnReferFriends.setOnClickListener( this );
 		edtMobileNumber.setOnEditorActionListener( this );
-		edtLandlineNumber.setOnEditorActionListener( this );
+		//edtLandlineNumber.setOnEditorActionListener( this );
 	}
 
 	@Override
@@ -282,16 +269,16 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 
 	private boolean checkValidation() {
 		boolean ret = true;
-		if ( !Validation.hasText( edtFirstName, "Please enter your First name" ) ) {
+		if ( !Validation.hasText( edtFirstName, "Please enter your Name" ) ) {
 			ret = false;
 		}
-		if ( !Validation.hasText( edtLastName, "Please enter your Last name" ) ) {
+		/*if ( !Validation.hasText( edtLastName, "Please enter your Last name" ) ) {
 			ret = false;
-		}
+		}*/
 		if ( !Validation.hasText( edtMobileNumber, "Please enter mobile number" ) ) {
 			ret = false;
 		}
-		if ( !Validation.isValidEmail( edtEmailAddress.getText().toString() ) ) {
+		/*if ( !Validation.isValidEmail( edtEmailAddress.getText().toString() ) ) {
 			ret = false;
 		}
 		if ( spOffers.getSelectedItemPosition() == 0 ) {
@@ -308,7 +295,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		}
 		if ( spSelectBranchCity.getSelectedItemPosition() == 0 ) {
 			ret = false;
-		}
+		}*/
 		/*if ( spSelectCity.getSelectedItemPosition() == 0 ) {
 			ret = false;
 		}
@@ -317,10 +304,10 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		}*/
 
 
-		if ( !checkBox.isChecked() ) {
+		/*if ( !checkBox.isChecked() ) {
 			Toast.makeText( getActivity(), "You must agree to the terms first!", Toast.LENGTH_SHORT ).show();
 			ret = false;
-		}
+		}*/
 
 		return ret;
 	}
@@ -338,68 +325,63 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 	}
 
 	public void callReferFriendService() {
+		inputReferFriendModel.setApiToken( PreferenceHelper.getString( PreferenceHelper.API_TOKEN ) );
 		strUserid = PreferenceHelper.getString( PreferenceHelper.USER_ID );
-		if ( strUserid != null ) {
-			inputReferFriendModel.setUserId( strUserid );
-		}
-		else {
-			inputReferFriendModel.setUserId( "0" );
-		}
-		inputReferFriendModel.setOfferId( strOfferId );
+		//inputReferFriendModel.setOfferId( strOfferId );
 		inputReferFriendModel.setFirstName( edtFirstName.getText().toString() );
-		inputReferFriendModel.setLastName( edtLastName.getText().toString() );
+		//inputReferFriendModel.setLastName( edtLastName.getText().toString() );
 		inputReferFriendModel.setMobileNumber( edtMobileNumber.getText().toString() );
-		inputReferFriendModel.setLandlineNumber( edtLandlineNumber.getText().toString() );
-		inputReferFriendModel.setEmailAddress( edtEmailAddress.getText().toString() );
-		if ( productCode != null && productCode != "-1" ) {
+		//inputReferFriendModel.setLandlineNumber( edtLandlineNumber.getText().toString() );
+		//inputReferFriendModel.setEmailAddress( edtEmailAddress.getText().toString() );
+		/*if ( productCode != null && productCode != "-1" ) {
 			inputReferFriendModel.setProductId( productCode );
-		}
+		}*/
 		/*else {
 		    Toast.makeText( getContext(), "Please Select Product Type", Toast.LENGTH_SHORT ).show();
 		}*/
-		if ( branchStateCode != null && branchStateCode != "-1" ) {
+		/*if ( branchStateCode != null && branchStateCode != "-1" ) {
 			inputReferFriendModel.setBranchState( branchStateCode );
 
-		}
+		}*/
 		/*else {
 			Toast.makeText( getContext(), "Please Select Branch State", Toast.LENGTH_SHORT ).show();
 		}*/
-		if ( branchCityCode != null && branchCityCode != "-1" ) {
+		/*if ( branchCityCode != null && branchCityCode != "-1" ) {
 			inputReferFriendModel.setBranchCity( branchCityCode );
-		}
+		}*/
 		/*else {
 			Toast.makeText( getContext(), "Please Select Branch City", Toast.LENGTH_SHORT ).show();
 		}*/
 
-		if ( branchCode != null && branchCode != "-1" ) {
+		/*if ( branchCode != null && branchCode != "-1" ) {
 			inputReferFriendModel.setBranch( branchCode );
-		}
+		}*/
 		/*else {
 			Toast.makeText( getContext(), "Please Select Branch", Toast.LENGTH_SHORT ).show();
 		}*/
 
-		if ( stateCode != null && stateCode != "-1" ) {
+	/*	if ( stateCode != null && stateCode != "-1" ) {
 			inputReferFriendModel.setState( String.valueOf( 0 ) );
 
-		}
+		}*/
 		/*else {
 			Toast.makeText( getContext(), "Please Select State", Toast.LENGTH_SHORT ).show();
 		}*/
 
 
-		if ( cityCode != null && cityCode != "-1" ) {
+		/*if ( cityCode != null && cityCode != "-1" ) {
 			inputReferFriendModel.setCity( String.valueOf( 0 ) );
-		}
+		}*/
 		/*else {
 			Toast.makeText( getContext(), "Please Select City", Toast.LENGTH_SHORT ).show();
 		}*/
 
 
-		inputReferFriendModel.setEmailAddress( edtEmailAddress.getText().toString() );
+	/*	inputReferFriendModel.setEmailAddress( edtEmailAddress.getText().toString() );
 		inputReferFriendModel.setPincode( edtCode.getText().toString() );
 		inputReferFriendModel.setLeadType( strLeadTypechk );
 		inputReferFriendModel.setOrganisationName( edtOrgnizationName.getText().toString() );
-		inputReferFriendModel.setVehicalType( strVechicalType );
+		inputReferFriendModel.setVehicalType( strVechicalType );*/
 		if ( ( PreferenceHelper.getString( PreferenceHelper.USER_ID ) ) != null ) {
 			inputReferFriendModel.setReferedBy( PreferenceHelper.getString( PreferenceHelper.USER_ID ) );
 		}
@@ -410,7 +392,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 
 	}
 
-	public void loadReferFriendsResponse( ReferFriendInputModel inputReferFriendModel ) {
+	public void loadReferFriendsResponse( ReferFriend inputReferFriendModel ) {
 		/*Log.e( "getFirstName", inputReferFriendModel.getFirstName() );
 		Log.e( "getLastName", inputReferFriendModel.getLastName() );
 		Log.e( "getMobileNumber", inputReferFriendModel.getMobileNumber() );
@@ -428,10 +410,15 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		Log.e( "getState", inputReferFriendModel.getState() );
 		Log.e( "getReferFriends", inputReferFriendModel.getReferedBy() );
 */
+
+
 		tmflApi.getFriendResponse( inputReferFriendModel ).enqueue( new Callback< ReferFriendResponseModel >() {
 			@Override
 			public void onResponse( Call< ReferFriendResponseModel > call, Response< ReferFriendResponseModel > response ) {
 				CommonUtils.closeProgressDialog();
+				if(response.body() == null){
+					Toast.makeText( getActivity(), "Response Is Null", Toast.LENGTH_LONG ).show();
+				}
 				if ( response.body() != null ) {
 					if ( response.body().getStatus().contains( "success" ) ) {
 						Log.e( "getFriendResponse", response.body().getStatus() );
@@ -449,6 +436,8 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 			@Override
 			public void onFailure( Call< ReferFriendResponseModel > call, Throwable t ) {
 				CommonUtils.closeProgressDialog();
+				t.printStackTrace();
+				Log.d("ReferResponseFail",t.getMessage());
 			}
 		} );
 	}
@@ -456,7 +445,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 	@Override
 	public void onItemSelected( AdapterView< ? > parent, View view, int position, long id ) {
 
-		switch ( parent.getId() ) {
+	/*	switch ( parent.getId() ) {
 			case R.id.sp_select_product:
 				if ( position != 0 ) {
 					productCode = ( ( ProductListResponseModel ) parent.getItemAtPosition( position ) ).getProdProductid();
@@ -515,7 +504,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 					Log.d( "offer id", strOfferId );
 				}
 				break;
-		}
+		}*/
 	}
 
 	@Override
@@ -525,7 +514,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 
 	@Override
 	public void onCheckedChanged( RadioGroup group, int checkedId ) {
-		switch ( group.getCheckedRadioButtonId() ) {
+	/*	switch ( group.getCheckedRadioButtonId() ) {
 			case R.id.rdb_organization:
 				if ( checkedId == R.id.rdb_organization ) {
 					strLeadTypechk = "Organizational";
@@ -558,13 +547,13 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 					inputReferFriendModel.setVehicalType( strVechicalType );
 				}
 				break;
-		}
+		}*/
 	}
 
 	public void clearData() {
 		edtFirstName.setText( "" );
-		edtLastName.setText( "" );
 		edtMobileNumber.setText( "" );
+	/*	edtLastName.setText( "" );
 		edtLandlineNumber.setText( "" );
 		edtEmailAddress.setText( "" );
 		edtOrgnizationName.setText( "" );
@@ -578,7 +567,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		spSelectCity.setSelection( 0 );
 		spSelectState.setSelection( 0 );
 		spOffers.setSelection( 0 );
-		checkBox.setChecked( false );
+		checkBox.setChecked( false );*/
 
 	}
 
@@ -639,7 +628,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 
 				break;
 		}*/
-
+/*
 		if ( b ) {
 			offer = 1;
 			Log.e( "inside offer", " inside offer new Offer" + offer );
@@ -651,7 +640,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 			Log.e( "inside offer", " inside offer new Offer" + offer );
 			spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, usedOfferListNew ) );
 
-		}
+		}*/
 
 	}
 }

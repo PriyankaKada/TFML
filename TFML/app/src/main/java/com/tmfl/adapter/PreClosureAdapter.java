@@ -25,7 +25,6 @@ public class PreClosureAdapter extends BaseAdapter {
 		this.context = context;
 		this.responseEnvelope = responseEnvelope;
 	}
-
 	@Override
 	public int getCount() {
 		return responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().size();
@@ -67,6 +66,7 @@ public class PreClosureAdapter extends BaseAdapter {
 		holder.txtNetBal.setText( responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( position ).getNET() == null ? "" : responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( position ).getNET() );
 		holder.txtRecAmt.setText( responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( position ).getREC() == null ? "" : responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( position ).getREC() );
 
+
 		if ( position == getCount() - 1 ) {
 			//for change color of TOTAL ROW
 			holder.lin_desc.setBackgroundDrawable( context.getResources().getDrawable( R.drawable.dotted_rect_bg_preclousre ) );
@@ -76,11 +76,13 @@ public class PreClosureAdapter extends BaseAdapter {
 		}
 		else {
 
-			holder.lin_desc.setBackgroundDrawable( context.getResources().getDrawable( R.drawable.dotted_bg ) );
+		holder.lin_desc.setBackgroundDrawable( context.getResources().getDrawable( R.drawable.dotted_bg ) );
 			holder.lin_due_amount.setBackgroundDrawable( context.getResources().getDrawable( R.drawable.dotted_bg ) );
 			holder.lin_rec_amount.setBackgroundDrawable( context.getResources().getDrawable( R.drawable.dotted_bg ) );
 			holder.lin_netBal.setBackgroundDrawable( context.getResources().getDrawable( R.drawable.dotted_bg ) );
 		}
+
+
 		return convertView;
 	}
 

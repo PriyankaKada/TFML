@@ -64,11 +64,11 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 		tmflApi = ApiService.getInstance().call();
 		init();
 
-		SimpleDateFormat date = new SimpleDateFormat( "EEEE, dd MMM yyyy" );
+		SimpleDateFormat date = new SimpleDateFormat( "dd-MM-yyyy" );
 
 		String newDate = date.format( System.currentTimeMillis() );
 		Log.d( "current date", newDate );
-		txtCurrentDate.setText( "Data as of end-of-previous-day. " + newDate );
+		txtCurrentDate.setText( "Data as of  " + newDate +"." );
 		txtName.setText( "Welcome, " + PreferenceHelper.getString( PreferenceHelper.USER_FIRT_NAME ) );
 	}
 

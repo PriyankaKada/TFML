@@ -78,7 +78,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 	ComplaintsFragment complaintsFragment;
 	FrameLayout        containerFrameLayout;
 	private BannerFragment bannerFragment;
-	private ImageView      imgQuickCall;
+	private ImageView      imgQuickCall,imgSocial;
 	private TextView       txtTitle;
 	private ImageView[]    dots;
 	private int            dotsCount;
@@ -96,7 +96,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 
 		mToolbar = ( Toolbar ) findViewById( R.id.toolbar );
 		imgQuickCall = ( ImageView ) findViewById( R.id.imgQuickCall );
-		//imgSocial = ( ImageView ) findViewById( R.id.imgSocial );
+		imgSocial = ( ImageView ) findViewById( R.id.img_social );
 		txtTitle = ( TextView ) findViewById( R.id.txtTitle );
 		txtSchemes = ( TextView ) findViewById( R.id.txtSchemes );
 		txtApplyLoan = ( TextView ) findViewById( R.id.txtApplyLoan );
@@ -136,8 +136,8 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		SetFonts.setFonts( this, txtLogin, 2 );
 		loadBannerData();
 		imgQuickCall.setOnClickListener( this );
-		//imgSocial.setOnClickListener( this );
-		//imgSocial.setVisibility( View.GONE );
+		imgSocial.setOnClickListener( this );
+		imgSocial.setVisibility( View.VISIBLE );
 		linSchemes.setOnClickListener( this );
 		linApplyLoan.setOnClickListener( this );
 		linReferFriend.setOnClickListener( this );
@@ -248,9 +248,9 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				quickCallDialog();
 				break;
 
-			/*case R.id.imgSocial:
+			case R.id.img_social:
 				socialDialog();
-				break;*/
+				break;
 			case R.id.llSchemes:
 
 				view1.setVisibility( View.GONE );
@@ -481,7 +481,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 	}
 
 	public void socialDialog() {
-		//imgSocial.setVisibility( View.INVISIBLE );
+		imgSocial.setVisibility( View.VISIBLE );
 		final Dialog socialdialog = new Dialog( BannerActivity.this, android.R.style.Theme_Holo_Dialog_NoActionBar );
 		socialdialog.getWindow().setBackgroundDrawable( new ColorDrawable( android.graphics.Color.TRANSPARENT ) );
 		socialdialog.setContentView( R.layout.dialog_social );
@@ -509,10 +509,10 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 			@Override
 			public void onClick( View v ) {
 				socialdialog.dismiss();
-				//imgSocial.setVisibility( View.VISIBLE );
+				imgSocial.setVisibility( View.VISIBLE );
 			}
 		} );
-		imgMessage.setOnClickListener( new View.OnClickListener() {
+	/*	imgMessage.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
 				SocialUtil.sendMail( BannerActivity.this, SocialUtil.email );
@@ -529,13 +529,13 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 			public void onClick( View v ) {
 				SocialUtil.sendWhatsAppMsg( BannerActivity.this, SocialUtil.whatsAppNo );
 			}
-		} );
+		} );*/
 		imgMap.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
 				startActivity( new Intent( BannerActivity.this, LocateUsActivity.class ) );
 				socialdialog.dismiss();
-				//imgSocial.setVisibility( View.VISIBLE );
+				imgSocial.setVisibility( View.VISIBLE );
 			}
 		} );
 
@@ -543,7 +543,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		socialdialog.setOnCancelListener( new DialogInterface.OnCancelListener() {
 			@Override
 			public void onCancel( DialogInterface dialog ) {
-				//imgSocial.setVisibility( View.VISIBLE );
+				imgSocial.setVisibility( View.VISIBLE );
 			}
 		} );
 

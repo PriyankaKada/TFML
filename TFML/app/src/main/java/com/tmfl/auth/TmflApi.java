@@ -46,7 +46,7 @@ import com.tmfl.model.myReciptPdfResponseModel.MyReceiptResponseModel;
 import com.tmfl.model.preClosurePdfResponseModel.PreClosureInputModel;
 import com.tmfl.model.preClosurePdfResponseModel.PreClosureStmtPdfResponse;
 import com.tmfl.model.productResponseModel.ProductListResponseModel;
-import com.tmfl.model.referFriendResponseModel.ReferFriendInputModel;
+import com.tmfl.model.referFriendResponseModel.ReferFriend;
 import com.tmfl.model.referFriendResponseModel.ReferFriendResponseModel;
 import com.tmfl.model.schemesResponseModel.SchemesResponse;
 import com.tmfl.model.soapModel.preClosureRequest.RequestEnvelope;
@@ -93,7 +93,7 @@ public interface TmflApi {
 	Call< ApplyLoanResponse > getApplyLoanResponse( @Body InputModel inputModel );
 
 	@POST( Constant.REFERFRIEND )
-	Call< ReferFriendResponseModel > getFriendResponse( @Body ReferFriendInputModel referFriendInputModel );
+	Call< ReferFriendResponseModel > getFriendResponse( @Body ReferFriend referFriendInputModel );
 
 	@POST( Constant.REQUESTQUICKCALL )
 	Call< QuickCallResponse > getQuickCallResponse( @Body QuickCallInputModel quickCallInputModel );

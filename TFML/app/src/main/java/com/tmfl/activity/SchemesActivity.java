@@ -1,6 +1,7 @@
 package com.tmfl.activity;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
@@ -89,7 +90,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 			imgSocial.setVisibility( View.VISIBLE );
 		}
 		else {
-			imgSocial.setVisibility( View.GONE );
+			imgSocial.setVisibility( View.VISIBLE );
 			view3.setVisibility( View.GONE );
 			linReferFriend.setVisibility( View.GONE );
 		}
@@ -304,7 +305,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 	}
 
 	public void socialDialog() {
-		imgSocial.setVisibility( View.INVISIBLE );
+		imgSocial.setVisibility( View.VISIBLE );
 		final Dialog socialDialog = new Dialog( SchemesActivity.this, android.R.style.Theme_Holo_Dialog_NoActionBar );
 		socialDialog.getWindow().setBackgroundDrawable( new ColorDrawable( android.graphics.Color.TRANSPARENT ) );
 		socialDialog.setContentView( R.layout.dialog_social_mirror );
@@ -329,7 +330,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 				imgSocial.setVisibility( View.VISIBLE );
 			}
 		} );
-		imgMessage.setOnClickListener( new View.OnClickListener() {
+	/*	imgMessage.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
 				sendMail();
@@ -346,9 +347,23 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 			public void onClick( View v ) {
 				sendWhatsAppMsg();
 			}
+		} );*/
+		imgMap.setOnClickListener( new View.OnClickListener() {
+			@Override
+			public void onClick( View v ) {
+				startActivity( new Intent( SchemesActivity.this, LocateUsActivity.class ) );
+				socialDialog.dismiss();
+				imgSocial.setVisibility( View.VISIBLE );
+			}
 		} );
 
 		socialDialog.show();
+		socialDialog.setOnCancelListener( new DialogInterface.OnCancelListener() {
+			@Override
+			public void onCancel( DialogInterface dialog ) {
+				imgSocial.setVisibility( View.VISIBLE );
+			}
+		} );
 	}
 
 	public void sendWhatsAppMsg() {

@@ -349,7 +349,8 @@
                 android:id="@+id/lst_pre_closure"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/whit_rect_bg">
+                android:background="@color/white"
+                android:cacheColorHint="@color/white">
             </ListView>
 
         </LinearLayout>
