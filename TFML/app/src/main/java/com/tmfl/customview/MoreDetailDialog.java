@@ -103,6 +103,7 @@ public class MoreDetailDialog extends Dialog implements View.OnClickListener {
 
 				PreferenceHelper.insertString( Constant.SHOW_PAGE, Constant.RECEIPT );
 
+
 				mContext.startActivity( new Intent( mContext, EmiActivity.class )
 						                        .putExtras( bundle ) );
 

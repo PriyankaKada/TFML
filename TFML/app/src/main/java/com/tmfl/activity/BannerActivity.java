@@ -533,7 +533,9 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		imgMap.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
-				startActivity( new Intent( BannerActivity.this, LocateUsActivity.class ) );
+				Intent mapIntent=  new Intent( BannerActivity.this, LocateUsActivity.class );
+				mapIntent.putExtra( "LOGGED_IN","false" );
+				startActivity(mapIntent );
 				socialdialog.dismiss();
 				imgSocial.setVisibility( View.VISIBLE );
 			}

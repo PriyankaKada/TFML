@@ -448,7 +448,7 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 			}
 		}
 		else {
-			Toast.makeText( getActivity(), "Please Check Network Connection", Toast.LENGTH_LONG ).show();
+			Toast.makeText( getActivity(), "Please Check Network Connectionmatch_parent", Toast.LENGTH_LONG ).show();
 		}
 	}
 

@@ -31,5 +31,11 @@ public class EmiListInputModel {
 		this.contractNo = contractNo;
 	}
 
-
+	@Override
+	public String toString() {
+		return "EmiListInputModel{" +
+				"contractNo='" + contractNo + '\'' +
+				", apiToken='" + apiToken + '\'' +
+				'}';
+	}
 }

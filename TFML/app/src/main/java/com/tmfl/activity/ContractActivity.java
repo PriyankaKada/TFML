@@ -65,10 +65,9 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 		init();
 
 		SimpleDateFormat date = new SimpleDateFormat( "dd-MM-yyyy" );
-
 		String newDate = date.format( System.currentTimeMillis() );
 		Log.d( "current date", newDate );
-		txtCurrentDate.setText( "Data as of  " + newDate +"." );
+		//txtCurrentDate.setText( "Data as of  " + newDate +"." );
 		txtName.setText( "Welcome, " + PreferenceHelper.getString( PreferenceHelper.USER_FIRT_NAME ) );
 	}
 
@@ -176,6 +175,8 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 					models.addAll( response.body().getData().getActive().getContracts() );
 
 					PreferenceHelper.insertObject( Constant.ONGOING_LOAN, response.body().getData().getActive() );
+					txtCurrentDate.setText( "Data as of  " + response.body().getData().getLastUpdatedDate() +"." );
+
 				}
 				else {
 					Toast.makeText( getBaseContext(), "No Data Founnd", Toast.LENGTH_SHORT ).show();
@@ -280,7 +281,9 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 		imgMap.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
-				startActivity( new Intent( ContractActivity.this, LocateUsActivity.class ) );
+				Intent mapIntent=  new Intent( ContractActivity.this, LocateUsActivity.class );
+				mapIntent.putExtra( "LOGGED_IN","true" );
+				startActivity(mapIntent );
 				contactDialog.dismiss();
 			}
 		} );

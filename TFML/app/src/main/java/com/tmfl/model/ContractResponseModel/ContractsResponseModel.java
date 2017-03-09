@@ -14,6 +14,7 @@ public class ContractsResponseModel {
 	@Expose
 	private ContractsDataModel data;
 
+
 	/**
 	 * @return The data
 	 */

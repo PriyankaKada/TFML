@@ -9,6 +9,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class ContractsDataModel {
 
+	@SerializedName( "last_updated_date" )
+	@Expose
+	private String lastUpdatedDate;
+
 
 	@SerializedName( "total" )
 	@Expose
@@ -63,4 +67,12 @@ public class ContractsDataModel {
 		this.terminated = terminated;
 	}
 
+
+	public String getLastUpdatedDate() {
+		return lastUpdatedDate;
+	}
+
+	public void setLastUpdatedDate( String lastUpdatedDate ) {
+		this.lastUpdatedDate = lastUpdatedDate;
+	}
 }

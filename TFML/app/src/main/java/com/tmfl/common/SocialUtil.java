@@ -76,7 +76,7 @@ public class SocialUtil {
 		List< ResolveInfo > resInfo = context.getPackageManager().queryIntentActivities( intent, 0 );
 		intent.setData( Uri.parse( "mailto:" + email ) );
 //		intent.putExtra( Intent.EXTRA_EMAIL, new String[]{ email } );
-		intent.putExtra( Intent.EXTRA_TEXT, "Welcome to TFML" );
+		//intent.putExtra( Intent.EXTRA_TEXT, "Welcome to TFML" );
 
 		context.startActivity( Intent.createChooser( intent, "Choose an Email client :" ) );
 
@@ -245,7 +245,7 @@ public class SocialUtil {
 					CommonUtils.closeProgressDialog();
 					if ( response != null ) {
 						ProductListResponseModel model = new ProductListResponseModel();
-						model.setProdName( "Select product" );
+						model.setProdName( "* Select product" );
 						model.setProdProductid( "-1" );
 						response.body().add( 0, model );
 						spnProduct.setAdapter( new ProductAdapter( context, response.body() ) );

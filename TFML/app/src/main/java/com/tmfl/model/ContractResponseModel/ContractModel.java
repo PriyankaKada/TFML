@@ -123,6 +123,12 @@ public class ContractModel implements Serializable {
 	@Expose
 	private String odcCollectioAmount;
 
+
+
+
+
+
+
 	public String getTotalExpenses() {
 		return totalExpenses;
 	}
@@ -241,7 +247,7 @@ public class ContractModel implements Serializable {
 		this.usrCrtDt = usrCrtDt;
 	}
 
-	/**
+	/**odcCollectioAmount
 	 * @return The contractStatus
 	 */
 	public String getContractStatus() {

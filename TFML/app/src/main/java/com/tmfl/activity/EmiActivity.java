@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import com.tmfl.R;
 import com.tmfl.adapter.EmiPagerAdapter;
 import com.tmfl.auth.Constant;
+import com.tmfl.fragment.EmiDetailFragment;
 import com.tmfl.fragment.EmiPatternFragment;
 import com.tmfl.fragment.PreClosureFragment;
 import com.tmfl.fragment.RcUpdateFragment;
@@ -28,14 +31,17 @@ import java.util.ArrayList;
 
 public class EmiActivity extends DrawerBaseActivity implements View.OnClickListener {
 
+	public static TextView txtEmiName;
 	Toolbar   toolbarEmi;
 	ImageView imgEmiBack, imgDrawerEmi;
-	TextView     txtEmiName;
 	TabLayout    emiTabLayout;
 	ViewPager    viewPager;
 	DrawerLayout drawerLayout;
 	View         view1, view2, view3, view4;
 	ArrayList< ContractModel > modelArrayList;
+	FragmentManager            fragmentManager;
+	FragmentTransaction        fragmentTransaction;
+	EmiDetailFragment          emiDetailFragment;
 	String datavalue = "";
 
 	@Override
@@ -60,7 +66,6 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 		imgEmiBack = ( ImageView ) findViewById( R.id.img_emi_back );
 		txtEmiName = ( TextView ) toolbarEmi.findViewById( R.id.txt_titel_emi );
 		viewPager = ( ViewPager ) findViewById( R.id.pager );
-
 		view1 = findViewById( R.id.view1 );
 		view2 = findViewById( R.id.view2 );
 		view3 = findViewById( R.id.view3 );
@@ -89,6 +94,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 
 			case Constant.STATEMENT_OF_ACCOUNT:
 
+
 				txtEmiName.setText( "Statement of Account" );
 				viewPager.setCurrentItem( 1, true );
 
@@ -109,8 +115,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 				break;
 
 			case Constant.RECEIPT:
-
-				txtEmiName.setText( "EMI Schedule" );
+				txtEmiName.setText( "Receipts" );
 				PreferenceHelper.insertBoolean( Constant.SHOW_RECEIPT, true );
 				viewPager.setCurrentItem( 0, true );
 
@@ -118,13 +123,13 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 		}
 	}
 
-	private void setupViewPager( ViewPager viewPager ) {
+	private void setupViewPager( final ViewPager viewPager ) {
 
-		EmiPagerAdapter adapter                    = new EmiPagerAdapter( getSupportFragmentManager() );
-		Fragment        emiPatternFrag             = new EmiPatternFragment();
-		Fragment        statementOfAccountFragment = new StatementOfAccountFragment();
-		Fragment        rcUpdateFragment           = new RcUpdateFragment();
-		Fragment        closureFragment            = new PreClosureFragment();
+		final EmiPagerAdapter adapter                    = new EmiPagerAdapter( getSupportFragmentManager() );
+		Fragment              emiPatternFrag             = new EmiPatternFragment();
+		Fragment              statementOfAccountFragment = new StatementOfAccountFragment();
+		Fragment              rcUpdateFragment           = new RcUpdateFragment();
+		Fragment              closureFragment            = new PreClosureFragment();
 
 		Bundle bundle = new Bundle();
 		bundle.putSerializable( "datamodel", modelArrayList );
@@ -136,7 +141,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 		adapter.addFrag( closureFragment, "Pre-closure Statement" );
 
 		viewPager.setAdapter( adapter );
-		viewPager.setCurrentItem( 0 );
+		//viewPager.setCurrentItem( 0 );
 		viewPager.addOnPageChangeListener( new ViewPager.OnPageChangeListener() {
 
 			@Override
@@ -144,14 +149,28 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 
 			}
 
+
 			@Override
 			public void onPageSelected( int position ) {
-				setTitle( getPageTitle( position ) );
+				//setTitle( getPageTitle( position ) );
 
 				switch ( position ) {
 
 					case 0:
-						txtEmiName.setText( "EMI Schedule" );
+
+						if ( PreferenceHelper.getBoolean( Constant.SHOW_RECEIPT ) ) {
+							txtEmiName.setText( "Receipts" );
+						}
+						else {
+							txtEmiName.setText( "EMI Schedule" );
+							/*fragmentManager = getSupportFragmentManager();
+							fragmentTransaction = fragmentManager.beginTransaction();
+							emiDetailFragment = new EmiDetailFragment();
+							fragmentTransaction.replace( R.id.frm_emi_detail, emiDetailFragment );
+							fragmentTransaction.commit();*/
+							String backStackEmiPatternFrag = EmiPatternFragment.class.getName();
+							getSupportFragmentManager().popBackStackImmediate( backStackEmiPatternFrag, 0 );
+						}
 						view1.setBackgroundResource( R.drawable.selector_tab_indicator_white );
 						view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
@@ -160,15 +179,15 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 						break;
 
 					case 1:
+						PreferenceHelper.insertBoolean( Constant.SHOW_RECEIPT, false );
 						txtEmiName.setText( "Statement of Account" );
 						view1.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view2.setBackgroundResource( R.drawable.selector_tab_indicator_white );
 						view3.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view4.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
-
 						break;
-
 					case 2:
+						PreferenceHelper.insertBoolean( Constant.SHOW_RECEIPT, false );
 						txtEmiName.setText( "RC Update" );
 						view1.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
@@ -178,6 +197,7 @@ public class EmiActivity extends DrawerBaseActivity implements View.OnClickListe
 						break;
 
 					case 3:
+						PreferenceHelper.insertBoolean( Constant.SHOW_RECEIPT, false );
 						txtEmiName.setText( "Pre-closure Statement" );
 						view1.setBackgroundResource( R.drawable.selector_tab_indicator_blue );
 						view2.setBackgroundResource( R.drawable.selector_tab_indicator_blue );

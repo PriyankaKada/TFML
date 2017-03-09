@@ -268,7 +268,6 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 					path = selectedImage.getPath();
 				}
 				break;
-
 			case 1:
 				if ( resultCode == Activity.RESULT_OK ) {
 					selectedImage = data.getData();
@@ -319,6 +318,7 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 	public void callRcUploadData( RcUploadDataInputModel rcUploadDataInputModel, MultipartBody.Part body ) {
 		HashMap< String, RequestBody > params = callmapmethod();
 		tmflApi.getRcUploadData( params, body ).enqueue( new Callback< RcUploadResponseModel >() {
+
 			@Override
 			public void onResponse( Call< RcUploadResponseModel > call, Response< RcUploadResponseModel > response ) {
 				//       Toast.makeText(getActivity(),""+response.body().getStatus().toString(),Toast.LENGTH_LONG).show();
@@ -331,7 +331,7 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 					CommonUtils.showAlert1( getActivity(), "", "RC Uploaded Successfully", false );
 				}
 				else {
-					//   Log.e("getApplyloanErr", response.body().getMessages());
+					//   Log.e("getApplyloanErr",response.body().getMessages());
 					CommonUtils.closeProgressDialog();
 					CommonUtils.showAlert1( getActivity(), "", response.body().getMessages(), false );
 				}

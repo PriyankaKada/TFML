@@ -68,6 +68,8 @@ public class EmiDetailFragment extends Fragment implements View.OnClickListener 
 
 	public void init() {
 
+//		( ( EmiActivity ) getActivity() ).txtEmiName.setText( "EMI Schedule" );
+
 		tmflLogin = ApiService.getInstance().call();
 		tmflApi = ApiService.getInstance().call();
 		callCheckLogin();

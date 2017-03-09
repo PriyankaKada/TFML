@@ -263,38 +263,40 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		if ( !Validation.hasText( edtFirstName, "Please enter your First name" ) ) {
 			ret = false;
 		}
-		if ( !Validation.hasText( edtLastName, "Please enter your Last name" ) ) {
+		else if ( !Validation.hasText( edtLastName, "Please enter your Last name" ) ) {
 			ret = false;
 		}
-		if ( !Validation.hasText( edtMobileNumber, "Please enter mobile number" ) ) {
+		else if ( !Validation.hasText( edtMobileNumber, "Please enter mobile number" ) ) {
 			ret = false;
 		}
-		if ( !Validation.isValidEmail( edtEmailAddress.getText().toString() ) ) {
+		else if ( !Validation.isValidEmail( edtEmailAddress.getText().toString() ) ) {
+			edtEmailAddress.setError( "Please Enter Email Address" );
 			ret = false;
 		}
-		if ( !Validation.hasText( edtCode, "Please enter Pincode number" ) ) {
+		else if ( !Validation.hasText( edtCode, "Please enter Pincode number" ) ) {
 			ret = false;
 		}
 
-		if ( edtCode.getText().toString().length() != 6 ) {
+		else if ( edtCode.getText().toString().length() != 6 ) {
 			edtCode.setError( "Pincode should be of 6 digits!" );
 			ret = false;
 		}
 
-		if ( spnProduct.getSelectedItemPosition() == 0 ) {
+		else if ( spnProduct.getSelectedItemPosition() == 0 ) {
+			Toast.makeText( getActivity(), "Please Select A Product", Toast.LENGTH_SHORT ).show();
 			ret = false;
 		}
-		if ( spSelectBranch.getSelectedItemPosition() == 0 ) {
+		/*else if ( spSelectBranch.getSelectedItemPosition() == 0 ) {
 			ret = false;
 		}
-		if ( spSelectBranchState.getSelectedItemPosition() == 0 ) {
+		else if ( spSelectBranchState.getSelectedItemPosition() == 0 ) {
 			ret = false;
-		}
-		if ( spSelectBranchCity.getSelectedItemPosition() == 0 ) {
+		}D
+		else if ( spSelectBranchCity.getSelectedItemPosition() == 0 ) {
 			ret = false;
-		}
+		}*/
 
-		if ( !checkBox.isChecked() ) {
+		else if ( !checkBox.isChecked() ) {
 			Toast.makeText( getActivity(), "You must agree to the terms first!", Toast.LENGTH_SHORT ).show();
 			ret = false;
 		}
@@ -304,7 +306,7 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 
 	public void callSubmit() {
 		if ( checkValidation() ) {
-			CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
+			CommonUtils.showProgressDialog( getActivity(), "Processing your request.Please wait.." );
 			callApplyLoanService();
 			loadApplyLoanResponse( inputLoanModel );
 

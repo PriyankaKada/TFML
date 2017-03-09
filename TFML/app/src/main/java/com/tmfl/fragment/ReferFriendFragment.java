@@ -68,7 +68,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 	private EditText edtFirstName, edtLastName, edtMobileNumber, edtLandlineNumber, edtEmailAddress, edtOrgnizationName, edtCode;
 	private Spinner spnProduct, spSelectBranchState, spSelectBranchCity, spSelectBranch, spSelectCity, spSelectState, spOffers;
 	private RadioButton rdbLeadTypeIndividual, rdbLeadTypeOrganizational, rdbVecTypeCommercial, rdbVechTypeRefinance, rdbVechPassanger;
-	private Button btnCancel, btnReferFriends;
+	private Button btnCancel, btnSubmit;
 	private List< String > branchStateList, branchCityList, branchList, cityList, stateList;
 	private RadioGroup radioGroupLeadType, radioGroupVehicleType;
 	private int         offer;
@@ -228,13 +228,13 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		rdbVechTypeRefinance = ( RadioButton ) view.findViewById( R.id.rdb_refinance );
 		rdbVechPassanger = ( RadioButton ) view.findViewById( R.id.rdb_passenger );*/
 		btnCancel = ( Button ) view.findViewById( R.id.btn_cancel );
-		btnReferFriends = ( Button ) view.findViewById( R.id.btn_refer_friends );
+		btnSubmit = ( Button ) view.findViewById( R.id.btn_refer_friends );
 
 		//rdNewOffers = ( RadioButton ) view.findViewById( R.id.rdNewOffers );
 		//rdUsedOffers = ( RadioButton ) view.findViewById( R.id.rdUsedOffers );
 
 		SetFonts.setFonts( getActivity(), btnCancel, 2 );
-		SetFonts.setFonts( getActivity(), btnReferFriends, 2 );
+		SetFonts.setFonts( getActivity(), btnSubmit, 2 );
 
 		//spnProduct.setSelection( 1 );
 		//spSelectCity.setSelection( 1 );
@@ -244,7 +244,7 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 		inputCityModel = new InputCityModel();
 		inputBranchModel = new InputBranchModel();
 		btnCancel.setOnClickListener( this );
-		btnReferFriends.setOnClickListener( this );
+		btnSubmit.setOnClickListener( this );
 		edtMobileNumber.setOnEditorActionListener( this );
 		//edtLandlineNumber.setOnEditorActionListener( this );
 	}
@@ -416,13 +416,13 @@ public class ReferFriendFragment extends Fragment implements View.OnClickListene
 			@Override
 			public void onResponse( Call< ReferFriendResponseModel > call, Response< ReferFriendResponseModel > response ) {
 				CommonUtils.closeProgressDialog();
-				if(response.body() == null){
+			/*	if(response.body() == null){
 					Toast.makeText( getActivity(), "Response Is Null", Toast.LENGTH_LONG ).show();
-				}
+				}*/
 				if ( response.body() != null ) {
 					if ( response.body().getStatus().contains( "success" ) ) {
 						Log.e( "getFriendResponse", response.body().getStatus() );
-						showAlert( getActivity(), "Refer Friends", " Thank You for referring friend. Our representative will contact him/her shortly.", true );
+						showAlert( getActivity(), "Refer Friends", "Thank You for referring friend. Our representative will contact him/her shortly.", true );
 
 					}
 					else {

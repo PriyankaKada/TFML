@@ -29,7 +29,7 @@ public class EmiPatternFragment extends Fragment {
 	FragmentManager            fragmentManager;
 	FragmentTransaction        fragmentTransaction;
 	EmiDetailFragment          emiDetailFragment;
-	MyReceiptFragment           myReceiptFragment;
+	MyReceiptFragment          myReceiptFragment;
 	Spinner                    spnContractNo;
 	ArrayList< ContractModel > modelArrayList;
 	TextView                   txt_repaymentmode, txt_emiamount, txt_dueamount, txt_duedate, txt_rc_no;
@@ -164,7 +164,7 @@ public class EmiPatternFragment extends Fragment {
 						setData( model );
 						Log.e( "ID", " " + modelArrayList.get( position ).getUsrConNo() );
 						PreferenceHelper.insertString( PreferenceHelper.CONTRACT_NO, modelArrayList.get( position ).getUsrConNo() );
-						getActivity().getSupportFragmentManager().beginTransaction().replace( R.id.frm_emi_detail, new MyReceiptFragment() ).commit();
+						getActivity().getSupportFragmentManager().beginTransaction().replace( R.id.frm_emi_detail, new EmiDetailFragment() ).commit();
 					}
 
 					@Override
@@ -191,11 +191,13 @@ public class EmiPatternFragment extends Fragment {
 	public void loadEmiDetail() {
 		fragmentManager = getActivity().getSupportFragmentManager();
 		fragmentTransaction = fragmentManager.beginTransaction();
-		myReceiptFragment=new MyReceiptFragment();
-		//emiDetailFragment = new EmiDetailFragment();
+		myReceiptFragment = new MyReceiptFragment();
+		emiDetailFragment = new EmiDetailFragment();
 		Bundle bundle = new Bundle();
 		bundle.putString( "datamodelvalue", datavalue );
-		fragmentTransaction.add( R.id.frm_emi_detail, myReceiptFragment );
+		String backStackEmiPatternFrag=EmiPatternFragment.class.getName();
+		fragmentTransaction.add( R.id.frm_emi_detail, emiDetailFragment );
+		fragmentTransaction.addToBackStack( backStackEmiPatternFrag );
 		fragmentTransaction.commit();
 	}
 }

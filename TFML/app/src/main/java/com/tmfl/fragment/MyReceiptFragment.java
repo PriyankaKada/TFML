@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.tmfl.R;
+import com.tmfl.activity.EmiActivity;
 import com.tmfl.activity.LoginActivity;
 import com.tmfl.adapter.MyExpandableListAdapter;
 import com.tmfl.auth.Constant;
@@ -78,10 +79,12 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 		return view;
 	}
 
+
 	public void init() {
 		lstReceipt = ( ListView ) view.findViewById( R.id.lst_my_receipt );
 		expandableListView = ( ExpandableListView ) view.findViewById( R.id.expandableListView );
 		btnBack = ( Button ) view.findViewById( R.id.btn_back );
+		( ( EmiActivity ) getActivity() ).txtEmiName.setText( "Receipts" );
 		btnBack.setOnClickListener( this );
 		SetFonts.setFonts( getActivity(), btnBack, 2 );
 		date = new Date();

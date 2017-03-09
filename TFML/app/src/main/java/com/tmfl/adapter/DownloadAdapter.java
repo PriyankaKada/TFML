@@ -3,7 +3,6 @@ package com.tmfl.adapter;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Environment;
@@ -16,7 +15,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.tmfl.R;
-import com.tmfl.activity.DownloadDataActivity;
 import com.tmfl.model.downloadResponseModel.Datum;
 
 import java.io.FileNotFoundException;
@@ -67,13 +65,17 @@ public class DownloadAdapter extends BaseAdapter {
 			holder = ( DownloadAdapter.Holder ) convertView.getTag();
 		}
 		holder.txtFile.setText( downloadList.get( position ).getName() );
+
+		holder.txtFile.setTag(""+ position );
+
 		holder.txtFile.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
-				String fileUrl        = downloadList.get( position ).getFile();
-				Intent downloadIntent = new Intent( context, DownloadDataActivity.class );
-				downloadIntent.putExtra( "URL", fileUrl );
-				Log.d( "fileUrl", fileUrl );
+				int i= Integer.parseInt( v.getTag() +"");
+				String fileUrl        = downloadList.get( i ).getFile();
+				//Intent downloadIntent = new Intent( context, DownloadDataActivity.class );
+				//downloadIntent.putExtra( "URL", fileUrl );
+				//Log.d( "fileUrl", fileUrl );
 
 				Uri uri = Uri.parse( fileUrl );
 
@@ -82,12 +84,14 @@ public class DownloadAdapter extends BaseAdapter {
 				Log.d( "mime type", mime );
 
 				DownloadManager.Request request = new DownloadManager.Request( uri );
+				request.setDescription( "File is downloading...." );
 				request.allowScanningByMediaScanner();
 				request.setNotificationVisibility( DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED );
 				request.setDestinationInExternalPublicDir( Environment.DIRECTORY_DOWNLOADS, "TFML/Downloads"
 						+ SystemClock.currentThreadTimeMillis() + mime );
 
 				DownloadManager manager           = ( DownloadManager ) context.getSystemService( Context.DOWNLOAD_SERVICE );
+
 				Long            downloadReference = manager.enqueue( request );
 				try {
 					manager.openDownloadedFile( downloadReference );
@@ -95,7 +99,8 @@ public class DownloadAdapter extends BaseAdapter {
 				catch ( FileNotFoundException e ) {
 					e.printStackTrace();
 				}
-				manager.enqueue( request );
+//				manager.enqueue( request );
+
 
 			}
 		} );

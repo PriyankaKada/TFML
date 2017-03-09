@@ -199,7 +199,9 @@ public class DrawerBaseActivity extends BaseActivity {
 						}
 						break;
 					case 10://Locate Map
-						startActivity( new Intent( DrawerBaseActivity.this, LocateUsActivity.class ) );
+						Intent mapIntent=  new Intent( DrawerBaseActivity.this, LocateUsActivity.class );
+						mapIntent.putExtra( "LOGGED_IN","true" );
+						startActivity(mapIntent );
 						drawerLayout.closeDrawers();
 						break;
 					default:

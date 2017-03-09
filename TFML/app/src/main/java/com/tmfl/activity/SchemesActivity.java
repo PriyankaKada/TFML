@@ -1,9 +1,11 @@
 package com.tmfl.activity;
 
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +22,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 import com.tmfl.R;
 import com.tmfl.adapter.SchemesPagerAdapter;
@@ -56,6 +60,11 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 	private LinearLayout         llSchemes, llApplyLoan, linReferFriend;
 	private SchemesPagerAdapter   adapter;
 	private List< UsedOfferData > usedOfferList;
+	/**
+	 * ATTENTION: This was auto-generated to implement the App Indexing API.
+	 * See https://g.co/AppIndexing/AndroidStudio for more information.
+	 */
+	private GoogleApiClient       client;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
@@ -68,6 +77,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		txtschemestitle = ( TextView ) findViewById( R.id.txt_schemes_title );
 		imgtoolbarhome = ( ImageView ) findViewById( R.id.img_toolbar_home );
 		imgSocial = ( ImageView ) findViewById( R.id.img_social );
+
 		llApplyLoan = ( LinearLayout ) findViewById( R.id.llApplyLoan );
 		llSchemes = ( LinearLayout ) findViewById( R.id.llSchemes );
 		linReferFriend = ( LinearLayout ) findViewById( R.id.linReferFriend );
@@ -91,6 +101,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		}
 		else {
 			imgSocial.setVisibility( View.VISIBLE );
+			//socialDialog1();
 			view3.setVisibility( View.GONE );
 			linReferFriend.setVisibility( View.GONE );
 		}
@@ -108,7 +119,17 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		viewPager = ( ViewPager ) findViewById( R.id.pager );
 
 		SetFonts.setFonts( this, txtschemestitle, 2 );
+		// ATTENTION: This was auto-generated to implement the App Indexing API.
+		// See https://g.co/AppIndexing/AndroidStudio for more information.
+		// ATTENTION: This "addApi(AppIndex.API)"was auto-generated to implement the App Indexing API.
+		// See https://g.co/AppIndexing/AndroidStudio for more information.
+		// ATTENTION: This "addApi(AppIndex.API)"was auto-generated to implement the App Indexing API.
+		// See https://g.co/AppIndexing/AndroidStudio for more information.
+		client = new GoogleApiClient.Builder( this ).addApi( AppIndex.API ).addApi( AppIndex.API ).addApi( AppIndex.API ).build();
 	}
+
+
+
 
 	private void setupViewPager( ViewPager viewPager ) {
 		List< Fragment > fragList = new ArrayList<>();
@@ -305,9 +326,12 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 	}
 
 	public void socialDialog() {
+
+		bundle1 = getIntent().getExtras();
+		String loggedIn = bundle1.getString( "LOGGED_IN" );
 		imgSocial.setVisibility( View.VISIBLE );
 		final Dialog socialDialog = new Dialog( SchemesActivity.this, android.R.style.Theme_Holo_Dialog_NoActionBar );
-		socialDialog.getWindow().setBackgroundDrawable( new ColorDrawable( android.graphics.Color.TRANSPARENT ) );
+		socialDialog.getWindow().setBackgroundDrawable( new ColorDrawable( Color.TRANSPARENT ) );
 		socialDialog.setContentView( R.layout.dialog_social_mirror );
 		WindowManager.LayoutParams params = socialDialog.getWindow().getAttributes();
 		params.y = 5;
@@ -323,6 +347,9 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 		final ImageView imgPhoneCall = ( ImageView ) socialDialog.findViewById( R.id.imgcall );
 		final ImageView imgcancel    = ( ImageView ) socialDialog.findViewById( R.id.imgcancel );
 
+
+
+			imgcancel.setVisibility( View.VISIBLE );
 		imgcancel.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
@@ -330,28 +357,45 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 				imgSocial.setVisibility( View.VISIBLE );
 			}
 		} );
-	/*	imgMessage.setOnClickListener( new View.OnClickListener() {
+
+
+		if( loggedIn.equals( "true" ))
+		{
+			imgMessage.setVisibility( View.VISIBLE );
+		imgMessage.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
 				sendMail();
 			}
 		} );
+		}
+
+		if( loggedIn.equals( "true" ))
+		{
+			imgPhoneCall.setVisibility( View.VISIBLE );
 		imgPhoneCall.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
 				dialPhoneCall();
 			}
 		} );
+		}
+		if( loggedIn.equals( "true" ))
+		{
+			imgWhatsApp.setVisibility( View.VISIBLE );
 		imgWhatsApp.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
 				sendWhatsAppMsg();
 			}
-		} );*/
+		} );
+		}
 		imgMap.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
-				startActivity( new Intent( SchemesActivity.this, LocateUsActivity.class ) );
+				Intent mapIntent = new Intent( SchemesActivity.this, LocateUsActivity.class );
+				mapIntent.putExtra( "LOGGED_IN", "true" );
+				startActivity( mapIntent );
 				socialDialog.dismiss();
 				imgSocial.setVisibility( View.VISIBLE );
 			}
@@ -428,7 +472,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 			finish();
 			Log.i( "Finish ", "sending emailId..." );
 		}
-		catch ( android.content.ActivityNotFoundException ex ) {
+		catch ( ActivityNotFoundException ex ) {
 			Toast.makeText( SchemesActivity.this, "There is no emailId client installed.", Toast.LENGTH_SHORT ).show();
 		}
 	}
@@ -460,4 +504,7 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 			}
 		} );
 	}
+
+
+
 }

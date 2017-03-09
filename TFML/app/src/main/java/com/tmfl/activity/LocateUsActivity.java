@@ -10,6 +10,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
@@ -31,15 +32,16 @@ import com.tmfl.common.CommonUtils;
 import com.tmfl.common.SocialUtil;
 import com.tmfl.model.branchResponseModel.BranchResponseModel;
 import com.tmfl.model.branchResponseModel.InputBranchState;
+import com.tmfl.model.loginResponseModel.LoginResponseModel;
 import com.tmfl.model.stateResponseModel.BranchStateResponseModel;
 import com.tmfl.util.SetFonts;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocateUsActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, OnMapReadyCallback, LocationListener {
+public class LocateUsActivity extends DrawerBaseActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, OnMapReadyCallback, LocationListener {
 	public BranchResponseModel branchResponseModel;
-	ImageView imgBack;
+	ImageView imgBack,img_drawer;
 	TextView  txtTitle;
 	Spinner   spnState, spnBranch;
 	String stateCode, branchCode;
@@ -53,12 +55,17 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 	private LocationManager locationManager;
 	private double          latitude;
 	private double          longitude;
+	LoginResponseModel loginResponseModel;
+	Bundle    bundle1;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
 		super.onCreate( savedInstanceState );
-		setContentView( R.layout.dialog_branch_locator );
-
+		//setContentView( R.layout.dialog_branch_locator );
+		View    view    = getLayoutInflater().inflate( R.layout.dialog_branch_locator, frameLayout );
+		Toolbar toolbar = ( Toolbar ) view.findViewById( R.id.toolbar );
+		setSupportActionBar( toolbar );
+		getSupportActionBar().setTitle( "" );
 		init();
 
 		locationManager = ( LocationManager ) getSystemService( LOCATION_SERVICE );
@@ -100,8 +107,21 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 
 	public void init() {
 
+		bundle1 = getIntent().getExtras();
+		String loggedIn = bundle1.getString( "LOGGED_IN" );
 		txtTitle = ( TextView ) findViewById( R.id.txt_toolbar_title );
 		imgBack = ( ImageView ) findViewById( R.id.img_map_back );
+		img_drawer = ( ImageView ) findViewById( R.id.img_drawer_download );
+
+		if(loggedIn.equals( "true" )){
+		img_drawer.setVisibility( View.VISIBLE );
+		}
+
+	/*	if( PreferenceHelper.getBoolean( PreferenceHelper.ISLOGIN ))
+		{
+			img_drawer.setVisibility( View.VISIBLE );
+		}*/
+
 		spnState = ( Spinner ) findViewById( R.id.sp_select_state );
 		spnState.setOnItemSelectedListener( this );
 
@@ -114,6 +134,7 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 		spnBranch.setOnItemSelectedListener( this );
 		SetFonts.setFonts( this, imgBack, 2 );
 		imgBack.setOnClickListener( this );
+		img_drawer.setOnClickListener( this );
 		branchResponseModel = new BranchResponseModel();
 	}
 
@@ -122,6 +143,12 @@ public class LocateUsActivity extends BaseActivity implements View.OnClickListen
 		switch ( v.getId() ) {
 			case R.id.img_map_back:
 				onBackPressed();
+				break;
+
+			case R.id.img_drawer_download:
+
+				openDrawer();
+
 				break;
 		}
 	}

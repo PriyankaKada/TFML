@@ -25,7 +25,7 @@
             android:textSize="14sp"
             android:textStyle="bold"
             android:background="#F26711"
-            android:paddingLeft="5dp"
+            android:paddingLeft="10dp"
             />
 
         <Spinner
@@ -36,9 +36,6 @@
             android:background="@drawable/selector_spinner"
             android:drawSelectorOnTop="false"
             android:gravity="left"
-            android:paddingBottom="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp"
             android:popupBackground="@color/white"
             android:scrollbars="none"
             android:spinnerMode="dropdown"/>
@@ -49,26 +46,28 @@
             android:layout_marginLeft="2dp"
             android:layout_weight="1"
             android:background="#F39C11"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:orientation="vertical"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="RC No. :"
                 android:textColor="#ffffff"
                 android:textSize="14sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:paddingLeft="10dp"/>
 
             <TextView
                 android:id="@+id/txt_rc_update_no"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="left|center"
-                android:paddingLeft="5dp"
+                android:paddingLeft="10dp"
                 android:textColor="#ffffff"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"/>
         </LinearLayout>
     </LinearLayout>
 
