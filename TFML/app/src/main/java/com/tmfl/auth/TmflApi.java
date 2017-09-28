@@ -135,14 +135,14 @@ public interface TmflApi {
 
 	@Headers( {
 			"SOAPAction : http://sap.com/xi/WebService/soap1.1/StmtOfAcc_Out",
-			"Authorization : Basic cHJkX3BpX3dlYjpsb3NAMTIzNA=="
+			"Authorization : Basic cHJkX3BpX3dlYjpwcmRwaXdlYkAx"
 	} )
 	@POST( "MessageServlet?senderParty=&senderService=Service_TMFUniverse&receiverParty=&receiverService=&interface=StmtOfAcc_Out&interfaceNamespace=http://tmf.com:TMFUniverse" )
 	Call< ResponseEnvelope > callStmtAcRequest( @Body RequestEnvelpe requestEnvelope );
 
 	@Headers( {
 			"SOAPAction : http://sap.com/xi/WebService/soap1.1/TerminalDues_Out",
-			"Authorization : Basic cHJkX3BpX3dlYjpsb3NAMTIzNA=="
+			"Authorization : Basic cHJkX3BpX3dlYjpwcmRwaXdlYkAx"
 	} )
 	@POST( "MessageServlet?senderParty=&senderService=Service_TMFUniverse&receiverParty=&receiverService=&interface=TerminalDues_Out&interfaceNamespace=http://tmf.com:TMFUniverse" )
 	Call< com.tmfl.model.soapModel.preClousreResponse.ResponseEnvelope > callClosureTableRequest( @Body RequestEnvelope requestEnvelope );

@@ -127,7 +127,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		view5 = findViewById( R.id.viewId5 );
 
 		circlePageIndicator.setRadius( 8.0f );
-		txtTitle.setText( "Welcome to TMFL" );
+//		txtTitle.setText( "Welcome to TMFL" );
 		SetFonts.setFonts( this, txtTitle, 2 );
 		SetFonts.setFonts( this, txtSchemes, 2 );
 		SetFonts.setFonts( this, txtApplyLoan, 2 );
