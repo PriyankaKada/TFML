@@ -41,13 +41,15 @@ import java.util.List;
 
 public class LocateUsActivity extends DrawerBaseActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, OnMapReadyCallback, LocationListener {
 	public BranchResponseModel branchResponseModel;
-	ImageView imgBack,img_drawer;
-	TextView  txtTitle;
-	Spinner   spnState, spnBranch;
+	ImageView imgBack, img_drawer;
+	TextView txtTitle;
+	Spinner  spnState, spnBranch;
 	String stateCode, branchCode;
-	InputBranchState inputBranchState;
-	WebView          webview;
-	Location         location;
+	InputBranchState   inputBranchState;
+	WebView            webview;
+	Location           location;
+	LoginResponseModel loginResponseModel;
+	Bundle             bundle1;
 	private List< String > stateList, branchList;
 	private GoogleMap       map;
 	private MapFragment     mapFragment;
@@ -55,8 +57,6 @@ public class LocateUsActivity extends DrawerBaseActivity implements View.OnClick
 	private LocationManager locationManager;
 	private double          latitude;
 	private double          longitude;
-	LoginResponseModel loginResponseModel;
-	Bundle    bundle1;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
@@ -113,8 +113,8 @@ public class LocateUsActivity extends DrawerBaseActivity implements View.OnClick
 		imgBack = ( ImageView ) findViewById( R.id.img_map_back );
 		img_drawer = ( ImageView ) findViewById( R.id.img_drawer_download );
 
-		if(loggedIn.equals( "true" )){
-		img_drawer.setVisibility( View.VISIBLE );
+		if ( loggedIn.equals( "true" ) ) {
+			img_drawer.setVisibility( View.VISIBLE );
 		}
 
 	/*	if( PreferenceHelper.getBoolean( PreferenceHelper.ISLOGIN ))
