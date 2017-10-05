@@ -138,7 +138,7 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 
 					Intent intent = new Intent( mContext, EmiActivity.class );
 					Bundle bundle = new Bundle();
-					bundle.putSerializable( "datamodel", arrayList );
+					bundle.putSerializable("datamodel", arrayList);
 					bundle.putString( "datamodelvalue", model.getUsrConNo() );
 					PreferenceHelper.insertString( PreferenceHelper.CONTRACT_NO, model.getUsrConNo() );
 					bundle.putString( "RCNO", model.getRcNumber() );
@@ -153,14 +153,14 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 				}
 			} );
 
-			if ( model.getUsrConCompCode().equalsIgnoreCase( "5000" ) ) {
-				btn_pay_emi.setEnabled( true );
-				btn_pay_emi.setVisibility( View.VISIBLE );
-			}
-			else {
-				btn_pay_emi.setEnabled( false );
-				btn_pay_emi.setVisibility( View.INVISIBLE );
-			}
+//			if ( model.getUsrConCompCode().equalsIgnoreCase( "5000" ) ) {
+//				btn_pay_emi.setEnabled( true );
+//				btn_pay_emi.setVisibility( View.VISIBLE );
+//			}
+//			else {
+//				btn_pay_emi.setEnabled( false );
+//				btn_pay_emi.setVisibility( View.INVISIBLE );
+//			}
 
 			btn_pay_emi.setOnClickListener( new View.OnClickListener() {
 				@Override

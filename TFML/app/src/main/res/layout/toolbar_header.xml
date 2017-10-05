@@ -12,7 +12,7 @@
                                    app:contentInsetStart="0dp"
                                    app:popupTheme="@style/AppTheme.PopupOverlay">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -22,19 +22,20 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
             android:src="@drawable/ic_mobile"
             />
 
         <TextView
             android:id="@+id/txtTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
             android:gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_weight="1"
             android:text="@string/title_welcome"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:layout_toRightOf="@+id/img_social"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:layout_centerHorizontal="true"/>
 
@@ -42,8 +43,7 @@
             android:id="@+id/linLogin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
+            android:layout_margin="10dp"
             android:background="?attr/selectableItemBackground"
             android:gravity="right|center_vertical"
             android:orientation="horizontal">
@@ -67,7 +67,7 @@
                 android:visibility="visible"/>
 
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
 </android.support.v7.widget.Toolbar>
 

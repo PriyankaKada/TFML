@@ -81,7 +81,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:button="@drawable/checkbox_selector"
+                    style="@style/Base.Widget.AppCompat.CompoundButton.CheckBox"
                     android:paddingLeft="10dp"
                     android:text="@string/txt_individual"
                     android:textColor="#6b6b6b"/>
@@ -91,7 +91,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:button="@drawable/checkbox_selector"
+                    style="@style/Base.Widget.AppCompat.CompoundButton.CheckBox"
                     android:paddingLeft="10dp"
                     android:text="@string/txt_organizational"
                     android:textColor="#6b6b6b"/>
@@ -142,8 +142,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:button="@drawable/checkbox_selector"
-                    android:paddingLeft="10dp"
+                    style="@style/Base.Widget.AppCompat.CompoundButton.CheckBox"
                     android:text="@string/txt_commercial"
                     android:textColor="#6b6b6b"/>
 
@@ -152,8 +151,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:button="@drawable/checkbox_selector"
-                    android:paddingLeft="10dp"
+                    style="@style/Base.Widget.AppCompat.CompoundButton.CheckBox"
                     android:text="@string/txt_passenger"
                     android:textColor="#6b6b6b"/>
 
@@ -162,8 +160,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:button="@drawable/checkbox_selector"
-                    android:paddingLeft="10dp"
+                    style="@style/Base.Widget.AppCompat.CompoundButton.CheckBox"
                     android:text="@string/txt_Refinance"
                     android:textColor="#6b6b6b"/>
             </RadioGroup>
@@ -229,6 +226,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/whit_rect_bg"
                     android:hint="Enter Landline No."
+                    android:visibility="gone"
                     android:imeOptions="actionGo"
                     android:inputType="number"
                     android:maxLength="12"
@@ -282,6 +280,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:visibility="gone"
                     android:layout_weight="1"
                     android:background="@drawable/spinner_bg"/>
             </LinearLayout>
@@ -293,6 +292,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/whit_rect_bg"
                 android:hint="* Enter Email Address"
+                android:visibility="gone"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:padding="8dp"
@@ -338,6 +338,7 @@
                     android:inputType="number"
                     android:maxLength="6"
                     android:maxLines="1"
+                    android:visibility="gone"
                     android:padding="8dp"
                     android:textSize="14sp"/>
 
@@ -359,7 +360,7 @@
                     android:id="@+id/chkTermsCond"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:button="@drawable/checkbox_selector"
+                    android:layout_gravity="top"
                     android:gravity="start"
                     />
 
