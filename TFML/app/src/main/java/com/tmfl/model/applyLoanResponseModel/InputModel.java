@@ -17,35 +17,15 @@ public class InputModel {
 	@SerializedName( "mobile_number" )
 	@Expose()
 	private String mobileNumber;
-	@SerializedName( "landline_number" )
-	@Expose
-	private String landlineNumber;
 	@SerializedName( "product_id" )
 	@Expose
 	private String productId;
-
 	@SerializedName( "branch_state" )
 	@Expose()
 	private String branchState;
-
 	@SerializedName( "branch_city" )
 	@Expose()
 	private String branchCity;
-	@SerializedName( "branch" )
-	@Expose()
-	private String branch;
-	@SerializedName( "email_address" )
-	@Expose
-	private String emailAddress;
-	@SerializedName( "state" )
-	@Expose
-	private String state;
-	@SerializedName( "city" )
-	@Expose
-	private String city;
-	@SerializedName( "pincode" )
-	@Expose
-	private String pincode;
 	@SerializedName( "lead_type" )
 	@Expose
 	private String leadType;
@@ -58,6 +38,23 @@ public class InputModel {
 	private String userId;
 	@SerializedName( "offer_id" )
 	private String offerId;
+
+	@Override
+	public String toString() {
+		return "InputModel{" +
+				"firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", mobileNumber='" + mobileNumber + '\'' +
+				", productId='" + productId + '\'' +
+				", branchState='" + branchState + '\'' +
+				", branchCity='" + branchCity + '\'' +
+				", leadType='" + leadType + '\'' +
+				", organisationName='" + organisationName + '\'' +
+				", vehicalType='" + vehicalType + '\'' +
+				", userId='" + userId + '\'' +
+				", offerId='" + offerId + '\'' +
+				'}';
+	}
 
 	public String getUserId() {
 		return userId;
@@ -107,13 +104,6 @@ public class InputModel {
 		this.mobileNumber = mobileNumber;
 	}
 
-	public String getLandlineNumber() {
-		return landlineNumber;
-	}
-
-	public void setLandlineNumber( String landlineNumber ) {
-		this.landlineNumber = landlineNumber;
-	}
 
 	public String getProductId() {
 		return productId;
@@ -137,46 +127,6 @@ public class InputModel {
 
 	public void setBranchCity( String branchCity ) {
 		this.branchCity = branchCity;
-	}
-
-	public String getBranch() {
-		return branch;
-	}
-
-	public void setBranch( String branch ) {
-		this.branch = branch;
-	}
-
-	public String getEmailAddress() {
-		return emailAddress;
-	}
-
-	public void setEmailAddress( String emailAddress ) {
-		this.emailAddress = emailAddress;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState( String state ) {
-		this.state = state;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity( String city ) {
-		this.city = city;
-	}
-
-	public String getPincode() {
-		return pincode;
-	}
-
-	public void setPincode( String pincode ) {
-		this.pincode = pincode;
 	}
 
 	public String getLeadType() {

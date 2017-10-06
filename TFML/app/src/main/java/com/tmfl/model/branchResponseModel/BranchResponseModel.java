@@ -1,6 +1,5 @@
 package com.tmfl.model.branchResponseModel;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -10,15 +9,15 @@ import com.google.gson.annotations.SerializedName;
 public class BranchResponseModel {
 
 	@SerializedName( "terr_territoryid" )
-	@Expose
 	private String terrTerritoryid;
 	@SerializedName( "terr_caption" )
-	@Expose
 	private String terrCaption;
 	@SerializedName( "terr_latitude" )
 	private String terrLatitude;
 	@SerializedName( "terr_longitude" )
 	private String terrLongitude;
+	@SerializedName( "terr_address" )
+	private String terrAddress;
 
 	public String getTerrLongitude() {
 		return terrLongitude;
@@ -64,4 +63,11 @@ public class BranchResponseModel {
 		this.terrCaption = terrCaption;
 	}
 
+	public String getTerrAddress() {
+		return terrAddress;
+	}
+
+	public void setTerrAddress( String terrAddress ) {
+		this.terrAddress = terrAddress;
+	}
 }

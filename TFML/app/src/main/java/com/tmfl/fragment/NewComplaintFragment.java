@@ -345,7 +345,7 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 			@Override
 			public void onFailure( Call< CreateCaseResponseEnvelope > call, Throwable t ) {
 				progressDialog.dismiss();
-				Log.d( "error", t.getMessage() );
+				t.printStackTrace();
 			}
 		} );
 

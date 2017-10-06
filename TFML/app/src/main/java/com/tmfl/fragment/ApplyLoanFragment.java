@@ -269,18 +269,18 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		else if ( !Validation.hasText( edtMobileNumber, "Please enter mobile number" ) ) {
 			ret = false;
 		}
-		else if ( !Validation.isValidEmail( edtEmailAddress.getText().toString() ) ) {
+		/*else if ( !Validation.isValidEmail( edtEmailAddress.getText().toString() ) ) {
 			edtEmailAddress.setError( "Please Enter Email Address" );
 			ret = false;
 		}
 		else if ( !Validation.hasText( edtCode, "Please enter Pincode number" ) ) {
 			ret = false;
-		}
+		}*/
 
-		else if ( edtCode.getText().toString().length() != 6 ) {
+		/*else if ( edtCode.getText().toString().length() != 6 ) {
 			edtCode.setError( "Pincode should be of 6 digits!" );
 			ret = false;
-		}
+		}*/
 
 		else if ( spnProduct.getSelectedItemPosition() == 0 ) {
 			Toast.makeText( getActivity(), "Please Select A Product", Toast.LENGTH_SHORT ).show();
@@ -330,8 +330,8 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		inputLoanModel.setFirstName( edtFirstName.getText().toString() );
 		inputLoanModel.setLastName( edtLastName.getText().toString() );
 		inputLoanModel.setMobileNumber( edtMobileNumber.getText().toString() );
-		inputLoanModel.setLandlineNumber( edtLandlineNumber.getText().toString() );
-		inputLoanModel.setEmailAddress( edtEmailAddress.getText().toString() );
+//		inputLoanModel.setLandlineNumber( edtLandlineNumber.getText().toString() );
+//		inputLoanModel.setEmailAddress( edtEmailAddress.getText().toString() );
 		if ( productCode != null && productCode != "-1" ) {
 			inputLoanModel.setProductId( productCode );
 		}
@@ -344,20 +344,20 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 			inputLoanModel.setBranchCity( branchCityCode );
 		}
 
-		if ( branchCode != null && branchCode != "-1" ) {
+		/*if ( branchCode != null && branchCode != "-1" ) {
 			inputLoanModel.setBranch( branchCode );
-		}
+		}*/
 
-		if ( stateCode != null && stateCode != "-1" ) {
+		/*if ( stateCode != null && stateCode != "-1" ) {
 			inputLoanModel.setState( String.valueOf( 0 ) );
 		}
 
 		if ( cityCode != null && cityCode != "-1" ) {
 			inputLoanModel.setCity( String.valueOf( 0 ) );
-		}
+		}*/
 
-		inputLoanModel.setEmailAddress( edtEmailAddress.getText().toString() );
-		inputLoanModel.setPincode( edtCode.getText().toString() );
+//		inputLoanModel.setEmailAddress( edtEmailAddress.getText().toString() );
+//		inputLoanModel.setPincode( edtCode.getText().toString() );
 		inputLoanModel.setLeadType( strLeadTypechk );
 		inputLoanModel.setOrganisationName( edtOrgnizationName.getText().toString() );
 		inputLoanModel.setVehicalType( strVechicalType );
@@ -365,24 +365,8 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 	}
 
 	public void loadApplyLoanResponse( InputModel inputmodel ) {
-	   /* Log.e("getFirstName", inputmodel.getFirstName());
-	    Log.e("getLastName", inputmodel.getLastName());
-        Log.e("getMobileNumber", inputmodel.getMobileNumber());
-        Log.e("getLandlineNumber", inputmodel.getLandlineNumber());
-        Log.e("getProductId", inputmodel.getProductId());
-        Log.e("getBranch", inputmodel.getBranch());
-        Log.e("getBranchCity", inputmodel.getBranchCity());
-        Log.e("getBranchState", inputmodel.getBranchState());
-        Log.e("getEmailAddress", inputmodel.getEmailAddress());
-        Log.e("getLeadType", inputmodel.getLeadType());
-        Log.e("getPincode", inputmodel.getPincode());
-        Log.e("getLeadType", inputmodel.getLeadType());
-        Log.e("getOrganisationName", inputmodel.getOrganisationName());
-        Log.e("getVehicalType", inputmodel.getVehicalType());
-        Log.e("getCity", inputmodel.getCity());
-        Log.e("getState", inputmodel.getState());
-        Log.e("getUserID", inputmodel.getUserId());
-        Log.e("getOfferId", inputmodel.getOfferId());*/
+
+		Log.d( "request", inputmodel.toString() );
 		tmflApi.getApplyLoanResponse( inputmodel ).enqueue( new Callback< ApplyLoanResponse >() {
 			@Override
 			public void onResponse( Call< ApplyLoanResponse > call, Response< ApplyLoanResponse > response ) {
@@ -392,7 +376,6 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 					if ( response.body().getStatus().contains( "success" ) ) {
 						Log.e( "getApplyLoanResponse", response.body().getStatus() );
 						showAlert( getActivity(), "", "Thank You for your interest in Tata Product. Our representative will contact you shortly.", true );
-
 					}
 					else {
 						Toast.makeText( getActivity(), response.body().getErrors().get( 0 ), Toast.LENGTH_LONG ).show();

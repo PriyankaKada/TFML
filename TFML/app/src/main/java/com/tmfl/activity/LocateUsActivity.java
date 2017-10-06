@@ -42,8 +42,8 @@ import java.util.List;
 public class LocateUsActivity extends DrawerBaseActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, OnMapReadyCallback, LocationListener {
 	public BranchResponseModel branchResponseModel;
 	ImageView imgBack, img_drawer;
-	TextView txtTitle;
-	Spinner  spnState, spnBranch;
+	TextView txtTitle, txtAddress;
+	Spinner spnState, spnBranch;
 	String stateCode, branchCode;
 	InputBranchState   inputBranchState;
 	WebView            webview;
@@ -111,6 +111,7 @@ public class LocateUsActivity extends DrawerBaseActivity implements View.OnClick
 		String loggedIn = bundle1.getString( "LOGGED_IN" );
 		txtTitle = ( TextView ) findViewById( R.id.txt_toolbar_title );
 		imgBack = ( ImageView ) findViewById( R.id.img_map_back );
+		txtAddress = ( TextView ) findViewById( R.id.txtAddress );
 		img_drawer = ( ImageView ) findViewById( R.id.img_drawer_download );
 
 		if ( loggedIn.equals( "true" ) ) {
@@ -180,6 +181,10 @@ public class LocateUsActivity extends DrawerBaseActivity implements View.OnClick
 								               .position( new LatLng( latitude, longitude ) ) );
 
 						map.moveCamera( CameraUpdateFactory.newLatLngZoom( new LatLng( latitude, longitude ), 13 ) );
+
+
+
+						txtAddress.setText( ( ( BranchResponseModel ) parent.getItemAtPosition( position ) ).getTerrAddress() );
 					}
 					else {
 						Toast.makeText( this, "Location not found!", Toast.LENGTH_SHORT ).show();

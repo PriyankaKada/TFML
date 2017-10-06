@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -17,6 +16,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -27,7 +27,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.michael.easydialog.EasyDialog;
 import com.tmfl.R;
 import com.tmfl.adapter.BannerAdapter;
 import com.tmfl.auth.Constant;
@@ -55,6 +54,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 //import static com.tfml.R.id.imageView1;
 public class BannerActivity extends BaseActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 	//String emailId,whatsAppNo,phoneNo;
@@ -68,21 +70,21 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 	String errormsg;
 	View   view1, view2, view3, view4, view5;
 	String strQuickCall, strOtpNo, strMobileNo;
-	TmflApi    tmflApiOtpSubmit;
-	ImageView  imgRefreshOtp;
-	EasyDialog dialog;
-	EditText   edtQuickCall, edtOtpNo;
+	TmflApi   tmflApiOtpSubmit;
+	ImageView imgRefreshOtp;
+	Dialog    dialog;
+	EditText  edtQuickCall, edtOtpNo;
 	CheckBox            checkBox;
 	QuickCallInputModel quickCallInputModel;
 	int count = 0;
 	ComplaintsFragment complaintsFragment;
 	FrameLayout        containerFrameLayout;
 	private BannerFragment bannerFragment;
-	private ImageView      imgQuickCall,imgSocial;
-	private TextView       txtTitle;
-	private ImageView[]    dots;
-	private int            dotsCount;
-	private TextView       txtSchemes, txtApplyLoan, txtReferFriend, txtLoanStatus, txtLogin;
+	private ImageView      imgQuickCall, imgSocial, imgCancel;
+	private TextView    txtTitle;
+	private ImageView[] dots;
+	private int         dotsCount;
+	private TextView    txtSchemes, txtApplyLoan, txtReferFriend, txtLoanStatus, txtLogin;
 	private ImageView imgSchemes, imgApplyLoan, imgReferFriend, imgLoanStatus, imgLogin;
 	private Timer timer;
 
@@ -237,6 +239,14 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 	@Override
 	public void onClick( View v ) {
 		switch ( v.getId() ) {
+
+			case R.id.imgCancel:
+
+				dialog.dismiss();
+
+				break;
+
+
 			case R.id.linQuickCall:
 
 				view5.setVisibility( View.VISIBLE );
@@ -339,21 +349,15 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 	public void quickCallDialog() {
 
 		View view = LayoutInflater.from( this ).inflate( R.layout.dialog_quick_calling, null );
-		dialog = new EasyDialog( this )
-				.setLayout( view )
-				.setBackgroundColor( Color.parseColor( "#FFFFFF" ) )
-				.setLocationByAttachedView( imgQuickCall )
-				.setGravity( EasyDialog.GRAVITY_TOP )
-				.setAnimationTranslationShow( EasyDialog.DIRECTION_Y, 500, 800, 0 )
-				.setAnimationAlphaShow( 500, 0, 0.5f, 1 )
-				.setAnimationTranslationDismiss( EasyDialog.DIRECTION_Y, 500, -50, 800 )
-				.setAnimationAlphaDismiss( 150, 1, 0 )
-				.setTouchOutsideDismiss( true )
-				.setMatchParent( true )
-				.setMarginLeftAndRight( 25, 25 )
-				.setOutsideColor( ContextCompat.getColor( this, R.color.background_color_black ) )
-				.show();
+		dialog = new Dialog( this );
+		dialog.requestWindowFeature( Window.FEATURE_NO_TITLE );
+		dialog.setContentView( view );
+		dialog.getWindow().setLayout( MATCH_PARENT, WRAP_CONTENT );
+		dialog.getWindow().setBackgroundDrawable( new ColorDrawable( android.graphics.Color.TRANSPARENT ) );
 
+		dialog.show();
+
+		imgCancel = ( ImageView ) view.findViewById( R.id.imgCancel );
 		edtQuickCall = ( EditText ) view.findViewById( R.id.edt_mobile_no );
 		edtOtpNo = ( EditText ) view.findViewById( R.id.edt_otp_no );
 		imgRefreshOtp = ( ImageView ) view.findViewById( R.id.img_Refresh_token );
@@ -361,6 +365,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		TextView txtSubmit = ( TextView ) view.findViewById( R.id.txt_submit );
 		checkBox = ( CheckBox ) view.findViewById( R.id.chkTermsCond );
 
+		imgCancel.setOnClickListener( this );
 		edtQuickCall.addTextChangedListener( new TextWatcher() {
 			@Override
 			public void beforeTextChanged( CharSequence s, int start, int count, int after ) {
@@ -533,9 +538,9 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 		imgMap.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
-				Intent mapIntent=  new Intent( BannerActivity.this, LocateUsActivity.class );
-				mapIntent.putExtra( "LOGGED_IN","false" );
-				startActivity(mapIntent );
+				Intent mapIntent = new Intent( BannerActivity.this, LocateUsActivity.class );
+				mapIntent.putExtra( "LOGGED_IN", "false" );
+				startActivity( mapIntent );
 				socialdialog.dismiss();
 				imgSocial.setVisibility( View.VISIBLE );
 			}
