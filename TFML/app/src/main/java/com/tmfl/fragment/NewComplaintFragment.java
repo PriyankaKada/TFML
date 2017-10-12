@@ -7,7 +7,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -232,18 +234,33 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 		return true;
 	}
 
+	public Uri getImageUri(Context inContext, Bitmap inImage) {
+		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+		inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+		String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+		return Uri.parse(path);
+	}
+
 	@Override
 	public void onActivityResult( int requestCode, int resultCode, Intent data ) {
 		super.onActivityResult( requestCode, resultCode, data );
 
 		String path = "";
 		if ( resultCode == Activity.RESULT_OK ) {
-
+			Bitmap imageBitmap;
 			switch ( requestCode ) {
 
 				case 10:
 
-					uri = data.getData();
+					if (Build.VERSION.SDK_INT<24)
+					{
+						uri = data.getData();
+
+					}else {
+						imageBitmap = (Bitmap) data.getExtras().get("data");
+
+						uri = getImageUri(getActivity(), imageBitmap);
+					}
 					file = new File( getFileNameByUri( getActivity(), uri ) );
 
 					fileByte = convertFileToByteArray( file );
@@ -273,7 +290,15 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 
 				case 20:
 
-					uri = data.getData();
+					if (Build.VERSION.SDK_INT<24)
+					{
+						uri = data.getData();
+
+					}else {
+						imageBitmap = (Bitmap) data.getExtras().get("data");
+
+						uri = getImageUri(getActivity(), imageBitmap);
+					}
 					file = new File( getFileNameByUri( getActivity(), uri ) );
 
 					fileByte = convertFileToByteArray( file );
@@ -301,8 +326,15 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 					break;
 
 				case 30:
+					if (Build.VERSION.SDK_INT<24)
+					{
+						uri = data.getData();
 
-					uri = data.getData();
+					}else {
+						imageBitmap = (Bitmap) data.getExtras().get("data");
+
+						uri = getImageUri(getActivity(), imageBitmap);
+					}
 					file = new File( getFileNameByUri( getActivity(), uri ) );
 
 					fileByte = convertFileToByteArray( file );

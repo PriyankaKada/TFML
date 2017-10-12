@@ -286,7 +286,6 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 
 			if ( CommonUtils.isNetworkAvailable( getActivity() ) ) {
 				CommonUtils.showProgressDialog( getActivity(), "Please Wait Uploading Data..." );
-
 				callRcUploadData( rcUploadDataInputModel, body );
 			}
 			else {
