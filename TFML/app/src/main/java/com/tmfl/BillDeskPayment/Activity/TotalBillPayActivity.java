@@ -189,9 +189,9 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 				List< Contract > list = new ArrayList< Contract >();
 
 				for ( int i = 0; i < response.body().getData().getActive().getContracts().size(); i++ ) {
-					if ( response.body().getData().getActive().getContracts().get( i ).getUsrConCompCode().equalsIgnoreCase( "5000" ) ) {
-						list.add( response.body().getData().getActive().getContracts().get( i ) );
-					}
+//					if ( response.body().getData().getActive().getContracts().get( i ).getUsrConCompCode().equalsIgnoreCase( "5000" ) ) {
+					list.add( response.body().getData().getActive().getContracts().get( i ) );
+//					}
 				}
 
 				for ( int i = 0; i < list.size(); i++ ) {

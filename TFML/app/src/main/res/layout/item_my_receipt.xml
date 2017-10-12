@@ -24,23 +24,12 @@
                 android:orientation="horizontal"
                 android:weightSum="10">
 
-                <!--<TextView
-                    android:id="@+id/txtReceiptDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    android:gravity="left|center"
-                    android:text="Receipt Date/ReceiptNo"
-                    android:textSize="12sp"
-                    android:visibility="invisible" />-->
-
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="5"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -48,7 +37,8 @@
                         android:gravity="left|center"
                         android:text="Type: "
                         android:textColor="@color/text_black"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp"
+                        android:visibility="gone"/>
 
                     <TextView
                         android:id="@+id/txtType"
@@ -118,8 +108,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:visibility="gone"
-                >
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -165,18 +154,14 @@
                     android:textSize="12sp"/>
 
             </LinearLayout>
-
-
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="2dp"
-            android:visibility="gone"
-            >
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -188,8 +173,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"

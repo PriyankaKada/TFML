@@ -1,8 +1,10 @@
 package com.tmfl.fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -35,6 +37,7 @@ import com.tmfl.complaintnetwork.createcase.request.FileKeyValuePair;
 import com.tmfl.complaintnetwork.createcase.response.CreateCaseResponseEnvelope;
 import com.tmfl.complaintnetwork.createcase.response.ParsedResponse;
 import com.tmfl.model.ContractResponseModel.ActiveContractsModel;
+import com.tmfl.util.ImageDecoding;
 import com.tmfl.util.PreferenceHelper;
 
 import java.io.ByteArrayOutputStream;
@@ -72,6 +75,7 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 	private ActiveContractsModel activeContractsModel;
 	private ArrayList< String >  contractsModelList;
 	private ProgressDialog       progressDialog;
+	private Uri                  selectedImage;
 
 	public static byte[] convertFileToByteArray( File f ) {
 		byte[] byteArray = null;
@@ -159,38 +163,33 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 
 			case R.id.imgUpload1:
 
-				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
-					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
-					intent.putExtra( "CONTENT_TYPE", "text/plain|image/*|application/*.pdf" );
-					intent.addCategory( Intent.CATEGORY_DEFAULT );
-				}
-				else {
-					intent = new Intent( Intent.ACTION_GET_CONTENT );
-					intent.setType( "text/plain|image/*|application/*.pdf" );
-					intent.addCategory( Intent.CATEGORY_OPENABLE );
-				}
-				startActivityForResult( intent, 1 );
+				upLoadRCdoc( 1, 10 );
 
 				break;
 
 			case R.id.imgUpload2:
 
-				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
-					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
-					intent.putExtra( "CONTENT_TYPE", "text/plain|image/*|application/*.pdf" );
-					intent.addCategory( Intent.CATEGORY_DEFAULT );
-				}
-				else {
-					intent = new Intent( Intent.ACTION_GET_CONTENT );
-					intent.setType( "text/plain|image/*|application/*.pdf" );
-					intent.addCategory( Intent.CATEGORY_OPENABLE );
-				}
-				startActivityForResult( intent, 2 );
+				upLoadRCdoc( 2, 20 );
 
 				break;
 
 			case R.id.imgUpload3:
 
+				upLoadRCdoc( 3, 30 );
+
+				break;
+		}
+	}
+
+	public void upLoadRCdoc( final int galleryCode, final int cameraCode ) {
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder( getActivity() );
+		alertDialog.setTitle( "Pictures Option" );
+		alertDialog.setIcon( getResources().getDrawable( R.drawable.ic_image ) );
+		alertDialog.setPositiveButton( "GALLARY", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick( DialogInterface dialog, int which ) {
+				Intent intent;
+				String manufactures = android.os.Build.MANUFACTURER;
 				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
 					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
 					intent.putExtra( "CONTENT_TYPE", "text/plain|image/*|application/*.pdf" );
@@ -201,11 +200,23 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 					intent.setType( "text/plain|image/*|application/*.pdf" );
 					intent.addCategory( Intent.CATEGORY_OPENABLE );
 				}
-				startActivityForResult( intent, 3 );
-
-				break;
-		}
+				startActivityForResult( intent, galleryCode );
+			}
+		} );
+		alertDialog.setNegativeButton( "CAMERA", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick( DialogInterface dialog, int which ) {
+				if ( ImageDecoding.isDeviceSupportCamera( getActivity() ) ) {
+					Intent intent = new Intent( MediaStore.ACTION_IMAGE_CAPTURE );
+					selectedImage = ImageDecoding.getOutputMediaFileUri( 1 );
+					intent.putExtra( MediaStore.EXTRA_OUTPUT, selectedImage );
+					startActivityForResult( intent, cameraCode );
+				}
+			}
+		} );
+		alertDialog.show();
 	}
+
 
 	private boolean validate() {
 
@@ -224,9 +235,27 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 	@Override
 	public void onActivityResult( int requestCode, int resultCode, Intent data ) {
 		super.onActivityResult( requestCode, resultCode, data );
+
+		String path = "";
 		if ( resultCode == Activity.RESULT_OK ) {
 
 			switch ( requestCode ) {
+
+				case 10:
+
+					uri = data.getData();
+					file = new File( getFileNameByUri( getActivity(), uri ) );
+
+					fileByte = convertFileToByteArray( file );
+					base64File = Base64.encodeToString( fileByte, Base64.DEFAULT );
+
+					fileKeyValuePair1.setKey( file.getName() );
+					fileKeyValuePair1.setValue( base64File );
+
+					txtFileName1.setText( file.getName() );
+
+					break;
+
 				case 1:
 
 					uri = data.getData();
@@ -242,6 +271,21 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 
 					break;
 
+				case 20:
+
+					uri = data.getData();
+					file = new File( getFileNameByUri( getActivity(), uri ) );
+
+					fileByte = convertFileToByteArray( file );
+					base64File = Base64.encodeToString( fileByte, Base64.DEFAULT );
+
+					fileKeyValuePair1.setKey( file.getName() );
+					fileKeyValuePair1.setValue( base64File );
+
+					txtFileName2.setText( file.getName() );
+
+					break;
+
 				case 2:
 
 					uri = data.getData();
@@ -254,6 +298,21 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 					fileKeyValuePair2.setValue( base64File );
 
 					txtFileName2.setText( file.getName() );
+					break;
+
+				case 30:
+
+					uri = data.getData();
+					file = new File( getFileNameByUri( getActivity(), uri ) );
+
+					fileByte = convertFileToByteArray( file );
+					base64File = Base64.encodeToString( fileByte, Base64.DEFAULT );
+
+					fileKeyValuePair1.setKey( file.getName() );
+					fileKeyValuePair1.setValue( base64File );
+
+					txtFileName3.setText( file.getName() );
+
 					break;
 
 				case 3:

@@ -155,7 +155,6 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 //		spnContractNo.setSelection( 1 );
 //         spnContractNo.setAdapter(new ArrayAdapter<String>(getActivity(),R.layout.spinner_row,contractLst));
 
-
 		edt_rc_no = ( EditText ) view.findViewById( R.id.edt_rc_no );
 		btnRcUpload = ( Button ) view.findViewById( R.id.btn_rc_upload );
 		img_upload = ( ImageView ) view.findViewById( R.id.img_upload );
@@ -181,13 +180,6 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 			txt_dueamount.setText( "Rs." + overdue );
 		}
 		SetFonts.setFonts( getActivity(), btnRcUpload, 2 );
-
-		spnContractNo.post( new Runnable() {
-			@Override
-			public void run() {
-
-			}
-		} );
 
 		spnContractNo.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
 			@Override
@@ -233,7 +225,6 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 	}
 
 	public void upLoadRCdoc() {
-
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder( getActivity() );
 		alertDialog.setTitle( "Pictures Option" );
 		alertDialog.setIcon( getResources().getDrawable( R.drawable.ic_image ) );
@@ -301,7 +292,6 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 			else {
 				CommonUtils.showAlert1( getActivity(), "", "No Internet Connection", false );
 			}
-
 		}
 	}
 
@@ -343,8 +333,6 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 				CommonUtils.closeProgressDialog();
 			}
 		} );
-
-
 	}
 
 	private HashMap< String, RequestBody > callmapmethod() {
@@ -366,6 +354,4 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
 
 		return params;
 	}
-
-
 }

@@ -35,13 +35,6 @@
 
             />
 
-        <ImageView
-            android:id="@+id/imgTick"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="4dp"
-            android:src="@drawable/ic_check_circle_amber"/>
     </LinearLayout>
 
     <View
@@ -141,7 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="5dp"
-            android:text="Overdue Charges"
+            android:text="Overdue Interest"
             android:textSize="14sp"/>
 
         <TextView
@@ -167,7 +160,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="5dp"
-            android:text="Expenses"
+            android:text="O/S Expenses"
             android:textSize="14sp"/>
 
         <TextView
@@ -232,6 +225,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:gravity="center_vertical"
             android:padding="5dp">
 
             <EditText
@@ -243,6 +237,15 @@
                 android:inputType="number"
                 android:padding="5dp"
                 android:textSize="14sp"/>
+
+            <ImageView
+                android:id="@+id/imgTick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:padding="4dp"
+                android:src="@drawable/ic_check_circle_amber"/>
 
         </LinearLayout>
     </LinearLayout>

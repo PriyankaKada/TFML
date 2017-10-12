@@ -194,9 +194,7 @@ public class SplashActivity extends BaseActivity {
 				Toast.makeText( SplashActivity.this, "Network Error...", Toast.LENGTH_SHORT ).show();
 			}
 		} );
-
 	}
-
 
 	@Override
 	public void onRequestPermissionsResult( int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults ) {
@@ -238,6 +236,4 @@ public class SplashActivity extends BaseActivity {
 				super.onRequestPermissionsResult( requestCode, permissions, grantResults );
 		}
 	}
-
-
 }
