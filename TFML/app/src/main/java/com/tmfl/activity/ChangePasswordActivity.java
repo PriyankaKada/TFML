@@ -58,7 +58,6 @@ public class ChangePasswordActivity extends DrawerBaseActivity implements View.O
 		btnChangePass.setOnClickListener( this );
 		img_drawer_download.setOnClickListener( this );
 
-
 	}
 
 	@Override
@@ -77,7 +76,7 @@ public class ChangePasswordActivity extends DrawerBaseActivity implements View.O
 						Toast.makeText( getBaseContext(), "Please Enter New Password", Toast.LENGTH_SHORT ).show();
 					}
 
-					else if ( !TextUtils.isEmpty( txtConfirmPass.getText().toString() ) ) {
+					else if ( TextUtils.isEmpty( txtConfirmPass.getText().toString() ) ) {
 						Toast.makeText( getBaseContext(), "Please Enter Confirm Password", Toast.LENGTH_SHORT ).show();
 					}
 					else if ( txtNewPass.getText().toString().equals( txtConfirmPass.getText().toString() ) ) {

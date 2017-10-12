@@ -66,13 +66,13 @@ public class DownloadAdapter extends BaseAdapter {
 		}
 		holder.txtFile.setText( downloadList.get( position ).getName() );
 
-		holder.txtFile.setTag(""+ position );
+		holder.txtFile.setTag( "" + position );
 
 		holder.txtFile.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
-				int i= Integer.parseInt( v.getTag() +"");
-				String fileUrl        = downloadList.get( i ).getFile();
+				int    i       = Integer.parseInt( v.getTag() + "" );
+				String fileUrl = downloadList.get( i ).getFile() == null ? downloadList.get( i ).getUrl() : downloadList.get( i ).getFile();
 				//Intent downloadIntent = new Intent( context, DownloadDataActivity.class );
 				//downloadIntent.putExtra( "URL", fileUrl );
 				//Log.d( "fileUrl", fileUrl );
@@ -90,9 +90,9 @@ public class DownloadAdapter extends BaseAdapter {
 				request.setDestinationInExternalPublicDir( Environment.DIRECTORY_DOWNLOADS, "TFML/Downloads"
 						+ SystemClock.currentThreadTimeMillis() + mime );
 
-				DownloadManager manager           = ( DownloadManager ) context.getSystemService( Context.DOWNLOAD_SERVICE );
+				DownloadManager manager = ( DownloadManager ) context.getSystemService( Context.DOWNLOAD_SERVICE );
 
-				Long            downloadReference = manager.enqueue( request );
+				Long downloadReference = manager.enqueue( request );
 				try {
 					manager.openDownloadedFile( downloadReference );
 				}

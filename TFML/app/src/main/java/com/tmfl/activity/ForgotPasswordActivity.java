@@ -50,7 +50,6 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
 		btnSubmit.setOnClickListener( this );
 		imgBack.setOnClickListener( this );
 
-
 	}
 
 	@Override
@@ -106,5 +105,4 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
 			}
 		} );
 	}
-
 }

@@ -77,63 +77,63 @@ public class CustomAdapter extends ArrayAdapter< Contract > {
 		}
 
 		Log.e( "contract", contract.getRcNumber() );
-		if ( contract.getUsrConCompCode().equalsIgnoreCase( "5000" ) ) {
-			holder.txtContractNoValue.setText( contract.getUsrConNo() );
-			holder.txtRcNo.setText( contract.getRcNumber() );
-			holder.txtOverdue.setText( contract.getOdAmt() );
-			holder.txtOverdueChanged.setText( contract.getDueAmount() );
-			holder.txtExpenses.setText( contract.getTotalExpenses() );
-			holder.txtTotalDue.setText( contract.getTotalCurrentDue() );
-			holder.txtMonthlyEMI.setText( contract.getDueAmount() );
+//		if ( contract.getUsrConCompCode().equalsIgnoreCase( "5000" ) ) {
+		holder.txtContractNoValue.setText( contract.getUsrConNo() );
+		holder.txtRcNo.setText( contract.getRcNumber() );
+		holder.txtOverdue.setText( contract.getOdAmt() );
+		holder.txtOverdueChanged.setText( contract.getDueAmount() );
+		holder.txtExpenses.setText( contract.getTotalExpenses() );
+		holder.txtTotalDue.setText( contract.getTotalCurrentDue() );
+		holder.txtMonthlyEMI.setText( contract.getDueAmount() );
 
-			holder.mWatcher.active = false;
+		holder.mWatcher.active = false;
 //		holder.txtEnterAmount.setInputType( InputType.TYPE_NUMBER_FLAG_DECIMAL );
-			holder.txtEnterAmount.setText( contract.getNewTotalCurrentDue() == null || contract.getNewTotalCurrentDue().equalsIgnoreCase( "" ) ? contract.getTotalCurrentDue() : contract.getNewTotalCurrentDue() );
-			holder.mWatcher.pos = position;
+		holder.txtEnterAmount.setText( contract.getNewTotalCurrentDue() == null || contract.getNewTotalCurrentDue().equalsIgnoreCase( "" ) ? contract.getTotalCurrentDue() : contract.getNewTotalCurrentDue() );
+		holder.mWatcher.pos = position;
 
-			holder.mWatcher.active = true;
-			holder.imgTick.setImageResource( contract.getIsSelected() ? R.drawable.ic_check_circle_green : R.drawable.ic_check_circle_amber );
-			holder.txtEnterAmount.setEnabled( !contract.getIsSelected() );
+		holder.mWatcher.active = true;
+		holder.imgTick.setImageResource( contract.getIsSelected() ? R.drawable.ic_check_circle_green : R.drawable.ic_check_circle_amber );
+		holder.txtEnterAmount.setEnabled( !contract.getIsSelected() );
 
-			int count = 0;
-			if ( contract.getIsSelected() ) {
-				count++;
-			}
-			else {
-				count--;
-			}
-
-			if ( contract.getIsSelected() ) {
-				holder.txtEnterAmount.setEnabled( true );
-			}
-			else {
-				holder.txtEnterAmount.setEnabled( false );
-			}
-			holder.imgTick.setTag( holder.txtEnterAmount );
-			final int finalCount = count;
-			holder.imgTick.setOnClickListener( new View.OnClickListener() {
-				@Override
-				public void onClick( View view ) {
-
-					if ( finalCount <= 8 ) {
-						EditText editText = ( EditText ) view.getTag();
-						double value = Double.parseDouble( editText.getText().toString().trim().equalsIgnoreCase( "" )
-								                                   ? "0.0" : editText.getText().toString().trim() );
-						listItems.get( position ).setSelected( !listItems.get( position ).getIsSelected() );
-						holder.imgTick.setImageResource( listItems.get( position ).getIsSelected() ? R.drawable.ic_check_circle_green : R.drawable.ic_check_circle_amber );
-						editText.setEnabled( listItems.get( position ).getIsSelected() );
-
-						InputMethodManager imm = ( InputMethodManager ) mContext.getSystemService( Activity.INPUT_METHOD_SERVICE );
-						imm.toggleSoftInput( 0, InputMethodManager.HIDE_IMPLICIT_ONLY );
-
-						( ( TotalBillPayActivity ) mContext ).updateTotalAmount();
-					}
-					else {
-						Toast.makeText( mContext, "Contract No exceeded!", Toast.LENGTH_SHORT ).show();
-					}
-				}
-			} );
+		int count = 0;
+		if ( contract.getIsSelected() ) {
+			count++;
 		}
+		else {
+			count--;
+		}
+
+		if ( contract.getIsSelected() ) {
+			holder.txtEnterAmount.setEnabled( true );
+		}
+		else {
+			holder.txtEnterAmount.setEnabled( false );
+		}
+		holder.imgTick.setTag( holder.txtEnterAmount );
+		final int finalCount = count;
+		holder.imgTick.setOnClickListener( new View.OnClickListener() {
+			@Override
+			public void onClick( View view ) {
+
+				if ( finalCount <= 8 ) {
+					EditText editText = ( EditText ) view.getTag();
+					double value = Double.parseDouble( editText.getText().toString().trim().equalsIgnoreCase( "" )
+							                                   ? "0.0" : editText.getText().toString().trim() );
+					listItems.get( position ).setSelected( !listItems.get( position ).getIsSelected() );
+					holder.imgTick.setImageResource( listItems.get( position ).getIsSelected() ? R.drawable.ic_check_circle_green : R.drawable.ic_check_circle_amber );
+					editText.setEnabled( listItems.get( position ).getIsSelected() );
+
+					InputMethodManager imm = ( InputMethodManager ) mContext.getSystemService( Activity.INPUT_METHOD_SERVICE );
+					imm.toggleSoftInput( 0, InputMethodManager.HIDE_IMPLICIT_ONLY );
+
+					( ( TotalBillPayActivity ) mContext ).updateTotalAmount();
+				}
+				else {
+					Toast.makeText( mContext, "Contract No exceeded!", Toast.LENGTH_SHORT ).show();
+				}
+			}
+		} );
+//		}
 
 		return convertView;
 	}
