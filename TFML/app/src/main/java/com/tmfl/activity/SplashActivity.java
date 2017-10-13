@@ -78,9 +78,6 @@ public class SplashActivity extends BaseActivity {
 		if ( !addPermission( permissionsList, Manifest.permission.ACCESS_FINE_LOCATION ) ) {
 			permissionsNeeded.add( "GPS" );
 		}
-		if ( !addPermission( permissionsList, Manifest.permission.READ_SMS ) ) {
-			permissionsNeeded.add( "Read SMS" );
-		}
 		if ( !addPermission( permissionsList, Manifest.permission.READ_CONTACTS ) ) {
 			permissionsNeeded.add( "Read Contacts" );
 		}

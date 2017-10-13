@@ -45,13 +45,11 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 	ContractsInputModel    contractsInputModel;
 	ContractsResponseModel contractsResponseModel;
 	String                 strApiToken, strUserId, strTerCount, strOverdue, strTotal;
+	boolean flag = false;
 	private TextView txtTitleContract, txtTotalCount, txtTerminatedCount, txtOverDueCount, txtCurrentDate, txtName, txtContractNo, txtRcNo, txtNextDueDate, txtCurrentEmi, txtLastPayment, txtPreviousEmi, txtOverdueAmount, txtRepaymentMode, txtTerminitedContracName, txtTerminatedContractDate, txtSchemes, txtApplyLoan, txtReferFriend, txtLoanStatus, txtContactUs;
 	private LinearLayout linSchemes, linApplyLoan, linReferFriend, linLoanStaus, linContactUs;
 	private ImageView imgDrawer;
 	private ListView  lstContractList;
-
-
-	boolean flag=false;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
@@ -64,8 +62,8 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 		tmflApi = ApiService.getInstance().call();
 		init();
 
-		SimpleDateFormat date = new SimpleDateFormat( "dd-MM-yyyy" );
-		String newDate = date.format( System.currentTimeMillis() );
+		SimpleDateFormat date    = new SimpleDateFormat( "dd-MM-yyyy" );
+		String           newDate = date.format( System.currentTimeMillis() );
 		Log.d( "current date", newDate );
 		//txtCurrentDate.setText( "Data as of  " + newDate +"." );
 		txtName.setText( "Welcome, " + PreferenceHelper.getString( PreferenceHelper.USER_FIRT_NAME ) );
@@ -144,7 +142,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 				if ( !flag ) {
 					txtTitleContract.setText( "Customer Care" );
 					getSupportFragmentManager().beginTransaction().addToBackStack( this.getClass().getName() ).replace( R.id.frame_container_contract, new ComplaintsFragment() ).commit();
-					flag=true;
+					flag = true;
 				}
 
 				break;
@@ -175,7 +173,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 					models.addAll( response.body().getData().getActive().getContracts() );
 
 					PreferenceHelper.insertObject( Constant.ONGOING_LOAN, response.body().getData().getActive() );
-					txtCurrentDate.setText( "Data as of  " + response.body().getData().getLastUpdatedDate() +"." );
+					txtCurrentDate.setText( "Data as of  " + response.body().getData().getLastUpdatedDate() + "." );
 
 				}
 				else {
@@ -281,9 +279,9 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 		imgMap.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View v ) {
-				Intent mapIntent=  new Intent( ContractActivity.this, LocateUsActivity.class );
-				mapIntent.putExtra( "LOGGED_IN","true" );
-				startActivity(mapIntent );
+				Intent mapIntent = new Intent( ContractActivity.this, LocateUsActivity.class );
+				mapIntent.putExtra( "LOGGED_IN", "true" );
+				startActivity( mapIntent );
 				contactDialog.dismiss();
 			}
 		} );
@@ -297,13 +295,12 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 
 		if ( getSupportFragmentManager().findFragmentById( R.id.frame_complaint_container ) instanceof ComplaintsFragment ) {
 			txtTitleContract.setText( "Customer Care" );
-			flag=true;
+			flag = true;
 		}
 		else {
 			txtTitleContract.setText( "My Contract" );
-			flag=false;
+			flag = false;
 		}
-
 
 
 	}
