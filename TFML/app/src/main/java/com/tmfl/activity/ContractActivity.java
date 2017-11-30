@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.tmfl.BillDeskPayment.Activity.TotalBillPayActivity;
 import com.tmfl.R;
 import com.tmfl.adapter.ContractsListAdapter;
 import com.tmfl.auth.Constant;
@@ -47,7 +48,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 	String                 strApiToken, strUserId, strTerCount, strOverdue, strTotal;
 	boolean flag = false;
 	private TextView txtTitleContract, txtTotalCount, txtTerminatedCount, txtOverDueCount, txtCurrentDate, txtName, txtContractNo, txtRcNo, txtNextDueDate, txtCurrentEmi, txtLastPayment, txtPreviousEmi, txtOverdueAmount, txtRepaymentMode, txtTerminitedContracName, txtTerminatedContractDate, txtSchemes, txtApplyLoan, txtReferFriend, txtLoanStatus, txtContactUs;
-	private LinearLayout linSchemes, linApplyLoan, linReferFriend, linLoanStaus, linContactUs;
+	private LinearLayout linSchemes, linApplyLoan, linReferFriend, linLoanStaus, linContactUs, llOnlinePayment;
 	private ImageView imgDrawer;
 	private ListView  lstContractList;
 
@@ -95,8 +96,10 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 		linLoanStaus = ( LinearLayout ) findViewById( R.id.linLoanStaus );
 		linContactUs = ( LinearLayout ) findViewById( R.id.lin_contact_us );
 		imgDrawer = ( ImageView ) findViewById( R.id.img_drawer );
+		llOnlinePayment = ( LinearLayout ) findViewById( R.id.llOnlinePayment );
 //		selectedView = ( View ) findViewById( R.id.viewId );
 		SetFonts.setFonts( this, txtTitleContract, 2 );
+		llOnlinePayment.setOnClickListener( this );
 		linSchemes.setOnClickListener( this );
 		linApplyLoan.setOnClickListener( this );
 		linReferFriend.setOnClickListener( this );
@@ -118,6 +121,14 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 	@Override
 	public void onClick( View v ) {
 		switch ( v.getId() ) {
+
+			case R.id.llOnlinePayment:
+
+				Intent intent = new Intent( ContractActivity.this, TotalBillPayActivity.class );
+				startActivity( intent );
+
+				break;
+
 			case R.id.llSchemes:
 				Intent intentSchema = new Intent( this, SchemesActivity.class );
 				intentSchema.putExtra( "TAB_SELECTED", Constant.ISSCHEMASTABSELECT ).putExtra( "LOGGED_IN", "true" );

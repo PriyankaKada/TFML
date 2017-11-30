@@ -80,4 +80,5 @@
     <string name="txt_total_bal">\"TOTAL BALANCE\" amount shown above is \"subject to providing clearance proof of all prior Receipts\" \n * The \"TOTAL BALANCE\" will change if not paid on </string>
 
     <string name="call_script">You can track status of your Query.\nRequest or Complain with this reference number.\nPlease quote this in case you are speaking to our\ncustomer care center executive. For any\nassitance on registration or status or your\ncase, please call our Customer care center\n1800-209-0188 (Toll Free).</string>
+    <string name="onlinePayment">Online\nPayment</string>
 </resources>

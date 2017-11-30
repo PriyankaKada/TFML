@@ -118,7 +118,7 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 			txtTotalDueAmount.setText( model.getTotalCurrentDue() == null ? "Rs. 0" : "Rs." + String.valueOf( ( int ) totalDueAmount ) );
 
 			txtODC.setText( model.getOdcCollectioAmount() );
-			txtExpenses.setText( model.getTotalExpenses() == null? "Rs. 0":"Rs." + model.getTotalExpenses());
+			txtExpenses.setText( model.getTotalExpenses() == null ? "Rs. 0" : "Rs." + model.getTotalExpenses() );
 			Log.e( "DueAmount", model.getDueAmount().toString() );
 			Log.e( "TDueAmount", txt_current_emi_amount.getText().toString() );
 
@@ -138,7 +138,7 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 
 					Intent intent = new Intent( mContext, EmiActivity.class );
 					Bundle bundle = new Bundle();
-					bundle.putSerializable("datamodel", arrayList);
+					bundle.putSerializable( "datamodel", arrayList );
 					bundle.putString( "datamodelvalue", model.getUsrConNo() );
 					PreferenceHelper.insertString( PreferenceHelper.CONTRACT_NO, model.getUsrConNo() );
 					bundle.putString( "RCNO", model.getRcNumber() );
