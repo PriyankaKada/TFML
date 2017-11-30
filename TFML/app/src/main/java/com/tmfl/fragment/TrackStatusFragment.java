@@ -172,7 +172,7 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 		imgUploadFile.setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View view ) {
-				uploadFile(  txtCaseId.getText().toString());
+				uploadFile( txtCaseId.getText().toString() );
 			}
 		} );
 
@@ -460,8 +460,10 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 
 		reqBody.setUploadDocData( reqData );
 		requestEnvelope.setUploadDocReqBody( reqBody );
+		fileDialog.dismiss();
 
 		TmflApi apiService = ComplaintSoapApiService.getInstance().call();
+
 
 		progressDialog.show();
 		apiService.uploadDocRequest( requestEnvelope ).enqueue( new Callback< UploadDocResponseEnvelope >() {
@@ -480,7 +482,6 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 				else {
 					Toast.makeText( getActivity(), caseFile.getCaseFile().getMessage(), Toast.LENGTH_SHORT ).show();
 				}
-				fileDialog.dismiss();
 
 				txtComplainCaseId.setText( "" );
 				txtFromDate.setText( "" );
@@ -491,7 +492,6 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 			@Override
 			public void onFailure( Call< UploadDocResponseEnvelope > call, Throwable t ) {
 
-				fileDialog.dismiss();
 				progressDialog.dismiss();
 				Log.d( "error", t.getMessage() );
 
