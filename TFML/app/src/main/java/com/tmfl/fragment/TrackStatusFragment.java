@@ -80,173 +80,171 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class TrackStatusFragment extends Fragment implements UploadFileInterface, View.OnClickListener, DatePickerDialog.OnDateChangeListener {
 
-	TextView txtComplainCaseId, txtFromDate, txtToDate;
-	Spinner      spnContractNo;
-	LinearLayout llComplaintListHeader;
-	ListView     list;
-	Dialog       fileDialog;
-	TextView     txtFileName1, txtFileName2, txtFileName3, txtCancel;
-	ImageView imgFile1, imgFile2, imgFile3, imgUploadFile;
-	FileKeyValuePair fileKeyValuePair1, fileKeyValuePair2, fileKeyValuePair3;
-	File   file;
-	String path, startDate, endDate;
-	byte[] fileByte;
-	String base64File;
-	Uri    uri;
+    TextView txtComplainCaseId, txtFromDate, txtToDate;
+    Spinner spnContractNo;
+    LinearLayout llComplaintListHeader;
+    ListView list;
+    Dialog fileDialog;
+    TextView txtFileName1, txtFileName2, txtFileName3, txtCancel;
+    ImageView imgFile1, imgFile2, imgFile3, imgUploadFile;
+    FileKeyValuePair fileKeyValuePair1, fileKeyValuePair2, fileKeyValuePair3;
+    File file;
+    String path, startDate, endDate;
+    byte[] fileByte;
+    String base64File;
+    Uri uri;
 
-	OnDateSetListener fromDate = new OnDateSetListener() {
-		@Override
-		public void onDateSet( DatePicker view, int year, int monthOfYear, int dayOfMonth ) {
-			// txtAccDate.setText((dayOfMonth > 9 ? dayOfMonth : "0"+dayOfMonth) + "-" + ((monthOfYear + 1) > 9 ? (monthOfYear + 1) :("0"+(monthOfYear + 1))) + "-" + year);
-			txtFromDate.setText( ( dayOfMonth > 9 ? dayOfMonth : "0" + dayOfMonth ) + "-" + ( ( monthOfYear + 1 ) > 9 ? ( monthOfYear + 1 ) : ( "0" + ( monthOfYear + 1 ) ) ) + "-" + year );
-			startDate = year + "-" + ( ( monthOfYear + 1 ) > 9 ? ( monthOfYear + 1 ) : ( "0" + ( monthOfYear + 1 ) ) ) + "-" + ( dayOfMonth > 9 ? dayOfMonth : "0" + dayOfMonth );
-			//dob = ((monthOfYear + 1) > 9 ? (monthOfYear + 1) :("0"+(monthOfYear + 1))) + "/" + (dayOfMonth > 9 ? dayOfMonth : "0"+dayOfMonth) + "/" + year;
-		}
-	};
+    OnDateSetListener fromDate = new OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            // txtAccDate.setText((dayOfMonth > 9 ? dayOfMonth : "0"+dayOfMonth) + "-" + ((monthOfYear + 1) > 9 ? (monthOfYear + 1) :("0"+(monthOfYear + 1))) + "-" + year);
+            txtFromDate.setText((dayOfMonth > 9 ? dayOfMonth : "0" + dayOfMonth) + "-" + ((monthOfYear + 1) > 9 ? (monthOfYear + 1) : ("0" + (monthOfYear + 1))) + "-" + year);
+            startDate = year + "-" + ((monthOfYear + 1) > 9 ? (monthOfYear + 1) : ("0" + (monthOfYear + 1))) + "-" + (dayOfMonth > 9 ? dayOfMonth : "0" + dayOfMonth);
+            //dob = ((monthOfYear + 1) > 9 ? (monthOfYear + 1) :("0"+(monthOfYear + 1))) + "/" + (dayOfMonth > 9 ? dayOfMonth : "0"+dayOfMonth) + "/" + year;
+        }
+    };
 
-	OnDateSetListener toDate = new OnDateSetListener() {
-		@Override
-		public void onDateSet( DatePicker view, int year, int monthOfYear, int dayOfMonth ) {
-			// txtAccDate.setText((dayOfMonth > 9 ? dayOfMonth : "0"+dayOfMonth) + "-" + ((monthOfYear + 1) > 9 ? (monthOfYear + 1) :("0"+(monthOfYear + 1))) + "-" + year);
-			txtToDate.setText( ( dayOfMonth > 9 ? dayOfMonth : "0" + dayOfMonth ) + "-" + ( ( monthOfYear + 1 ) > 9 ? ( monthOfYear + 1 ) : ( "0" + ( monthOfYear + 1 ) ) ) + "-" + year );
-			endDate = year + "-" + ( ( monthOfYear + 1 ) > 9 ? ( monthOfYear + 1 ) : ( "0" + ( monthOfYear + 1 ) ) ) + "-" + ( dayOfMonth > 9 ? dayOfMonth : "0" + dayOfMonth );
-			//dob = ((monthOfYear + 1) > 9 ? (monthOfYear + 1) :("0"+(monthOfYear + 1))) + "/" + (dayOfMonth > 9 ? dayOfMonth : "0"+dayOfMonth) + "/" + year;
-		}
-	};
+    OnDateSetListener toDate = new OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            // txtAccDate.setText((dayOfMonth > 9 ? dayOfMonth : "0"+dayOfMonth) + "-" + ((monthOfYear + 1) > 9 ? (monthOfYear + 1) :("0"+(monthOfYear + 1))) + "-" + year);
+            txtToDate.setText((dayOfMonth > 9 ? dayOfMonth : "0" + dayOfMonth) + "-" + ((monthOfYear + 1) > 9 ? (monthOfYear + 1) : ("0" + (monthOfYear + 1))) + "-" + year);
+            endDate = year + "-" + ((monthOfYear + 1) > 9 ? (monthOfYear + 1) : ("0" + (monthOfYear + 1))) + "-" + (dayOfMonth > 9 ? dayOfMonth : "0" + dayOfMonth);
+            //dob = ((monthOfYear + 1) > 9 ? (monthOfYear + 1) :("0"+(monthOfYear + 1))) + "/" + (dayOfMonth > 9 ? dayOfMonth : "0"+dayOfMonth) + "/" + year;
+        }
+    };
 
-	private TextView txtCaseId, txtReqComplaintDate, txtDesc, txtCaseStage, txtUploadFile;
-	private Button             btnGo;
-	private DatePickerFragment date;
-	private ProgressDialog     progressDialog;
-	private String             caseId;
-	private LinearLayout       linearLayout;
+    private TextView txtCaseId, txtReqComplaintDate, txtDesc, txtCaseStage, txtUploadFile;
+    private Button btnGo;
+    private DatePickerFragment date;
+    private ProgressDialog progressDialog;
+    private String caseId;
+    private LinearLayout linearLayout;
 
-	public static byte[] convertFileToByteArray( File f ) {
-		byte[] byteArray = null;
-		try {
-			@SuppressWarnings( "resource" )
-			InputStream inputStream = new FileInputStream( f );
-			ByteArrayOutputStream bos       = new ByteArrayOutputStream();
-			byte[]                b         = new byte[1024 * 8];
-			int                   bytesRead = 0;
+    public static byte[] convertFileToByteArray(File f) {
+        byte[] byteArray = null;
+        try {
+            @SuppressWarnings("resource")
+            InputStream inputStream = new FileInputStream(f);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] b = new byte[1024 * 8];
+            int bytesRead = 0;
 
-			while ( ( bytesRead = inputStream.read( b ) ) != -1 ) {
-				bos.write( b, 0, bytesRead );
-			}
+            while ((bytesRead = inputStream.read(b)) != -1) {
+                bos.write(b, 0, bytesRead);
+            }
 
-			byteArray = bos.toByteArray();
-		}
-		catch ( IOException e ) {
-			e.printStackTrace();
-		}
-		return byteArray;
-	}
+            byteArray = bos.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return byteArray;
+    }
 
-	@Override
-	public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
-		View rootView;
-		rootView = inflater.inflate( R.layout.fragment_track_status, container, false );
-		date = new DatePickerFragment();
-		txtComplainCaseId = ( TextView ) rootView.findViewById( R.id.txtComplainCaseId );
-		txtFromDate = ( TextView ) rootView.findViewById( R.id.txtFromDate );
-		txtToDate = ( TextView ) rootView.findViewById( R.id.txtToDate );
-		btnGo = ( Button ) rootView.findViewById( R.id.btnGo );
-		llComplaintListHeader = ( LinearLayout ) rootView.findViewById( R.id.llComplaintListHeader );
-		list = ( ListView ) rootView.findViewById( R.id.lstComplaints );
-		spnContractNo = ( Spinner ) rootView.findViewById( R.id.spnContractNo );
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView;
+        rootView = inflater.inflate(R.layout.fragment_track_status, container, false);
+        date = new DatePickerFragment();
+        txtComplainCaseId = (TextView) rootView.findViewById(R.id.txtComplainCaseId);
+        txtFromDate = (TextView) rootView.findViewById(R.id.txtFromDate);
+        txtToDate = (TextView) rootView.findViewById(R.id.txtToDate);
+        btnGo = (Button) rootView.findViewById(R.id.btnGo);
+        llComplaintListHeader = (LinearLayout) rootView.findViewById(R.id.llComplaintListHeader);
+        list = (ListView) rootView.findViewById(R.id.lstComplaints);
+        spnContractNo = (Spinner) rootView.findViewById(R.id.spnContractNo);
 
-		ActiveContractsModel activeContractsModel = ( ActiveContractsModel ) PreferenceHelper.getObject( Constant.ONGOING_LOAN, ActiveContractsModel.class );
-		ArrayList< String >  contractsModelList   = new ArrayList<>();
+        ActiveContractsModel activeContractsModel = (ActiveContractsModel) PreferenceHelper.getObject(Constant.ONGOING_LOAN, ActiveContractsModel.class);
+        ArrayList<String> contractsModelList = new ArrayList<>();
 
-		linearLayout = ( LinearLayout ) rootView.findViewById( R.id.llRow );
+        linearLayout = (LinearLayout) rootView.findViewById(R.id.llRow);
 
-		fileKeyValuePair1 = new FileKeyValuePair();
-		fileKeyValuePair2 = new FileKeyValuePair();
-		fileKeyValuePair3 = new FileKeyValuePair();
+        fileKeyValuePair1 = new FileKeyValuePair();
+        fileKeyValuePair2 = new FileKeyValuePair();
+        fileKeyValuePair3 = new FileKeyValuePair();
 
-		txtCaseId = ( TextView ) rootView.findViewById( R.id.txtCaseId );
-		txtReqComplaintDate = ( TextView ) rootView.findViewById( R.id.txtReqComplaintDate );
-		txtDesc = ( TextView ) rootView.findViewById( R.id.txtDesc );
-		txtCaseStage = ( TextView ) rootView.findViewById( R.id.txtCaseStage );
-		imgUploadFile = ( ImageView ) rootView.findViewById( R.id.imgUploadFile );
+        txtCaseId = (TextView) rootView.findViewById(R.id.txtCaseId);
+        txtReqComplaintDate = (TextView) rootView.findViewById(R.id.txtReqComplaintDate);
+        txtDesc = (TextView) rootView.findViewById(R.id.txtDesc);
+        txtCaseStage = (TextView) rootView.findViewById(R.id.txtCaseStage);
+        imgUploadFile = (ImageView) rootView.findViewById(R.id.imgUploadFile);
 
 
-		imgUploadFile.setOnClickListener( new View.OnClickListener() {
-			@Override
-			public void onClick( View view ) {
-				uploadFile( txtCaseId.getText().toString() );
-			}
-		} );
+        imgUploadFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                uploadFile(txtCaseId.getText().toString());
+            }
+        });
 
-		progressDialog = new ProgressDialog( getActivity() );
-		progressDialog.setMessage( "Please Wait..." );
-		progressDialog.setCancelable( false );
-		progressDialog.setCanceledOnTouchOutside( false );
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Please Wait...");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
 
-		contractsModelList.add( "Select Contract" );
-		for ( int i = 0; i < activeContractsModel.getContracts().size(); i++ ) {
-			contractsModelList.add( activeContractsModel.getContracts().get( i ).getUsrConNo() );
-			Log.d( "contract no", contractsModelList.get( i ) + " " + activeContractsModel.getContracts().size() );
-		}
-		spnContractNo.setAdapter( new ArrayAdapter< String >( getActivity(), R.layout.spinner_complaint_row, contractsModelList ) );
+        contractsModelList.add("Select Contract");
+        for (int i = 0; i < activeContractsModel.getContracts().size(); i++) {
+            contractsModelList.add(activeContractsModel.getContracts().get(i).getUsrConNo());
+            Log.d("contract no", contractsModelList.get(i) + " " + activeContractsModel.getContracts().size());
+        }
+        spnContractNo.setAdapter(new ArrayAdapter<String>(getActivity(), R.layout.spinner_complaint_row, contractsModelList));
 
-		txtFromDate.setOnClickListener( this );
-		txtToDate.setOnClickListener( this );
-		return rootView;
-	}
+        txtFromDate.setOnClickListener(this);
+        txtToDate.setOnClickListener(this);
+        return rootView;
+    }
 
-	@Override
-	public void onViewCreated( View view, @Nullable Bundle savedInstanceState ) {
-		super.onViewCreated( view, savedInstanceState );
-		btnGo.setOnClickListener( this );
-	}
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        btnGo.setOnClickListener(this);
+    }
 
-	public void selectDate( String from ) {
+    public void selectDate(String from) {
 
-		Calendar calender = Calendar.getInstance();
-		Bundle   args     = new Bundle();
-		args.putInt( "year", calender.get( Calendar.YEAR ) );
-		args.putInt( "month", calender.get( Calendar.MONTH ) );
-		args.putInt( "day", calender.get( Calendar.DAY_OF_MONTH ) );
-		date.setArguments( args );
+        Calendar calender = Calendar.getInstance();
+        Bundle args = new Bundle();
+        args.putInt("year", calender.get(Calendar.YEAR));
+        args.putInt("month", calender.get(Calendar.MONTH));
+        args.putInt("day", calender.get(Calendar.DAY_OF_MONTH));
+        date.setArguments(args);
 
-		if ( from.equalsIgnoreCase( "fromDate" ) ) {
-			date.setCallBack( fromDate, from );
-		}
-		else {
-			date.setCallBack( toDate, from );
-		}
-		date.show( getFragmentManager(), "Date Picker" );
-	}
+        if (from.equalsIgnoreCase("fromDate")) {
+            date.setCallBack(fromDate, from);
+        } else {
+            date.setCallBack(toDate, from);
+        }
+        date.show(getFragmentManager(), "Date Picker");
+    }
 
-	@Override
-	public void onClick( View view ) {
+    @Override
+    public void onClick(View view) {
 
-		Intent intent       = new Intent();
-		String manufactures = android.os.Build.MANUFACTURER;
+        Intent intent = new Intent();
+        String manufactures = android.os.Build.MANUFACTURER;
 
-		switch ( view.getId() ) {
-			case R.id.txtFromDate:
-				selectDate( "fromDate" );
-				break;
+        switch (view.getId()) {
+            case R.id.txtFromDate:
+                selectDate("fromDate");
+                break;
 
-			case R.id.txtToDate:
-				selectDate( "toDate" );
-				break;
+            case R.id.txtToDate:
+                selectDate("toDate");
+                break;
 
-			case R.id.btnGo:
-				progressDialog.show();
-				if ( validate() ) {
-					findCase();
-				}
-				break;
+            case R.id.btnGo:
+                if (validate()) {
+                    progressDialog.show();
+                    findCase();
+                }
+                break;
 
-			case R.id.imgUploadFile1:
-				/*if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
-					try {
+            case R.id.imgUploadFile1:
+                /*if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
+                    try {
 						intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
 						intent.putExtra( "CONTENT_TYPE", "text/plain|image*//*|application*//*.pdf" );
-						intent.addCategory( Intent.CATEGORY_DEFAULT );
+                        intent.addCategory( Intent.CATEGORY_DEFAULT );
 					}
 					catch ( Exception e ) {
 
@@ -254,48 +252,48 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 
 						intent = new Intent( Intent.ACTION_GET_CONTENT );
 						intent.setType( "text/plain|image*//*|application*//*.pdf" );
-						intent.addCategory( Intent.CATEGORY_OPENABLE );
+                        intent.addCategory( Intent.CATEGORY_OPENABLE );
 					}
 				}
 				else {
 					intent = new Intent( Intent.ACTION_GET_CONTENT );
 					intent.setType( "text/plain|image*//*|application*//*.pdf" );
-					intent.addCategory( Intent.CATEGORY_OPENABLE );
+                    intent.addCategory( Intent.CATEGORY_OPENABLE );
 				}
 				startActivityForResult( intent, 1 );
 */
 
-				Intent newIntent = new Intent( Intent.ACTION_GET_CONTENT );
-				newIntent.setType( "text/plain|image|application.pdf" );
-				newIntent.addCategory( Intent.CATEGORY_OPENABLE );
-				this.startActivityForResult(
-						Intent.createChooser( getFileChooserIntent(), "Select File" ),
-						1 );
-				break;
+                Intent newIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                newIntent.setType("text/plain|image|application.pdf");
+                newIntent.addCategory(Intent.CATEGORY_OPENABLE);
+                this.startActivityForResult(
+                        Intent.createChooser(getFileChooserIntent(), "Select File"),
+                        1);
+                break;
 
-			case R.id.imgUploadFile2:
-				/*if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
-					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
+            case R.id.imgUploadFile2:
+                /*if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
+                    intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
 					intent.putExtra( "CONTENT_TYPE", "text/plain|image*//*|application*//*.pdf" );
-					intent.addCategory( Intent.CATEGORY_DEFAULT );
+                    intent.addCategory( Intent.CATEGORY_DEFAULT );
 				}
 				else {
 					intent = new Intent( Intent.ACTION_GET_CONTENT );
 					intent.setType( "text/plain|image*//*|application*//*.pdf" );
-					intent.addCategory( Intent.CATEGORY_OPENABLE );
+                    intent.addCategory( Intent.CATEGORY_OPENABLE );
 				}
 				intent.setType( "text/plain|image*//*|application*//*.pdf" );
-				startActivityForResult( intent, 2 );*/
+                startActivityForResult( intent, 2 );*/
 
-				newIntent = new Intent( Intent.ACTION_GET_CONTENT );
-				newIntent.setType( "text/plain|image|application.pdf" );
-				newIntent.addCategory( Intent.CATEGORY_OPENABLE );
-				this.startActivityForResult(
-						Intent.createChooser( getFileChooserIntent(), "Select File" ),
-						2 );
-				break;
+                newIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                newIntent.setType("text/plain|image|application.pdf");
+                newIntent.addCategory(Intent.CATEGORY_OPENABLE);
+                this.startActivityForResult(
+                        Intent.createChooser(getFileChooserIntent(), "Select File"),
+                        2);
+                break;
 
-			case R.id.imgUploadFile3:
+            case R.id.imgUploadFile3:
 				/*if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
 					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
 					intent.putExtra( "CONTENT_TYPE", "text/plain|image*//*|application*//*.pdf" );
@@ -309,364 +307,348 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 				intent.setType( "text/plain|image*//*|application*//*.pdf" );
 				startActivityForResult( intent, 3 );*/
 
-				newIntent = new Intent( Intent.ACTION_GET_CONTENT );
-				newIntent.setType( "text/plain|image|application.pdf" );
-				newIntent.addCategory( Intent.CATEGORY_OPENABLE );
-				this.startActivityForResult(
-						Intent.createChooser( getFileChooserIntent(), "Select File" ),
-						3 );
-				break;
+                newIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                newIntent.setType("text/plain|image|application.pdf");
+                newIntent.addCategory(Intent.CATEGORY_OPENABLE);
+                this.startActivityForResult(
+                        Intent.createChooser(getFileChooserIntent(), "Select File"),
+                        3);
+                break;
 
-			case R.id.txtUpload:
+            case R.id.txtUpload:
 
-				uploadDocs();
+                uploadDocs();
 
-				break;
+                break;
 
-			case R.id.txtCancel:
+            case R.id.txtCancel:
 
-				fileDialog.dismiss();
+                fileDialog.dismiss();
 
-				break;
-		}
+                break;
+        }
 
-	}
+    }
 
-	private boolean validate() {
+    private boolean validate() {
 
-		if ( TextUtils.isEmpty( txtComplainCaseId.getText().toString().trim() ) ) {
-			if ( spnContractNo.getSelectedItemPosition() == 0 && TextUtils.isEmpty( txtFromDate.getText().toString().trim() ) && TextUtils.isEmpty( txtToDate.getText().toString().trim() ) ) {
-				txtComplainCaseId.setError( "Please enter Case Id!" );
-				return false;
-			}
-			else if ( spnContractNo.getSelectedItemPosition() == 0 ) {
-				Toast.makeText( getActivity(), "Please select Contract No!", Toast.LENGTH_SHORT ).show();
+        if (TextUtils.isEmpty(txtComplainCaseId.getText().toString().trim())) {
+            if (spnContractNo.getSelectedItemPosition() == 0 && TextUtils.isEmpty(txtFromDate.getText().toString().trim()) && TextUtils.isEmpty(txtToDate.getText().toString().trim())) {
+                txtComplainCaseId.setError("Please enter Case Id!");
+                return false;
+            } else if (spnContractNo.getSelectedItemPosition() == 0) {
+                Toast.makeText(getActivity(), "Please select Contract No!", Toast.LENGTH_SHORT).show();
 //				txtComplainCaseId.setError( null );
-				return false;
-			}
-			else if ( TextUtils.isEmpty( txtFromDate.getText().toString() ) ) {
-				txtFromDate.setError( "Please select From Date!" );
+                return false;
+            } else if (TextUtils.isEmpty(txtFromDate.getText().toString())) {
+                txtFromDate.setError("Please select From Date!");
 //				txtComplainCaseId.setError( null );
-				return false;
-			}
-			else if ( TextUtils.isEmpty( txtToDate.getText().toString() ) ) {
-				txtToDate.setError( "Please select End Date!" );
+                return false;
+            } else if (TextUtils.isEmpty(txtToDate.getText().toString())) {
+                txtToDate.setError("Please select End Date!");
 //				txtComplainCaseId.setError( null );
-				return false;
-			}
-			else {
-				return true;
-			}
-		}
-		else {
-			return true;
-		}
-	}
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    }
 
-	public void onActivityResult( int requestCode, int resultCode, Intent data ) {
-		super.onActivityResult( requestCode, resultCode, data );
-		if ( resultCode == Activity.RESULT_OK ) {
-			Uri    selectedImageUri;
-			String selectedImagePath;
-			switch ( requestCode ) {
-				case 1:
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            Uri selectedImageUri;
+            String selectedImagePath;
+            switch (requestCode) {
+                case 1:
 					/*uri = data.getData();
 					file = new File( getRealPathFromURI( uri ) );*/
 
-					selectedImageUri = data.getData();
-					selectedImagePath = uriToFilename( selectedImageUri );
+                    selectedImageUri = data.getData();
+                    selectedImagePath = uriToFilename(selectedImageUri);
 
-					file = new File( selectedImagePath );
+                    file = new File(selectedImagePath);
 
-					fileByte = convertFileToByteArray( file );
-					base64File = Base64.encodeToString( fileByte, Base64.DEFAULT );
+                    fileByte = convertFileToByteArray(file);
+                    base64File = Base64.encodeToString(fileByte, Base64.DEFAULT);
 
-					fileKeyValuePair1.setKey( file.getName() );
-					fileKeyValuePair1.setValue( base64File );
+                    fileKeyValuePair1.setKey(file.getName());
+                    fileKeyValuePair1.setValue(base64File);
 
-					txtFileName1.setText( file.getName() );
-					break;
+                    txtFileName1.setText(file.getName());
+                    break;
 
-				case 2:
+                case 2:
 
-					selectedImageUri = data.getData();
-					selectedImagePath = uriToFilename( selectedImageUri );
+                    selectedImageUri = data.getData();
+                    selectedImagePath = uriToFilename(selectedImageUri);
 
-					file = new File( selectedImagePath );
+                    file = new File(selectedImagePath);
 
-					fileByte = convertFileToByteArray( file );
-					base64File = Base64.encodeToString( fileByte, Base64.DEFAULT );
+                    fileByte = convertFileToByteArray(file);
+                    base64File = Base64.encodeToString(fileByte, Base64.DEFAULT);
 
-					fileKeyValuePair2.setKey( file.getName() );
-					fileKeyValuePair2.setValue( base64File );
+                    fileKeyValuePair2.setKey(file.getName());
+                    fileKeyValuePair2.setValue(base64File);
 
-					txtFileName2.setText( file.getName() );
+                    txtFileName2.setText(file.getName());
 
-					break;
+                    break;
 
-				case 3:
+                case 3:
 
-					selectedImageUri = data.getData();
-					selectedImagePath = uriToFilename( selectedImageUri );
+                    selectedImageUri = data.getData();
+                    selectedImagePath = uriToFilename(selectedImageUri);
 
-					file = new File( selectedImagePath );
+                    file = new File(selectedImagePath);
 
-					fileByte = convertFileToByteArray( file );
-					base64File = Base64.encodeToString( fileByte, Base64.DEFAULT );
+                    fileByte = convertFileToByteArray(file);
+                    base64File = Base64.encodeToString(fileByte, Base64.DEFAULT);
 
-					fileKeyValuePair3.setKey( file.getName() );
-					fileKeyValuePair3.setValue( base64File );
+                    fileKeyValuePair3.setKey(file.getName());
+                    fileKeyValuePair3.setValue(base64File);
 
-					txtFileName3.setText( file.getName() );
+                    txtFileName3.setText(file.getName());
 
-					break;
-			}
-		}
-	}
+                    break;
+            }
+        }
+    }
 
 
-	private void findCase() {
+    private void findCase() {
 
-		FindCaseRequestEnvelope requestEnvelope = new FindCaseRequestEnvelope();
-		FindCaseBody            findCaseReqBody = new FindCaseBody();
-		FindCaseData            findCaseReqData = new FindCaseData();
+        FindCaseRequestEnvelope requestEnvelope = new FindCaseRequestEnvelope();
+        FindCaseBody findCaseReqBody = new FindCaseBody();
+        FindCaseData findCaseReqData = new FindCaseData();
 
-		if ( txtComplainCaseId.getText().toString().length() != 0 ) {
-			findCaseReqData.setCaseId( txtComplainCaseId.getText().toString().trim() );
-			findCaseReqData.setContractNo( "" );
-			findCaseReqData.setStartDate( "" );
-			findCaseReqData.setEndDate( "" );
-		}
-		else {
-			findCaseReqData.setCaseId( "" );
-			findCaseReqData.setContractNo( spnContractNo.getSelectedItem().toString() );
-			findCaseReqData.setStartDate( startDate );
-			findCaseReqData.setEndDate( endDate );
-		}
+        if (txtComplainCaseId.getText().toString().length() != 0) {
+            findCaseReqData.setCaseId(txtComplainCaseId.getText().toString().trim());
+            findCaseReqData.setContractNo("");
+            findCaseReqData.setStartDate("");
+            findCaseReqData.setEndDate("");
+        } else {
+            findCaseReqData.setCaseId("");
+            findCaseReqData.setContractNo(spnContractNo.getSelectedItem().toString());
+            findCaseReqData.setStartDate(startDate);
+            findCaseReqData.setEndDate(endDate);
+        }
 
-		findCaseReqBody.setReqData( findCaseReqData );
-		requestEnvelope.setCaseBody( findCaseReqBody );
-		TmflApi apiService = ComplaintSoapApiService.getInstance().call();
+        findCaseReqBody.setReqData(findCaseReqData);
+        requestEnvelope.setCaseBody(findCaseReqBody);
+        TmflApi apiService = ComplaintSoapApiService.getInstance().call();
 
-		apiService.findCaseRequest( requestEnvelope ).enqueue( new Callback< FindCaseResponseEnvelope >() {
-			@Override
-			public void onResponse( Call< FindCaseResponseEnvelope > call, Response< FindCaseResponseEnvelope > response ) {
-				progressDialog.dismiss();
-				Log.d( "success", response.body().getFindCaseBody().getFindCaseResponse().getFindCaseResult() );
+        apiService.findCaseRequest(requestEnvelope).enqueue(new Callback<FindCaseResponseEnvelope>() {
+            @Override
+            public void onResponse(Call<FindCaseResponseEnvelope> call, Response<FindCaseResponseEnvelope> response) {
+                progressDialog.dismiss();
+                Log.d("success", response.body().getFindCaseBody().getFindCaseResponse().getFindCaseResult());
 
-				PreferenceHelper.insertObject( Constant.FIND_CASE_RESPONSE, response.body().getFindCaseBody() );
+                PreferenceHelper.insertObject(Constant.FIND_CASE_RESPONSE, response.body().getFindCaseBody());
 
-				setCaseDetails( response.body().getFindCaseBody().getFindCaseResponse().getFindCaseResult() );
+                setCaseDetails(response.body().getFindCaseBody().getFindCaseResponse().getFindCaseResult());
 
-				txtComplainCaseId.setText( "" );
-				txtFromDate.setText( "" );
-				spnContractNo.setSelection( 0 );
-				txtToDate.setText( "" );
-
-			}
-
-			@Override
-			public void onFailure( Call< FindCaseResponseEnvelope > call, Throwable t ) {
-				progressDialog.dismiss();
-				Log.d( "error", t.getMessage() );
-			}
-		} );
-	}
-
-	private void uploadDocs() {
-
-		UploadDocRequestEnvelope requestEnvelope = new UploadDocRequestEnvelope();
-		UploadDocReqBody         reqBody         = new UploadDocReqBody();
-		UploadDocReqData         reqData         = new UploadDocReqData();
-
-		reqData.setCaseId( caseId );
-		if ( fileKeyValuePair1.getKey() != null ) {
-			reqData.setAttachFiles1( fileKeyValuePair1 );
-		}
-		else {
-			reqData.setAttachFiles1( new FileKeyValuePair( "", "" ) );
-		}
-		if ( fileKeyValuePair2.getKey() != null ) {
-			reqData.setAttachFiles2( fileKeyValuePair2 );
-		}
-		else {
-			reqData.setAttachFiles2( new FileKeyValuePair( "", "" ) );
-		}
-		if ( fileKeyValuePair3.getKey() != null ) {
-			reqData.setAttachFiles3( fileKeyValuePair3 );
-		}
-		else {
-			reqData.setAttachFiles3( new FileKeyValuePair( "", "" ) );
-		}
-
-		reqBody.setUploadDocData( reqData );
-		requestEnvelope.setUploadDocReqBody( reqBody );
-		fileDialog.dismiss();
-
-		TmflApi apiService = ComplaintSoapApiService.getInstance().call();
-
-
-		progressDialog.show();
-		apiService.uploadDocRequest( requestEnvelope ).enqueue( new Callback< UploadDocResponseEnvelope >() {
-			@Override
-			public void onResponse( Call< UploadDocResponseEnvelope > call, Response< UploadDocResponseEnvelope > response ) {
-
-				progressDialog.dismiss();
-				Log.d( "success", response.body().getResponseBody().getResponse().getResult() );
-
-				XMLPullParser  xmlPullParser = new XMLPullParser( response.body().getResponseBody().getResponse().getResult() );
-				ParsedResponse caseFile      = xmlPullParser.parse();
-
-				if ( caseFile.getCaseFile().getResult().equalsIgnoreCase( "1" ) ) {
-					Toast.makeText( getActivity(), caseFile.getCaseFile().getMessage(), Toast.LENGTH_SHORT ).show();
-				}
-				else {
-					Toast.makeText( getActivity(), caseFile.getCaseFile().getMessage(), Toast.LENGTH_SHORT ).show();
-				}
-
-				txtComplainCaseId.setText( "" );
-				txtFromDate.setText( "" );
-				spnContractNo.setSelection( 0 );
-				txtToDate.setText( "" );
-			}
-
-			@Override
-			public void onFailure( Call< UploadDocResponseEnvelope > call, Throwable t ) {
-
-				progressDialog.dismiss();
-				Log.d( "error", t.getMessage() );
-
-				txtComplainCaseId.setText( "" );
-				txtFromDate.setText( "" );
-				spnContractNo.setSelection( 0 );
-				txtToDate.setText( "" );
-			}
-		} );
-	}
-
-	private void setCaseDetails( String findCaseResult ) {
-
-		JSONObject jsonObject = new JSONObject();
-		try {
-			jsonObject = XML.toJSONObject( findCaseResult );
-			Gson           gson       = new Gson();
-			FindCaseResult caseResult = gson.fromJson( jsonObject.toString(), FindCaseResult.class );
-
-
-			Log.d( "String", caseResult.getMessage() + " " + caseResult.toString() );
-			if ( !caseResult.getCaseCount().equalsIgnoreCase( "0" ) ) {
-				llComplaintListHeader.setVisibility( View.VISIBLE );
-				if ( caseResult.getCase() instanceof List ) {
-					linearLayout.setVisibility( View.GONE );
-					list.setAdapter( new ComplaintsToTrackListAdapter( getActivity(), 0, ( List< LinkedTreeMap > ) caseResult.getCase(), this ) );
-				}
-				else {
-					LinkedTreeMap map = ( LinkedTreeMap ) caseResult.getCase();
-					linearLayout.setVisibility( View.VISIBLE );
-					txtCaseId.setText( map.get( "CaseId" ).toString().substring( 0, map.get( "CaseId" ).toString().indexOf( "." ) ) );
-					txtCaseStage.setText( map.get( "Casestage" ).toString() );
-					txtDesc.setText( map.get( "Description" ).toString() );
-					txtReqComplaintDate.setText( map.get( "CreatedDate" ).toString() );
-				}
-			}
-			else {
-				Toast.makeText( getActivity(), caseResult.getMessage(), Toast.LENGTH_SHORT ).show();
-			}
-
-		}
-		catch ( JSONException e ) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void onDateChange( String date, String picker ) {
-		if ( picker.equalsIgnoreCase( " " ) ) {
-			txtFromDate.setText( txtFromDate.getText().toString() + " " + date );
-			txtToDate.setText( txtToDate.getText().toString() + " " + date );
-		}
-	}
-
-	@Override
-	public void uploadFile( String mCase ) {
-
-		fileDialog = new Dialog( getActivity() );
-
-		fileDialog.setContentView( R.layout.dialog_upload_file );
-		fileDialog.getWindow().setLayout( MATCH_PARENT, WRAP_CONTENT );
-		fileDialog.setCancelable( false );
-
-		fileDialog.show();
-
-		caseId = mCase;
-		txtFileName1 = ( TextView ) fileDialog.findViewById( R.id.txtFileName1 );
-		txtFileName2 = ( TextView ) fileDialog.findViewById( R.id.txtFileName2 );
-		txtFileName3 = ( TextView ) fileDialog.findViewById( R.id.txtFileName3 );
-		txtUploadFile = ( TextView ) fileDialog.findViewById( R.id.txtUpload );
-		txtCancel = ( TextView ) fileDialog.findViewById( R.id.txtCancel );
-
-		imgFile1 = ( ImageView ) fileDialog.findViewById( R.id.imgUploadFile1 );
-		imgFile2 = ( ImageView ) fileDialog.findViewById( R.id.imgUploadFile2 );
-		imgFile3 = ( ImageView ) fileDialog.findViewById( R.id.imgUploadFile3 );
-
-		imgFile1.setOnClickListener( this );
-		imgFile2.setOnClickListener( this );
-		imgFile3.setOnClickListener( this );
-		txtCancel.setOnClickListener( this );
-		txtUploadFile.setOnClickListener( this );
-	}
-
-	public String getRealPathFromURI( Uri contentUri ) {
-
-		String   path   = null;
-		String[] proj   = { MediaStore.Files.FileColumns.DATA };
-		Cursor   cursor = getActivity().getContentResolver().query( contentUri, proj, null, null, null );
-		if ( cursor.moveToFirst() ) {
-			int column_index = cursor.getColumnIndexOrThrow( MediaStore.MediaColumns.DATA );
-			path = cursor.getString( column_index );
-		}
-		cursor.close();
-		return path;
-	}
-
-	private Intent getFileChooserIntent() {
-		String[] mimeTypes = { "image/*", "application/pdf" };
-
-		Intent intent = new Intent( Intent.ACTION_GET_CONTENT );
-		intent.addCategory( Intent.CATEGORY_OPENABLE );
-
-		if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT ) {
-			intent.setType( mimeTypes.length == 1 ? mimeTypes[0] : "*/*" );
-			if ( mimeTypes.length > 0 ) {
-				intent.putExtra( Intent.EXTRA_MIME_TYPES, mimeTypes );
-			}
-		}
-		else {
-			String mimeTypesStr = "";
-
-			for ( String mimeType : mimeTypes ) {
-				mimeTypesStr += mimeType + "|";
-			}
-
-			intent.setType( mimeTypesStr.substring( 0, mimeTypesStr.length() - 1 ) );
-		}
-
-		return intent;
-	}
-
-	private String uriToFilename( Uri uri ) {
-		String path = null;
-
-		if ( Build.VERSION.SDK_INT < 11 ) {
-			path = RealPathUtil.getRealPathFromURI_BelowAPI11( getActivity(), uri );
-		}
-		else if ( Build.VERSION.SDK_INT < 19 ) {
-			path = RealPathUtil.getRealPathFromURI_API11to18( getActivity(), uri );
-		}
-		else {
-			path = RealPathUtil.getRealPathFromURI_API19( getActivity(), uri );
-		}
-
-		return path;
-	}
+                txtComplainCaseId.setText("");
+                txtFromDate.setText("");
+                spnContractNo.setSelection(0);
+                txtToDate.setText("");
+
+            }
+
+            @Override
+            public void onFailure(Call<FindCaseResponseEnvelope> call, Throwable t) {
+                progressDialog.dismiss();
+                Log.d("error", t.getMessage());
+            }
+        });
+    }
+
+    private void uploadDocs() {
+
+        UploadDocRequestEnvelope requestEnvelope = new UploadDocRequestEnvelope();
+        UploadDocReqBody reqBody = new UploadDocReqBody();
+        UploadDocReqData reqData = new UploadDocReqData();
+
+        reqData.setCaseId(caseId);
+        if (fileKeyValuePair1.getKey() != null) {
+            reqData.setAttachFiles1(fileKeyValuePair1);
+        } else {
+            reqData.setAttachFiles1(new FileKeyValuePair("", ""));
+        }
+        if (fileKeyValuePair2.getKey() != null) {
+            reqData.setAttachFiles2(fileKeyValuePair2);
+        } else {
+            reqData.setAttachFiles2(new FileKeyValuePair("", ""));
+        }
+        if (fileKeyValuePair3.getKey() != null) {
+            reqData.setAttachFiles3(fileKeyValuePair3);
+        } else {
+            reqData.setAttachFiles3(new FileKeyValuePair("", ""));
+        }
+
+        reqBody.setUploadDocData(reqData);
+        requestEnvelope.setUploadDocReqBody(reqBody);
+        fileDialog.dismiss();
+
+        TmflApi apiService = ComplaintSoapApiService.getInstance().call();
+
+
+        progressDialog.show();
+        apiService.uploadDocRequest(requestEnvelope).enqueue(new Callback<UploadDocResponseEnvelope>() {
+            @Override
+            public void onResponse(Call<UploadDocResponseEnvelope> call, Response<UploadDocResponseEnvelope> response) {
+
+                progressDialog.dismiss();
+                Log.d("success", response.body().getResponseBody().getResponse().getResult());
+
+                XMLPullParser xmlPullParser = new XMLPullParser(response.body().getResponseBody().getResponse().getResult());
+                ParsedResponse caseFile = xmlPullParser.parse();
+
+                if (caseFile.getCaseFile().getResult().equalsIgnoreCase("1")) {
+                    Toast.makeText(getActivity(), caseFile.getCaseFile().getMessage(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), caseFile.getCaseFile().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+                txtComplainCaseId.setText("");
+                txtFromDate.setText("");
+                spnContractNo.setSelection(0);
+                txtToDate.setText("");
+            }
+
+            @Override
+            public void onFailure(Call<UploadDocResponseEnvelope> call, Throwable t) {
+
+                progressDialog.dismiss();
+                Log.d("error", t.getMessage());
+
+                txtComplainCaseId.setText("");
+                txtFromDate.setText("");
+                spnContractNo.setSelection(0);
+                txtToDate.setText("");
+            }
+        });
+    }
+
+    private void setCaseDetails(String findCaseResult) {
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject = XML.toJSONObject(findCaseResult);
+            Gson gson = new Gson();
+            FindCaseResult caseResult = gson.fromJson(jsonObject.toString(), FindCaseResult.class);
+
+
+            Log.d("String", caseResult.getMessage() + " " + caseResult.toString());
+            if (!caseResult.getCaseCount().equalsIgnoreCase("0")) {
+                llComplaintListHeader.setVisibility(View.VISIBLE);
+                if (caseResult.getCase() instanceof List) {
+                    linearLayout.setVisibility(View.GONE);
+                    list.setAdapter(new ComplaintsToTrackListAdapter(getActivity(), 0, (List<LinkedTreeMap>) caseResult.getCase(), this));
+                } else {
+                    LinkedTreeMap map = (LinkedTreeMap) caseResult.getCase();
+                    linearLayout.setVisibility(View.VISIBLE);
+                    txtCaseId.setText(map.get("CaseId").toString().substring(0, map.get("CaseId").toString().indexOf(".")));
+                    txtCaseStage.setText(map.get("Casestage").toString());
+                    txtDesc.setText(map.get("Description").toString());
+                    txtReqComplaintDate.setText(map.get("CreatedDate").toString());
+                }
+            } else {
+                Toast.makeText(getActivity(), caseResult.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onDateChange(String date, String picker) {
+        if (picker.equalsIgnoreCase(" ")) {
+            txtFromDate.setText(txtFromDate.getText().toString() + " " + date);
+            txtToDate.setText(txtToDate.getText().toString() + " " + date);
+        }
+    }
+
+    @Override
+    public void uploadFile(String mCase) {
+
+        fileDialog = new Dialog(getActivity());
+
+        fileDialog.setContentView(R.layout.dialog_upload_file);
+        fileDialog.getWindow().setLayout(MATCH_PARENT, WRAP_CONTENT);
+        fileDialog.setCancelable(false);
+
+        fileDialog.show();
+
+        caseId = mCase;
+        txtFileName1 = (TextView) fileDialog.findViewById(R.id.txtFileName1);
+        txtFileName2 = (TextView) fileDialog.findViewById(R.id.txtFileName2);
+        txtFileName3 = (TextView) fileDialog.findViewById(R.id.txtFileName3);
+        txtUploadFile = (TextView) fileDialog.findViewById(R.id.txtUpload);
+        txtCancel = (TextView) fileDialog.findViewById(R.id.txtCancel);
+
+        imgFile1 = (ImageView) fileDialog.findViewById(R.id.imgUploadFile1);
+        imgFile2 = (ImageView) fileDialog.findViewById(R.id.imgUploadFile2);
+        imgFile3 = (ImageView) fileDialog.findViewById(R.id.imgUploadFile3);
+
+        imgFile1.setOnClickListener(this);
+        imgFile2.setOnClickListener(this);
+        imgFile3.setOnClickListener(this);
+        txtCancel.setOnClickListener(this);
+        txtUploadFile.setOnClickListener(this);
+    }
+
+    public String getRealPathFromURI(Uri contentUri) {
+
+        String path = null;
+        String[] proj = {MediaStore.Files.FileColumns.DATA};
+        Cursor cursor = getActivity().getContentResolver().query(contentUri, proj, null, null, null);
+        if (cursor.moveToFirst()) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+            path = cursor.getString(column_index);
+        }
+        cursor.close();
+        return path;
+    }
+
+    private Intent getFileChooserIntent() {
+        String[] mimeTypes = {"image/*", "application/pdf"};
+
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            intent.setType(mimeTypes.length == 1 ? mimeTypes[0] : "*/*");
+            if (mimeTypes.length > 0) {
+                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+            }
+        } else {
+            String mimeTypesStr = "";
+
+            for (String mimeType : mimeTypes) {
+                mimeTypesStr += mimeType + "|";
+            }
+
+            intent.setType(mimeTypesStr.substring(0, mimeTypesStr.length() - 1));
+        }
+
+        return intent;
+    }
+
+    private String uriToFilename(Uri uri) {
+        String path = null;
+
+        if (Build.VERSION.SDK_INT < 11) {
+            path = RealPathUtil.getRealPathFromURI_BelowAPI11(getActivity(), uri);
+        } else if (Build.VERSION.SDK_INT < 19) {
+            path = RealPathUtil.getRealPathFromURI_API11to18(getActivity(), uri);
+        } else {
+            path = RealPathUtil.getRealPathFromURI_API19(getActivity(), uri);
+        }
+
+        return path;
+    }
 }
