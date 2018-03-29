@@ -22,22 +22,24 @@
         android:background="@color/total_lin_bg"
         android:visibility="gone"/>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="vertical">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/whit_rect_bg"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                >
+                android:weightSum="1">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -45,8 +47,8 @@
                     android:layout_marginRight="3dp"
                     android:layout_weight="0.5"
                     android:background="#F26711"
-                    android:orientation="horizontal">
-
+                    android:orientation="horizontal"
+                    android:padding="5dp">
 
                     <TextView
                         android:id="@+id/txt_loan_ac_no."
@@ -62,10 +64,10 @@
 
                     <TextView
                         android:id="@+id/txt_contract_no"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:padding="10dp"
+                        android:layout_weight="1.2"
                         android:text=""
                         android:textColor="@color/white"
                         android:textSize="14sp"/>
@@ -114,6 +116,7 @@
                 android:id="@+id/txt_terminated_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 />

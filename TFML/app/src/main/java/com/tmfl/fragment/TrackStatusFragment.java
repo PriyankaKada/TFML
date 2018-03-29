@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -47,6 +48,7 @@ import com.tmfl.complaintnetwork.uploaddoc.request.UploadDocReqBody;
 import com.tmfl.complaintnetwork.uploaddoc.request.UploadDocReqData;
 import com.tmfl.complaintnetwork.uploaddoc.request.UploadDocRequestEnvelope;
 import com.tmfl.complaintnetwork.uploaddoc.response.UploadDocResponseEnvelope;
+import com.tmfl.fragment.NewComplaintFragment.RealPathUtil;
 import com.tmfl.model.ContractResponseModel.ActiveContractsModel;
 import com.tmfl.util.DatePickerDialog;
 import com.tmfl.util.DatePickerFragment;
@@ -233,54 +235,86 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 				break;
 
 			case R.id.btnGo:
+				progressDialog.show();
 				if ( validate() ) {
 					findCase();
 				}
 				break;
 
 			case R.id.imgUploadFile1:
-				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
-					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
-					intent.putExtra( "CONTENT_TYPE", "text/plain|image/*|application/*.pdf" );
-					intent.addCategory( Intent.CATEGORY_DEFAULT );
+				/*if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
+					try {
+						intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
+						intent.putExtra( "CONTENT_TYPE", "text/plain|image*//*|application*//*.pdf" );
+						intent.addCategory( Intent.CATEGORY_DEFAULT );
+					}
+					catch ( Exception e ) {
+
+						e.printStackTrace();
+
+						intent = new Intent( Intent.ACTION_GET_CONTENT );
+						intent.setType( "text/plain|image*//*|application*//*.pdf" );
+						intent.addCategory( Intent.CATEGORY_OPENABLE );
+					}
 				}
 				else {
 					intent = new Intent( Intent.ACTION_GET_CONTENT );
-					intent.setType( "text/plain|image/*|application/*.pdf" );
+					intent.setType( "text/plain|image*//*|application*//*.pdf" );
 					intent.addCategory( Intent.CATEGORY_OPENABLE );
 				}
 				startActivityForResult( intent, 1 );
+*/
 
+				Intent newIntent = new Intent( Intent.ACTION_GET_CONTENT );
+				newIntent.setType( "text/plain|image|application.pdf" );
+				newIntent.addCategory( Intent.CATEGORY_OPENABLE );
+				this.startActivityForResult(
+						Intent.createChooser( getFileChooserIntent(), "Select File" ),
+						1 );
 				break;
 
 			case R.id.imgUploadFile2:
-				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
+				/*if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
 					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
-					intent.putExtra( "CONTENT_TYPE", "text/plain|image/*|application/*.pdf" );
+					intent.putExtra( "CONTENT_TYPE", "text/plain|image*//*|application*//*.pdf" );
 					intent.addCategory( Intent.CATEGORY_DEFAULT );
 				}
 				else {
 					intent = new Intent( Intent.ACTION_GET_CONTENT );
-					intent.setType( "text/plain|image/*|application/*.pdf" );
+					intent.setType( "text/plain|image*//*|application*//*.pdf" );
 					intent.addCategory( Intent.CATEGORY_OPENABLE );
 				}
-				intent.setType( "text/plain|image/*|application/*.pdf" );
-				startActivityForResult( intent, 2 );
+				intent.setType( "text/plain|image*//*|application*//*.pdf" );
+				startActivityForResult( intent, 2 );*/
+
+				newIntent = new Intent( Intent.ACTION_GET_CONTENT );
+				newIntent.setType( "text/plain|image|application.pdf" );
+				newIntent.addCategory( Intent.CATEGORY_OPENABLE );
+				this.startActivityForResult(
+						Intent.createChooser( getFileChooserIntent(), "Select File" ),
+						2 );
 				break;
 
 			case R.id.imgUploadFile3:
-				if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
+				/*if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
 					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
-					intent.putExtra( "CONTENT_TYPE", "text/plain|image/*|application/*.pdf" );
+					intent.putExtra( "CONTENT_TYPE", "text/plain|image*//*|application*//*.pdf" );
 					intent.addCategory( Intent.CATEGORY_DEFAULT );
 				}
 				else {
 					intent = new Intent( Intent.ACTION_GET_CONTENT );
-					intent.setType( "text/plain|image/*|application/*.pdf" );
+					intent.setType( "text/plain|image*//*|application*//*.pdf" );
 					intent.addCategory( Intent.CATEGORY_OPENABLE );
 				}
-				intent.setType( "text/plain|image/*|application/*.pdf" );
-				startActivityForResult( intent, 3 );
+				intent.setType( "text/plain|image*//*|application*//*.pdf" );
+				startActivityForResult( intent, 3 );*/
+
+				newIntent = new Intent( Intent.ACTION_GET_CONTENT );
+				newIntent.setType( "text/plain|image|application.pdf" );
+				newIntent.addCategory( Intent.CATEGORY_OPENABLE );
+				this.startActivityForResult(
+						Intent.createChooser( getFileChooserIntent(), "Select File" ),
+						3 );
 				break;
 
 			case R.id.txtUpload:
@@ -327,17 +361,22 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 		else {
 			return true;
 		}
-
 	}
 
 	public void onActivityResult( int requestCode, int resultCode, Intent data ) {
 		super.onActivityResult( requestCode, resultCode, data );
 		if ( resultCode == Activity.RESULT_OK ) {
-
+			Uri    selectedImageUri;
+			String selectedImagePath;
 			switch ( requestCode ) {
 				case 1:
-					uri = data.getData();
-					file = new File( getRealPathFromURI( uri ) );
+					/*uri = data.getData();
+					file = new File( getRealPathFromURI( uri ) );*/
+
+					selectedImageUri = data.getData();
+					selectedImagePath = uriToFilename( selectedImageUri );
+
+					file = new File( selectedImagePath );
 
 					fileByte = convertFileToByteArray( file );
 					base64File = Base64.encodeToString( fileByte, Base64.DEFAULT );
@@ -350,8 +389,10 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 
 				case 2:
 
-					uri = data.getData();
-					file = new File( getRealPathFromURI( uri ) );
+					selectedImageUri = data.getData();
+					selectedImagePath = uriToFilename( selectedImageUri );
+
+					file = new File( selectedImagePath );
 
 					fileByte = convertFileToByteArray( file );
 					base64File = Base64.encodeToString( fileByte, Base64.DEFAULT );
@@ -365,8 +406,10 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 
 				case 3:
 
-					uri = data.getData();
-					file = new File( getRealPathFromURI( uri ) );
+					selectedImageUri = data.getData();
+					selectedImagePath = uriToFilename( selectedImageUri );
+
+					file = new File( selectedImagePath );
 
 					fileByte = convertFileToByteArray( file );
 					base64File = Base64.encodeToString( fileByte, Base64.DEFAULT );
@@ -405,7 +448,6 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 		requestEnvelope.setCaseBody( findCaseReqBody );
 		TmflApi apiService = ComplaintSoapApiService.getInstance().call();
 
-		progressDialog.show();
 		apiService.findCaseRequest( requestEnvelope ).enqueue( new Callback< FindCaseResponseEnvelope >() {
 			@Override
 			public void onResponse( Call< FindCaseResponseEnvelope > call, Response< FindCaseResponseEnvelope > response ) {
@@ -429,7 +471,6 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 				Log.d( "error", t.getMessage() );
 			}
 		} );
-
 	}
 
 	private void uploadDocs() {
@@ -578,7 +619,7 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 	public String getRealPathFromURI( Uri contentUri ) {
 
 		String   path   = null;
-		String[] proj   = { MediaStore.MediaColumns.DATA };
+		String[] proj   = { MediaStore.Files.FileColumns.DATA };
 		Cursor   cursor = getActivity().getContentResolver().query( contentUri, proj, null, null, null );
 		if ( cursor.moveToFirst() ) {
 			int column_index = cursor.getColumnIndexOrThrow( MediaStore.MediaColumns.DATA );
@@ -588,4 +629,44 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 		return path;
 	}
 
+	private Intent getFileChooserIntent() {
+		String[] mimeTypes = { "image/*", "application/pdf" };
+
+		Intent intent = new Intent( Intent.ACTION_GET_CONTENT );
+		intent.addCategory( Intent.CATEGORY_OPENABLE );
+
+		if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT ) {
+			intent.setType( mimeTypes.length == 1 ? mimeTypes[0] : "*/*" );
+			if ( mimeTypes.length > 0 ) {
+				intent.putExtra( Intent.EXTRA_MIME_TYPES, mimeTypes );
+			}
+		}
+		else {
+			String mimeTypesStr = "";
+
+			for ( String mimeType : mimeTypes ) {
+				mimeTypesStr += mimeType + "|";
+			}
+
+			intent.setType( mimeTypesStr.substring( 0, mimeTypesStr.length() - 1 ) );
+		}
+
+		return intent;
+	}
+
+	private String uriToFilename( Uri uri ) {
+		String path = null;
+
+		if ( Build.VERSION.SDK_INT < 11 ) {
+			path = RealPathUtil.getRealPathFromURI_BelowAPI11( getActivity(), uri );
+		}
+		else if ( Build.VERSION.SDK_INT < 19 ) {
+			path = RealPathUtil.getRealPathFromURI_API11to18( getActivity(), uri );
+		}
+		else {
+			path = RealPathUtil.getRealPathFromURI_API19( getActivity(), uri );
+		}
+
+		return path;
+	}
 }

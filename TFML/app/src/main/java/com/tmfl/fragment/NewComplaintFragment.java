@@ -173,12 +173,15 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 
 			case R.id.btnSubmit:
 
-				if ( validate() ) {
 
+				progressDialog.show();
+				if ( validate() ) {
 					try {
 						createCase();
 					}
 					catch ( OutOfMemoryError error ) {
+						progressDialog.dismiss();
+						Toast.makeText( getActivity(), "Something went wrong, try after some time!", Toast.LENGTH_SHORT ).show();
 						error.printStackTrace();
 					}
 				}
@@ -188,8 +191,6 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 			case R.id.imgUpload1:
 
 				upLoadRCdoc( 1, 10 );
-
-//				selectImage();
 
 				break;
 
@@ -536,7 +537,6 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 
 	private void createCase() {
 
-		progressDialog.show();
 		CreateCaseRequestEnvelope requestEnvelope = new CreateCaseRequestEnvelope();
 		CreateCaseReqBody         reqBody         = new CreateCaseReqBody();
 		CreateCaseReqData         reqData         = new CreateCaseReqData();
@@ -581,7 +581,7 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 			@Override
 			public void onResponse( Call< CreateCaseResponseEnvelope > call, Response< CreateCaseResponseEnvelope > response ) {
 				progressDialog.dismiss();
-				Log.d( "success", response.body().getCaseResponseBody().getCaseResponse().getCreateCaseResult() );
+//				Log.d( "success", response.body().getCaseResponseBody().getCaseResponse().getCreateCaseResult() );
 
 				XMLPullParser  xmlPullParser = new XMLPullParser( response.body().getCaseResponseBody().getCaseResponse().getCreateCaseResult() );
 				ParsedResponse caseFile      = xmlPullParser.parse();
@@ -599,6 +599,9 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 							.replace( R.id.frame_complaint_container, fragment )
 							.addToBackStack( this.getClass().getName() )
 							.commit();
+
+					spnContractNo.setSelection( 0 );
+					txtDescription.setText( "" );
 				}
 			}
 
@@ -768,4 +771,5 @@ public class NewComplaintFragment extends Fragment implements View.OnClickListen
 			return result;
 		}
 	}
+
 }

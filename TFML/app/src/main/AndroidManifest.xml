@@ -29,6 +29,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -155,7 +156,6 @@
         <!-- Below is the WrapperApp's (Not BillDesk SDK's) StatusActivity
         to show response msg from BillDesk's PG -->
         <activity android:name=".BillDeskPayment.StatusActivity"/>
-
 
         <meta-data
             android:name="io.fabric.ApiKey"

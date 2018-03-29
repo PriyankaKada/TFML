@@ -80,128 +80,128 @@ import retrofit2.http.Url;
 
 public interface TmflApi {
 
-	@POST( Constant.BANNER )
-	Call< BannerlistResponse > getBannerResponse();
+    @POST(Constant.BANNER)
+    Call<BannerlistResponse> getBannerResponse();
 
-	@POST( Constant.DOWNLOADS )
-	Call< DownloadResponse > getDownloadResponse();
+    @POST(Constant.DOWNLOADS)
+    Call<DownloadResponse> getDownloadResponse();
 
-	@POST( Constant.SCHEMES )
-	Call< SchemesResponse > getSchemesResponse();
+    @POST(Constant.SCHEMES)
+    Call<SchemesResponse> getSchemesResponse();
 
-	@POST( Constant.APPLYLOAN )
-	Call< ApplyLoanResponse > getApplyLoanResponse( @Body InputModel inputModel );
+    @POST(Constant.APPLYLOAN)
+    Call<ApplyLoanResponse> getApplyLoanResponse(@Body InputModel inputModel);
 
-	@POST( Constant.REFERFRIEND )
-	Call< ReferFriendResponseModel > getFriendResponse( @Body ReferFriend referFriendInputModel );
+    @POST(Constant.REFERFRIEND)
+    Call<ReferFriendResponseModel> getFriendResponse(@Body ReferFriend referFriendInputModel);
 
-	@POST( Constant.REQUESTQUICKCALL )
-	Call< QuickCallResponse > getQuickCallResponse( @Body QuickCallInputModel quickCallInputModel );
+    @POST(Constant.REQUESTQUICKCALL)
+    Call<QuickCallResponse> getQuickCallResponse(@Body QuickCallInputModel quickCallInputModel);
 
-	@POST( Constant.VERIFYOTP )
-	Call< LoanStatusResponse > getOtpResponse( @Body LoanStatusInputModel loanStatusInputModel );
+    @POST(Constant.VERIFYOTP)
+    Call<LoanStatusResponse> getOtpResponse(@Body LoanStatusInputModel loanStatusInputModel);
 
-	@GET( Constant.CONTACTDETAILS )
-	Call< ContactListResponseModel > getContactList();
+    @GET(Constant.CONTACTDETAILS)
+    Call<ContactListResponseModel> getContactList();
 
-	@GET( Constant.PRODUCTS )
-	Call< List< ProductListResponseModel > > getProductList();
+    @GET(Constant.PRODUCTS)
+    Call<List<ProductListResponseModel>> getProductList();
 
-	@GET( Constant.STATES )
-	Call< List< BranchStateResponseModel > > getBranchStateList();
+    @GET(Constant.STATES)
+    Call<List<BranchStateResponseModel>> getBranchStateList();
 
-	@POST( Constant.GETCITIES )
-	Call< List< BranchCityResponseModel > > getBranchCityList( @Body InputCityModel inputCityModel );
+    @POST(Constant.GETCITIES)
+    Call<List<BranchCityResponseModel>> getBranchCityList(@Body InputCityModel inputCityModel);
 
-	@POST( Constant.GETBRANCHES )
-	Call< List< BranchResponseModel > > getBranchList( @Body InputBranchModel inputBranchModel );
+    @POST(Constant.GETBRANCHES)
+    Call<List<BranchResponseModel>> getBranchList(@Body InputBranchModel inputBranchModel);
 
-	@GET( Constant.STATELIST )
-	Call< List< StateResponseModel > > getStateListData();
+    @GET(Constant.STATELIST)
+    Call<List<StateResponseModel>> getStateListData();
 
-	@POST( Constant.CITYLIST )
-	Call< List< CityResponseModel > > getCityListData( @Body InputCityModel inputCityModel );
+    @POST(Constant.CITYLIST)
+    Call<List<CityResponseModel>> getCityListData(@Body InputCityModel inputCityModel);
 
-	@Multipart
-	@POST( Constant.UPDATERC )
-	Call< RcUploadResponseModel > getRcUploadData( @PartMap Map< String, RequestBody > params, @Part MultipartBody.Part image );
+    @Multipart
+    @POST(Constant.UPDATERC)
+    Call<RcUploadResponseModel> getRcUploadData(@PartMap Map<String, RequestBody> params, @Part MultipartBody.Part image);
 
-	@GET
-	@Streaming
-	Call< ResponseBody > getFile( @Url String url );
+    @GET
+    @Streaming
+    Call<ResponseBody> getFile(@Url String url);
 
-	@POST( Constant.STATEBRNCHES )
-	Call< List< BranchResponseModel > > getStateBranches( @Body InputBranchState inputBranchState );
+    @POST(Constant.STATEBRNCHES)
+    Call<List<BranchResponseModel>> getStateBranches(@Body InputBranchState inputBranchState);
 
-	@Headers( {
-			"SOAPAction : http://sap.com/xi/WebService/soap1.1/StmtOfAcc_Out",
-			"Authorization : Basic cHJkX3BpX3dlYjpwcmRwaXdlYkAx"
-	} )
-	@POST( "MessageServlet?senderParty=&senderService=Service_TMFUniverse&receiverParty=&receiverService=&interface=StmtOfAcc_Out&interfaceNamespace=http://tmf.com:TMFUniverse" )
-	Call< ResponseEnvelope > callStmtAcRequest( @Body RequestEnvelpe requestEnvelope );
+    @Headers({
+            "SOAPAction : http://sap.com/xi/WebService/soap1.1/StmtOfAcc_Out",
+            "Authorization : Basic cHJkX3BpX3dlYjpwcmRwaXdlYkAx"
+    })
+    @POST("MessageServlet?senderParty=&senderService=Service_TMFUniverse&receiverParty=&receiverService=&interface=StmtOfAcc_Out&interfaceNamespace=http://tmf.com:TMFUniverse")
+    Call<ResponseEnvelope> callStmtAcRequest(@Body RequestEnvelpe requestEnvelope);
 
-	@Headers( {
-			"SOAPAction : http://sap.com/xi/WebService/soap1.1/TerminalDues_Out",
-			"Authorization : Basic cHJkX3BpX3dlYjpwcmRwaXdlYkAx"
-	} )
-	@POST( "MessageServlet?senderParty=&senderService=Service_TMFUniverse&receiverParty=&receiverService=&interface=TerminalDues_Out&interfaceNamespace=http://tmf.com:TMFUniverse" )
-	Call< com.tmfl.model.soapModel.preClousreResponse.ResponseEnvelope > callClosureTableRequest( @Body RequestEnvelope requestEnvelope );
+    @Headers({
+            "SOAPAction : http://sap.com/xi/WebService/soap1.1/TerminalDues_Out",
+            "Authorization : Basic cHJkX3BpX3dlYjpwcmRwaXdlYkAx"
+    })
+    @POST("MessageServlet?senderParty=&senderService=Service_TMFUniverse&receiverParty=&receiverService=&interface=TerminalDues_Out&interfaceNamespace=http://tmf.com:TMFUniverse")
+    Call<com.tmfl.model.soapModel.preClousreResponse.ResponseEnvelope> callClosureTableRequest(@Body RequestEnvelope requestEnvelope);
 
-	@Headers( {
-			"SOAPAction : http://tempuri.org/FindCase",
-			"Content-Type : text/xml; charset=utf-8"
-	} )
-	@POST( "CustOne_Case_Webservice?op=FindCase" )
-	Call< FindCaseResponseEnvelope > findCaseRequest( @Body FindCaseRequestEnvelope requestEnvelope );
+    @Headers({
+            "SOAPAction : http://tempuri.org/FindCase",
+            "Content-Type : text/xml; charset=utf-8"
+    })
+    @POST("CustOne_Case_Webservice?op=FindCase")
+    Call<FindCaseResponseEnvelope> findCaseRequest(@Body FindCaseRequestEnvelope requestEnvelope);
 
-	@Headers( {
-			"SOAPAction : http://tempuri.org/CreateCase_CustOne",
-			"Content-Type : text/xml; charset=utf-8"
-	} )
-	@POST( "CustOne_Case_Webservice?op=CreateCase_CustOne" )
-	Call< CreateCaseResponseEnvelope > createCaseRequest( @Body CreateCaseRequestEnvelope requestEnvelope );
+    @Headers({
+            "SOAPAction : http://tempuri.org/CreateCase_CustOne",
+            "Content-Type : text/xml; charset=utf-8"
+    })
+    @POST("CustOne_Case_Webservice?op=CreateCase_CustOne")
+    Call<CreateCaseResponseEnvelope> createCaseRequest(@Body CreateCaseRequestEnvelope requestEnvelope);
 
-	@Headers( {
-			"SOAPAction : http://tempuri.org/UploadDoc",
-			"Content-Type : text/xml; charset=utf-8"
-	} )
-	@POST( "CustOne_Case_Webservice?op=UploadDoc" )
-	Call< UploadDocResponseEnvelope > uploadDocRequest( @Body UploadDocRequestEnvelope requestEnvelope );
+    @Headers({
+            "SOAPAction : http://tempuri.org/UploadDoc",
+            "Content-Type : text/xml; charset=utf-8"
+    })
+    @POST("CustOne_Case_Webservice?op=UploadDoc")
+    Call<UploadDocResponseEnvelope> uploadDocRequest(@Body UploadDocRequestEnvelope requestEnvelope);
 
-	@POST( Constant.MYCONTRACT )
-	Call< ContractsResponseModel > getContractListData( @Body ContractsInputModel contractsInputModel );
+    @POST(Constant.MYCONTRACT)
+    Call<ContractsResponseModel> getContractListData(@Body ContractsInputModel contractsInputModel);
 
-	@POST( Constant.LOGIN )
-	Call< LoginResponseModel > getLoginResponse( @Body LoginRequestModel loginRequestModel );
+    @POST(Constant.LOGIN)
+    Call<LoginResponseModel> getLoginResponse(@Body LoginRequestModel loginRequestModel);
 
-	@POST( Constant.ACCOUNT_STATEMENT_DOWNLOAD )
-	Call< AccountStmtResponse > getAccStmtDownload( @Body AccountStatementInputModel accountStatementInputModel );
+    @POST(Constant.ACCOUNT_STATEMENT_DOWNLOAD)
+    Call<AccountStmtResponse> getAccStmtDownload(@Body AccountStatementInputModel accountStatementInputModel);
 
-	@POST( Constant.PRECLOSURE_STATEMENT_DOWNLOAD )
-	Call< PreClosureStmtPdfResponse > getPreClosureDownload( @Body PreClosureInputModel preClosureInputModel );
+    @POST(Constant.PRECLOSURE_STATEMENT_DOWNLOAD)
+    Call<PreClosureStmtPdfResponse> getPreClosureDownload(@Body PreClosureInputModel preClosureInputModel);
 
-	@POST( Constant.FORGOT_PASSWORD )
-	Call< ForgotResponse > getForgotResponse( @Body ForgotInputModel forgotInputModel );
+    @POST(Constant.FORGOT_PASSWORD)
+    Call<ForgotResponse> getForgotResponse(@Body ForgotInputModel forgotInputModel);
 
-	@POST( Constant.LOGGEDIN )
-	Call< LogResponseModel > getLogResponse( @Body LogInputModel logInputModel );
+    @POST(Constant.LOGGEDIN)
+    Call<LogResponseModel> getLogResponse(@Body LogInputModel logInputModel);
 
-	@POST( Constant.EMILIST )
-	Call< EmiListResponseModel > getEmiListResponse( @Body EmiListInputModel emiListInputModel );
+    @POST(Constant.EMILIST)
+    Call<EmiListResponseModel> getEmiListResponse(@Body EmiListInputModel emiListInputModel);
 
-	@POST( Constant.CHANGPASSWORD )
-	Call< ChangePasswordResponse > getChangePassResponse( @Body ChangePasswordInputModel changePasswordInputModel );
+    @POST(Constant.CHANGPASSWORD)
+    Call<ChangePasswordResponse> getChangePassResponse(@Body ChangePasswordInputModel changePasswordInputModel);
 
-	@POST( Constant.RECEIPTPDF )
-	Call< MyReceiptResponseModel > getMyReceiptResponse( @Body MyReceiptInputModel myReceiptInputModel );
+    @POST(Constant.RECEIPTPDF)
+    Call<MyReceiptResponseModel> getMyReceiptResponse(@Body MyReceiptInputModel myReceiptInputModel);
 
-	@POST( Constant.LOGOUT )
-	Call< LogoutResponseModel > getLogoutResponse( @Body LogoutInputModel logoutInputModel );
+    @POST(Constant.LOGOUT)
+    Call<LogoutResponseModel> getLogoutResponse(@Body LogoutInputModel logoutInputModel);
 
-	@POST( Constant.BILL_DESK_MESSAGE )
-	Call< BillDeskMsgResponseModel > getBillDeskMsgResponse( @Body BillDeskMsgInputModel billDeskMsgInputModel );
+    @POST(Constant.BILL_DESK_MESSAGE)
+    Call<BillDeskMsgResponseModel> getBillDeskMsgResponse(@Body BillDeskMsgInputModel billDeskMsgInputModel);
 
-	@POST( "customer/myContracts" )
-	Call< Example > getListData( @Body JSONData jsonData );
+    @POST("customer/myContracts")
+    Call<Example> getListData(@Body JSONData jsonData);
 
 }
