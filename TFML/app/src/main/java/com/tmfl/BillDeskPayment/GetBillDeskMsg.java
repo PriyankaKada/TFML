@@ -33,7 +33,7 @@ public class GetBillDeskMsg {
 	TmflApi        tmflApi;
 	String         list, mobile;
 
-	public GetBillDeskMsg( Context mContext, String contract, String mobile ) {
+	public GetBillDeskMsg(Context mContext, String contract, String mobile) {
 		this.context = mContext;
 		this.list = contract;
 		this.mobile = mobile;
@@ -42,6 +42,7 @@ public class GetBillDeskMsg {
 	}
 
 	public void getBillDeskMsg() {
+
 		tmflApi = ApiService.getInstance().call();
 
 		billDeskMsgInputModel.setContracts( list );
@@ -86,7 +87,6 @@ public class GetBillDeskMsg {
 			@Override
 			public void onFailure( Call< BillDeskMsgResponseModel > call, Throwable t ) {
 				CommonUtils.closeProgressDialog();
-
 				Log.d( "error", t.getMessage() );
 			}
 		} );

@@ -27,4 +27,11 @@ public class RequestEnvelpe {
 	public void setReqBody( ReqBody reqBody ) {
 		this.reqBody = reqBody;
 	}
+
+	@Override
+	public String toString() {
+		return "RequestEnvelpe{" +
+				"reqBody=" + reqBody +
+				'}';
+	}
 }

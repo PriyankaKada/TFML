@@ -11,9 +11,9 @@ public class LogResponseModel {
 	@SerializedName( "status" )
 	@Expose
 	private String status;
-	@SerializedName( "error" )
+	/*@SerializedName( "error" )
 	@Expose
-	private String error;
+	private String error;*/
 
 	public String getStatus() {
 		return status;
@@ -23,11 +23,11 @@ public class LogResponseModel {
 		this.status = status;
 	}
 
-	public String getError() {
+	/*public String getError() {
 		return error;
 	}
 
 	public void setError( String error ) {
 		this.error = error;
-	}
+	}*/
 }

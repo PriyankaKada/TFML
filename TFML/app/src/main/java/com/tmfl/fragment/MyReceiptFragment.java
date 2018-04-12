@@ -165,108 +165,114 @@ public class MyReceiptFragment extends Fragment implements View.OnClickListener 
 		reqBody.setReqData( reqData );
 		requestEnvelpe.setReqBody( reqBody );
 		tmflApi = SoapApiService.getInstance().call();
-		tmflApi.callStmtAcRequest( requestEnvelpe ).enqueue( new Callback< ResponseEnvelope >() {
-			@Override
-			public void onResponse( Call< ResponseEnvelope > call, Response< ResponseEnvelope > response ) {
-				CommonUtils.closeProgressDialog();
-				if ( response.body() != null ) {
-					responseEnvelope = response.body().getBody();
+		try {
+			tmflApi.callStmtAcRequest( requestEnvelpe ).enqueue( new Callback< ResponseEnvelope >() {
+                @Override
+                public void onResponse( Call< ResponseEnvelope > call, Response< ResponseEnvelope > response ) {
+                    CommonUtils.closeProgressDialog();
+                    if ( response.body() != null ) {
+                        responseEnvelope = response.body().getBody();
 
-					if ( responseEnvelope != null ) {
-						longInfo( new Gson().toJson( responseEnvelope ) );
-						Log.e( "SIZE ", response.body().getBody().getZCISResponse().getI_REC().size() + "" );
+                        if ( responseEnvelope != null ) {
+                            longInfo( new Gson().toJson( responseEnvelope ) );
+                            Log.e( "SIZE ", response.body().getBody().getZCISResponse().getI_REC().size() + "" );
 
-						if ( response.body().getBody().getZCISResponse().getI_REC().size() != 0 ) {
-							LinkedHashMap< String, ArrayList< ResponseEnvelope.Item > > hashMap = new LinkedHashMap< String, ArrayList< ResponseEnvelope.Item > >();
-
-
-							List< String > itemsCategory = new ArrayList< String >();
-							for ( ResponseEnvelope.Item item : response.body().getBody().getZCISResponse().getI_REC() ) {
-								itemsCategory.add( item.getBELNR() );
-							}
-							List< String > categories = new ArrayList< String >();
-
-							List< ResponseEnvelope.Item > items = response.body().getBody().getZCISResponse().getI_REC();
-							Collections.sort( items, new Comparator< ResponseEnvelope.Item >() {
-
-								@Override
-								public int compare( ResponseEnvelope.Item lhs, ResponseEnvelope.Item rhs ) {
-									SimpleDateFormat form  = new SimpleDateFormat( "yyyy-MM-dd" );
-									Date             date1 = null;
-									Date             date2 = null;
-
-									try {
-										date1 = form.parse( lhs.getZFBDT() );
-										date2 = form.parse( rhs.getZFBDT() );
-									}
-									catch ( Exception e ) {
-										e.printStackTrace();
-									}
-									return date2.compareTo( date1 );
-								}
-							} );
-
-							for ( int i = 0; i < items.size(); i++ ) {
-								Log.d( "sorted dates", items.get( i ).getZFBDT() );
-							}
-
-							for ( ResponseEnvelope.Item item : items ) {
-								if ( !isDataAvailabe( categories, item.getBELNR() ) ) {
-									categories.add( item.getBELNR() );
-									Log.e( " receipt ", item.getBELNR() );
-									hashMap.put( item.getBELNR(), new ArrayList< ResponseEnvelope.Item >() );
-								}
-
-								Log.e( "date and receipt ", item.getBELNR() + "    " + item.getZFBDT() );
-								hashMap.get( item.getBELNR() ).add( item );
-							}
+                            if ( response.body().getBody().getZCISResponse().getI_REC().size() != 0 ) {
+                                LinkedHashMap< String, ArrayList< ResponseEnvelope.Item > > hashMap = new LinkedHashMap< String, ArrayList< ResponseEnvelope.Item > >();
 
 
-							ArrayList< String > groupar  = new ArrayList<>();
-							ArrayList< Double > amountar = new ArrayList< Double >();
-							Log.e( "HashMap ", new Gson().toJson( hashMap ) + "" );
+                                List< String > itemsCategory = new ArrayList< String >();
+                                for ( ResponseEnvelope.Item item : response.body().getBody().getZCISResponse().getI_REC() ) {
+                                    itemsCategory.add( item.getBELNR() );
+                                }
+                                List< String > categories = new ArrayList< String >();
 
-							longInfo( new Gson().toJson( hashMap ) );
+                                List< ResponseEnvelope.Item > items = response.body().getBody().getZCISResponse().getI_REC();
+                                Collections.sort( items, new Comparator< ResponseEnvelope.Item >() {
 
-							Iterator it = hashMap.entrySet().iterator();
+                                    @Override
+                                    public int compare( ResponseEnvelope.Item lhs, ResponseEnvelope.Item rhs ) {
+                                        SimpleDateFormat form  = new SimpleDateFormat( "yyyy-MM-dd" );
+                                        Date             date1 = null;
+                                        Date             date2 = null;
 
-							for ( String key : hashMap.keySet() ) {
-								Double                             amount = 0.00;
-								ArrayList< ResponseEnvelope.Item > itemss = hashMap.get( key );
-								for ( int i = 0; i < itemss.size(); i++ ) {
-									amount = amount + Double.parseDouble( itemss.get( i ).getDMBTR() );
-									if ( i == 0 ) {
-										groupar.add( itemss.get( i ).getZFBDT() + " / " + itemss.get( i ).getBELNR() );
-									}
-								}
-								amountar.add( amount );
-							}
+                                        try {
+                                            date1 = form.parse( lhs.getZFBDT() );
+                                            date2 = form.parse( rhs.getZFBDT() );
+                                        }
+                                        catch ( Exception e ) {
+                                            e.printStackTrace();
+                                        }
+                                        return date2.compareTo( date1 );
+                                    }
+                                } );
 
-							MyExpandableListAdapter expandableListAdapter = new MyExpandableListAdapter( getActivity(), hashMap, groupar, amountar );
-							expandableListView.setAdapter( expandableListAdapter );
-						}
-					}
-				}
-				else {
-					Toast.makeText( getActivity(), "Server Under Maintenance,Please try after Sometime ", Toast.LENGTH_LONG ).show();
-				}
-			}
+                                for ( int i = 0; i < items.size(); i++ ) {
+                                    Log.d( "sorted dates", items.get( i ).getZFBDT() );
+                                }
 
-			private boolean isDataAvailabe( List< String > stringList, String data ) {
-				for ( String str : stringList ) {
-					if ( data.equalsIgnoreCase( str ) ) {
-						return true;
-					}
-				}
+                                for ( ResponseEnvelope.Item item : items ) {
+                                    if ( !isDataAvailabe( categories, item.getBELNR() ) ) {
+                                        categories.add( item.getBELNR() );
+                                        Log.e( " receipt ", item.getBELNR() );
+                                        hashMap.put( item.getBELNR(), new ArrayList< ResponseEnvelope.Item >() );
+                                    }
 
-				return false;
-			}
+                                    Log.e( "date and receipt ", item.getBELNR() + "    " + item.getZFBDT() );
+                                    hashMap.get( item.getBELNR() ).add( item );
+                                }
 
-			@Override
-			public void onFailure( Call< ResponseEnvelope > call, Throwable t ) {
-				Log.e( "Response ", "" + t.getLocalizedMessage() );
-				CommonUtils.closeProgressDialog();
-			}
-		} );
+
+                                ArrayList< String > groupar  = new ArrayList<>();
+                                ArrayList< Double > amountar = new ArrayList< Double >();
+                                Log.e( "HashMap ", new Gson().toJson( hashMap ) + "" );
+
+                                longInfo( new Gson().toJson( hashMap ) );
+
+                                Iterator it = hashMap.entrySet().iterator();
+
+                                for ( String key : hashMap.keySet() ) {
+                                    Double                             amount = 0.00;
+                                    ArrayList< ResponseEnvelope.Item > itemss = hashMap.get( key );
+                                    for ( int i = 0; i < itemss.size(); i++ ) {
+                                        amount = amount + Double.parseDouble( itemss.get( i ).getDMBTR() );
+                                        if ( i == 0 ) {
+                                            groupar.add( itemss.get( i ).getZFBDT() + " / " + itemss.get( i ).getBELNR() );
+                                        }
+                                    }
+                                    amountar.add( amount );
+                                }
+
+                                MyExpandableListAdapter expandableListAdapter = new MyExpandableListAdapter( getActivity(), hashMap, groupar, amountar );
+                                expandableListView.setAdapter( expandableListAdapter );
+                            }
+                        }
+                    }
+                    else {
+                        Toast.makeText( getActivity(), "Server Under Maintenance,Please try after Sometime ", Toast.LENGTH_LONG ).show();
+                    }
+                }
+
+                private boolean isDataAvailabe( List< String > stringList, String data ) {
+                    for ( String str : stringList ) {
+                        if ( data.equalsIgnoreCase( str ) ) {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+
+                @Override
+                public void onFailure( Call< ResponseEnvelope > call, Throwable t ) {
+                    Log.e( "Response ", "" + t.getLocalizedMessage() );
+                    CommonUtils.closeProgressDialog();
+                }
+            } );
+		} catch (Exception e) {
+			e.printStackTrace();
+			CommonUtils.closeProgressDialog();
+			Toast.makeText(getContext(), "Try After Some time", Toast.LENGTH_SHORT).show();
+		}
 	}
 }

@@ -340,53 +340,61 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 		reqData.setREQDATE( txtAccDate.getText().toString() );
 		reqBody.setReqData( reqData );
 		requestEnvelpe.setReqBody( reqBody );
+		Log.e("requestData", reqData.toString());
 		tmflSoapApi = SoapApiService.getInstance().call();
-		tmflSoapApi.callStmtAcRequest( requestEnvelpe ).enqueue( new Callback< ResponseEnvelope >() {
-			@Override
-			public void onResponse( Call< ResponseEnvelope > call, Response< ResponseEnvelope > response ) {
-				if ( response.body() != null ) {
-					responseEnvelope = response.body().getBody();
-					PreferenceHelper.insertObject( PreferenceHelper.SOAPSTATMENTOFACCOUNTRESPONSE, responseEnvelope );
-				/*	Log.e( "Response ", responseEnvelope.getZCISResponse().getIT_CARDEX1().getItem().getREQDATE() );
-					Log.e( "Response ", response.body().getBody().getZCISResponse().getIT_CARDEX2().getItem().getZZDATE() );
-					Log.e( "Response ", response.body().getBody().getZCISResponse().getIT_DUES1().getItem().getCONTRACTNO() );
-					Log.e( "Response ", response.body().getBody().getZCISResponse().getIT_DUES2().getItem().getODC_CHRG_DUE() );
-					Log.e( "Response ", response.body().getBody().getZCISResponse().getIT_DUES3().getItem().getTOT_EXP_DUE() );
-					Log.e( "Response ", response.body().getBody().getZCISResponse().getIT_ODC().size() + "" );
-					Log.e( "Res", response.body().getBody().getZCISResponse().getI_REC().get( 0 ).getCONTRACTNO() + "---" + response.body().getBody().getZCISResponse().getI_REC().size() );
-					Log.e( "REQDATE", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getREQDATE() );
-					Log.e( "Aggrement No", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getCONTRACTNO() );
-					Log.e( "Aggrement Date", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getCONTSTARTDT() );
-					Log.e( "Tenure", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getTENURE() );
-					Log.e( "TenureUNIT", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getTENURE_UNIT() );
-					Log.e( "EngineNO", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getENGINE_NO() );
-					Log.e( "Chasis No", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getCHASIS_NO() );
-					Log.e( "RC NO", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getREG_NO() );*/
+		try {
+			tmflSoapApi.callStmtAcRequest( requestEnvelpe ).enqueue( new Callback< ResponseEnvelope >() {
+                @Override
+                public void onResponse( Call< ResponseEnvelope > call, Response< ResponseEnvelope > response ) {
+                    try {
+                        if (response.body() != null) {
+                            responseEnvelope = response.body().getBody();
+                            PreferenceHelper.insertObject(PreferenceHelper.SOAPSTATMENTOFACCOUNTRESPONSE, responseEnvelope);
+                    /*	Log.e( "Response ", responseEnvelope.getZCISResponse().getIT_CARDEX1().getItem().getREQDATE() );
+                        Log.e( "Response ", response.body().getBody().getZCISResponse().getIT_CARDEX2().getItem().getZZDATE() );
+                        Log.e( "Response ", response.body().getBody().getZCISResponse().getIT_DUES1().getItem().getCONTRACTNO() );
+                        Log.e( "Response ", response.body().getBody().getZCISResponse().getIT_DUES2().getItem().getODC_CHRG_DUE() );
+                        Log.e( "Response ", response.body().getBody().getZCISResponse().getIT_DUES3().getItem().getTOT_EXP_DUE() );
+                        Log.e( "Response ", response.body().getBody().getZCISResponse().getIT_ODC().size() + "" );
+                        Log.e( "Res", response.body().getBody().getZCISResponse().getI_REC().get( 0 ).getCONTRACTNO() + "---" + response.body().getBody().getZCISResponse().getI_REC().size() );
+                        Log.e( "REQDATE", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getREQDATE() );
+                        Log.e( "Aggrement No", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getCONTRACTNO() );
+                        Log.e( "Aggrement Date", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getCONTSTARTDT() );
+                        Log.e( "Tenure", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getTENURE() );
+                        Log.e( "TenureUNIT", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getTENURE_UNIT() );
+                        Log.e( "EngineNO", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getENGINE_NO() );
+                        Log.e( "Chasis No", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getCHASIS_NO() );
+                        Log.e( "RC NO", response.body().getBody().getZCISResponse().getIT_CARDEX1().getItem().getREG_NO() );*/
 
-					linAccDetail.setVisibility( View.VISIBLE );
+                            linAccDetail.setVisibility(View.VISIBLE);
 
-					if ( submitClicked == true ) {
-						if ( financeDetailClicked == false ) {
-							callBasicDetail();
-						}
-						else {
-							callFinanceDetail();
+                            if (submitClicked == true) {
+                                if (financeDetailClicked == false) {
+                                    callBasicDetail();
+                                } else {
+                                    callFinanceDetail();
 
-						}
-					}
+                                }
+                            }
 
-				}
-				else {
-					Toast.makeText( getActivity(), "Server Under Maintenance,Please try after Sometime ", Toast.LENGTH_LONG ).show();
-				}
-			}
+                        } else {
+                            Toast.makeText(getActivity(), "Server Under Maintenance,Please try after Sometime ", Toast.LENGTH_LONG).show();
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
 
 
-			@Override
-			public void onFailure( Call< ResponseEnvelope > call, Throwable t ) {
-				Log.e( "Response ", "" + t.getLocalizedMessage() );
-			}
-		} );
+                @Override
+                public void onFailure( Call< ResponseEnvelope > call, Throwable t ) {
+                    Log.e( "Response ", "" + t.getLocalizedMessage() );
+                }
+            } );
+		} catch (Exception e) {
+			e.printStackTrace();
+			Toast.makeText(getContext(), "Try After Some time", Toast.LENGTH_SHORT).show();
+		}
 
 	}
 

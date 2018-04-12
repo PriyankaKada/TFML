@@ -138,36 +138,38 @@ public class EmiDetailFragment extends Fragment implements View.OnClickListener 
 			public void onResponse( Call< EmiListResponseModel > call, Response< EmiListResponseModel > response ) {
 				CommonUtils.closeProgressDialog();
 				Log.e( "Response EMI", new Gson().toJson( response.body() ) + "" );
-				if ( response.body() != null ) {
-					if ( response.body().getStatus().toString().contains( "Success" ) ) {
-						Log.e( "Response EMI", response.body().getData().size() + "" );
-						if ( response.body().getData().size() != 0 ) {
-							ArrayList< Datum > parent = new ArrayList< Datum >();
-							ArrayList< Datum > child  = new ArrayList< Datum >();
+				if (response.code() == 200) {
+					if (response.body() != null) {
+						if (response.body().getStatus().toString().contains("Success")) {
+							Log.e("Response EMI", response.body().getData().size() + "");
+							if (response.body().getData().size() != 0) {
+								ArrayList<Datum> parent = new ArrayList<Datum>();
+								ArrayList<Datum> child = new ArrayList<Datum>();
 
-							for ( int i = 0; i < response.body().getData().size(); i++ ) {
-								if ( !response.body().getData().get( i ).getADATE().equalsIgnoreCase( "0000-00-00" ) ) {
-									parent.add( response.body().getData().get( i ) );
-									child.add( response.body().getData().get( i ) );
+								for (int i = 0; i < response.body().getData().size(); i++) {
+									if (!response.body().getData().get(i).getADATE().equalsIgnoreCase("0000-00-00")) {
+										parent.add(response.body().getData().get(i));
+										child.add(response.body().getData().get(i));
+									}
 								}
-							}
 
                         /*Collections.reverse(parent);
                         Collections.reverse(child);*/
 
 
-							expandableListViewEmi.setAdapter( new EmiExpandableListView( getActivity(), parent, child ) );
+								expandableListViewEmi.setAdapter(new EmiExpandableListView(getActivity(), parent, child));
+							}
+						} else if (response.body().getStatus().toString().contains("Failed")) {
+							CommonUtils.closeProgressDialog();
+							Toast.makeText(emiActivity, "Server Under Maintenance,Please try after Sometime ", Toast.LENGTH_LONG).show();
+						} else {
+							CommonUtils.closeProgressDialog();
+							Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+							getActivity().startActivity(loginIntent);
 						}
 					}
-					else if ( response.body().getStatus().toString().contains( "Failed" ) ) {
-						CommonUtils.closeProgressDialog();
-						Toast.makeText( emiActivity, "Server Under Maintenance,Please try after Sometime ", Toast.LENGTH_LONG ).show();
-					}
-					else {
-						CommonUtils.closeProgressDialog();
-						Intent loginIntent = new Intent( getActivity(), LoginActivity.class );
-						getActivity().startActivity( loginIntent );
-					}
+				}else{
+					Log.e("medha", "something went wrong");
 				}
 			}
 

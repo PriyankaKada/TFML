@@ -254,7 +254,6 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 					Toast.makeText( getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT ).show();
 				}
 				break;
-
 		}
 	}
 

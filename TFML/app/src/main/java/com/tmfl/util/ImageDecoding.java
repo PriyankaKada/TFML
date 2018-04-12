@@ -90,9 +90,9 @@ public class ImageDecoding {
 		catch ( IOException e ) {
 			e.printStackTrace();
 		}
-		int orientation = ei.getAttributeInt( ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL );
+//		int orientation = ei.getAttributeInt( ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL );
 
-		switch ( orientation ) {
+		/*switch ( orientation ) {
 			case ExifInterface.ORIENTATION_ROTATE_90:
 				bitmap = rotateImage( bitmap, 90 );
 				break;
@@ -100,7 +100,7 @@ public class ImageDecoding {
 				bitmap = rotateImage( bitmap, 180 );
 				break;
 			// etc.
-		}
+		}*/
 
 		return bitmap;
 	}

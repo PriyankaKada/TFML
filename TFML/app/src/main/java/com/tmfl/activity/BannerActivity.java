@@ -185,7 +185,7 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 					}
 				}
 				else {
-					Toast.makeText( getBaseContext(), "Server Error........", Toast.LENGTH_LONG ).show();
+					Toast.makeText( getBaseContext(), "Try After Some time", Toast.LENGTH_LONG ).show();
 				}
 			}
 

@@ -45,7 +45,7 @@ public class Data {
 	@SerializedName( "state" )
 	@Expose
 	private Object  state;
-	@SerializedName( "emailId" )
+	@SerializedName( "email" )
 	@Expose
 	private Object  email;
 	@SerializedName( "mobile" )

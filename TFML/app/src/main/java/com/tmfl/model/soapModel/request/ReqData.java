@@ -31,4 +31,12 @@ public class ReqData {
 	public void setREQDATE( String REQDATE ) {
 		this.REQDATE = REQDATE;
 	}
+
+	@Override
+	public String toString() {
+		return "ReqData{" +
+				"contactId='" + contactId + '\'' +
+				", REQDATE='" + REQDATE + '\'' +
+				'}';
+	}
 }

@@ -294,8 +294,8 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
                 break;
 
             case R.id.imgUploadFile3:
-				/*if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
-					intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
+                /*if ( manufactures.equalsIgnoreCase( "samsung" ) ) {
+                    intent = new Intent( "com.sec.android.app.myfiles.PICK_DATA" );
 					intent.putExtra( "CONTENT_TYPE", "text/plain|image*//*|application*//*.pdf" );
 					intent.addCategory( Intent.CATEGORY_DEFAULT );
 				}
@@ -333,24 +333,21 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
     private boolean validate() {
 
         if (TextUtils.isEmpty(txtComplainCaseId.getText().toString().trim())) {
-            if (spnContractNo.getSelectedItemPosition() == 0 && TextUtils.isEmpty(txtFromDate.getText().toString().trim()) && TextUtils.isEmpty(txtToDate.getText().toString().trim())) {
-                txtComplainCaseId.setError("Please enter Case Id!");
-                return false;
-            } else if (spnContractNo.getSelectedItemPosition() == 0) {
-                Toast.makeText(getActivity(), "Please select Contract No!", Toast.LENGTH_SHORT).show();
+            txtComplainCaseId.requestFocus();
+            txtComplainCaseId.setError("Please enter Case Id!");
+            return false;
+        } else if (spnContractNo.getSelectedItemPosition() == 0) {
+            Toast.makeText(getActivity(), "Please select Contract No!", Toast.LENGTH_SHORT).show();
 //				txtComplainCaseId.setError( null );
-                return false;
-            } else if (TextUtils.isEmpty(txtFromDate.getText().toString())) {
-                txtFromDate.setError("Please select From Date!");
+            return false;
+        } else if (TextUtils.isEmpty(txtFromDate.getText().toString())) {
+            txtFromDate.setError("Please select From Date!");
 //				txtComplainCaseId.setError( null );
-                return false;
-            } else if (TextUtils.isEmpty(txtToDate.getText().toString())) {
-                txtToDate.setError("Please select End Date!");
+            return false;
+        } else if (TextUtils.isEmpty(txtToDate.getText().toString())) {
+            txtToDate.setError("Please select End Date!");
 //				txtComplainCaseId.setError( null );
-                return false;
-            } else {
-                return true;
-            }
+            return false;
         } else {
             return true;
         }
@@ -440,29 +437,35 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
         requestEnvelope.setCaseBody(findCaseReqBody);
         TmflApi apiService = ComplaintSoapApiService.getInstance().call();
 
-        apiService.findCaseRequest(requestEnvelope).enqueue(new Callback<FindCaseResponseEnvelope>() {
-            @Override
-            public void onResponse(Call<FindCaseResponseEnvelope> call, Response<FindCaseResponseEnvelope> response) {
-                progressDialog.dismiss();
-                Log.d("success", response.body().getFindCaseBody().getFindCaseResponse().getFindCaseResult());
+        try {
+            apiService.findCaseRequest(requestEnvelope).enqueue(new Callback<FindCaseResponseEnvelope>() {
+                @Override
+                public void onResponse(Call<FindCaseResponseEnvelope> call, Response<FindCaseResponseEnvelope> response) {
+                    progressDialog.dismiss();
+    //                Log.d("success", response.body().getFindCaseBody().getFindCaseResponse().getFindCaseResult());
 
-                PreferenceHelper.insertObject(Constant.FIND_CASE_RESPONSE, response.body().getFindCaseBody());
+                    PreferenceHelper.insertObject(Constant.FIND_CASE_RESPONSE, response.body().getFindCaseBody());
 
-                setCaseDetails(response.body().getFindCaseBody().getFindCaseResponse().getFindCaseResult());
+                    setCaseDetails(response.body().getFindCaseBody().getFindCaseResponse().getFindCaseResult());
 
-                txtComplainCaseId.setText("");
-                txtFromDate.setText("");
-                spnContractNo.setSelection(0);
-                txtToDate.setText("");
+                    txtComplainCaseId.setText("");
+                    txtFromDate.setText("");
+                    spnContractNo.setSelection(0);
+                    txtToDate.setText("");
 
-            }
+                }
 
-            @Override
-            public void onFailure(Call<FindCaseResponseEnvelope> call, Throwable t) {
-                progressDialog.dismiss();
-                Log.d("error", t.getMessage());
-            }
-        });
+                @Override
+                public void onFailure(Call<FindCaseResponseEnvelope> call, Throwable t) {
+                    progressDialog.dismiss();
+                    Log.d("error", t.getMessage());
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            progressDialog.dismiss();
+            Toast.makeText(getContext(), "Try After Some time", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void uploadDocs() {
@@ -496,40 +499,50 @@ public class TrackStatusFragment extends Fragment implements UploadFileInterface
 
 
         progressDialog.show();
-        apiService.uploadDocRequest(requestEnvelope).enqueue(new Callback<UploadDocResponseEnvelope>() {
-            @Override
-            public void onResponse(Call<UploadDocResponseEnvelope> call, Response<UploadDocResponseEnvelope> response) {
+        try {
+            apiService.uploadDocRequest(requestEnvelope).enqueue(new Callback<UploadDocResponseEnvelope>() {
+                @Override
+                public void onResponse(Call<UploadDocResponseEnvelope> call, Response<UploadDocResponseEnvelope> response) {
 
-                progressDialog.dismiss();
-                Log.d("success", response.body().getResponseBody().getResponse().getResult());
+                    try {
+                        progressDialog.dismiss();
+                        Log.d("success", response.body().getResponseBody().getResponse().getResult());
 
-                XMLPullParser xmlPullParser = new XMLPullParser(response.body().getResponseBody().getResponse().getResult());
-                ParsedResponse caseFile = xmlPullParser.parse();
+                        XMLPullParser xmlPullParser = new XMLPullParser(response.body().getResponseBody().getResponse().getResult());
+                        ParsedResponse caseFile = xmlPullParser.parse();
 
-                if (caseFile.getCaseFile().getResult().equalsIgnoreCase("1")) {
-                    Toast.makeText(getActivity(), caseFile.getCaseFile().getMessage(), Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(), caseFile.getCaseFile().getMessage(), Toast.LENGTH_SHORT).show();
+                        if (caseFile.getCaseFile().getResult().equalsIgnoreCase("1")) {
+                            Toast.makeText(getActivity(), caseFile.getCaseFile().getMessage(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getActivity(), caseFile.getCaseFile().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
+                        txtComplainCaseId.setText("");
+                        txtFromDate.setText("");
+                        spnContractNo.setSelection(0);
+                        txtToDate.setText("");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
-                txtComplainCaseId.setText("");
-                txtFromDate.setText("");
-                spnContractNo.setSelection(0);
-                txtToDate.setText("");
-            }
+                @Override
+                public void onFailure(Call<UploadDocResponseEnvelope> call, Throwable t) {
 
-            @Override
-            public void onFailure(Call<UploadDocResponseEnvelope> call, Throwable t) {
+                    progressDialog.dismiss();
+                    Log.d("error", t.getMessage());
 
-                progressDialog.dismiss();
-                Log.d("error", t.getMessage());
-
-                txtComplainCaseId.setText("");
-                txtFromDate.setText("");
-                spnContractNo.setSelection(0);
-                txtToDate.setText("");
-            }
-        });
+                    txtComplainCaseId.setText("");
+                    txtFromDate.setText("");
+                    spnContractNo.setSelection(0);
+                    txtToDate.setText("");
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            progressDialog.dismiss();
+            Toast.makeText(getContext(), "Try After Some time", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setCaseDetails(String findCaseResult) {

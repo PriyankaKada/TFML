@@ -90,8 +90,8 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
                         Toast.makeText(getBaseContext(), "Invalid UserId", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-
                     Log.e("null", "");
+                    Toast.makeText(getBaseContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
                 }
             }
 

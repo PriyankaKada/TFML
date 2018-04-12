@@ -134,39 +134,39 @@ public interface TmflApi {
     Call<List<BranchResponseModel>> getStateBranches(@Body InputBranchState inputBranchState);
 
     @Headers({
-            "SOAPAction : http://sap.com/xi/WebService/soap1.1/StmtOfAcc_Out",
-            "Authorization : Basic cHJkX3BpX3dlYjpwcmRwaXdlYkAx"
+            "SOAPAction:http://sap.com/xi/WebService/soap1.1/StmtOfAcc_Out",
+            "Authorization:Basic cHJkX3BpX3dlYjpwcmRwaXdlYkAx"
     })
     @POST("MessageServlet?senderParty=&senderService=Service_TMFUniverse&receiverParty=&receiverService=&interface=StmtOfAcc_Out&interfaceNamespace=http://tmf.com:TMFUniverse")
-    Call<ResponseEnvelope> callStmtAcRequest(@Body RequestEnvelpe requestEnvelope);
+    Call<ResponseEnvelope> callStmtAcRequest(@Body RequestEnvelpe requestEnvelope) throws Exception;
 
     @Headers({
-            "SOAPAction : http://sap.com/xi/WebService/soap1.1/TerminalDues_Out",
-            "Authorization : Basic cHJkX3BpX3dlYjpwcmRwaXdlYkAx"
+            "SOAPAction:http://sap.com/xi/WebService/soap1.1/TerminalDues_Out",
+            "Authorization:Basic cHJkX3BpX3dlYjpwcmRwaXdlYkAx"
     })
     @POST("MessageServlet?senderParty=&senderService=Service_TMFUniverse&receiverParty=&receiverService=&interface=TerminalDues_Out&interfaceNamespace=http://tmf.com:TMFUniverse")
-    Call<com.tmfl.model.soapModel.preClousreResponse.ResponseEnvelope> callClosureTableRequest(@Body RequestEnvelope requestEnvelope);
+    Call<com.tmfl.model.soapModel.preClousreResponse.ResponseEnvelope> callClosureTableRequest(@Body RequestEnvelope requestEnvelope) throws Exception;
 
     @Headers({
-            "SOAPAction : http://tempuri.org/FindCase",
-            "Content-Type : text/xml; charset=utf-8"
+            "SOAPAction:http://tempuri.org/FindCase",
+            "Content-Type:text/xml; charset=utf-8"
     })
     @POST("CustOne_Case_Webservice?op=FindCase")
-    Call<FindCaseResponseEnvelope> findCaseRequest(@Body FindCaseRequestEnvelope requestEnvelope);
+    Call<FindCaseResponseEnvelope> findCaseRequest(@Body FindCaseRequestEnvelope requestEnvelope) throws Exception;
 
     @Headers({
-            "SOAPAction : http://tempuri.org/CreateCase_CustOne",
-            "Content-Type : text/xml; charset=utf-8"
+            "SOAPAction:http://tempuri.org/CreateCase_CustOne",
+            "Content-Type:text/xml; charset=utf-8"
     })
     @POST("CustOne_Case_Webservice?op=CreateCase_CustOne")
-    Call<CreateCaseResponseEnvelope> createCaseRequest(@Body CreateCaseRequestEnvelope requestEnvelope);
+    Call<CreateCaseResponseEnvelope> createCaseRequest(@Body CreateCaseRequestEnvelope requestEnvelope) throws Exception;
 
     @Headers({
-            "SOAPAction : http://tempuri.org/UploadDoc",
-            "Content-Type : text/xml; charset=utf-8"
+            "SOAPAction:http://tempuri.org/UploadDoc",
+            "Content-Type:text/xml; charset=utf-8"
     })
     @POST("CustOne_Case_Webservice?op=UploadDoc")
-    Call<UploadDocResponseEnvelope> uploadDocRequest(@Body UploadDocRequestEnvelope requestEnvelope);
+    Call<UploadDocResponseEnvelope> uploadDocRequest(@Body UploadDocRequestEnvelope requestEnvelope) throws Exception;
 
     @POST(Constant.MYCONTRACT)
     Call<ContractsResponseModel> getContractListData(@Body ContractsInputModel contractsInputModel);

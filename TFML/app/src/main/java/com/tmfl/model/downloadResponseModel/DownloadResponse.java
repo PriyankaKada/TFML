@@ -31,7 +31,7 @@ public class DownloadResponse {
 	private Integer to;
 	@SerializedName( "data" )
 	@Expose
-	private List< Datum > data = new ArrayList< Datum >();
+	private List< Datum > data = new ArrayList<>();
 
 	/**
 	 * @return The perPage

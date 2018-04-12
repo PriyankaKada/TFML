@@ -59,9 +59,7 @@ public class DownloadAdapter extends BaseAdapter {
 			holder.txtFile.setPaintFlags( Paint.UNDERLINE_TEXT_FLAG );
 			convertView.setTag( holder );
 		}
-		else
-
-		{
+		else{
 			holder = ( DownloadAdapter.Holder ) convertView.getTag();
 		}
 		holder.txtFile.setText( downloadList.get( position ).getName() );

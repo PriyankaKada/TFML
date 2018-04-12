@@ -355,53 +355,59 @@ public class PreClosureFragment extends Fragment implements View.OnClickListener
 		reqBody.setReqData( reqData );
 		requestEnvelope.setReqBody( reqBody );
 		tmflSoapApi = SoapApiService.getInstance().call();
-		tmflSoapApi.callClosureTableRequest( requestEnvelope ).enqueue( new Callback< com.tmfl.model.soapModel.preClousreResponse.ResponseEnvelope >() {
-			@Override
-			public void onResponse( Call< com.tmfl.model.soapModel.preClousreResponse.ResponseEnvelope > call, Response< com.tmfl.model.soapModel.preClousreResponse.ResponseEnvelope > response ) {
-				// Log.e("ResponseModel",response.body().getBody().getZ_TERMINALDUESResponse().getI_DTL().get(0).getCONTRACTNO());
-				CommonUtils.closeProgressDialog();
-				if ( response.body() != null ) {
-					ll_footerclouser.setVisibility( View.VISIBLE );
-					responseEnvelope = response.body().getBody();
+		try {
+			tmflSoapApi.callClosureTableRequest( requestEnvelope ).enqueue( new Callback< ResponseEnvelope >() {
+                @Override
+                public void onResponse( Call< ResponseEnvelope > call, Response< ResponseEnvelope > response ) {
+                    // Log.e("ResponseModel",response.body().getBody().getZ_TERMINALDUESResponse().getI_DTL().get(0).getCONTRACTNO());
+                    CommonUtils.closeProgressDialog();
+                    if ( response.body() != null ) {
+                        ll_footerclouser.setVisibility( View.VISIBLE );
+                        responseEnvelope = response.body().getBody();
 
-					Body                                    dummy                  = new Body();
-					ResponseEnvelope.Z_TERMINALDUESResponse z_terminalduesResponse = new ResponseEnvelope.Z_TERMINALDUESResponse();
-					List< ResponseEnvelope.Item >           items                  = new ArrayList< ResponseEnvelope.Item >();
+                        Body                                    dummy                  = new Body();
+                        ResponseEnvelope.Z_TERMINALDUESResponse z_terminalduesResponse = new ResponseEnvelope.Z_TERMINALDUESResponse();
+                        List< ResponseEnvelope.Item >           items                  = new ArrayList< ResponseEnvelope.Item >();
 
-					List< String > stringList = new ArrayList< String >();
-					if ( responseEnvelope != null ) {
-						for ( int i = 0; i < responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().size(); i++ ) {
+                        List< String > stringList = new ArrayList< String >();
+                        if ( responseEnvelope != null ) {
+                            for ( int i = 0; i < responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().size(); i++ ) {
 
-							Log.e( "element  ", responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( i ).getDESCP() );
-							items.add( responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( i ) );
-							if ( responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( i ).getDESCP().equals( "TOTAL" ) ) {
-								Log.e( "inside elememt  ", responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( i ).getDESCP() );
-								break;
-							}
-							else {
-								stringList.add( responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( i ).getDESCP() );
-							}
-						}
+                                Log.e( "element  ", responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( i ).getDESCP() );
+                                items.add( responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( i ) );
+                                if ( responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( i ).getDESCP().equals( "TOTAL" ) ) {
+                                    Log.e( "inside elememt  ", responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( i ).getDESCP() );
+                                    break;
+                                }
+                                else {
+                                    stringList.add( responseEnvelope.getZ_TERMINALDUESResponse().getI_DTL().get( i ).getDESCP() );
+                                }
+                            }
 
-						z_terminalduesResponse.setI_DTL( items );
-						dummy.setZ_TERMINALDUESResponse( z_terminalduesResponse );
-						for ( String s : stringList ) {
-							Log.e( "String", "" + s );
-						}
-						lstPreClosure.setAdapter( new PreClosureAdapter( getActivity(), dummy ) );
-					}
+                            z_terminalduesResponse.setI_DTL( items );
+                            dummy.setZ_TERMINALDUESResponse( z_terminalduesResponse );
+                            for ( String s : stringList ) {
+                                Log.e( "String", "" + s );
+                            }
+                            lstPreClosure.setAdapter( new PreClosureAdapter( getActivity(), dummy ) );
+                        }
 
-					linTable.setVisibility( View.VISIBLE );
-					llHeader.setVisibility( View.VISIBLE );
-				}
-			}
+                        linTable.setVisibility( View.VISIBLE );
+                        llHeader.setVisibility( View.VISIBLE );
+                    }
+                }
 
-			@Override
-			public void onFailure( Call< com.tmfl.model.soapModel.preClousreResponse.ResponseEnvelope > call, Throwable t ) {
-				//  Log.e("ERROR", t.getMessage());
-				CommonUtils.closeProgressDialog();
-			}
-		} );
+                @Override
+                public void onFailure( Call< ResponseEnvelope > call, Throwable t ) {
+                    //  Log.e("ERROR", t.getMessage());
+                    CommonUtils.closeProgressDialog();
+                }
+            } );
+		} catch (Exception e) {
+			e.printStackTrace();
+			CommonUtils.closeProgressDialog();
+			Toast.makeText(getContext(), "Try After Some time", Toast.LENGTH_SHORT).show();
+		}
 	}
 
 
