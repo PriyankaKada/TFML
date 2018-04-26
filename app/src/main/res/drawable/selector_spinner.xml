@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <layer-list>
+            <item
+                >
+                <color android:color="#F26711"/>
+                <shape android:shape="rectangle">
+                    <padding android:bottom="5dp"
+                             android:left="5dp"
+                             android:right="5dp"
+                             android:top="5dp">
+                    </padding>
+                </shape>
+            </item>
+
+            <item
+                android:top="3dp"
+                android:right="2dp">
+                <bitmap
+                    android:gravity="center_vertical|right"
+                    android:src="@drawable/down_arrow"
+                    />
+                <scale android:scaleHeight="10dp"
+                       android:scaleWidth="10dp"
+                    >
+
+                </scale>
+            </item>
+        </layer-list>
+    </item>
+</selector>

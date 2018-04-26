@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout android:id="@+id/drawerLayout"
+                                        xmlns:android="http://schemas.android.com/apk/res/android"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/framelayout_base_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <!-- <android.support.design.widget.NavigationView
+         android:id="@+id/navigation_view"
+         android:layout_width="wrap_content"
+         android:layout_height="match_parent"
+         android:layout_gravity="end"
+         app:headerLayout="@layout/navigation_header"
+          app:itemBackground="@color/white"
+         app:itemTextColor="#333"
+         app:menu="@menu/navigation_view_items" />-->
+    <include
+        layout="@layout/layout_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"/>
+</android.support.v4.widget.DrawerLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="app_background">#523380</color>
+    <color name="colorPrimary">#003668</color>
+    <color name="colorPrimaryDark">#003668</color>
+    <color name="colorAccent">#303F9F</color>
+    <color name="text_black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="tab_selector">#003668</color>
+    <color name="tab_bg">#004c92</color>
+    <color name="color_grey">#bbbbbb</color>
+    <color name="color_grey_light">#EEEEEE</color>
+    <color name="total_lin_bg">#27AE61</color>
+    <color name="total_count_bg">#239655</color>
+    <color name="terminated_lin_bg">#E84C3D</color>
+    <color name="terminated_count_bg">#D04437</color>
+    <color name="overdues_ling_bg">#F96128</color>
+    <color name="overdues_count_bg">#da8c10</color>
+    <color name="detail_frag_bg">#EEEEEE</color>
+    <color name="color_DARKgrey">#6D6D6D</color>
+    <color name="green">#00ff00</color>
+
+</resources>

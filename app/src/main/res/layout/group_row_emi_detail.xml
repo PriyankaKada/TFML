@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/llRootHeader"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/list_row"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_header_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:id="@+id/rlEmiDetail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ll_daterow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:weightSum="10">
+
+                <TextView
+                    android:id="@+id/txtCount"
+                    style="@style/Base.TextAppearance.AppCompat.Subhead"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text=""/>
+
+
+                <TextView
+                    android:id="@+id/txtEmiDate"
+                    style="@style/Base.TextAppearance.AppCompat.Subhead"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="4"
+                    android:gravity="left|center"
+                    android:text=""
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/txtEmiAmount"
+                    style="@style/Base.TextAppearance.AppCompat.Subhead"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="4"
+                    android:gravity="left|center"
+                    android:text=""
+                    android:textSize="12sp"/>
+
+                <ImageView
+                    android:id="@+id/img_expand"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/ic_spin_bg_small"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>
