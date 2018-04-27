@@ -37,156 +37,156 @@ import retrofit2.Response;
 
 public class EmiDetailFragment extends Fragment implements View.OnClickListener {
 
-	Button             btnReciept;
-	View               view;
-	ExpandableListView expandableListViewEmi;
-	TmflApi            tmflApi, tmflLogin;
-	EmiListInputModel emiListInputModel;
-	String datavalue = "";
-	LogInputModel    logInputModel;
-	LogResponseModel logResponseModel;
+    Button btnReciept;
+    View view;
+    ExpandableListView expandableListViewEmi;
+    TmflApi tmflApi, tmflLogin;
+    EmiListInputModel emiListInputModel;
+    String datavalue = "";
+    LogInputModel logInputModel;
+    LogResponseModel logResponseModel;
 
-	EmiActivity emiActivity;
+    EmiActivity emiActivity;
 
-	@Override
-	public View onCreateView( LayoutInflater inflater, ViewGroup container,
-	                          Bundle savedInstanceState ) {
-		// Inflate the layout for this fragment
-		view = inflater.inflate( R.layout.fragment_emi_detail, container, false );
-		Intent intent = getActivity().getIntent();
-		Bundle bundle = intent.getExtras();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_emi_detail, container, false);
+        Intent intent = getActivity().getIntent();
+        Bundle bundle = intent.getExtras();
 
-		datavalue = ( String ) bundle.getString( "datamodelvalue" );
-		logInputModel = new LogInputModel();
-		logResponseModel = new LogResponseModel();
+        datavalue = (String) bundle.getString("datamodelvalue");
+        logInputModel = new LogInputModel();
+        logResponseModel = new LogResponseModel();
 
-		emiActivity = ( EmiActivity ) getActivity();
+        emiActivity = (EmiActivity) getActivity();
 
-		init();
-		return view;
-	}
+        init();
+        return view;
+    }
 
-	public void init() {
+    public void init() {
 
 //		( ( EmiActivity ) getActivity() ).txtEmiName.setText( "EMI Schedule" );
 
-		tmflLogin = ApiService.getInstance().call();
-		tmflApi = ApiService.getInstance().call();
-		callCheckLogin();
-		emiListInputModel = new EmiListInputModel();
-		emiListInputModel.setApiToken( PreferenceHelper.getString( PreferenceHelper.API_TOKEN ) );
-		emiListInputModel.setContractNo( PreferenceHelper.getString( PreferenceHelper.CONTRACT_NO ) );
+        tmflLogin = ApiService.getInstance().call();
+        tmflApi = ApiService.getInstance().call();
+        callCheckLogin();
+        emiListInputModel = new EmiListInputModel();
+        emiListInputModel.setApiToken(PreferenceHelper.getString(PreferenceHelper.API_TOKEN));
+        emiListInputModel.setContractNo(PreferenceHelper.getString(PreferenceHelper.CONTRACT_NO));
+        //Contract type
+        emiListInputModel.setContract_type(Integer.parseInt(PreferenceHelper.getString(PreferenceHelper.CONTRACT_TYPE)));
+        Log.e("EMIDetailFragment",PreferenceHelper.getString(PreferenceHelper.CONTRACT_TYPE) );
+        emiListInputModel.setContractNo(PreferenceHelper.getString(PreferenceHelper.CONTRACT_NO));
+        Log.e("Req ", new Gson().toJson(emiListInputModel));
+        expandableListViewEmi = (ExpandableListView) view.findViewById(R.id.expandableListViewEmi);
+        btnReciept = (Button) view.findViewById(R.id.btnReciept);
 
-		emiListInputModel.setContractNo( PreferenceHelper.getString( PreferenceHelper.CONTRACT_NO ) );
-		Log.e( "Req ", new Gson().toJson( emiListInputModel ) );
-		expandableListViewEmi = ( ExpandableListView ) view.findViewById( R.id.expandableListViewEmi );
-		btnReciept = ( Button ) view.findViewById( R.id.btnReciept );
+        btnReciept.setOnClickListener(this);
+        SetFonts.setFonts(getActivity(), btnReciept, 2);
+        Log.e("Req EMI", new Gson().toJson(emiListInputModel) + "");
 
-		btnReciept.setOnClickListener( this );
-		SetFonts.setFonts( getActivity(), btnReciept, 2 );
-		Log.e( "Req EMI", new Gson().toJson( emiListInputModel ) + "" );
+        if (PreferenceHelper.getBoolean(Constant.SHOW_RECEIPT)) {
+            btnReciept.performClick();
+        }
 
-		if ( PreferenceHelper.getBoolean( Constant.SHOW_RECEIPT ) ) {
-			btnReciept.performClick();
-		}
+        callCheckLogin();
 
-		callCheckLogin();
+    }
 
-	}
+    public void callCheckLogin() {
+        if (CommonUtils.isNetworkAvailable(getActivity())) {
 
-	public void callCheckLogin() {
-		if ( CommonUtils.isNetworkAvailable( getActivity() ) ) {
+            logInputModel.setApi_token(PreferenceHelper.getString(PreferenceHelper.API_TOKEN));
+            logInputModel.setUser_id(PreferenceHelper.getString(PreferenceHelper.USER_ID));
+            callLogService(logInputModel);
+        } else {
+            Toast.makeText(getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT).show();
+        }
+    }
 
-			logInputModel.setApi_token( PreferenceHelper.getString( PreferenceHelper.API_TOKEN ) );
-			logInputModel.setUser_id( PreferenceHelper.getString( PreferenceHelper.USER_ID ) );
-			callLogService( logInputModel );
-		}
-		else {
-			Toast.makeText( getActivity(), "Please Check Network Connection", Toast.LENGTH_SHORT ).show();
-		}
-	}
+    public void callLogService(LogInputModel logInputModel) {
+        tmflLogin.getLogResponse(logInputModel).enqueue(new Callback<LogResponseModel>() {
+            @Override
+            public void onResponse(Call<LogResponseModel> call, Response<LogResponseModel> response) {
+                Log.e("isLogin", new Gson().toJson(response.body()));
 
-	public void callLogService( LogInputModel logInputModel ) {
-		tmflLogin.getLogResponse( logInputModel ).enqueue( new Callback< LogResponseModel >() {
-			@Override
-			public void onResponse( Call< LogResponseModel > call, Response< LogResponseModel > response ) {
-				Log.e( "isLogin", new Gson().toJson( response.body() ) );
+                if (response.body().getStatus().toString().contains("Success")) {
+                    if (getActivity() != null) {
+                        CommonUtils.showProgressDialog(getActivity(), "Getting Your Information");
+                    }
+                    callSoapRequest();
+                } else {
+                    Toast.makeText(getActivity(), "User Logged in from another Device", Toast.LENGTH_LONG).show();
+                    Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+                    getActivity().startActivity(loginIntent);
+                }
+            }
 
-				if ( response.body().getStatus().toString().contains( "Success" ) ) {
-					if ( getActivity() != null ) {
-						CommonUtils.showProgressDialog( getActivity(), "Getting Your Information" );
-					}
-					callSoapRequest();
-				}
-				else {
-					Toast.makeText( getActivity(), "User Logged in from another Device", Toast.LENGTH_LONG ).show();
-					Intent loginIntent = new Intent( getActivity(), LoginActivity.class );
-					getActivity().startActivity( loginIntent );
-				}
-			}
-
-			@Override
-			public void onFailure( Call< LogResponseModel > call, Throwable t ) {
+            @Override
+            public void onFailure(Call<LogResponseModel> call, Throwable t) {
 //                Log.e("ERROR",t.getMessage());
-			}
-		} );
-	}
+            }
+        });
+    }
 
-	public void callSoapRequest() {
-		tmflApi.getEmiListResponse( emiListInputModel ).enqueue( new Callback< EmiListResponseModel >() {
-			@Override
-			public void onResponse( Call< EmiListResponseModel > call, Response< EmiListResponseModel > response ) {
-				CommonUtils.closeProgressDialog();
-				Log.e( "Response EMI", new Gson().toJson( response.body() ) + "" );
-				if (response.code() == 200) {
-					if (response.body() != null) {
-						if (response.body().getStatus().toString().contains("Success")) {
-							Log.e("Response EMI", response.body().getData().size() + "");
-							if (response.body().getData().size() != 0) {
-								ArrayList<Datum> parent = new ArrayList<Datum>();
-								ArrayList<Datum> child = new ArrayList<Datum>();
+    public void callSoapRequest() {
+        tmflApi.getEmiListResponse(emiListInputModel).enqueue(new Callback<EmiListResponseModel>() {
+            @Override
+            public void onResponse(Call<EmiListResponseModel> call, Response<EmiListResponseModel> response) {
+                CommonUtils.closeProgressDialog();
+                Log.e("Response EMI", new Gson().toJson(response.body()) + "");
+                if (response.code() == 200) {
+                    if (response.body() != null) {
+                        if (response.body().getStatus().toString().contains("Success")) {
+                            Log.e("Response EMI", response.body().getData().size() + "");
+                            if (response.body().getData().size() != 0) {
+                                ArrayList<Datum> parent = new ArrayList<Datum>();
+                                ArrayList<Datum> child = new ArrayList<Datum>();
 
-								for (int i = 0; i < response.body().getData().size(); i++) {
-									if (!response.body().getData().get(i).getADATE().equalsIgnoreCase("0000-00-00")) {
-										parent.add(response.body().getData().get(i));
-										child.add(response.body().getData().get(i));
-									}
-								}
+                                for (int i = 0; i < response.body().getData().size(); i++) {
+                                    if (!response.body().getData().get(i).getADATE().equalsIgnoreCase("0000-00-00")) {
+                                        parent.add(response.body().getData().get(i));
+                                        child.add(response.body().getData().get(i));
+                                    }
+                                }
 
                         /*Collections.reverse(parent);
                         Collections.reverse(child);*/
 
 
-								expandableListViewEmi.setAdapter(new EmiExpandableListView(getActivity(), parent, child));
-							}
-						} else if (response.body().getStatus().toString().contains("Failed")) {
-							CommonUtils.closeProgressDialog();
-							Toast.makeText(emiActivity, "Server Under Maintenance,Please try after Sometime ", Toast.LENGTH_LONG).show();
-						} else {
-							CommonUtils.closeProgressDialog();
-							Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
-							getActivity().startActivity(loginIntent);
-						}
-					}
-				}else{
-					Log.e("medha", "something went wrong");
-				}
-			}
+                                expandableListViewEmi.setAdapter(new EmiExpandableListView(getActivity(), parent, child));
+                            }
+                        } else if (response.body().getStatus().toString().contains("Failed")) {
+                            CommonUtils.closeProgressDialog();
+                            Toast.makeText(emiActivity, "Server Under Maintenance,Please try after Sometime ", Toast.LENGTH_LONG).show();
+                        } else {
+                            CommonUtils.closeProgressDialog();
+                            Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+                            getActivity().startActivity(loginIntent);
+                        }
+                    }
+                } else {
+                    Log.e("medha", "something went wrong");
+                }
+            }
 
-			@Override
-			public void onFailure( Call< EmiListResponseModel > call, Throwable t ) {
-				//Log.e("SERVERError",""+t.getMessage());
-				CommonUtils.closeProgressDialog();
-			}
-		} );
-	}
+            @Override
+            public void onFailure(Call<EmiListResponseModel> call, Throwable t) {
+                //Log.e("SERVERError",""+t.getMessage());
+                CommonUtils.closeProgressDialog();
+            }
+        });
+    }
 
-	@Override
-	public void onClick( View v ) {
-		switch ( v.getId() ) {
-			case R.id.btnReciept:
-				getActivity().getSupportFragmentManager().beginTransaction().replace( R.id.frm_emi_detail, new MyReceiptFragment() ).commit();
-				break;
-		}
-	}
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnReciept:
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frm_emi_detail, new MyReceiptFragment()).commit();
+                break;
+        }
+    }
 }

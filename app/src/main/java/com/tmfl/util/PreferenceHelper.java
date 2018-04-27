@@ -19,6 +19,7 @@ public class PreferenceHelper {
 	public static final String EMAIL                         = "emailId";
 	public static final String MOBILE                        = "mobile";
 	public static final String USER_FIRT_NAME                = "first_name";
+	public static final String CONTRACT_TYPE                   = "contract_type";
 	private static SharedPreferences.Editor preferenceEditor;
 	private static SharedPreferences        pref;
 

@@ -11,7 +11,7 @@ public class Contract {
 	public  boolean isSelected;
 	@SerializedName( "id" )
 	@Expose
-	private Integer id;
+	private long id;
 	@SerializedName( "user_id" )
 	@Expose
 	private String  userId;
@@ -137,11 +137,11 @@ public class Contract {
 		this.newTotalCurrentDue = newTotalCurrentDue;
 	}
 
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId( Integer id ) {
+	public void setId( long id ) {
 		this.id = id;
 	}
 

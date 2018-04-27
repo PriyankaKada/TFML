@@ -3,6 +3,7 @@ package com.tmfl.BillDeskPayment.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -74,7 +75,7 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 
 		payBillDialog = new Dialog( this );
 
-		findViewById( R.id.btnPayNow ).setOnClickListener( new View.OnClickListener() {
+		((TextView)findViewById( R.id.btnPayNow )).setOnClickListener( new View.OnClickListener() {
 			@Override
 			public void onClick( View view ) {
 				callPayNow();
@@ -185,13 +186,15 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 			@Override
 			public void onResponse( Call< Example > call, Response< Example > response ) {
 
-
 				List< Contract > list = new ArrayList< Contract >();
 
 				for ( int i = 0; i < response.body().getData().getActive().getContracts().size(); i++ ) {
 //					if ( response.body().getData().getActive().getContracts().get( i ).getUsrConCompCode().equalsIgnoreCase( "5000" ) ) {
 					list.add( response.body().getData().getActive().getContracts().get( i ) );
-//					}
+
+//				String contract_type=	response.body().getData().getActive().getContracts().get( i ).getUsrConCompCode();
+//				PreferenceHelper.insertString(PreferenceHelper.CONTRACT_TYPE,contract_type);
+
 				}
 
 				for ( int i = 0; i < list.size(); i++ ) {

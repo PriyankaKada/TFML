@@ -83,6 +83,7 @@ public class MoreDetailDialog extends Dialog implements View.OnClickListener {
 		bundle = new Bundle();
 
 		bundle.putSerializable( "datamodel", contractModels );
+
 		bundle.putString( "datamodelvalue", contractModel.getUsrConNo() );
 		PreferenceHelper.insertString( PreferenceHelper.CONTRACT_NO, trimLeadingZeros( contractModel.getUsrConNo() ) );
 		bundle.putString( "RCNO", contractModel.getRcNumber() );

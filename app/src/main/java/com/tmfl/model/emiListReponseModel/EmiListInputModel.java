@@ -14,6 +14,17 @@ public class EmiListInputModel {
 	@SerializedName( "api_token" )
 	@Expose
 	public String apiToken;
+	@SerializedName( "contract_type" )
+	@Expose
+	public int contract_type;
+
+	public int getContract_type() {
+		return contract_type;
+	}
+
+	public void setContract_type(int contract_type) {
+		this.contract_type = contract_type;
+	}
 
 	public String getApiToken() {
 		return apiToken;

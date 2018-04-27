@@ -147,6 +147,9 @@ public class ContractsListAdapter extends ArrayAdapter< ContractModel > {
 					bundle.putString( "DUEDATE", String.valueOf( model.getDueDate() ) );
 					bundle.putString( "CURRENTEMI", String.valueOf( model.getDueAmount() ) );
 					bundle.putString( "LASTPAYMODE", model.getLastReceiptDate() );
+
+					PreferenceHelper.insertString(PreferenceHelper.CONTRACT_TYPE,model.getUsrConCompCode());
+
 					intent.putExtras( bundle );
 
 					new MoreDetailDialog( mContext );
