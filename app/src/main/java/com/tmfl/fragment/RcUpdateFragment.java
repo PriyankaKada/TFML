@@ -233,7 +233,6 @@ public class RcUpdateFragment extends Fragment implements View.OnClickListener {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
         alertDialog.setTitle("Pictures Option");
         alertDialog.setIcon(getResources().getDrawable(R.drawable.ic_image));
-        alertDialog.setIcon(getResources().getDrawable(R.drawable.ic_image));
         alertDialog.setPositiveButton("GALLARY", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

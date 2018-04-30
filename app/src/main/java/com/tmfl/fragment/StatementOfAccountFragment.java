@@ -247,7 +247,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 		spnContractNo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-				CommonUtils.showProgressDialog(getActivity(),"Getting Your Information");
+				//CommonUtils.showProgressDialog(getActivity(),"Getting Your Information");
 
 				contractNo = spnContractNo.getSelectedItem().toString();
 				Log.d( "contractNo", contractNo );
