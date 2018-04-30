@@ -119,6 +119,10 @@ public class ChangePasswordActivity extends DrawerBaseActivity implements View.O
                 } else if(response.body().getStatus().equals("Failed")) {
                     Toast.makeText(getBaseContext(), response.body().getData(), Toast.LENGTH_SHORT).show();
                     clearData();
+                }else {
+                    Toast.makeText(ChangePasswordActivity.this, "Logged in From another Device", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(ChangePasswordActivity.this, LoginActivity.class);
+                  startActivity(intent);
                 }
 
 

@@ -494,6 +494,10 @@ public class SchemesActivity extends BaseActivity implements View.OnClickListene
 				if ( model != null ) {
 					PreferenceHelper.insertObject( "Scheme response", model );
 					setupViewPager( viewPager );
+				}else {
+					Toast.makeText(SchemesActivity.this, "Logged in From another Device", Toast.LENGTH_SHORT).show();
+					Intent intent=new Intent(SchemesActivity.this, LoginActivity.class);
+					startActivity(intent);
 				}
 			}
 

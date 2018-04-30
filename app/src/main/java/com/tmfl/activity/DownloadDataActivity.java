@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -79,8 +80,14 @@ public class DownloadDataActivity extends DrawerBaseActivity implements View.OnC
 			public void onResponse( Call< DownloadResponse > call, Response< DownloadResponse > response ) {
 				CommonUtils.closeProgressDialog();
 				Log.e( "DownloadResponse", new Gson().toJson( response.body() ) );
-				List< com.tmfl.model.downloadResponseModel.Datum > body = response.body().getData();
-				lstDownloadList.setAdapter( new DownloadAdapter( DownloadDataActivity.this, body ) );
+				if(response.body().getData()!=null) {
+					List<com.tmfl.model.downloadResponseModel.Datum> body = response.body().getData();
+					lstDownloadList.setAdapter(new DownloadAdapter(DownloadDataActivity.this, body));
+				}else {
+					Toast.makeText(DownloadDataActivity.this, "Logged in From another Device", Toast.LENGTH_SHORT).show();
+					Intent intent=new Intent(DownloadDataActivity.this, LoginActivity.class);
+				startActivity(intent);
+				}
 
 				/*String path = Environment.getExternalStorageDirectory().toString()
 						+ "/TMFL/Download/";

@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.billdesk.sdk.PaymentOptions;
 import com.google.gson.Gson;
 import com.tmfl.BillDeskPayment.Activity.TotalBillPayActivity;
+import com.tmfl.activity.LoginActivity;
 import com.tmfl.auth.TmflApi;
 import com.tmfl.common.ApiService;
 import com.tmfl.common.CommonUtils;
@@ -56,10 +58,9 @@ public class GetBillDeskMsg {
 			@Override
 			public void onResponse( Call< BillDeskMsgResponseModel > call, Response< BillDeskMsgResponseModel > response ) {
 				CommonUtils.closeProgressDialog();
-				if ( response.body() != null ) {
+				if ( response.body().getMsg() != null ) {
 
 					String email;
-
 					email = PreferenceHelper.getString( PreferenceHelper.EMAIL );
 					if ( TextUtils.isEmpty( email ) ) {
 						email = "NA";
@@ -81,6 +82,11 @@ public class GetBillDeskMsg {
 					intent.putExtra( "callback", callbackObj );
 					context.startActivity( intent );
 					( ( TotalBillPayActivity ) context ).finish();
+				}
+				else {
+					Toast.makeText(context, "Logged in From another Device", Toast.LENGTH_SHORT).show();
+					Intent intent=new Intent(context, LoginActivity.class);
+					context.startActivity(intent);
 				}
 			}
 
