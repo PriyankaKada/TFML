@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,16 +33,29 @@ public class NewSchemeFragment extends Fragment implements View.OnClickListener 
 	SchemesResponse      response;
 	private ListView              lstNewSchemes;
 	private List< UsedOfferData > usedOfferList;
-
+WebView mWebView;
 	@Override
 	public View onCreateView( LayoutInflater inflater, ViewGroup container,
 	                          Bundle savedInstanceState ) {
 		View view = inflater.inflate( R.layout.fragment_new_scheme, container, false );
 
+
+		mWebView = (WebView) view.findViewById(R.id.webView);
+		mWebView.loadUrl("https://www.neosofttech.com/");
+
+		// Enable Javascript
+		WebSettings webSettings = mWebView.getSettings();
+		webSettings.setJavaScriptEnabled(true);
+
+		// Force links and redirects to open in the WebView instead of in a browser
+		mWebView.setWebViewClient(new WebViewClient());
+
+
 		initView( view );
 
 		txtNewOffers.setOnClickListener( this );
 		txtUsedOffers.setOnClickListener( this );
+
 
 		return view;
 	}
@@ -56,6 +72,7 @@ public class NewSchemeFragment extends Fragment implements View.OnClickListener 
 
 		txtNewOffers = ( TextView ) view.findViewById( R.id.txtNewOffers );
 		txtUsedOffers = ( TextView ) view.findViewById( R.id.txtUsedOffers );
+
 	}
 
 	@Override
