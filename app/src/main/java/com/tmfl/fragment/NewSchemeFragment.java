@@ -41,7 +41,7 @@ WebView mWebView;
 
 
 		mWebView = (WebView) view.findViewById(R.id.webView);
-		mWebView.loadUrl("https://www.neosofttech.com/");
+		mWebView.loadUrl("https://www.tmf.co.in/offers");
 
 		// Enable Javascript
 		WebSettings webSettings = mWebView.getSettings();
