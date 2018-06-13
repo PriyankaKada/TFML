@@ -81,7 +81,7 @@ public class CustomAdapter extends ArrayAdapter< Contract > {
 		holder.txtContractNoValue.setText( contract.getUsrConNo() );
 		holder.txtRcNo.setText( contract.getRcNumber() );
 		holder.txtOverdue.setText( contract.getOdAmt() );
-		holder.txtOverdueChanged.setText( contract.getDueAmount() );
+		holder.txtOverdueChanged.setText( contract.getOdcCollectioAmount() );
 		holder.txtExpenses.setText( contract.getTotalExpenses() );
 		holder.txtTotalDue.setText( contract.getTotalCurrentDue() );
 		holder.txtMonthlyEMI.setText( contract.getDueAmount() );
