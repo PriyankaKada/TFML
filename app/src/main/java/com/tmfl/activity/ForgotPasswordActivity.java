@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -31,7 +32,7 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
     private EditText txtUserId;
     private Button btnSubmit;
     private ImageView imgBack;
-
+TextView message;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,7 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
 
     public void init() {
         txtUserId = (EditText) findViewById(R.id.txt_user_id);
+        message=(TextView)findViewById(R.id.txt_message) ;
         btnSubmit = (Button) findViewById(R.id.btn_submit);
         imgBack = (ImageView) findViewById(R.id.img_forgot_pass_back);
         SetFonts.setFonts(this, imgBack, 2);
@@ -84,10 +86,14 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
 
                 if (response.body() != null) {
                     if (response.body().getStatus().toString().contains("Success")) {
-                        Toast.makeText(getBaseContext(), "You will get password soon", Toast.LENGTH_SHORT).show();
+                        message.setVisibility(View.VISIBLE);
+                        message.setText("You will get password soon");
+//                        Toast.makeText(getBaseContext(), "You will get password soon", Toast.LENGTH_SHORT).show();
                         txtUserId.setText("");
                     } else {
-                        Toast.makeText(getBaseContext(), "Invalid UserId", Toast.LENGTH_SHORT).show();
+                        message.setVisibility(View.VISIBLE);
+                        message.setText("Invalid UserId");
+//                        Toast.makeText(getBaseContext(), "Invalid UserId", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Log.e("null", "");

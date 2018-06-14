@@ -220,7 +220,7 @@ public class TotalBillPayActivity extends DrawerBaseActivity implements View.OnC
 
     public void updateTotalAmount() {
 
-        totalAmount = 0;
+       totalAmount = 0;
 
         if (listOfContract != null) {
             for (Contract contract : listOfContract) {
