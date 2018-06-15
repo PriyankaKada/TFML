@@ -11,7 +11,9 @@ public class ForgotResponse {
 	@SerializedName( "status" )
 	@Expose
 	private String status;
-
+	@SerializedName( "data" )
+	@Expose
+	private String data;
 	/**
 	 * @return The status
 	 */
@@ -24,5 +26,13 @@ public class ForgotResponse {
 	 */
 	public void setStatus( String status ) {
 		this.status = status;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
 	}
 }
