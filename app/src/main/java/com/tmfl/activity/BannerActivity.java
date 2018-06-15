@@ -1,6 +1,7 @@
 package com.tmfl.activity;
 
 import android.app.Dialog;
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -34,6 +35,7 @@ import com.tmfl.auth.TmflApi;
 import com.tmfl.common.ApiService;
 import com.tmfl.common.CommonUtils;
 import com.tmfl.common.SocialUtil;
+import com.tmfl.fragment.ApplyLoanFragment;
 import com.tmfl.fragment.BannerFragment;
 import com.tmfl.fragment.ComplaintsFragment;
 import com.tmfl.model.LoanStatusResponseModel.LoanStatusInputModel;
@@ -282,10 +284,20 @@ public class BannerActivity extends BaseActivity implements View.OnClickListener
 				view5.setVisibility( View.GONE );
 				view3.setVisibility( View.GONE );
 				view4.setVisibility( View.GONE );
+//
+//				Intent intentApplyLoan = new Intent( this, SchemesActivity.class );
+//				intentApplyLoan.putExtra( "TAB_SELECTED", Constant.ISAPPLYLOANSELECT ).putExtra( "LOGGED_IN", "false" );
+//				startActivity( intentApplyLoan );
 
-				Intent intentApplyLoan = new Intent( this, SchemesActivity.class );
-				intentApplyLoan.putExtra( "TAB_SELECTED", Constant.ISAPPLYLOANSELECT ).putExtra( "LOGGED_IN", "false" );
-				startActivity( intentApplyLoan );
+
+				getSupportFragmentManager().popBackStack( null, FragmentManager.POP_BACK_STACK_INCLUSIVE );
+
+				getSupportFragmentManager().beginTransaction()
+						.addToBackStack( getClass().getName() )
+						.replace( R.id.frame_banner, new ApplyLoanFragment() )
+						.commit();
+
+
 				break;
 
 			case R.id.linReferFriend:

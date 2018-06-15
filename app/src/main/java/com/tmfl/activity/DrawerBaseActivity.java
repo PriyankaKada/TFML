@@ -1,5 +1,6 @@
 package com.tmfl.activity;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import com.tmfl.auth.TmflApi;
 import com.tmfl.common.ApiService;
 import com.tmfl.common.CommonUtils;
 import com.tmfl.common.SocialUtil;
+import com.tmfl.fragment.ApplyLoanFragment;
 import com.tmfl.model.logoutResponseModel.LogoutInputModel;
 import com.tmfl.model.logoutResponseModel.LogoutResponseModel;
 import com.tmfl.util.PreferenceHelper;
@@ -107,17 +109,18 @@ public class DrawerBaseActivity extends BaseActivity {
 						break;
 
 					case 1://Apply Loan
-						Intent intentApplyLoan = new Intent( DrawerBaseActivity.this, SchemesActivity.class ).putExtra( "LOGGED_IN", "true" );
-						intentApplyLoan.putExtra( "TAB_SELECTED", Constant.ISAPPLYLOANSELECT );
-						startActivity( intentApplyLoan );
-						drawerLayout.closeDrawers();
+//						Intent intentApplyLoan = new Intent( DrawerBaseActivity.this, SchemesActivity.class ).putExtra( "LOGGED_IN", "true" );
+//						intentApplyLoan.putExtra( "TAB_SELECTED", Constant.ISAPPLYLOANSELECT );
+//						startActivity( intentApplyLoan );
+//						drawerLayout.closeDrawers();
 
-					/*	getSupportFragmentManager().popBackStack( null, FragmentManager.POP_BACK_STACK_INCLUSIVE );
+						getSupportFragmentManager().popBackStack( null, FragmentManager.POP_BACK_STACK_INCLUSIVE );
 
 						getSupportFragmentManager().beginTransaction()
 								.addToBackStack( getClass().getName() )
 								.replace( R.id.frame_container_contract, new ApplyLoanFragment() )
-								.commit();*/
+								.commit();
+						drawerLayout.closeDrawers();
 
 						break;
 					case 2://Refer Friends

@@ -87,12 +87,12 @@ TextView message;
                 if (response.body() != null) {
                     if (response.body().getStatus().toString().contains("Success")) {
                         message.setVisibility(View.VISIBLE);
-                        message.setText("You will get password soon");
+                        message.setText(response.body().getStatus());
 //                        Toast.makeText(getBaseContext(), "You will get password soon", Toast.LENGTH_SHORT).show();
                         txtUserId.setText("");
                     } else {
                         message.setVisibility(View.VISIBLE);
-                        message.setText("Invalid UserId");
+                        message.setText(response.body().getStatus());
 //                        Toast.makeText(getBaseContext(), "Invalid UserId", Toast.LENGTH_SHORT).show();
                     }
                 } else {
