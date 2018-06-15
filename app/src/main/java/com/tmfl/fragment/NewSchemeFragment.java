@@ -40,10 +40,19 @@ WebView mWebView;
 	                          Bundle savedInstanceState ) {
 		View view = inflater.inflate( R.layout.fragment_new_scheme, container, false );
 
-		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tmf.co.in/offers"));
-		startActivity(browserIntent);
-		getActivity().finish();
+//		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tmf.co.in/offers"));
+//		startActivity(browserIntent);
+//		getActivity().finish();
 
+		mWebView = (WebView) view.findViewById(R.id.webView);
+		mWebView.loadUrl("https://www.tmf.co.in/offers");
+
+		// Enable Javascript
+		WebSettings webSettings = mWebView.getSettings();
+		webSettings.setJavaScriptEnabled(true);
+
+		// Force links and redirects to open in the WebView instead of in a browser
+		mWebView.setWebViewClient(new WebViewClient());
 
 
 		initView( view );
