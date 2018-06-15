@@ -1,6 +1,7 @@
 package com.tmfl.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -39,16 +40,18 @@ WebView mWebView;
 	                          Bundle savedInstanceState ) {
 		View view = inflater.inflate( R.layout.fragment_new_scheme, container, false );
 
-
-		mWebView = (WebView) view.findViewById(R.id.webView);
-		mWebView.loadUrl("https://www.tmf.co.in/offers");
-
-		// Enable Javascript
-		WebSettings webSettings = mWebView.getSettings();
-		webSettings.setJavaScriptEnabled(true);
-
-		// Force links and redirects to open in the WebView instead of in a browser
-		mWebView.setWebViewClient(new WebViewClient());
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tmf.co.in/offers"));
+		startActivity(browserIntent);
+		getActivity().finish();
+//		mWebView = (WebView) view.findViewById(R.id.webView);
+//		mWebView.loadUrl("https://www.tmf.co.in/offers");
+//
+//		// Enable Javascript
+//		WebSettings webSettings = mWebView.getSettings();
+//		webSettings.setJavaScriptEnabled(true);
+//
+//		// Force links and redirects to open in the WebView instead of in a browser
+//		mWebView.setWebViewClient(new WebViewClient());
 
 
 		initView( view );
