@@ -71,9 +71,9 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 	InputCityModel   inputCityModel;
 	InputBranchModel inputBranchModel;
 	String           productCode, branchStateCode, branchCityCode, branchCode, stateCode, cityCode, strOfferId, strUserid;
-	List< NewOfferData >  newOfferList;
-	List< UsedOfferData > usedOfferList;
-	SchemesResponse       response;
+//	List< NewOfferData >  newOfferList;
+//	List< UsedOfferData > usedOfferList;
+//	SchemesResponse       response;
 	int                   offer;
 	List< UsedOfferData > usedOfferListNew = new ArrayList<>();
 	List< NewOfferData >  newOfferListNew  = new ArrayList<>();
@@ -96,30 +96,30 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		Intent intent = getActivity().getIntent();
 		Bundle bundle = intent.getExtras();
 
-		response = ( SchemesResponse ) PreferenceHelper.getObject( "Scheme response", SchemesResponse.class );
-
-		newOfferList = new ArrayList<>();
-		usedOfferList = new ArrayList<>();
-
-		newOfferList = response.getOfferData().getNEW();
-		usedOfferList = response.getOfferData().getUSED();
+//		response = ( SchemesResponse ) PreferenceHelper.getObject( "Scheme response", SchemesResponse.class );
+//
+//		newOfferList = new ArrayList<>();
+//		usedOfferList = new ArrayList<>();
+//
+//		newOfferList = response.getOfferData().getNEW();
+//		usedOfferList = response.getOfferData().getUSED();
 
 		init();
 		spOfferList = new ArrayList<>();
 
-		for ( int i = 0; i < newOfferList.size(); i++ ) {
-			spOfferList.add( response.getOfferData().getNEW().get( i ).getTitle() );
-		}
+//		for ( int i = 0; i < newOfferList.size(); i++ ) {
+//			spOfferList.add( response.getOfferData().getNEW().get( i ).getTitle() );
+//		}
 
 		NewOfferData datum = new NewOfferData();
 		datum.setTitle( "Select Offers" );
 		newOfferListNew.add( datum );
-		newOfferListNew.addAll( this.newOfferList );
+//		newOfferListNew.addAll( this.newOfferList );
 
 		UsedOfferData usedOfferData = new UsedOfferData();
 		usedOfferData.setTitle( "Select Offers" );
 		usedOfferListNew.add( usedOfferData );
-		usedOfferListNew.addAll( this.usedOfferList );
+//		usedOfferListNew.addAll( this.usedOfferList );
 
 		spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, newOfferListNew ) );
 
@@ -567,11 +567,11 @@ public class ApplyLoanFragment extends Fragment implements View.OnClickListener,
 		if ( b ) {
 
 			offer = 1;
-			spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, newOfferListNew ) );
+//			spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, newOfferListNew ) );
 		}
 		else {
 			offer = 2;
-			spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, usedOfferListNew ) );
+//			spOffers.setAdapter( new ArrayAdapter<>( getActivity(), R.layout.layout_spinner_textview, usedOfferListNew ) );
 
 		}
 	}
