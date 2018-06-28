@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">TMFL</string>
     <string name="apply_loan">Apply Loan</string>
+    <string name="cust_care">Register Query</string>
     <string name="schemes">Offers</string>
     <string name="refer_friend">Refer\nFriend</string>
     <string name="loan_status">Loan\nStatus</string>
