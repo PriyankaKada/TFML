@@ -103,11 +103,23 @@ public class BasicDetailFragment extends Fragment {
 		txtClientName.setText( strClientName );
 		txtEmailId.setText( strEmail );
 		txtRCNO.setText( rcNo );
-//		txtStatement_of_account.setText( currentDate );
+//	txtStatement_of_account.setText( currentDate );
+
+		DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy");
+
+		Date date = null;
+		try {
+			date = inputFormat.parse(dateString);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		String outputDateStr = outputFormat.format(date);
+
 
 		lbl_statement_of_accountLabel=(TextView)view.findViewById(R.id.lbl_statement_of_accountLabel);
 		lbl_statement_of_accountLabel.setText(" ");
-		lbl_statement_of_accountLabel.setText("Statement of Account as on- "+dateString);
+		lbl_statement_of_accountLabel.setText("Statement of Account as on- "+outputDateStr);
 
 	}
 
