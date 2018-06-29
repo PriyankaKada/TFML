@@ -152,7 +152,7 @@ public class ContractActivity extends DrawerBaseActivity implements View.OnClick
 				break;
 			case R.id.linLoanStaus:
 				if ( !flag ) {
-					txtTitleContract.setText( "Register Query" );
+					txtTitleContract.setText( "Customer Care" );
 					getSupportFragmentManager().beginTransaction().addToBackStack( this.getClass().getName() ).replace( R.id.frame_container_contract, new ComplaintsFragment() ).commit();
 					flag = true;
 				}

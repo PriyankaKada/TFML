@@ -352,7 +352,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Register Query"
+                android:text="Customer\nCare"
                 android:textColor="#FFFFFF"/>
         </LinearLayout>
 
