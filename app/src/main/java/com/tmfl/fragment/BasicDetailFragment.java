@@ -22,8 +22,9 @@ public class BasicDetailFragment extends Fragment {
 	String aggrementNo, aggrementDate, maturityDate, tenure, tenure_unit, chasisNo, engineNo, strSoaDateTo, strSoaDateFrom, strClientName, strEmail;
 	String strFromDate, strToDate, strAggrementDate, strMaturityDate;
 	private View     view;
-	private TextView txtStmtofAc, txtContractNo, txtContractDate, txtMaturityDate, txtTenure, txtChasisNo, txtEngineNo, txtEmailId, txtClientName, txtRCNO, txtStatement_of_account;
+	private TextView txtStmtofAc, txtContractNo, txtContractDate, txtMaturityDate, txtTenure, txtChasisNo, txtEngineNo, txtEmailId, txtClientName, txtRCNO, txtStatement_of_account,lbl_statement_of_accountLabel;
 	private String rcNo, currentDate;
+	private String dateString;
 
 	@Override
 	public View onCreateView( LayoutInflater inflater, ViewGroup container,
@@ -33,6 +34,7 @@ public class BasicDetailFragment extends Fragment {
 
 		Bundle bundle = getArguments();
 		if ( bundle != null ) {
+			dateString=bundle.getString("date");
 			ResponseEnvelope.Body body = ( ResponseEnvelope.Body ) bundle.getSerializable( "ResponseModel" );
 			//  strFinAmt=body.getZCISResponse().getIT_CARDEX1().getItem().getFIN_AMT()==null?"":body.getZCISResponse().getIT_CARDEX1().getItem().getFIN_AMT();
 			strClientName = body.getZCISResponse().getIT_CARDEX1().getItem().getCLIENT_NAME() == null ? "" : body.getZCISResponse().getIT_CARDEX1().getItem().getCLIENT_NAME().toString();
@@ -101,7 +103,11 @@ public class BasicDetailFragment extends Fragment {
 		txtClientName.setText( strClientName );
 		txtEmailId.setText( strEmail );
 		txtRCNO.setText( rcNo );
-		txtStatement_of_account.setText( currentDate );
+//		txtStatement_of_account.setText( currentDate );
+
+		lbl_statement_of_accountLabel=(TextView)view.findViewById(R.id.lbl_statement_of_accountLabel);
+		lbl_statement_of_accountLabel.setText(" ");
+		lbl_statement_of_accountLabel.setText("Statement of Account as on- "+dateString);
 
 	}
 
