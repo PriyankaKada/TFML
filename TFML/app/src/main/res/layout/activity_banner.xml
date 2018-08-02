@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/activity_banner"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.tmfl.activity.BannerActivity">
+
+    <include
+        android:id="@+id/upper"
+        layout="@layout/toolbar_header"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0.5dp"
+        android:layout_above="@+id/frame_banner"
+        android:layout_below="@+id/upper"
+        android:background="#FFFFFF"/>
+
+    <FrameLayout
+        android:id="@+id/frame_banner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/llBottom"
+        android:layout_below="@+id/upper"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <com.tmfl.util.ViewPagerCustomDuration
+            android:id="@+id/recentViewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@color/white"/>
+
+        <com.viewpagerindicator.CirclePageIndicator
+            android:id="@+id/titles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:padding="30dp"
+            app:fillColor="@color/color_grey"
+            app:pageColor="@android:color/white"
+            app:radius="4dp"
+            app:strokeColor="@android:color/darker_gray"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/llBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="@color/tab_bg"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp">
+
+        <LinearLayout
+            android:id="@+id/llSchemes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/viewId1"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/white"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/imageSchemes"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:padding="2dp"
+                android:src="@drawable/ic_scheme_non_selected"/>
+
+            <TextView
+                android:id="@+id/txtSchemes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/schemes"
+                android:textColor="#FFFFFF"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llApplyLoan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/viewId2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/white"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/imgApplyLoan"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:padding="2dp"
+                android:src="@drawable/ic_apply_loan_non_selected"/>
+
+            <TextView
+                android:id="@+id/txtApplyLoan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/apply_loan"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linReferFriend"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View
+                android:id="@+id/viewId3"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/white"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/imgReferFriend"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:padding="2dp"
+                android:src="@drawable/ic_refer_friends_non_selected"/>
+
+            <TextView
+                android:id="@+id/txtReferFriend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/refer_friend"
+                android:textColor="#FFFFFF"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linLoanStaus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View
+                android:id="@+id/viewId4"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/white"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/imgLoanStatus"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:padding="2dp"
+                android:src="@drawable/ic_complaint"/>
+
+            <TextView
+                android:id="@+id/txtLoanStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Complaint"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linQuickCall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/viewId5"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/white"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/imgQuickCall"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:padding="2dp"
+                android:src="@drawable/ic_call_non_selected"/>
+
+            <TextView
+                android:id="@+id/txtQuicCall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Quick Loan Apply"
+                android:textColor="#FFFFFF"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

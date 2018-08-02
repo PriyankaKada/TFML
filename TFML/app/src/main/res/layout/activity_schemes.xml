@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/activity_schemes"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.tmfl.activity.SchemesActivity">
+
+    <include
+        android:id="@+id/upper"
+        layout="@layout/toolbar_schemes_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            tools:context=".SchemesActivity"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/tab_bg"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_tab_indicator_white"
+                android:visibility="invisible"
+                />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_tab_indicator_white"
+                android:visibility="invisible"
+                />
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_tab_indicator_white"
+                android:visibility="invisible"/>
+        </LinearLayout>
+
+        <!-- <android.support.design.widget.TabLayout
+             android:id="@+id/tab_layout"
+             android:layout_width="match_parent"
+             android:layout_height="80dp"
+             android:layout_weight="1"
+             android:background="@color/tab_bg"
+             android:elevation="6dp"
+             app:tabGravity="fill"
+             app:tabMinWidth="100dp"
+             app:tabMode="fixed"
+             app:tabSelectedTextColor="@color/tab_selector"
+             app:tabTextColor="@color/tab_selector"
+             />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/tab_bg"
+            android:elevation="6dp"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:id="@+id/llSchemes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="start"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageSchemes"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_scheme_non_selected"/>
+
+                <TextView
+                    android:id="@+id/txtSchemes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/schemes"
+                    android:textColor="#FFFFFF"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llApplyLoan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgApplyLoan"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_apply_loan_non_selected"/>
+
+                <TextView
+                    android:id="@+id/txtApplyLoan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/apply_loan"
+                    android:textColor="#FFFFFF"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linReferFriend"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgReferFriend"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_refer_friends_non_selected"/>
+
+                <TextView
+                    android:id="@+id/txtReferFriend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/refer_friend"
+                    android:textColor="#FFFFFF"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <!-- <com.astuetz.PagerSlidingTabStrip
+             android:id="@+id/tab_layout"
+             android:layout_width="match_parent"
+             android:layout_height="48dip"
+             app:pstsDividerColor="@android:color/transparent"
+             app:pstsIndicatorColor="@color/white"
+             app:pstsIndicatorHeight="4px"
+             app:tabGravity="fill"
+             app:tabTextColor="@color/tab_selector"
+             app:tabMinWidth="100dp"
+             app:pstsShouldExpand="true"/>-->
+
+    </LinearLayout>
+
+</LinearLayout>
