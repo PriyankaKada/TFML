@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">TMFL</string>
     <string name="apply_loan">Apply Loan</string>
+    <string name="cust_care">Register Query</string>
     <string name="schemes">Offers</string>
     <string name="refer_friend">Refer\nFriend</string>
     <string name="loan_status">Loan\nStatus</string>
@@ -23,7 +24,7 @@
     <string name="btn_rc_upload_image">Upload RC Image</string>
     <string name="txt_forgot_pass_header">Forgot Your Password ?</string>
     <string name="btn_submit">Submit</string>
-    <string name="txt_forgot_pass_desc">Enter your User Id and we Will Send you link to reset your password.</string>
+    <string name="txt_forgot_pass_desc">Enter your User Id</string>
     <string name="txt_branch_locator">Branch Locator</string>
     <string name="txt_remember_pass">Remember Password</string>
     <string name="txt_forgot_pass">Forgot Password?</string>

@@ -97,9 +97,11 @@ public class FinanceDetailFragment extends Fragment {
 		txtCreditedEconomicYearLbl.setText( "Amount Credited from " + strFromDate + " To " + strToDate );
 		txtAmtCreditEconomicYear.setText( strSoaPrdAmt );
 		txtyTotalCreditLbl.setText( "Total Credit Upto " + strToDate );
-		txtTotalCredit.setText( strCred );
+		String txtTotalCredit_str=new DecimalFormat( "00.00" ).format( Double.parseDouble( strSoaPrvAmt ) + Double.parseDouble( strSoaPrdAmt ));
 
-		String balPayable = new DecimalFormat( "00.00" ).format( Double.parseDouble( totalReceivable ) - Double.parseDouble( strCred ) );
+		txtTotalCredit.setText( txtTotalCredit_str);
+
+		String balPayable = new DecimalFormat( "00.00" ).format( Double.parseDouble( totalReceivable ) - Double.parseDouble( txtTotalCredit_str ) );
 		txtBalPayable.setText( balPayable );
 		txtPrincipalPeriodLbl.setText( "Principal for the Period " + strFromDate + " To " + strToDate );
 		txtPrincipalPeriod.setText( strSoaPrincipal );

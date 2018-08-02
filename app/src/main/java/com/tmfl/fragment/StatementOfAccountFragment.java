@@ -433,6 +433,7 @@ public class StatementOfAccountFragment extends Fragment implements View.OnClick
 		frmBasicAccDetail = new BasicDetailFragment();
 		if ( responseEnvelope != null ) {
 			Bundle bundle = new Bundle();
+			bundle.putString("date",txtAccDate.getText().toString());
 			bundle.putSerializable( "ResponseModel", responseEnvelope );
 			frmBasicAccDetail.setArguments( bundle );
 		}

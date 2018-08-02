@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="@string/apply_loan"
+                android:text="Apply Loan"
                 android:textColor="#FFFFFF"/>
         </LinearLayout>
 

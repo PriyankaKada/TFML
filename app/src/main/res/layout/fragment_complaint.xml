@@ -17,7 +17,7 @@
             android:background="@color/tab_bg"
             android:gravity="center_horizontal"
             android:padding="8dp"
-            android:text="New Complain"
+            android:text="Register Query"
             android:textColor="@color/white"
             android:textSize="16sp"
             />
