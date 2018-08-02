@@ -42,7 +42,7 @@ public class BasicDetailFragment extends Fragment {
 			strSoaDateFrom = body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_DATE_FROM() == null ? "" : body.getZCISResponse().getIT_CARDEX2().getItem().getSOA_DATE_FROM();
 			aggrementNo = body.getZCISResponse().getIT_CARDEX1().getItem().getCONTRACTNO().toString() == null ? "" : body.getZCISResponse().getIT_CARDEX1().getItem().getCONTRACTNO().toString();
 			aggrementDate = body.getZCISResponse().getIT_CARDEX1().getItem().getCONTSTARTDT() == null ? "" : body.getZCISResponse().getIT_CARDEX1().getItem().getCONTSTARTDT();
-			maturityDate = body.getZCISResponse().getIT_CARDEX1().getItem().getCONTENDDT() == null ? "" : body.getZCISResponse().getIT_CARDEX1().getItem().getCONTENDDT();
+			maturityDate = body.getZCISResponse().getIT_CARDEX1().getItem().getCONTENDDT() == null ? "" : body.getZCISResponse().getIT_CARDEX1().getItem().getMATURITY_DATE();
 			tenure = body.getZCISResponse().getIT_CARDEX1().getItem().getTENURE().trim() == null ? "" : body.getZCISResponse().getIT_CARDEX1().getItem().getTENURE().trim();
 			tenure_unit = body.getZCISResponse().getIT_CARDEX1().getItem().getTENURE_UNIT() == null ? "" : body.getZCISResponse().getIT_CARDEX1().getItem().getTENURE_UNIT();
 			chasisNo = body.getZCISResponse().getIT_CARDEX1().getItem().getCHASIS_NO() == null ? "" : body.getZCISResponse().getIT_CARDEX1().getItem().getCHASIS_NO();

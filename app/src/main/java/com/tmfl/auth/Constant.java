@@ -12,7 +12,8 @@ public class Constant {
 
 
     // public static final String BASE_URL = "http://staging.php-dev.in:8844/tatamotors/public/";
-    public static final String BASE_URL = "http://14.142.124.78/public/";
+//    public static final String BASE_URL = "http://14.142.124.78/public/";
+    public static final String BASE_URL = "https://cust1.tmf.co.in";
     public static final String LOGIN = "api/login";
     public static final String BANNER = "banners";
     public static final String SCHEMES = "schemes";
